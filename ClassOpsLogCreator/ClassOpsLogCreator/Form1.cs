@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ClassOpsLogCreator
 {
-    public partial class Form1 : Form
+    public partial class LogCreator : Form
     {
-        public Form1()
+        public LogCreator()
         {
             InitializeComponent();
         }
