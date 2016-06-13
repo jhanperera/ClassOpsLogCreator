@@ -47,7 +47,13 @@ namespace ClassOpsLogCreator
 
         private void clearBTN_Click(object sender, EventArgs e)
         {
-            ResetAllControls(this);
+          foreach (Control ctrl in Form.ControlCollection)
+            {
+                if (ctrl is TextBox)
+                {
+                    (ctrl as TextBox).Clear();
+                }
+            }
         }
     }
 }
