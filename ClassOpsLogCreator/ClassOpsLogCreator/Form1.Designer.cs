@@ -43,6 +43,7 @@
             this.openBTN1 = new System.Windows.Forms.Button();
             this.openBTN2 = new System.Windows.Forms.Button();
             this.openBTN3 = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.mainTabContainer.SuspendLayout();
             this.step1Tab.SuspendLayout();
             this.SuspendLayout();
@@ -99,6 +100,7 @@
             this.clearBTN.TabIndex = 1;
             this.clearBTN.Text = "Clear";
             this.clearBTN.UseVisualStyleBackColor = true;
+            this.clearBTN.Click += new System.EventHandler(this.clearBTN_Click);
             // 
             // submitBTN
             // 
@@ -172,22 +174,24 @@
             // openBTN1
             // 
             this.openBTN1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.openBTN1.Location = new System.Drawing.Point(498, 61);
+            this.openBTN1.Location = new System.Drawing.Point(496, 61);
             this.openBTN1.Name = "openBTN1";
             this.openBTN1.Size = new System.Drawing.Size(147, 20);
             this.openBTN1.TabIndex = 9;
             this.openBTN1.Text = "Open";
             this.openBTN1.UseVisualStyleBackColor = true;
+            this.openBTN1.Click += new System.EventHandler(this.openBTN1_Click);
             // 
             // openBTN2
             // 
             this.openBTN2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.openBTN2.Location = new System.Drawing.Point(498, 87);
+            this.openBTN2.Location = new System.Drawing.Point(496, 87);
             this.openBTN2.Name = "openBTN2";
             this.openBTN2.Size = new System.Drawing.Size(147, 20);
             this.openBTN2.TabIndex = 10;
             this.openBTN2.Text = "Open";
             this.openBTN2.UseVisualStyleBackColor = true;
+            this.openBTN2.Click += new System.EventHandler(this.openBTN2_Click);
             // 
             // openBTN3
             // 
@@ -198,6 +202,11 @@
             this.openBTN3.TabIndex = 11;
             this.openBTN3.Text = "Open";
             this.openBTN3.UseVisualStyleBackColor = true;
+            this.openBTN3.Click += new System.EventHandler(this.openBTN3_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
             // 
             // LogCreator
             // 
@@ -231,6 +240,7 @@
         private System.Windows.Forms.TextBox fileTextBox3;
         private System.Windows.Forms.TextBox fileTextBox2;
         private System.Windows.Forms.TextBox fileTextBox1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
 
