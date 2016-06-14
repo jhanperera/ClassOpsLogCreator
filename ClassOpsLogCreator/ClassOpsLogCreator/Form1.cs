@@ -7,12 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-<<<<<<< Updated upstream
 using Excel = Microsoft.Office.Interop.Excel;
-
-=======
-using Microsoft.Office.Interop; 
->>>>>>> Stashed changes
 
 namespace ClassOpsLogCreator
 {
