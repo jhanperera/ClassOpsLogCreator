@@ -30,19 +30,19 @@
         {
             this.mainTabContainer = new System.Windows.Forms.TabControl();
             this.step1Tab = new System.Windows.Forms.TabPage();
+            this.openBTN3 = new System.Windows.Forms.Button();
+            this.openBTN2 = new System.Windows.Forms.Button();
+            this.openBTN1 = new System.Windows.Forms.Button();
+            this.fileText3 = new System.Windows.Forms.Label();
+            this.fileText2 = new System.Windows.Forms.Label();
+            this.fileText1 = new System.Windows.Forms.Label();
+            this.fileTextBox3 = new System.Windows.Forms.TextBox();
+            this.fileTextBox2 = new System.Windows.Forms.TextBox();
+            this.fileTextBox1 = new System.Windows.Forms.TextBox();
             this.setOneText = new System.Windows.Forms.Label();
             this.clearBTN = new System.Windows.Forms.Button();
             this.submitBTN = new System.Windows.Forms.Button();
             this.step2Tab = new System.Windows.Forms.TabPage();
-            this.fileTextBox1 = new System.Windows.Forms.TextBox();
-            this.fileTextBox2 = new System.Windows.Forms.TextBox();
-            this.fileTextBox3 = new System.Windows.Forms.TextBox();
-            this.fileText1 = new System.Windows.Forms.Label();
-            this.fileText2 = new System.Windows.Forms.Label();
-            this.fileText3 = new System.Windows.Forms.Label();
-            this.openBTN1 = new System.Windows.Forms.Button();
-            this.openBTN2 = new System.Windows.Forms.Button();
-            this.openBTN3 = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.mainTabContainer.SuspendLayout();
             this.step1Tab.SuspendLayout();
@@ -81,6 +81,87 @@
             this.step1Tab.Text = "Step 1";
             this.step1Tab.UseVisualStyleBackColor = true;
             // 
+            // openBTN3
+            // 
+            this.openBTN3.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.openBTN3.Location = new System.Drawing.Point(496, 113);
+            this.openBTN3.Name = "openBTN3";
+            this.openBTN3.Size = new System.Drawing.Size(130, 20);
+            this.openBTN3.TabIndex = 11;
+            this.openBTN3.Text = "Open";
+            this.openBTN3.UseVisualStyleBackColor = true;
+            this.openBTN3.Click += new System.EventHandler(this.openBTN3_Click);
+            // 
+            // openBTN2
+            // 
+            this.openBTN2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.openBTN2.Location = new System.Drawing.Point(496, 87);
+            this.openBTN2.Name = "openBTN2";
+            this.openBTN2.Size = new System.Drawing.Size(130, 20);
+            this.openBTN2.TabIndex = 10;
+            this.openBTN2.Text = "Open";
+            this.openBTN2.UseVisualStyleBackColor = true;
+            this.openBTN2.Click += new System.EventHandler(this.openBTN2_Click);
+            // 
+            // openBTN1
+            // 
+            this.openBTN1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.openBTN1.Location = new System.Drawing.Point(496, 61);
+            this.openBTN1.Name = "openBTN1";
+            this.openBTN1.Size = new System.Drawing.Size(130, 20);
+            this.openBTN1.TabIndex = 9;
+            this.openBTN1.Text = "Open";
+            this.openBTN1.UseVisualStyleBackColor = true;
+            this.openBTN1.Click += new System.EventHandler(this.openBTN1_Click);
+            // 
+            // fileText3
+            // 
+            this.fileText3.AutoSize = true;
+            this.fileText3.Location = new System.Drawing.Point(34, 113);
+            this.fileText3.Name = "fileText3";
+            this.fileText3.Size = new System.Drawing.Size(53, 13);
+            this.fileText3.TabIndex = 8;
+            this.fileText3.Text = "File three:";
+            // 
+            // fileText2
+            // 
+            this.fileText2.AutoSize = true;
+            this.fileText2.Location = new System.Drawing.Point(34, 90);
+            this.fileText2.Name = "fileText2";
+            this.fileText2.Size = new System.Drawing.Size(46, 13);
+            this.fileText2.TabIndex = 7;
+            this.fileText2.Text = "File two:";
+            // 
+            // fileText1
+            // 
+            this.fileText1.AutoSize = true;
+            this.fileText1.Location = new System.Drawing.Point(34, 64);
+            this.fileText1.Name = "fileText1";
+            this.fileText1.Size = new System.Drawing.Size(47, 13);
+            this.fileText1.TabIndex = 6;
+            this.fileText1.Text = "File one:";
+            // 
+            // fileTextBox3
+            // 
+            this.fileTextBox3.Location = new System.Drawing.Point(87, 113);
+            this.fileTextBox3.Name = "fileTextBox3";
+            this.fileTextBox3.Size = new System.Drawing.Size(396, 20);
+            this.fileTextBox3.TabIndex = 5;
+            // 
+            // fileTextBox2
+            // 
+            this.fileTextBox2.Location = new System.Drawing.Point(87, 87);
+            this.fileTextBox2.Name = "fileTextBox2";
+            this.fileTextBox2.Size = new System.Drawing.Size(396, 20);
+            this.fileTextBox2.TabIndex = 4;
+            // 
+            // fileTextBox1
+            // 
+            this.fileTextBox1.Location = new System.Drawing.Point(87, 61);
+            this.fileTextBox1.Name = "fileTextBox1";
+            this.fileTextBox1.Size = new System.Drawing.Size(396, 20);
+            this.fileTextBox1.TabIndex = 3;
+            // 
             // setOneText
             // 
             this.setOneText.AutoSize = true;
@@ -94,9 +175,9 @@
             // clearBTN
             // 
             this.clearBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.clearBTN.Location = new System.Drawing.Point(13, 188);
+            this.clearBTN.Location = new System.Drawing.Point(37, 179);
             this.clearBTN.Name = "clearBTN";
-            this.clearBTN.Size = new System.Drawing.Size(153, 35);
+            this.clearBTN.Size = new System.Drawing.Size(130, 35);
             this.clearBTN.TabIndex = 1;
             this.clearBTN.Text = "Clear";
             this.clearBTN.UseVisualStyleBackColor = true;
@@ -106,9 +187,9 @@
             // 
             this.submitBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.submitBTN.AutoEllipsis = true;
-            this.submitBTN.Location = new System.Drawing.Point(490, 188);
+            this.submitBTN.Location = new System.Drawing.Point(496, 188);
             this.submitBTN.Name = "submitBTN";
-            this.submitBTN.Size = new System.Drawing.Size(153, 35);
+            this.submitBTN.Size = new System.Drawing.Size(130, 35);
             this.submitBTN.TabIndex = 0;
             this.submitBTN.Text = "Submit";
             this.submitBTN.UseVisualStyleBackColor = true;
@@ -118,91 +199,10 @@
             this.step2Tab.Location = new System.Drawing.Point(4, 22);
             this.step2Tab.Name = "step2Tab";
             this.step2Tab.Padding = new System.Windows.Forms.Padding(3);
-            this.step2Tab.Size = new System.Drawing.Size(690, 233);
+            this.step2Tab.Size = new System.Drawing.Size(651, 231);
             this.step2Tab.TabIndex = 1;
             this.step2Tab.Text = "Step 2";
             this.step2Tab.UseVisualStyleBackColor = true;
-            // 
-            // fileTextBox1
-            // 
-            this.fileTextBox1.Location = new System.Drawing.Point(87, 61);
-            this.fileTextBox1.Name = "fileTextBox1";
-            this.fileTextBox1.Size = new System.Drawing.Size(396, 20);
-            this.fileTextBox1.TabIndex = 3;
-            // 
-            // fileTextBox2
-            // 
-            this.fileTextBox2.Location = new System.Drawing.Point(87, 87);
-            this.fileTextBox2.Name = "fileTextBox2";
-            this.fileTextBox2.Size = new System.Drawing.Size(396, 20);
-            this.fileTextBox2.TabIndex = 4;
-            // 
-            // fileTextBox3
-            // 
-            this.fileTextBox3.Location = new System.Drawing.Point(87, 113);
-            this.fileTextBox3.Name = "fileTextBox3";
-            this.fileTextBox3.Size = new System.Drawing.Size(396, 20);
-            this.fileTextBox3.TabIndex = 5;
-            // 
-            // fileText1
-            // 
-            this.fileText1.AutoSize = true;
-            this.fileText1.Location = new System.Drawing.Point(34, 64);
-            this.fileText1.Name = "fileText1";
-            this.fileText1.Size = new System.Drawing.Size(47, 13);
-            this.fileText1.TabIndex = 6;
-            this.fileText1.Text = "File one:";
-            // 
-            // fileText2
-            // 
-            this.fileText2.AutoSize = true;
-            this.fileText2.Location = new System.Drawing.Point(34, 90);
-            this.fileText2.Name = "fileText2";
-            this.fileText2.Size = new System.Drawing.Size(46, 13);
-            this.fileText2.TabIndex = 7;
-            this.fileText2.Text = "File two:";
-            // 
-            // fileText3
-            // 
-            this.fileText3.AutoSize = true;
-            this.fileText3.Location = new System.Drawing.Point(34, 113);
-            this.fileText3.Name = "fileText3";
-            this.fileText3.Size = new System.Drawing.Size(53, 13);
-            this.fileText3.TabIndex = 8;
-            this.fileText3.Text = "File three:";
-            // 
-            // openBTN1
-            // 
-            this.openBTN1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.openBTN1.Location = new System.Drawing.Point(496, 61);
-            this.openBTN1.Name = "openBTN1";
-            this.openBTN1.Size = new System.Drawing.Size(147, 20);
-            this.openBTN1.TabIndex = 9;
-            this.openBTN1.Text = "Open";
-            this.openBTN1.UseVisualStyleBackColor = true;
-            this.openBTN1.Click += new System.EventHandler(this.openBTN1_Click);
-            // 
-            // openBTN2
-            // 
-            this.openBTN2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.openBTN2.Location = new System.Drawing.Point(496, 87);
-            this.openBTN2.Name = "openBTN2";
-            this.openBTN2.Size = new System.Drawing.Size(147, 20);
-            this.openBTN2.TabIndex = 10;
-            this.openBTN2.Text = "Open";
-            this.openBTN2.UseVisualStyleBackColor = true;
-            this.openBTN2.Click += new System.EventHandler(this.openBTN2_Click);
-            // 
-            // openBTN3
-            // 
-            this.openBTN3.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.openBTN3.Location = new System.Drawing.Point(496, 113);
-            this.openBTN3.Name = "openBTN3";
-            this.openBTN3.Size = new System.Drawing.Size(147, 20);
-            this.openBTN3.TabIndex = 11;
-            this.openBTN3.Text = "Open";
-            this.openBTN3.UseVisualStyleBackColor = true;
-            this.openBTN3.Click += new System.EventHandler(this.openBTN3_Click);
             // 
             // openFileDialog
             // 
