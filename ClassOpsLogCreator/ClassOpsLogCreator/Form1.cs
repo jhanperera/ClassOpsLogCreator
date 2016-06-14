@@ -7,8 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+<<<<<<< Updated upstream
 using Excel = Microsoft.Office.Interop.Excel;
 
+=======
+using Microsoft.Office.Interop; 
+>>>>>>> Stashed changes
 
 namespace ClassOpsLogCreator
 {
@@ -34,6 +38,7 @@ namespace ClassOpsLogCreator
         private void openBTN1_Click(object sender, EventArgs e)
         {
             open_and_setFile(fileTextBox1);
+            Spreadsheet document = new Spreadsheet();
         }
       
 
