@@ -33,7 +33,6 @@ namespace ClassOpsLogCreator
         private void openBTN1_Click(object sender, EventArgs e)
         {
             open_and_setFile(fileTextBox1);
-            Spreadsheet document = new Spreadsheet();
         }
       
 

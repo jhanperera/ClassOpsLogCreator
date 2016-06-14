@@ -86,11 +86,7 @@
             this.openBTN3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.openBTN3.Location = new System.Drawing.Point(496, 113);
             this.openBTN3.Name = "openBTN3";
-<<<<<<< HEAD
             this.openBTN3.Size = new System.Drawing.Size(147, 20);
-=======
-            this.openBTN3.Size = new System.Drawing.Size(130, 20);
->>>>>>> dc94bbb2e795ea1cda81f70d1205501cc64a6b61
             this.openBTN3.TabIndex = 11;
             this.openBTN3.Text = "Open";
             this.openBTN3.UseVisualStyleBackColor = true;
@@ -101,11 +97,7 @@
             this.openBTN2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.openBTN2.Location = new System.Drawing.Point(496, 87);
             this.openBTN2.Name = "openBTN2";
-<<<<<<< HEAD
             this.openBTN2.Size = new System.Drawing.Size(147, 20);
-=======
-            this.openBTN2.Size = new System.Drawing.Size(130, 20);
->>>>>>> dc94bbb2e795ea1cda81f70d1205501cc64a6b61
             this.openBTN2.TabIndex = 10;
             this.openBTN2.Text = "Open";
             this.openBTN2.UseVisualStyleBackColor = true;
@@ -116,11 +108,7 @@
             this.openBTN1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.openBTN1.Location = new System.Drawing.Point(496, 61);
             this.openBTN1.Name = "openBTN1";
-<<<<<<< HEAD
             this.openBTN1.Size = new System.Drawing.Size(147, 20);
-=======
-            this.openBTN1.Size = new System.Drawing.Size(130, 20);
->>>>>>> dc94bbb2e795ea1cda81f70d1205501cc64a6b61
             this.openBTN1.TabIndex = 9;
             this.openBTN1.Text = "Open";
             this.openBTN1.UseVisualStyleBackColor = true;
