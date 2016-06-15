@@ -187,7 +187,7 @@
             // 
             this.submitBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.submitBTN.AutoEllipsis = true;
-            this.submitBTN.Location = new System.Drawing.Point(496, 188);
+            this.submitBTN.Location = new System.Drawing.Point(496, 179);
             this.submitBTN.Name = "submitBTN";
             this.submitBTN.Size = new System.Drawing.Size(130, 35);
             this.submitBTN.TabIndex = 0;
