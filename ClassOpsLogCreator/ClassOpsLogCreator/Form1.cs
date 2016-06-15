@@ -77,7 +77,8 @@ namespace ClassOpsLogCreator
 
         private void clearBTN_Click(object sender, EventArgs e)
         {
-
+            MyBook1.SaveAs("Text.pdf");
+            MyBook1.Close();
         }
 
     }
