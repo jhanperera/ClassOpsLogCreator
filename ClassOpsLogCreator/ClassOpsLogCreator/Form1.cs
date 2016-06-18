@@ -31,11 +31,11 @@ namespace ClassOpsLogCreator
         {
             //Open the room excel file
             roomSched = new Excel.Application();
-            roomSched.Visible = true;
+            roomSched.Visible = false;
             try
             {
                 //This should look for the file one level up. (Temporary to keep everything local)
-                roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
+                roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
                 //Work in worksheet number 1
                 roomSheet1 = roomWorkBook.Sheets[1];
 
@@ -62,6 +62,7 @@ namespace ClassOpsLogCreator
             string[] arrayTimes = this.ConvertToStringArray(array2, 1);
             //DO WORK HERE
 
+            //This is the last time for each classroom in the list
             string[] arrayLastTimes = this.extract_last_time(arrayTimes);
 
 
@@ -69,7 +70,7 @@ namespace ClassOpsLogCreator
 
             //DEGUB CODE
             //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
-            textBox1.Text = arrayLastTimes[0].ToString();
+            textBox1.Text = arrayClassRooms.Length.ToString() + " " + arrayLastTimes.Length.ToString();
         }
 
 
@@ -95,6 +96,7 @@ namespace ClassOpsLogCreator
                     //This takes care of white space
                     if (values.GetValue(i, j).ToString().Trim().Length == 0)
                     {
+                        //Add an empty string so we can parse for last time later
                          if(flag == 1)
                         {
                             newArray[index] = "";
@@ -120,14 +122,19 @@ namespace ClassOpsLogCreator
         private string[] extract_last_time(string[] array)
         {
             string[] newArray = new string[array.Length];
-            for (int index = 0; index < array.Length; index++)
+            int index = 0;
+            
+            for (int i = array.GetLowerBound(0); i <= array.GetUpperBound(0) - 4; i++)
             {
-                if (array[index].Length != 0)
+                //if the next cell is empty we found the last time, add it to the array
+                if ((array[i].ToString().Length != 0) && (array[i + 1].ToString().Length == 0))
                 {
-                    newArray[index] = DateTime.FromOADate(double.Parse(array[index])).ToString("hh:mm:tt");
+                    //add the last time to the list
+                    newArray[index] = DateTime.FromOADate(double.Parse(array[i])).ToString("hh:mm tt");
+                    index++;
                 }
             } 
-            return newArray;
+            return newArray = newArray.Where(n => n != null).ToArray();
         }
     }
 }
