@@ -35,7 +35,7 @@ namespace ClassOpsLogCreator
             try
             {
                 //This should look for the file one level up. (Temporary to keep everything local)
-                roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
+                roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
                 //Work in worksheet number 1
                 roomSheet1 = roomWorkBook.Sheets[1];
 
@@ -60,19 +60,17 @@ namespace ClassOpsLogCreator
             //Now we extract all the raw data to strings 
             string[] arrayClassRooms = this.ConvertToStringArray(array, 0);
             string[] arrayTimes = this.ConvertToStringArray(array2, 1);
-            //DO WORK HERE
-
-            //This is the last time for each classroom in the list
             string[] arrayLastTimes = this.extract_last_time(arrayTimes);
 
-
-
-
+            //DO WORK HERE
+            //1) we must take each element in arrayClassRooms and add it to a new excel worksheer
+            //2) add the corresonding arrayLastTimes to said worksheer in the adjacent coloumn
+            
             //DEGUB CODE
             //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
             textBox1.Text = arrayClassRooms.Length + " " + arrayLastTimes.Length;
 
-            
+            //close the excel application
             roomWorkBook.Close();
             roomSched.Quit();
         }
@@ -98,7 +96,7 @@ namespace ClassOpsLogCreator
                           j <= values.GetUpperBound(1); j++)
                 {
                     //This takes care of white space
-                    if (values.GetValue(i, j).ToString().Trim().Length == 0)
+                    if ((values.GetValue(i, j) == null) ||(values.GetValue(i, j).ToString().Trim().Length == 0))
                     {
                         //Add an empty string so we can parse for last time later
                          if(flag == 1)
@@ -138,6 +136,7 @@ namespace ClassOpsLogCreator
                     index++;
                 }
             } 
+            //Return an array with no null characters. 
             return newArray = newArray.Where(n => n != null).ToArray();
         }
     }
