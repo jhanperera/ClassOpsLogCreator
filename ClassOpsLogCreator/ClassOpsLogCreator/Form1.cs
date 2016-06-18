@@ -96,7 +96,7 @@ namespace ClassOpsLogCreator
             try
             {
                 //This should look for the file one level up. (Temporary to keep everything local)
-                roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
+                roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
                 //Work in worksheet number 1
                 roomSheet1 = roomWorkBook.Sheets[1];
 
@@ -129,33 +129,23 @@ namespace ClassOpsLogCreator
             logoutMaster.Visible = false;
             Excel.Workbook logoutMasterWorkBook = logoutMaster.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
             Excel.Worksheet logoutMasterWorkSheet = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[1];
-            Excel.Range aRange = logoutMasterWorkSheet.get_Range("A2", "A" + (arrayLastTimes.Length * 2));
 
-            //add info to the excel file
-            for (int i = 0; i < aRange.Rows.Count; i++)
-            {
-                aRange.Cells[i] = arrayClassRooms[i];
-            }
-
+            //write all the data to the excel file
+            this.WriteArray(logoutMasterWorkSheet, arrayClassRooms, arrayLastTimes);
 
             //Saving and closing the new excel file
-            logoutMasterWorkBook.SaveAs(@"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\test.xlsx");
+            logoutMasterWorkBook.SaveAs(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\test.xlsx");
             logoutMasterWorkBook.Close();
             logoutMaster.Quit();
 
-
-
-            //2) add the corresonding arrayLastTimes to said worksheer in the adjacent coloumn
-
             //DEGUB CODE
             //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
-            textBox1.Text = arrayClassRooms.Length + " " + arrayLastTimes.Length;
+            textBox1.Text = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\test.xlsx";
 
             //close the excel application
             roomWorkBook.Close();
             roomSched.Quit();
         }
-
 
         /**A Helper converter that will take our "values" and convert them into a string array. 
          * String parsing IS requires for now until we make it smart. 
@@ -219,6 +209,31 @@ namespace ClassOpsLogCreator
             } 
             //Return an array with no null characters. 
             return newArray = newArray.Where(n => n != null).ToArray();
+        }
+
+        /*Testing out
+         */
+        private void WriteArray(Excel.Worksheet worksheet, string[] arrayClass, string[] arrayTime)
+        {
+            var firstCell = (Excel.Range)worksheet.Cells[1, 1];
+            firstCell.Value2 = "Task Type";
+              int index = 0;
+              for(int i = 2; i <= arrayClass.Length + 1; i ++)
+              {
+                  var cellA = (Excel.Range)worksheet.Cells[i, 1];
+                  var cellB = (Excel.Range)worksheet.Cells[i, 2];
+                  var cellC = (Excel.Range)worksheet.Cells[i, 3];
+                  cellA.ColumnWidth = 24.00;
+                  cellB.ColumnWidth = 17.00;
+                  cellC.ColumnWidth = 13.00;
+                  cellA.Value2 = "Crestron Logout";
+                  cellA.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                  cellB.Value2 = arrayClass[index];
+                  cellB.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                  cellC.Value2 = arrayTime[index];
+                  cellC.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                  index++;
+              }
         }
     }
 }
