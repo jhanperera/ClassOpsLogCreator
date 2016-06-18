@@ -23,6 +23,67 @@ namespace ClassOpsLogCreator
         public LogCreator()
         {
             InitializeComponent();
+
+            //fill the combo boxes
+            for(int i = 1; i <= 12; i ++)
+            {
+                this.startHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
+                this.startHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
+
+                this.endHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
+                this.endHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
+                //15 minute intervals
+                for (int k = 15; k <= 45; k += 15)
+                {
+                    this.startHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString()});
+                    this.startHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
+
+                    this.endHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
+                    this.endHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
+                }
+            }
+
+            //add number of shifts
+            for(int j = 1; j <= 6; j ++)
+            {
+                this.numberOfShiftsCombo1.Items.Add(j.ToString());
+                this.numberOfShiftsCombo2.Items.Add(j.ToString());
+            }
+
+            //Fill the am/pm selector
+            this.am_pmCombo1.Items.Add("AM");
+            this.am_pmCombo1.Items.Add("PM");
+            this.am_pmCombo2.Items.Add("AM");
+            this.am_pmCombo2.Items.Add("PM");
+            this.am_pmCombo3.Items.Add("AM");
+            this.am_pmCombo3.Items.Add("PM");
+            this.am_pmCombo4.Items.Add("AM");
+            this.am_pmCombo4.Items.Add("PM");
+
+            //set the default view for the combo
+            this.startHour1.SelectedIndex = 0;
+            this.startHour2.SelectedIndex = 0;
+            this.endHour1.SelectedIndex = 0;
+            this.endHour2.SelectedIndex = 0;
+            this.numberOfShiftsCombo1.SelectedIndex = 0;
+            this.numberOfShiftsCombo2.SelectedIndex = 0;
+            this.am_pmCombo1.SelectedIndex = 0;
+            this.am_pmCombo2.SelectedIndex = 0;
+            this.am_pmCombo3.SelectedIndex = 0;
+            this.am_pmCombo4.SelectedIndex = 0;
+
+            //Make the combo box read only
+            this.startHour1.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.startHour2.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.endHour1.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.endHour2.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.am_pmCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.am_pmCombo2.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.am_pmCombo3.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.am_pmCombo4.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.numberOfShiftsCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.numberOfShiftsCombo2.DropDownStyle = ComboBoxStyle.DropDownList;
+
         }
 
         /** When the user clicks the "Create" Button this is what will happen
@@ -63,9 +124,29 @@ namespace ClassOpsLogCreator
             string[] arrayLastTimes = this.extract_last_time(arrayTimes);
 
             //DO WORK HERE
-            //1) we must take each element in arrayClassRooms and add it to a new excel worksheer
+            //Create the new Excel file where we will store all the new information
+            Excel.Application logoutMaster = new Excel.Application();
+            logoutMaster.Visible = false;
+            Excel.Workbook logoutMasterWorkBook = logoutMaster.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
+            Excel.Worksheet logoutMasterWorkSheet = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[1];
+            Excel.Range aRange = logoutMasterWorkSheet.get_Range("A2", "A" + (arrayLastTimes.Length * 2));
+
+            //add info to the excel file
+            for (int i = 0; i < aRange.Rows.Count; i++)
+            {
+                aRange.Cells[i] = arrayClassRooms[i];
+            }
+
+
+            //Saving and closing the new excel file
+            logoutMasterWorkBook.SaveAs(@"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\test.xlsx");
+            logoutMasterWorkBook.Close();
+            logoutMaster.Quit();
+
+
+
             //2) add the corresonding arrayLastTimes to said worksheer in the adjacent coloumn
-            
+
             //DEGUB CODE
             //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
             textBox1.Text = arrayClassRooms.Length + " " + arrayLastTimes.Length;
@@ -96,7 +177,7 @@ namespace ClassOpsLogCreator
                           j <= values.GetUpperBound(1); j++)
                 {
                     //This takes care of white space
-                    if ((values.GetValue(i, j) == null) ||(values.GetValue(i, j).ToString().Trim().Length == 0))
+                    if ((values.GetValue(i, j) == null) || (values.GetValue(i, j).ToString().Trim().Length == 0))
                     {
                         //Add an empty string so we can parse for last time later
                          if(flag == 1)
