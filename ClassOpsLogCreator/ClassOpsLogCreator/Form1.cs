@@ -70,7 +70,11 @@ namespace ClassOpsLogCreator
 
             //DEGUB CODE
             //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
-            textBox1.Text = arrayClassRooms.Length.ToString() + " " + arrayLastTimes.Length.ToString();
+            textBox1.Text = arrayClassRooms.Length + " " + arrayLastTimes.Length;
+
+            
+            roomWorkBook.Close();
+            roomSched.Quit();
         }
 
 
@@ -124,10 +128,10 @@ namespace ClassOpsLogCreator
             string[] newArray = new string[array.Length];
             int index = 0;
             
-            for (int i = array.GetLowerBound(0); i <= array.GetUpperBound(0) - 4; i++)
+            for (int i = array.GetLowerBound(0); i <= array.GetUpperBound(0) - 2; i++)
             {
                 //if the next cell is empty we found the last time, add it to the array
-                if ((array[i].ToString().Length != 0) && (array[i + 1].ToString().Length == 0))
+                if ((array[i].ToString().Length != 0) && (array[i + 1].ToString().Length == 0) || (array[i + 1] == null))
                 {
                     //add the last time to the list
                     newArray[index] = DateTime.FromOADate(double.Parse(array[i])).ToString("hh:mm tt");
