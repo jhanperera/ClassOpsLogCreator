@@ -19,6 +19,11 @@ namespace ClassOpsLogCreator
         private static Excel.Workbook roomWorkBook = null;
         private static Excel.Worksheet roomSheet1 = null;
 
+        private static Excel.Application logoutMaster = null;
+        private static Excel.Workbook logoutMasterWorkBook = null;
+        private static Excel.Worksheet logoutMasterWorkSheet = null;
+
+
         /** Constructor for the system. (Changes here should be confirmed with everyone first) */
         public LogCreator()
         {
@@ -96,7 +101,7 @@ namespace ClassOpsLogCreator
             try
             {
                 //This should look for the file one level up. (Temporary to keep everything local)
-                roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
+                roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
                 //Work in worksheet number 1
                 roomSheet1 = roomWorkBook.Sheets[1];
 
@@ -109,6 +114,7 @@ namespace ClassOpsLogCreator
                 return;
 
             }
+
             //Get the range we are working within. (A1, A.LastRow)
             Excel.Range last = roomSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
             Excel.Range range1 = roomSheet1.get_Range("A5", "A" + last.Row);
@@ -123,28 +129,32 @@ namespace ClassOpsLogCreator
             string[] arrayTimes = this.ConvertToStringArray(array2, 1);
             string[] arrayLastTimes = this.extract_last_time(arrayTimes);
 
-            //DO WORK HERE
             //Create the new Excel file where we will store all the new information
-            Excel.Application logoutMaster = new Excel.Application();
+            logoutMaster = new Excel.Application();
             logoutMaster.Visible = false;
-            Excel.Workbook logoutMasterWorkBook = logoutMaster.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
-            Excel.Worksheet logoutMasterWorkSheet = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[1];
+            logoutMasterWorkBook = logoutMaster.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
+            logoutMasterWorkSheet = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[1];
 
             //write all the data to the excel file
             this.WriteArray(logoutMasterWorkSheet, arrayClassRooms, arrayLastTimes);
 
             //Saving and closing the new excel file
-            logoutMasterWorkBook.SaveAs(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\test.xlsx");
-            logoutMasterWorkBook.Close();
-            logoutMaster.Quit();
+            logoutMasterWorkBook.SaveAs(Environment.GetFolderPath(
+                         System.Environment.SpecialFolder.DesktopDirectory) + @"\Logout_Master.xlsx");
 
             //DEGUB CODE
             //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
-            textBox1.Text = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\test.xlsx";
+            textBox1.Text = Environment.GetFolderPath(
+                         System.Environment.SpecialFolder.DesktopDirectory) + @"\Logout_Master.xlsx";
 
             //close the excel application
-            roomWorkBook.Close();
+            roomWorkBook.Close(0);
             roomSched.Quit();
+            logoutMasterWorkBook.Close(0);
+            logoutMaster.Quit();
+
+            //TODO: Clean up the excel process problem ( HAVE TO Refer everything to null and call a GC)
+
         }
 
         /**A Helper converter that will take our "values" and convert them into a string array. 
@@ -158,8 +168,6 @@ namespace ClassOpsLogCreator
             string[] newArray = new string[values.Length];
             int index = 0;
 
-            //The fun of double nester for loops, this is O(x^2)
-            //This is the slowest part of the program at the moment
             for (int i = values.GetLowerBound(0);
                   i <= values.GetUpperBound(0); i++)
             {
@@ -211,29 +219,30 @@ namespace ClassOpsLogCreator
             return newArray = newArray.Where(n => n != null).ToArray();
         }
 
-        /*Testing out
+        /*This method will write our arrays to the excel file.
+         * 
+         * This method generates the Excel output via the arrays
          */
         private void WriteArray(Excel.Worksheet worksheet, string[] arrayClass, string[] arrayTime)
         {
-            var firstCell = (Excel.Range)worksheet.Cells[1, 1];
-            firstCell.Value2 = "Task Type";
-              int index = 0;
-              for(int i = 2; i <= arrayClass.Length + 1; i ++)
-              {
-                  var cellA = (Excel.Range)worksheet.Cells[i, 1];
-                  var cellB = (Excel.Range)worksheet.Cells[i, 2];
-                  var cellC = (Excel.Range)worksheet.Cells[i, 3];
-                  cellA.ColumnWidth = 24.00;
-                  cellB.ColumnWidth = 17.00;
-                  cellC.ColumnWidth = 13.00;
-                  cellA.Value2 = "Crestron Logout";
-                  cellA.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                  cellB.Value2 = arrayClass[index];
-                  cellB.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                  cellC.Value2 = arrayTime[index];
-                  cellC.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                  index++;
-              }
+            string[,] values = new string[arrayClass.Length, 2];
+            for (int i = 0; i < arrayClass.Length; i++)
+            {
+                values[i, 1] = arrayClass[i];
+                values[i, 0] = arrayTime[i];
+            }
+            //Setting up the cells to put the information into
+            Excel.Range taskType_range = worksheet.get_Range("A2", "A" + (arrayClass.Length + 1)); 
+            Excel.Range value_range = worksheet.get_Range("B2", "C" + (arrayClass.Length + 1));
+            //Formatting for easy to read for "Crestron logout"
+            taskType_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            taskType_range.ColumnWidth = 20;
+            taskType_range.Value2 = "Crestron Logout";
+
+            //Format for easy read Time and Building and room
+            value_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            value_range.ColumnWidth = 17;
+            value_range.Value2 = values;
         }
     }
 }
