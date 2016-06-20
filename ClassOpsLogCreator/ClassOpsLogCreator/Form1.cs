@@ -98,13 +98,13 @@ namespace ClassOpsLogCreator
             //Open the room excel file
             roomSched = new Excel.Application();
             roomSched.Visible = false;
+            
             try
             {
                 //This should look for the file one level up. (Temporary to keep everything local)
                 roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
                 //Work in worksheet number 1
                 roomSheet1 = roomWorkBook.Sheets[1];
-
             }
             catch (Exception ex)
             {
@@ -112,7 +112,6 @@ namespace ClassOpsLogCreator
                 textBox1.Text = "error: FILE NOT FOUND" + ex.ToString();
                 roomSched.Quit();
                 return;
-
             }
 
             //Get the range we are working within. (A1, A.LastRow)
@@ -243,6 +242,10 @@ namespace ClassOpsLogCreator
             value_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             value_range.ColumnWidth = 17;
             value_range.Value2 = values;
+
+            //Sorting it by column 2
+            dynamic allDataRange = worksheet.UsedRange;
+            allDataRange.Sort(allDataRange.Columns[2], Excel.XlSortOrder.xlAscending);
         }
     }
 }
