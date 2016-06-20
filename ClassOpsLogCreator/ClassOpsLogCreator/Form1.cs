@@ -102,7 +102,7 @@ namespace ClassOpsLogCreator
             try
             {
                 //This should look for the file one level up. (Temporary to keep everything local)
-                roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
+                roomWorkBook = roomSched.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
                 //Work in worksheet number 1
                 roomSheet1 = roomWorkBook.Sheets[1];
             }
