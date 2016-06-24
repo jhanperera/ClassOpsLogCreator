@@ -127,10 +127,9 @@ namespace ClassOpsLogCreator
             {
                 //This should look for the file
                 roomWorkBook = roomSched.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
-                //CHANGE THE PATHS HERE!
-                JeannineWorkBook = JeannineLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
-                DerekWorkBook = DerekLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
-                RaulWorkBook = RaulLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
+                JeannineWorkBook = JeannineLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx");
+                DerekWorkBook = DerekLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx");
+                RaulWorkBook = RaulLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx");
                 //roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
 
                 //Work in worksheet number 1
@@ -147,7 +146,7 @@ namespace ClassOpsLogCreator
                 return;
             }
             
-
+            //CREATE MASTER LOGOUT FILE!
             //Get the range we are working within. (A1, A.LastRow)
             Excel.Range last = roomSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
             Excel.Range range1 = roomSheet1.get_Range("A5", "A" + last.Row);
@@ -174,6 +173,17 @@ namespace ClassOpsLogCreator
             //Saving and closing the new excel file
             logoutMasterWorkBook.SaveAs(Environment.GetFolderPath(
                          System.Environment.SpecialFolder.DesktopDirectory) + @"\Logout_Master.xlsx");
+            //END OF CREATE MASTER LOGOUT FILE
+
+            //CREATE MASTER LOG FILE!
+            //Get the last row for each log
+            Excel.Range lastJeannine = JeannineSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+            Excel.Range lastDerek = DerekSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+            Excel.Range lastRaul = RaulSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+
+
+            
+            //END OF CREATE MASTER LOG FILES
 
             //DEGUB CODE
             //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
