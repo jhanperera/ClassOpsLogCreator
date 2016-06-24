@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -13,6 +14,7 @@ namespace ClassOpsLogCreator
 {
     public partial class LogCreator : Form
     {
+        
         // Values to read in the excel file, leave static so the excel file is 
         // accessable everywhere. 
         private static Excel.Application roomSched = null;
@@ -23,7 +25,7 @@ namespace ClassOpsLogCreator
         private static Excel.Workbook logoutMasterWorkBook = null;
         private static Excel.Worksheet logoutMasterWorkSheet = null;
 
-
+        
         /** Constructor for the system. (Changes here should be confirmed with everyone first) */
         public LogCreator()
         {
@@ -114,6 +116,7 @@ namespace ClassOpsLogCreator
                 roomSched.Quit();
                 return;
             }
+            
 
             //Get the range we are working within. (A1, A.LastRow)
             Excel.Range last = roomSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
@@ -136,7 +139,7 @@ namespace ClassOpsLogCreator
             logoutMasterWorkSheet = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[1];
 
             //write all the data to the excel file
-            this.WriteArray(logoutMasterWorkSheet, arrayClassRooms, arrayLastTimes);
+            this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, arrayLastTimes);
 
             //Saving and closing the new excel file
             logoutMasterWorkBook.SaveAs(Environment.GetFolderPath(
@@ -149,8 +152,13 @@ namespace ClassOpsLogCreator
 
             //close the excel application
             Quit();
-    }
+        }
 
+
+        /// <summary>
+        ///  ALL HELPER METHODS GO HERE BELLOW HERE! 
+        /// </summary>
+       
         /**A Helper converter that will take our "values" and convert them into a string array. 
          * String parsing IS requires for now until we make it smart. 
          * 
@@ -193,11 +201,6 @@ namespace ClassOpsLogCreator
         }
 
 
-
-        /// <summary>
-        ///  ALL HELPER METHODS GO HERE BELLOW HERE! 
-        /// </summary>
-        
         /* A  helper method to get the last time in our time array
          */
         private string[] extract_last_time(string[] array)
@@ -220,22 +223,33 @@ namespace ClassOpsLogCreator
             return newArray = newArray.Where(n => n != null).ToArray();
         }
 
+        
         /*This method will write our arrays to the excel file.
          * 
          * This method generates the Excel output via the arrays
          */
-        private void WriteArray(Excel.Worksheet worksheet, string[] arrayClass, string[] arrayTime)
+        private void WriteLogOutArray(Excel.Worksheet worksheet, string[] arrayClass, string[] arrayTime)
         {
             string[,] values = new string[arrayClass.Length, 2];
+            DateTime fourPM = DateTime.FromOADate(0.666);
+            DateTime tenPM = DateTime.FromOADate(0.920);
             //Add all the elements of the array's into one array. 
+            int index = 0;
             for (int i = 0; i < arrayClass.Length; i++)
             {
-                values[i, 0] = arrayTime[i];
-                values[i, 1] = arrayClass[i];
+                //Add only the times between 4pm and 10pm
+                DateTime check = Convert.ToDateTime(arrayTime[i]);
+                if(check.TimeOfDay >= fourPM.TimeOfDay && check.TimeOfDay <= tenPM.TimeOfDay)
+                {
+                    values[index, 0] = arrayTime[i];
+                    values[index, 1] = arrayClass[i];
+                    index++;
+                }  
             }
+
             //Setting up the cells to put the information into
-            Excel.Range taskType_range = worksheet.get_Range("A2", "A" + (arrayClass.Length + 1)); 
-            Excel.Range value_range = worksheet.get_Range("B2", "C" + (arrayClass.Length + 1));
+            Excel.Range taskType_range = worksheet.get_Range("A2", "A" + (index + 1)); 
+            Excel.Range value_range = worksheet.get_Range("B2", "C" + (index + 1));
 
             //Formatting for easy to read for "Crestron logout"
             taskType_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -251,6 +265,7 @@ namespace ClassOpsLogCreator
             dynamic allDataRange = worksheet.UsedRange;
             allDataRange.Sort(allDataRange.Columns[2], Excel.XlSortOrder.xlAscending);
         }
+
 
         /* Close all open instances of Excel and Garbage collects. 
          * 
