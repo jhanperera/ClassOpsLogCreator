@@ -25,7 +25,19 @@ namespace ClassOpsLogCreator
         private static Excel.Workbook logoutMasterWorkBook = null;
         private static Excel.Worksheet logoutMasterWorkSheet = null;
 
-        
+        private static Excel.Application JeannineLog = null;
+        private static Excel.Workbook JeannineWorkBook = null;
+        private static Excel.Worksheet JeannineSheet1 = null;
+
+        private static Excel.Application DerekLog = null;
+        private static Excel.Workbook DerekWorkBook = null;
+        private static Excel.Worksheet DerekSheet1 = null;
+
+        private static Excel.Application RaulLog = null;
+        private static Excel.Workbook RaulWorkBook = null;
+        private static Excel.Worksheet RaulSheet1 = null;
+
+
         /** Constructor for the system. (Changes here should be confirmed with everyone first) */
         public LogCreator()
         {
@@ -100,20 +112,38 @@ namespace ClassOpsLogCreator
             //Open the room excel file
             roomSched = new Excel.Application();
             roomSched.Visible = false;
+
+            JeannineLog = new Excel.Application();
+            JeannineLog.Visible = false;
+
+            DerekLog = new Excel.Application();
+            DerekLog.Visible = false;
+
+            RaulLog = new Excel.Application();
+            RaulLog.Visible = false;
+
             
             try
             {
-                //This should look for the file one level up. (Temporary to keep everything local)
+                //This should look for the file
                 roomWorkBook = roomSched.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
+                //CHANGE THE PATHS HERE!
+                JeannineWorkBook = JeannineLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
+                DerekWorkBook = DerekLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
+                RaulWorkBook = RaulLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
                 //roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
+
                 //Work in worksheet number 1
                 roomSheet1 = roomWorkBook.Sheets[1];
+                JeannineSheet1 = JeannineWorkBook.Sheets[1];
+                DerekSheet1 = DerekWorkBook.Sheets[2];
+                RaulSheet1 = RaulWorkBook.Sheets[1];
             }
             catch (Exception ex)
             {
                 //File not found...
                 textBox1.Text = "error: FILE NOT FOUND" + ex.ToString();
-                roomSched.Quit();
+                Quit();
                 return;
             }
             
@@ -272,14 +302,41 @@ namespace ClassOpsLogCreator
          */ 
         private void Quit()
         {
-            roomWorkBook.Close(0);
-            roomSched.Quit();
+            if (roomWorkBook != null)
+            {
+                roomWorkBook.Close(0);
+                roomSched.Quit();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(roomSched);
+            }
+            
+            if(logoutMasterWorkBook != null)
+            {
+                logoutMasterWorkBook.Close(0);
+                logoutMaster.Quit();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(logoutMaster);
+            }
 
+            if(JeannineWorkBook != null)
+            {
+                JeannineWorkBook.Close(0);
+                JeannineLog.Quit();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(JeannineLog);
+            }
 
-            logoutMasterWorkBook.Close(0);
-            logoutMaster.Quit();
+            if (DerekWorkBook != null)
+            {
+                DerekWorkBook.Close(0);
+                DerekLog.Quit();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(DerekLog);
+            }
 
-
+            if(RaulWorkBook != null)
+            {
+                RaulWorkBook.Close(0);
+                RaulLog.Quit();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(RaulLog);
+            }
+            
             roomSched = null;
             roomWorkBook = null;
             roomSheet1 = null;
@@ -287,6 +344,18 @@ namespace ClassOpsLogCreator
             logoutMaster = null;
             logoutMasterWorkBook = null;
             logoutMasterWorkSheet = null;
+
+            JeannineLog = null;
+            JeannineWorkBook = null;
+            JeannineSheet1 = null;
+
+            DerekLog = null;
+            DerekWorkBook = null;
+            DerekSheet1 = null;
+
+            RaulLog = null;
+            RaulWorkBook = null;
+            RaulSheet1 = null;
 
             GC.Collect();
         }
