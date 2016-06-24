@@ -102,7 +102,8 @@ namespace ClassOpsLogCreator
             try
             {
                 //This should look for the file one level up. (Temporary to keep everything local)
-                roomWorkBook = roomSched.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
+                //roomWorkBook = roomSched.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
+                roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
                 //Work in worksheet number 1
                 roomSheet1 = roomWorkBook.Sheets[1];
             }
@@ -147,14 +148,8 @@ namespace ClassOpsLogCreator
                          System.Environment.SpecialFolder.DesktopDirectory) + @"\Logout_Master.xlsx";
 
             //close the excel application
-            roomWorkBook.Close(0);
-            roomSched.Quit();
-            logoutMasterWorkBook.Close(0);
-            logoutMaster.Quit();
-
-            //TODO: Clean up the excel process problem ( HAVE TO Refer everything to null and call a GC)
-
-        }
+            Quit();
+    }
 
         /**A Helper converter that will take our "values" and convert them into a string array. 
          * String parsing IS requires for now until we make it smart. 
@@ -197,19 +192,26 @@ namespace ClassOpsLogCreator
             return newArray = newArray.Where(n => n != null).ToArray();
         }
 
+
+
+        /// <summary>
+        ///  ALL HELPER METHODS GO HERE BELLOW HERE! 
+        /// </summary>
+        
         /* A  helper method to get the last time in our time array
          */
         private string[] extract_last_time(string[] array)
         {
             string[] newArray = new string[array.Length];
             int index = 0;
-            
+            //Iterate throught the list and find the ending time of the las class in said room.
+            //Getlowerbound and GetUpperBound is safer then .Length
             for (int i = array.GetLowerBound(0); i <= array.GetUpperBound(0) - 2; i++)
             {
                 //if the next cell is empty we found the last time, add it to the array
                 if ((array[i].ToString().Length != 0) && (array[i + 1].ToString().Length == 0) || (array[i + 1] == null))
                 {
-                    //add the last time to the list
+                    //add the last time in a formatted wayS to the list
                     newArray[index] = DateTime.FromOADate(double.Parse(array[i])).ToString("hh:mm tt");
                     index++;
                 }
@@ -225,14 +227,16 @@ namespace ClassOpsLogCreator
         private void WriteArray(Excel.Worksheet worksheet, string[] arrayClass, string[] arrayTime)
         {
             string[,] values = new string[arrayClass.Length, 2];
+            //Add all the elements of the array's into one array. 
             for (int i = 0; i < arrayClass.Length; i++)
             {
-                values[i, 1] = arrayClass[i];
                 values[i, 0] = arrayTime[i];
+                values[i, 1] = arrayClass[i];
             }
             //Setting up the cells to put the information into
             Excel.Range taskType_range = worksheet.get_Range("A2", "A" + (arrayClass.Length + 1)); 
             Excel.Range value_range = worksheet.get_Range("B2", "C" + (arrayClass.Length + 1));
+
             //Formatting for easy to read for "Crestron logout"
             taskType_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             taskType_range.ColumnWidth = 20;
@@ -246,6 +250,30 @@ namespace ClassOpsLogCreator
             //Sorting it by column 2
             dynamic allDataRange = worksheet.UsedRange;
             allDataRange.Sort(allDataRange.Columns[2], Excel.XlSortOrder.xlAscending);
+        }
+
+        /* Close all open instances of Excel and Garbage collects. 
+         * 
+         */ 
+        private void Quit()
+        {
+            roomWorkBook.Close(0);
+            roomSched.Quit();
+
+
+            logoutMasterWorkBook.Close(0);
+            logoutMaster.Quit();
+
+
+            roomSched = null;
+            roomWorkBook = null;
+            roomSheet1 = null;
+
+            logoutMaster = null;
+            logoutMasterWorkBook = null;
+            logoutMasterWorkSheet = null;
+
+            GC.Collect();
         }
     }
 }
