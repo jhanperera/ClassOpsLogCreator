@@ -126,11 +126,14 @@ namespace ClassOpsLogCreator
             try
             {
                 //This should look for the file
-                roomWorkBook = roomSched.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
-                JeannineWorkBook = JeannineLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx");
-                DerekWorkBook = DerekLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx");
-                RaulWorkBook = RaulLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx");
-                //roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
+                //roomWorkBook = roomSched.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
+                //JeannineWorkBook = JeannineLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx");
+                //DerekWorkBook = DerekLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx");
+                //RaulWorkBook = RaulLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx");
+                roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
+                JeannineWorkBook = JeannineLog.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx");
+                DerekWorkBook = DerekLog.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx");
+                RaulWorkBook = RaulLog.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx");
 
                 //Work in worksheet number 1
                 roomSheet1 = roomWorkBook.Sheets[1];
@@ -181,8 +184,10 @@ namespace ClassOpsLogCreator
             Excel.Range lastDerek = DerekSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
             Excel.Range lastRaul = RaulSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
 
-
             
+            string[] listentry = this.ConvertToStringArray((System.Array)lastJeannine.Value2, 1);
+
+                      
             //END OF CREATE MASTER LOG FILES
 
             //DEGUB CODE
@@ -239,7 +244,6 @@ namespace ClassOpsLogCreator
             //Return an array with no null characters
             return newArray = newArray.Where(n => n != null).ToArray();
         }
-
 
         /* A  helper method to get the last time in our time array
          */
