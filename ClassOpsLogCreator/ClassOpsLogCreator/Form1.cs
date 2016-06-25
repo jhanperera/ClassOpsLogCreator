@@ -14,9 +14,14 @@ namespace ClassOpsLogCreator
 {
     public partial class LogCreator : Form
     {
-        
-        // Values to read in the excel file, leave static so the excel file is 
-        // accessable everywhere. 
+        //Public readonly attribues
+        //public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
+        public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx";
+        public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
+        public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
+        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
+
+        // Private attributes
         private static Excel.Application roomSched = null;
         private static Excel.Workbook roomWorkBook = null;
         private static Excel.Worksheet roomSheet1 = null;
@@ -24,19 +29,6 @@ namespace ClassOpsLogCreator
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
         private static Excel.Worksheet logoutMasterWorkSheet = null;
-
-        private static Excel.Application JeannineLog = null;
-        private static Excel.Workbook JeannineWorkBook = null;
-        private static Excel.Worksheet JeannineSheet1 = null;
-
-        private static Excel.Application DerekLog = null;
-        private static Excel.Workbook DerekWorkBook = null;
-        private static Excel.Worksheet DerekSheet1 = null;
-
-        private static Excel.Application RaulLog = null;
-        private static Excel.Workbook RaulWorkBook = null;
-        private static Excel.Worksheet RaulSheet1 = null;
-
 
         /** Constructor for the system. (Changes here should be confirmed with everyone first) */
         public LogCreator()
@@ -113,23 +105,11 @@ namespace ClassOpsLogCreator
             roomSched = new Excel.Application();
             roomSched.Visible = false;
 
-            JeannineLog = new Excel.Application();
-            JeannineLog.Visible = false;
-
-            DerekLog = new Excel.Application();
-            DerekLog.Visible = false;
-
-            RaulLog = new Excel.Application();
-            RaulLog.Visible = false;
-
-            
             try
             {
                 //This should look for the file
-                //roomWorkBook = roomSched.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
-                roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
-                
-
+                roomWorkBook = roomSched.Workbooks.Open(ROOM_SCHED);
+                               
                 //Work in worksheet number 1
                 roomSheet1 = roomWorkBook.Sheets[1];
               
@@ -137,7 +117,7 @@ namespace ClassOpsLogCreator
             catch (Exception ex)
             {
                 //File not found...
-                textBox1.Text = "error: FILE NOT FOUND" + ex.ToString();
+                MessageBox.Show("Error: FILE NOT FOUND " + ex.ToString());
                 Quit();
                 return;
             }
@@ -172,14 +152,14 @@ namespace ClassOpsLogCreator
             //END OF CREATE MASTER LOGOUT FILE
 
             //CREATE MASTER LOG FILE!
-            //Get the last row for each log
+            ZoneSuperLogImporter firstTest = new ZoneSuperLogImporter(this);
+            
 
             //END OF CREATE MASTER LOG FILES
 
             //DEGUB CODE
             //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
-            textBox1.Text = Environment.GetFolderPath(
-                         System.Environment.SpecialFolder.DesktopDirectory) + @"\Logout_Master.xlsx";
+            textBox1.Text = firstTest.getLastDate();
 
             //close the excel application
             Quit();
@@ -196,7 +176,7 @@ namespace ClassOpsLogCreator
          * A string array is returned by with white spaces.
          * flag = 0 means no null/white space, 1 means leave white space and null and we work with doubles
          **/
-        private string[] ConvertToStringArray(System.Array values, int flag)
+        public string[] ConvertToStringArray(System.Array values, int flag)
         {
             string[] newArray = new string[values.Length];
             int index = 0;

@@ -61,7 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MasterClassList.cs" />
+    <Compile Include="ZoneSuperLogImporter.cs" />
+    <Compile Include="ClassInfo.cs" />
     <Compile Include="TimeItem.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

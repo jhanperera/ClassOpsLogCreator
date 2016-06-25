@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace ClassOpsLogCreator
 {
-    class MasterClassList
+    class ClassInfo
     {
         /// <summary>
         /// Constructor for this class
         /// This will import the master classlist and give access to other helper methods.
         /// </summary>
-        public MasterClassList()
+        public ClassInfo()
         {
 
         }
-
 
     }
 }
