@@ -127,19 +127,12 @@ namespace ClassOpsLogCreator
             {
                 //This should look for the file
                 //roomWorkBook = roomSched.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx");
-                //JeannineWorkBook = JeannineLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx");
-                //DerekWorkBook = DerekLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx");
-                //RaulWorkBook = RaulLog.Workbooks.Open(@"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx");
                 roomWorkBook = roomSched.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx");
-                JeannineWorkBook = JeannineLog.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx");
-                DerekWorkBook = DerekLog.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx");
-                RaulWorkBook = RaulLog.Workbooks.Open(@"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx");
+                
 
                 //Work in worksheet number 1
                 roomSheet1 = roomWorkBook.Sheets[1];
-                JeannineSheet1 = JeannineWorkBook.Sheets[1];
-                DerekSheet1 = DerekWorkBook.Sheets[2];
-                RaulSheet1 = RaulWorkBook.Sheets[1];
+              
             }
             catch (Exception ex)
             {
@@ -180,14 +173,7 @@ namespace ClassOpsLogCreator
 
             //CREATE MASTER LOG FILE!
             //Get the last row for each log
-            Excel.Range lastJeannine = JeannineSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            Excel.Range lastDerek = DerekSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            Excel.Range lastRaul = RaulSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
 
-            
-            string[] listentry = this.ConvertToStringArray((System.Array)lastJeannine.Value2, 1);
-
-                      
             //END OF CREATE MASTER LOG FILES
 
             //DEGUB CODE
@@ -329,28 +315,7 @@ namespace ClassOpsLogCreator
                 logoutMaster.Quit();
                 System.Runtime.InteropServices.Marshal.FinalReleaseComObject(logoutMaster);
             }
-
-            if(JeannineWorkBook != null)
-            {
-                JeannineWorkBook.Close(0);
-                JeannineLog.Quit();
-                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(JeannineLog);
-            }
-
-            if (DerekWorkBook != null)
-            {
-                DerekWorkBook.Close(0);
-                DerekLog.Quit();
-                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(DerekLog);
-            }
-
-            if(RaulWorkBook != null)
-            {
-                RaulWorkBook.Close(0);
-                RaulLog.Quit();
-                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(RaulLog);
-            }
-            
+        
             roomSched = null;
             roomWorkBook = null;
             roomSheet1 = null;
@@ -359,19 +324,7 @@ namespace ClassOpsLogCreator
             logoutMasterWorkBook = null;
             logoutMasterWorkSheet = null;
 
-            JeannineLog = null;
-            JeannineWorkBook = null;
-            JeannineSheet1 = null;
-
-            DerekLog = null;
-            DerekWorkBook = null;
-            DerekSheet1 = null;
-
-            RaulLog = null;
-            RaulWorkBook = null;
-            RaulSheet1 = null;
-
-            GC.Collect();
+             GC.Collect();
         }
     }
 }
