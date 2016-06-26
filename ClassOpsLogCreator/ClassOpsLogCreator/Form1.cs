@@ -154,12 +154,15 @@ namespace ClassOpsLogCreator
             //CREATE MASTER LOG FILE!
             ZoneSuperLogImporter firstTest = new ZoneSuperLogImporter(this);
             
+            //Get the three logs
+            //Write them to the masterlog excel sheet.
+
 
             //END OF CREATE MASTER LOG FILES
 
             //DEGUB CODE
             //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
-            textBox1.Text = firstTest.getLastDate();
+            textBox1.Text = firstTest.getNumberofRows().ToString();
 
             //close the excel application
             Quit();
