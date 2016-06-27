@@ -15,11 +15,17 @@ namespace ClassOpsLogCreator
     public partial class LogCreator : Form
     {
         //Public readonly attribues
-        //public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
-        public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx";
-        public readonly string JEANNINE_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
-        public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
+        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
+        public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
+
+        //DEBUG CODE! 
+        //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
+        //public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx";
+        //public readonly string JEANNINE_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
+        //public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
+        //public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
 
         // Private attributes
         private static Excel.Application roomSched = null;
@@ -112,8 +118,7 @@ namespace ClassOpsLogCreator
             try
             {
                 //This should look for the file
-                roomWorkBook = roomSched.Workbooks.Open(ROOM_SCHED);
-                               
+                roomWorkBook = roomSched.Workbooks.Open(ROOM_SCHED);             
                 //Work in worksheet number 1
                 roomSheet1 = roomWorkBook.Sheets[1];
               
@@ -125,8 +130,8 @@ namespace ClassOpsLogCreator
                 Quit();
                 return;
             }
-            
-            //CREATE MASTER LOGOUT FILE!
+
+            //***********************CREATE MASTER LOGOUT FILE!***********************
             //Get the range we are working within. (A1, A.LastRow)
             Excel.Range last = roomSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
             Excel.Range range1 = roomSheet1.get_Range("A5", "A" + last.Row);
@@ -153,15 +158,15 @@ namespace ClassOpsLogCreator
             //Saving and closing the new excel file
             logoutMasterWorkBook.SaveAs(Environment.GetFolderPath(
                          System.Environment.SpecialFolder.DesktopDirectory) + @"\Logout_Master.xlsx");
-            //END OF CREATE MASTER LOGOUT FILE
+            //***********************END OF CREATE MASTER LOGOUT FILE**************
 
-            //CREATE MASTER LOG FILE!
-            ZoneSuperLogImporter firstTest = new ZoneSuperLogImporter(this);
+            //***********************CREATE MASTER LOG FILE!***********************
+            ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this);
 
             //Get the three logs
-            string[,] JInstruction = firstTest.getJeannineLog();
-            string[,] DInstruction = firstTest.getDerekLog();
-            string[,] RInstruction = firstTest.getRaulLog();
+            string[,] JInstruction = ZoneLogs.getJeannineLog();
+            string[,] DInstruction = ZoneLogs.getDerekLog();
+            string[,] RInstruction = ZoneLogs.getRaulLog();
 
             //Create the new Excel file where we will store all the new information
             MasterLog = new Excel.Application();
@@ -176,14 +181,16 @@ namespace ClassOpsLogCreator
             //Saving and closing the new excel file
             MasterLogWorkBook.SaveAs(Environment.GetFolderPath(
                          System.Environment.SpecialFolder.DesktopDirectory) + @"\Master_Log.xlsx");
-            //END OF CREATE MASTER LOG FILES
+            //***********************END OF CREATE MASTER LOG FILES*******************
 
-            //DEGUB CODE
+
+            //***********************DEGUB CODE***************************************
             //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
             textBox1.Text = Environment.GetFolderPath(
                          System.Environment.SpecialFolder.DesktopDirectory).ToString();
-
-            //close the excel application
+            //***********************END OF DEGUB CODE*********************************
+            
+            //Gracefully close all instances
             Quit();
         }
 
