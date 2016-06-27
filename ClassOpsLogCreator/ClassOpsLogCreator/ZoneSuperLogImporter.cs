@@ -17,6 +17,14 @@ namespace ClassOpsLogCreator
         private static Excel.Workbook JeannineWorkBook = null;
         private static Excel.Worksheet JeannineSheet1 = null;
 
+        private static Excel.Application RaulLog = null;
+        private static Excel.Workbook RaulWorkBook = null;
+        private static Excel.Worksheet RaulSheet1 = null;
+
+        private static Excel.Application DerekLog = null;
+        private static Excel.Workbook DerekWorkBook = null;
+        private static Excel.Worksheet DerekSheet1 = null;
+
         private string lastDate = null;
         private string[,] JeannineLogArray = null;
         private string[,] RaulLogArray = null;
@@ -31,16 +39,23 @@ namespace ClassOpsLogCreator
             this.Form1 = form1;
 
             JeannineLog = new Excel.Application();
+            RaulLog = new Excel.Application();
+            DerekLog = new Excel.Application();
             JeannineLog.Visible = false;
+            RaulLog.Visible = false;
+            DerekLog.Visible = false;
 
             try
             {
                 //This should look for the file
-                //JeannineWorkBook = JeannineLog.Workbooks.Open(Form1.JEANNINE_LOG);
-                JeannineWorkBook = JeannineLog.Workbooks.Open(@"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx");
+                JeannineWorkBook = JeannineLog.Workbooks.Open(Form1.JEANNINE_LOG);
+                RaulWorkBook = RaulLog.Workbooks.Open(Form1.RAUL_LOG);
+                DerekWorkBook = DerekLog.Workbooks.Open(Form1.DEREK_LOG);
 
                 //Work in worksheet number 1
                 JeannineSheet1 = JeannineWorkBook.Sheets[2];
+                RaulSheet1 = RaulWorkBook.Sheets[2];
+                DerekSheet1 = DerekWorkBook.Sheets[2];
             }
             catch (Exception ex)
             {
@@ -53,8 +68,8 @@ namespace ClassOpsLogCreator
             // Get the last date and create the 2D array for each log.
             lastDate = this.dateFromLogs(JeannineSheet1);
             JeannineLogArray = this.ConvertToStringArray2D(JeannineSheet1);
-            DerekLogArray = this.ConvertToStringArray2D(null);
-            RaulLogArray = this.ConvertToStringArray2D(null);
+            DerekLogArray = this.ConvertToStringArray2D(DerekSheet1);
+            RaulLogArray = this.ConvertToStringArray2D(RaulSheet1);
         }
 
         /// <summary>
@@ -168,7 +183,16 @@ namespace ClassOpsLogCreator
                 values[i, 2] = arrayD.GetValue(i + 1, 1).ToString();
                 values[i, 3] = arrayE.GetValue(i + 1, 1).ToString();
                 values[i, 4] = arrayF.GetValue(i + 1, 1).ToString();
-                values[i, 5] = arrayG.GetValue(i + 1, 1).ToString();
+                
+                if( arrayG.GetValue(i + 1, 1) == null )
+                {
+                    values[i, 5] = "";
+                }
+                else
+                {
+                    values[i, 5] = arrayG.GetValue(i + 1, 1).ToString();
+                }
+                
 
             }
             return values;

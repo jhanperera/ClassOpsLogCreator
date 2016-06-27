@@ -17,9 +17,9 @@ namespace ClassOpsLogCreator
         //Public readonly attribues
         //public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
         public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx";
-        public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
-        public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
-        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
+        public readonly string JEANNINE_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
 
         // Private attributes
         private static Excel.Application roomSched = null;
@@ -153,16 +153,20 @@ namespace ClassOpsLogCreator
 
             //CREATE MASTER LOG FILE!
             ZoneSuperLogImporter firstTest = new ZoneSuperLogImporter(this);
-            
+
             //Get the three logs
-            //Write them to the masterlog excel sheet.
+            string[,] JInstruction = firstTest.getJeannineLog();
+            string[,] DInstruction = firstTest.getDerekLog();
+            string[,] RInstruction = firstTest.getRaulLog();
+            
+            //merg the 3 array logs into a master excel log.
 
 
             //END OF CREATE MASTER LOG FILES
 
             //DEGUB CODE
             //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
-            textBox1.Text = firstTest.getNumberofRows().ToString();
+            textBox1.Text = DInstruction.Length.ToString();
 
             //close the excel application
             Quit();
@@ -264,12 +268,12 @@ namespace ClassOpsLogCreator
             Excel.Range taskType_range = worksheet.get_Range("A2", "A" + (index + 1)); 
             Excel.Range value_range = worksheet.get_Range("B2", "C" + (index + 1));
 
-            //Formatting for easy to read for "Crestron logout"
+            //Formatt for easy to read for "Crestron logout"
             taskType_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             taskType_range.ColumnWidth = 20;
             taskType_range.Value2 = "Crestron Logout";
 
-            //Format for easy read Time and Building and room
+            //Format for easy reading of Time, Building, and Room.
             value_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             value_range.ColumnWidth = 17;
             value_range.Value2 = values;
@@ -279,10 +283,15 @@ namespace ClassOpsLogCreator
             allDataRange.Sort(allDataRange.Columns[2], Excel.XlSortOrder.xlAscending);
         }
 
+        /*This method will write our arrays to the excel file.
+        * 
+        * This method generates the Excel output via the arrays
+        */
+        private void WriteMasterLog(Excel.Worksheet worksheet, string[] arrayClass, string[] arrayTime)
 
         /* Close all open instances of Excel and Garbage collects. 
          * 
-         */ 
+         */
         private void Quit()
         {
             if (roomWorkBook != null)
