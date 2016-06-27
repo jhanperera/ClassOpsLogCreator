@@ -49,7 +49,7 @@ namespace ClassOpsLogCreator
             {
                 //This should look for the file
                 JeannineWorkBook = JeannineLog.Workbooks.Open(Form1.JEANNINE_LOG);
-                RaulWorkBook = RaulLog.Workbooks.Open(Form1.RAUL_LOG);
+                RaulWorkBook = RaulLog.Workbooks.Open(form1.RAUL_LOG);
                 DerekWorkBook = DerekLog.Workbooks.Open(Form1.DEREK_LOG);
 
                 //Work in worksheet number 1
@@ -70,6 +70,8 @@ namespace ClassOpsLogCreator
             JeannineLogArray = this.ConvertToStringArray2D(JeannineSheet1);
             DerekLogArray = this.ConvertToStringArray2D(DerekSheet1);
             RaulLogArray = this.ConvertToStringArray2D(RaulSheet1);
+
+            this.Quit();
         }
 
         /// <summary>
@@ -184,6 +186,7 @@ namespace ClassOpsLogCreator
                 values[i, 3] = arrayE.GetValue(i + 1, 1).ToString();
                 values[i, 4] = arrayF.GetValue(i + 1, 1).ToString();
                 
+                //Add a blank if the space is null
                 if( arrayG.GetValue(i + 1, 1) == null )
                 {
                     values[i, 5] = "";
@@ -192,8 +195,6 @@ namespace ClassOpsLogCreator
                 {
                     values[i, 5] = arrayG.GetValue(i + 1, 1).ToString();
                 }
-                
-
             }
             return values;
         }
@@ -212,6 +213,26 @@ namespace ClassOpsLogCreator
                 JeannineLog = null;
                 JeannineWorkBook = null;
                 JeannineSheet1 = null;
+            }
+            if (RaulWorkBook != null)
+            {
+                RaulWorkBook.Close(0);
+                RaulLog.Quit();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(RaulLog);
+
+                RaulLog = null;
+                RaulWorkBook = null;
+                RaulSheet1 = null;
+            }
+            if (DerekWorkBook != null)
+            {
+                DerekWorkBook.Close(0);
+                DerekLog.Quit();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(DerekLog);
+
+                DerekLog = null;
+                DerekWorkBook = null;
+                DerekSheet1 = null;
             }
             GC.Collect();
         }

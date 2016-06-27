@@ -18,7 +18,7 @@ namespace ClassOpsLogCreator
         //public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
         public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx";
         public readonly string JEANNINE_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
-        public readonly string RAUL_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
 
         // Private attributes
@@ -29,6 +29,10 @@ namespace ClassOpsLogCreator
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
         private static Excel.Worksheet logoutMasterWorkSheet = null;
+
+        private static Excel.Application MasterLog = null;
+        private static Excel.Workbook MasterLogWorkBook = null;
+        private static Excel.Worksheet MasterLogWorkSheet = null;
 
         /** Constructor for the system. (Changes here should be confirmed with everyone first) */
         public LogCreator()
@@ -158,15 +162,26 @@ namespace ClassOpsLogCreator
             string[,] JInstruction = firstTest.getJeannineLog();
             string[,] DInstruction = firstTest.getDerekLog();
             string[,] RInstruction = firstTest.getRaulLog();
-            
+
+            //Create the new Excel file where we will store all the new information
+            MasterLog = new Excel.Application();
+            MasterLog.Visible = false;
+            MasterLogWorkBook = MasterLog.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
+            MasterLogWorkSheet = (Excel.Worksheet)MasterLogWorkBook.Worksheets[1];
+
+            //write all the data to the excel file
             //merg the 3 array logs into a master excel log.
+            this.WriteMasterLog(MasterLogWorkSheet, JInstruction, DInstruction, RInstruction);
 
-
+            //Saving and closing the new excel file
+            MasterLogWorkBook.SaveAs(Environment.GetFolderPath(
+                         System.Environment.SpecialFolder.DesktopDirectory) + @"\Master_Log.xlsx");
             //END OF CREATE MASTER LOG FILES
 
             //DEGUB CODE
             //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
-            textBox1.Text = DInstruction.Length.ToString();
+            textBox1.Text = Environment.GetFolderPath(
+                         System.Environment.SpecialFolder.DesktopDirectory).ToString();
 
             //close the excel application
             Quit();
@@ -287,7 +302,18 @@ namespace ClassOpsLogCreator
         * 
         * This method generates the Excel output via the arrays
         */
-        private void WriteMasterLog(Excel.Worksheet worksheet, string[] arrayClass, string[] arrayTime)
+        private void WriteMasterLog(Excel.Worksheet worksheet, string[,] array1, string[,] array2, string[,] array3)
+        {
+            //Get the range to inser the 2d arrayinto
+            Excel.Range logRange1 = worksheet.get_Range("B2", "G"+ (array1.GetLength(0) + 1));
+            Excel.Range logRange2 = worksheet.get_Range("B" + (array1.GetLength(0) + 2), "G" + (array1.GetLength(0) + array2.GetLength(0) + 1));
+            Excel.Range logRange3 = worksheet.get_Range("B" + (array1.GetLength(0) + array2.GetLength(0) + 2), "G" + 
+                                                                (array1.GetLength(0) + array2.GetLength(0) + array3.GetLength(0) + 1));
+            //Save all the values to the range. 
+            logRange1.Value2 = array1;
+            logRange2.Value2 = array2;
+            logRange3.Value2 = array3;
+        }
 
         /* Close all open instances of Excel and Garbage collects. 
          * 
@@ -307,6 +333,13 @@ namespace ClassOpsLogCreator
                 logoutMaster.Quit();
                 System.Runtime.InteropServices.Marshal.FinalReleaseComObject(logoutMaster);
             }
+
+            if(MasterLogWorkBook != null)
+            {
+                MasterLogWorkBook.Close(0);
+                MasterLog.Quit();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(MasterLog);
+            }
         
             roomSched = null;
             roomWorkBook = null;
@@ -315,6 +348,10 @@ namespace ClassOpsLogCreator
             logoutMaster = null;
             logoutMasterWorkBook = null;
             logoutMasterWorkSheet = null;
+
+            MasterLog = null;
+            MasterLogWorkBook = null;
+            MasterLogWorkSheet = null;
 
              GC.Collect();
         }
