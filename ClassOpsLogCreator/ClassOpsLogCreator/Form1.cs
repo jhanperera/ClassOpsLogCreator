@@ -15,17 +15,17 @@ namespace ClassOpsLogCreator
     public partial class LogCreator : Form
     {
         //Public readonly attribues
-        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
+        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";*/
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        //public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx";
-        //public readonly string JEANNINE_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
-        //public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
-        //public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
+        public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx";
+        public readonly string JEANNINE_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
 
         // Private attributes
         private static Excel.Application roomSched = null;
@@ -269,6 +269,7 @@ namespace ClassOpsLogCreator
          */
         private void WriteLogOutArray(Excel.Worksheet worksheet, string[] arrayClass, string[] arrayTime)
         {
+            ClassInfo classList = new ClassInfo();
             string[,] values = new string[arrayClass.Length, 2];
             DateTime fourPM = DateTime.FromOADate(0.666);
             DateTime tenPM = DateTime.FromOADate(0.920);
@@ -277,8 +278,10 @@ namespace ClassOpsLogCreator
             for (int i = 0; i < arrayClass.Length; i++)
             {
                 //Add only the times between 4pm and 10pm
+                //and remove all classes with no crestron. 
                 DateTime check = Convert.ToDateTime(arrayTime[i]);
-                if(check.TimeOfDay >= fourPM.TimeOfDay && check.TimeOfDay <= tenPM.TimeOfDay)
+                if((check.TimeOfDay >= fourPM.TimeOfDay) && (check.TimeOfDay <= tenPM.TimeOfDay)
+                    && (classList.hasCrestron(arrayClass[i])))
                 {
                     values[index, 0] = arrayTime[i];
                     values[index, 1] = arrayClass[i];
