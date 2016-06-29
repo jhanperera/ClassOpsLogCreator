@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogCreator));
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.createBTN = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -49,6 +50,7 @@
             this.numberOfShiftsLabel1 = new System.Windows.Forms.Label();
             this.shiftTime1 = new System.Windows.Forms.Label();
             this.numberOfShiftsCombo1 = new System.Windows.Forms.ComboBox();
+            this.workProgressBar = new System.Windows.Forms.ProgressBar();
             this.mainGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -242,6 +244,13 @@
             this.numberOfShiftsCombo1.Size = new System.Drawing.Size(121, 21);
             this.numberOfShiftsCombo1.TabIndex = 6;
             // 
+            // workProgressBar
+            // 
+            this.workProgressBar.Location = new System.Drawing.Point(12, 316);
+            this.workProgressBar.Name = "workProgressBar";
+            this.workProgressBar.Size = new System.Drawing.Size(505, 23);
+            this.workProgressBar.TabIndex = 7;
+            // 
             // LogCreator
             // 
             this.AllowDrop = true;
@@ -249,12 +258,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(524, 317);
+            this.ClientSize = new System.Drawing.Size(524, 344);
+            this.Controls.Add(this.workProgressBar);
             this.Controls.Add(this.mainGroupBox);
             this.Controls.Add(this.destinationLabel);
             this.Controls.Add(this.createBTN);
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "LogCreator";
             this.Text = "Log Creator";
@@ -287,6 +298,7 @@
         private System.Windows.Forms.Label toLabel1;
         private System.Windows.Forms.ComboBox endHour1;
         private System.Windows.Forms.ComboBox am_pmCombo2;
+        private System.Windows.Forms.ProgressBar workProgressBar;
     }
 }
 

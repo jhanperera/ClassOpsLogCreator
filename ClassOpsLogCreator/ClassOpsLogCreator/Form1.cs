@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Reflection;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -39,6 +39,9 @@ namespace ClassOpsLogCreator
         private static Excel.Application MasterLog = null;
         private static Excel.Workbook MasterLogWorkBook = null;
         private static Excel.Worksheet MasterLogWorkSheet = null;
+
+        //Use a background worker to allow the GUI to still be functional and not hang.
+        private static BackgroundWorker bw = new BackgroundWorker();
 
         /** Constructor for the system. (Changes here should be confirmed with everyone first) */
         public LogCreator()
@@ -111,17 +114,40 @@ namespace ClassOpsLogCreator
          */
         private void createBTN_Click(object sender, EventArgs e)
         {
+            //Initialize the Background worker and report progress
+            bw.WorkerReportsProgress = true;
+            bw.DoWork += new DoWorkEventHandler(Bw_DoWork);
+            bw.ProgressChanged +=
+                new ProgressChangedEventHandler(bw_ProgressChanged);
+            if(bw.IsBusy != true)
+            {
+                bw.RunWorkerAsync();
+            }
+            //***********************DEGUB CODE***************************************
+            //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
+            textBox1.Text = Environment.GetFolderPath(
+                         System.Environment.SpecialFolder.DesktopDirectory).ToString();
+            //***********************END OF DEGUB CODE*********************************
+        }
+
+        /** Al the work is done in this method
+         */
+        private void Bw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //Sender to send info to progressbar
+            var worker = sender as BackgroundWorker;
+
             //Open the room excel file
             roomSched = new Excel.Application();
             roomSched.Visible = false;
-
+            
             try
             {
                 //This should look for the file
-                roomWorkBook = roomSched.Workbooks.Open(ROOM_SCHED);             
+                roomWorkBook = roomSched.Workbooks.Open(ROOM_SCHED);
                 //Work in worksheet number 1
                 roomSheet1 = roomWorkBook.Sheets[1];
-              
+
             }
             catch (Exception ex)
             {
@@ -131,6 +157,7 @@ namespace ClassOpsLogCreator
                 return;
             }
 
+            worker.ReportProgress(15);
             //***********************CREATE MASTER LOGOUT FILE!***********************
             //Get the range we are working within. (A1, A.LastRow)
             Excel.Range last = roomSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
@@ -159,7 +186,7 @@ namespace ClassOpsLogCreator
             logoutMasterWorkBook.SaveAs(Environment.GetFolderPath(
                          System.Environment.SpecialFolder.DesktopDirectory) + @"\Logout_Master.xlsx");
             //***********************END OF CREATE MASTER LOGOUT FILE**************
-
+            worker.ReportProgress(50);
             //***********************CREATE MASTER LOG FILE!***********************
             ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this);
 
@@ -182,23 +209,26 @@ namespace ClassOpsLogCreator
             MasterLogWorkBook.SaveAs(Environment.GetFolderPath(
                          System.Environment.SpecialFolder.DesktopDirectory) + @"\Master_Log.xlsx");
             //***********************END OF CREATE MASTER LOG FILES*******************
-
-
-            //***********************DEGUB CODE***************************************
-            //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
-            textBox1.Text = Environment.GetFolderPath(
-                         System.Environment.SpecialFolder.DesktopDirectory).ToString();
-            //***********************END OF DEGUB CODE*********************************
-            
+            worker.ReportProgress(90    );
             //Gracefully close all instances
             Quit();
+            //Send report that we are all done 100%
+            worker.ReportProgress(100);
+            return;
         }
 
+        /** Update the progress bar 
+         */
+        private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //This is called on GUI/main thread, so you can access the controls properly
+            this.workProgressBar.Value = e.ProgressPercentage;
+        }
 
         /// <summary>
         ///  ALL HELPER METHODS GO HERE BELLOW HERE! 
         /// </summary>
-       
+
         /**A Helper converter that will take our "values" and convert them into a string array. 
          * String parsing IS requires for now until we make it smart. 
          * 
@@ -240,7 +270,7 @@ namespace ClassOpsLogCreator
             return newArray = newArray.Where(n => n != null).ToArray();
         }
 
-        /* A  helper method to get the last time in our time array
+        /** A  helper method to get the last time in our time array
          */
         private string[] extract_last_time(string[] array)
         {
@@ -263,7 +293,7 @@ namespace ClassOpsLogCreator
         }
 
         
-        /*This method will write our arrays to the excel file.
+        /**This method will write our arrays to the excel file.
          * 
          * This method generates the Excel output via the arrays
          */
@@ -308,7 +338,7 @@ namespace ClassOpsLogCreator
             allDataRange.Sort(allDataRange.Columns[2], Excel.XlSortOrder.xlAscending);
         }
 
-        /*This method will write our arrays to the excel file.
+        /**This method will write our arrays to the excel file.
         * 
         * This method generates the Excel output via the arrays
         */
@@ -323,9 +353,101 @@ namespace ClassOpsLogCreator
             logRange1.Value2 = array1;
             logRange2.Value2 = array2;
             logRange3.Value2 = array3;
+
+            //Format the worksheet
+            this.formatWorkSheet(worksheet);
+
         }
 
-        /* Close all open instances of Excel and Garbage collects. 
+        /**This method will format the work sheet to be easy to read and 
+         * work with
+         */
+        public void formatWorkSheet(Excel.Worksheet worksheet)
+        {
+
+            //Some color valiables 
+            Color yellow = Color.FromArgb(255, 235, 156);
+            Color brown = Color.FromArgb(156, 101, 0);
+
+            //Set the headers range
+            Excel.Range staffNameRange = worksheet.get_Range("A1", "A1");
+            Excel.Range taskTypeRange = worksheet.get_Range("B1", "B1");
+            Excel.Range dateRange = worksheet.get_Range("C1", "C1");
+            Excel.Range timeRange = worksheet.get_Range("D1", "D1");
+            Excel.Range buildingRange = worksheet.get_Range("E1", "E1");
+            Excel.Range roomRange = worksheet.get_Range("F1", "F1");
+            Excel.Range instructionsRange = worksheet.get_Range("G1", "G1");
+            Excel.Range initialRange = worksheet.get_Range("H1", "H1");
+
+            //Add the headers and format the cells
+            //Staff Name header
+            staffNameRange.ColumnWidth = 11;
+            staffNameRange.Interior.Color = yellow;
+            staffNameRange.Font.Color = brown;
+            staffNameRange.Font.Bold = true;
+            staffNameRange.Value2 = "Staff Name";
+
+            //Task Type header
+            taskTypeRange.ColumnWidth = 22;
+            taskTypeRange.Interior.Color = yellow;
+            taskTypeRange.Font.Color = brown;
+            taskTypeRange.Font.Bold = true;
+            taskTypeRange.Value2 = "Task Type";
+
+            //Date header
+            dateRange.ColumnWidth = 10;
+            dateRange.Interior.Color = yellow;
+            dateRange.Font.Color = brown;
+            dateRange.Font.Bold = true;
+            dateRange.Value2 = "Date";
+
+            //Time header
+            
+            timeRange.ColumnWidth = 7;
+            timeRange.Interior.Color = yellow;
+            timeRange.Font.Color = brown;
+            timeRange.Font.Bold = true;
+            timeRange.Value2 = "Time";
+
+            //Building header
+            buildingRange.ColumnWidth = 14;
+            buildingRange.Interior.Color = yellow;
+            buildingRange.Font.Color = brown;
+            buildingRange.Font.Bold = true;
+            buildingRange.Value2 = "Building";
+
+            //Room header
+            roomRange.ColumnWidth = 11;
+            roomRange.Interior.Color = yellow;
+            roomRange.Font.Color = brown;
+            roomRange.Font.Bold = true;
+            roomRange.Value2 = "Room";
+
+            //Instructions header;
+            instructionsRange.ColumnWidth = 42;
+            instructionsRange.Interior.Color = yellow;
+            instructionsRange.Font.Color = brown;
+            instructionsRange.Font.Bold = true;
+            instructionsRange.Value2 = "Special Instructions/Comments";
+
+            //Initial header
+            initialRange.ColumnWidth = 11;
+            initialRange.Interior.Color = yellow;
+            initialRange.Font.Color = brown;
+            initialRange.Font.Bold = true;
+            initialRange.Value2 = "Initial Here";
+
+            //outline around all boxes 
+            Excel.Range fullRange = worksheet.UsedRange;
+            fullRange.Borders.Color = System.Drawing.Color.Black.ToArgb();
+            fullRange.WrapText = true;
+            fullRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+
+
+        }
+
+
+        /** Close all open instances of Excel and Garbage collects. 
          * 
          */
         private void Quit()
