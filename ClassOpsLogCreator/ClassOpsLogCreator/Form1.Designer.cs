@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogCreator));
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.createBTN = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.destinationLabel = new System.Windows.Forms.Label();
@@ -51,12 +50,10 @@
             this.shiftTime1 = new System.Windows.Forms.Label();
             this.numberOfShiftsCombo1 = new System.Windows.Forms.ComboBox();
             this.workProgressBar = new System.Windows.Forms.ProgressBar();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.mainGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog";
             // 
             // createBTN
             // 
@@ -103,6 +100,7 @@
             // 
             // mainGroupBox
             // 
+            this.mainGroupBox.Controls.Add(this.pictureBox1);
             this.mainGroupBox.Controls.Add(this.toLabel2);
             this.mainGroupBox.Controls.Add(this.endHour2);
             this.mainGroupBox.Controls.Add(this.am_pmCombo4);
@@ -251,6 +249,16 @@
             this.workProgressBar.Size = new System.Drawing.Size(505, 23);
             this.workProgressBar.TabIndex = 7;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ClassOpsLogCreator.Properties.Resources.www_zaxonusa_com_small_icon_schedual;
+            this.pictureBox1.Location = new System.Drawing.Point(301, 14);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(198, 235);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
+            // 
             // LogCreator
             // 
             this.AllowDrop = true;
@@ -271,13 +279,13 @@
             this.Text = "Log Creator";
             this.mainGroupBox.ResumeLayout(false);
             this.mainGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button createBTN;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label destinationLabel;
@@ -299,6 +307,7 @@
         private System.Windows.Forms.ComboBox endHour1;
         private System.Windows.Forms.ComboBox am_pmCombo2;
         private System.Windows.Forms.ProgressBar workProgressBar;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

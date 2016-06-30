@@ -57,10 +57,9 @@ namespace ClassOpsLogCreator
                 RaulSheet1 = RaulWorkBook.Sheets[2];
                 DerekSheet1 = DerekWorkBook.Sheets[2];
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //File not found...
-                MessageBox.Show("Error: FILE NOT FOUND " + ex.ToString());
                 Quit();
                 return;
             }

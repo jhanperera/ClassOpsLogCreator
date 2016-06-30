@@ -39,10 +39,10 @@ namespace ClassOpsLogCreator
                 roomSheet1 = roomWorkBook.Sheets[1];
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //File not found...
-                MessageBox.Show("Error: FILE NOT FOUND " + ex.ToString());
+                
                 Quit();
                 return;
             }
