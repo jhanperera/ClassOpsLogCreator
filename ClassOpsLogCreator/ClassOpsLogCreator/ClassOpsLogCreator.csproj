@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogoutLogImporter.cs" />
     <Compile Include="ZoneSuperLogImporter.cs" />
     <Compile Include="ClassInfo.cs" />
     <Compile Include="TimeItem.cs" />
