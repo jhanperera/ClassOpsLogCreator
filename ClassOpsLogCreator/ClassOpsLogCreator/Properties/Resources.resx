@@ -121,10 +121,4 @@
   <data name="www.zaxonusa.com-small-icon-schedual" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\www.zaxonusa.com-small-icon-schedual.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imageedit_3_6118778519" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imageedit_3_6118778519.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="schedule_512_682_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\schedule_512_682_icon.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>
