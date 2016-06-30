@@ -15,17 +15,17 @@ namespace ClassOpsLogCreator
     public partial class LogCreator : Form
     {
         //Public readonly attribues
-        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
+        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";*/
+        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx";
+        /*public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx";
         public readonly string JEANNINE_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";*/
 
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
@@ -42,6 +42,9 @@ namespace ClassOpsLogCreator
         public LogCreator()
         {
             InitializeComponent();
+
+            //Make the text box readonly
+            textBox1.ReadOnly = true;
 
             //fill the combo boxes
             for(int i = 1; i <= 12; i ++)
@@ -111,17 +114,24 @@ namespace ClassOpsLogCreator
         {
             //Initialize the Background worker and report progress
             bw.WorkerReportsProgress = true;
+            //Add Work to the worker thread
             bw.DoWork += new DoWorkEventHandler(Bw_DoWork);
-            bw.ProgressChanged +=
-                new ProgressChangedEventHandler(bw_ProgressChanged);
+            //Get progress changes
+            bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
+            //Get work completed events
+            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+            //Do all the wok 
             if(bw.IsBusy != true)
             {
+                //Disable the button
+                createBTN.Enabled = false;
+                //Run the work
                 bw.RunWorkerAsync();
             }
             //***********************DEGUB CODE***************************************
             //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
-            textBox1.Text = Environment.GetFolderPath(
-                         System.Environment.SpecialFolder.DesktopDirectory).ToString();
+            //textBox1.Text = Environment.GetFolderPath(
+                         //System.Environment.SpecialFolder.DesktopDirectory).ToString();
             //***********************END OF DEGUB CODE*********************************
         }
 
@@ -138,7 +148,6 @@ namespace ClassOpsLogCreator
 
             string[] arrayClassRooms = classRoomTimeLogs.getClassRooms();
             string[] arrayLastTimes = classRoomTimeLogs.getLastTImes();
-
 
             //Create the new Excel file where we will store all the new information
             logoutMaster = new Excel.Application();
@@ -193,6 +202,37 @@ namespace ClassOpsLogCreator
         {
             //This is called on GUI/main thread, so you can access the controls properly
             this.workProgressBar.Value = e.ProgressPercentage;
+        }
+
+        /** This event handler deals with the results of the
+         *  background operation.
+         */
+        private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // First, handle the case where an exception was thrown.
+            if (e.Error != null)
+            {
+                MessageBox.Show(e.Error.Message);
+            }
+            else if (e.Cancelled)
+            {
+                // Next, handle the case where the user canceled 
+                // the operation.
+                // Note that due to a race condition in 
+                // the DoWork event handler, the Cancelled
+                // flag may not have been set, even though
+                // CancelAsync was called.
+                textBox1.Text = "Canceled";
+            }
+            else
+            {
+                // Finally, handle the case where the operation 
+                // succeeded.
+                textBox1.Text = Environment.GetFolderPath(
+                         System.Environment.SpecialFolder.DesktopDirectory).ToString();
+            }
+            //Enable the button again
+            createBTN.Enabled = true;
         }
 
         /// <summary>
@@ -402,7 +442,7 @@ namespace ClassOpsLogCreator
             MasterLogWorkBook = null;
             MasterLogWorkSheet = null;
 
-             GC.Collect();
+            GC.Collect();
         }
     }
 }
