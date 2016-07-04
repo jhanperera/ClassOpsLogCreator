@@ -134,7 +134,7 @@ namespace ClassOpsLogCreator
         private int numberOfRows(Excel.Worksheet ExSheet, string date)
         {
             Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            Excel.Range range = ExSheet.get_Range("C" + (last.Row - 100), "C" + last.Row);
+            Excel.Range range = ExSheet.get_Range("C" + (last.Row - 50), "C" + last.Row);
 
             //Export to array 
             System.Array array = (System.Array)range.Cells.Value2;
@@ -202,7 +202,7 @@ namespace ClassOpsLogCreator
             }
             return values;
         }
-       
+
         /* Close all open instances of Excel and Garbage collects. 
          * 
          */

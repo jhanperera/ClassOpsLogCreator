@@ -21,6 +21,8 @@ namespace ClassOpsLogCreator
         private string[] arrayTimes = null;
         private string[] arrayLastTimes = null;
 
+        private string[,] masterArray = null;
+
         /** Constructor that will create the arrays for the main UI to use
          */
         public LogoutLogImporter(LogCreator Form1)
@@ -119,6 +121,39 @@ namespace ClassOpsLogCreator
             }
             //Return an array with no null characters
             return newArray = newArray.Where(n => n != null).ToArray();
+        }
+
+        /** This method will create a 2D array of all the classes and time to be logged out 
+         *  Between the times of 4PM and 10PM
+         */
+        private string[,] convertToString2DArray(string[] classArray, string[] timeArray)
+        {
+            masterArray = new string[classArray.GetUpperBound(0), 3];
+            ClassInfo classList = new ClassInfo();
+            DateTime fourPM = DateTime.FromOADate(0.666);  //4pm in DateTime
+            DateTime tenPM = DateTime.FromOADate(0.920);   //10pm in DateTime
+
+            //Add all the elements of the array's into one array. 
+            int index = 0;
+            for (int i = 0; i < classArray.GetUpperBound(0); i++)
+            {
+                //Add only the times between 4pm and 10pm
+                //and remove all classes with no crestron. 
+                DateTime check = Convert.ToDateTime(timeArray[i]);
+                if ((check.TimeOfDay >= fourPM.TimeOfDay) && (check.TimeOfDay <= tenPM.TimeOfDay)
+                    && (classList.hasCrestron(classArray[i])))
+                {
+                    masterArray[index, 0] = timeArray[i];
+                    //Split the building from the room 
+                    string[] token = classArray[i].Split(null);
+                    //Add it to the array
+                    masterArray[index, 1] = token[1];
+                    masterArray[index, 2] = token[2];
+                    index++;
+                }
+            }
+
+            return masterArray;
         }
 
         /** A  helper method to get the last time in our time array
