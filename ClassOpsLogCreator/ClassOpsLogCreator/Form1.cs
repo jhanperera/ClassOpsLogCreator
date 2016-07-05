@@ -18,10 +18,10 @@ namespace ClassOpsLogCreator
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        public readonly string ROOM_SCHED = @"C:\Users\Diana\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx";
-        public readonly string JEANNINE_LOG = @"C:\Users\Diana\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
-        public readonly string RAUL_LOG = @"C:\Users\Diana\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\Diana\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
+        public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx";
+        public readonly string JEANNINE_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
 
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
@@ -142,8 +142,8 @@ namespace ClassOpsLogCreator
             //***********************CREATE MASTER LOGOUT FILE**********************
             LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this);
 
-            string[] arrayClassRooms = classRoomTimeLogs.getClassRooms();
-            string[] arrayLastTimes = classRoomTimeLogs.getLastTImes();
+            string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
+            
 
             //Create the new Excel file where we will store all the new information
             logoutMaster = new Excel.Application();
@@ -152,7 +152,7 @@ namespace ClassOpsLogCreator
             logoutMasterWorkSheet = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[1];
 
             //write all the data to the excel file
-            this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, arrayLastTimes);
+            this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, classRoomTimeLogs.getLogOutArrayCount());
 
             //Saving and closing the new excel file
             logoutMasterWorkBook.SaveAs(Environment.GetFolderPath(
@@ -184,7 +184,7 @@ namespace ClassOpsLogCreator
             MasterLogWorkBook.SaveAs(Environment.GetFolderPath(
                          System.Environment.SpecialFolder.DesktopDirectory) + @"\Master_Log.xlsx");
             //***********************END OF CREATE MASTER LOG FILES*******************
-            worker.ReportProgress(90    );
+            worker.ReportProgress(90);
             //Gracefully close all instances
             Quit();
             //Send report that we are all done 100%
@@ -243,72 +243,37 @@ namespace ClassOpsLogCreator
         ///  ALL HELPER METHODS GO HERE BELLOW HERE! 
         /// </summary>
 
-        /** A  helper method to get the last time in our time array
-         */
-        private string[] extract_last_time(string[] array)
-        {
-            string[] newArray = new string[array.Length];
-            int index = 0;
-            //Iterate throught the list and find the ending time of the las class in said room.
-            //Getlowerbound and GetUpperBound is safer then .Length
-            for (int i = array.GetLowerBound(0); i <= array.GetUpperBound(0) - 2; i++)
-            {
-                //if the next cell is empty we found the last time, add it to the array
-                if ((array[i].ToString().Length != 0) && (array[i + 1].ToString().Length == 0) || (array[i + 1] == null))
-                {
-                    //add the last time in a formatted wayS to the list
-                    newArray[index] = DateTime.FromOADate(double.Parse(array[i])).ToString("hh:mm tt");
-                    index++;
-                }
-            } 
-            //Return an array with no null characters. 
-            return newArray = newArray.Where(n => n != null).ToArray();
-        }
-
-        
         /**This method will write our arrays to the excel file.
          * 
          * This method generates the Excel output via the arrays
          */
-        private void WriteLogOutArray(Excel.Worksheet worksheet, string[] arrayClass, string[] arrayTime)
+        private void WriteLogOutArray(Excel.Worksheet worksheet, string[,] values, int index)
         {
-            ClassInfo classList = new ClassInfo();
-            string[,] values = new string[arrayClass.Length, 2];
-            DateTime fourPM = DateTime.FromOADate(0.666);
-            DateTime tenPM = DateTime.FromOADate(0.920);
-            //Add all the elements of the array's into one array. 
-            int index = 0;
-            for (int i = 0; i < arrayClass.Length; i++)
-            {
-                //Add only the times between 4pm and 10pm
-                //and remove all classes with no crestron. 
-                DateTime check = Convert.ToDateTime(arrayTime[i]);
-                if((check.TimeOfDay >= fourPM.TimeOfDay) && (check.TimeOfDay <= tenPM.TimeOfDay)
-                    && (classList.hasCrestron(arrayClass[i])))
-                {
-                    values[index, 0] = arrayTime[i];
-                    values[index, 1] = arrayClass[i];
-                    index++;
-                }  
-            }
-
             //Setting up the cells to put the information into
-            Excel.Range taskType_range = worksheet.get_Range("B2", "B" + (index + 1)); 
-            Excel.Range value_range = worksheet.get_Range("C2", "D" + (index + 1));
+            Excel.Range taskType_range = worksheet.get_Range("B2", "B" + (index + 1));
+            Excel.Range date_range = worksheet.get_Range("C2", "C" + (index + 1));
+            Excel.Range value_range = worksheet.get_Range("D2", "F" + (index + 1));
 
             //Formatt for easy to read for "Crestron logout"
             taskType_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             taskType_range.ColumnWidth = 20;
             taskType_range.Value2 = "Crestron Logout";
 
+            //Formatt for east reading of the date
+            date_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            date_range.ColumnWidth = 10;
+            date_range.Value2 = DateTime.Today.ToString("M/dd/yy");
+
             //Format for easy reading of Time, Building, and Room.
             value_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             value_range.ColumnWidth = 17;
             value_range.Value2 = values;
 
-            //Sorting it by column 2
+            //Sorting it by time column
             dynamic allDataRange = worksheet.UsedRange;
-            allDataRange.Sort(allDataRange.Columns[2], Excel.XlSortOrder.xlAscending);
+            allDataRange.Sort(allDataRange.Columns[3], Excel.XlSortOrder.xlAscending);
+
+            this.formatWorkSheet(worksheet);
         }
 
         /**This method will write our arrays to the excel file.
@@ -374,8 +339,7 @@ namespace ClassOpsLogCreator
             dateRange.Font.Bold = true;
             dateRange.Value2 = "Date";
 
-            //Time header
-            
+            //Time header  
             timeRange.ColumnWidth = 7;
             timeRange.Interior.Color = yellow;
             timeRange.Font.Color = brown;
@@ -419,8 +383,6 @@ namespace ClassOpsLogCreator
 
         }
         
-
-
         /** Close all open instances of Excel and Garbage collects. 
          * 
          */

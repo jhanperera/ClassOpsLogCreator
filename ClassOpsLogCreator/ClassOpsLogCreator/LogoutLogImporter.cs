@@ -22,6 +22,7 @@ namespace ClassOpsLogCreator
         private string[] arrayLastTimes = null;
 
         private string[,] masterArray = null;
+        private int masterArrayCounter = 0;
 
         /** Constructor that will create the arrays for the main UI to use
          */
@@ -76,7 +77,6 @@ namespace ClassOpsLogCreator
         {
             return this.arrayClassRooms;
         }
-
         public string[] getLastTImes()
         {
             return this.arrayLastTimes;
@@ -84,6 +84,10 @@ namespace ClassOpsLogCreator
         public string[,] getLogOutArray()
         {
             return this.masterArray;
+        }
+        public int getLogOutArrayCount()
+        {
+            return this.masterArrayCounter;
         }
 
         
@@ -150,14 +154,22 @@ namespace ClassOpsLogCreator
                 {
                     masterArray[index, 0] = timeArray[i];
                     //Split the building from the room 
-                    string[] token = classArray[i].Split(null);
+                    string[] token = classArray[i].Split(' ');
                     //Add it to the array
                     masterArray[index, 1] = token[0];
-                    masterArray[index, 2] = token[1];
+                    //Acount for Ross
+                    if (token[0].Equals("R"))
+                    {
+                        masterArray[index, 2] = token[2];
+                    }
+                    else
+                    {
+                        masterArray[index, 2] = token[1];
+                    }
                     index++;
                 }
             }
-
+            masterArrayCounter = index;
             return masterArray;
         }
 
@@ -175,7 +187,7 @@ namespace ClassOpsLogCreator
                 if ((array[i].ToString().Length != 0) && (array[i + 1].ToString().Length == 0) || (array[i + 1] == null))
                 {
                     //add the last time in a formatted wayS to the list
-                    newArray[index] = DateTime.FromOADate(double.Parse(array[i])).ToString("hh:mm tt");
+                    newArray[index] = DateTime.FromOADate(double.Parse(array[i])).ToString("HH:mm");
                     index++;
                 }
             }
