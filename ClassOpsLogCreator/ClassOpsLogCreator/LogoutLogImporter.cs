@@ -62,6 +62,7 @@ namespace ClassOpsLogCreator
             arrayClassRooms = this.ConvertToStringArray(array, 0);
             arrayTimes = this.ConvertToStringArray(array2, 1);
             arrayLastTimes = this.extract_last_time(arrayTimes);
+            masterArray = this.convertToString2DArray(arrayClassRooms, arrayLastTimes);
 
             //Close all open processes
             Quit();
@@ -79,6 +80,10 @@ namespace ClassOpsLogCreator
         public string[] getLastTImes()
         {
             return this.arrayLastTimes;
+        }
+        public string[,] getLogOutArray()
+        {
+            return this.masterArray;
         }
 
         
@@ -147,8 +152,8 @@ namespace ClassOpsLogCreator
                     //Split the building from the room 
                     string[] token = classArray[i].Split(null);
                     //Add it to the array
-                    masterArray[index, 1] = token[1];
-                    masterArray[index, 2] = token[2];
+                    masterArray[index, 1] = token[0];
+                    masterArray[index, 2] = token[1];
                     index++;
                 }
             }
