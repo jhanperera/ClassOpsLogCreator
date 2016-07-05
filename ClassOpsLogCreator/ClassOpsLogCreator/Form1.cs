@@ -163,7 +163,10 @@ namespace ClassOpsLogCreator
             worker.ReportProgress(50);
 
             //***********************CREATE MASTER LOG FILE!***********************
-            ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this);
+            /*ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this);
+          
+            
+            
 
             //Get the three logs
             string[,] JInstruction = ZoneLogs.getJeannineLog();
@@ -182,7 +185,7 @@ namespace ClassOpsLogCreator
 
             //Saving and closing the new excel file
             MasterLogWorkBook.SaveAs(Environment.GetFolderPath(
-                         System.Environment.SpecialFolder.DesktopDirectory) + @"\Master_Log.xlsx");
+                         System.Environment.SpecialFolder.DesktopDirectory) + @"\Master_Log.xlsx");*/
             //***********************END OF CREATE MASTER LOG FILES*******************
             worker.ReportProgress(90);
             //Gracefully close all instances
