@@ -206,7 +206,6 @@ namespace ClassOpsLogCreator
                 roomSched.Quit();
                 System.Runtime.InteropServices.Marshal.FinalReleaseComObject(roomSched);
             }
-
             roomSched = null;
             roomWorkBook = null;
             roomSheet1 = null;

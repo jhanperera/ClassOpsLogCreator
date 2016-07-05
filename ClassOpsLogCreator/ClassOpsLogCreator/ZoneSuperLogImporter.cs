@@ -124,8 +124,18 @@ namespace ClassOpsLogCreator
             //Export to array 
             System.Array array = (System.Array)range.Cells.Value2;
 
+            string dateFromExcel = DateTime.FromOADate(double.Parse((string)array.GetValue(array.GetUpperBound(0), 1).ToString())).ToString("M/dd/yy");
+            string dateToday = DateTime.Today.ToString("M/dd/yy");
+
             //Return the last time in the format of Month/Day/Year
-            return DateTime.FromOADate(double.Parse((string)array.GetValue(array.GetUpperBound(0), 1).ToString())).ToString("M/dd/yy");
+            if (dateFromExcel.Equals(dateToday))
+            {
+                return dateFromExcel;
+            }
+            else
+            {
+                return dateToday;
+            }    
         }
 
         /* This method retun how many entries we need to copy over
