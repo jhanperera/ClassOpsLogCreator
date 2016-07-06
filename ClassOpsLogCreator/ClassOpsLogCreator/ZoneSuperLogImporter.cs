@@ -144,7 +144,7 @@ namespace ClassOpsLogCreator
         private int numberOfRows(Excel.Worksheet ExSheet, string date)
         {
             Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            Excel.Range range = ExSheet.get_Range("C" + (last.Row - 50), "C" + last.Row);
+            Excel.Range range = ExSheet.get_Range("C" + (last.Row - 100), "C" + last.Row);
 
             //Export to array 
             System.Array array = (System.Array)range.Cells.Value2;
@@ -189,26 +189,30 @@ namespace ClassOpsLogCreator
             string[,] values = new string[start + 1, 6];
             for (int i = 0; i <= start; i ++)
             {
-                //Taskt type
-                values[i, 0] = arrayB.GetValue(i + 1, 1).ToString();
-                //Date
-                values[i, 1] = DateTime.FromOADate(double.Parse((string)arrayC.GetValue(i + 1, 1).ToString())).ToString("M/dd/yy");
-                //Time
-                values[i, 2] = arrayD.GetValue(i + 1, 1).ToString();
-                //Building
-                values[i, 3] = arrayE.GetValue(i + 1, 1).ToString();
-                //Room
-                values[i, 4] = arrayF.GetValue(i + 1, 1).ToString();
+                if(arrayB.GetValue(i+1,1) != null)
+                {
+                    //Taskt type
+                    values[i, 0] = arrayB.GetValue(i + 1, 1).ToString();
+                    //Date
+                    values[i, 1] = DateTime.FromOADate(double.Parse((string)arrayC.GetValue(i + 1, 1).ToString())).ToString("M/dd/yy");
+                    //Time
+                    values[i, 2] = arrayD.GetValue(i + 1, 1).ToString();
+                    //Building
+                    values[i, 3] = arrayE.GetValue(i + 1, 1).ToString();
+                    //Room
+                    values[i, 4] = arrayF.GetValue(i + 1, 1).ToString();
+
+                    //Comment, add a space if no comment is present
+                    if (arrayG.GetValue(i + 1, 1) == null)
+                    {
+                        values[i, 5] = "";
+                    }
+                    else
+                    {
+                        values[i, 5] = arrayG.GetValue(i + 1, 1).ToString();
+                    }
+                }
                 
-                //Comment, add a space if no comment is present
-                if( arrayG.GetValue(i + 1, 1) == null )
-                {
-                    values[i, 5] = "";
-                }
-                else
-                {
-                    values[i, 5] = arrayG.GetValue(i + 1, 1).ToString();
-                }
             }
             return values;
         }

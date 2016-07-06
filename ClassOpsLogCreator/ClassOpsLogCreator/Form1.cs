@@ -11,17 +11,17 @@ namespace ClassOpsLogCreator
     public partial class LogCreator : Form
     {
         //Public readonly attribues
-        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
+        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";*/
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        /*public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\room schedule.xlsx";
+        public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsx";
         public readonly string JEANNINE_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";*/
+        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
 
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
@@ -163,11 +163,8 @@ namespace ClassOpsLogCreator
             worker.ReportProgress(50);
 
             //***********************CREATE MASTER LOG FILE!***********************
-            /*ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this);
-          
-            
-            
-
+            ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this);
+             
             //Get the three logs
             string[,] JInstruction = ZoneLogs.getJeannineLog();
             string[,] DInstruction = ZoneLogs.getDerekLog();
@@ -185,7 +182,7 @@ namespace ClassOpsLogCreator
 
             //Saving and closing the new excel file
             MasterLogWorkBook.SaveAs(Environment.GetFolderPath(
-                         System.Environment.SpecialFolder.DesktopDirectory) + @"\Master_Log.xlsx");*/
+                         System.Environment.SpecialFolder.DesktopDirectory) + @"\Master_Log.xlsx");
             //***********************END OF CREATE MASTER LOG FILES*******************
             worker.ReportProgress(90);
             //Gracefully close all instances
