@@ -11,17 +11,17 @@ namespace ClassOpsLogCreator
     public partial class LogCreator : Form
     {
         //Public readonly attribues
-        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
+        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";*/
+        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsx";
+        /*public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsx";
         public readonly string JEANNINE_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";*/
 
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
@@ -101,7 +101,6 @@ namespace ClassOpsLogCreator
             this.am_pmCombo4.DropDownStyle = ComboBoxStyle.DropDownList;
             this.numberOfShiftsCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.numberOfShiftsCombo2.DropDownStyle = ComboBoxStyle.DropDownList;
-
         }
 
         /** When the user clicks the "Create" Button this is what will happen
@@ -294,7 +293,6 @@ namespace ClassOpsLogCreator
 
             //Format the worksheet
             this.formatWorkSheet(worksheet);
-
         }
 
         /**This method will format the work sheet to be easy to read and 
@@ -379,8 +377,6 @@ namespace ClassOpsLogCreator
             fullRange.Borders.Color = System.Drawing.Color.Black.ToArgb();
             fullRange.WrapText = true;
             fullRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-
-
         }
         
         /** Close all open instances of Excel and Garbage collects. 
