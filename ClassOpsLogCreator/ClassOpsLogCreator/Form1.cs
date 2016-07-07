@@ -34,6 +34,9 @@ namespace ClassOpsLogCreator
         //Use a background worker to allow the GUI to still be functional and not hang.
         private static BackgroundWorker bw = new BackgroundWorker();
 
+        private string startTimeFromCombo = null;
+        private string endTimeFromCombo = null;
+
         /** Constructor for the system. (Changes here should be confirmed with everyone first) */
         public LogCreator()
         {
@@ -46,18 +49,12 @@ namespace ClassOpsLogCreator
             for(int i = 1; i <= 12; i ++)
             {
                 this.startHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
-                this.startHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
-
                 this.endHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
-                this.endHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
                 //15 minute intervals
                 for (int k = 15; k <= 45; k += 15)
                 {
                     this.startHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString()});
-                    this.startHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
-
                     this.endHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
-                    this.endHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
                 }
             }
 
@@ -65,7 +62,6 @@ namespace ClassOpsLogCreator
             for(int j = 1; j <= 6; j ++)
             {
                 this.numberOfShiftsCombo1.Items.Add(j.ToString());
-                this.numberOfShiftsCombo2.Items.Add(j.ToString());
             }
 
             //Fill the am/pm selector
@@ -73,40 +69,52 @@ namespace ClassOpsLogCreator
             this.am_pmCombo1.Items.Add("PM");
             this.am_pmCombo2.Items.Add("AM");
             this.am_pmCombo2.Items.Add("PM");
-            this.am_pmCombo3.Items.Add("AM");
-            this.am_pmCombo3.Items.Add("PM");
-            this.am_pmCombo4.Items.Add("AM");
-            this.am_pmCombo4.Items.Add("PM");
 
             //set the default view for the combo
-            this.startHour1.SelectedIndex = 0;
-            this.startHour2.SelectedIndex = 0;
-            this.endHour1.SelectedIndex = 0;
-            this.endHour2.SelectedIndex = 0;
+            this.startHour1.SelectedIndex = -1;
+            this.endHour1.SelectedIndex = -1;
             this.numberOfShiftsCombo1.SelectedIndex = 0;
-            this.numberOfShiftsCombo2.SelectedIndex = 0;
-            this.am_pmCombo1.SelectedIndex = 0;
-            this.am_pmCombo2.SelectedIndex = 0;
-            this.am_pmCombo3.SelectedIndex = 0;
-            this.am_pmCombo4.SelectedIndex = 0;
+            this.am_pmCombo1.SelectedIndex = 1;
+            this.am_pmCombo2.SelectedIndex = 1;
+ 
 
             //Make the combo box read only
-            this.startHour1.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.startHour2.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.startHour1.DropDownStyle = ComboBoxStyle.DropDownList; 
             this.endHour1.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.endHour2.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo2.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.am_pmCombo3.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.am_pmCombo4.DropDownStyle = ComboBoxStyle.DropDownList;
             this.numberOfShiftsCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.numberOfShiftsCombo2.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         /** When the user clicks the "Create" Button this is what will happen
          */
         private void createBTN_Click(object sender, EventArgs e)
         {
+            //Get the times set by the combo box
+            startTimeFromCombo = this.startHour1.GetItemText(this.startHour1.SelectedItem) + "" + this.am_pmCombo1.GetItemText(this.am_pmCombo1.SelectedItem);
+            endTimeFromCombo = this.endHour1.GetItemText(this.endHour1.SelectedItem) + "" + this.am_pmCombo2.GetItemText(this.am_pmCombo2.SelectedItem);
+
+            //Input Error checking!
+            if (startTimeFromCombo.Equals("PM") || startTimeFromCombo.Equals("AM") || startTimeFromCombo == null ||
+                endTimeFromCombo.Equals("PM") || endTimeFromCombo.Equals("AM") || endTimeFromCombo == null)
+            {
+                MessageBox.Show("Valid time must be set.",
+                                 "Problem...",
+                                  MessageBoxButtons.OK,
+                                  MessageBoxIcon.Exclamation,
+                                  MessageBoxDefaultButton.Button1);
+                return;
+            }
+            else if (Convert.ToDateTime(startTimeFromCombo) >= Convert.ToDateTime(endTimeFromCombo))
+            {
+                MessageBox.Show("Valid time must be set.",
+                                 "Problem...",
+                                  MessageBoxButtons.OK,
+                                  MessageBoxIcon.Exclamation,
+                                  MessageBoxDefaultButton.Button1);
+                return;
+            }
+
             //Initialize the Background worker and report progress
             bw.WorkerReportsProgress = true;
             //Add Work to the worker thread
@@ -139,7 +147,7 @@ namespace ClassOpsLogCreator
 
             worker.ReportProgress(15);
             //***********************CREATE MASTER LOGOUT FILE**********************
-            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this);
+            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo, endTimeFromCombo);
 
             string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
             
@@ -233,6 +241,7 @@ namespace ClassOpsLogCreator
                 // succeeded.
                 textBox1.Text = Environment.GetFolderPath(
                          System.Environment.SpecialFolder.DesktopDirectory).ToString();
+                Quit();
             }
             //Enable the button again
             createBTN.Enabled = true;
@@ -261,7 +270,7 @@ namespace ClassOpsLogCreator
             //Formatt for east reading of the date
             date_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             date_range.ColumnWidth = 10;
-            date_range.Value2 = DateTime.Today.ToString("M/dd/yy");
+            date_range.Value2 = DateTime.Today.ToString("M/d/yyyy");
 
             //Format for easy reading of Time, Building, and Room.
             value_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -389,6 +398,9 @@ namespace ClassOpsLogCreator
                 logoutMasterWorkBook.Close(0);
                 logoutMaster.Quit();
                 System.Runtime.InteropServices.Marshal.FinalReleaseComObject(logoutMaster);
+                logoutMaster = null;
+                logoutMasterWorkBook = null;
+                logoutMasterWorkSheet = null;
             }
 
             if(MasterLogWorkBook != null)
@@ -396,17 +408,11 @@ namespace ClassOpsLogCreator
                 MasterLogWorkBook.Close(0);
                 MasterLog.Quit();
                 System.Runtime.InteropServices.Marshal.FinalReleaseComObject(MasterLog);
+                MasterLog = null;
+                MasterLogWorkBook = null;
+                MasterLogWorkSheet = null;
             }
-
-            logoutMaster = null;
-            logoutMasterWorkBook = null;
-            logoutMasterWorkSheet = null;
-
-            MasterLog = null;
-            MasterLogWorkBook = null;
-            MasterLogWorkSheet = null;
-
-            GC.Collect();
+            GC.Collect();  
         }
     }
 }

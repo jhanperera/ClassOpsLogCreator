@@ -24,11 +24,16 @@ namespace ClassOpsLogCreator
         private string[,] masterArray = null;
         private int masterArrayCounter = 0;
 
+        private string startTime = null;
+        private string endTime = null;
+
         /** Constructor that will create the arrays for the main UI to use
          */
-        public LogoutLogImporter(LogCreator Form1)
+        public LogoutLogImporter(LogCreator Form1, string StartTime, string EndTime)
         {
             this.form1 = Form1;
+            this.startTime = StartTime;
+            this.endTime = EndTime;
 
             //Open the room excel file
             roomSched = new Excel.Application();
@@ -73,6 +78,7 @@ namespace ClassOpsLogCreator
         /// Public accessors of the 2 arrays
         /// </summary>
         /// <returns></returns>
+        /// Getters
         public string[] getClassRooms()
         {
             return this.arrayClassRooms;
@@ -89,7 +95,6 @@ namespace ClassOpsLogCreator
         {
             return this.masterArrayCounter;
         }
-
         
         /**A Helper converter that will take our "values" and convert them into a string array. 
          * String parsing IS requires for now until we make it smart. 
@@ -139,8 +144,8 @@ namespace ClassOpsLogCreator
         {
             masterArray = new string[classArray.GetUpperBound(0), 3];
             ClassInfo classList = new ClassInfo();
-            DateTime fourPM = DateTime.FromOADate(0.666);  //4pm in DateTime
-            DateTime tenPM = DateTime.FromOADate(0.920);   //10pm in DateTime
+            DateTime startingTime = Convert.ToDateTime(this.startTime.ToString());  //4pm in DateTime
+            DateTime endingTime = Convert.ToDateTime(this.endTime.ToString());   //10pm in DateTime
 
             //Add all the elements of the array's into one array. 
             int index = 0;
@@ -149,10 +154,10 @@ namespace ClassOpsLogCreator
                 //Add only the times between 4pm and 10pm
                 //and remove all classes with no crestron. 
                 DateTime check = Convert.ToDateTime(timeArray[i]);
-                if ((check.TimeOfDay >= fourPM.TimeOfDay) && (check.TimeOfDay <= tenPM.TimeOfDay)
+                if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay)
                     && (classList.hasCrestron(classArray[i])))
                 {
-                    masterArray[index, 0] = timeArray[i];
+                    masterArray[index, 0] = Convert.ToDateTime(timeArray[i]).ToString("HHmm");
                     //Split the building from the room 
                     string[] token = classArray[i].Split(' ');
                     //Add it to the array
@@ -198,17 +203,19 @@ namespace ClassOpsLogCreator
         /** Close all open instances of Excel and Garbage collects. 
          * 
          */
-        private void Quit()
+        public void Quit()
         {
             if (roomWorkBook != null)
             {
                 roomWorkBook.Close(0);
                 roomSched.Quit();
                 System.Runtime.InteropServices.Marshal.FinalReleaseComObject(roomSched);
+
+                roomSched = null;
+                roomWorkBook = null;
+                roomSheet1 = null;
             }
-            roomSched = null;
-            roomWorkBook = null;
-            roomSheet1 = null;
+            GC.Collect();
         }
     }
 }

@@ -220,7 +220,7 @@ namespace ClassOpsLogCreator
         /* Close all open instances of Excel and Garbage collects. 
          * 
          */
-        private void Quit()
+        public void Quit()
         {
             if (JeannineWorkBook != null)
             {
