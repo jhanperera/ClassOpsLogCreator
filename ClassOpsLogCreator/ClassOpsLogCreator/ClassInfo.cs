@@ -12,6 +12,7 @@ namespace ClassOpsLogCreator
     {
         private string[] ClassArray = null;
         private string[] ClassArrayWithNoCrestron = null;
+        private string[] CLassArrayWithLapelMic = null;
 
         /// <summary>
         /// Constructor for this class
@@ -84,14 +85,33 @@ namespace ClassOpsLogCreator
                 "RS537","RS822","RS840","RS841","VC102","VC103","VC104","VC105","VC106","VC108",
                 "VC114","VC115","VC116","VC117","VC118","VC119"
             };
-    }
+
+            CLassArrayWithLapelMic = new string[]
+            {
+                "ACE001","ACE002", "ACE003", "ACE004", "ACE005", "ACE007", "ACE009", "ACE011",
+                "ACE013", "ACE102", "ACE235", "ACE244", "ACW102", "ACW103", "ACW004", "ACW005",
+                "ACW006", "ACW106", "ACW109", "ACW205", "ACW206", "CFA312", "CB115", "C121",
+                "CLH110", "CLHA", "CLHB", "CLHC", "CLHD", "CLHE", "CLHF", "CLHG", "CLHH", "CLHI",
+                "CLHJ", "CLHK", "CLHL", "CLHM", "FC203", "HNE030", "HNE031", "HNE032", "HNE033",
+                "HNE034", "HNE035", "HNE037", "HNE038", "HNE140", "HNE304", "HNE401", "HNEB02",
+                "KT519", "KT524", "LASA", "LASB", "LASC", "LSB101", "LSB103", "LSB105", "LSB106",
+                "LSB107", "LSB201", "LSB207", "LSB211", "LSB215", "LSB217", "LSB219", "LSB221",
+                "LSB223", "LSB225", "LSB227", "MC157A", "MC157B", "MC157C", "OSG1001", "OSG1002",
+                "OSG1003", "OSG1005", "OSG1006", "OSG2001", "OSG2002", "OSG2003", "OSG2010",
+                "OSG2027", "RS137", "RS201", "RS205", "RS802", "SSBE111", "SSBE112", "SSBE115",
+                "SSBE118", "SSBN105", "SSBN106", "SSBN107", "SSBN108", "SSBN109", "SSBS124",
+                "SSBS235", "SSBS335", "SSBW132", "SSBW133", "SSBW136", "SSBW141", "SLHA",
+                "SLHB", "SLHC", "SLHD", "SLHE", "SLHF", "SC302", "SC303", "TEL0001", "TEL0005",
+                "TEL0006", "TEL0007", "TEL0010", "TEL0014", "TEL0016", "TEL1004", "TEL1005",
+                "VC135", "VH3006", "VH3009", "VH1152A", "VHA", "VHB", "VHC", "VHD"
+            };
+        }
 
         //Return the list of crestron absent classrooms
         public string[] CrestronAbsentClassList()
         {
             return this.ClassArrayWithNoCrestron;
         }
-
 
         //Is this class room in the absent list?
         public Boolean hasCrestron(string classroom)
@@ -102,8 +122,20 @@ namespace ClassOpsLogCreator
             classroom = Regex.Replace(classroom, @"\s+", "");
 
             //find the class. 
-            //TO DO Check if the class is in the ClassRoom list
             return !(this.ClassArrayWithNoCrestron.Contains(classroom)) && (this.ClassArray.Contains(classroom));
         }
+
+        //Does this class have a lapel mic?
+        public Boolean hasLapelMic(string classroom)
+        {
+            //trim the string
+            classroom = classroom.Trim();
+            //replace any of the sapces in the middle
+            classroom = Regex.Replace(classroom, @"\s+", "");
+
+            //find the class with a lapel mic
+            return (this.CLassArrayWithLapelMic.Contains(classroom)) && (this.ClassArray.Contains(classroom));
+        }
+
     }
 }

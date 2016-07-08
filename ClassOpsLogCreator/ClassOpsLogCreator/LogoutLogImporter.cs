@@ -142,7 +142,7 @@ namespace ClassOpsLogCreator
          */
         private string[,] convertToString2DArray(string[] classArray, string[] timeArray)
         {
-            masterArray = new string[classArray.GetUpperBound(0), 3];
+            masterArray = new string[classArray.GetUpperBound(0), 4];
             ClassInfo classList = new ClassInfo();
             DateTime startingTime = Convert.ToDateTime(this.startTime.ToString());  //4pm in DateTime
             DateTime endingTime = Convert.ToDateTime(this.endTime.ToString());   //10pm in DateTime
@@ -157,7 +157,9 @@ namespace ClassOpsLogCreator
                 if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay)
                     && (classList.hasCrestron(classArray[i])))
                 {
+                    //Set the time
                     masterArray[index, 0] = Convert.ToDateTime(timeArray[i]).ToString("HHmm");
+
                     //Split the building from the room 
                     string[] token = classArray[i].Split(' ');
                     //Add it to the array
@@ -170,6 +172,17 @@ namespace ClassOpsLogCreator
                     else
                     {
                         masterArray[index, 2] = token[1];
+                    }
+
+                    //Adding notes
+                    //Does the class have a neck mic?
+                    if(classList.hasLapelMic(classArray[i]))
+                    {
+                        masterArray[index, 3] = "Ensure neck mic goes back to equipment drawer.";
+                    }
+                    else
+                    {
+                        masterArray[index, 3] = "";
                     }
                     index++;
                 }

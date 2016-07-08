@@ -260,7 +260,7 @@ namespace ClassOpsLogCreator
             //Setting up the cells to put the information into
             Excel.Range taskType_range = worksheet.get_Range("B2", "B" + (index + 1));
             Excel.Range date_range = worksheet.get_Range("C2", "C" + (index + 1));
-            Excel.Range value_range = worksheet.get_Range("D2", "F" + (index + 1));
+            Excel.Range value_range = worksheet.get_Range("D2", "G" + (index + 1));
 
             //Formatt for easy to read for "Crestron logout"
             taskType_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -368,7 +368,7 @@ namespace ClassOpsLogCreator
             roomRange.Value2 = "Room";
 
             //Instructions header;
-            instructionsRange.ColumnWidth = 42;
+            instructionsRange.ColumnWidth = 48;
             instructionsRange.Interior.Color = yellow;
             instructionsRange.Font.Color = brown;
             instructionsRange.Font.Bold = true;
