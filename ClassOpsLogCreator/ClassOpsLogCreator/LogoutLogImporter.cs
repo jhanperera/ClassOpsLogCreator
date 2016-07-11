@@ -172,6 +172,7 @@ namespace ClassOpsLogCreator
                     else if(token[0].Equals("IKB"))
                     {
                         masterArray[index, 1] = "OSG";
+                        masterArray[index, 2] = token[1];
                     }
                     else
                     {
