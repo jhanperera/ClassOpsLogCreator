@@ -284,15 +284,15 @@ namespace ClassOpsLogCreator
             this.formatWorkSheet(worksheet);
 
             //High light all the cells that have lapel mics
-            Color limegreen = Color.FromArgb(207, 251, 207);
+            Color lightblue = Color.FromArgb(189, 235, 255);
             Excel.Range instuciton_range = worksheet.get_Range("G2", "G" + (index + 1));
             foreach (Excel.Range cell in instuciton_range)
             {
                 if(cell.Value2 == "Ensure neck mic goes back to equipment drawer.")
                 {
-                    cell.Interior.Color = limegreen;
+                    cell.Interior.Color = lightblue;
                     Excel.Range task_color_change = worksheet.get_Range("B" + cell.Row, "B" + cell.Row);
-                    task_color_change.Interior.Color = limegreen;
+                    task_color_change.Interior.Color = lightblue;
                 }
             }
         }
