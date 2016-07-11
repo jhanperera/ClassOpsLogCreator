@@ -151,7 +151,6 @@ namespace ClassOpsLogCreator
             int index = 0;
             for (int i = 0; i < classArray.GetUpperBound(0); i++)
             {
-                //Add only the times between 4pm and 10pm
                 //and remove all classes with no crestron. 
                 DateTime check = Convert.ToDateTime(timeArray[i]);
                 if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay)
@@ -169,11 +168,15 @@ namespace ClassOpsLogCreator
                     {
                         masterArray[index, 2] = token[2];
                     }
+                    //Change IKB to OSG 
+                    else if(token[0].Equals("IKB"))
+                    {
+                        masterArray[index, 2] = "OSG";
+                    }
                     else
                     {
                         masterArray[index, 2] = token[1];
                     }
-
                     //Adding notes
                     //Does the class have a neck mic?
                     if(classList.hasLapelMic(classArray[i]))
