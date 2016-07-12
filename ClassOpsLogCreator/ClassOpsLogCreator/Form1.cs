@@ -415,7 +415,6 @@ namespace ClassOpsLogCreator
                 logoutMasterWorkBook = null;
                 logoutMasterWorkSheet = null;
             }
-
             if(MasterLogWorkBook != null)
             {
                 MasterLogWorkBook.Close(0);
