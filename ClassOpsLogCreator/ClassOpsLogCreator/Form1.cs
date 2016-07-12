@@ -284,7 +284,7 @@ namespace ClassOpsLogCreator
             this.formatWorkSheet(worksheet);
 
             //High light all the cells that have lapel mics
-            Color lightblue = Color.FromArgb(189, 235, 255);
+            Color lightblue = Color.FromArgb(225, 246, 255);
             Excel.Range instuciton_range = worksheet.get_Range("G2", "G" + (index + 1));
             foreach (Excel.Range cell in instuciton_range)
             {
