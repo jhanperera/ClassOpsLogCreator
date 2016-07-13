@@ -187,34 +187,82 @@ namespace ClassOpsLogCreator
 
             //Add all the values from the arrays to a 2d array of strings,
             string[,] values = new string[start + 1, 6];
+            int index = 0;
             for (int i = 0; i <= start; i ++)
             {
-                if(arrayB.GetValue(i+1,1) != null)
+                //Only going to get the events that are not Crestron Logouts
+                if (arrayB.GetValue(i + 1, 1) != null && !(arrayB.GetValue(i + 1, 1).Equals("Crestron Logout")))
                 {
                     //Taskt type
-                    values[i, 0] = arrayB.GetValue(i + 1, 1).ToString();
+                    values[index, 0] = arrayB.GetValue(i + 1, 1).ToString();
                     //Date
-                    values[i, 1] = DateTime.FromOADate(double.Parse((string)arrayC.GetValue(i + 1, 1).ToString())).ToString("M/dd/yy");
+                    values[index, 1] = DateTime.FromOADate(double.Parse((string)arrayC.GetValue(i + 1, 1).ToString())).ToString("M/dd/yy");
                     //Time
-                    values[i, 2] = arrayD.GetValue(i + 1, 1).ToString();
+                    values[index, 2] = arrayD.GetValue(i + 1, 1).ToString();
                     //Building
-                    values[i, 3] = arrayE.GetValue(i + 1, 1).ToString();
+                    values[index, 3] = arrayE.GetValue(i + 1, 1).ToString();
                     //Room
-                    values[i, 4] = arrayF.GetValue(i + 1, 1).ToString();
+                    values[index, 4] = arrayF.GetValue(i + 1, 1).ToString();
 
                     //Comment, add a space if no comment is present
                     if (arrayG.GetValue(i + 1, 1) == null)
                     {
-                        values[i, 5] = "";
+                        values[index, 5] = "";
                     }
                     else
                     {
-                        values[i, 5] = arrayG.GetValue(i + 1, 1).ToString();
+                        values[index, 5] = arrayG.GetValue(i + 1, 1).ToString();
+                    }
+                    index++;
+                }
+            }
+            //Remove all null/empty rows
+            string[,] temp = RemoveEmptyRows(values);
+            return temp;
+        }
+
+        /* This method will remove all empty rows/null rows from the master logs
+         */
+        public static string[,] RemoveEmptyRows(string[,] strs)
+        {
+            int length1 = strs.GetLength(0);
+            int length2 = strs.GetLength(1);
+
+            // First we count the non-emtpy rows
+            int nonEmpty = 0;
+
+            for (int i = 0; i < length1; i++)
+            {
+                for (int j = 0; j < length2; j++)
+                {
+                    if (strs[i, j] != null)
+                    {
+                        nonEmpty++;
+                        break;
                     }
                 }
-                
             }
-            return values;
+            // Then we create an array of the right size
+            string[,] strs2 = new string[nonEmpty, length2];
+
+            for (int i1 = 0, i2 = 0; i2 < nonEmpty; i1++)
+            {
+                for (int j = 0; j < length2; j++)
+                {
+                    if (strs[i1, j] != null)
+                    {
+                        // If the i1 row is not empty, we copy it
+                        for (int k = 0; k < length2; k++)
+                        {
+                            strs2[i2, k] = strs[i1, k];
+                        }
+
+                        i2++;
+                        break;
+                    }
+                }
+            }
+            return strs2;
         }
 
         /* Close all open instances of Excel and Garbage collects. 
