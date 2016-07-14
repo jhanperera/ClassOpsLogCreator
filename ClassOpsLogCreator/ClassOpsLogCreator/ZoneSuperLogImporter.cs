@@ -197,11 +197,11 @@ namespace ClassOpsLogCreator
             for (int i = 0; i <= start; i ++)
             {
                 //Check if the event is between the selected times
-                DateTime check = DateTime.ParseExact(arrayD.GetValue(i + 1, 1).ToString(), "HHmm", null);
+                //DateTime check = DateTime.ParseExact(arrayD.GetValue(i + 1, 1).ToString(), "HHmm", null);
 
                 //Only going to get the events that are not Crestron Logouts
-                if (arrayB.GetValue(i + 1, 1) != null && !(arrayB.GetValue(i + 1, 1).Equals("Crestron Logout"))
-                    && (check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
+                if (arrayB.GetValue(i + 1, 1) != null && !(arrayB.GetValue(i + 1, 1).Equals("Crestron Logout")))
+                   // && (check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
                 {
                     //Taskt type
                     values[index, 0] = arrayB.GetValue(i + 1, 1).ToString();
