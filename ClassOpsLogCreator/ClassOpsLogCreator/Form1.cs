@@ -11,17 +11,17 @@ namespace ClassOpsLogCreator
     public partial class LogCreator : Form
     {
         //Public readonly attribues
-        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
+        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";*/
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        /*public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsx";
+        public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsx";
         public readonly string JEANNINE_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";*/
+        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
 
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
@@ -127,11 +127,8 @@ namespace ClassOpsLogCreator
                 //Run the work
                 bw.RunWorkerAsync();
             }
-            //***********************DEGUB CODE***************************************
-            //textBox1.Text = DateTime.FromOADate(double.Parse(arrayTimes[0])).ToString("hh:mm:tt");
-            //textBox1.Text = Environment.GetFolderPath(
-                         //System.Environment.SpecialFolder.DesktopDirectory).ToString();
-            //***********************END OF DEGUB CODE*********************************
+            //***********************DEGUB CODE***************************************/
+            //***********************END OF DEGUB CODE*********************************/
         }
 
         /** Al the work is done in this method
@@ -142,7 +139,8 @@ namespace ClassOpsLogCreator
             var worker = sender as BackgroundWorker;
 
             worker.ReportProgress(15);
-            //***********************CREATE MASTER LOGOUT FILE**********************
+
+            //***********************CREATE MASTER LOG FILE PT 1**********************
             LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo, endTimeFromCombo);
 
             string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
@@ -153,11 +151,11 @@ namespace ClassOpsLogCreator
             logoutMasterWorkBook = logoutMaster.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
             logoutMasterWorkSheet = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[1];
 
-            //***********************END OF CREATE MASTER LOGOUT FILE**************
+            //***********************END OF CREATE MASTER LOGOUT FILE PT 1**************
 
             worker.ReportProgress(50);
 
-            //***********************CREATE MASTER LOG FILE!***********************
+            //***********************CREATE MASTER LOG FILE PT 2***********************
             ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this, startTimeFromCombo, endTimeFromCombo);
              
             //Get the three logs
@@ -175,12 +173,16 @@ namespace ClassOpsLogCreator
             logoutMasterWorkBook.SaveAs(Environment.GetFolderPath(
             System.Environment.SpecialFolder.DesktopDirectory) + @"\CLassOps_Master.xlsx");
 
-            //***********************END OF CREATE MASTER LOG FILES*******************
+            //***********************END OF CREATE MASTER LOG FILES PT 2*******************
+
             worker.ReportProgress(90);
+
             //Gracefully close all instances
             Quit();
+
             //Send report that we are all done 100%
             worker.ReportProgress(100);
+
             return;
         }
 

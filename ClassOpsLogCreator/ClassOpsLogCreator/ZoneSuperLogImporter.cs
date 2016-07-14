@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Excel = Microsoft.Office.Interop.Excel;
-using System.Windows.Forms;
 
 namespace ClassOpsLogCreator
 {
@@ -39,6 +34,7 @@ namespace ClassOpsLogCreator
         /// </summary>
         public ZoneSuperLogImporter(LogCreator form1, string StartTime, string EndTime)
         {
+            //Assigning the variables
             this.Form1 = form1;
             this.startTime = StartTime;
             this.endTime = EndTime;
@@ -196,34 +192,35 @@ namespace ClassOpsLogCreator
             int index = 0;
             for (int i = 0; i <= start; i ++)
             {
-                //Check if the event is between the selected times
-                //DateTime check = DateTime.ParseExact(arrayD.GetValue(i + 1, 1).ToString(), "HHmm", null);
-
                 //Only going to get the events that are not Crestron Logouts
-                if (arrayB.GetValue(i + 1, 1) != null && !(arrayB.GetValue(i + 1, 1).Equals("Crestron Logout")))
-                   // && (check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
+                if ((arrayB.GetValue(i + 1, 1) != null) && (arrayD.GetValue(i + 1, 1) != null) && !(arrayB.GetValue(i + 1, 1).Equals("Crestron Logout")))
                 {
-                    //Taskt type
-                    values[index, 0] = arrayB.GetValue(i + 1, 1).ToString();
-                    //Date
-                    values[index, 1] = DateTime.FromOADate(double.Parse((string)arrayC.GetValue(i + 1, 1).ToString())).ToString("M/dd/yy");
-                    //Time
-                    values[index, 2] = arrayD.GetValue(i + 1, 1).ToString();
-                    //Building
-                    values[index, 3] = arrayE.GetValue(i + 1, 1).ToString();
-                    //Room
-                    values[index, 4] = arrayF.GetValue(i + 1, 1).ToString();
+                    //Check if the event is between the selected times
+                    DateTime check = DateTime.ParseExact(arrayD.GetValue(i + 1, 1).ToString(), "HHmm", null);
+                    if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
+                    {
+                        //Taskt type
+                        values[index, 0] = arrayB.GetValue(i + 1, 1).ToString();
+                        //Date
+                        values[index, 1] = DateTime.FromOADate(double.Parse((string)arrayC.GetValue(i + 1, 1).ToString())).ToString("M/dd/yy");
+                        //Time
+                        values[index, 2] = arrayD.GetValue(i + 1, 1).ToString();
+                        //Building
+                        values[index, 3] = arrayE.GetValue(i + 1, 1).ToString();
+                        //Room
+                        values[index, 4] = arrayF.GetValue(i + 1, 1).ToString();
 
-                    //Comment, add a space if no comment is present
-                    if (arrayG.GetValue(i + 1, 1) == null)
-                    {
-                        values[index, 5] = "";
+                        //Comment, add a space if no comment is present
+                        if (arrayG.GetValue(i + 1, 1) == null)
+                        {
+                            values[index, 5] = "";
+                        }
+                        else
+                        {
+                            values[index, 5] = arrayG.GetValue(i + 1, 1).ToString();
+                        }
+                        index++;
                     }
-                    else
-                    {
-                        values[index, 5] = arrayG.GetValue(i + 1, 1).ToString();
-                    }
-                    index++;
                 }
             }
             //Remove all null/empty rows
