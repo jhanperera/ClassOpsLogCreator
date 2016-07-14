@@ -68,8 +68,22 @@ namespace ClassOpsLogCreator
             arrayClassRooms = this.ConvertToStringArray(array, 0);
             arrayTimes = this.ConvertToStringArray(array2, 1);
             arrayLastTimes = this.extract_last_time(arrayTimes);
-            masterArray = this.convertToString2DArray(arrayClassRooms, arrayLastTimes);
 
+            //Check if the arrayLastTimes and the classarray are the same length, if so then we get correct results.
+            if(arrayLastTimes.GetUpperBound(0) > arrayClassRooms.GetUpperBound(0))
+            {
+                MessageBox.Show("Error: While parsing clo.xlsx we ran into a problem:" + Environment.NewLine +
+                                "The file is not formatted correctly, please ensure all rows have a corresponding classroom",
+                                 "File format error",
+                                  MessageBoxButtons.OK,
+                                  MessageBoxIcon.Exclamation,
+                                  MessageBoxDefaultButton.Button1);
+            }
+            else
+            {
+                masterArray = this.convertToString2DArray(arrayClassRooms, arrayLastTimes);
+            }
+            
             //Close all open processes
             Quit();
         }

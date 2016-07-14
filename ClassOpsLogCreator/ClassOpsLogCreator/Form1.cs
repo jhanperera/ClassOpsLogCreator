@@ -151,7 +151,6 @@ namespace ClassOpsLogCreator
 
             string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
             
-
             //Create the new Excel file where we will store all the new information
             logoutMaster = new Excel.Application();
             logoutMaster.Visible = false;
@@ -160,10 +159,6 @@ namespace ClassOpsLogCreator
 
             //write all the data to the excel file
             this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, classRoomTimeLogs.getLogOutArrayCount());
-
-            //Saving and closing the new excel file
-            logoutMasterWorkBook.SaveAs(Environment.GetFolderPath(
-                         System.Environment.SpecialFolder.DesktopDirectory) + @"\Logout_Master.xlsx");
 
             //***********************END OF CREATE MASTER LOGOUT FILE**************
 
@@ -177,19 +172,14 @@ namespace ClassOpsLogCreator
             string[,] DInstruction = ZoneLogs.getDerekLog();
             string[,] RInstruction = ZoneLogs.getRaulLog();
 
-            //Create the new Excel file where we will store all the new information
-            MasterLog = new Excel.Application();
-            MasterLog.Visible = false;
-            MasterLogWorkBook = MasterLog.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
-            MasterLogWorkSheet = (Excel.Worksheet)MasterLogWorkBook.Worksheets[1];
-
             //write all the data to the excel file
             //merg the 3 array logs into a master excel log.
-            this.WriteMasterLog(MasterLogWorkSheet, JInstruction, DInstruction, RInstruction);
+            this.WriteMasterLog(logoutMasterWorkSheet, JInstruction, DInstruction, RInstruction);
 
             //Saving and closing the new excel file
-            MasterLogWorkBook.SaveAs(Environment.GetFolderPath(
-                         System.Environment.SpecialFolder.DesktopDirectory) + @"\Master_Log.xlsx");
+            logoutMasterWorkBook.SaveAs(Environment.GetFolderPath(
+            System.Environment.SpecialFolder.DesktopDirectory) + @"\Logout_Master.xlsx");
+
             //***********************END OF CREATE MASTER LOG FILES*******************
             worker.ReportProgress(90);
             //Gracefully close all instances
@@ -270,7 +260,10 @@ namespace ClassOpsLogCreator
             //Formatt for east reading of the date
             date_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             date_range.ColumnWidth = 10;
-            date_range.Value2 = DateTime.Today.ToString("M/d/yyyy");
+            DateTime today = DateTime.Today;
+            date_range.Value2 = today.ToString("M/d/yy");
+            //Set the date format for the whole column. 
+            date_range.EntireColumn.NumberFormat = "M/d/yy";
 
             //Format for easy reading of Time, Building, and Room.
             value_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -303,11 +296,12 @@ namespace ClassOpsLogCreator
         */
         private void WriteMasterLog(Excel.Worksheet worksheet, string[,] array1, string[,] array2, string[,] array3)
         {
+            Excel.Range lastRow = worksheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
             //Get the range to inser the 2d arrayinto
-            Excel.Range logRange1 = worksheet.get_Range("B2", "G"+ (array1.GetLength(0) + 1));
-            Excel.Range logRange2 = worksheet.get_Range("B" + (array1.GetLength(0) + 2), "G" + (array1.GetLength(0) + array2.GetLength(0) + 1));
-            Excel.Range logRange3 = worksheet.get_Range("B" + (array1.GetLength(0) + array2.GetLength(0) + 2), "G" + 
-                                                                (array1.GetLength(0) + array2.GetLength(0) + array3.GetLength(0) + 1));
+            Excel.Range logRange1 = worksheet.get_Range("B" + lastRow.Row, "G"+ (array1.GetLength(0) + lastRow.Row +  1));
+            Excel.Range logRange2 = worksheet.get_Range("B" + (array1.GetLength(0) + lastRow.Row + 2), "G" + (array1.GetLength(0) + array2.GetLength(0) + lastRow.Row + 1));
+            Excel.Range logRange3 = worksheet.get_Range("B" + (array1.GetLength(0) + array2.GetLength(0) + lastRow.Row + 2), "G" + 
+                                                                (array1.GetLength(0) + array2.GetLength(0) + array3.GetLength(0) + lastRow.Row + 1));
             //Save all the values to the range. 
             logRange1.Value2 = array1;
             logRange2.Value2 = array2;
