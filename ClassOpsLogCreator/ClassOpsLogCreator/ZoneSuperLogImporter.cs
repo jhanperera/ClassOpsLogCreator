@@ -30,13 +30,18 @@ namespace ClassOpsLogCreator
         private string[,] RaulLogArray = null;
         private string[,] DerekLogArray = null;
 
+        private string startTime = null;
+        private string endTime = null;
+
         /// <summary>
         /// This Class will import all the zone supervisor logs and assist with 
         /// modification and find operations. 
         /// </summary>
-        public ZoneSuperLogImporter(LogCreator form1)
+        public ZoneSuperLogImporter(LogCreator form1, string StartTime, string EndTime)
         {
             this.Form1 = form1;
+            this.startTime = StartTime;
+            this.endTime = EndTime;
 
             JeannineLog = new Excel.Application();
             RaulLog = new Excel.Application();
@@ -77,7 +82,6 @@ namespace ClassOpsLogCreator
         ///  All Public Accesor methods
         /// </summary>
         /// <returns></returns>
-
         //Return the Last Date AKA todays date
         public string getLastDate()
         {
@@ -107,7 +111,6 @@ namespace ClassOpsLogCreator
         {
             return this.DerekLogArray;
         }
-
 
         /// <summary>
         /// All Private Modifiers are bellow
@@ -167,6 +170,9 @@ namespace ClassOpsLogCreator
          */
         private string[,] ConvertToStringArray2D(Excel.Worksheet ExSheet)
         {
+            DateTime startingTime = Convert.ToDateTime(this.startTime.ToString());
+            DateTime endingTime = Convert.ToDateTime(this.endTime.ToString());
+
             //initialization of all the ranges that we are going to collect.
             int start = this.numberOfRows(ExSheet, this.getLastDate()) -1;
             Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
@@ -190,8 +196,12 @@ namespace ClassOpsLogCreator
             int index = 0;
             for (int i = 0; i <= start; i ++)
             {
+                //Check if the event is between the selected times
+                DateTime check = DateTime.ParseExact(arrayD.GetValue(i + 1, 1).ToString(), "HHmm", null);
+
                 //Only going to get the events that are not Crestron Logouts
-                if (arrayB.GetValue(i + 1, 1) != null && !(arrayB.GetValue(i + 1, 1).Equals("Crestron Logout")))
+                if (arrayB.GetValue(i + 1, 1) != null && !(arrayB.GetValue(i + 1, 1).Equals("Crestron Logout"))
+                    && (check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
                 {
                     //Taskt type
                     values[index, 0] = arrayB.GetValue(i + 1, 1).ToString();

@@ -11,25 +11,21 @@ namespace ClassOpsLogCreator
     public partial class LogCreator : Form
     {
         //Public readonly attribues
-        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
+        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";*/
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        /*public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsx";
+        public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsx";
         public readonly string JEANNINE_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";*/
+        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
 
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
         private static Excel.Worksheet logoutMasterWorkSheet = null;
-
-        private static Excel.Application MasterLog = null;
-        private static Excel.Workbook MasterLogWorkBook = null;
-        private static Excel.Worksheet MasterLogWorkSheet = null;
 
         //Use a background worker to allow the GUI to still be functional and not hang.
         private static BackgroundWorker bw = new BackgroundWorker();
@@ -157,15 +153,12 @@ namespace ClassOpsLogCreator
             logoutMasterWorkBook = logoutMaster.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
             logoutMasterWorkSheet = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[1];
 
-            //write all the data to the excel file
-            this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, classRoomTimeLogs.getLogOutArrayCount());
-
             //***********************END OF CREATE MASTER LOGOUT FILE**************
 
             worker.ReportProgress(50);
 
             //***********************CREATE MASTER LOG FILE!***********************
-            ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this);
+            ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this, startTimeFromCombo, endTimeFromCombo);
              
             //Get the three logs
             string[,] JInstruction = ZoneLogs.getJeannineLog();
@@ -173,12 +166,14 @@ namespace ClassOpsLogCreator
             string[,] RInstruction = ZoneLogs.getRaulLog();
 
             //write all the data to the excel file
-            //merg the 3 array logs into a master excel log.
-            this.WriteMasterLog(logoutMasterWorkSheet, JInstruction, DInstruction, RInstruction);
+            //merg the all the data together into the master log
+            this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, classRoomTimeLogs.getLogOutArrayCount(),
+                                                                        JInstruction, DInstruction, RInstruction);
 
             //Saving and closing the new excel file
+            logoutMaster.DisplayAlerts = false;
             logoutMasterWorkBook.SaveAs(Environment.GetFolderPath(
-            System.Environment.SpecialFolder.DesktopDirectory) + @"\Logout_Master.xlsx");
+            System.Environment.SpecialFolder.DesktopDirectory) + @"\CLassOps_Master.xlsx");
 
             //***********************END OF CREATE MASTER LOG FILES*******************
             worker.ReportProgress(90);
@@ -245,12 +240,19 @@ namespace ClassOpsLogCreator
          * 
          * This method generates the Excel output via the arrays
          */
-        private void WriteLogOutArray(Excel.Worksheet worksheet, string[,] values, int index)
+        private void WriteLogOutArray(Excel.Worksheet worksheet, string[,] values, int index, 
+                                            string[,] array1, string[,] array2, string[,] array3)
         {
             //Setting up the cells to put the information into
             Excel.Range taskType_range = worksheet.get_Range("B2", "B" + (index + 1));
             Excel.Range date_range = worksheet.get_Range("C2", "C" + (index + 1));
             Excel.Range value_range = worksheet.get_Range("D2", "G" + (index + 1));
+
+            //Get the ranges for the 3 arrays
+            Excel.Range logRange1 = worksheet.get_Range("B" + (index + 2), "G" + (array1.GetLength(0) + index + 1));
+            Excel.Range logRange2 = worksheet.get_Range("B" + (array1.GetLength(0) + index + 2), "G" + (array1.GetLength(0) + array2.GetLength(0) + index + 1));
+            Excel.Range logRange3 = worksheet.get_Range("B" + (array1.GetLength(0) + array2.GetLength(0) + index + 2), "G" +
+                                                                (array1.GetLength(0) + array2.GetLength(0) + array3.GetLength(0) + index + 1));
 
             //Formatt for easy to read for "Crestron logout"
             taskType_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -270,15 +272,39 @@ namespace ClassOpsLogCreator
             value_range.ColumnWidth = 17;
             value_range.Value2 = values;
 
+            //Add the three logs to the master
+            logRange1.Value2 = array1;
+            logRange2.Value2 = array2;
+            logRange3.Value2 = array3;
+
             //Sorting it by time column
             dynamic allDataRange = worksheet.UsedRange;
             allDataRange.Sort(allDataRange.Columns[3], Excel.XlSortOrder.xlAscending);
 
+            //Format the sheet to look correct
             this.formatWorkSheet(worksheet);
+
+            Excel.Range last_row = worksheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+
+            //High light all the other/pickup/demo/setup rows
+            Color redBackground = Color.FromArgb(255, 199, 206);
+            Color redFont = Color.FromArgb(156, 0, 6);
+            Excel.Range task_range = worksheet.get_Range("B2", "B" + (last_row.Row));
+            foreach(Excel.Range cell in task_range)
+            {
+                if(cell.Value2 != "Crestron Logout")
+                {
+                    cell.Interior.Color = redBackground;
+                    cell.Font.Color = redFont;
+                    Excel.Range task_color_change = worksheet.get_Range("G" + cell.Row, "G" + cell.Row);
+                    task_color_change.Interior.Color = redBackground;
+                    task_color_change.Font.Color = redFont;
+                }
+            }
 
             //High light all the cells that have lapel mics
             Color lightblue = Color.FromArgb(225, 246, 255);
-            Excel.Range instuciton_range = worksheet.get_Range("G2", "G" + (index + 1));
+            Excel.Range instuciton_range = worksheet.get_Range("G2", "G" + (last_row.Row));
             foreach (Excel.Range cell in instuciton_range)
             {
                 if(cell.Value2 == "Ensure neck mic goes back to equipment drawer.")
@@ -288,27 +314,6 @@ namespace ClassOpsLogCreator
                     task_color_change.Interior.Color = lightblue;
                 }
             }
-        }
-
-        /**This method will write our arrays to the excel file.
-        * 
-        * This method generates the Excel output via the arrays
-        */
-        private void WriteMasterLog(Excel.Worksheet worksheet, string[,] array1, string[,] array2, string[,] array3)
-        {
-            Excel.Range lastRow = worksheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            //Get the range to inser the 2d arrayinto
-            Excel.Range logRange1 = worksheet.get_Range("B" + lastRow.Row, "G"+ (array1.GetLength(0) + lastRow.Row +  1));
-            Excel.Range logRange2 = worksheet.get_Range("B" + (array1.GetLength(0) + lastRow.Row + 2), "G" + (array1.GetLength(0) + array2.GetLength(0) + lastRow.Row + 1));
-            Excel.Range logRange3 = worksheet.get_Range("B" + (array1.GetLength(0) + array2.GetLength(0) + lastRow.Row + 2), "G" + 
-                                                                (array1.GetLength(0) + array2.GetLength(0) + array3.GetLength(0) + lastRow.Row + 1));
-            //Save all the values to the range. 
-            logRange1.Value2 = array1;
-            logRange2.Value2 = array2;
-            logRange3.Value2 = array3;
-
-            //Format the worksheet
-            this.formatWorkSheet(worksheet);
         }
 
         /**This method will format the work sheet to be easy to read and 
@@ -408,15 +413,6 @@ namespace ClassOpsLogCreator
                 logoutMaster = null;
                 logoutMasterWorkBook = null;
                 logoutMasterWorkSheet = null;
-            }
-            if(MasterLogWorkBook != null)
-            {
-                MasterLogWorkBook.Close(0);
-                MasterLog.Quit();
-                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(MasterLog);
-                MasterLog = null;
-                MasterLogWorkBook = null;
-                MasterLogWorkSheet = null;
             }
             GC.Collect();  
         }
