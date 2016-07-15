@@ -1,6 +1,20 @@
 ﻿using System;
 using Excel = Microsoft.Office.Interop.Excel;
 
+/// <summary>
+/// 
+/// Author: Jhan Perera
+/// Department: UIT Client Services
+/// 
+/// Description of class: This class will take in 3 input logs 
+/// and sort the most important components. This will output only 
+/// demos/setups/picksups and any other speical taskt.
+///
+/// Class Version: 0.1.0.0 - BETA - 7152016
+/// 
+/// System Version: 0.1.0.0 - BETA - 7152016
+/// 
+/// </summary>
 namespace ClassOpsLogCreator
 {
     public class ZoneSuperLogImporter

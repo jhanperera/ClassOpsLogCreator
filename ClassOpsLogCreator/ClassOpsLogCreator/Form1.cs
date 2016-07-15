@@ -6,6 +6,22 @@ using System.Linq;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 
+/// <summary>
+/// 
+/// Author: Jhan Perera
+/// Department: UIT Client Services
+/// 
+/// 
+/// Description of class: This is the main thread class
+/// all the main event handelers and work is done here. 
+/// All output is genereated from here and main features are 
+/// all called here. 
+///
+/// Class Version: 0.1.0.0 - BETA - 7152016
+/// 
+/// System Version: 0.1.0.0 - BETA - 7152016
+/// 
+/// </summary>
 namespace ClassOpsLogCreator
 {
     public partial class LogCreator : Form

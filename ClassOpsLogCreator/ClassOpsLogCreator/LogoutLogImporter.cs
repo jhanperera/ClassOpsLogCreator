@@ -3,6 +3,23 @@ using System.Linq;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Windows.Forms;
 
+/// <summary>
+/// 
+/// Author: Jhan Perera
+/// Department: UIT Client Services
+/// 
+/// 
+/// Description of class: This class is a helper class that 
+/// will assis with creating the Crestron Logouts of the 
+/// input excel file. This class also assists with sorting and 
+/// presenting a nice arnagment of all last times for the 
+/// events heald around School. 
+///
+/// Class Version: 0.1.0.0 - BETA - 7152016
+/// 
+/// System Version: 0.1.0.0 - BETA - 7152016
+/// 
+/// </summary>
 namespace ClassOpsLogCreator
 {
     class LogoutLogImporter
@@ -210,41 +227,48 @@ namespace ClassOpsLogCreator
             return masterArray;
         }
 
-        /* *********************** TO DO *******************************************/
-        /* We must find a way to account for events when there is no class dirrectly associated 
-         * with the time. This outlier causes all times to be incorrect. 
-         * 
-         * My solution is to have the clo file also contain classes that are occuring 
-         * during those time slots so I cna double check the true end time of a class 
-         * in a given room. 
-         ************************* END OF TO DO************************************/
-
-
         /** A  helper method to get the last time in our time array
          */
         private string[] extract_last_time(string[] timearray, string[] eventarray)
         {
-            string[] newArray = new string[timearray.GetUpperBound(0) + 1];
+            string[] newArray = new string[eventarray.GetUpperBound(0) + 1];
             int index = 0;
             //Iterate throught the list and find the ending time of the las class in said room.
             //Getlowerbound and GetUpperBound is safer then .Length
-            for (int i = timearray.GetLowerBound(0); i <= timearray.GetUpperBound(0); i++)
+            for (int i = eventarray.GetLowerBound(0); i <= eventarray.GetUpperBound(0); i++)
             {
                 //if the next cell is empty we found the last time, add it to the array
-                if (timearray[i].ToString().Length != 0)
+                if (eventarray[i].ToString().Length != 0)
                 {
                     //Check if it is the last elemtn in the array
-                    if(i == timearray.GetUpperBound(0))
+                    if(i == eventarray.GetUpperBound(0))
                     {
                         //add the last time in a formatted way to the list
                         newArray[index] = DateTime.FromOADate(double.Parse(timearray[i])).ToString("HH:mm");
                         index++;
                     }
                     //else we check if the next element is empty or null
-                    else if ((timearray[i + 1].ToString().Length == 0) || (timearray[i + 1] == null))
+                    else if ((eventarray[i + 1].ToString().Length == 0) || (eventarray[i + 1] == null))
                     {
-                        newArray[index] = DateTime.FromOADate(double.Parse(timearray[i])).ToString("HH:mm");
-                        index++;
+                        //check the time array for the corresponding times 
+                        //If it is not null or empty we know this is the last time.
+                        if((timearray[i] != null) && (timearray[i].ToString().Length != 0 ))
+                        {
+                            newArray[index] = DateTime.FromOADate(double.Parse(timearray[i])).ToString("HH:mm");
+                            index++;
+                        }
+                        //else we are goning to check at most 2 elements up to see if its not null or not empty
+                        else
+                        {
+                            for(int j = 1; j < 2; j++)
+                            {
+                                if ((timearray[i - j] != null) && (timearray[i - j].ToString().Length != 0))
+                                {
+                                    newArray[index] = DateTime.FromOADate(double.Parse(timearray[i - 1])).ToString("HH:mm");
+                                    index++;
+                                }
+                            }
+                        }
                     }
                 }
             }

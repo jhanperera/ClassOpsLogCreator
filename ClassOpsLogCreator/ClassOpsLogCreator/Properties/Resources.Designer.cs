@@ -63,9 +63,9 @@ namespace ClassOpsLogCreator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap www_zaxonusa_com_small_icon_schedual {
+        internal static System.Drawing.Bitmap Main_thread_image {
             get {
-                object obj = ResourceManager.GetObject("www.zaxonusa.com-small-icon-schedual", resourceCulture);
+                object obj = ResourceManager.GetObject("Main_thread_image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

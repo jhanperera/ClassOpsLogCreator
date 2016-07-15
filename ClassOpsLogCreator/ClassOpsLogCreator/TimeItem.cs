@@ -4,9 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/*This class is used to help fill in the time for the combo boxes.
- * 
- */
+/// <summary>
+/// 
+/// Author: Jhan Perera
+/// Department: UIT Client Services
+/// 
+/// 
+/// Description of class: This class is my Time format 
+/// It is used for filling the combo boxes in a qucik way. 
+///
+/// Class Version: 0.1.0.0 - BETA - 7152016
+/// 
+/// System Version: 0.1.0.0 - BETA - 7152016
+/// 
+/// </summary>
 namespace ClassOpsLogCreator
 {
     class TimeItem

@@ -82,7 +82,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Image = global::ClassOpsLogCreator.Properties.Resources.www_zaxonusa_com_small_icon_schedual;
+            this.pictureBox1.Image = global::ClassOpsLogCreator.Properties.Resources.Main_thread_image;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
