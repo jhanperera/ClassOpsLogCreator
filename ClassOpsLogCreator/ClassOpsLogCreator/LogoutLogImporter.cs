@@ -17,6 +17,7 @@ namespace ClassOpsLogCreator
         private string[] arrayClassRooms = null;
         private string[] arrayTimes = null;
         private string[] arrayLastTimes = null;
+        private string[] arrayEvent = null;
 
         private string[,] masterArray = null;
         private int masterArrayCounter = 0;
@@ -66,7 +67,8 @@ namespace ClassOpsLogCreator
             //Now we extract all the raw data to strings 
             arrayClassRooms = this.ConvertToStringArray(classArray, 0);
             arrayTimes = this.ConvertToStringArray(timeArray, 1);
-            arrayLastTimes = this.extract_last_time(arrayTimes);
+            arrayEvent = this.ConvertToStringArray(eventArray, 1);
+            arrayLastTimes = this.extract_last_time(arrayTimes, arrayEvent);
 
             //Check if the arrayLastTimes and the classarray are the same length, if so then we get correct results.
             if(arrayLastTimes.GetUpperBound(0) != arrayClassRooms.GetUpperBound(0))
@@ -220,28 +222,28 @@ namespace ClassOpsLogCreator
 
         /** A  helper method to get the last time in our time array
          */
-        private string[] extract_last_time(string[] array)
+        private string[] extract_last_time(string[] timearray, string[] eventarray)
         {
-            string[] newArray = new string[array.GetUpperBound(0) + 1];
+            string[] newArray = new string[timearray.GetUpperBound(0) + 1];
             int index = 0;
             //Iterate throught the list and find the ending time of the las class in said room.
             //Getlowerbound and GetUpperBound is safer then .Length
-            for (int i = array.GetLowerBound(0); i <= array.GetUpperBound(0); i++)
+            for (int i = timearray.GetLowerBound(0); i <= timearray.GetUpperBound(0); i++)
             {
                 //if the next cell is empty we found the last time, add it to the array
-                if (array[i].ToString().Length != 0)
+                if (timearray[i].ToString().Length != 0)
                 {
                     //Check if it is the last elemtn in the array
-                    if(i == array.GetUpperBound(0))
+                    if(i == timearray.GetUpperBound(0))
                     {
                         //add the last time in a formatted way to the list
-                        newArray[index] = DateTime.FromOADate(double.Parse(array[i])).ToString("HH:mm");
+                        newArray[index] = DateTime.FromOADate(double.Parse(timearray[i])).ToString("HH:mm");
                         index++;
                     }
                     //else we check if the next element is empty or null
-                    else if ((array[i + 1].ToString().Length == 0) || (array[i + 1] == null))
+                    else if ((timearray[i + 1].ToString().Length == 0) || (timearray[i + 1] == null))
                     {
-                        newArray[index] = DateTime.FromOADate(double.Parse(array[i])).ToString("HH:mm");
+                        newArray[index] = DateTime.FromOADate(double.Parse(timearray[i])).ToString("HH:mm");
                         index++;
                     }
                 }
