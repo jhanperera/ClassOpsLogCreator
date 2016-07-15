@@ -175,7 +175,7 @@ namespace ClassOpsLogCreator
 
             //***********************END OF CREATE MASTER LOG FILES PT 2*******************
 
-            worker.ReportProgress(90);
+            worker.ReportProgress(85);
 
             //Gracefully close all instances
             Quit();
