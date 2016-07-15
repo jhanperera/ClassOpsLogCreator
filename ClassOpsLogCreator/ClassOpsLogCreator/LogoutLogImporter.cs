@@ -54,16 +54,18 @@ namespace ClassOpsLogCreator
 
             //Get the range we are working within. (A1, A.LastRow)
             Excel.Range last = roomSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            Excel.Range range1 = roomSheet1.get_Range("A5", "A" + last.Row);
-            Excel.Range range2 = roomSheet1.get_Range("C5", "C" + last.Row);
+            Excel.Range classRange = roomSheet1.get_Range("A5", "A" + last.Row);
+            Excel.Range timeRange = roomSheet1.get_Range("C5", "C" + last.Row);
+            Excel.Range eventRange = roomSheet1.get_Range("D5", "D" + last.Row);
 
             //Lets export the whole range of raw data into an array. (Cell.Value2 is a fast and accurate operation to use)
-            System.Array array = (System.Array)range1.Cells.Value2;
-            System.Array array2 = (System.Array)range2.Cells.Value2;
+            System.Array classArray = (System.Array)classRange.Cells.Value2;
+            System.Array timeArray = (System.Array)timeRange.Cells.Value2;
+            System.Array eventArray = (System.Array)eventRange.Cells.Value2;
 
             //Now we extract all the raw data to strings 
-            arrayClassRooms = this.ConvertToStringArray(array, 0);
-            arrayTimes = this.ConvertToStringArray(array2, 1);
+            arrayClassRooms = this.ConvertToStringArray(classArray, 0);
+            arrayTimes = this.ConvertToStringArray(timeArray, 1);
             arrayLastTimes = this.extract_last_time(arrayTimes);
 
             //Check if the arrayLastTimes and the classarray are the same length, if so then we get correct results.
