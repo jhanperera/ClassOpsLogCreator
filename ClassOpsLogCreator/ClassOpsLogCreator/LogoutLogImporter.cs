@@ -206,6 +206,16 @@ namespace ClassOpsLogCreator
             return masterArray;
         }
 
+        /* *********************** TO DO *******************************************/
+        /* We must find a way to account for events when there is no class dirrectly associated 
+         * with the time. This outlier causes all times to be incorrect. 
+         * 
+         * My solution is to have the clo file also contain classes that are occuring 
+         * during those time slots so I cna double check the true end time of a class 
+         * in a given room. 
+         ************************* END OF TO DO************************************/
+
+
         /** A  helper method to get the last time in our time array
          */
         private string[] extract_last_time(string[] array)
