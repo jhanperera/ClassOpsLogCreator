@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ClassOpsLogCreator;
 
 /// <summary>
 /// This is our test class
@@ -13,6 +14,7 @@ namespace UnitTest1
         [TestMethod]
         public void TestMethod1()
         {
+            
         }
     }
 }
