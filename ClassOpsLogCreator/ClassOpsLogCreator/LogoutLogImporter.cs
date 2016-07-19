@@ -59,7 +59,7 @@ namespace ClassOpsLogCreator
                 //This should look for the file
                 roomWorkBook = roomSched.Workbooks.Open(form1.ROOM_SCHED);
                 //Work in worksheet number 1
-                roomSheet1 = roomWorkBook.Sheets[1];
+                roomSheet1 = (Excel.Worksheet)roomWorkBook.Sheets[1];
 
             }
             catch (Exception)

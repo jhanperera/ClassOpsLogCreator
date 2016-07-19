@@ -43,6 +43,10 @@ namespace ClassOpsLogCreator
         private static Excel.Workbook logoutMasterWorkBook = null;
         private static Excel.Worksheet logoutMasterWorkSheet = null;
 
+        private static Excel.Application existingMaster = null;
+        private static Excel.Workbook existingMasterWorkBook = null;
+        private static Excel.Worksheet existingMasterWorkSheet = null;
+
         //Use a background worker to allow the GUI to still be functional and not hang.
         private static BackgroundWorker bw = new BackgroundWorker();
 
@@ -196,6 +200,7 @@ namespace ClassOpsLogCreator
 
             //Take the current excel log file that is in sorted order and add it to the 
             //existing log file that masi has provided.
+            this.mergeMasterWithExisting(logoutMasterWorkSheet);
 
             //********************END CONCATINATE CURRENT LOG WITH EXISTING MASTER**********
 
@@ -318,7 +323,7 @@ namespace ClassOpsLogCreator
             Excel.Range task_range = worksheet.get_Range("B2", "B" + (last_row.Row));
             foreach(Excel.Range cell in task_range)
             {
-                if(cell.Value2 != "Crestron Logout")
+                if((string)cell.Value2 != "Crestron Logout")
                 {
                     cell.Interior.Color = redBackground;
                     cell.Font.Color = redFont;
@@ -333,7 +338,7 @@ namespace ClassOpsLogCreator
             Excel.Range instuciton_range = worksheet.get_Range("G2", "G" + (last_row.Row));
             foreach (Excel.Range cell in instuciton_range)
             {
-                if(cell.Value2 == "Ensure neck mic goes back to equipment drawer.")
+                if((string)cell.Value2 == "Ensure neck mic goes back to equipment drawer.")
                 {
                     cell.Interior.Color = lightblue;
                     Excel.Range task_color_change = worksheet.get_Range("B" + cell.Row, "B" + cell.Row);
@@ -345,10 +350,44 @@ namespace ClassOpsLogCreator
         /**his method will merger our file with the already existing file in sorted order. 
          * 
          */ 
-        public void mergeMasterWithExisting(Excel.Worksheet worksheet1, Excel.Worksheet worksheet2)
+        public void mergeMasterWithExisting(Excel.Worksheet worksheet)
         {
 
+            //Open the exisitng excel file
+            existingMaster = new Excel.Application();
+            try
+            {
+                existingMasterWorkBook = existingMaster.Workbooks.Open(@"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\new.xlsx");
+                existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
+            }
+            catch(Exception)
+            {
+                existingMasterWorkBook.Close(0);
+                existingMaster.Quit();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
+                GC.Collect();
+            }
 
+            //Get the number of rowms from the worksheet and the existing worksheet
+            int sheetRowCount = worksheet.UsedRange.Rows.Count;
+            int lastRowDestination = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Row;
+
+            //Select the ranges from the worksheet and the existing work sheet we are going to work with. 
+            Excel.Range range = worksheet.get_Range("A2", "G" + sheetRowCount);
+            Excel.Range destinationRange = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 1), "G"
+                + (lastRowDestination + sheetRowCount - 1));
+
+            //Past the values from the current work sheet to the existing one
+            destinationRange.Value2 = range.Value2;
+
+            //Save
+            existingMasterWorkBook.SaveAs(Environment.GetFolderPath(
+            System.Environment.SpecialFolder.DesktopDirectory) + @"\new.xlsx");
+
+            //Close
+            existingMasterWorkBook.Close(0);
+            existingMaster.Quit();
+            System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
         }
 
 

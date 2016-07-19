@@ -68,9 +68,9 @@ namespace ClassOpsLogCreator
                 DerekWorkBook = DerekLog.Workbooks.Open(Form1.DEREK_LOG);
 
                 //Work in worksheet number 1
-                JeannineSheet1 = JeannineWorkBook.Sheets[1];
-                RaulSheet1 = RaulWorkBook.Sheets[1];
-                DerekSheet1 = DerekWorkBook.Sheets[1];
+                JeannineSheet1 = (Excel.Worksheet)JeannineWorkBook.Sheets[1];
+                RaulSheet1 = (Excel.Worksheet)RaulWorkBook.Sheets[1];
+                DerekSheet1 = (Excel.Worksheet)DerekWorkBook.Sheets[1];
             }
             catch (Exception)
             {
