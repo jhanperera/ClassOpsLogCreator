@@ -372,6 +372,7 @@ namespace ClassOpsLogCreator
             int sheetRowCount = worksheet.UsedRange.Rows.Count;
             int lastRowDestination = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Row;
 
+
             //Select the ranges from the worksheet and the existing work sheet we are going to work with. 
             Excel.Range range = worksheet.get_Range("A2", "G" + sheetRowCount);
             Excel.Range destinationRange = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 1), "G"
@@ -382,7 +383,7 @@ namespace ClassOpsLogCreator
 
             //Save
             existingMasterWorkBook.SaveAs(Environment.GetFolderPath(
-            System.Environment.SpecialFolder.DesktopDirectory) + @"\new.xlsx");
+            System.Environment.SpecialFolder.DesktopDirectory) + @"\TestOutput.xlsx");
 
             //Close
             existingMasterWorkBook.Close(0);
