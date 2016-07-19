@@ -149,7 +149,7 @@ namespace ClassOpsLogCreator
 
             int numberOfRows = 0;
             for (int i = array.GetUpperBound(0);
-                 i > array.GetLowerBound(0); i--)
+                 i >= array.GetLowerBound(0); i--)
             {
                 //This finds all number of columsn that happen today. 
                 if ((array.GetValue(i,1) != null) && (array.GetValue(i,1) is double ) 
@@ -169,14 +169,14 @@ namespace ClassOpsLogCreator
             DateTime endingTime = Convert.ToDateTime(this.endTime.ToString());
 
             //initialization of all the ranges that we are going to collect.
-            int start = this.numberOfRows(ExSheet, this.getLastDate()) -1;
             Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            Excel.Range rangeA = ExSheet.get_Range("A" + (last.Row - start), "A" + last.Row);
-            Excel.Range rangeB = ExSheet.get_Range("B" + (last.Row - start), "B" + last.Row);
-            Excel.Range rangeC = ExSheet.get_Range("C" + (last.Row - start), "C" + last.Row);
-            Excel.Range rangeD = ExSheet.get_Range("D" + (last.Row - start), "D" + last.Row);
-            Excel.Range rangeE = ExSheet.get_Range("E" + (last.Row - start), "E" + last.Row);
-            Excel.Range rangeF = ExSheet.get_Range("F" + (last.Row - start), "F" + last.Row);
+            int start = last.Row - this.numberOfRows(ExSheet, this.getLastDate()) + 1;
+            Excel.Range rangeA = ExSheet.get_Range("A" + start, "A" + last.Row);
+            Excel.Range rangeB = ExSheet.get_Range("B" + start, "B" + last.Row);
+            Excel.Range rangeC = ExSheet.get_Range("C" + start, "C" + last.Row);
+            Excel.Range rangeD = ExSheet.get_Range("D" + start, "D" + last.Row);
+            Excel.Range rangeE = ExSheet.get_Range("E" + start, "E" + last.Row);
+            Excel.Range rangeF = ExSheet.get_Range("F" + start, "F" + last.Row);
 
             //Convert all the ranges to a 1d array.
             System.Array arrayA = (System.Array)rangeA.Cells.Value2;
@@ -189,7 +189,7 @@ namespace ClassOpsLogCreator
             //Add all the values from the arrays to a 2d array of strings,
             string[,] values = new string[start + 1, 6];
             int index = 0;
-            for (int i = 0; i <= start; i ++)
+            for (int i = 0; i < arrayA.GetUpperBound(0); i ++)
             {
                 //Only going to get the events that are not Crestron Logouts
                 if ((arrayA.GetValue(i + 1, 1) != null) && (arrayC.GetValue(i + 1, 1) != null) && !(arrayA.GetValue(i + 1, 1).Equals("Crestron Logout")))
