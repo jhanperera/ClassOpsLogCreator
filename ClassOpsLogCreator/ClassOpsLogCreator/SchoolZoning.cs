@@ -29,6 +29,9 @@ namespace ClassOpsLogCreator
         /// </summary>
         public SchoolZoning()
         {
+            //Create the graph and add he edges acroding to the 
+            Graph schoolGraph = new Graph();
+
 
         }
     }
