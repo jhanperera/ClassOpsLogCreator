@@ -34,10 +34,10 @@ namespace ClassOpsLogCreator
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        /*public readonly string ROOM_SCHED = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsx";
-        public readonly string JEANNINE_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
-        public readonly string RAUL_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\Jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";*/
+        /*public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsx";
+        public readonly string JEANNINE_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";*/
 
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
@@ -181,7 +181,7 @@ namespace ClassOpsLogCreator
 
             //write all the data to the excel file
             //merg the all the data together into the master log
-            this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, classRoomTimeLogs.getLogOutArrayCount(),
+           this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, classRoomTimeLogs.getLogOutArrayCount(),
                                                                         JInstruction, DInstruction, RInstruction);
 
             //Saving and closing the new excel file
@@ -190,6 +190,14 @@ namespace ClassOpsLogCreator
             System.Environment.SpecialFolder.DesktopDirectory) + @"\ClassOps_Master.xlsx");
 
             //***********************END OF CREATE MASTER LOG FILES PT 2*******************
+
+
+            //************************CONCATINATE CURRENT LOG WITH EXISTING MASTER*********
+
+            //Take the current excel log file that is in sorted order and add it to the 
+            //existing log file that masi has provided.
+
+            //********************END CONCATINATE CURRENT LOG WITH EXISTING MASTER**********
 
             worker.ReportProgress(85);
 
@@ -333,6 +341,16 @@ namespace ClassOpsLogCreator
                 }
             }
         }
+
+        /**his method will merger our file with the already existing file in sorted order. 
+         * 
+         */ 
+        public void mergeMasterWithExisting(Excel.Worksheet worksheet1, Excel.Worksheet worksheet2)
+        {
+
+
+        }
+
 
         /**This method will format the work sheet to be easy to read and 
          * work with
