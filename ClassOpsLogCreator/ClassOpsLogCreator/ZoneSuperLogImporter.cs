@@ -144,20 +144,29 @@ namespace ClassOpsLogCreator
             int lastRow = ExSheet.UsedRange.Rows.Count;
             Excel.Range range = ExSheet.get_Range("B2", "B" + lastRow);
 
-            //Export to array 
-            System.Array array = (System.Array)range.Cells.Value2;
-
             int numberOfRows = 0;
-            for (int i = array.GetUpperBound(0);
-                 i >= array.GetLowerBound(0); i--)
+
+            if (range.Rows.Count != 1)
             {
-                //This finds all number of columsn that happen today. 
-                if ((array.GetValue(i,1) != null) && (array.GetValue(i,1) is double ) 
-                    && (DateTime.FromOADate(double.Parse((string)array.GetValue(i, 1).ToString())).ToString("M/dd/yy").Equals(date)))
+                //Export to array 
+                System.Array array = (System.Array)range.Cells.Value2;
+                
+                for (int i = array.GetUpperBound(0);
+                     i >= array.GetLowerBound(0); i--)
                 {
-                    numberOfRows++;
-                }   
+                    //This finds all number of columsn that happen today. 
+                    if ((array.GetValue(i, 1) != null) && (array.GetValue(i, 1) is double)
+                        && (DateTime.FromOADate(double.Parse((string)array.GetValue(i, 1).ToString())).ToString("M/dd/yy").Equals(date)))
+                    {
+                        numberOfRows++;
+                    }
+                }
             }
+            else
+            {
+                numberOfRows++;
+            }
+            
             return numberOfRows;
         }
 
@@ -167,6 +176,7 @@ namespace ClassOpsLogCreator
         {
             DateTime startingTime = Convert.ToDateTime(this.startTime.ToString());
             DateTime endingTime = Convert.ToDateTime(this.endTime.ToString());
+            
 
             //initialization of all the ranges that we are going to collect.
             Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
@@ -177,51 +187,82 @@ namespace ClassOpsLogCreator
             Excel.Range rangeD = ExSheet.get_Range("D" + start, "D" + last.Row);
             Excel.Range rangeE = ExSheet.get_Range("E" + start, "E" + last.Row);
             Excel.Range rangeF = ExSheet.get_Range("F" + start, "F" + last.Row);
-
-            //Convert all the ranges to a 1d array.
-            System.Array arrayA = (System.Array)rangeA.Cells.Value2;
-            System.Array arrayB = (System.Array)rangeB.Cells.Value2;
-            System.Array arrayC = (System.Array)rangeC.Cells.Value2;
-            System.Array arrayD = (System.Array)rangeD.Cells.Value2;
-            System.Array arrayE = (System.Array)rangeE.Cells.Value2;
-            System.Array arrayF = (System.Array)rangeF.Cells.Value2;
-
-            //Add all the values from the arrays to a 2d array of strings,
+            
             string[,] values = new string[start + 1, 6];
-            int index = 0;
-            for (int i = 0; i < arrayA.GetUpperBound(0); i ++)
-            {
-                //Only going to get the events that are not Crestron Logouts
-                if ((arrayA.GetValue(i + 1, 1) != null) && (arrayC.GetValue(i + 1, 1) != null) && !(arrayA.GetValue(i + 1, 1).Equals("Crestron Logout")))
-                {
-                    //Check if the event is between the selected times
-                    DateTime check = DateTime.ParseExact(arrayC.GetValue(i + 1, 1).ToString(), "HHmm", null);
-                    if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
-                    {
-                        //Taskt type
-                        values[index, 0] = arrayA.GetValue(i + 1, 1).ToString();
-                        //Date
-                        values[index, 1] = DateTime.FromOADate(double.Parse((string)arrayB.GetValue(i + 1, 1).ToString())).ToString("M/dd/yy");
-                        //Time
-                        values[index, 2] = arrayC.GetValue(i + 1, 1).ToString();
-                        //Building
-                        values[index, 3] = arrayD.GetValue(i + 1, 1).ToString();
-                        //Room
-                        values[index, 4] = arrayE.GetValue(i + 1, 1).ToString();
 
-                        //Comment, add a space if no comment is present
-                        if (arrayF.GetValue(i + 1, 1) == null)
+            //If the range is not just one element we make arrays out of them
+            if (rangeA.Rows.Count != 1)
+            {
+                //Convert all the ranges to a 1d array.
+                System.Array arrayA = (System.Array)rangeA.Cells.Value2;
+                System.Array arrayB = (System.Array)rangeB.Cells.Value2;
+                System.Array arrayC = (System.Array)rangeC.Cells.Value2;
+                System.Array arrayD = (System.Array)rangeD.Cells.Value2;
+                System.Array arrayE = (System.Array)rangeE.Cells.Value2;
+                System.Array arrayF = (System.Array)rangeF.Cells.Value2;
+
+                //Add all the values from the arrays to a 2d array of strings,
+                int index = 0;
+                for (int i = 0; i < arrayA.GetUpperBound(0); i++)
+                {
+                    //Only going to get the events that are not Crestron Logouts
+                    if ((arrayA.GetValue(i + 1, 1) != null) && (arrayC.GetValue(i + 1, 1) != null) && !(arrayA.GetValue(i + 1, 1).Equals("Crestron Logout")))
+                    {
+                        //Check if the event is between the selected times
+                        DateTime check = DateTime.ParseExact(arrayC.GetValue(i + 1, 1).ToString(), "HHmm", null);
+                        if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
                         {
-                            values[index, 5] = "";
+                            //Taskt type
+                            values[index, 0] = arrayA.GetValue(i + 1, 1).ToString();
+                            //Date
+                            values[index, 1] = DateTime.FromOADate(double.Parse((string)arrayB.GetValue(i + 1, 1).ToString())).ToString("M/dd/yy");
+                            //Time
+                            values[index, 2] = arrayC.GetValue(i + 1, 1).ToString();
+                            //Building
+                            values[index, 3] = arrayD.GetValue(i + 1, 1).ToString();
+                            //Room
+                            values[index, 4] = arrayE.GetValue(i + 1, 1).ToString();
+
+                            //Comment, add a space if no comment is present
+                            if (arrayF.GetValue(i + 1, 1) == null)
+                            {
+                                values[index, 5] = "";
+                            }
+                            else
+                            {
+                                values[index, 5] = arrayF.GetValue(i + 1, 1).ToString();
+                            }
+                            index++;
                         }
-                        else
-                        {
-                            values[index, 5] = arrayF.GetValue(i + 1, 1).ToString();
-                        }
-                        index++;
                     }
                 }
             }
+            //Else the array is one element so we add only that one element to output
+            else
+            {
+                values[0, 0] = rangeA.Cells.Value2.ToString();
+                //Date
+                values[0, 1] = DateTime.FromOADate(double.Parse((string)rangeB.Cells.Value2.ToString())).ToString("M/dd/yy");
+                //Time
+                values[0, 2] = rangeC.Cells.Value2.ToString();
+                //Building
+                values[0, 3] = rangeD.Cells.Value2.ToString();
+                //Room
+                values[0, 4] = rangeE.Cells.Value2.ToString();
+
+                //Comment, add a space if no comment is present
+                if (rangeF.Cells.Value2 == null)
+                {
+                    values[0, 5] = "";
+                }
+                else
+                {
+                    values[0, 5] = rangeF.Cells.Value2.ToString();
+                }
+
+            }
+            
+
             //Remove all null/empty rows
             string[,] temp = RemoveEmptyRows(values);
             return temp;
