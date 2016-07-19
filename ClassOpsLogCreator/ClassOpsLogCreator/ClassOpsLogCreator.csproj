@@ -89,7 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdjacencyList.cs" />
+    <Compile Include="Graph.cs" />
     <Compile Include="SchoolZoning.cs" />
     <Compile Include="LogoutLogImporter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

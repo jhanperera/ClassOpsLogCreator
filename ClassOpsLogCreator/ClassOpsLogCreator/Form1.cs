@@ -135,7 +135,7 @@ namespace ClassOpsLogCreator
             bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
             //Get work completed events
             bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
-            //Do all the wok 
+            //Do all the work
             if(bw.IsBusy != true)
             {
                 //Disable the button

@@ -10,8 +10,7 @@ namespace ClassOpsUnitTest
         [TestMethod]
         public void Create_and_check_One_Creation_SchoolZoning()
         {
-            ClassOpsLogCreator.SchoolZoning zones = new ClassOpsLogCreator.SchoolZoning();
-
+            
             //This should retrn true if we create one large zone
             //We should get 
             Assert.Fail();
