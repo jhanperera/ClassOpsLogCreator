@@ -199,16 +199,12 @@ namespace ClassOpsLogCreator
 
             //Saving and closing the new excel file
             logoutMaster.DisplayAlerts = false;
-            logoutMasterWorkBook.SaveAs(Environment.GetFolderPath(
-            System.Environment.SpecialFolder.DesktopDirectory) + @"\ClassOps_Master.xlsx");
 
             //***********************END OF CREATE MASTER LOG FILES PT 2*******************
 
 
             //************************CONCATINATE CURRENT LOG WITH EXISTING MASTER*********
 
-            //Take the current excel log file that is in sorted order and add it to the 
-            //existing log file that masi has provided.
             this.mergeMasterWithExisting(logoutMasterWorkSheet);
 
             //********************END CONCATINATE CURRENT LOG WITH EXISTING MASTER**********
@@ -278,7 +274,7 @@ namespace ClassOpsLogCreator
             //Enable the button again
             createBTN.Enabled = true;
 
-            //Open the final file
+            //Open the merged file
             if (workDone)
             {
                 Excel.Application excel = new Excel.Application();
@@ -348,40 +344,6 @@ namespace ClassOpsLogCreator
             //Sorting it by time column
             dynamic allDataRange = worksheet.UsedRange;
             allDataRange.Sort(allDataRange.Columns[3], Excel.XlSortOrder.xlAscending);
-
-            //Format the sheet to look correct
-            /*this.formatWorkSheet(worksheet);
-
-            Excel.Range last_row = worksheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-
-            //High light all the other/pickup/demo/setup rows
-            Color redBackground = Color.FromArgb(255, 199, 206);
-            Color redFont = Color.FromArgb(156, 0, 6);
-            Excel.Range task_range = worksheet.get_Range("B2", "B" + (last_row.Row));
-            foreach(Excel.Range cell in task_range)
-            {
-                if((string)cell.Value2 != "Crestron Logout")
-                {
-                    cell.Interior.Color = redBackground;
-                    cell.Font.Color = redFont;
-                    Excel.Range task_color_change = worksheet.get_Range("G" + cell.Row, "G" + cell.Row);
-                    task_color_change.Interior.Color = redBackground;
-                    task_color_change.Font.Color = redFont;
-                }
-            }
-
-            //High light all the cells that have lapel mics
-            Color lightblue = Color.FromArgb(225, 246, 255);
-            Excel.Range instuciton_range = worksheet.get_Range("G2", "G" + (last_row.Row));
-            foreach (Excel.Range cell in instuciton_range)
-            {
-                if((string)cell.Value2 == "Ensure neck mic goes back to equipment drawer.")
-                {
-                    cell.Interior.Color = lightblue;
-                    Excel.Range task_color_change = worksheet.get_Range("B" + cell.Row, "B" + cell.Row);
-                    task_color_change.Interior.Color = lightblue;
-                }
-            }*/
         }
 
         /// <summary>
@@ -457,94 +419,9 @@ namespace ClassOpsLogCreator
 
             //Save
             //SAVE TO DESKTOP ATM! temp test
+            existingMaster.DisplayAlerts = false;
             existingMasterWorkBook.SaveAs(Environment.GetFolderPath(
             System.Environment.SpecialFolder.DesktopDirectory) + @"\TestOutput.xlsx");   
-        }
-
-
-        /// <summary>
-        /// This method will format the work sheet to be easy to read and  work with
-        /// </summary>
-        /// <param name="worksheet"></param>
-        public void formatWorkSheet(Excel.Worksheet worksheet)
-        {
-
-            //Some color valiables 
-            Color yellow = Color.FromArgb(255, 235, 156);
-            Color brown = Color.FromArgb(156, 101, 0);
-
-            //Set the headers range
-            Excel.Range staffNameRange = worksheet.get_Range("A1", "A1");
-            Excel.Range taskTypeRange = worksheet.get_Range("B1", "B1");
-            Excel.Range dateRange = worksheet.get_Range("C1", "C1");
-            Excel.Range timeRange = worksheet.get_Range("D1", "D1");
-            Excel.Range buildingRange = worksheet.get_Range("E1", "E1");
-            Excel.Range roomRange = worksheet.get_Range("F1", "F1"); 
-            Excel.Range instructionsRange = worksheet.get_Range("G1", "G1");
-            Excel.Range initialRange = worksheet.get_Range("H1", "H1");
-
-            //Add the headers and format the cells
-            //Staff Name header
-            staffNameRange.ColumnWidth = 11;
-            staffNameRange.Interior.Color = yellow;
-            staffNameRange.Font.Color = brown;
-            staffNameRange.Font.Bold = true;
-            staffNameRange.Value2 = "Staff Name";
-
-            //Task Type header
-            taskTypeRange.ColumnWidth = 22;
-            taskTypeRange.Interior.Color = yellow;
-            taskTypeRange.Font.Color = brown;
-            taskTypeRange.Font.Bold = true;
-            taskTypeRange.Value2 = "Task Type";
-
-            //Date header
-            dateRange.ColumnWidth = 10;
-            dateRange.Interior.Color = yellow;
-            dateRange.Font.Color = brown;
-            dateRange.Font.Bold = true;
-            dateRange.Value2 = "Date";
-
-            //Time header  
-            timeRange.ColumnWidth = 7;
-            timeRange.Interior.Color = yellow;
-            timeRange.Font.Color = brown;
-            timeRange.Font.Bold = true;
-            timeRange.Value2 = "Time";
-
-            //Building header
-            buildingRange.ColumnWidth = 14;
-            buildingRange.Interior.Color = yellow;
-            buildingRange.Font.Color = brown;
-            buildingRange.Font.Bold = true;
-            buildingRange.Value2 = "Building";
-
-            //Room header
-            roomRange.ColumnWidth = 11;
-            roomRange.Interior.Color = yellow;
-            roomRange.Font.Color = brown;
-            roomRange.Font.Bold = true;
-            roomRange.Value2 = "Room";
-
-            //Instructions header;
-            instructionsRange.ColumnWidth = 48;
-            instructionsRange.Interior.Color = yellow;
-            instructionsRange.Font.Color = brown;
-            instructionsRange.Font.Bold = true;
-            instructionsRange.Value2 = "Special Instructions/Comments";
-
-            //Initial header
-            initialRange.ColumnWidth = 11;
-            initialRange.Interior.Color = yellow;
-            initialRange.Font.Color = brown;
-            initialRange.Font.Bold = true;
-            initialRange.Value2 = "Initial Here";
-
-            //outline around all boxes 
-            Excel.Range fullRange = worksheet.UsedRange;
-            fullRange.Borders.Color = System.Drawing.Color.Black.ToArgb();
-            fullRange.WrapText = true;
-            fullRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
         }
 
         /// <summary>
