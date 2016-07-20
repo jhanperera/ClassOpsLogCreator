@@ -131,6 +131,34 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
+        /// This method will return all the buildinds adjacent to 
+        /// the building in question
+        /// </summary>
+        /// <param name="building"></param>
+        /// <returns></returns>
+        public List<string> adjacentTo(string Building)
+        {
+            //Save the building ID and get the list read
+            int buildingID;
+            List<string> adjacentto = new List<string>();
+
+            //Get the building ID
+            buildingDictionary.TryGetValue(Building, out buildingID);
+
+            //Look through the array to see what buildings are connected
+            for (int i = 0; i < this.vertexCount; i++)
+            {
+                //Connected then add it the list.
+                if (this.adjacecnyMatrix[buildingID, i] == true)
+                {
+                    adjacentto.Add(buildingDictionary.FirstOrDefault(x => x.Value == i).Key);
+                }
+            }
+            //Return the list
+            return adjacentto;
+        }
+
+        /// <summary>
         /// This method will create our Dictionary of buildinds and 
         /// a corresponding integer which represents a spot in the 
         /// matrix

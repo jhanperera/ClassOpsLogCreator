@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ClassOpsLogCreator;
 
@@ -61,5 +63,43 @@ namespace ClassOpsUnitTest
             Assert.AreEqual("BCS", check);
         }
 
+        [TestMethod]
+        public void Create_and_Test_AdjacentTo()
+        {
+            Graph g = new Graph();
+            List<string> check1 = new List<string>();
+            check1.Add("ELC");
+            List<string> check2 = new List<string>();
+            check2.Add("BCS");
+
+            g.addEdge("BCS", "ELC");   
+            List<string> weGet1 = g.adjacentTo("BCS");
+            List<string> weGet2 = g.adjacentTo("ELC");
+
+            //We should get
+            CollectionAssert.AreEqual(check1, weGet1);
+            CollectionAssert.AreEqual(check2, weGet2);
+        }
+
+
+        [TestMethod]
+        public void Create_SchoolZoning_And_Check()
+        {
+            SchoolZoning sz = new SchoolZoning();
+
+            int check = sz.getNumberOfBuilding();
+            //We should get 
+            Assert.AreEqual((int)35, (int)check);
+        }
+
+        [TestMethod]
+        public void Create_SchoolZoning_And_Check_Connections()
+        {
+            SchoolZoning sz = new SchoolZoning();
+
+            int check = sz.getNumberOfConnections();
+            //We should get 
+            Assert.AreEqual((int)81, (int)check);
+        }
     }
 }

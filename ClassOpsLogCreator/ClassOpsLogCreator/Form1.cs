@@ -30,7 +30,8 @@ namespace ClassOpsLogCreator
         /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";*/
+        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\PW\new.xlsx";*/
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
@@ -201,15 +202,13 @@ namespace ClassOpsLogCreator
             logoutMaster.DisplayAlerts = false;
 
             //***********************END OF CREATE MASTER LOG FILES PT 2*******************
-
+            worker.ReportProgress(85);
 
             //************************CONCATINATE CURRENT LOG WITH EXISTING MASTER*********
 
             this.mergeMasterWithExisting(logoutMasterWorkSheet);
 
             //********************END CONCATINATE CURRENT LOG WITH EXISTING MASTER**********
-
-            worker.ReportProgress(85);
 
             //Gracefully close all instances
             Quit();
@@ -278,8 +277,7 @@ namespace ClassOpsLogCreator
             if (workDone)
             {
                 Excel.Application excel = new Excel.Application();
-                Excel.Workbook wb = excel.Workbooks.Open(Environment.GetFolderPath(
-                System.Environment.SpecialFolder.DesktopDirectory) + @"\TestOutput.xlsx");
+                Excel.Workbook wb = excel.Workbooks.Open(EXISTING_MASTER_LOG);
                 excel.Visible = true;
             }
         }
@@ -418,10 +416,8 @@ namespace ClassOpsLogCreator
             }
 
             //Save
-            //SAVE TO DESKTOP ATM! temp test
             existingMaster.DisplayAlerts = false;
-            existingMasterWorkBook.SaveAs(Environment.GetFolderPath(
-            System.Environment.SpecialFolder.DesktopDirectory) + @"\TestOutput.xlsx");   
+            existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);   
         }
 
         /// <summary>
