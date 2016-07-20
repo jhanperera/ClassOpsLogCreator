@@ -188,7 +188,7 @@ namespace ClassOpsLogCreator
             Excel.Range rangeE = ExSheet.get_Range("E" + start, "E" + last.Row);
             Excel.Range rangeF = ExSheet.get_Range("F" + start, "F" + last.Row);
             
-            string[,] values = new string[start + 1, 6];
+            string[,] values = new string[(last.Row - start) + 1, 6];
 
             //If the range is not just one element we make arrays out of them
             if (rangeA.Rows.Count != 1)
@@ -240,28 +240,30 @@ namespace ClassOpsLogCreator
             //Else the array is one element so we add only that one element to output
             else
             {
-                values[0, 0] = rangeA.Cells.Value2.ToString();
-                //Date
-                values[0, 1] = DateTime.FromOADate(double.Parse((string)rangeB.Cells.Value2.ToString())).ToString("M/dd/yy");
-                //Time
-                values[0, 2] = rangeC.Cells.Value2.ToString();
-                //Building
-                values[0, 3] = rangeD.Cells.Value2.ToString();
-                //Room
-                values[0, 4] = rangeE.Cells.Value2.ToString();
-
-                //Comment, add a space if no comment is present
-                if (rangeF.Cells.Value2 == null)
+                DateTime check = DateTime.ParseExact(rangeC.Cells.Value2.ToString(), "HHmm", null);
+                if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
                 {
-                    values[0, 5] = "";
-                }
-                else
-                {
-                    values[0, 5] = rangeF.Cells.Value2.ToString();
-                }
+                    values[0, 0] = rangeA.Cells.Value2.ToString();
+                    //Date
+                    values[0, 1] = DateTime.FromOADate(double.Parse((string)rangeB.Cells.Value2.ToString())).ToString("M/dd/yy");
+                    //Time
+                    values[0, 2] = rangeC.Cells.Value2.ToString();
+                    //Building
+                    values[0, 3] = rangeD.Cells.Value2.ToString();
+                    //Room
+                    values[0, 4] = rangeE.Cells.Value2.ToString();
 
+                    //Comment, add a space if no comment is present
+                    if (rangeF.Cells.Value2 == null)
+                    {
+                        values[0, 5] = "";
+                    }
+                    else
+                    {
+                        values[0, 5] = rangeF.Cells.Value2.ToString();
+                    }
+                }
             }
-            
 
             //Remove all null/empty rows
             string[,] temp = RemoveEmptyRows(values);
