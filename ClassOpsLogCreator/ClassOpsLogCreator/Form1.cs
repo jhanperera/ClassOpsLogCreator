@@ -17,7 +17,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 /// All output is genereated from here and main features are 
 /// all called here. 
 ///
-/// Class Version: 0.1.0.0 - BETA - 7192016
+/// Class Version: 0.1.0.3 - BETA - 7202016
 /// 
 /// System Version: 0.1.0.0 - BETA - 7152016
 /// 
@@ -53,7 +53,9 @@ namespace ClassOpsLogCreator
         private string startTimeFromCombo = null;
         private string endTimeFromCombo = null;
 
-        /** Constructor for the system. (Changes here should be confirmed with everyone first) */
+        /// <summary>
+        /// Constructor for the system. (Changes here should be confirmed with everyone first)
+        /// </summary>
         public LogCreator()
         {
             InitializeComponent();
@@ -102,8 +104,11 @@ namespace ClassOpsLogCreator
             this.numberOfShiftsCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        /** When the user clicks the "Create" Button this is what will happen
-         */
+        /// <summary>
+        /// When the user clicks the "Create" Button this is what will happen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void createBTN_Click(object sender, EventArgs e)
         {
             //Get the times set by the combo box
@@ -147,12 +152,13 @@ namespace ClassOpsLogCreator
                 //Run the work
                 bw.RunWorkerAsync();
             }
-            //***********************DEGUB CODE***************************************/
-            //***********************END OF DEGUB CODE*********************************/
         }
 
-        /** Al the work is done in this method
-         */
+        /// <summary>
+        /// Al the work is done in this method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Bw_DoWork(object sender, DoWorkEventArgs e)
         {
             //Sender to send info to progressbar
@@ -215,17 +221,23 @@ namespace ClassOpsLogCreator
             return;
         }
 
-        /** Update the progress bar 
-         */
+        /// <summary>
+        /// Update the progress bar 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //This is called on GUI/main thread, so you can access the controls properly
             this.workProgressBar.Value = e.ProgressPercentage;
         }
 
-        /** This event handler deals with the results of the
-         *  background operation.
-         */
+        /// <summary>
+        /// This event handler deals with the results of the
+        /// background operation.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             // First, handle the case where an exception was thrown.
@@ -265,12 +277,10 @@ namespace ClassOpsLogCreator
 
         /// <summary>
         ///  ALL HELPER METHODS GO HERE BELLOW HERE! 
+        ///  
+        /// This method will write our arrays to the excel file.
+        /// This method generates the Excel output via the arrays
         /// </summary>
-
-        /**This method will write our arrays to the excel file.
-         * 
-         * This method generates the Excel output via the arrays
-         */
         private void WriteLogOutArray(Excel.Worksheet worksheet, string[,] values, int index, 
                                             string[,] array1, string[,] array2, string[,] array3)
         {
@@ -322,8 +332,8 @@ namespace ClassOpsLogCreator
                 ace017CloseRange.Value2 = ace017String;
             }
 
-                //Sorting it by time column
-                dynamic allDataRange = worksheet.UsedRange;
+            //Sorting it by time column
+            dynamic allDataRange = worksheet.UsedRange;
             allDataRange.Sort(allDataRange.Columns[3], Excel.XlSortOrder.xlAscending);
 
             //Format the sheet to look correct
@@ -361,9 +371,11 @@ namespace ClassOpsLogCreator
             }
         }
 
-        /**his method will merger our file with the already existing file in sorted order. 
-         * 
-         */ 
+        /// <summary>
+        /// This method will merger our file with the already existing file in sorted order. 
+        /// </summary>
+        /// <param name="worksheet"></param>
+
         public void mergeMasterWithExisting(Excel.Worksheet worksheet)
         {
 
@@ -406,9 +418,10 @@ namespace ClassOpsLogCreator
         }
 
 
-        /**This method will format the work sheet to be easy to read and 
-         * work with
-         */
+        /// <summary>
+        /// This method will format the work sheet to be easy to read and  work with
+        /// </summary>
+        /// <param name="worksheet"></param>
         public void formatWorkSheet(Excel.Worksheet worksheet)
         {
 
@@ -422,7 +435,7 @@ namespace ClassOpsLogCreator
             Excel.Range dateRange = worksheet.get_Range("C1", "C1");
             Excel.Range timeRange = worksheet.get_Range("D1", "D1");
             Excel.Range buildingRange = worksheet.get_Range("E1", "E1");
-            Excel.Range roomRange = worksheet.get_Range("F1", "F1");
+            Excel.Range roomRange = worksheet.get_Range("F1", "F1"); 
             Excel.Range instructionsRange = worksheet.get_Range("G1", "G1");
             Excel.Range initialRange = worksheet.get_Range("H1", "H1");
 
@@ -489,10 +502,10 @@ namespace ClassOpsLogCreator
             fullRange.WrapText = true;
             fullRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
         }
-        
-        /** Close all open instances of Excel and Garbage collects. 
-         * 
-         */
+
+        /// <summary>
+        /// Close all open instances of Excel and Garbage collects.
+        /// </summary>
         private void Quit()
         {            
             if(logoutMasterWorkBook != null)
