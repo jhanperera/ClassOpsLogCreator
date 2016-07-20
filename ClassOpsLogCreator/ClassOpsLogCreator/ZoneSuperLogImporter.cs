@@ -10,7 +10,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 /// and sort the most important components. This will output only 
 /// demos/setups/picksups and any other speical taskt.
 ///
-/// Class Version: 0.1.0.0 - BETA - 7152016
+/// Class Version: 0.1.0.2 - BETA - 7202016
 /// 
 /// System Version: 0.1.0.0 - BETA - 7152016
 /// 
@@ -164,7 +164,11 @@ namespace ClassOpsLogCreator
             }
             else
             {
-                numberOfRows++;
+                if ((range.Value2 != null) && (range.Value2 is double)
+                        && (DateTime.FromOADate(double.Parse((string)range.Value2.ToString())).ToString("M/dd/yy").Equals(date)))
+                {
+                    numberOfRows++;
+                }
             }
             
             return numberOfRows;
@@ -177,7 +181,6 @@ namespace ClassOpsLogCreator
             DateTime startingTime = Convert.ToDateTime(this.startTime.ToString());
             DateTime endingTime = Convert.ToDateTime(this.endTime.ToString());
             
-
             //initialization of all the ranges that we are going to collect.
             Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
             int start = last.Row - this.numberOfRows(ExSheet, this.getLastDate()) + 1;
@@ -191,7 +194,8 @@ namespace ClassOpsLogCreator
             string[,] values = new string[(last.Row - start) + 1, 6];
 
             //If the range is not just one element we make arrays out of them
-            if (rangeA.Rows.Count != 1)
+            //And get upper bound is greater than 0 (Avoid the array out of bounds)
+            if (rangeA.Rows.Count != 1 && values.GetUpperBound(0) > 0)
             {
                 //Convert all the ranges to a 1d array.
                 System.Array arrayA = (System.Array)rangeA.Cells.Value2;
@@ -238,7 +242,8 @@ namespace ClassOpsLogCreator
                 }
             }
             //Else the array is one element so we add only that one element to output
-            else
+            //get upper bound is greater than 0 (Avoid the array out of bounds)
+            else if (values.GetUpperBound(0) > 0)
             {
                 DateTime check = DateTime.ParseExact(rangeC.Cells.Value2.ToString(), "HHmm", null);
                 if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
