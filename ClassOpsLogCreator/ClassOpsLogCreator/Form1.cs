@@ -27,17 +27,18 @@ namespace ClassOpsLogCreator
     public partial class LogCreator : Form
     {
         //Public readonly attribues
-        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
+        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsx";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";*/
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        /*public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsx";
+        public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsx";
         public readonly string JEANNINE_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";*/
+        public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
+        public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\new.xlsx";
 
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
@@ -52,6 +53,8 @@ namespace ClassOpsLogCreator
 
         private string startTimeFromCombo = null;
         private string endTimeFromCombo = null;
+
+        private Boolean workDone = false;
 
         /// <summary>
         /// Constructor for the system. (Changes here should be confirmed with everyone first)
@@ -206,7 +209,7 @@ namespace ClassOpsLogCreator
 
             //Take the current excel log file that is in sorted order and add it to the 
             //existing log file that masi has provided.
-            //this.mergeMasterWithExisting(logoutMasterWorkSheet);
+            this.mergeMasterWithExisting(logoutMasterWorkSheet);
 
             //********************END CONCATINATE CURRENT LOG WITH EXISTING MASTER**********
 
@@ -269,10 +272,20 @@ namespace ClassOpsLogCreator
                 // succeeded.
                 textBox1.Text = Environment.GetFolderPath(
                          System.Environment.SpecialFolder.DesktopDirectory).ToString();
+                workDone = true;
                 Quit();
             }
             //Enable the button again
             createBTN.Enabled = true;
+
+            //Open the final file
+            if (workDone)
+            {
+                Excel.Application excel = new Excel.Application();
+                Excel.Workbook wb = excel.Workbooks.Open(Environment.GetFolderPath(
+                System.Environment.SpecialFolder.DesktopDirectory) + @"\TestOutput.xlsx");
+                excel.Visible = true;
+            }
         }
 
         /// <summary>
@@ -337,7 +350,7 @@ namespace ClassOpsLogCreator
             allDataRange.Sort(allDataRange.Columns[3], Excel.XlSortOrder.xlAscending);
 
             //Format the sheet to look correct
-            this.formatWorkSheet(worksheet);
+            /*this.formatWorkSheet(worksheet);
 
             Excel.Range last_row = worksheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
 
@@ -368,53 +381,84 @@ namespace ClassOpsLogCreator
                     Excel.Range task_color_change = worksheet.get_Range("B" + cell.Row, "B" + cell.Row);
                     task_color_change.Interior.Color = lightblue;
                 }
-            }
+            }*/
         }
 
         /// <summary>
         /// This method will merger our file with the already existing file in sorted order. 
         /// </summary>
         /// <param name="worksheet"></param>
-
         public void mergeMasterWithExisting(Excel.Worksheet worksheet)
         {
 
             //Open the exisitng excel file
             existingMaster = new Excel.Application();
+            existingMaster.Visible = false;
             try
             {
-                existingMasterWorkBook = existingMaster.Workbooks.Open(@"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\new.xlsx");
+                existingMasterWorkBook = existingMaster.Workbooks.Open(EXISTING_MASTER_LOG);
                 existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
             }
             catch(Exception)
             {
-                existingMasterWorkBook.Close(0);
-                existingMaster.Quit();
-                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
-                GC.Collect();
+                Quit();
+                return;
             }
 
             //Get the number of rowms from the worksheet and the existing worksheet
             int sheetRowCount = worksheet.UsedRange.Rows.Count;
             int lastRowDestination = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Row;
 
-
             //Select the ranges from the worksheet and the existing work sheet we are going to work with. 
             Excel.Range range = worksheet.get_Range("A2", "G" + sheetRowCount);
-            Excel.Range destinationRange = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 1), "G"
-                + (lastRowDestination + sheetRowCount - 1));
+            Excel.Range dividerRange = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 1)).EntireRow;
+            Excel.Range destinationRange = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 2), "G"
+                + (lastRowDestination + sheetRowCount));
+
+            //Put red accross the divider
+            Color darkRed = Color.FromArgb(204, 0, 51);
+            dividerRange.Interior.Color = darkRed;
 
             //Past the values from the current work sheet to the existing one
             destinationRange.Value2 = range.Value2;
 
-            //Save
-            existingMasterWorkBook.SaveAs(Environment.GetFolderPath(
-            System.Environment.SpecialFolder.DesktopDirectory) + @"\TestOutput.xlsx");
+            //Get the new last row
+            Excel.Range last_row = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
 
-            //Close
-            existingMasterWorkBook.Close(0);
-            existingMaster.Quit();
-            System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
+            //High light all the other/pickup/demo/setup rows
+            Color redBackground = Color.FromArgb(255, 199, 206);
+            Color redFont = Color.FromArgb(156, 0, 6);
+            Excel.Range task_range = existingMasterWorkSheet.get_Range("B" + (lastRowDestination + 2), "B" + (last_row.Row));
+            task_range.WrapText = true;
+            foreach (Excel.Range cell in task_range)
+            {
+                if ((string)cell.Value2 != "Crestron Logout")
+                {
+                    cell.Interior.Color = redBackground;
+                    cell.Font.Color = redFont;
+                    Excel.Range task_color_change = existingMasterWorkSheet.get_Range("G" + cell.Row, "G" + cell.Row);
+                    task_color_change.Interior.Color = redBackground;
+                    task_color_change.Font.Color = redFont;
+                }
+            }
+
+            //High light all the cells that have lapel mics
+            Color lightblue = Color.FromArgb(225, 246, 255);
+            Excel.Range instuciton_range = existingMasterWorkSheet.get_Range("G" + (lastRowDestination + 2), "G" + (last_row.Row));
+            foreach (Excel.Range cell in instuciton_range)
+            {
+                if ((string)cell.Value2 == "Ensure neck mic goes back to equipment drawer.")
+                {
+                    cell.Interior.Color = lightblue;
+                    Excel.Range task_color_change = existingMasterWorkSheet.get_Range("B" + cell.Row, "B" + cell.Row);
+                    task_color_change.Interior.Color = lightblue;
+                }
+            }
+
+            //Save
+            //SAVE TO DESKTOP ATM! temp test
+            existingMasterWorkBook.SaveAs(Environment.GetFolderPath(
+            System.Environment.SpecialFolder.DesktopDirectory) + @"\TestOutput.xlsx");   
         }
 
 
@@ -516,6 +560,16 @@ namespace ClassOpsLogCreator
                 logoutMaster = null;
                 logoutMasterWorkBook = null;
                 logoutMasterWorkSheet = null;
+            }
+
+            if(existingMasterWorkBook != null)
+            {
+                existingMasterWorkBook.Close(0);
+                existingMaster.Quit();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
+                existingMaster = null;
+                existingMasterWorkBook = null;
+                existingMasterWorkSheet = null;
             }
             GC.Collect();  
         }
