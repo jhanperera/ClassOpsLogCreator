@@ -34,10 +34,10 @@ namespace ClassOpsLogCreator
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        /*public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsx";
-        public readonly string JEANNINE_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
-        public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";*/
+        /*public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsx";
+        public readonly string JEANNINE_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";*/
 
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
@@ -284,6 +284,8 @@ namespace ClassOpsLogCreator
             Excel.Range logRange2 = worksheet.get_Range("B" + (array1.GetLength(0) + index + 2), "G" + (array1.GetLength(0) + array2.GetLength(0) + index + 1));
             Excel.Range logRange3 = worksheet.get_Range("B" + (array1.GetLength(0) + array2.GetLength(0) + index + 2), "G" +
                                                                 (array1.GetLength(0) + array2.GetLength(0) + array3.GetLength(0) + index + 1));
+            Excel.Range ace017CloseRange = worksheet.get_Range("B" + (array1.GetLength(0) + array2.GetLength(0) + array3.GetLength(0) + index + 2),
+                                                                "G" + (array1.GetLength(0) + array2.GetLength(0) + array3.GetLength(0) + index + 2));
 
             //Formatt for easy to read for "Crestron logout"
             taskType_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -308,8 +310,20 @@ namespace ClassOpsLogCreator
             logRange2.Value2 = array2;
             logRange3.Value2 = array3;
 
-            //Sorting it by time column
-            dynamic allDataRange = worksheet.UsedRange;
+            //Add ACE017 to the log if we have are in the time peiod
+            DateTime startingTime = Convert.ToDateTime(this.startTimeFromCombo.ToString());
+            DateTime endingTime = Convert.ToDateTime(this.endTimeFromCombo.ToString());
+            DateTime check = DateTime.ParseExact("1600", "HHmm", null);
+            if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
+            {
+                string[] ace017String = {"CLOSE ACE017", today.ToString("M/d/yy"), "1600", "ACE", "017",
+                    @"Keys are in ACE 015 storeroom. Make sure all workstations have a keyboard and a mouse, 
+                    shut down the lights and lock the door.If the room is already locked please report on your log."};
+                ace017CloseRange.Value2 = ace017String;
+            }
+
+                //Sorting it by time column
+                dynamic allDataRange = worksheet.UsedRange;
             allDataRange.Sort(allDataRange.Columns[3], Excel.XlSortOrder.xlAscending);
 
             //Format the sheet to look correct

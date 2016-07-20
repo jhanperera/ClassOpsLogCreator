@@ -24,7 +24,9 @@ namespace ClassOpsLogCreator
 {
     class LogoutLogImporter
     {
-        // Private attributes
+        /// <summary>
+        /// Private Attributes
+        /// </summary>
         private LogCreator form1 = null;
  
         private static Excel.Application roomSched = null;
@@ -42,8 +44,12 @@ namespace ClassOpsLogCreator
         private string startTime = null;
         private string endTime = null;
 
-        /** Constructor that will create the arrays for the main UI to use
-         */
+        /// <summary>
+        /// Constructor that will create the arrays for the main UI to use
+        /// </summary>
+        /// <param name="Form1"></param>
+        /// <param name="StartTime"></param>
+        /// <param name="EndTime"></param>
         public LogoutLogImporter(LogCreator Form1, string StartTime, string EndTime)
         {
             this.form1 = Form1;
@@ -128,12 +134,15 @@ namespace ClassOpsLogCreator
             return this.masterArrayCounter;
         }
         
-        /**A Helper converter that will take our "values" and convert them into a string array. 
-         * String parsing IS requires for now until we make it smart. 
-         * 
-         * A string array is returned by with white spaces.
-         * flag = 0 means no null/white space, 1 means leave white space and null and we work with doubles
-         **/
+        /// <summary>
+        /// /**A Helper converter that will take our "values" and convert them into a string array. 
+        /// String parsing IS requires for now until we make it smart.
+        /// A string array is returned by with white spaces.
+        /// flag = 0 means no null/white space, 1 means leave white space and null and we work with doubles
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="flag"></param>
+        /// <returns></returns>
         private string[] ConvertToStringArray(System.Array values, int flag)
         {
             string[] newArray = new string[values.Length];
@@ -169,9 +178,13 @@ namespace ClassOpsLogCreator
             return newArray = newArray.Where(n => n != null).ToArray();
         }
 
-        /** This method will create a 2D array of all the classes and time to be logged out 
-         *  Between the times of 4PM and 10PM
-         */
+        /// <summary>
+        /// This method will create a 2D array of all the classes and time to be logged out 
+        /// Between the times of 4PM and 10PM
+        /// </summary>
+        /// <param name="classArray"></param>
+        /// <param name="timeArray"></param>
+        /// <returns></returns>
         private string[,] convertToString2DArray(string[] classArray, string[] timeArray)
         {
             masterArray = new string[classArray.GetUpperBound(0), 4];
@@ -206,6 +219,10 @@ namespace ClassOpsLogCreator
                         masterArray[index, 1] = "OSG";
                         masterArray[index, 2] = token[1];
                     }
+                    else if(token[0].Equals("MC") && token[1].Equals("157A"))
+                    {
+                        masterArray[index, 3] = "Door code 11012*";
+                    }
                     else
                     {
                         masterArray[index, 2] = token[1];
@@ -227,8 +244,12 @@ namespace ClassOpsLogCreator
             return masterArray;
         }
 
-        /** A  helper method to get the last time in our time array
-         */
+        /// <summary>
+        /// A  helper method to get the last time in our time array
+        /// </summary>
+        /// <param name="timearray"></param>
+        /// <param name="eventarray"></param>
+        /// <returns></returns>
         private string[] extract_last_time(string[] timearray, string[] eventarray)
         {
             string[] newArray = new string[eventarray.GetUpperBound(0) + 1];
@@ -276,9 +297,9 @@ namespace ClassOpsLogCreator
             return newArray = newArray.Where(n => n != null).ToArray();
         }
 
-        /** Close all open instances of Excel and Garbage collects. 
-         * 
-         */
+        /// <summary>
+        /// Close all open instances of Excel and Garbage collects. 
+        /// </summary>
         public void Quit()
         {
             if (roomWorkBook != null)

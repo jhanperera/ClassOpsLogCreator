@@ -19,7 +19,9 @@ namespace ClassOpsLogCreator
 {
     public class ZoneSuperLogImporter
     {
-        //Private attributes
+         /// <summary>
+         /// Private attributes
+        /// </summary>
         private LogCreator Form1 = null;
 
         private static Excel.Application JeannineLog = null;
@@ -124,19 +126,22 @@ namespace ClassOpsLogCreator
 
         /// <summary>
         /// All Private Modifiers are bellow
+        /// 
+        /// This method will return the date from us. (Does not reply on logs anymore)
         /// </summary>
-
-        /* This method will extract the date for today
-         */
         private string dateFromLogs(Excel.Worksheet ExSheet)
         {
             string dateToday = DateTime.Today.ToString("M/dd/yy");
             return dateToday;
         }
 
-        /* This method retun how many entries we need to copy over
-         * We start from the bottom of the excel sheet and look for the first null, or when date != the date in cell
-         */
+        /// <summary>
+        /// This method retun how many entries we need to copy over
+        /// We start from the bottom of the excel sheet and look for the first null, or when date != the date in cell
+        /// </summary>
+        /// <param name="ExSheet"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
         private int numberOfRows(Excel.Worksheet ExSheet, string date)
         {
 
@@ -164,18 +169,21 @@ namespace ClassOpsLogCreator
             }
             else
             {
+                //We just have one element in the array so we check if its in the time period.
                 if ((range.Value2 != null) && (range.Value2 is double)
                         && (DateTime.FromOADate(double.Parse((string)range.Value2.ToString())).ToString("M/dd/yy").Equals(date)))
                 {
                     numberOfRows++;
                 }
-            }
-            
+            }   
             return numberOfRows;
         }
 
-        /* This method creates a 2d array of all the events for today for the master log
-         */
+        /// <summary>
+        ///  This method creates a 2d array of all the events for today for the master log
+        /// </summary>
+        /// <param name="ExSheet"></param>
+        /// <returns></returns>
         private string[,] ConvertToStringArray2D(Excel.Worksheet ExSheet)
         {
             DateTime startingTime = Convert.ToDateTime(this.startTime.ToString());
@@ -275,8 +283,11 @@ namespace ClassOpsLogCreator
             return temp;
         }
 
-        /* This method will remove all empty rows/null rows from the master logs
-         */
+        /// <summary>
+        /// This method will remove all empty rows/null rows from the master logs
+        /// </summary>
+        /// <param name="strs"></param>
+        /// <returns></returns>
         public static string[,] RemoveEmptyRows(string[,] strs)
         {
             int length1 = strs.GetLength(0);
@@ -319,9 +330,9 @@ namespace ClassOpsLogCreator
             return strs2;
         }
 
-        /* Close all open instances of Excel and Garbage collects. 
-         * 
-         */
+        /// <summary>
+        /// /* Close all open instances of Excel and Garbage collects. 
+        /// </summary>
         public void Quit()
         {
             if (JeannineWorkBook != null)

@@ -120,13 +120,20 @@ namespace ClassOpsLogCreator
             };
         }
 
-        //Return the list of crestron absent classrooms
+        /// <summary>
+        /// Return the list of crestron absent classrooms
+        /// </summary>
+        /// <returns></returns>
         public string[] CrestronAbsentClassList()
         {
             return this.ClassArrayWithNoCrestron;
         }
 
-        //Is this class room in the absent list?
+        /// <summary>
+        /// Is this class room in the absent list?
+        /// </summary>
+        /// <param name="classroom"></param>
+        /// <returns></returns>
         public Boolean hasCrestron(string classroom)
         {
             //trim the string
@@ -138,7 +145,11 @@ namespace ClassOpsLogCreator
             return !(this.ClassArrayWithNoCrestron.Contains(classroom)) && (this.ClassArray.Contains(classroom));
         }
 
-        //Does this class have a lapel mic?
+        /// <summary>
+        /// Does this class have a lapel mic?
+        /// </summary>
+        /// <param name="classroom"></param>
+        /// <returns></returns>
         public Boolean hasLapelMic(string classroom)
         {
             //trim the string
