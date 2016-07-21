@@ -178,7 +178,7 @@ namespace ClassOpsLogCreator
             reachable.Enqueue(root);
 
             //While our queue is not empty and while we are within the distance
-            while(reachable.Count > 0 && distanceCount <= distance)
+            while(reachable.Count > 0 && distanceCount < distance)
             {
                 //Pop the top of the queue
                 string current = reachable.Dequeue();

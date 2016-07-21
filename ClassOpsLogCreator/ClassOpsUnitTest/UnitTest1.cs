@@ -101,5 +101,17 @@ namespace ClassOpsUnitTest
             //We should get 
             Assert.AreEqual((int)81, (int)check);
         }
+
+        [TestMethod]
+        public void Create_SchoolZoning_Check_BFS()
+        {
+            SchoolZoning sz = new SchoolZoning();
+            Queue<string> actual = sz.BFS("BSB", 2);
+
+            Queue<string> check = new Queue<string>();
+            //We should get
+            CollectionAssert.AreEqual(check, actual);
+        }
+
     }
 }
