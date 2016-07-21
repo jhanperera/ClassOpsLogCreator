@@ -23,6 +23,7 @@ namespace ClassOpsLogCreator
 {
     public class SchoolZoning
     {
+        private Graph schoolGraph;
         private int numberOfBuildings;
         private int numberOfConnections;
 
@@ -33,7 +34,7 @@ namespace ClassOpsLogCreator
         public SchoolZoning()
         {
             //Create the graph and add he edges acroding to the 
-            Graph schoolGraph = new Graph();
+            schoolGraph = new Graph();
             this.numberOfBuildings = schoolGraph.numberOfVerticies();
             //Add all the connections here 
             //ACE
@@ -157,14 +158,43 @@ namespace ClassOpsLogCreator
             return this.numberOfConnections;
         }
 
+        /// <summary>
+        /// This method will find the hosrtest path from the root
+        /// to all other nodes within a given distance
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="distance"></param>
+        /// <returns></returns>
         public Queue<string> BFS(string root, int distance)
         {
+            //Create the queue and the mark array
             Queue<string> reachable = new Queue<string>();
+            string[] mark = new string[numberOfBuildings];
+            int index = 0;
+            int distanceCount = 0;
+
+            //Add the root to the visited list
+            mark[index] = root;
             reachable.Enqueue(root);
 
-
+            //While our queue is not empty and while we are within the distance
+            while(reachable.Count > 0 && distanceCount <= distance)
+            {
+                //Pop the top of the queue
+                string current = reachable.Dequeue();
+                //Look at all the adjacent 
+                foreach(string v in schoolGraph.adjacentTo(current))
+                {
+                    if(!(mark.Contains(v)))
+                    {
+                        index++;
+                        mark[index] = v;
+                        reachable.Enqueue(v);
+                    }
+                }
+                distanceCount++;
+            }
             return reachable;
         }
-
     }
 }
