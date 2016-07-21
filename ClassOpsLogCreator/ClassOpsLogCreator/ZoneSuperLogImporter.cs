@@ -191,7 +191,7 @@ namespace ClassOpsLogCreator
             
             //initialization of all the ranges that we are going to collect.
             Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            int start = last.Row - this.numberOfRows(ExSheet, this.getLastDate()) + 1;
+            int start = last.Row - this.numberOfRows(ExSheet, this.getLastDate());
             Excel.Range rangeA = ExSheet.get_Range("A" + start, "A" + last.Row);
             Excel.Range rangeB = ExSheet.get_Range("B" + start, "B" + last.Row);
             Excel.Range rangeC = ExSheet.get_Range("C" + start, "C" + last.Row);

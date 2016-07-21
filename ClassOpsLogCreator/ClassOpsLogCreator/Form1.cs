@@ -32,6 +32,7 @@ namespace ClassOpsLogCreator
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
+        public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
@@ -276,6 +277,12 @@ namespace ClassOpsLogCreator
             //Open the merged file
             if (workDone)
             {
+                //Make a copy of the exel file
+                System.IO.File.Copy(EXISTING_MASTER_LOG, EXISTING_MASTER_LOG_COPY, true);
+                //Make a new copied file not hidden
+                System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Normal);
+
+                //Open the master log file
                 Excel.Application excel = new Excel.Application();
                 Excel.Workbook wb = excel.Workbooks.Open(EXISTING_MASTER_LOG);
                 excel.Visible = true;
@@ -283,7 +290,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        ///  ALL HELPER METHODS GO HERE BELLOW HERE! 
+        /// ALL HELPER METHODS GO HERE BELLOW HERE! 
         ///  
         /// This method will write our arrays to the excel file.
         /// This method generates the Excel output via the arrays
