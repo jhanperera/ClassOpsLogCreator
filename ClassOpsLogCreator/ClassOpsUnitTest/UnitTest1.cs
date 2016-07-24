@@ -93,24 +93,21 @@ namespace ClassOpsUnitTest
         }
 
         [TestMethod]
-        public void Create_SchoolZoning_And_Check_Connections()
+        public void Create_SchoolZongin_Check_zone2()
         {
             SchoolZoning sz = new SchoolZoning();
 
-            int check = sz.getNumberOfConnections();
-            //We should get 
-            Assert.AreEqual((int)81, (int)check);
-        }
+            List<string> zone1 = sz.getZone_2(1);
 
-        [TestMethod]
-        public void Create_SchoolZoning_Check_BFS()
-        {
-            SchoolZoning sz = new SchoolZoning();
-            Queue<string> actual = sz.BFS("BSB", 2);
+            string[] zone1array = new string[]
+            {
+                "MC", "WC", "VC", "FC", "LUM", "LSB", "CC", "BC", "CB", "PSE",
+                "LAS", "FRQ", "SLH", "KT", "YL", "STC", "BSB", "SC"
+            };
+            List<string> expected = new List<string>();
+            expected.AddRange(zone1array);
 
-            Queue<string> check = new Queue<string>();
-            //We should get
-            CollectionAssert.AreEqual(check, actual);
+            CollectionAssert.AreEqual(expected, zone1);
         }
 
     }

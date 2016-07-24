@@ -36,107 +36,7 @@ namespace ClassOpsLogCreator
             //Create the graph and add he edges acroding to the 
             schoolGraph = new Graph();
             this.numberOfBuildings = schoolGraph.numberOfVerticies();
-            //Add all the connections here 
-            //ACE
-            schoolGraph.addEdge("ACE", "KT");
-            //ACW
-            schoolGraph.addEdge("ACW", "YL");
-            schoolGraph.addEdge("ACW", "VH");
-            schoolGraph.addEdge("ACW", "STC");
-            //BC
-            schoolGraph.addEdge("BC", "LSB");
-            schoolGraph.addEdge("BC", "CB");
-            schoolGraph.addEdge("BC", "SC");
-            schoolGraph.addEdge("BC", "CC");
-            //BSC
-            schoolGraph.addEdge("BCS", "ELC");
-            schoolGraph.addEdge("BCS", "TEL");
-            //BSB
-            schoolGraph.addEdge("BSB", "STC");
-            schoolGraph.addEdge("BSB", "R");
-            schoolGraph.addEdge("BSB", "VH");
-            schoolGraph.addEdge("BSB", "CSQ");
-            schoolGraph.addEdge("BSB", "CLH");
-            schoolGraph.addEdge("BSB", "LAS");
-            schoolGraph.addEdge("BSB", "FRQ");
-            schoolGraph.addEdge("BSB", "SLH");
-            //BRG
-            schoolGraph.addEdge("BRG", "SCL");
-            schoolGraph.addEdge("BRG", "SC");
-            schoolGraph.addEdge("BRG", "CB");
-            schoolGraph.addEdge("BRG", "PSE");
-            //CS
-            schoolGraph.addEdge("CB", "PSE");
-            schoolGraph.addEdge("CB", "LSB");
-            //CFA
-            schoolGraph.addEdge("CFA", "ATK");
-            schoolGraph.addEdge("CFA", "ACW");
-            //CFT
-            schoolGraph.addEdge("CFT", "ACW");
-            schoolGraph.addEdge("CFT", "KT");
-            schoolGraph.addEdge("CFT", "YL");
-            //CSQ
-            schoolGraph.addEdge("CSQ", "CLH");
-            schoolGraph.addEdge("CSQ", "BSB");
-            schoolGraph.addEdge("CSQ", "R");
-            schoolGraph.addEdge("CSQ", "HNE");
-            schoolGraph.addEdge("CSQ", "SCL");
-            //CLH
-            schoolGraph.addEdge("CLH", "LAS");
-            schoolGraph.addEdge("CLH", "FRQ");
-            schoolGraph.addEdge("CLH", "BSB");
-            schoolGraph.addEdge("CLH", "R");
-            schoolGraph.addEdge("CLH", "CSQ");
-            schoolGraph.addEdge("CLH", "SCL");
-            schoolGraph.addEdge("CLH", "PSE");
-            //ELC 
-            schoolGraph.addEdge("ELC", "TEL");
-            schoolGraph.addEdge("ELC", "SSB");
-            schoolGraph.addEdge("ELC", "ACE");
-            //LAS
-            schoolGraph.addEdge("LAS", "PSE");
-            schoolGraph.addEdge("LAS", "LUM");
-            schoolGraph.addEdge("LAS", "FRQ");
-            schoolGraph.addEdge("LAS", "BSB");
-            schoolGraph.addEdge("LAS", "CLH");
-            //R
-            schoolGraph.addEdge("R", "HNE");
-            schoolGraph.addEdge("R", "CSQ");
-            schoolGraph.addEdge("R", "CLH");
-            schoolGraph.addEdge("R", "BSB");
-            schoolGraph.addEdge("R", "STC");
-            schoolGraph.addEdge("R", "VH");
-            schoolGraph.addEdge("R", "ATK");
-            //SLH
-            schoolGraph.addEdge("SLH", "FC");
-            schoolGraph.addEdge("SLH", "VC");
-            schoolGraph.addEdge("SLH", "YL");
-            schoolGraph.addEdge("SLH", "STC");
-            schoolGraph.addEdge("SLH", "BSB");
-            schoolGraph.addEdge("SLH", "FRQ");
-            schoolGraph.addEdge("SLH", "LUM");
-            //SSB
-            schoolGraph.addEdge("SSB", "ACE");
-            schoolGraph.addEdge("SSB", "TEL");
-            //TEL
-            schoolGraph.addEdge("TEL", "ACE");
-            schoolGraph.addEdge("TEL", "CFT");
-            schoolGraph.addEdge("TEL", "ACW");
-            schoolGraph.addEdge("TEL", "CFA");
-            //VC
-            schoolGraph.addEdge("VC", "WC");
-            schoolGraph.addEdge("VC", "MC");
-            schoolGraph.addEdge("VC", "FC");
-            schoolGraph.addEdge("VC", "SLH");
-            schoolGraph.addEdge("VC", "YL");
-            schoolGraph.addEdge("VC", "KT");
-            //YL
-            schoolGraph.addEdge("YL", "KT");
-            schoolGraph.addEdge("YL", "STC");
-            schoolGraph.addEdge("YL", "CFT");
-            schoolGraph.addEdge("YL", "ACW");
-            schoolGraph.addEdge("YL", "VH");
-            schoolGraph.addEdge("YL", "SLH");
+   
             this.numberOfConnections = schoolGraph.numberOfEdges();
         }
 
@@ -157,7 +57,409 @@ namespace ClassOpsLogCreator
         {
             return this.numberOfConnections;
         }
+        
+        /**All the methods under here are not using BFS yet
+         * The BFS algo needs to be modified to work correctly
+         * before we use it to be dynamic and "Smart"
+         */
 
+        /// <summary>
+        /// This will return a List of buildings that are in one of two zones
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public List<string> getZone_2(int i)
+        {
+            string[] zone1 = new string[]
+            {
+                "MC", "WC", "VC", "FC", "LUM", "LSB", "CC", "BC", "CB", "PSE",
+                "LAS", "FRQ", "SLH", "KT", "YL", "STC", "BSB", "SC"
+            };
+
+            string[] zone2 = new string[]
+            {
+                "CLH", "BRG", "SCL", "CSQ", "R", "VH", "ACW", "CFT", "ACE", "SSB",
+                "ELC", "TEL", "CFA", "HNE", "OSG", "ATK", "BCS"
+            };
+
+            List <string> buildingList = new List<string>();
+            //North Zone
+            if(i == 1)
+            {
+                buildingList.AddRange(zone1);
+            }
+            //South Zone
+            else
+            {
+                buildingList.AddRange(zone2);
+            }
+
+            return buildingList;
+        }
+
+        /// <summary>
+        /// This will return a List of buildings that are in one of three zones
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public List<string> getZone_3(int i)
+        {
+            string[] zone1 = new string[]
+            {
+                "MC", "WC", "VC", "FC", "LUM", "FRQ", "SLH", "BSB", "STC", "YL", "KT"
+            };
+
+            string[] zone2 = new string[]
+            {
+                "LSB", "CC", "BC", "CB", "PSE", "LAS", "SC", "CLH", "BRG", "SCL", "CSQ"
+            };
+
+            string[] zone3 = new string[]
+            {
+                "R", "VH", "ACW", "CFT", "ACE", "SSB", "HNE", "CFA", "TEL", "ELC", "OSG", "ATK", "BCS"
+            };
+
+            List<string> buildingList = new List<string>();
+            if (i == 1)
+            {
+                buildingList.AddRange(zone1);
+            }
+            else if (i == 2)
+            {
+                buildingList.AddRange(zone2);
+            }
+            else
+            {
+                buildingList.AddRange(zone3);
+            }
+
+            return buildingList;
+        }
+
+        /// <summary>
+        /// This will return a List of buildings that are in one of four zones
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public List<string> getZone_4(int i)
+        {
+            string[] zone1 = new string[]
+            {
+                "MC", "VC", "WC", "FC", "SLH", "STC", "YL", "KT" 
+            };
+
+            string[] zone2 = new string[]
+            {
+                "LUM", "FRQ", "LAS", "PSE", "CB", "BC", "CC", "LSB", "SC"
+            };
+
+            string[] zone3 = new string[]
+            {
+                "CLH", "BSB", "BRG", "SCL", "CSQ", "R", "VH", "HNE", "OSG"
+            };
+
+            string[] zone4 = new string[]
+            {
+                "ATK", "ACW", "CFT", "ACE", "SSB", "CFA", "TEL", "ELC", "BCS"
+            };
+
+            List<string> buildingList = new List<string>();
+            if (i == 1)
+            {
+                buildingList.AddRange(zone1);
+            }
+            else if(i == 2)
+            {
+                buildingList.AddRange(zone2);
+            }
+            else if(i == 3)
+            {
+                buildingList.AddRange(zone3);
+            }
+            else
+            {
+                buildingList.AddRange(zone4);
+            }
+            return buildingList;
+        }
+
+        /// <summary>
+        /// This will return a List of buildings that are in one of five zones
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public List<string> getZone_5(int i)
+        {
+            string[] zone1 = new string[]
+             {
+                "MC", "VC", "WC", "FC", "SLH", "YL", "KT"
+             };
+
+            string[] zone2 = new string[]
+            {
+                "LAS", "PSE", "CB", "BC", "CC", "LSB", "SC"
+            };
+
+            string[] zone3 = new string[]
+            {
+                "BRG", "SCL", "CLH", "CSQ", "HNE", "OSG", "R"
+            };
+
+            string[] zone4 = new string[]
+            {
+                "LUM", "FRQ", "BSB", "STC", "VH", "ATK", "ACW"
+            };
+
+            string[] zone5 = new string[]
+            {
+                "CFA", "CFT", "ACE", "TEL", "SSB", "ELC", "BCS"
+            };
+
+            List<string> buildingList = new List<string>();
+            if (i == 1)
+            {
+                buildingList.AddRange(zone1);
+            }
+            else if (i == 2)
+            {
+                buildingList.AddRange(zone2);
+            }
+            else if (i == 3)
+            {
+                buildingList.AddRange(zone3);
+            }
+            else if (i == 4)
+            {
+                buildingList.AddRange(zone4);
+            }
+            else
+            {
+                buildingList.AddRange(zone5);
+            }
+
+            return buildingList;
+        }
+
+        /// <summary>
+        /// This will return a List of buildings that are in one of six zones
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public List<string> getZone_6(int i)
+        {
+            string[] zone1 = new string[]
+             {
+                "MC", "VC", "WC", "FC", "LUM", "SLH"
+             };
+
+            string[] zone2 = new string[]
+            {
+                "PSE", "CB", "BC", "CC", "LSB", "SC"
+            };
+
+            string[] zone3 = new string[]
+            {
+                "LAS", "CLH", "BSB", "FRQ", "YL", "STC"
+            };
+
+            string[] zone4 = new string[]
+            {
+                "KT", "ACE", "TEL", "SSB", "ELC", "BCS"
+            };
+
+            string[] zone5 = new string[]
+            {
+                "CFT", "ACW", "CFA", "ATK", "VH", "R"
+            };
+
+            string[] zone6= new string[]
+            {
+                "BRG", "SCL", "CSQ", "HNE", "OSG"
+            };
+
+            List<string> buildingList = new List<string>();
+            if (i == 1)
+            {
+                buildingList.AddRange(zone1);
+            }
+            else if (i == 2)
+            {
+                buildingList.AddRange(zone2);
+            }
+            else if (i == 3)
+            {
+                buildingList.AddRange(zone3);
+            }
+            else if (i == 4)
+            {
+                buildingList.AddRange(zone4);
+            }
+            else if (i == 5)
+            {
+                buildingList.AddRange(zone5);
+            }
+            else
+            {
+                buildingList.AddRange(zone6);
+            }
+            return buildingList;
+        }
+
+        /// <summary>
+        /// This will return a List of buildings that are in one of seven zones
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public List<string> getZone_7(int i)
+        {
+            string[] zone1 = new string[]
+             {
+                "MC", "VC", "WC", "FC", "SLH"
+             };
+
+            string[] zone2 = new string[]
+            {
+                "CB", "BC", "CC", "LSB", "SC"
+            };
+
+            string[] zone3 = new string[]
+            {
+                "PSE", "LAS", "LUM", "FRQ", "CLH"
+            };
+
+            string[] zone4 = new string[]
+            {
+               "BSB", "STC", "VH", "R", "ATk"
+            };
+
+            string[] zone5 = new string[]
+            {
+                "YL", "KT", "ACW", "CFA", "CFT"
+            };
+
+            string[] zone6 = new string[]
+            {
+                "BRG", "SCL", "CSQ", "HNE", "OSG"
+            };
+
+            string[] zone7 = new string[]
+            {
+                "ACE", "SSB", "TEL", "ELC", "BCS"
+            };
+
+            List<string> buildingList = new List<string>();
+            if (i == 1)
+            {
+                buildingList.AddRange(zone1);
+            }
+            else if (i == 2)
+            {
+                buildingList.AddRange(zone2);
+            }
+            else if (i == 3)
+            {
+                buildingList.AddRange(zone3);
+            }
+            else if (i == 4)
+            {
+                buildingList.AddRange(zone4);
+            }
+            else if (i == 5)
+            {
+                buildingList.AddRange(zone5);
+            }
+            else if( i == 6)
+            {
+                buildingList.AddRange(zone6);
+            }
+            else
+            {
+                buildingList.AddRange(zone7);
+            }
+            return buildingList;
+        }
+
+        /// <summary>
+        /// This will return a List of buildings that are in one of eight zones
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public List<string> getZone_8(int i)
+        {
+            string[] zone1 = new string[]
+             {
+                "MC", "VC", "WC", "FC", "SLH"
+             };
+
+            string[] zone2 = new string[]
+            {
+                "CB", "BC", "CC", "LSB", "SC"
+            };
+
+            string[] zone3 = new string[]
+            {
+                "PSE", "LAS", "LUM", "FRQ", "CLH"
+            };
+
+            string[] zone4 = new string[]
+            {
+               "BSB", "STC", "VH", "R"
+            };
+
+            string[] zone5 = new string[]
+            {
+                "YL", "KT", "ACW", "CFA", "CFT"
+            };
+
+            string[] zone6 = new string[]
+            {
+                "BRG", "SCL", "CSQ"
+            };
+
+            string[] zone7 = new string[]
+            {
+                "ACE", "SSB", "TEL", "ELC", "BCS"
+            };
+            string[] zone8 = new string[]
+            {
+                "ATK", "OSG", "HNE"
+            };
+
+            List<string> buildingList = new List<string>();
+            if (i == 1)
+            {
+                buildingList.AddRange(zone1);
+            }
+            else if (i == 2)
+            {
+                buildingList.AddRange(zone2);
+            }
+            else if (i == 3)
+            {
+                buildingList.AddRange(zone3);
+            }
+            else if (i == 4)
+            {
+                buildingList.AddRange(zone4);
+            }
+            else if (i == 5)
+            {
+                buildingList.AddRange(zone5);
+            }
+            else if (i == 6)
+            {
+                buildingList.AddRange(zone6);
+            }
+            else if (i == 7)
+            {
+                buildingList.AddRange(zone7);
+            }
+            else
+            {
+                buildingList.AddRange(zone8);
+            }
+            return buildingList;
+        }
         /// <summary>
         /// This method will find the hosrtest path from the root
         /// to all other nodes within a given distance
@@ -165,7 +467,7 @@ namespace ClassOpsLogCreator
         /// <param name="root"></param>
         /// <param name="distance"></param>
         /// <returns></returns>
-        public Queue<string> BFS(string root, int distance)
+        public string[] BFS(string root, int distance)
         {
             //Create the queue and the mark array
             Queue<string> reachable = new Queue<string>();
@@ -194,7 +496,7 @@ namespace ClassOpsLogCreator
                 }
                 distanceCount++;
             }
-            return reachable;
+            return mark = mark.Where(n => n != null).ToArray();
         }
     }
 }
