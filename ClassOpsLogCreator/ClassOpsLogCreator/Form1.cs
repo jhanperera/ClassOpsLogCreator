@@ -37,7 +37,7 @@ namespace ClassOpsLogCreator
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        /*public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsx";
+        /*public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
@@ -281,7 +281,7 @@ namespace ClassOpsLogCreator
             if (workDone)
             {
                 //Make a copy of the exel file
-                 System.IO.File.Copy(EXISTING_MASTER_LOG, EXISTING_MASTER_LOG_COPY, true);
+                System.IO.File.Copy(EXISTING_MASTER_LOG, EXISTING_MASTER_LOG_COPY, true);
                 //Make a new copied file not hidden
                 System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Normal);
 
@@ -343,20 +343,9 @@ namespace ClassOpsLogCreator
             DateTime check = DateTime.ParseExact("1600", "HHmm", null);
             if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
             {
-                //For one shift we have to leave the dat time standard
-                if( numberOfShifts == 1)
-                {
-                    string[] ace017String = {"CLOSE ACE017", today.ToString("M/d/yy"), "1600", "ACE", "017",
-                    @"Keys are in ACE 015 storeroom. Make sure all workstations have a keyboard and a mouse, shut down the lights and lock the door.If the room is already locked please report on your log."};
-                    ace017CloseRange.Value2 = ace017String;
-                }
-                //For more than one shift we have to set the date time to an integer
-                else
-                {
-                    string[] ace017String = {"CLOSE ACE017", ((int)today.ToOADate()).ToString(), "1600", "ACE", "017",
-                    @"Keys are in ACE 015 storeroom. Make sure all workstations have a keyboard and a mouse, shut down the lights and lock the door.If the room is already locked please report on your log."};
-                    ace017CloseRange.Value2 = ace017String;
-                }  
+                string[] ace017String = {"CLOSE ACE017", today.ToString("M/d/yy"), "1600", "ACE", "017",
+                @"Keys are in ACE 015 storeroom. Make sure all workstations have a keyboard and a mouse, shut down the lights and lock the door.If the room is already locked please report on your log."};
+                ace017CloseRange.Value2 = ace017String; 
             }
 
             //Sorting it by time column
@@ -478,7 +467,12 @@ namespace ClassOpsLogCreator
 
                 for (int i = 0; i <= zonedArray.GetUpperBound(0); i++)
                 {
-                    zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                    DateTime temp;
+                    if((!DateTime.TryParse(zonedArray[i, 2], out temp)))
+                    {
+                        zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                    }
+                    
                     if (zone1.Contains(zonedArray[i,4]))
                     {
                         Array.Copy(zonedArray, i * zonedArray.GetLength(1), zone1Array, zone1Index * zone1Array.GetLength(1), zonedArray.GetLength(1));
@@ -514,7 +508,11 @@ namespace ClassOpsLogCreator
 
                 for (int i = 0; i <= zonedArray.GetUpperBound(0); i++)
                 {
-                    zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                    DateTime temp;
+                    if ((!DateTime.TryParse(zonedArray[i, 2], out temp)))
+                    {
+                        zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                    }
                     if (zone1.Contains(zonedArray[i, 4]))
                     {                       
                         Array.Copy(zonedArray, i * zonedArray.GetLength(1), zone1Array, zone1Index * zone1Array.GetLength(1), zonedArray.GetLength(1));
@@ -560,7 +558,11 @@ namespace ClassOpsLogCreator
 
                 for (int i = 0; i <= zonedArray.GetUpperBound(0); i++)
                 {
-                    zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                    DateTime temp;
+                    if ((!DateTime.TryParse(zonedArray[i, 2], out temp)))
+                    {
+                        zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                    }
                     if (zone1.Contains(zonedArray[i, 4]))
                     {
                         Array.Copy(zonedArray, i * zonedArray.GetLength(1), zone1Array, zone1Index * zone1Array.GetLength(1), zonedArray.GetLength(1));
@@ -616,7 +618,11 @@ namespace ClassOpsLogCreator
 
                 for (int i = 0; i <= zonedArray.GetUpperBound(0); i++)
                 {
-                    zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                    DateTime temp;
+                    if ((!DateTime.TryParse(zonedArray[i, 2], out temp)))
+                    {
+                        zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                    }
                     if (zone1.Contains(zonedArray[i, 4]))
                     {
                         Array.Copy(zonedArray, i * zonedArray.GetLength(1), zone1Array, zone1Index * zone1Array.GetLength(1), zonedArray.GetLength(1));
@@ -686,7 +692,11 @@ namespace ClassOpsLogCreator
 
                 for (int i = 0; i <= zonedArray.GetUpperBound(0); i++)
                 {
-                    zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                    DateTime temp;
+                    if ((!DateTime.TryParse(zonedArray[i, 2], out temp)))
+                    {
+                        zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                    }
                     if (zone1.Contains(zonedArray[i, 4]))
                     {
                         Array.Copy(zonedArray, i * zonedArray.GetLength(1), zone1Array, zone1Index * zone1Array.GetLength(1), zonedArray.GetLength(1));
@@ -767,7 +777,11 @@ namespace ClassOpsLogCreator
 
                 for (int i = 0; i <= zonedArray.GetUpperBound(0); i++)
                 {
-                    zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                    DateTime temp;
+                    if ((!DateTime.TryParse(zonedArray[i, 2], out temp)))
+                    {
+                        zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                    }
                     if (zone1.Contains(zonedArray[i, 4]))
                     {
                         Array.Copy(zonedArray, i * zonedArray.GetLength(1), zone1Array, zone1Index * zone1Array.GetLength(1), zonedArray.GetLength(1));
@@ -861,7 +875,11 @@ namespace ClassOpsLogCreator
 
                 for (int i = 0; i <= zonedArray.GetUpperBound(0); i++)
                 {
-                    zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                    DateTime temp;
+                    if ((!DateTime.TryParse(zonedArray[i, 2], out temp)))
+                    {
+                        zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                    }
                     if (zone1.Contains(zonedArray[i, 4]))
                     {
                         Array.Copy(zonedArray, i * zonedArray.GetLength(1), zone1Array, zone1Index * zone1Array.GetLength(1), zonedArray.GetLength(1));
