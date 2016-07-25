@@ -287,7 +287,7 @@ namespace ClassOpsLogCreator
 
                 //Open the master log file
                 Excel.Application excel = new Excel.Application();
-                Excel.Workbook wb = excel.Workbooks.Open(EXISTING_MASTER_LOG);
+                Excel.Workbook wb = excel.Workbooks.Open(EXISTING_MASTER_LOG_COPY);
                 excel.Visible = true;
             }
         }
