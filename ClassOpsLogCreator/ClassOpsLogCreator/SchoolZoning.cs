@@ -71,16 +71,16 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         public List<string> getZone_2(int i)
         {
-            string[] zone1 = new string[]
+            string[] zone1 = new string[] //North West
             {
                 "MC", "WC", "VC", "FC", "LUM", "LSB", "CC", "BC", "CB", "PSE",
-                "LAS", "FRQ", "SLH", "KT", "YL", "STC", "BSB", "SC"
+                "LAS", "FRQ", "SLH", "YL", "STC", "BSB", "SC", "CLH", "BSB", "SCL", "CSQ"
             };
 
-            string[] zone2 = new string[]
+            string[] zone2 = new string[] //South East
             {
-                "CLH", "BRG", "SCL", "CSQ", "R", "VH", "ACW", "CFT", "ACE", "SSB",
-                "ELC", "TEL", "CFA", "HNE", "OSG", "ATK", "BCS"
+                "KT", "R", "VH", "ACW", "CFT", "ACE", "SSB", "HNE", "CFA", "TEL",
+                "ELC", "OSG", "ATK", "BGS"
             };
 
             List <string> buildingList = new List<string>();
@@ -114,12 +114,12 @@ namespace ClassOpsLogCreator
             string[] zone2 = new string[] //Central
             {
                 "CLH", "BSB", "STC", "BRG", "SCL", "STC", "CSQ", "R", "VH",
-                "ACW", "HNE"
+                "ACW", "HNE", "OSG"
             };
 
             string[] zone3 = new string[] //South
             {
-                "CFT", "ACE", "SSB", "CFA", "TEL", "ELC", "BGS", "ATK", "OSG", "YL",
+                "CFT", "ACE", "SSB", "CFA", "TEL", "ELC", "BGS", "ATK", "YL",
                 "KT"
             };
 
@@ -147,24 +147,24 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         public List<string> getZone_4(int i)
         {
-            string[] zone1 = new string[]
+            string[] zone1 = new string[] //North
             {
-                "MC", "VC", "WC", "FC", "SLH", "STC", "YL", "KT" 
+                "MC", "VC", "WC", "FC", "SLH", "STC", "YL", 
             };
 
-            string[] zone2 = new string[]
+            string[] zone2 = new string[] //West
             {
-                "LUM", "FRQ", "LAS", "PSE", "CB", "BC", "CC", "LSB", "SC"
+                "LUM", "FRQ", "PSE", "CB", "BC", "CC", "SC", "LSB", "LAS",
             };
 
-            string[] zone3 = new string[]
+            string[] zone3 = new string[] //Centerl
             {
-                "CLH", "BSB", "BRG", "SCL", "CSQ", "R", "VH", "HNE", "OSG"
+                "CLH", "BSB", "BRG", "SCL", "CSQ", "R", "VH", "HNE", "OSG","ACW"
             };
 
-            string[] zone4 = new string[]
+            string[] zone4 = new string[] //South
             {
-                "ATK", "ACW", "CFT", "ACE", "SSB", "CFA", "TEL", "ELC", "BCS"
+                "ATK", "CFT", "ACE", "SSB", "CFA", "TEL", "ELC", "BCS", "KT"
             };
 
             List<string> buildingList = new List<string>();

@@ -28,20 +28,20 @@ namespace ClassOpsLogCreator
     public partial class LogCreator : Form
     {
         //Public readonly attribues
-        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
-        public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";*/
+        public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsm";
+        /*public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
-        public readonly string EXISTING_MASTER_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\new.xlsx";
+        public readonly string EXISTING_MASTER_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\new.xlsx";*/
 
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
@@ -281,13 +281,13 @@ namespace ClassOpsLogCreator
             if (workDone)
             {
                 //Make a copy of the exel file
-                //System.IO.File.Copy(EXISTING_MASTER_LOG, EXISTING_MASTER_LOG_COPY, true);
+                System.IO.File.Copy(EXISTING_MASTER_LOG, EXISTING_MASTER_LOG_COPY, true);
                 //Make a new copied file not hidden
-                //System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Normal);
+                System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Normal);
 
                 //Open the master log file
                 Excel.Application excel = new Excel.Application();
-                Excel.Workbook wb = excel.Workbooks.Open(EXISTING_MASTER_LOG);
+                Excel.Workbook wb = excel.Workbooks.Open(EXISTING_MASTER_LOG_COPY);
                 excel.Visible = true;
             }
         }
