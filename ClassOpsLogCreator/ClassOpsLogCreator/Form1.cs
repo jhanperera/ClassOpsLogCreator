@@ -511,7 +511,7 @@ namespace ClassOpsLogCreator
                     DateTime temp;
                     if ((!DateTime.TryParse(zonedArray[i, 2], out temp)))
                     {
-                        zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                        zonedArray[i, 2] = DateTime.FromOADate(double.Parse(zonedArray[i, 2].ToString())).ToString("M/dd/yy");
                     }
                     if (zone1.Contains(zonedArray[i, 4]))
                     {                       
