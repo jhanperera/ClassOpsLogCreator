@@ -107,6 +107,12 @@ namespace ClassOpsLogCreator
             {
                 masterArray = this.convertToString2DArray(arrayClassRooms, arrayLastTimes);
             }
+
+            //Clean out the clo file
+            Excel.Range clearAllRange = roomSheet1.UsedRange;
+            clearAllRange.Clear();
+            //Save
+            roomWorkBook.Save();
             
             //Close all open processes
             Quit();
