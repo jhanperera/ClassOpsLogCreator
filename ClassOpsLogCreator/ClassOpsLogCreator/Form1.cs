@@ -34,6 +34,7 @@ namespace ClassOpsLogCreator
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_END_TIMES.xlsx";
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
@@ -73,13 +74,21 @@ namespace ClassOpsLogCreator
             //fill the combo boxes
             for(int i = 1; i <= 12; i ++)
             {
+                //Tab 1 
                 this.startHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
                 this.endHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
+                //Tab 2
+                this.cloGenStart1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
+                this.cloGenEnd1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
                 //15 minute intervals
                 for (int k = 15; k <= 45; k += 15)
                 {
+                    //Tab 1
                     this.startHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString()});
                     this.endHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
+                    //Tab 2
+                    this.cloGenStart1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
+                    this.cloGenEnd1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
                 }
             }
 
@@ -89,26 +98,41 @@ namespace ClassOpsLogCreator
                 this.numberOfShiftsCombo1.Items.Add(j.ToString());
             }
 
-            //Fill the am/pm selector
+            //Fill the am/pm selector for tab 1
             this.am_pmCombo1.Items.Add("AM");
             this.am_pmCombo1.Items.Add("PM");
             this.am_pmCombo2.Items.Add("AM");
             this.am_pmCombo2.Items.Add("PM");
+            //Fill the am/pm selector for tab 2
+            this.cloAm_pmCombo1.Items.Add("AM");
+            this.cloAm_pmCombo1.Items.Add("PM");
+            this.cloAm_pmCombo2.Items.Add("AM");
+            this.cloAm_pmCombo2.Items.Add("PM");
 
-            //set the default view for the combo
+            //set the default view for the combo for tab 1
             this.startHour1.SelectedIndex = -1;
             this.endHour1.SelectedIndex = -1;
             this.numberOfShiftsCombo1.SelectedIndex = 0;
             this.am_pmCombo1.SelectedIndex = 1;
             this.am_pmCombo2.SelectedIndex = 1;
- 
+            ////set the default view for the combo for tab 1
+            this.cloGenStart1.SelectedIndex = -1;
+            this.cloGenEnd1.SelectedIndex = -1;
+            this.cloAm_pmCombo1.SelectedIndex = 1;
+            this.cloAm_pmCombo2.SelectedIndex = 1;
 
-            //Make the combo box read only
+
+            //Make the combo box read only for tab 1
             this.startHour1.DropDownStyle = ComboBoxStyle.DropDownList; 
             this.endHour1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo2.DropDownStyle = ComboBoxStyle.DropDownList;
             this.numberOfShiftsCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
+            //Make the combo box read only for tab 2
+            this.cloGenStart1.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cloGenEnd1.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cloAm_pmCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cloAm_pmCombo2.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         /// <summary>
@@ -148,11 +172,11 @@ namespace ClassOpsLogCreator
             //Initialize the Background worker and report progress
             bw.WorkerReportsProgress = true;
             //Add Work to the worker thread
-            bw.DoWork += new DoWorkEventHandler(Bw_DoWork);
+            bw.DoWork += new DoWorkEventHandler(Bw_DoWorkTab1);
             //Get progress changes
             bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
             //Get work completed events
-            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompletedTab1);
             //Do all the work
             if(bw.IsBusy != true)
             {
@@ -164,11 +188,63 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// Al the work is done in this method
+        /// When the user clicks "Create CLO log" on tab 2
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Bw_DoWork(object sender, DoWorkEventArgs e)
+        private void createCLOBTN_Click(object sender, EventArgs e)
+        {
+            //Get the times set by the combo box
+            startTimeFromCombo = this.cloGenStart1.GetItemText(this.cloGenStart1.SelectedItem) + "" + this.cloAm_pmCombo1.GetItemText(this.cloAm_pmCombo1.SelectedItem);
+            endTimeFromCombo = this.cloGenEnd1.GetItemText(this.cloGenEnd1.SelectedItem) + "" + this.cloAm_pmCombo2.GetItemText(this.cloAm_pmCombo2.SelectedItem);
+
+            //Input Error checking!
+            if (startTimeFromCombo.Equals("PM") || startTimeFromCombo.Equals("AM") || startTimeFromCombo == null ||
+                endTimeFromCombo.Equals("PM") || endTimeFromCombo.Equals("AM") || endTimeFromCombo == null)
+            {
+                MessageBox.Show("Valid time must be set.",
+                                 "Problem...",
+                                  MessageBoxButtons.OK,
+                                  MessageBoxIcon.Exclamation,
+                                  MessageBoxDefaultButton.Button1);
+                return;
+            }
+            else if (Convert.ToDateTime(startTimeFromCombo) >= Convert.ToDateTime(endTimeFromCombo))
+            {
+                MessageBox.Show("Valid time must be set.",
+                                 "Problem...",
+                                  MessageBoxButtons.OK,
+                                  MessageBoxIcon.Exclamation,
+                                  MessageBoxDefaultButton.Button1);
+                return;
+            }
+
+            bw = new BackgroundWorker();
+            //Initialize the Background worker and report progress
+            bw.WorkerReportsProgress = true;
+            //Add Work to the worker thread
+            bw.DoWork += new DoWorkEventHandler(Bw_DoWorkTab2);
+            //Get progress changes
+            bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
+            //Get work completed events
+            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompletedTab2);
+            //Do all the work
+            if (bw.IsBusy != true)
+            {
+                //Disable the button
+                createCLOBTN.Enabled = false;
+                //Run the work
+                bw.RunWorkerAsync();
+            }
+
+        }
+
+        /// <summary>
+        /// Al log (tab1) work is done in this method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Bw_DoWorkTab1(object sender, DoWorkEventArgs e)
         {
             //Sender to send info to progressbar
             var worker = sender as BackgroundWorker;
@@ -200,7 +276,7 @@ namespace ClassOpsLogCreator
             //write all the data to the excel file
             //merg the all the data together into the master log
            this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, classRoomTimeLogs.getLogOutArrayCount(),
-                                                                        JInstruction, DInstruction, RInstruction);
+                                                                        JInstruction, DInstruction, RInstruction, true);
 
             //Saving and closing the new excel file
             logoutMaster.DisplayAlerts = false;
@@ -224,6 +300,49 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
+        /// Al clo (tab2) work is done in this method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Bw_DoWorkTab2(object sender, DoWorkEventArgs e)
+        {
+            var worker = sender as BackgroundWorker;
+            //We are going to only open the clo with set start times and end times
+            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo, endTimeFromCombo);
+
+            string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
+
+            //Create the new Excel file where we will store all the new information
+            logoutMaster = new Excel.Application();
+            logoutMasterWorkBook = logoutMaster.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
+            logoutMasterWorkSheet = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[1];
+
+            //Get the three logs (Empty logs for this purpos)
+            string[,] JInstruction = new string[1, 1];
+            string[,] DInstruction = new string[1, 1];
+            string[,] RInstruction = new string[1, 1];
+
+            //write all the data to the excel file
+            this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, classRoomTimeLogs.getLogOutArrayCount(),
+                                                                         JInstruction, DInstruction, RInstruction, false);
+            //Format the sheet for easy reading
+            Excel.Range G_range = logoutMasterWorkSheet.get_Range("G2", "G" + (classRoomTimeLogs.getLogOutArrayCount() + 1));
+            G_range.ColumnWidth = 49;
+
+            //Save to desktop
+            logoutMaster.DisplayAlerts = false;
+            logoutMasterWorkBook.SaveAs(CLO_GENERATED_LOG);
+
+            //update progress bar
+            worker.ReportProgress(100);
+
+            //Clean up and close all instances
+            Quit();
+
+            return;
+        }
+
+        /// <summary>
         /// Update the progress bar 
         /// </summary>
         /// <param name="sender"></param>
@@ -236,11 +355,11 @@ namespace ClassOpsLogCreator
 
         /// <summary>
         /// This event handler deals with the results of the
-        /// background operation.
+        /// background operation for tab 1 work
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void bw_RunWorkerCompletedTab1(object sender, RunWorkerCompletedEventArgs e)
         {
             // First, handle the case where an exception was thrown.
             if (e.Error != null)
@@ -292,6 +411,53 @@ namespace ClassOpsLogCreator
             }
         }
 
+        // <summary>
+        /// This event handler deals with the results of the
+        /// background operation for tab2 work
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bw_RunWorkerCompletedTab2(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show(e.Error.Message, "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.textBox1.Text = "Please ensure files are in the correct location.";
+                this.workProgressBar.Value = 0;
+                this.workProgressBar.Refresh();
+                Quit();
+            }
+            else if (e.Cancelled)
+            {
+                // Next, handle the case where the user canceled 
+                // the operation.
+                // Note that due to a race condition in 
+                // the DoWork event handler, the Cancelled
+                // flag may not have been set, even though
+                // CancelAsync was called.
+                textBox1.Text = "Canceled";
+                this.workProgressBar.Value = 0;
+                this.workProgressBar.Refresh();
+                Quit();
+            }
+            else
+            {
+                // Finally, handle the case where the operation 
+                // succeeded.
+                workDone = true;
+                Quit();
+            }
+
+            //Open the CLO file
+            if (workDone)
+            {
+                Excel.Application excel = new Excel.Application();
+                Excel.Workbook wb = excel.Workbooks.Open(CLO_GENERATED_LOG);
+                excel.Visible = true;
+            }
+        }
+
         /// <summary>
         /// ALL HELPER METHODS GO HERE BELLOW HERE! 
         ///  
@@ -299,7 +465,7 @@ namespace ClassOpsLogCreator
         /// This method generates the Excel output via the arrays
         /// </summary>
         private void WriteLogOutArray(Excel.Worksheet worksheet, string[,] values, int index, 
-                                            string[,] array1, string[,] array2, string[,] array3)
+                                            string[,] array1, string[,] array2, string[,] array3, bool includeACE)
         {
             //Setting up the cells to put the information into
             Excel.Range taskType_range = worksheet.get_Range("B2", "B" + (index + 1));
@@ -341,7 +507,7 @@ namespace ClassOpsLogCreator
             DateTime startingTime = Convert.ToDateTime(this.startTimeFromCombo.ToString());
             DateTime endingTime = Convert.ToDateTime(this.endTimeFromCombo.ToString());
             DateTime check = DateTime.ParseExact("1600", "HHmm", null);
-            if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
+            if (includeACE &&(check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
             {
                 string[] ace017String = {"CLOSE ACE017", today.ToString("M/d/yy"), "1600", "ACE", "017",
                 @"Keys are in ACE 015 storeroom. Make sure all workstations have a keyboard and a mouse, shut down the lights and lock the door.If the room is already locked please report on your log."};
