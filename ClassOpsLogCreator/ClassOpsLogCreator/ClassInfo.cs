@@ -15,8 +15,10 @@ using Excel = Microsoft.Office.Interop.Excel;
 /// Description of class: This is a utility class
 /// of all the classes in the school. This class contains 
 /// information about each class and any special instuctions. 
+/// 
+/// This class also houses and important zone and building info
 ///
-/// Class Version: 0.1.0.0 - BETA - 7152016
+/// Class Version: 0.1.0.2 - BETA - 7272016
 /// 
 /// System Version: 0.1.0.0 - BETA - 7152016
 /// 
@@ -159,6 +161,407 @@ namespace ClassOpsLogCreator
 
             //find the class with a lapel mic
             return (this.CLassArrayWithLapelMic.Contains(classroom)) && (this.ClassArray.Contains(classroom));
+        }
+
+        /// <summary>
+        /// This will return a List of buildings that are in one of two zones
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public List<string> getZone_2(int i)
+        {
+            string[] zone1 = new string[] //North West
+            {
+                "MC", "WC", "VC", "FC", "LUM", "LSB", "CC", "BC", "CB", "PSE",
+                "LAS", "FRQ", "SLH", "YL", "STC", "BSB", "SC", "CLH", "BSB", "SCL", "CSQ"
+            };
+
+            string[] zone2 = new string[] //South East
+            {
+                "KT", "R", "VH", "ACW", "CFT", "ACE", "SSB", "HNE", "CFA", "TEL",
+                "ELC", "OSG", "ATK", "BGS"
+            };
+
+            List<string> buildingList = new List<string>();
+            //North Zone
+            if (i == 1)
+            {
+                buildingList.AddRange(zone1);
+            }
+            //South Zone
+            else
+            {
+                buildingList.AddRange(zone2);
+            }
+
+            return buildingList;
+        }
+
+        /// <summary>
+        /// This will return a List of buildings that are in one of three zones
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public List<string> getZone_3(int i)
+        {
+            string[] zone1 = new string[] // North
+            {
+                "MC", "WC", "VC", "FC", "LUM", "LSB", "CC", "BC", "CB", "PSE",
+                "SC", "LAS", "FRQ", "SLH"
+            };
+
+            string[] zone2 = new string[] //Central
+            {
+                "CLH", "BSB", "STC", "BRG", "SCL", "STC", "CSQ", "R", "VH",
+                "ACW", "HNE", "OSG"
+            };
+
+            string[] zone3 = new string[] //South
+            {
+                "CFT", "ACE", "SSB", "CFA", "TEL", "ELC", "BGS", "ATK", "YL",
+                "KT"
+            };
+
+            List<string> buildingList = new List<string>();
+            if (i == 1)
+            {
+                buildingList.AddRange(zone1);
+            }
+            else if (i == 2)
+            {
+                buildingList.AddRange(zone2);
+            }
+            else
+            {
+                buildingList.AddRange(zone3);
+            }
+
+            return buildingList;
+        }
+
+        /// <summary>
+        /// This will return a List of buildings that are in one of four zones
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public List<string> getZone_4(int i)
+        {
+            string[] zone1 = new string[] //North
+            {
+                "MC", "VC", "WC", "FC", "SLH", "STC", "YL",
+            };
+
+            string[] zone2 = new string[] //West
+            {
+                "LUM", "FRQ", "PSE", "CB", "BC", "CC", "SC", "LSB", "LAS",
+            };
+
+            string[] zone3 = new string[] //Centerl
+            {
+                "CLH", "BSB", "BRG", "SCL", "CSQ", "R", "VH", "HNE", "OSG","ACW"
+            };
+
+            string[] zone4 = new string[] //South
+            {
+                "ATK", "CFT", "ACE", "SSB", "CFA", "TEL", "ELC", "BCS", "KT"
+            };
+
+            List<string> buildingList = new List<string>();
+            if (i == 1)
+            {
+                buildingList.AddRange(zone1);
+            }
+            else if (i == 2)
+            {
+                buildingList.AddRange(zone2);
+            }
+            else if (i == 3)
+            {
+                buildingList.AddRange(zone3);
+            }
+            else
+            {
+                buildingList.AddRange(zone4);
+            }
+            return buildingList;
+        }
+
+        /// <summary>
+        /// This will return a List of buildings that are in one of five zones
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public List<string> getZone_5(int i)
+        {
+            string[] zone1 = new string[]
+             {
+                "MC", "VC", "WC", "FC", "SLH", "YL", "KT"
+             };
+
+            string[] zone2 = new string[]
+            {
+                "LAS", "PSE", "CB", "BC", "CC", "LSB", "SC"
+            };
+
+            string[] zone3 = new string[]
+            {
+                "BRG", "SCL", "CLH", "CSQ", "HNE", "OSG", "R"
+            };
+
+            string[] zone4 = new string[]
+            {
+                "LUM", "FRQ", "BSB", "STC", "VH", "ATK", "ACW"
+            };
+
+            string[] zone5 = new string[]
+            {
+                "CFA", "CFT", "ACE", "TEL", "SSB", "ELC", "BCS"
+            };
+
+            List<string> buildingList = new List<string>();
+            if (i == 1)
+            {
+                buildingList.AddRange(zone1);
+            }
+            else if (i == 2)
+            {
+                buildingList.AddRange(zone2);
+            }
+            else if (i == 3)
+            {
+                buildingList.AddRange(zone3);
+            }
+            else if (i == 4)
+            {
+                buildingList.AddRange(zone4);
+            }
+            else
+            {
+                buildingList.AddRange(zone5);
+            }
+
+            return buildingList;
+        }
+
+        /// <summary>
+        /// This will return a List of buildings that are in one of six zones
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public List<string> getZone_6(int i)
+        {
+            string[] zone1 = new string[]
+             {
+                "MC", "VC", "WC", "FC", "LUM", "SLH"
+             };
+
+            string[] zone2 = new string[]
+            {
+                "PSE", "CB", "BC", "CC", "LSB", "SC"
+            };
+
+            string[] zone3 = new string[]
+            {
+                "LAS", "CLH", "BSB", "FRQ", "YL", "STC"
+            };
+
+            string[] zone4 = new string[]
+            {
+                "KT", "ACE", "TEL", "SSB", "ELC", "BCS"
+            };
+
+            string[] zone5 = new string[]
+            {
+                "CFT", "ACW", "CFA", "ATK", "VH", "R"
+            };
+
+            string[] zone6 = new string[]
+            {
+                "BRG", "SCL", "CSQ", "HNE", "OSG"
+            };
+
+            List<string> buildingList = new List<string>();
+            if (i == 1)
+            {
+                buildingList.AddRange(zone1);
+            }
+            else if (i == 2)
+            {
+                buildingList.AddRange(zone2);
+            }
+            else if (i == 3)
+            {
+                buildingList.AddRange(zone3);
+            }
+            else if (i == 4)
+            {
+                buildingList.AddRange(zone4);
+            }
+            else if (i == 5)
+            {
+                buildingList.AddRange(zone5);
+            }
+            else
+            {
+                buildingList.AddRange(zone6);
+            }
+            return buildingList;
+        }
+
+        /// <summary>
+        /// This will return a List of buildings that are in one of seven zones
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public List<string> getZone_7(int i)
+        {
+            string[] zone1 = new string[]
+             {
+                "MC", "VC", "WC", "FC", "SLH"
+             };
+
+            string[] zone2 = new string[]
+            {
+                "CB", "BC", "CC", "LSB", "SC"
+            };
+
+            string[] zone3 = new string[]
+            {
+                "PSE", "LAS", "LUM", "FRQ", "CLH"
+            };
+
+            string[] zone4 = new string[]
+            {
+               "BSB", "STC", "VH", "R", "ATk"
+            };
+
+            string[] zone5 = new string[]
+            {
+                "YL", "KT", "ACW", "CFA", "CFT"
+            };
+
+            string[] zone6 = new string[]
+            {
+                "BRG", "SCL", "CSQ", "HNE", "OSG"
+            };
+
+            string[] zone7 = new string[]
+            {
+                "ACE", "SSB", "TEL", "ELC", "BCS"
+            };
+
+            List<string> buildingList = new List<string>();
+            if (i == 1)
+            {
+                buildingList.AddRange(zone1);
+            }
+            else if (i == 2)
+            {
+                buildingList.AddRange(zone2);
+            }
+            else if (i == 3)
+            {
+                buildingList.AddRange(zone3);
+            }
+            else if (i == 4)
+            {
+                buildingList.AddRange(zone4);
+            }
+            else if (i == 5)
+            {
+                buildingList.AddRange(zone5);
+            }
+            else if (i == 6)
+            {
+                buildingList.AddRange(zone6);
+            }
+            else
+            {
+                buildingList.AddRange(zone7);
+            }
+            return buildingList;
+        }
+
+        /// <summary>
+        /// This will return a List of buildings that are in one of eight zones
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public List<string> getZone_8(int i)
+        {
+            string[] zone1 = new string[]
+             {
+                "MC", "VC", "WC", "FC", "SLH"
+             };
+
+            string[] zone2 = new string[]
+            {
+                "CB", "BC", "CC", "LSB", "SC"
+            };
+
+            string[] zone3 = new string[]
+            {
+                "PSE", "LAS", "LUM", "FRQ", "CLH"
+            };
+
+            string[] zone4 = new string[]
+            {
+               "BSB", "STC", "VH", "R"
+            };
+
+            string[] zone5 = new string[]
+            {
+                "YL", "KT", "ACW", "CFA", "CFT"
+            };
+
+            string[] zone6 = new string[]
+            {
+                "BRG", "SCL", "CSQ"
+            };
+
+            string[] zone7 = new string[]
+            {
+                "ACE", "SSB", "TEL", "ELC", "BCS"
+            };
+            string[] zone8 = new string[]
+            {
+                "ATK", "OSG", "HNE"
+            };
+
+            List<string> buildingList = new List<string>();
+            if (i == 1)
+            {
+                buildingList.AddRange(zone1);
+            }
+            else if (i == 2)
+            {
+                buildingList.AddRange(zone2);
+            }
+            else if (i == 3)
+            {
+                buildingList.AddRange(zone3);
+            }
+            else if (i == 4)
+            {
+                buildingList.AddRange(zone4);
+            }
+            else if (i == 5)
+            {
+                buildingList.AddRange(zone5);
+            }
+            else if (i == 6)
+            {
+                buildingList.AddRange(zone6);
+            }
+            else if (i == 7)
+            {
+                buildingList.AddRange(zone7);
+            }
+            else
+            {
+                buildingList.AddRange(zone8);
+            }
+            return buildingList;
         }
 
     }

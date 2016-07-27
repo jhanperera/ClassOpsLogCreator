@@ -25,6 +25,7 @@ namespace ClassOpsLogCreator
     public class SchoolZoning
     {
         private Graph schoolGraph;
+        private ClassInfo classinfo;
         private int numberOfBuildings;
         private int numberOfConnections;
 
@@ -34,10 +35,11 @@ namespace ClassOpsLogCreator
         /// </summary>
         public SchoolZoning()
         {
-            //Create the graph and add he edges acroding to the 
+            //Create the graph
             schoolGraph = new Graph();
+            classinfo = new ClassInfo();
+            
             this.numberOfBuildings = schoolGraph.numberOfVerticies();
-   
             this.numberOfConnections = schoolGraph.numberOfEdges();
         }
 
@@ -65,407 +67,6 @@ namespace ClassOpsLogCreator
          */
 
         /// <summary>
-        /// This will return a List of buildings that are in one of two zones
-        /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
-        public List<string> getZone_2(int i)
-        {
-            string[] zone1 = new string[] //North West
-            {
-                "MC", "WC", "VC", "FC", "LUM", "LSB", "CC", "BC", "CB", "PSE",
-                "LAS", "FRQ", "SLH", "YL", "STC", "BSB", "SC", "CLH", "BSB", "SCL", "CSQ"
-            };
-
-            string[] zone2 = new string[] //South East
-            {
-                "KT", "R", "VH", "ACW", "CFT", "ACE", "SSB", "HNE", "CFA", "TEL",
-                "ELC", "OSG", "ATK", "BGS"
-            };
-
-            List <string> buildingList = new List<string>();
-            //North Zone
-            if(i == 1)
-            {
-                buildingList.AddRange(zone1);
-            }
-            //South Zone
-            else
-            {
-                buildingList.AddRange(zone2);
-            }
-
-            return buildingList;
-        }
-
-        /// <summary>
-        /// This will return a List of buildings that are in one of three zones
-        /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
-        public List<string> getZone_3(int i)
-        {
-            string[] zone1 = new string[] // North
-            {
-                "MC", "WC", "VC", "FC", "LUM", "LSB", "CC", "BC", "CB", "PSE",
-                "SC", "LAS", "FRQ", "SLH"
-            };
-
-            string[] zone2 = new string[] //Central
-            {
-                "CLH", "BSB", "STC", "BRG", "SCL", "STC", "CSQ", "R", "VH",
-                "ACW", "HNE", "OSG"
-            };
-
-            string[] zone3 = new string[] //South
-            {
-                "CFT", "ACE", "SSB", "CFA", "TEL", "ELC", "BGS", "ATK", "YL",
-                "KT"
-            };
-
-            List<string> buildingList = new List<string>();
-            if (i == 1)
-            {
-                buildingList.AddRange(zone1);
-            }
-            else if (i == 2)
-            {
-                buildingList.AddRange(zone2);
-            }
-            else
-            {
-                buildingList.AddRange(zone3);
-            }
-
-            return buildingList;
-        }
-
-        /// <summary>
-        /// This will return a List of buildings that are in one of four zones
-        /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
-        public List<string> getZone_4(int i)
-        {
-            string[] zone1 = new string[] //North
-            {
-                "MC", "VC", "WC", "FC", "SLH", "STC", "YL", 
-            };
-
-            string[] zone2 = new string[] //West
-            {
-                "LUM", "FRQ", "PSE", "CB", "BC", "CC", "SC", "LSB", "LAS",
-            };
-
-            string[] zone3 = new string[] //Centerl
-            {
-                "CLH", "BSB", "BRG", "SCL", "CSQ", "R", "VH", "HNE", "OSG","ACW"
-            };
-
-            string[] zone4 = new string[] //South
-            {
-                "ATK", "CFT", "ACE", "SSB", "CFA", "TEL", "ELC", "BCS", "KT"
-            };
-
-            List<string> buildingList = new List<string>();
-            if (i == 1)
-            {
-                buildingList.AddRange(zone1);
-            }
-            else if(i == 2)
-            {
-                buildingList.AddRange(zone2);
-            }
-            else if(i == 3)
-            {
-                buildingList.AddRange(zone3);
-            }
-            else
-            {
-                buildingList.AddRange(zone4);
-            }
-            return buildingList;
-        }
-
-        /// <summary>
-        /// This will return a List of buildings that are in one of five zones
-        /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
-        public List<string> getZone_5(int i)
-        {
-            string[] zone1 = new string[]
-             {
-                "MC", "VC", "WC", "FC", "SLH", "YL", "KT"
-             };
-
-            string[] zone2 = new string[]
-            {
-                "LAS", "PSE", "CB", "BC", "CC", "LSB", "SC"
-            };
-
-            string[] zone3 = new string[]
-            {
-                "BRG", "SCL", "CLH", "CSQ", "HNE", "OSG", "R"
-            };
-
-            string[] zone4 = new string[]
-            {
-                "LUM", "FRQ", "BSB", "STC", "VH", "ATK", "ACW"
-            };
-
-            string[] zone5 = new string[]
-            {
-                "CFA", "CFT", "ACE", "TEL", "SSB", "ELC", "BCS"
-            };
-
-            List<string> buildingList = new List<string>();
-            if (i == 1)
-            {
-                buildingList.AddRange(zone1);
-            }
-            else if (i == 2)
-            {
-                buildingList.AddRange(zone2);
-            }
-            else if (i == 3)
-            {
-                buildingList.AddRange(zone3);
-            }
-            else if (i == 4)
-            {
-                buildingList.AddRange(zone4);
-            }
-            else
-            {
-                buildingList.AddRange(zone5);
-            }
-
-            return buildingList;
-        }
-
-        /// <summary>
-        /// This will return a List of buildings that are in one of six zones
-        /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
-        public List<string> getZone_6(int i)
-        {
-            string[] zone1 = new string[]
-             {
-                "MC", "VC", "WC", "FC", "LUM", "SLH"
-             };
-
-            string[] zone2 = new string[]
-            {
-                "PSE", "CB", "BC", "CC", "LSB", "SC"
-            };
-
-            string[] zone3 = new string[]
-            {
-                "LAS", "CLH", "BSB", "FRQ", "YL", "STC"
-            };
-
-            string[] zone4 = new string[]
-            {
-                "KT", "ACE", "TEL", "SSB", "ELC", "BCS"
-            };
-
-            string[] zone5 = new string[]
-            {
-                "CFT", "ACW", "CFA", "ATK", "VH", "R"
-            };
-
-            string[] zone6= new string[]
-            {
-                "BRG", "SCL", "CSQ", "HNE", "OSG"
-            };
-
-            List<string> buildingList = new List<string>();
-            if (i == 1)
-            {
-                buildingList.AddRange(zone1);
-            }
-            else if (i == 2)
-            {
-                buildingList.AddRange(zone2);
-            }
-            else if (i == 3)
-            {
-                buildingList.AddRange(zone3);
-            }
-            else if (i == 4)
-            {
-                buildingList.AddRange(zone4);
-            }
-            else if (i == 5)
-            {
-                buildingList.AddRange(zone5);
-            }
-            else
-            {
-                buildingList.AddRange(zone6);
-            }
-            return buildingList;
-        }
-
-        /// <summary>
-        /// This will return a List of buildings that are in one of seven zones
-        /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
-        public List<string> getZone_7(int i)
-        {
-            string[] zone1 = new string[]
-             {
-                "MC", "VC", "WC", "FC", "SLH"
-             };
-
-            string[] zone2 = new string[]
-            {
-                "CB", "BC", "CC", "LSB", "SC"
-            };
-
-            string[] zone3 = new string[]
-            {
-                "PSE", "LAS", "LUM", "FRQ", "CLH"
-            };
-
-            string[] zone4 = new string[]
-            {
-               "BSB", "STC", "VH", "R", "ATk"
-            };
-
-            string[] zone5 = new string[]
-            {
-                "YL", "KT", "ACW", "CFA", "CFT"
-            };
-
-            string[] zone6 = new string[]
-            {
-                "BRG", "SCL", "CSQ", "HNE", "OSG"
-            };
-
-            string[] zone7 = new string[]
-            {
-                "ACE", "SSB", "TEL", "ELC", "BCS"
-            };
-
-            List<string> buildingList = new List<string>();
-            if (i == 1)
-            {
-                buildingList.AddRange(zone1);
-            }
-            else if (i == 2)
-            {
-                buildingList.AddRange(zone2);
-            }
-            else if (i == 3)
-            {
-                buildingList.AddRange(zone3);
-            }
-            else if (i == 4)
-            {
-                buildingList.AddRange(zone4);
-            }
-            else if (i == 5)
-            {
-                buildingList.AddRange(zone5);
-            }
-            else if( i == 6)
-            {
-                buildingList.AddRange(zone6);
-            }
-            else
-            {
-                buildingList.AddRange(zone7);
-            }
-            return buildingList;
-        }
-
-        /// <summary>
-        /// This will return a List of buildings that are in one of eight zones
-        /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
-        public List<string> getZone_8(int i)
-        {
-            string[] zone1 = new string[]
-             {
-                "MC", "VC", "WC", "FC", "SLH"
-             };
-
-            string[] zone2 = new string[]
-            {
-                "CB", "BC", "CC", "LSB", "SC"
-            };
-
-            string[] zone3 = new string[]
-            {
-                "PSE", "LAS", "LUM", "FRQ", "CLH"
-            };
-
-            string[] zone4 = new string[]
-            {
-               "BSB", "STC", "VH", "R"
-            };
-
-            string[] zone5 = new string[]
-            {
-                "YL", "KT", "ACW", "CFA", "CFT"
-            };
-
-            string[] zone6 = new string[]
-            {
-                "BRG", "SCL", "CSQ"
-            };
-
-            string[] zone7 = new string[]
-            {
-                "ACE", "SSB", "TEL", "ELC", "BCS"
-            };
-            string[] zone8 = new string[]
-            {
-                "ATK", "OSG", "HNE"
-            };
-
-            List<string> buildingList = new List<string>();
-            if (i == 1)
-            {
-                buildingList.AddRange(zone1);
-            }
-            else if (i == 2)
-            {
-                buildingList.AddRange(zone2);
-            }
-            else if (i == 3)
-            {
-                buildingList.AddRange(zone3);
-            }
-            else if (i == 4)
-            {
-                buildingList.AddRange(zone4);
-            }
-            else if (i == 5)
-            {
-                buildingList.AddRange(zone5);
-            }
-            else if (i == 6)
-            {
-                buildingList.AddRange(zone6);
-            }
-            else if (i == 7)
-            {
-                buildingList.AddRange(zone7);
-            }
-            else
-            {
-                buildingList.AddRange(zone8);
-            }
-            return buildingList;
-        }
-
-        /// <summary>
         /// This method is resposible for the zoning of all the elements in the range.
         /// This will return an array with all the elements in it and with zones.
         /// </summary>
@@ -482,8 +83,8 @@ namespace ClassOpsLogCreator
             //If we have 2 shifts
             if (shiftNumber == 2)
             {
-                List<string> zone1 = getZone_2(1);
-                List<string> zone2 = getZone_2(2);
+                List<string> zone1 = classinfo.getZone_2(1);
+                List<string> zone2 = classinfo.getZone_2(2);
                 string[,] zone1Array = new string[zonedArray.GetUpperBound(0), 7];
                 string[,] zone2Array = new string[zonedArray.GetUpperBound(0), 7];
                 int zone1Index = 0;
@@ -520,9 +121,9 @@ namespace ClassOpsLogCreator
             //If we have 3 Shifts
             else if (shiftNumber == 3)
             {
-                List<string> zone1 = getZone_3(1);
-                List<string> zone2 = getZone_3(2);
-                List<string> zone3 = getZone_3(3);
+                List<string> zone1 = classinfo.getZone_3(1);
+                List<string> zone2 = classinfo.getZone_3(2);
+                List<string> zone3 = classinfo.getZone_3(3);
                 string[,] zone1Array = new string[zonedArray.GetUpperBound(0), 7];
                 string[,] zone2Array = new string[zonedArray.GetUpperBound(0), 7];
                 string[,] zone3Array = new string[zonedArray.GetUpperBound(0), 7];
@@ -567,10 +168,10 @@ namespace ClassOpsLogCreator
             //If we have 4 Shifts
             else if (shiftNumber == 4)
             {
-                List<string> zone1 = getZone_4(1);
-                List<string> zone2 = getZone_4(2);
-                List<string> zone3 = getZone_4(3);
-                List<string> zone4 = getZone_4(4);
+                List<string> zone1 = classinfo.getZone_4(1);
+                List<string> zone2 = classinfo.getZone_4(2);
+                List<string> zone3 = classinfo.getZone_4(3);
+                List<string> zone4 = classinfo.getZone_4(4);
                 string[,] zone1Array = new string[zonedArray.GetUpperBound(0), 7];
                 string[,] zone2Array = new string[zonedArray.GetUpperBound(0), 7];
                 string[,] zone3Array = new string[zonedArray.GetUpperBound(0), 7];
@@ -624,11 +225,11 @@ namespace ClassOpsLogCreator
             //If we have 5 Shifts
             else if (shiftNumber == 5)
             {
-                List<string> zone1 = getZone_5(1);
-                List<string> zone2 = getZone_5(2);
-                List<string> zone3 = getZone_5(3);
-                List<string> zone4 = getZone_5(4);
-                List<string> zone5 = getZone_5(5);
+                List<string> zone1 = classinfo.getZone_5(1);
+                List<string> zone2 = classinfo.getZone_5(2);
+                List<string> zone3 = classinfo.getZone_5(3);
+                List<string> zone4 = classinfo.getZone_5(4);
+                List<string> zone5 = classinfo.getZone_5(5);
                 string[,] zone1Array = new string[zonedArray.GetUpperBound(0), 7];
                 string[,] zone2Array = new string[zonedArray.GetUpperBound(0), 7];
                 string[,] zone3Array = new string[zonedArray.GetUpperBound(0), 7];
@@ -695,12 +296,12 @@ namespace ClassOpsLogCreator
             //If we have 6 Shifts
             else if (shiftNumber == 6)
             {
-                List<string> zone1 = getZone_6(1);
-                List<string> zone2 = getZone_6(2);
-                List<string> zone3 = getZone_6(3);
-                List<string> zone4 = getZone_6(4);
-                List<string> zone5 = getZone_6(5);
-                List<string> zone6 = getZone_6(6);
+                List<string> zone1 = classinfo.getZone_6(1);
+                List<string> zone2 = classinfo.getZone_6(2);
+                List<string> zone3 = classinfo.getZone_6(3);
+                List<string> zone4 = classinfo.getZone_6(4);
+                List<string> zone5 = classinfo.getZone_6(5);
+                List<string> zone6 = classinfo.getZone_6(6);
                 string[,] zone1Array = new string[zonedArray.GetUpperBound(0), 7];
                 string[,] zone2Array = new string[zonedArray.GetUpperBound(0), 7];
                 string[,] zone3Array = new string[zonedArray.GetUpperBound(0), 7];
@@ -777,13 +378,13 @@ namespace ClassOpsLogCreator
             //If we have 7 shifts
             else if (shiftNumber == 7)
             {
-                List<string> zone1 = getZone_7(1);
-                List<string> zone2 = getZone_7(2);
-                List<string> zone3 = getZone_7(3);
-                List<string> zone4 = getZone_7(4);
-                List<string> zone5 = getZone_7(5);
-                List<string> zone6 = getZone_7(6);
-                List<string> zone7 = getZone_7(7);
+                List<string> zone1 = classinfo.getZone_7(1);
+                List<string> zone2 = classinfo.getZone_7(2);
+                List<string> zone3 = classinfo.getZone_7(3);
+                List<string> zone4 = classinfo.getZone_7(4);
+                List<string> zone5 = classinfo.getZone_7(5);
+                List<string> zone6 = classinfo.getZone_7(6);
+                List<string> zone7 = classinfo.getZone_7(7);
                 string[,] zone1Array = new string[zonedArray.GetUpperBound(0), 7];
                 string[,] zone2Array = new string[zonedArray.GetUpperBound(0), 7];
                 string[,] zone3Array = new string[zonedArray.GetUpperBound(0), 7];
@@ -872,14 +473,14 @@ namespace ClassOpsLogCreator
             //If we have 8 shifts
             else if (shiftNumber == 8)
             {
-                List<string> zone1 = getZone_8(1);
-                List<string> zone2 = getZone_8(2);
-                List<string> zone3 = getZone_8(3);
-                List<string> zone4 = getZone_8(4);
-                List<string> zone5 = getZone_8(5);
-                List<string> zone6 = getZone_8(6);
-                List<string> zone7 = getZone_8(7);
-                List<string> zone8 = getZone_8(8);
+                List<string> zone1 = classinfo.getZone_8(1);
+                List<string> zone2 = classinfo.getZone_8(2);
+                List<string> zone3 = classinfo.getZone_8(3);
+                List<string> zone4 = classinfo.getZone_8(4);
+                List<string> zone5 = classinfo.getZone_8(5);
+                List<string> zone6 = classinfo.getZone_8(6);
+                List<string> zone7 = classinfo.getZone_8(7);
+                List<string> zone8 = classinfo.getZone_8(8);
                 string[,] zone1Array = new string[zonedArray.GetUpperBound(0), 7];
                 string[,] zone2Array = new string[zonedArray.GetUpperBound(0), 7];
                 string[,] zone3Array = new string[zonedArray.GetUpperBound(0), 7];

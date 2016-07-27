@@ -441,7 +441,59 @@ namespace ClassOpsLogCreator
             existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);   
         }
 
-       
+        //Closing event 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+
+            // Confirm user wants to close
+            switch (MessageBox.Show(this, "Are you sure you want to close?", "Closing", MessageBoxButtons.YesNo))
+            {
+                case DialogResult.No:
+                    e.Cancel = true;
+                    break;
+                default:
+                    Excel.Application roomSched = new Excel.Application();
+                    Excel.Workbook roomWorkBook = null;
+                    Excel.Worksheet roomSheet1 = null;
+                    roomSched.Visible = false;
+
+                    try
+                    {
+                        //This should look for the file
+                        roomWorkBook = roomSched.Workbooks.Open(ROOM_SCHED);
+                        //Work in worksheet number 1
+                        roomSheet1 = (Excel.Worksheet)roomWorkBook.Sheets[1];
+
+                    }
+                    catch (Exception)
+                    {
+                        //File not found...
+
+                        Quit();
+                        return;
+                    }
+                    //Clean out the clo file
+                    Excel.Range clearAllRange = roomSheet1.UsedRange;
+                    clearAllRange.Clear();
+                    //Save
+                    roomWorkBook.Save();
+                    //Clean up
+                    if (roomWorkBook != null)
+                    {
+                        roomWorkBook.Close(false, Type.Missing, Type.Missing);
+                        roomSched.Quit();
+                        System.Runtime.InteropServices.Marshal.FinalReleaseComObject(roomSched);
+                        roomSched = null;
+                        roomWorkBook = null;
+                        roomSheet1 = null;
+                    }
+                    break;
+            }
+        }
+
         /// <summary>
         /// Close all open instances of Excel and Garbage collects.
         /// </summary>
