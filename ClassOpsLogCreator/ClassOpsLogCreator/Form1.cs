@@ -455,12 +455,12 @@ namespace ClassOpsLogCreator
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
 
             // Confirm user wants to close
-            switch (MessageBox.Show(this, "Are you sure you want to close?", "Closing", MessageBoxButtons.YesNo))
+            switch (MessageBox.Show(this, "Closing, clear CLO?","Closing", MessageBoxButtons.YesNo))
             {
                 //No the person does not want to close the application
                 //Else we go to defualt case
                 case DialogResult.No:
-                    e.Cancel = true;
+                    //Close with no clear
                     break;
                 default:
                     Excel.Application roomSched = new Excel.Application();
