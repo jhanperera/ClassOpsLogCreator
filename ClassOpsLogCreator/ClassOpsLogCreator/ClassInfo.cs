@@ -172,14 +172,14 @@ namespace ClassOpsLogCreator
         {
             string[] zone1 = new string[] //North West
             {
-                "MC", "WC", "VC", "FC", "LUM", "LSB", "CC", "BC", "CB", "PSE",
-                "LAS", "FRQ", "SLH", "YL", "STC", "BSB", "SC", "CLH", "BSB", "SCL", "CSQ"
+                "CLH", "FRQ", "LAS", "LUM", "CC", "LSB", "BC", "PSE", "SC", "BSB", "SLH", "VH",
+                "FC", "MC", "VC", "WC"
             };
 
             string[] zone2 = new string[] //South East
             {
-                "KT", "R", "VH", "ACW", "CFT", "ACE", "SSB", "HNE", "CFA", "TEL",
-                "ELC", "OSG", "ATK", "BGS"
+                "CSQ", "SLH", "R", "ACW", "CFT", "CFA", "TEL", "STC", "ATK", "BCS", "SSB", "ACE", "YL",
+                "KT", "HNE", "OSG", "ELC"
             };
 
             List<string> buildingList = new List<string>();
@@ -246,24 +246,24 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         public List<string> getZone_4(int i)
         {
-            string[] zone1 = new string[] //North
+            string[] zone1 = new string[]
             {
-                "MC", "VC", "WC", "FC", "SLH", "STC", "YL",
+               "CLH", "FRQ", "LAS", "LUM", "SLH", "BSB", "FC", "MC", "VC", "WC","CC", "CB", "LSB", "BC", "PSE", "SC"
             };
 
-            string[] zone2 = new string[] //West
+            string[] zone2 = new string[]
             {
-                "LUM", "FRQ", "PSE", "CB", "BC", "CC", "SC", "LSB", "LAS",
+                "CSQ", "R", "SCL", "ACW", "HNE", "OSG", "VH"
             };
 
-            string[] zone3 = new string[] //Centerl
+            string[] zone3 = new string[]
             {
-                "CLH", "BSB", "BRG", "SCL", "CSQ", "R", "VH", "HNE", "OSG","ACW"
+                "CFT", "CFA", "TEL", "STC", "ATK"
             };
 
-            string[] zone4 = new string[] //South
+            string[] zone4 = new string[]
             {
-                "ATK", "CFT", "ACE", "SSB", "CFA", "TEL", "ELC", "BCS", "KT"
+               "BCS", "SSB", "ACE", "YL", "KT", "ELC"
             };
 
             List<string> buildingList = new List<string>();
@@ -294,28 +294,28 @@ namespace ClassOpsLogCreator
         public List<string> getZone_5(int i)
         {
             string[] zone1 = new string[]
-             {
-                "MC", "VC", "WC", "FC", "SLH", "YL", "KT"
-             };
+            {
+               "CLH", "FRQ", "LAS", "LUM", "SLH", "BSB", "FC", "MC", "VC", "WC"
+            };
 
             string[] zone2 = new string[]
             {
-                "LAS", "PSE", "CB", "BC", "CC", "LSB", "SC"
+                "CC", "CB", "LSB", "BC", "PSE", "SC"
             };
 
             string[] zone3 = new string[]
             {
-                "BRG", "SCL", "CLH", "CSQ", "HNE", "OSG", "R"
+                "CSQ", "R", "SCL", "ACW", "HNE", "OSG", "VH"
             };
 
             string[] zone4 = new string[]
             {
-                "LUM", "FRQ", "BSB", "STC", "VH", "ATK", "ACW"
+               "CFT", "CFA", "TEL", "STC", "ATK"
             };
 
             string[] zone5 = new string[]
             {
-                "CFA", "CFT", "ACE", "TEL", "SSB", "ELC", "BCS"
+                "BCS", "SSB", "ACE", "YL", "KT", "ELC"
             };
 
             List<string> buildingList = new List<string>();
@@ -351,34 +351,35 @@ namespace ClassOpsLogCreator
         public List<string> getZone_6(int i)
         {
             string[] zone1 = new string[]
-             {
-                "MC", "VC", "WC", "FC", "LUM", "SLH"
-             };
+            {
+               "CLH", "FRQ", "LAS", "LUM", "SLH", "BSB"
+            };
 
             string[] zone2 = new string[]
             {
-                "PSE", "CB", "BC", "CC", "LSB", "SC"
+                "CC", "CB", "LSB", "BC", "PSE", "SC"
             };
 
             string[] zone3 = new string[]
             {
-                "LAS", "CLH", "BSB", "FRQ", "YL", "STC"
+                "CSQ", "R", "SCL", "ACW", "HNE", "OSG", "VH"
             };
 
             string[] zone4 = new string[]
             {
-                "KT", "ACE", "TEL", "SSB", "ELC", "BCS"
+               "FC", "MC", "VC", "WC"
             };
 
             string[] zone5 = new string[]
             {
-                "CFT", "ACW", "CFA", "ATK", "VH", "R"
+                "CFT", "CFA", "TEL", "STC", "ATK"
             };
 
             string[] zone6 = new string[]
             {
-                "BRG", "SCL", "CSQ", "HNE", "OSG"
+                "BCS", "SSB", "ACE", "YL", "KT", "ELC"
             };
+
 
             List<string> buildingList = new List<string>();
             if (i == 1)
@@ -416,38 +417,38 @@ namespace ClassOpsLogCreator
         public List<string> getZone_7(int i)
         {
             string[] zone1 = new string[]
-             {
-                "MC", "VC", "WC", "FC", "SLH"
-             };
+            {
+               "CLH", "FRQ", "LAS", "LUM"
+            };
 
             string[] zone2 = new string[]
             {
-                "CB", "BC", "CC", "LSB", "SC"
+                "CC", "CB", "LSB", "BC", "PSE", "SC"
             };
 
             string[] zone3 = new string[]
             {
-                "PSE", "LAS", "LUM", "FRQ", "CLH"
+                "BSB", "SLH", "VH"
             };
 
             string[] zone4 = new string[]
             {
-               "BSB", "STC", "VH", "R", "ATk"
+               "CSQ", "R", "SCL", "ACW", "HNE", "OSG"
             };
 
             string[] zone5 = new string[]
             {
-                "YL", "KT", "ACW", "CFA", "CFT"
+                "FC", "MC", "VC", "WC"
             };
 
             string[] zone6 = new string[]
             {
-                "BRG", "SCL", "CSQ", "HNE", "OSG"
+                "CFT", "CFA", "TEL", "STC", "ATK"
             };
 
             string[] zone7 = new string[]
             {
-                "ACE", "SSB", "TEL", "ELC", "BCS"
+                "BCS", "SSB", "ACE", "YL", "KT", "ELC"
             };
 
             List<string> buildingList = new List<string>();
@@ -491,41 +492,41 @@ namespace ClassOpsLogCreator
         {
             string[] zone1 = new string[]
              {
-                "MC", "VC", "WC", "FC", "SLH"
+                "CLH", "FRQ", "LAS", "LUM", "WSC"
              };
 
             string[] zone2 = new string[]
             {
-                "CB", "BC", "CC", "LSB", "SC"
+                "CC", "CB", "LSB", "BC", "PSE", "SHR", "TM", "SC"
             };
 
             string[] zone3 = new string[]
             {
-                "PSE", "LAS", "LUM", "FRQ", "CLH"
+                "BSB", "SLH", "VH"
             };
 
             string[] zone4 = new string[]
             {
-               "BSB", "STC", "VH", "R"
+               "CSQ", "R", "SCL", "ACW"
             };
 
             string[] zone5 = new string[]
             {
-                "YL", "KT", "ACW", "CFA", "CFT"
+                "FC", "MC", "VC", "WC"
             };
 
             string[] zone6 = new string[]
             {
-                "BRG", "SCL", "CSQ"
+                "CFT", "CFA", "TEL", "STC", "ATK"
             };
 
             string[] zone7 = new string[]
             {
-                "ACE", "SSB", "TEL", "ELC", "BCS"
+                "BCS", "SSB", "ACE", "YL", "KT", "ELC"
             };
             string[] zone8 = new string[]
             {
-                "ATK", "OSG", "HNE"
+                "HNE", "OSG"
             };
 
             List<string> buildingList = new List<string>();

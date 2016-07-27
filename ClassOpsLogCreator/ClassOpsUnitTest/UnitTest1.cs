@@ -91,24 +91,5 @@ namespace ClassOpsUnitTest
             //We should get 
             Assert.AreEqual((int)35, (int)check);
         }
-
-        [TestMethod]
-        public void Create_SchoolZongin_Check_zone2()
-        {
-            SchoolZoning sz = new SchoolZoning();
-
-            List<string> zone1 = sz.getZone_2(1);
-
-            string[] zone1array = new string[]
-            {
-                "MC", "WC", "VC", "FC", "LUM", "LSB", "CC", "BC", "CB", "PSE",
-                "LAS", "FRQ", "SLH", "KT", "YL", "STC", "BSB", "SC"
-            };
-            List<string> expected = new List<string>();
-            expected.AddRange(zone1array);
-
-            CollectionAssert.AreEqual(expected, zone1);
-        }
-
     }
 }
