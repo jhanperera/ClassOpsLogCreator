@@ -448,6 +448,8 @@ namespace ClassOpsLogCreator
                 workDone = true;
                 Quit();
             }
+            //Enable the button
+            createCLOBTN.Enabled = true;
 
             //Open the CLO file
             if (workDone)
