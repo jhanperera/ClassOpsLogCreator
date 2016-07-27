@@ -441,16 +441,24 @@ namespace ClassOpsLogCreator
             existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);   
         }
 
-        //Closing event 
+        /// <summary>
+        /// This will add a small addiction to the closing operation of the application
+        /// Clear he clo file and clean up the memory.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
+            //We are going to use the base onFormClose operations and add more
             base.OnFormClosing(e);
 
+            //If the sysstem gets shutdown we close eveything gracefully
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
 
             // Confirm user wants to close
             switch (MessageBox.Show(this, "Are you sure you want to close?", "Closing", MessageBoxButtons.YesNo))
             {
+                //No the person does not want to close the application
+                //Else we go to defualt case
                 case DialogResult.No:
                     e.Cancel = true;
                     break;
@@ -475,12 +483,14 @@ namespace ClassOpsLogCreator
                         Quit();
                         return;
                     }
+
                     //Clean out the clo file
                     Excel.Range clearAllRange = roomSheet1.UsedRange;
                     clearAllRange.Clear();
                     //Save
                     roomWorkBook.Save();
-                    //Clean up
+
+                    //Clean up the memory
                     if (roomWorkBook != null)
                     {
                         roomWorkBook.Close(false, Type.Missing, Type.Missing);
