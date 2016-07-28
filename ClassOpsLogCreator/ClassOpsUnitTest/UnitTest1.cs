@@ -81,7 +81,6 @@ namespace ClassOpsUnitTest
             CollectionAssert.AreEqual(check2, weGet2);
         }
 
-
         [TestMethod]
         public void Create_SchoolZoning_And_Check()
         {
@@ -90,6 +89,36 @@ namespace ClassOpsUnitTest
             int check = sz.getNumberOfBuilding();
             //We should get 
             Assert.AreEqual((int)35, (int)check);
+        }
+
+        [TestMethod]
+        public void Create_TaskRank_Check_Ranks()
+        {
+            TaskRanks tr = new TaskRanks();
+
+            int taskRank = tr.getTaskValue("Demo");
+            //We should get 
+            Assert.AreEqual(2, taskRank);
+        }
+
+        [TestMethod]
+        public void Create_TaskRank_Check_TotalTaskRanks()
+        {
+            TaskRanks tr = new TaskRanks();
+
+            string[,] input = new string[,]
+            {
+                { "","Crestron Logout","7/27/16", "1400","R","N102", "" },
+                { "","Crestron Logout","7/27/16", "1400","R","N102", "" },
+                { "","Crestron Logout","7/27/16", "1400","R","N102", "" },
+                { "","Crestron Logout","7/27/16", "1400","R","N102", "" },
+                { "","CLOSE ACE017","7/27/16", "1400","R","N102", "" },
+                { "","CLOSE ACE017","7/27/16", "1400","R","N102", "" },
+
+            };
+            int taskRank = tr.getTotalTaskValue(input);
+            //We should get 
+            Assert.AreEqual(4, taskRank);
         }
     }
 }

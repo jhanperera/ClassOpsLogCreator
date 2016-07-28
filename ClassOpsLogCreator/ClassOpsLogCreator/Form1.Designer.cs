@@ -84,7 +84,7 @@
             this.workProgressBar.Location = new System.Drawing.Point(0, 293);
             this.workProgressBar.Margin = new System.Windows.Forms.Padding(4);
             this.workProgressBar.Name = "workProgressBar";
-            this.workProgressBar.Size = new System.Drawing.Size(590, 25);
+            this.workProgressBar.Size = new System.Drawing.Size(548, 25);
             this.workProgressBar.TabIndex = 7;
             // 
             // tabControl
@@ -95,7 +95,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(601, 267);
+            this.tabControl.Size = new System.Drawing.Size(548, 267);
             this.tabControl.TabIndex = 8;
             // 
             // tab1
@@ -104,7 +104,7 @@
             this.tab1.Location = new System.Drawing.Point(4, 30);
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Windows.Forms.Padding(3);
-            this.tab1.Size = new System.Drawing.Size(593, 233);
+            this.tab1.Size = new System.Drawing.Size(540, 233);
             this.tab1.TabIndex = 0;
             this.tab1.Text = "Log Creator";
             this.tab1.UseVisualStyleBackColor = true;
@@ -127,7 +127,7 @@
             this.mainPanel.Controls.Add(this.pictureBox1);
             this.mainPanel.Location = new System.Drawing.Point(-4, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(590, 242);
+            this.mainPanel.Size = new System.Drawing.Size(548, 242);
             this.mainPanel.TabIndex = 53;
             // 
             // toLabel1
@@ -171,10 +171,10 @@
             // 
             // createBTN
             // 
-            this.createBTN.Location = new System.Drawing.Point(377, 182);
+            this.createBTN.Location = new System.Drawing.Point(377, 191);
             this.createBTN.Margin = new System.Windows.Forms.Padding(4);
             this.createBTN.Name = "createBTN";
-            this.createBTN.Size = new System.Drawing.Size(195, 43);
+            this.createBTN.Size = new System.Drawing.Size(158, 31);
             this.createBTN.TabIndex = 50;
             this.createBTN.Text = "Create Logs";
             this.createBTN.UseVisualStyleBackColor = true;
@@ -249,7 +249,7 @@
             this.tab2.Location = new System.Drawing.Point(4, 30);
             this.tab2.Name = "tab2";
             this.tab2.Padding = new System.Windows.Forms.Padding(3);
-            this.tab2.Size = new System.Drawing.Size(593, 233);
+            this.tab2.Size = new System.Drawing.Size(540, 233);
             this.tab2.TabIndex = 1;
             this.tab2.Text = "CLO Generator";
             // 
@@ -264,9 +264,9 @@
             // 
             // createCLOBTN
             // 
-            this.createCLOBTN.Location = new System.Drawing.Point(185, 146);
+            this.createCLOBTN.Location = new System.Drawing.Point(197, 154);
             this.createCLOBTN.Name = "createCLOBTN";
-            this.createCLOBTN.Size = new System.Drawing.Size(195, 43);
+            this.createCLOBTN.Size = new System.Drawing.Size(147, 32);
             this.createCLOBTN.TabIndex = 58;
             this.createCLOBTN.Text = "Create CLO log";
             this.createCLOBTN.UseVisualStyleBackColor = true;
@@ -328,7 +328,7 @@
             this.helpToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(590, 29);
+            this.menuStrip1.Size = new System.Drawing.Size(548, 29);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -475,7 +475,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(590, 318);
+            this.ClientSize = new System.Drawing.Size(548, 318);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.workProgressBar);
             this.Controls.Add(this.menuStrip1);

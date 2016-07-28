@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 /// </summary>
 namespace ClassOpsLogCreator
 {
-    class TaskRanks
+    public class TaskRanks
     {
         private string[] value0 = null;
         private string[] value1 = null;
@@ -34,27 +34,76 @@ namespace ClassOpsLogCreator
             //Value = 0 tasks
             value0 = new string[]
             {
-
+                "AV Shutdown",  "Crestron Logout", "Proactive Classroom Check",
+                "Other", "SCLD Student Logout"
             };
 
             // Value = 1 tasks
             value1 = new string[]
            {
-
+               "Operator", "Replace Battery", "SCLD Student Event"
            };
 
             //Value = 2 tasks
              value2 = new string[]
            {
-
+               "Inperson Technical Assistance", "Demo", "CLOSE ACE017", "Lockup",
+               "Pickup Large PA","Pickup Mic", "Pickup PC","Pickup Projector",
+               "Pickup Skype Kit","Pickup Small PA"
            };
 
             // Value = 3 tasks
             value3 = new string[]
            {
-
+               "Setup Large PA","Setup Mic","Setup PC","Setup Projector",
+               "Setup Skype Kit","Setup Small PA"
            };
+        }
 
+        /// <summary>
+        /// This method evalutes the current task and determines the 
+        /// weight of the task. 
+        /// 
+        /// return -1 if the task does not exist in our database                                                                                                                                                                                                                                                                  
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
+        public int getTaskValue(string task)
+        {
+            int value = -1;
+            if(value0.Contains(task))
+            {
+                value = 0;
+            }
+            else if (value1.Contains(task))
+            {
+                value = 1;
+            }
+            else if (value2.Contains(task))
+            {
+                value = 2;
+            }
+            else if (value3.Contains(task))
+            {
+                value = 3;
+            }
+            return value;
+        }
+
+        /// <summary>
+        /// This method will return the total task value of 
+        /// said zone
+        /// </summary>
+        /// <param name="taskArray"></param>
+        /// <returns></returns>
+        public int getTotalTaskValue(string[,] taskArray)
+        {
+            int value = 0;
+            for(int i = 0; i <= taskArray.GetUpperBound(0); i++)
+            {
+                value += this.getTaskValue(taskArray[i, 1]);
+            }
+            return value;
         }
     }
 }

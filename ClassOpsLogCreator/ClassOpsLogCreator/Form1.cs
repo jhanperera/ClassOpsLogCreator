@@ -677,6 +677,7 @@ namespace ClassOpsLogCreator
         {            
             if(logoutMasterWorkBook != null)
             {
+                
                 logoutMasterWorkBook.Close(false, Type.Missing, Type.Missing);
                 logoutMaster.Quit();
                 System.Runtime.InteropServices.Marshal.FinalReleaseComObject(logoutMaster);
