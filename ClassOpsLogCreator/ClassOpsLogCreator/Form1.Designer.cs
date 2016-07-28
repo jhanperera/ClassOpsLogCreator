@@ -70,6 +70,15 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.plusBTN = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.endHour2 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo4 = new System.Windows.Forms.ComboBox();
+            this.numberOfShiftsLabel2 = new System.Windows.Forms.Label();
+            this.shiftTime2 = new System.Windows.Forms.Label();
+            this.numberOfShiftsCombo2 = new System.Windows.Forms.ComboBox();
+            this.startHour2 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo3 = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.tab1.SuspendLayout();
             this.mainPanel.SuspendLayout();
@@ -81,7 +90,7 @@
             // workProgressBar
             // 
             this.workProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.workProgressBar.Location = new System.Drawing.Point(0, 293);
+            this.workProgressBar.Location = new System.Drawing.Point(0, 292);
             this.workProgressBar.Margin = new System.Windows.Forms.Padding(4);
             this.workProgressBar.Name = "workProgressBar";
             this.workProgressBar.Size = new System.Drawing.Size(548, 25);
@@ -89,13 +98,16 @@
             // 
             // tabControl
             // 
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tab1);
             this.tabControl.Controls.Add(this.tab2);
             this.tabControl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl.Location = new System.Drawing.Point(0, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(548, 267);
+            this.tabControl.Size = new System.Drawing.Size(548, 264);
             this.tabControl.TabIndex = 8;
             // 
             // tab1
@@ -104,15 +116,27 @@
             this.tab1.Location = new System.Drawing.Point(4, 30);
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Windows.Forms.Padding(3);
-            this.tab1.Size = new System.Drawing.Size(540, 233);
+            this.tab1.Size = new System.Drawing.Size(540, 230);
             this.tab1.TabIndex = 0;
             this.tab1.Text = "Log Creator";
             this.tab1.UseVisualStyleBackColor = true;
             // 
             // mainPanel
             // 
+            this.mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.mainPanel.BackColor = System.Drawing.SystemColors.Menu;
             this.mainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.mainPanel.Controls.Add(this.label1);
+            this.mainPanel.Controls.Add(this.endHour2);
+            this.mainPanel.Controls.Add(this.am_pmCombo4);
+            this.mainPanel.Controls.Add(this.numberOfShiftsLabel2);
+            this.mainPanel.Controls.Add(this.shiftTime2);
+            this.mainPanel.Controls.Add(this.numberOfShiftsCombo2);
+            this.mainPanel.Controls.Add(this.startHour2);
+            this.mainPanel.Controls.Add(this.am_pmCombo3);
+            this.mainPanel.Controls.Add(this.plusBTN);
             this.mainPanel.Controls.Add(this.toLabel1);
             this.mainPanel.Controls.Add(this.destinationLabel);
             this.mainPanel.Controls.Add(this.textBox1);
@@ -127,7 +151,7 @@
             this.mainPanel.Controls.Add(this.pictureBox1);
             this.mainPanel.Location = new System.Drawing.Point(-4, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(548, 242);
+            this.mainPanel.Size = new System.Drawing.Size(548, 231);
             this.mainPanel.TabIndex = 53;
             // 
             // toLabel1
@@ -142,9 +166,10 @@
             // 
             // destinationLabel
             // 
+            this.destinationLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.destinationLabel.AutoEllipsis = true;
             this.destinationLabel.AutoSize = true;
-            this.destinationLabel.Location = new System.Drawing.Point(13, 169);
+            this.destinationLabel.Location = new System.Drawing.Point(13, 171);
             this.destinationLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.destinationLabel.Name = "destinationLabel";
             this.destinationLabel.Size = new System.Drawing.Size(150, 21);
@@ -153,8 +178,9 @@
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(11, 194);
+            this.textBox1.Location = new System.Drawing.Point(11, 196);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(340, 29);
@@ -171,7 +197,8 @@
             // 
             // createBTN
             // 
-            this.createBTN.Location = new System.Drawing.Point(377, 191);
+            this.createBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.createBTN.Location = new System.Drawing.Point(377, 193);
             this.createBTN.Margin = new System.Windows.Forms.Padding(4);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(158, 31);
@@ -468,6 +495,100 @@
             this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
             this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
             // 
+            // plusBTN
+            // 
+            this.plusBTN.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.plusBTN.Location = new System.Drawing.Point(468, 102);
+            this.plusBTN.Name = "plusBTN";
+            this.plusBTN.Size = new System.Drawing.Size(67, 30);
+            this.plusBTN.TabIndex = 53;
+            this.plusBTN.Text = "+";
+            this.plusBTN.UseVisualStyleBackColor = true;
+            this.plusBTN.Click += new System.EventHandler(this.plusBTN_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(348, 170);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(24, 21);
+            this.label1.TabIndex = 61;
+            this.label1.Text = "to";
+            this.label1.Visible = false;
+            // 
+            // endHour2
+            // 
+            this.endHour2.FormattingEnabled = true;
+            this.endHour2.Location = new System.Drawing.Point(377, 167);
+            this.endHour2.Margin = new System.Windows.Forms.Padding(4);
+            this.endHour2.Name = "endHour2";
+            this.endHour2.Size = new System.Drawing.Size(83, 29);
+            this.endHour2.TabIndex = 59;
+            this.endHour2.Visible = false;
+            // 
+            // am_pmCombo4
+            // 
+            this.am_pmCombo4.FormattingEnabled = true;
+            this.am_pmCombo4.Location = new System.Drawing.Point(468, 167);
+            this.am_pmCombo4.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo4.Name = "am_pmCombo4";
+            this.am_pmCombo4.Size = new System.Drawing.Size(67, 29);
+            this.am_pmCombo4.TabIndex = 60;
+            this.am_pmCombo4.Visible = false;
+            // 
+            // numberOfShiftsLabel2
+            // 
+            this.numberOfShiftsLabel2.AutoSize = true;
+            this.numberOfShiftsLabel2.Location = new System.Drawing.Point(183, 209);
+            this.numberOfShiftsLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.numberOfShiftsLabel2.Name = "numberOfShiftsLabel2";
+            this.numberOfShiftsLabel2.Size = new System.Drawing.Size(130, 21);
+            this.numberOfShiftsLabel2.TabIndex = 58;
+            this.numberOfShiftsLabel2.Text = "Number of shifts:";
+            this.numberOfShiftsLabel2.Visible = false;
+            // 
+            // shiftTime2
+            // 
+            this.shiftTime2.AutoSize = true;
+            this.shiftTime2.Location = new System.Drawing.Point(183, 144);
+            this.shiftTime2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.shiftTime2.Name = "shiftTime2";
+            this.shiftTime2.Size = new System.Drawing.Size(176, 21);
+            this.shiftTime2.TabIndex = 57;
+            this.shiftTime2.Text = "Please select shift times:";
+            this.shiftTime2.Visible = false;
+            // 
+            // numberOfShiftsCombo2
+            // 
+            this.numberOfShiftsCombo2.FormattingEnabled = true;
+            this.numberOfShiftsCombo2.Location = new System.Drawing.Point(183, 234);
+            this.numberOfShiftsCombo2.Margin = new System.Windows.Forms.Padding(4);
+            this.numberOfShiftsCombo2.Name = "numberOfShiftsCombo2";
+            this.numberOfShiftsCombo2.Size = new System.Drawing.Size(177, 29);
+            this.numberOfShiftsCombo2.TabIndex = 56;
+            this.numberOfShiftsCombo2.Visible = false;
+            // 
+            // startHour2
+            // 
+            this.startHour2.FormattingEnabled = true;
+            this.startHour2.Location = new System.Drawing.Point(183, 167);
+            this.startHour2.Margin = new System.Windows.Forms.Padding(4);
+            this.startHour2.Name = "startHour2";
+            this.startHour2.Size = new System.Drawing.Size(82, 29);
+            this.startHour2.TabIndex = 54;
+            this.startHour2.Visible = false;
+            // 
+            // am_pmCombo3
+            // 
+            this.am_pmCombo3.FormattingEnabled = true;
+            this.am_pmCombo3.Location = new System.Drawing.Point(273, 167);
+            this.am_pmCombo3.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo3.Name = "am_pmCombo3";
+            this.am_pmCombo3.Size = new System.Drawing.Size(67, 29);
+            this.am_pmCombo3.TabIndex = 55;
+            this.am_pmCombo3.Visible = false;
+            // 
             // LogCreator
             // 
             this.AllowDrop = true;
@@ -475,7 +596,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(548, 318);
+            this.ClientSize = new System.Drawing.Size(548, 317);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.workProgressBar);
             this.Controls.Add(this.menuStrip1);
@@ -546,6 +667,15 @@
         private System.Windows.Forms.ComboBox cloAm_pmCombo1;
         private System.Windows.Forms.Button createCLOBTN;
         private System.Windows.Forms.Label selectTimeLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox endHour2;
+        private System.Windows.Forms.ComboBox am_pmCombo4;
+        private System.Windows.Forms.Label numberOfShiftsLabel2;
+        private System.Windows.Forms.Label shiftTime2;
+        private System.Windows.Forms.ComboBox numberOfShiftsCombo2;
+        private System.Windows.Forms.ComboBox startHour2;
+        private System.Windows.Forms.ComboBox am_pmCombo3;
+        private System.Windows.Forms.Button plusBTN;
     }
 }
 

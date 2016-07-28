@@ -712,5 +712,26 @@ namespace ClassOpsLogCreator
             AboutBox box = new AboutBox();
             box.ShowDialog();
         }
+
+
+        /// <summary>
+        /// When the + button is clicked
+        /// 
+        /// Make the new controls apear and extend the frame
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void plusBTN_Click(object sender, EventArgs e)
+        {
+            //Extend the frame
+            this.Height = 437;
+            this.shiftTime2.Visible = true;
+            this.startHour2.Visible = true;
+            this.am_pmCombo3.Visible = true;
+            this.endHour2.Visible = true;
+            this.am_pmCombo4.Visible = true;
+            this.numberOfShiftsLabel2.Visible = true;
+            this.numberOfShiftsCombo2.Visible = true;
+        }
     }
 }
