@@ -140,7 +140,7 @@ namespace ClassOpsLogCreator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void createBTN_Click(object sender, EventArgs e)
+        private void createBTN_Click_1(object sender, EventArgs e)
         {
             //Get the times set by the combo box and the number of shifts
             startTimeFromCombo = this.startHour1.GetItemText(this.startHour1.SelectedItem) + "" + this.am_pmCombo1.GetItemText(this.am_pmCombo1.SelectedItem);
@@ -366,7 +366,7 @@ namespace ClassOpsLogCreator
             {
                 MessageBox.Show(e.Error.Message, "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.textBox1.Text = "Please ensure files are in the correct location.";
+                this.textBox1.Text = "Something went wrong!";
                 this.workProgressBar.Value = 0;
                 this.workProgressBar.Refresh();
                 Quit();
@@ -423,7 +423,6 @@ namespace ClassOpsLogCreator
             {
                 MessageBox.Show(e.Error.Message, "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.textBox1.Text = "Please ensure files are in the correct location.";
                 this.workProgressBar.Value = 0;
                 this.workProgressBar.Refresh();
                 Quit();
@@ -436,7 +435,6 @@ namespace ClassOpsLogCreator
                 // the DoWork event handler, the Cancelled
                 // flag may not have been set, even though
                 // CancelAsync was called.
-                textBox1.Text = "Canceled";
                 this.workProgressBar.Value = 0;
                 this.workProgressBar.Refresh();
                 Quit();
@@ -697,6 +695,12 @@ namespace ClassOpsLogCreator
                 existingMasterWorkSheet = null;
             }
             GC.Collect();  
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox box = new AboutBox();
+            box.ShowDialog();
         }
     }
 }

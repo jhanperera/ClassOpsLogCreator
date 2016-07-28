@@ -63,6 +63,16 @@ namespace ClassOpsLogCreator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AboutInfoPICTURE {
+            get {
+                object obj = ResourceManager.GetObject("AboutInfoPICTURE", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Main_thread_image {
             get {
                 object obj = ResourceManager.GetObject("Main_thread_image", resourceCulture);

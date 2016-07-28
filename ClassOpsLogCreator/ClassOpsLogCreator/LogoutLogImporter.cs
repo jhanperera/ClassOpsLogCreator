@@ -188,14 +188,10 @@ namespace ClassOpsLogCreator
         private string[,] convertToString2DArray(string[] classArray, string[] timeArray)
         {
             //Check if the clo is empty or not
+            //Throw an excpetion to cause the system to hault
             if(classArray.GetUpperBound(0) < 1)
             {
-                MessageBox.Show("Error: It seems the CLO is empty!",
-                                 "File format error",
-                                  MessageBoxButtons.OK,
-                                  MessageBoxIcon.Exclamation,
-                                  MessageBoxDefaultButton.Button1);
-                return new string[1, 1];
+                throw new System.IO.FileLoadException("Error: It seems the CLO is empty!");
             }
 
             masterArray = new string[classArray.GetUpperBound(0), 4];
