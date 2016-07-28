@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 
-/// </summary>
-/// /// <summary>
+/// <summary>
 /// 
 /// Author: Jhan Perera
 /// Department: UIT Client Services

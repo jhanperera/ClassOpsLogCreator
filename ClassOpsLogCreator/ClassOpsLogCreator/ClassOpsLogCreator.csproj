@@ -103,6 +103,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TaskRanks.cs" />
     <Compile Include="ZoneSuperLogImporter.cs" />
     <Compile Include="ClassInfo.cs" />
     <Compile Include="TimeItem.cs" />

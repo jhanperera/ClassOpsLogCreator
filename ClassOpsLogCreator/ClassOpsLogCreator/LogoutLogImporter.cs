@@ -191,6 +191,7 @@ namespace ClassOpsLogCreator
             //Throw an excpetion to cause the system to hault
             if(classArray.GetUpperBound(0) < 1)
             {
+                Quit();
                 throw new System.IO.FileLoadException("Error: It seems the CLO is empty!");
             }
 

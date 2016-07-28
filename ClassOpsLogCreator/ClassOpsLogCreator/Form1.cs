@@ -697,6 +697,11 @@ namespace ClassOpsLogCreator
             GC.Collect();  
         }
 
+        /// <summary>
+        /// This action listener opens up the "About" box when clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutBox box = new AboutBox();
