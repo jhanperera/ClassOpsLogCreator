@@ -450,6 +450,9 @@ namespace ClassOpsLogCreator
             //Open the merged file
             if (workDone)
             {
+                //Delete the hidden file.
+                System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Normal);
+                System.IO.File.Delete(EXISTING_MASTER_LOG_COPY);
                 //Make a copy of the exel file
                 System.IO.File.Delete(EXISTING_MASTER_LOG_COPY);
                 System.IO.File.Copy(EXISTING_MASTER_LOG, EXISTING_MASTER_LOG_COPY, true);
