@@ -98,7 +98,7 @@ namespace ClassOpsUnitTest
 
             int taskRank = tr.getTaskValue("Demo");
             //We should get 
-            Assert.AreEqual(3, taskRank);
+            Assert.AreEqual(2, taskRank);
         }
 
         [TestMethod]
@@ -118,7 +118,7 @@ namespace ClassOpsUnitTest
             };
             int taskRank = tr.getTotalTaskValue(input);
             //We should get 
-            Assert.AreEqual(10, taskRank);
+            Assert.AreEqual(4, taskRank);
         }
     }
 }

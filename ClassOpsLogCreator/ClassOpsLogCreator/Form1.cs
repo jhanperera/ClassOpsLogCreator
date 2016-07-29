@@ -32,8 +32,8 @@ namespace ClassOpsLogCreator
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
-        public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
-        public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
+        public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
+        public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
         public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_END_TIMES.xlsx";
 
         //DEBUG CODE! 
@@ -41,7 +41,7 @@ namespace ClassOpsLogCreator
         /*public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\Derek's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\pereraj\Desktop\Book1.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\new.xlsx";*/
 
         private static Excel.Application logoutMaster = null;
@@ -402,11 +402,11 @@ namespace ClassOpsLogCreator
                 //Make a copy of the exel file
                 System.IO.File.Copy(EXISTING_MASTER_LOG, EXISTING_MASTER_LOG_COPY, true);
                 //Make a new copied file not hidden
-                System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Normal);
+                System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Hidden);
 
                 //Open the master log file
                 Excel.Application excel = new Excel.Application();
-                Excel.Workbook wb = excel.Workbooks.Open(EXISTING_MASTER_LOG_COPY);
+                Excel.Workbook wb = excel.Workbooks.Open(EXISTING_MASTER_LOG);
                 excel.Visible = true;
             }
         }
@@ -707,6 +707,27 @@ namespace ClassOpsLogCreator
         {
             AboutBox box = new AboutBox();
             box.ShowDialog();
+        }
+
+
+        /// <summary>
+        /// When the + button is clicked
+        /// 
+        /// Make the new controls apear and extend the frame
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void plusBTN_Click(object sender, EventArgs e)
+        {
+            //Extend the frame
+            this.Height = 437;
+            this.shiftTime2.Visible = true;
+            this.startHour2.Visible = true;
+            this.am_pmCombo3.Visible = true;
+            this.endHour2.Visible = true;
+            this.am_pmCombo4.Visible = true;
+            this.numberOfShiftsLabel2.Visible = true;
+            this.numberOfShiftsCombo2.Visible = true;
         }
     }
 }
