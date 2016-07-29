@@ -402,7 +402,7 @@ namespace ClassOpsLogCreator
                 //Make a copy of the exel file
                 System.IO.File.Copy(EXISTING_MASTER_LOG, EXISTING_MASTER_LOG_COPY, true);
                 //Make a new copied file not hidden
-                System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Normal);
+                System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Hidden);
 
                 //Open the master log file
                 Excel.Application excel = new Excel.Application();
