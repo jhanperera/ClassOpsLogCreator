@@ -55,11 +55,16 @@ namespace ClassOpsLogCreator
         //Use a background worker to allow the GUI to still be functional and not hang.
         private static BackgroundWorker bw = null;
 
-        private string startTimeFromCombo = null;
-        private string endTimeFromCombo = null;
-        private int numberOfShifts = 0;
+        private string startTimeFromCombo1 = null;
+        private string endTimeFromCombo1 = null;
+        private int numberOfShifts1 = 0;
+
+        private string startTimeFromCombo2 = null;
+        private string endTimeFromCombo2 = null;
+        private int numberOfShifts2 = 0;
 
         private Boolean workDone = false;
+        private Boolean plusClicked = false;
 
         /// <summary>
         /// Constructor for the system. (Changes here should be confirmed with everyone first)
@@ -142,30 +147,73 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void createBTN_Click_1(object sender, EventArgs e)
         {
-            //Get the times set by the combo box and the number of shifts
-            startTimeFromCombo = this.startHour1.GetItemText(this.startHour1.SelectedItem) + "" + this.am_pmCombo1.GetItemText(this.am_pmCombo1.SelectedItem);
-            endTimeFromCombo = this.endHour1.GetItemText(this.endHour1.SelectedItem) + "" + this.am_pmCombo2.GetItemText(this.am_pmCombo2.SelectedItem);
-            numberOfShifts = int.Parse(this.numberOfShiftsCombo1.SelectedItem.ToString());
+            //If the plus button is clicked we validate all the input
+            if(plusClicked)
+            {
+                //Get the times set by the combo box and the number of shifts
+                startTimeFromCombo1 = this.startHour1.GetItemText(this.startHour1.SelectedItem) + "" + this.am_pmCombo1.GetItemText(this.am_pmCombo1.SelectedItem);
+                endTimeFromCombo1 = this.endHour1.GetItemText(this.endHour1.SelectedItem) + "" + this.am_pmCombo2.GetItemText(this.am_pmCombo2.SelectedItem);
+                numberOfShifts1 = int.Parse(this.numberOfShiftsCombo1.SelectedItem.ToString());
 
-            //Input Error checking!
-            if (startTimeFromCombo.Equals("PM") || startTimeFromCombo.Equals("AM") || startTimeFromCombo == null ||
-                endTimeFromCombo.Equals("PM") || endTimeFromCombo.Equals("AM") || endTimeFromCombo == null)
-            {
-                MessageBox.Show("Valid time must be set.",
-                                 "Problem...",
-                                  MessageBoxButtons.OK,
-                                  MessageBoxIcon.Exclamation,
-                                  MessageBoxDefaultButton.Button1);
-                return;
+                startTimeFromCombo2 = this.startHour2.GetItemText(this.startHour2.SelectedItem) + "" + this.am_pmCombo3.GetItemText(this.am_pmCombo3.SelectedItem);
+                endTimeFromCombo2 = this.endHour2.GetItemText(this.endHour2.SelectedItem) + "" + this.am_pmCombo4.GetItemText(this.am_pmCombo4.SelectedItem);
+                numberOfShifts2 = int.Parse(this.numberOfShiftsCombo2.SelectedItem.ToString());
+
+                //Input Error checking!
+                if (startTimeFromCombo1.Equals("PM") || startTimeFromCombo1.Equals("AM") || startTimeFromCombo1 == null ||
+                    endTimeFromCombo1.Equals("PM") || endTimeFromCombo1.Equals("AM") || endTimeFromCombo1 == null ||
+                    startTimeFromCombo2.Equals("PM") || startTimeFromCombo2.Equals("AM") || startTimeFromCombo2 == null ||
+                    endTimeFromCombo2.Equals("PM") || endTimeFromCombo2.Equals("AM") || endTimeFromCombo2 == null)
+                {
+                    MessageBox.Show("Valid time must be set.",
+                                     "Problem...",
+                                      MessageBoxButtons.OK,
+                                      MessageBoxIcon.Exclamation,
+                                      MessageBoxDefaultButton.Button1);
+                    return;
+                }
+                else if (Convert.ToDateTime(startTimeFromCombo1) >= Convert.ToDateTime(endTimeFromCombo1) ||
+                         Convert.ToDateTime(startTimeFromCombo2) >= Convert.ToDateTime(endTimeFromCombo2))
+                {
+                    MessageBox.Show("Valid time must be set.",
+                                     "Problem...",
+                                      MessageBoxButtons.OK,
+                                      MessageBoxIcon.Exclamation,
+                                      MessageBoxDefaultButton.Button1);
+                    return;
+                }
+
+
             }
-            else if (Convert.ToDateTime(startTimeFromCombo) >= Convert.ToDateTime(endTimeFromCombo))
+            //Else we validate only the fist row of data
+            else if(!plusClicked)
             {
-                MessageBox.Show("Valid time must be set.",
-                                 "Problem...",
-                                  MessageBoxButtons.OK,
-                                  MessageBoxIcon.Exclamation,
-                                  MessageBoxDefaultButton.Button1);
-                return;
+                //Get the times set by the combo box and the number of shifts
+                startTimeFromCombo1 = this.startHour1.GetItemText(this.startHour1.SelectedItem) + "" + this.am_pmCombo1.GetItemText(this.am_pmCombo1.SelectedItem);
+                endTimeFromCombo1 = this.endHour1.GetItemText(this.endHour1.SelectedItem) + "" + this.am_pmCombo2.GetItemText(this.am_pmCombo2.SelectedItem);
+                numberOfShifts1 = int.Parse(this.numberOfShiftsCombo1.SelectedItem.ToString());
+
+                //Input Error checking!
+                if (startTimeFromCombo1.Equals("PM") || startTimeFromCombo1.Equals("AM") || startTimeFromCombo1 == null ||
+                    endTimeFromCombo1.Equals("PM") || endTimeFromCombo1.Equals("AM") || endTimeFromCombo1 == null)
+                {
+                    MessageBox.Show("Valid time must be set.",
+                                     "Problem...",
+                                      MessageBoxButtons.OK,
+                                      MessageBoxIcon.Exclamation,
+                                      MessageBoxDefaultButton.Button1);
+                    return;
+                }
+                else if (Convert.ToDateTime(startTimeFromCombo1) >= Convert.ToDateTime(endTimeFromCombo1))
+                {
+                    MessageBox.Show("Valid time must be set.",
+                                     "Problem...",
+                                      MessageBoxButtons.OK,
+                                      MessageBoxIcon.Exclamation,
+                                      MessageBoxDefaultButton.Button1);
+                    return;
+                }
+
             }
 
             bw = new BackgroundWorker();
@@ -195,12 +243,12 @@ namespace ClassOpsLogCreator
         private void createCLOBTN_Click(object sender, EventArgs e)
         {
             //Get the times set by the combo box
-            startTimeFromCombo = this.cloGenStart1.GetItemText(this.cloGenStart1.SelectedItem) + "" + this.cloAm_pmCombo1.GetItemText(this.cloAm_pmCombo1.SelectedItem);
-            endTimeFromCombo = this.cloGenEnd1.GetItemText(this.cloGenEnd1.SelectedItem) + "" + this.cloAm_pmCombo2.GetItemText(this.cloAm_pmCombo2.SelectedItem);
+            startTimeFromCombo1 = this.cloGenStart1.GetItemText(this.cloGenStart1.SelectedItem) + "" + this.cloAm_pmCombo1.GetItemText(this.cloAm_pmCombo1.SelectedItem);
+            endTimeFromCombo1 = this.cloGenEnd1.GetItemText(this.cloGenEnd1.SelectedItem) + "" + this.cloAm_pmCombo2.GetItemText(this.cloAm_pmCombo2.SelectedItem);
 
             //Input Error checking!
-            if (startTimeFromCombo.Equals("PM") || startTimeFromCombo.Equals("AM") || startTimeFromCombo == null ||
-                endTimeFromCombo.Equals("PM") || endTimeFromCombo.Equals("AM") || endTimeFromCombo == null)
+            if (startTimeFromCombo1.Equals("PM") || startTimeFromCombo1.Equals("AM") || startTimeFromCombo1 == null ||
+                endTimeFromCombo1.Equals("PM") || endTimeFromCombo1.Equals("AM") || endTimeFromCombo1 == null)
             {
                 MessageBox.Show("Valid time must be set.",
                                  "Problem...",
@@ -209,7 +257,7 @@ namespace ClassOpsLogCreator
                                   MessageBoxDefaultButton.Button1);
                 return;
             }
-            else if (Convert.ToDateTime(startTimeFromCombo) >= Convert.ToDateTime(endTimeFromCombo))
+            else if (Convert.ToDateTime(startTimeFromCombo1) >= Convert.ToDateTime(endTimeFromCombo1))
             {
                 MessageBox.Show("Valid time must be set.",
                                  "Problem...",
@@ -252,7 +300,7 @@ namespace ClassOpsLogCreator
             worker.ReportProgress(15);
 
             //***********************CREATE MASTER LOG FILE PT 1**********************
-            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo, endTimeFromCombo);
+            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo1, endTimeFromCombo1);
 
             string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
             
@@ -266,7 +314,7 @@ namespace ClassOpsLogCreator
             worker.ReportProgress(50);
 
             //***********************CREATE MASTER LOG FILE PT 2***********************
-            ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this, startTimeFromCombo, endTimeFromCombo);
+            ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this, startTimeFromCombo1, endTimeFromCombo1);
              
             //Get the three logs
             string[,] JInstruction = ZoneLogs.getJeannineLog();
@@ -308,7 +356,7 @@ namespace ClassOpsLogCreator
         {
             var worker = sender as BackgroundWorker;
             //We are going to only open the clo with set start times and end times
-            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo, endTimeFromCombo);
+            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo1, endTimeFromCombo1);
 
             string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
 
@@ -504,8 +552,8 @@ namespace ClassOpsLogCreator
             logRange3.Value2 = array3;
 
             //Add ACE017 to the log if we have are in the time peiod
-            DateTime startingTime = Convert.ToDateTime(this.startTimeFromCombo.ToString());
-            DateTime endingTime = Convert.ToDateTime(this.endTimeFromCombo.ToString());
+            DateTime startingTime = Convert.ToDateTime(this.startTimeFromCombo1.ToString());
+            DateTime endingTime = Convert.ToDateTime(this.endTimeFromCombo1.ToString());
             DateTime check = DateTime.ParseExact("1600", "HHmm", null);
             if (includeACE &&(check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
             {
@@ -555,11 +603,11 @@ namespace ClassOpsLogCreator
             dividerRange.Interior.Color = darkRed;
 
             //Zoning is done here
-            if (numberOfShifts > 1)
+            if (numberOfShifts1 > 1)
             {
                 SchoolZoning sz = new SchoolZoning();
                 //Pass the zoning with the number of shifts
-                destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts);
+                destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts1);
             }
             else
             {
@@ -713,21 +761,98 @@ namespace ClassOpsLogCreator
         /// <summary>
         /// When the + button is clicked
         /// 
-        /// Make the new controls apear and extend the frame
+        /// Make the new controls appear and extend the frame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void plusBTN_Click(object sender, EventArgs e)
         {
-            //Extend the frame
-            this.Height = 437;
-            this.shiftTime2.Visible = true;
-            this.startHour2.Visible = true;
-            this.am_pmCombo3.Visible = true;
-            this.endHour2.Visible = true;
-            this.am_pmCombo4.Visible = true;
-            this.numberOfShiftsLabel2.Visible = true;
-            this.numberOfShiftsCombo2.Visible = true;
+            if(!plusClicked)
+            {
+                //Extend the frame
+                this.Height = 475;
+
+                //create a beveled line
+                bevelLineLabel.AutoSize = false;
+                bevelLineLabel.Height = 2;
+                bevelLineLabel.BorderStyle = BorderStyle.Fixed3D;
+
+                //Set up the values in the combo boxes
+                for (int i = 1; i <= 12; i++)
+                {
+                    //Tab 1 
+                    this.startHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
+                    this.endHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
+
+                    //15 minute intervals
+                    for (int k = 15; k <= 45; k += 15)
+                    {
+                        //Tab 1
+                        this.startHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
+                        this.endHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
+                    }
+                }
+
+                //add number of shifts
+                for (int j = 1; j <= 8; j++)
+                {
+                    this.numberOfShiftsCombo2.Items.Add(j.ToString());
+                }
+
+                //Fill the am/pm selector for tab 1
+                this.am_pmCombo3.Items.Add("AM");
+                this.am_pmCombo3.Items.Add("PM");
+                this.am_pmCombo4.Items.Add("AM");
+                this.am_pmCombo4.Items.Add("PM");
+
+                //set the default view for the combo for tab 1
+                this.startHour2.SelectedIndex = -1;
+                this.endHour2.SelectedIndex = -1;
+                this.numberOfShiftsCombo2.SelectedIndex = 0;
+                this.am_pmCombo3.SelectedIndex = 1;
+                this.am_pmCombo4.SelectedIndex = 1;
+
+                //Make the combo box read only for tab 1
+                this.startHour2.DropDownStyle = ComboBoxStyle.DropDownList;
+                this.endHour2.DropDownStyle = ComboBoxStyle.DropDownList;
+                this.am_pmCombo3.DropDownStyle = ComboBoxStyle.DropDownList;
+                this.am_pmCombo4.DropDownStyle = ComboBoxStyle.DropDownList;
+                this.numberOfShiftsCombo2.DropDownStyle = ComboBoxStyle.DropDownList;
+
+
+                //Set them all to visabl
+                this.bevelLineLabel.Visible = true;
+                this.toLabel2.Visible = true;
+                this.shiftTime2.Visible = true;
+                this.startHour2.Visible = true;
+                this.am_pmCombo3.Visible = true;
+                this.endHour2.Visible = true;
+                this.am_pmCombo4.Visible = true;
+                this.numberOfShiftsLabel2.Visible = true;
+                this.numberOfShiftsCombo2.Visible = true;
+
+                this.plusBTN.Text = "-";
+                this.plusClicked = true;
+            }
+            else if(plusClicked)
+            {
+                //Reduce the frame
+                this.Height = 355;
+
+                this.bevelLineLabel.Visible = false;
+                this.toLabel2.Visible = false;
+                this.shiftTime2.Visible = false;
+                this.startHour2.Visible = false;
+                this.am_pmCombo3.Visible = false;
+                this.endHour2.Visible = false;
+                this.am_pmCombo4.Visible = false;
+                this.numberOfShiftsLabel2.Visible = false;
+                this.numberOfShiftsCombo2.Visible = false;
+
+                this.plusBTN.Text = "+";
+                this.plusClicked = false;
+            }
+            
         }
     }
 }
