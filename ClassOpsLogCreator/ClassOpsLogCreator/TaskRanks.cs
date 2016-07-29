@@ -105,5 +105,31 @@ namespace ClassOpsLogCreator
             }
             return value;
         }
+
+        public Boolean isSubsetSum(string[,] arr, int n, int sum)
+        {
+            //base case
+            if(sum == 0)
+            {
+                return true;
+            }
+            if(n == 0 && sum != 0)
+            {
+                return false;
+            }
+
+            //if the last element is greate than the sum then ignore it
+            if(this.getTaskValue(arr[n - 1, 1]) > sum )
+            {
+                return isSubsetSum(arr, n - 1, sum);
+            }
+
+            /* else, check if sum can be obtained by any of
+               the following
+               (a) including the last element
+               (b) excluding the last element
+            */
+            return isSubsetSum(arr, n - 1, sum) || isSubsetSum(arr, n - 1, sum - this.getTaskValue(arr[n - 1, 1]));
+        }
     }
 }
