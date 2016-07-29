@@ -96,12 +96,9 @@ namespace ClassOpsLogCreator
             //Check if the arrayLastTimes and the classarray are the same length, if so then we get correct results.
             if(arrayLastTimes.GetUpperBound(0) != arrayClassRooms.GetUpperBound(0))
             {
-                MessageBox.Show("Error: While parsing clo.xlsx we ran into a problem:" + Environment.NewLine +
-                                "The file is not formatted correctly, please ensure all rows have a corresponding classroom",
-                                 "File format error",
-                                  MessageBoxButtons.OK,
-                                  MessageBoxIcon.Exclamation,
-                                  MessageBoxDefaultButton.Button1);
+                Quit();
+                throw new System.IO.FileLoadException("Error: While parsing clo.xlsx we ran into a problem:" + Environment.NewLine +
+                                "The file is not formatted correctly, please ensure all rows have a corresponding classroom");
             }
             else
             {
