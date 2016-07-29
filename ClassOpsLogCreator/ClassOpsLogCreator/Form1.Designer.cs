@@ -33,16 +33,6 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tab1 = new System.Windows.Forms.TabPage();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.bevelLineLabel = new System.Windows.Forms.Label();
-            this.toLabel2 = new System.Windows.Forms.Label();
-            this.endHour2 = new System.Windows.Forms.ComboBox();
-            this.am_pmCombo4 = new System.Windows.Forms.ComboBox();
-            this.numberOfShiftsLabel2 = new System.Windows.Forms.Label();
-            this.shiftTime2 = new System.Windows.Forms.Label();
-            this.numberOfShiftsCombo2 = new System.Windows.Forms.ComboBox();
-            this.startHour2 = new System.Windows.Forms.ComboBox();
-            this.am_pmCombo3 = new System.Windows.Forms.ComboBox();
-            this.plusBTN = new System.Windows.Forms.Button();
             this.toLabel1 = new System.Windows.Forms.Label();
             this.destinationLabel = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -54,7 +44,6 @@
             this.numberOfShiftsCombo1 = new System.Windows.Forms.ComboBox();
             this.startHour1 = new System.Windows.Forms.ComboBox();
             this.am_pmCombo1 = new System.Windows.Forms.ComboBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tab2 = new System.Windows.Forms.TabPage();
             this.selectTimeLabel = new System.Windows.Forms.Label();
             this.createCLOBTN = new System.Windows.Forms.Button();
@@ -65,14 +54,9 @@
             this.cloAm_pmCombo1 = new System.Windows.Forms.ComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,18 +64,33 @@
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.plusBTN = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.endHour2 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo4 = new System.Windows.Forms.ComboBox();
+            this.numberOfShiftsLabel2 = new System.Windows.Forms.Label();
+            this.shiftTime2 = new System.Windows.Forms.Label();
+            this.numberOfShiftsCombo2 = new System.Windows.Forms.ComboBox();
+            this.startHour2 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo3 = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.tab1.SuspendLayout();
             this.mainPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tab2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // workProgressBar
             // 
             this.workProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.workProgressBar.Location = new System.Drawing.Point(0, 288);
+            this.workProgressBar.Location = new System.Drawing.Point(0, 292);
             this.workProgressBar.Margin = new System.Windows.Forms.Padding(4);
             this.workProgressBar.Name = "workProgressBar";
             this.workProgressBar.Size = new System.Drawing.Size(548, 25);
@@ -108,7 +107,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(548, 260);
+            this.tabControl.Size = new System.Drawing.Size(548, 264);
             this.tabControl.TabIndex = 8;
             // 
             // tab1
@@ -117,7 +116,7 @@
             this.tab1.Location = new System.Drawing.Point(4, 30);
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Windows.Forms.Padding(3);
-            this.tab1.Size = new System.Drawing.Size(540, 226);
+            this.tab1.Size = new System.Drawing.Size(540, 230);
             this.tab1.TabIndex = 0;
             this.tab1.Text = "Log Creator";
             this.tab1.UseVisualStyleBackColor = true;
@@ -129,8 +128,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mainPanel.BackColor = System.Drawing.SystemColors.Menu;
             this.mainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.mainPanel.Controls.Add(this.bevelLineLabel);
-            this.mainPanel.Controls.Add(this.toLabel2);
+            this.mainPanel.Controls.Add(this.label1);
             this.mainPanel.Controls.Add(this.endHour2);
             this.mainPanel.Controls.Add(this.am_pmCombo4);
             this.mainPanel.Controls.Add(this.numberOfShiftsLabel2);
@@ -153,112 +151,8 @@
             this.mainPanel.Controls.Add(this.pictureBox1);
             this.mainPanel.Location = new System.Drawing.Point(-4, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(548, 227);
+            this.mainPanel.Size = new System.Drawing.Size(548, 231);
             this.mainPanel.TabIndex = 53;
-            // 
-            // bevelLineLabel
-            // 
-            this.bevelLineLabel.AutoSize = true;
-            this.bevelLineLabel.Location = new System.Drawing.Point(184, 155);
-            this.bevelLineLabel.Name = "bevelLineLabel";
-            this.bevelLineLabel.Size = new System.Drawing.Size(352, 21);
-            this.bevelLineLabel.TabIndex = 62;
-            this.bevelLineLabel.Text = "---------------------------------------------------------";
-            this.bevelLineLabel.Visible = false;
-            // 
-            // toLabel2
-            // 
-            this.toLabel2.AutoSize = true;
-            this.toLabel2.Location = new System.Drawing.Point(348, 192);
-            this.toLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.toLabel2.Name = "toLabel2";
-            this.toLabel2.Size = new System.Drawing.Size(24, 21);
-            this.toLabel2.TabIndex = 61;
-            this.toLabel2.Text = "to";
-            this.toLabel2.Visible = false;
-            // 
-            // endHour2
-            // 
-            this.endHour2.FormattingEnabled = true;
-            this.endHour2.Location = new System.Drawing.Point(377, 189);
-            this.endHour2.Margin = new System.Windows.Forms.Padding(4);
-            this.endHour2.Name = "endHour2";
-            this.endHour2.Size = new System.Drawing.Size(83, 29);
-            this.endHour2.TabIndex = 59;
-            this.endHour2.Visible = false;
-            // 
-            // am_pmCombo4
-            // 
-            this.am_pmCombo4.FormattingEnabled = true;
-            this.am_pmCombo4.Location = new System.Drawing.Point(468, 189);
-            this.am_pmCombo4.Margin = new System.Windows.Forms.Padding(4);
-            this.am_pmCombo4.Name = "am_pmCombo4";
-            this.am_pmCombo4.Size = new System.Drawing.Size(67, 29);
-            this.am_pmCombo4.TabIndex = 60;
-            this.am_pmCombo4.Visible = false;
-            // 
-            // numberOfShiftsLabel2
-            // 
-            this.numberOfShiftsLabel2.AutoSize = true;
-            this.numberOfShiftsLabel2.Location = new System.Drawing.Point(183, 231);
-            this.numberOfShiftsLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.numberOfShiftsLabel2.Name = "numberOfShiftsLabel2";
-            this.numberOfShiftsLabel2.Size = new System.Drawing.Size(130, 21);
-            this.numberOfShiftsLabel2.TabIndex = 58;
-            this.numberOfShiftsLabel2.Text = "Number of shifts:";
-            this.numberOfShiftsLabel2.Visible = false;
-            // 
-            // shiftTime2
-            // 
-            this.shiftTime2.AutoSize = true;
-            this.shiftTime2.Location = new System.Drawing.Point(183, 166);
-            this.shiftTime2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.shiftTime2.Name = "shiftTime2";
-            this.shiftTime2.Size = new System.Drawing.Size(176, 21);
-            this.shiftTime2.TabIndex = 57;
-            this.shiftTime2.Text = "Please select shift times:";
-            this.shiftTime2.Visible = false;
-            // 
-            // numberOfShiftsCombo2
-            // 
-            this.numberOfShiftsCombo2.FormattingEnabled = true;
-            this.numberOfShiftsCombo2.Location = new System.Drawing.Point(183, 256);
-            this.numberOfShiftsCombo2.Margin = new System.Windows.Forms.Padding(4);
-            this.numberOfShiftsCombo2.Name = "numberOfShiftsCombo2";
-            this.numberOfShiftsCombo2.Size = new System.Drawing.Size(177, 29);
-            this.numberOfShiftsCombo2.TabIndex = 56;
-            this.numberOfShiftsCombo2.Visible = false;
-            // 
-            // startHour2
-            // 
-            this.startHour2.FormattingEnabled = true;
-            this.startHour2.Location = new System.Drawing.Point(183, 189);
-            this.startHour2.Margin = new System.Windows.Forms.Padding(4);
-            this.startHour2.Name = "startHour2";
-            this.startHour2.Size = new System.Drawing.Size(82, 29);
-            this.startHour2.TabIndex = 54;
-            this.startHour2.Visible = false;
-            // 
-            // am_pmCombo3
-            // 
-            this.am_pmCombo3.FormattingEnabled = true;
-            this.am_pmCombo3.Location = new System.Drawing.Point(273, 189);
-            this.am_pmCombo3.Margin = new System.Windows.Forms.Padding(4);
-            this.am_pmCombo3.Name = "am_pmCombo3";
-            this.am_pmCombo3.Size = new System.Drawing.Size(67, 29);
-            this.am_pmCombo3.TabIndex = 55;
-            this.am_pmCombo3.Visible = false;
-            // 
-            // plusBTN
-            // 
-            this.plusBTN.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.plusBTN.Location = new System.Drawing.Point(468, 102);
-            this.plusBTN.Name = "plusBTN";
-            this.plusBTN.Size = new System.Drawing.Size(67, 30);
-            this.plusBTN.TabIndex = 53;
-            this.plusBTN.Text = "+";
-            this.plusBTN.UseVisualStyleBackColor = true;
-            this.plusBTN.Click += new System.EventHandler(this.plusBTN_Click);
             // 
             // toLabel1
             // 
@@ -275,7 +169,7 @@
             this.destinationLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.destinationLabel.AutoEllipsis = true;
             this.destinationLabel.AutoSize = true;
-            this.destinationLabel.Location = new System.Drawing.Point(13, 167);
+            this.destinationLabel.Location = new System.Drawing.Point(13, 171);
             this.destinationLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.destinationLabel.Name = "destinationLabel";
             this.destinationLabel.Size = new System.Drawing.Size(150, 21);
@@ -286,7 +180,7 @@
             // 
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(11, 192);
+            this.textBox1.Location = new System.Drawing.Point(11, 196);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(340, 29);
@@ -304,7 +198,7 @@
             // createBTN
             // 
             this.createBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.createBTN.Location = new System.Drawing.Point(377, 189);
+            this.createBTN.Location = new System.Drawing.Point(377, 193);
             this.createBTN.Margin = new System.Windows.Forms.Padding(4);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(158, 31);
@@ -369,19 +263,6 @@
             this.am_pmCombo1.Size = new System.Drawing.Size(67, 29);
             this.am_pmCombo1.TabIndex = 46;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Image = global::ClassOpsLogCreator.Properties.Resources.Main_thread_image;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(175, 165);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
-            // 
             // tab2
             // 
             this.tab2.BackColor = System.Drawing.SystemColors.Menu;
@@ -395,7 +276,7 @@
             this.tab2.Location = new System.Drawing.Point(4, 30);
             this.tab2.Name = "tab2";
             this.tab2.Padding = new System.Windows.Forms.Padding(3);
-            this.tab2.Size = new System.Drawing.Size(540, 228);
+            this.tab2.Size = new System.Drawing.Size(540, 233);
             this.tab2.TabIndex = 1;
             this.tab2.Text = "CLO Generator";
             // 
@@ -495,37 +376,10 @@
             this.fileToolStripMenuItem1.Size = new System.Drawing.Size(46, 25);
             this.fileToolStripMenuItem1.Text = "&File";
             // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
-            this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
-            this.newToolStripMenuItem.Text = "&New";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
-            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
-            this.openToolStripMenuItem.Text = "&Open";
-            // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
             this.toolStripSeparator.Size = new System.Drawing.Size(173, 6);
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
-            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
-            this.saveToolStripMenuItem.Text = "&Save";
             // 
             // saveAsToolStripMenuItem
             // 
@@ -537,23 +391,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(173, 6);
-            // 
-            // printToolStripMenuItem
-            // 
-            this.printToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripMenuItem.Image")));
-            this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
-            this.printToolStripMenuItem.Text = "&Print";
-            // 
-            // printPreviewToolStripMenuItem
-            // 
-            this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
-            this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
-            this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
             // 
             // toolStripSeparator2
             // 
@@ -577,7 +414,7 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.optionsToolStripMenuItem.Text = "&Options";
             // 
             // helpToolStripMenuItem1
@@ -592,14 +429,165 @@
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(128, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Image = global::ClassOpsLogCreator.Properties.Resources.Main_thread_image;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(175, 165);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
+            this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
+            this.newToolStripMenuItem.Text = "&New";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
+            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
+            this.openToolStripMenuItem.Text = "&Open";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
+            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
+            this.saveToolStripMenuItem.Text = "&Save";
+            // 
+            // printToolStripMenuItem
+            // 
+            this.printToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripMenuItem.Image")));
+            this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
+            this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
+            this.printToolStripMenuItem.Text = "&Print";
+            // 
+            // printPreviewToolStripMenuItem
+            // 
+            this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
+            this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
+            this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
+            // 
+            // plusBTN
+            // 
+            this.plusBTN.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.plusBTN.Location = new System.Drawing.Point(468, 102);
+            this.plusBTN.Name = "plusBTN";
+            this.plusBTN.Size = new System.Drawing.Size(67, 30);
+            this.plusBTN.TabIndex = 53;
+            this.plusBTN.Text = "+";
+            this.plusBTN.UseVisualStyleBackColor = true;
+            this.plusBTN.Click += new System.EventHandler(this.plusBTN_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(348, 170);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(24, 21);
+            this.label1.TabIndex = 61;
+            this.label1.Text = "to";
+            this.label1.Visible = false;
+            // 
+            // endHour2
+            // 
+            this.endHour2.FormattingEnabled = true;
+            this.endHour2.Location = new System.Drawing.Point(377, 167);
+            this.endHour2.Margin = new System.Windows.Forms.Padding(4);
+            this.endHour2.Name = "endHour2";
+            this.endHour2.Size = new System.Drawing.Size(83, 29);
+            this.endHour2.TabIndex = 59;
+            this.endHour2.Visible = false;
+            // 
+            // am_pmCombo4
+            // 
+            this.am_pmCombo4.FormattingEnabled = true;
+            this.am_pmCombo4.Location = new System.Drawing.Point(468, 167);
+            this.am_pmCombo4.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo4.Name = "am_pmCombo4";
+            this.am_pmCombo4.Size = new System.Drawing.Size(67, 29);
+            this.am_pmCombo4.TabIndex = 60;
+            this.am_pmCombo4.Visible = false;
+            // 
+            // numberOfShiftsLabel2
+            // 
+            this.numberOfShiftsLabel2.AutoSize = true;
+            this.numberOfShiftsLabel2.Location = new System.Drawing.Point(183, 209);
+            this.numberOfShiftsLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.numberOfShiftsLabel2.Name = "numberOfShiftsLabel2";
+            this.numberOfShiftsLabel2.Size = new System.Drawing.Size(130, 21);
+            this.numberOfShiftsLabel2.TabIndex = 58;
+            this.numberOfShiftsLabel2.Text = "Number of shifts:";
+            this.numberOfShiftsLabel2.Visible = false;
+            // 
+            // shiftTime2
+            // 
+            this.shiftTime2.AutoSize = true;
+            this.shiftTime2.Location = new System.Drawing.Point(183, 144);
+            this.shiftTime2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.shiftTime2.Name = "shiftTime2";
+            this.shiftTime2.Size = new System.Drawing.Size(176, 21);
+            this.shiftTime2.TabIndex = 57;
+            this.shiftTime2.Text = "Please select shift times:";
+            this.shiftTime2.Visible = false;
+            // 
+            // numberOfShiftsCombo2
+            // 
+            this.numberOfShiftsCombo2.FormattingEnabled = true;
+            this.numberOfShiftsCombo2.Location = new System.Drawing.Point(183, 234);
+            this.numberOfShiftsCombo2.Margin = new System.Windows.Forms.Padding(4);
+            this.numberOfShiftsCombo2.Name = "numberOfShiftsCombo2";
+            this.numberOfShiftsCombo2.Size = new System.Drawing.Size(177, 29);
+            this.numberOfShiftsCombo2.TabIndex = 56;
+            this.numberOfShiftsCombo2.Visible = false;
+            // 
+            // startHour2
+            // 
+            this.startHour2.FormattingEnabled = true;
+            this.startHour2.Location = new System.Drawing.Point(183, 167);
+            this.startHour2.Margin = new System.Windows.Forms.Padding(4);
+            this.startHour2.Name = "startHour2";
+            this.startHour2.Size = new System.Drawing.Size(82, 29);
+            this.startHour2.TabIndex = 54;
+            this.startHour2.Visible = false;
+            // 
+            // am_pmCombo3
+            // 
+            this.am_pmCombo3.FormattingEnabled = true;
+            this.am_pmCombo3.Location = new System.Drawing.Point(273, 167);
+            this.am_pmCombo3.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo3.Name = "am_pmCombo3";
+            this.am_pmCombo3.Size = new System.Drawing.Size(67, 29);
+            this.am_pmCombo3.TabIndex = 55;
+            this.am_pmCombo3.Visible = false;
             // 
             // LogCreator
             // 
@@ -608,7 +596,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(548, 313);
+            this.ClientSize = new System.Drawing.Size(548, 317);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.workProgressBar);
             this.Controls.Add(this.menuStrip1);
@@ -627,11 +615,11 @@
             this.tab1.ResumeLayout(false);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tab2.ResumeLayout(false);
             this.tab2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -679,7 +667,7 @@
         private System.Windows.Forms.ComboBox cloAm_pmCombo1;
         private System.Windows.Forms.Button createCLOBTN;
         private System.Windows.Forms.Label selectTimeLabel;
-        private System.Windows.Forms.Label toLabel2;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox endHour2;
         private System.Windows.Forms.ComboBox am_pmCombo4;
         private System.Windows.Forms.Label numberOfShiftsLabel2;
@@ -688,7 +676,6 @@
         private System.Windows.Forms.ComboBox startHour2;
         private System.Windows.Forms.ComboBox am_pmCombo3;
         private System.Windows.Forms.Button plusBTN;
-        private System.Windows.Forms.Label bevelLineLabel;
     }
 }
 
