@@ -173,7 +173,7 @@ namespace ClassOpsLogCreator
             string[] zone1 = new string[] //North West
             {
                 "CLH", "FRQ", "LAS", "LUM", "CC", "LSB", "BC", "PSE", "SC", "BSB", "SLH", "VH",
-                "FC", "MC", "VC", "WC"
+                "FC", "MC", "VC", "WC", "CB"
             };
 
             string[] zone2 = new string[] //South East
