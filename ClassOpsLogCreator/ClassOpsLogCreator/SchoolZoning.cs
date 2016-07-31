@@ -28,7 +28,6 @@ namespace ClassOpsLogCreator
         private ClassInfo classinfo;
         private int numberOfBuildings;
         private int numberOfConnections;
-        private int[] sumWeight;
 
         /// <summary>
         /// This will create a the map for the school and 
@@ -97,9 +96,8 @@ namespace ClassOpsLogCreator
                     DateTime temp;
                     if ((!DateTime.TryParse(zonedArray[i, 2], out temp)))
                     {
-                        zonedArray[i, 2] = DateTime.FromOADate(double.Parse((string)zonedArray[i, 2].ToString())).ToString("M/dd/yy");
+                        zonedArray[i, 2] = DateTime.FromOADate(double.Parse(zonedArray[i, 2].ToString())).ToString("M/dd/yy");
                     }
-
                     if (zone1.Contains(zonedArray[i, 4]))
                     {
                         Array.Copy(zonedArray, i * zonedArray.GetLength(1), zone1Array, zone1Index * zone1Array.GetLength(1), zonedArray.GetLength(1));
@@ -115,14 +113,10 @@ namespace ClassOpsLogCreator
                 zone1Array = ZoneSuperLogImporter.RemoveEmptyRows(zone1Array);
                 zone2Array = ZoneSuperLogImporter.RemoveEmptyRows(zone2Array);
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0), 7];
-                //Calculate sum of th weights
-                sumWeight = new int[2];
-                sumWeight[0] = tr.getTotalTaskValue(zone1Array);
-                sumWeight[1] = tr.getTotalTaskValue(zone2Array);
-
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
                 AddToArray(result, zone2Array, zone1Array.GetLength(0));
+ 
             }
 
             //If we have 3 Shifts
@@ -587,11 +581,6 @@ namespace ClassOpsLogCreator
 
             //Return the merged array with the zones. 
             return result;
-        }
-
-        public int[] getWeighted()
-        {
-            return this.sumWeight;
         }
 
         /// <summary>
