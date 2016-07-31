@@ -38,13 +38,13 @@ namespace ClassOpsLogCreator
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        private static readonly string path = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator";
-        public readonly string ROOM_SCHED = path + @"\CLASSOPS\clo.xlsm";
-        public readonly string JEANNINE_LOG = path + @"\CLASSOPS\Jeannine\Jeannine's log.xlsx";
-        public readonly string RAUL_LOG = path + @"\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = path + @"\CLASSOPS\Derek\Derek's Log.xlsx";
-        public readonly string EXISTING_MASTER_LOG_COPY = path +@"\PW\masterlog.xlsx";
-        public readonly string EXISTING_MASTER_LOG = path + @"H:\CLASSOPS\masterlog.xlsx";
+        private static readonly string path = @"‪C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator";
+        public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
+        public readonly string JEANNINE_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
+        public readonly string EXISTING_MASTER_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
         public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_END_TIMES.xlsx";
 
         private static Excel.Application logoutMaster = null;
@@ -403,10 +403,10 @@ namespace ClassOpsLogCreator
             if (workDone)
             {
                 //Make a copy of the exel file
-                //System.IO.File.Delete(EXISTING_MASTER_LOG_COPY);
-                //System.IO.File.Copy(EXISTING_MASTER_LOG, EXISTING_MASTER_LOG_COPY, true);
+                System.IO.File.Delete(EXISTING_MASTER_LOG_COPY);
+                System.IO.File.Copy(EXISTING_MASTER_LOG, EXISTING_MASTER_LOG_COPY, true);
                 //Make a new copied file not hidden
-               // System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Hidden);
+                System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Hidden);
 
                 //Open the master log file
                 Excel.Application excel = new Excel.Application();
