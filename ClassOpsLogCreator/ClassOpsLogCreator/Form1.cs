@@ -528,7 +528,7 @@ namespace ClassOpsLogCreator
         /// This method will merger our file with the already existing file in sorted order. 
         /// </summary>
         /// <param name="worksheet"></param>
-        public void mergeMasterWithExisting(Excel.Worksheet worksheet)
+        private void mergeMasterWithExisting(Excel.Worksheet worksheet)
         {
 
             //Open the exisitng excel file
