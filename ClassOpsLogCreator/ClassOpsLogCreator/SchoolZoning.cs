@@ -160,6 +160,8 @@ namespace ClassOpsLogCreator
                 zone2Array = ZoneSuperLogImporter.RemoveEmptyRows(zone2Array);
                 zone3Array = ZoneSuperLogImporter.RemoveEmptyRows(zone3Array);
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0) + zone3Array.GetLength(0), 7];
+                //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
+            
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
                 AddToArray(result, zone2Array, zone1Array.GetLength(0));
