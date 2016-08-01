@@ -113,6 +113,9 @@ namespace ClassOpsLogCreator
                 zone1Array = ZoneSuperLogImporter.RemoveEmptyRows(zone1Array);
                 zone2Array = ZoneSuperLogImporter.RemoveEmptyRows(zone2Array);
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0), 7];
+                // test work
+                this.applyRankAndOrganize(zone1Array, zone2Array, classinfo.boarderBuildingZone2());
+
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
                 AddToArray(result, zone2Array, zone1Array.GetLength(0));
@@ -666,6 +669,74 @@ namespace ClassOpsLogCreator
                 distanceCount++;
             }
             return mark = mark.Where(n => n != null).ToArray();
+        }
+
+        /// <summary>
+        /// This method will score each zone and make a compairiosn
+        /// If the compairison is true, then we move items around in zones and 
+        /// return the new zones with balanced ranks
+        /// </summary>
+        /// <param name="zone1"></param>
+        /// <param name="zone2"></param>
+        /// <param name="borderBuildings"></param>
+        private void applyRankAndOrganize(string[,] zone1, string[,] zone2, List<string> borderBuildings)
+        {
+            //Convert each zone to a list
+            List<string[]> zone1List = convertToList(zone1);
+            List<string[]> zone2List = convertToList(zone2);
+
+            //TODO: Do the compairison and all the work
+
+            //Convert back to 2d arrays
+            zone1 = CreateRectangularArray<string>(zone1List);
+            zone2 = CreateRectangularArray<string>(zone2List);
+        }
+
+        /// <summary>
+        /// This method converts a 2d arry to a list
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        private static List<string[]> convertToList(string[,] arr)
+        {
+            string[][] jagged = new string[arr.GetLength(0)][];
+
+            for (int i = 0; i < arr.GetLength(0); i++)
+            {
+                jagged[i] = new string[arr.GetLength(1)];
+                for (int j = 0; j < arr.GetLength(1); j++)
+                {
+                    jagged[i][j] = arr[i, j];
+                }
+            }
+            return jagged.ToList();
+        }
+
+        /// <summary>
+        /// This method converts a List<string[]> into a 2d array
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="arrays"></param>
+        /// <returns></returns>
+        private static T[,] CreateRectangularArray<T>(IList<T[]> arrays)
+        {
+            // TODO: Validation and special-casing for arrays.Count == 0
+            int minorLength = arrays[0].Length;
+            T[,] ret = new T[arrays.Count, minorLength];
+            for (int i = 0; i < arrays.Count; i++)
+            {
+                var array = arrays[i];
+                if (array.Length != minorLength)
+                {
+                    throw new ArgumentException
+                        ("All arrays must be the same length");
+                }
+                for (int j = 0; j < minorLength; j++)
+                {
+                    ret[i, j] = array[j];
+                }
+            }
+            return ret;
         }
     }
 }
