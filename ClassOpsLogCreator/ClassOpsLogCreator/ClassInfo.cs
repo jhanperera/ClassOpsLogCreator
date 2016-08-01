@@ -565,5 +565,16 @@ namespace ClassOpsLogCreator
             return buildingList;
         }
 
+        public List<string> boarderBuildingZone2()
+        {
+            string[] zone1Boarder = new string[]
+            {
+                "CSQ", "R", "STC", "YL", "KT", "SLH", "BSB", "CLH", "SCL"
+            };
+            List<string> zone1BoarderList = new List<string>();
+            zone1BoarderList.AddRange(zone1Boarder);
+            return zone1BoarderList;
+        }
+
     }
 }
