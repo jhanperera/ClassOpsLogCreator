@@ -114,7 +114,7 @@ namespace ClassOpsLogCreator
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0), 7];
 
                 //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
-                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone2(), 8);
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_2(), 8);
 
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
@@ -163,7 +163,12 @@ namespace ClassOpsLogCreator
                 zone2Array = ZoneSuperLogImporter.RemoveEmptyRows(zone2Array);
                 zone3Array = ZoneSuperLogImporter.RemoveEmptyRows(zone3Array);
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0) + zone3Array.GetLength(0), 7];
-            
+
+                //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_3(1), 8);//North Central
+                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_3(2), 8);//Central South
+                this.applyRankAndOrganize(ref zone3Array, ref zone1Array, classinfo.boarderBuildingZone_3(3), 8);//South North
+
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
                 AddToArray(result, zone2Array, zone1Array.GetLength(0));
@@ -220,6 +225,13 @@ namespace ClassOpsLogCreator
                 zone3Array = ZoneSuperLogImporter.RemoveEmptyRows(zone3Array);
                 zone4Array = ZoneSuperLogImporter.RemoveEmptyRows(zone4Array);
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0) + zone3Array.GetLength(0) + zone4Array.GetLength(0), 7];
+
+                //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_4(1), 4);//North Central
+                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_4(2), 4);//Central South Central
+                this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_4(3), 4);//South Cnetral South East
+                this.applyRankAndOrganize(ref zone4Array, ref zone1Array, classinfo.boarderBuildingZone_4(4), 4);//South East Central
+
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
                 AddToArray(result, zone2Array, zone1Array.GetLength(0));
