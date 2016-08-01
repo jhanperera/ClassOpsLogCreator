@@ -79,7 +79,6 @@ namespace ClassOpsLogCreator
             System.Array rangeArray = (System.Array)range.Cells.Value2;
             string[,] zonedArray = covertToArray(rangeArray);
             string[,] result = null;
-            TaskRanks tr = new TaskRanks();
 
             //If we have 2 shifts
             if (shiftNumber == 2)
@@ -113,8 +112,9 @@ namespace ClassOpsLogCreator
                 zone1Array = ZoneSuperLogImporter.RemoveEmptyRows(zone1Array);
                 zone2Array = ZoneSuperLogImporter.RemoveEmptyRows(zone2Array);
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0), 7];
-                // test work
-                this.applyRankAndOrganize(zone1Array, zone2Array, classinfo.boarderBuildingZone2());
+
+                //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone2(), 8);
 
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
@@ -163,7 +163,6 @@ namespace ClassOpsLogCreator
                 zone2Array = ZoneSuperLogImporter.RemoveEmptyRows(zone2Array);
                 zone3Array = ZoneSuperLogImporter.RemoveEmptyRows(zone3Array);
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0) + zone3Array.GetLength(0), 7];
-                //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
             
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
@@ -679,13 +678,56 @@ namespace ClassOpsLogCreator
         /// <param name="zone1"></param>
         /// <param name="zone2"></param>
         /// <param name="borderBuildings"></param>
-        private void applyRankAndOrganize(string[,] zone1, string[,] zone2, List<string> borderBuildings)
+        private void applyRankAndOrganize(ref string[,] zone1, ref string[,] zone2, List<string> borderBuildings, int discrepancy)
         {
             //Convert each zone to a list
             List<string[]> zone1List = convertToList(zone1);
             List<string[]> zone2List = convertToList(zone2);
+            TaskRanks tr = new TaskRanks();
+            int zone1Rank = tr.getTotalTaskValue(zone1);
+            int zone2Rank = tr.getTotalTaskValue(zone2);
 
-            //TODO: Do the compairison and all the work
+            //If the difference of the two zones ranks in 6
+            if(Math.Abs(zone1Rank - zone2Rank) > discrepancy)
+            {
+                if (zone1Rank > zone2Rank)
+                {
+                    int offset = 0;
+                    //move items from zone1 to zone2
+                    for (int i = 0; i <= zone1.GetUpperBound(0) && Math.Abs(zone1Rank - zone2Rank) > discrepancy; i++)
+                    {
+                        if (borderBuildings.Contains(zone1[i,4]))
+                        {
+                            var temp = zone1List[i - offset];
+                            zone1List.Remove(zone1List[i - offset]);
+                            zone2List.Add(temp);
+                            offset++;
+                            zone2 = CreateRectangularArray<string>(zone2List);
+                            zone2Rank = tr.getTotalTaskValue(zone2);
+                        }
+                    }
+                }
+                else if (zone1Rank < zone2Rank)
+                {
+                    int offset = 0;
+                    //move items from zone2 to zone1
+                    for (int i = 0; i <= zone2.GetUpperBound(0) && Math.Abs(zone1Rank - zone2Rank) > discrepancy;  i++)
+                    {
+                        if (borderBuildings.Contains(zone2[i, 4]))
+                        {
+                            var temp = zone2List[i - offset];
+                            zone2List.Remove(zone2List[i- offset]);
+                            zone1List.Add(temp);
+                            offset++;
+                            zone1 = CreateRectangularArray<string>(zone1List);
+                            zone1Rank = tr.getTotalTaskValue(zone1);
+                        }
+                    }
+                }
+            }
+            //Sort
+            zone1List = zone1List.OrderBy(arr => arr[3]).ToList<string[]>();
+            zone2List = zone2List.OrderBy(arr => arr[3]).ToList<string[]>();
 
             //Convert back to 2d arrays
             zone1 = CreateRectangularArray<string>(zone1List);
