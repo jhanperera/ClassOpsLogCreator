@@ -6,7 +6,6 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using Excel = Microsoft.Office.Interop.Excel;
-using System.Data.OleDb;
 
 /// <summary>
 /// 
@@ -29,23 +28,23 @@ namespace ClassOpsLogCreator
     public partial class LogCreator : Form
     {
         //Public readonly attribues
-       /* public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_END_TIMES.xlsx";*/
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_END_TIMES.xlsx";
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
+        /*public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_END_TIMES.xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_END_TIMES.xlsx";*/
 
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
@@ -63,7 +62,6 @@ namespace ClassOpsLogCreator
         private int numberOfShifts = 0;
 
         private Boolean workDone = false;
-        private Boolean plusClicked = false;
 
         /// <summary>
         /// Constructor for the system. (Changes here should be confirmed with everyone first)
@@ -712,37 +710,6 @@ namespace ClassOpsLogCreator
         {
             AboutBox box = new AboutBox();
             box.ShowDialog();
-        }
-
-
-        /// <summary>
-        /// When the + button is clicked
-        /// 
-        /// Make the new controls apear and extend the frame
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void plusBTN_Click(object sender, EventArgs e)
-        {
-            this.Height = 475;
-            //create a beveled line
-            bevelLineLabel.AutoSize = false;
-            bevelLineLabel.Height = 2;
-            bevelLineLabel.BorderStyle = BorderStyle.Fixed3D;
-
-            //Set them all to visabl
-            this.bevelLineLabel.Visible = true;
-            this.toLabel2.Visible = true;
-            this.shiftTime2.Visible = true;
-            this.startHour2.Visible = true;
-            this.am_pmCombo3.Visible = true;
-            this.endHour2.Visible = true;
-            this.am_pmCombo4.Visible = true;
-            this.numberOfShiftsLabel2.Visible = true;
-            this.numberOfShiftsCombo2.Visible = true;
-            
-            this.plusBTN.Text = "-";
-            this.plusClicked = true;
         }
     }
 }
