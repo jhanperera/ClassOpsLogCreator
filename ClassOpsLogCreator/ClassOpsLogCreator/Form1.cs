@@ -73,23 +73,45 @@ namespace ClassOpsLogCreator
         public LogCreator()
         {
             InitializeComponent();
-
+            this.SetStyle(
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.UserPaint |
+                ControlStyles.DoubleBuffer,
+                true);
 
             //fill the combo boxes
-            for(int i = 1; i <= 12; i ++)
+            for (int i = 1; i <= 12; i++)
             {
-                //Tab 1 
+                //Tab 1 Select 1
                 this.startHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
                 this.endHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
+                //Tab 1 Select 2
+                this.startHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
+                this.endHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
+                //Tab 1 Select 3
+                this.startHour3.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
+                this.endHour3.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
+                //Tab 1 Select 4
+                this.startHour4.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
+                this.endHour4.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
                 //Tab 2
                 this.cloGenStart1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
                 this.cloGenEnd1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
                 //15 minute intervals
                 for (int k = 15; k <= 45; k += 15)
                 {
-                    //Tab 1
-                    this.startHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString()});
+                    //Tab 1 Select 1
+                    this.startHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
                     this.endHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
+                    //Tab 1 Select 2
+                    this.startHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
+                    this.endHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
+                    //Tab 1 Select 3
+                    this.startHour3.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
+                    this.endHour3.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
+                    //Tab 1 Select 4
+                    this.startHour4.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
+                    this.endHour4.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
                     //Tab 2
                     this.cloGenStart1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
                     this.cloGenEnd1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
@@ -97,9 +119,12 @@ namespace ClassOpsLogCreator
             }
 
             //add number of shifts
-            for(int j = 1; j <= 8; j ++)
+            for (int j = 1; j <= 8; j++)
             {
                 this.numberOfShiftsCombo1.Items.Add(j.ToString());
+                this.numberOfShiftsCombo2.Items.Add(j.ToString());
+                this.numberOfShiftsCombo3.Items.Add(j.ToString());
+                this.numberOfShiftsCombo4.Items.Add(j.ToString());
             }
 
             //Fill the am/pm selector for tab 1
@@ -107,6 +132,21 @@ namespace ClassOpsLogCreator
             this.am_pmCombo1.Items.Add("PM");
             this.am_pmCombo2.Items.Add("AM");
             this.am_pmCombo2.Items.Add("PM");
+            //Tab 1 Select 2
+            this.am_pmCombo3.Items.Add("AM");
+            this.am_pmCombo3.Items.Add("PM");
+            this.am_pmCombo4.Items.Add("AM");
+            this.am_pmCombo4.Items.Add("PM");
+            //Tab 1 Select 3
+            this.am_pmCombo5.Items.Add("AM");
+            this.am_pmCombo5.Items.Add("PM");
+            this.am_pmCombo6.Items.Add("AM");
+            this.am_pmCombo6.Items.Add("PM");
+            //Tab 1 Select 4
+            this.am_pmCombo7.Items.Add("AM");
+            this.am_pmCombo7.Items.Add("PM");
+            this.am_pmCombo8.Items.Add("AM");
+            this.am_pmCombo8.Items.Add("PM");
             //Fill the am/pm selector for tab 2
             this.cloAm_pmCombo1.Items.Add("AM");
             this.cloAm_pmCombo1.Items.Add("PM");
@@ -119,19 +159,56 @@ namespace ClassOpsLogCreator
             this.numberOfShiftsCombo1.SelectedIndex = 0;
             this.am_pmCombo1.SelectedIndex = 1;
             this.am_pmCombo2.SelectedIndex = 1;
+            //Tab 1 Select 2
+            this.startHour2.SelectedIndex = -1;
+            this.endHour2.SelectedIndex = -1;
+            this.numberOfShiftsCombo2.SelectedIndex = 0;
+            this.am_pmCombo3.SelectedIndex = 1;
+            this.am_pmCombo4.SelectedIndex = 1;
+            //Tab 1 Select 3
+            this.startHour3.SelectedIndex = -1;
+            this.endHour3.SelectedIndex = -1;
+            this.numberOfShiftsCombo3.SelectedIndex = 0;
+            this.am_pmCombo5.SelectedIndex = 1;
+            this.am_pmCombo6.SelectedIndex = 1;
+            //Tab 1 Select 3
+            this.startHour4.SelectedIndex = -1;
+            this.endHour4.SelectedIndex = -1;
+            this.numberOfShiftsCombo4.SelectedIndex = 0;
+            this.am_pmCombo7.SelectedIndex = 1;
+            this.am_pmCombo8.SelectedIndex = 1;
+
             ////set the default view for the combo for tab 1
             this.cloGenStart1.SelectedIndex = -1;
             this.cloGenEnd1.SelectedIndex = -1;
             this.cloAm_pmCombo1.SelectedIndex = 1;
             this.cloAm_pmCombo2.SelectedIndex = 1;
 
-
-            //Make the combo box read only for tab 1
+            //Make the combo box read only for tab 1 - select 1
             this.startHour1.DropDownStyle = ComboBoxStyle.DropDownList; 
             this.endHour1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo2.DropDownStyle = ComboBoxStyle.DropDownList;
             this.numberOfShiftsCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
+            //Make the combo box read only for tab 1 - select 2
+            this.startHour2.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.endHour2.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.am_pmCombo3.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.am_pmCombo4.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.numberOfShiftsCombo2.DropDownStyle = ComboBoxStyle.DropDownList;
+            //Make the combo box read only for tab 1 - select 3
+            this.startHour3.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.endHour3.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.am_pmCombo5.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.am_pmCombo6.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.numberOfShiftsCombo3.DropDownStyle = ComboBoxStyle.DropDownList;
+            //Make the combo box read only for tab 1 - select 4
+            this.startHour4.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.endHour4.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.am_pmCombo7.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.am_pmCombo8.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.numberOfShiftsCombo4.DropDownStyle = ComboBoxStyle.DropDownList;
+
             //Make the combo box read only for tab 2
             this.cloGenStart1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.cloGenEnd1.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -257,6 +334,9 @@ namespace ClassOpsLogCreator
 
             //***********************CREATE MASTER LOG FILE PT 1**********************
             LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo, endTimeFromCombo);
+
+            //ACOUNT FOR WHEN WE HAVE MORE THAN ONE SEGMENT OPENED IN THE FORM 
+
 
             string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
             
