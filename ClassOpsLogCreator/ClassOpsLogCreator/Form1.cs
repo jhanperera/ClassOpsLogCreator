@@ -724,25 +724,7 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void plusBTN_Click(object sender, EventArgs e)
         {
-            this.Height = 475;
-            //create a beveled line
-            bevelLineLabel.AutoSize = false;
-            bevelLineLabel.Height = 2;
-            bevelLineLabel.BorderStyle = BorderStyle.Fixed3D;
-
-            //Set them all to visabl
-            this.bevelLineLabel.Visible = true;
-            this.toLabel2.Visible = true;
-            this.shiftTime2.Visible = true;
-            this.startHour2.Visible = true;
-            this.am_pmCombo3.Visible = true;
-            this.endHour2.Visible = true;
-            this.am_pmCombo4.Visible = true;
-            this.numberOfShiftsLabel2.Visible = true;
-            this.numberOfShiftsCombo2.Visible = true;
-            
-            this.plusBTN.Text = "-";
-            this.plusClicked = true;
+        
         }
     }
 }
