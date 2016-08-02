@@ -63,7 +63,9 @@ namespace ClassOpsLogCreator
         private int numberOfShifts = 0;
 
         private Boolean workDone = false;
-        private Boolean plusClicked = false;
+        private Boolean plusClicked1 = false;
+        private Boolean plusClicked2 = false;
+        private Boolean plusClicked3 = false;
 
         /// <summary>
         /// Constructor for the system. (Changes here should be confirmed with everyone first)
@@ -72,8 +74,6 @@ namespace ClassOpsLogCreator
         {
             InitializeComponent();
 
-            //Make the text box readonly
-            textBox1.ReadOnly = true;
 
             //fill the combo boxes
             for(int i = 1; i <= 12; i ++)
@@ -370,7 +370,6 @@ namespace ClassOpsLogCreator
             {
                 MessageBox.Show(e.Error.Message, "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.textBox1.Text = "Something went wrong!";
                 this.workProgressBar.Value = 0;
                 this.workProgressBar.Refresh();
                 Quit();
@@ -383,7 +382,6 @@ namespace ClassOpsLogCreator
                 // the DoWork event handler, the Cancelled
                 // flag may not have been set, even though
                 // CancelAsync was called.
-                textBox1.Text = "Canceled";
                 this.workProgressBar.Value = 0;
                 this.workProgressBar.Refresh();
                 Quit();
@@ -392,8 +390,6 @@ namespace ClassOpsLogCreator
             {
                 // Finally, handle the case where the operation 
                 // succeeded.
-                textBox1.Text = Environment.GetFolderPath(
-                         System.Environment.SpecialFolder.DesktopDirectory).ToString();
                 workDone = true;
                 Quit();
             }
@@ -722,9 +718,159 @@ namespace ClassOpsLogCreator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void plusBTN_Click(object sender, EventArgs e)
+        private void plusBTN1_Click_1(object sender, EventArgs e)
         {
-        
+            //initalize all components
+
+            if(!plusClicked1)
+            {
+                //set the clicked flag
+                this.plusClicked1 = true;
+                this.plusBTN1.Text = "-";
+
+                //Make them all visable
+                this.Height += 145;
+                this.shiftTime2.Visible = true;
+                this.startHour2.Visible = true;
+                this.am_pmCombo3.Visible = true;
+                this.toLabel2.Visible = true;
+                this.endHour2.Visible = true;
+                this.am_pmCombo4.Visible = true;
+                this.numberOfShiftsLabel2.Visible = true;
+                this.numberOfShiftsCombo2.Visible = true;
+                this.plusBTN2.Visible = true;
+
+                //Center Screen
+                this.CenterToScreen();
+            }
+            else if(plusClicked1)
+            {
+                //set the clicked flag
+                this.plusClicked1 = false;
+                this.plusBTN1.Text = "+";
+
+                //Make them all visable
+                this.Height -= 145;
+                this.shiftTime2.Visible = false;
+                this.startHour2.Visible = false;
+                this.am_pmCombo3.Visible = false;
+                this.toLabel2.Visible = false;
+                this.endHour2.Visible = false;
+                this.am_pmCombo4.Visible = false;
+                this.numberOfShiftsLabel2.Visible = false;
+                this.numberOfShiftsCombo2.Visible = false;
+                this.plusBTN2.Visible = false;
+
+                //Center Screen
+                this.CenterToScreen();
+            }        
+        }
+
+        /// <summary>
+        /// When the + button is clicked
+        /// 
+        /// Make the new controls apear and extend the frame
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void plusBTN2_Click(object sender, EventArgs e)
+        {
+            //initalize all components
+
+            if (!plusClicked2)
+            {
+                //Disable the previous + button
+                this.plusBTN1.Enabled = false;
+                //set the clicked flag
+                this.plusClicked2 = true;
+                this.plusBTN2.Text = "-";
+
+                //Make them all visable
+                this.Height += 145;
+                this.shiftTime3.Visible = true;
+                this.startHour3.Visible = true;
+                this.am_pmCombo5.Visible = true;
+                this.toLabel3.Visible = true;
+                this.endHour3.Visible = true;
+                this.am_pmCombo6.Visible = true;
+                this.numberOfShiftsLabel3.Visible = true;
+                this.numberOfShiftsCombo3.Visible = true;
+                this.plusBTN3.Visible = true;
+
+                //Center Screen
+                this.CenterToScreen();
+            }
+            else if (plusClicked2)
+            {
+                //Disable the previous + button
+                this.plusBTN1.Enabled = true;
+                //set the clicked flag
+                this.plusClicked2 = false;
+                this.plusBTN2.Text = "+";
+
+                //Make them all visable
+                this.Height -= 145;
+                this.shiftTime3.Visible = false;
+                this.startHour3.Visible = false;
+                this.am_pmCombo5.Visible = false;
+                this.toLabel3.Visible = false;
+                this.endHour3.Visible = false;
+                this.am_pmCombo6.Visible = false;
+                this.numberOfShiftsLabel3.Visible = false;
+                this.numberOfShiftsCombo3.Visible = false;
+                this.plusBTN3.Visible = false;
+
+                //Center Screen
+                this.CenterToScreen();
+            }
+        }
+
+        private void plusBTN3_Click(object sender, EventArgs e)
+        {
+            if (!plusClicked3)
+            {
+                //Disable the previous + button
+                this.plusBTN2.Enabled = false;
+                //set the clicked flag
+                this.plusClicked3 = true;
+                this.plusBTN3.Text = "-";
+
+                //Make them all visable
+                this.Height += 145;
+                this.shiftTime4.Visible = true;
+                this.startHour4.Visible = true;
+                this.am_pmCombo7.Visible = true;
+                this.toLabel4.Visible = true;
+                this.endHour4.Visible = true;
+                this.am_pmCombo8.Visible = true;
+                this.numberOfShiftsLabel4.Visible = true;
+                this.numberOfShiftsCombo4.Visible = true;
+
+                //Center Screen
+                this.CenterToScreen();
+            }
+            else if (plusClicked3)
+            {
+                //Disable the previous + button
+                this.plusBTN2.Enabled = true;
+                //set the clicked flag
+                this.plusClicked3 = false;
+                this.plusBTN3.Text = "+";
+
+                //Make them all visable
+                this.Height -= 145;
+                this.shiftTime4.Visible = false;
+                this.startHour4.Visible = false;
+                this.am_pmCombo7.Visible = false;
+                this.toLabel4.Visible = false;
+                this.endHour4.Visible = false;
+                this.am_pmCombo8.Visible = false;
+                this.numberOfShiftsLabel4.Visible = false;
+                this.numberOfShiftsCombo4.Visible = false;
+
+                //Center Screen
+                this.CenterToScreen();
+            }
         }
     }
 }

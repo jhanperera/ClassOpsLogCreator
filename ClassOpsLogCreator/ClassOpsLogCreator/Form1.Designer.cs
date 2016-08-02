@@ -33,10 +33,34 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tab1 = new System.Windows.Forms.TabPage();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.plusBTN = new System.Windows.Forms.Button();
+            this.toLabel4 = new System.Windows.Forms.Label();
+            this.endHour4 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo8 = new System.Windows.Forms.ComboBox();
+            this.numberOfShiftsLabel4 = new System.Windows.Forms.Label();
+            this.shiftTime4 = new System.Windows.Forms.Label();
+            this.numberOfShiftsCombo4 = new System.Windows.Forms.ComboBox();
+            this.startHour4 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo7 = new System.Windows.Forms.ComboBox();
+            this.plusBTN3 = new System.Windows.Forms.Button();
+            this.toLabel3 = new System.Windows.Forms.Label();
+            this.endHour3 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo6 = new System.Windows.Forms.ComboBox();
+            this.numberOfShiftsLabel3 = new System.Windows.Forms.Label();
+            this.shiftTime3 = new System.Windows.Forms.Label();
+            this.numberOfShiftsCombo3 = new System.Windows.Forms.ComboBox();
+            this.startHour3 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo5 = new System.Windows.Forms.ComboBox();
+            this.plusBTN2 = new System.Windows.Forms.Button();
+            this.toLabel2 = new System.Windows.Forms.Label();
+            this.endHour2 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo4 = new System.Windows.Forms.ComboBox();
+            this.numberOfShiftsLabel2 = new System.Windows.Forms.Label();
+            this.shiftTime2 = new System.Windows.Forms.Label();
+            this.numberOfShiftsCombo2 = new System.Windows.Forms.ComboBox();
+            this.startHour2 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo3 = new System.Windows.Forms.ComboBox();
+            this.plusBTN1 = new System.Windows.Forms.Button();
             this.toLabel1 = new System.Windows.Forms.Label();
-            this.destinationLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.endHour1 = new System.Windows.Forms.ComboBox();
             this.createBTN = new System.Windows.Forms.Button();
             this.am_pmCombo2 = new System.Windows.Forms.ComboBox();
@@ -45,7 +69,6 @@
             this.numberOfShiftsCombo1 = new System.Windows.Forms.ComboBox();
             this.startHour1 = new System.Windows.Forms.ComboBox();
             this.am_pmCombo1 = new System.Windows.Forms.ComboBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tab2 = new System.Windows.Forms.TabPage();
             this.selectTimeLabel = new System.Windows.Forms.Label();
             this.createCLOBTN = new System.Windows.Forms.Button();
@@ -74,7 +97,6 @@
             this.tabControl.SuspendLayout();
             this.tab1.SuspendLayout();
             this.mainPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tab2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -82,7 +104,7 @@
             // workProgressBar
             // 
             this.workProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.workProgressBar.Location = new System.Drawing.Point(0, 296);
+            this.workProgressBar.Location = new System.Drawing.Point(0, 260);
             this.workProgressBar.Margin = new System.Windows.Forms.Padding(4);
             this.workProgressBar.Name = "workProgressBar";
             this.workProgressBar.Size = new System.Drawing.Size(548, 25);
@@ -99,7 +121,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(548, 268);
+            this.tabControl.Size = new System.Drawing.Size(548, 232);
             this.tabControl.TabIndex = 8;
             // 
             // tab1
@@ -108,7 +130,7 @@
             this.tab1.Location = new System.Drawing.Point(4, 30);
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Windows.Forms.Padding(3);
-            this.tab1.Size = new System.Drawing.Size(540, 234);
+            this.tab1.Size = new System.Drawing.Size(540, 198);
             this.tab1.TabIndex = 0;
             this.tab1.Text = "Log Creator";
             this.tab1.UseVisualStyleBackColor = true;
@@ -120,10 +142,34 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mainPanel.BackColor = System.Drawing.SystemColors.Menu;
             this.mainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.mainPanel.Controls.Add(this.plusBTN);
+            this.mainPanel.Controls.Add(this.toLabel4);
+            this.mainPanel.Controls.Add(this.endHour4);
+            this.mainPanel.Controls.Add(this.am_pmCombo8);
+            this.mainPanel.Controls.Add(this.numberOfShiftsLabel4);
+            this.mainPanel.Controls.Add(this.shiftTime4);
+            this.mainPanel.Controls.Add(this.numberOfShiftsCombo4);
+            this.mainPanel.Controls.Add(this.startHour4);
+            this.mainPanel.Controls.Add(this.am_pmCombo7);
+            this.mainPanel.Controls.Add(this.plusBTN3);
+            this.mainPanel.Controls.Add(this.toLabel3);
+            this.mainPanel.Controls.Add(this.endHour3);
+            this.mainPanel.Controls.Add(this.am_pmCombo6);
+            this.mainPanel.Controls.Add(this.numberOfShiftsLabel3);
+            this.mainPanel.Controls.Add(this.shiftTime3);
+            this.mainPanel.Controls.Add(this.numberOfShiftsCombo3);
+            this.mainPanel.Controls.Add(this.startHour3);
+            this.mainPanel.Controls.Add(this.am_pmCombo5);
+            this.mainPanel.Controls.Add(this.plusBTN2);
+            this.mainPanel.Controls.Add(this.toLabel2);
+            this.mainPanel.Controls.Add(this.endHour2);
+            this.mainPanel.Controls.Add(this.am_pmCombo4);
+            this.mainPanel.Controls.Add(this.numberOfShiftsLabel2);
+            this.mainPanel.Controls.Add(this.shiftTime2);
+            this.mainPanel.Controls.Add(this.numberOfShiftsCombo2);
+            this.mainPanel.Controls.Add(this.startHour2);
+            this.mainPanel.Controls.Add(this.am_pmCombo3);
+            this.mainPanel.Controls.Add(this.plusBTN1);
             this.mainPanel.Controls.Add(this.toLabel1);
-            this.mainPanel.Controls.Add(this.destinationLabel);
-            this.mainPanel.Controls.Add(this.textBox1);
             this.mainPanel.Controls.Add(this.endHour1);
             this.mainPanel.Controls.Add(this.createBTN);
             this.mainPanel.Controls.Add(this.am_pmCombo2);
@@ -132,58 +178,309 @@
             this.mainPanel.Controls.Add(this.numberOfShiftsCombo1);
             this.mainPanel.Controls.Add(this.startHour1);
             this.mainPanel.Controls.Add(this.am_pmCombo1);
-            this.mainPanel.Controls.Add(this.pictureBox1);
             this.mainPanel.Location = new System.Drawing.Point(-4, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(548, 235);
+            this.mainPanel.Size = new System.Drawing.Size(548, 199);
             this.mainPanel.TabIndex = 53;
             // 
-            // plusBTN
+            // toLabel4
             // 
-            this.plusBTN.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.plusBTN.Location = new System.Drawing.Point(468, 102);
-            this.plusBTN.Name = "plusBTN";
-            this.plusBTN.Size = new System.Drawing.Size(67, 30);
-            this.plusBTN.TabIndex = 53;
-            this.plusBTN.Text = "+";
-            this.plusBTN.UseVisualStyleBackColor = true;
+            this.toLabel4.AutoSize = true;
+            this.toLabel4.Location = new System.Drawing.Point(264, 486);
+            this.toLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.toLabel4.Name = "toLabel4";
+            this.toLabel4.Size = new System.Drawing.Size(24, 21);
+            this.toLabel4.TabIndex = 79;
+            this.toLabel4.Text = "to";
+            this.toLabel4.Visible = false;
+            // 
+            // endHour4
+            // 
+            this.endHour4.FormattingEnabled = true;
+            this.endHour4.Location = new System.Drawing.Point(293, 483);
+            this.endHour4.Margin = new System.Windows.Forms.Padding(4);
+            this.endHour4.Name = "endHour4";
+            this.endHour4.Size = new System.Drawing.Size(83, 29);
+            this.endHour4.TabIndex = 77;
+            this.endHour4.Visible = false;
+            // 
+            // am_pmCombo8
+            // 
+            this.am_pmCombo8.FormattingEnabled = true;
+            this.am_pmCombo8.Location = new System.Drawing.Point(384, 483);
+            this.am_pmCombo8.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo8.Name = "am_pmCombo8";
+            this.am_pmCombo8.Size = new System.Drawing.Size(67, 29);
+            this.am_pmCombo8.TabIndex = 78;
+            this.am_pmCombo8.Visible = false;
+            // 
+            // numberOfShiftsLabel4
+            // 
+            this.numberOfShiftsLabel4.AutoSize = true;
+            this.numberOfShiftsLabel4.Location = new System.Drawing.Point(99, 525);
+            this.numberOfShiftsLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.numberOfShiftsLabel4.Name = "numberOfShiftsLabel4";
+            this.numberOfShiftsLabel4.Size = new System.Drawing.Size(130, 21);
+            this.numberOfShiftsLabel4.TabIndex = 76;
+            this.numberOfShiftsLabel4.Text = "Number of shifts:";
+            this.numberOfShiftsLabel4.Visible = false;
+            // 
+            // shiftTime4
+            // 
+            this.shiftTime4.AutoSize = true;
+            this.shiftTime4.Location = new System.Drawing.Point(99, 460);
+            this.shiftTime4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.shiftTime4.Name = "shiftTime4";
+            this.shiftTime4.Size = new System.Drawing.Size(176, 21);
+            this.shiftTime4.TabIndex = 75;
+            this.shiftTime4.Text = "Please select shift times:";
+            this.shiftTime4.Visible = false;
+            // 
+            // numberOfShiftsCombo4
+            // 
+            this.numberOfShiftsCombo4.FormattingEnabled = true;
+            this.numberOfShiftsCombo4.Location = new System.Drawing.Point(99, 550);
+            this.numberOfShiftsCombo4.Margin = new System.Windows.Forms.Padding(4);
+            this.numberOfShiftsCombo4.Name = "numberOfShiftsCombo4";
+            this.numberOfShiftsCombo4.Size = new System.Drawing.Size(177, 29);
+            this.numberOfShiftsCombo4.TabIndex = 74;
+            this.numberOfShiftsCombo4.Visible = false;
+            // 
+            // startHour4
+            // 
+            this.startHour4.FormattingEnabled = true;
+            this.startHour4.Location = new System.Drawing.Point(99, 483);
+            this.startHour4.Margin = new System.Windows.Forms.Padding(4);
+            this.startHour4.Name = "startHour4";
+            this.startHour4.Size = new System.Drawing.Size(82, 29);
+            this.startHour4.TabIndex = 72;
+            this.startHour4.Visible = false;
+            // 
+            // am_pmCombo7
+            // 
+            this.am_pmCombo7.FormattingEnabled = true;
+            this.am_pmCombo7.Location = new System.Drawing.Point(189, 483);
+            this.am_pmCombo7.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo7.Name = "am_pmCombo7";
+            this.am_pmCombo7.Size = new System.Drawing.Size(67, 29);
+            this.am_pmCombo7.TabIndex = 73;
+            this.am_pmCombo7.Visible = false;
+            // 
+            // plusBTN3
+            // 
+            this.plusBTN3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.plusBTN3.Location = new System.Drawing.Point(383, 402);
+            this.plusBTN3.Name = "plusBTN3";
+            this.plusBTN3.Size = new System.Drawing.Size(67, 30);
+            this.plusBTN3.TabIndex = 71;
+            this.plusBTN3.Text = "+";
+            this.plusBTN3.UseVisualStyleBackColor = true;
+            this.plusBTN3.Visible = false;
+            this.plusBTN3.Click += new System.EventHandler(this.plusBTN3_Click);
+            // 
+            // toLabel3
+            // 
+            this.toLabel3.AutoSize = true;
+            this.toLabel3.Location = new System.Drawing.Point(263, 339);
+            this.toLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.toLabel3.Name = "toLabel3";
+            this.toLabel3.Size = new System.Drawing.Size(24, 21);
+            this.toLabel3.TabIndex = 70;
+            this.toLabel3.Text = "to";
+            this.toLabel3.Visible = false;
+            // 
+            // endHour3
+            // 
+            this.endHour3.FormattingEnabled = true;
+            this.endHour3.Location = new System.Drawing.Point(292, 336);
+            this.endHour3.Margin = new System.Windows.Forms.Padding(4);
+            this.endHour3.Name = "endHour3";
+            this.endHour3.Size = new System.Drawing.Size(83, 29);
+            this.endHour3.TabIndex = 68;
+            this.endHour3.Visible = false;
+            // 
+            // am_pmCombo6
+            // 
+            this.am_pmCombo6.FormattingEnabled = true;
+            this.am_pmCombo6.Location = new System.Drawing.Point(383, 336);
+            this.am_pmCombo6.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo6.Name = "am_pmCombo6";
+            this.am_pmCombo6.Size = new System.Drawing.Size(67, 29);
+            this.am_pmCombo6.TabIndex = 69;
+            this.am_pmCombo6.Visible = false;
+            // 
+            // numberOfShiftsLabel3
+            // 
+            this.numberOfShiftsLabel3.AutoSize = true;
+            this.numberOfShiftsLabel3.Location = new System.Drawing.Point(98, 378);
+            this.numberOfShiftsLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.numberOfShiftsLabel3.Name = "numberOfShiftsLabel3";
+            this.numberOfShiftsLabel3.Size = new System.Drawing.Size(130, 21);
+            this.numberOfShiftsLabel3.TabIndex = 67;
+            this.numberOfShiftsLabel3.Text = "Number of shifts:";
+            this.numberOfShiftsLabel3.Visible = false;
+            // 
+            // shiftTime3
+            // 
+            this.shiftTime3.AutoSize = true;
+            this.shiftTime3.Location = new System.Drawing.Point(98, 313);
+            this.shiftTime3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.shiftTime3.Name = "shiftTime3";
+            this.shiftTime3.Size = new System.Drawing.Size(176, 21);
+            this.shiftTime3.TabIndex = 66;
+            this.shiftTime3.Text = "Please select shift times:";
+            this.shiftTime3.Visible = false;
+            // 
+            // numberOfShiftsCombo3
+            // 
+            this.numberOfShiftsCombo3.FormattingEnabled = true;
+            this.numberOfShiftsCombo3.Location = new System.Drawing.Point(98, 403);
+            this.numberOfShiftsCombo3.Margin = new System.Windows.Forms.Padding(4);
+            this.numberOfShiftsCombo3.Name = "numberOfShiftsCombo3";
+            this.numberOfShiftsCombo3.Size = new System.Drawing.Size(177, 29);
+            this.numberOfShiftsCombo3.TabIndex = 65;
+            this.numberOfShiftsCombo3.Visible = false;
+            // 
+            // startHour3
+            // 
+            this.startHour3.FormattingEnabled = true;
+            this.startHour3.Location = new System.Drawing.Point(98, 336);
+            this.startHour3.Margin = new System.Windows.Forms.Padding(4);
+            this.startHour3.Name = "startHour3";
+            this.startHour3.Size = new System.Drawing.Size(82, 29);
+            this.startHour3.TabIndex = 63;
+            this.startHour3.Visible = false;
+            // 
+            // am_pmCombo5
+            // 
+            this.am_pmCombo5.FormattingEnabled = true;
+            this.am_pmCombo5.Location = new System.Drawing.Point(188, 336);
+            this.am_pmCombo5.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo5.Name = "am_pmCombo5";
+            this.am_pmCombo5.Size = new System.Drawing.Size(67, 29);
+            this.am_pmCombo5.TabIndex = 64;
+            this.am_pmCombo5.Visible = false;
+            // 
+            // plusBTN2
+            // 
+            this.plusBTN2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.plusBTN2.Location = new System.Drawing.Point(384, 258);
+            this.plusBTN2.Name = "plusBTN2";
+            this.plusBTN2.Size = new System.Drawing.Size(67, 30);
+            this.plusBTN2.TabIndex = 62;
+            this.plusBTN2.Text = "+";
+            this.plusBTN2.UseVisualStyleBackColor = true;
+            this.plusBTN2.Visible = false;
+            this.plusBTN2.Click += new System.EventHandler(this.plusBTN2_Click);
+            // 
+            // toLabel2
+            // 
+            this.toLabel2.AutoSize = true;
+            this.toLabel2.Location = new System.Drawing.Point(264, 195);
+            this.toLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.toLabel2.Name = "toLabel2";
+            this.toLabel2.Size = new System.Drawing.Size(24, 21);
+            this.toLabel2.TabIndex = 61;
+            this.toLabel2.Text = "to";
+            this.toLabel2.Visible = false;
+            // 
+            // endHour2
+            // 
+            this.endHour2.FormattingEnabled = true;
+            this.endHour2.Location = new System.Drawing.Point(293, 192);
+            this.endHour2.Margin = new System.Windows.Forms.Padding(4);
+            this.endHour2.Name = "endHour2";
+            this.endHour2.Size = new System.Drawing.Size(83, 29);
+            this.endHour2.TabIndex = 59;
+            this.endHour2.Visible = false;
+            // 
+            // am_pmCombo4
+            // 
+            this.am_pmCombo4.FormattingEnabled = true;
+            this.am_pmCombo4.Location = new System.Drawing.Point(384, 192);
+            this.am_pmCombo4.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo4.Name = "am_pmCombo4";
+            this.am_pmCombo4.Size = new System.Drawing.Size(67, 29);
+            this.am_pmCombo4.TabIndex = 60;
+            this.am_pmCombo4.Visible = false;
+            // 
+            // numberOfShiftsLabel2
+            // 
+            this.numberOfShiftsLabel2.AutoSize = true;
+            this.numberOfShiftsLabel2.Location = new System.Drawing.Point(99, 234);
+            this.numberOfShiftsLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.numberOfShiftsLabel2.Name = "numberOfShiftsLabel2";
+            this.numberOfShiftsLabel2.Size = new System.Drawing.Size(130, 21);
+            this.numberOfShiftsLabel2.TabIndex = 58;
+            this.numberOfShiftsLabel2.Text = "Number of shifts:";
+            this.numberOfShiftsLabel2.Visible = false;
+            // 
+            // shiftTime2
+            // 
+            this.shiftTime2.AutoSize = true;
+            this.shiftTime2.Location = new System.Drawing.Point(99, 169);
+            this.shiftTime2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.shiftTime2.Name = "shiftTime2";
+            this.shiftTime2.Size = new System.Drawing.Size(176, 21);
+            this.shiftTime2.TabIndex = 57;
+            this.shiftTime2.Text = "Please select shift times:";
+            this.shiftTime2.Visible = false;
+            // 
+            // numberOfShiftsCombo2
+            // 
+            this.numberOfShiftsCombo2.FormattingEnabled = true;
+            this.numberOfShiftsCombo2.Location = new System.Drawing.Point(99, 259);
+            this.numberOfShiftsCombo2.Margin = new System.Windows.Forms.Padding(4);
+            this.numberOfShiftsCombo2.Name = "numberOfShiftsCombo2";
+            this.numberOfShiftsCombo2.Size = new System.Drawing.Size(177, 29);
+            this.numberOfShiftsCombo2.TabIndex = 56;
+            this.numberOfShiftsCombo2.Visible = false;
+            // 
+            // startHour2
+            // 
+            this.startHour2.FormattingEnabled = true;
+            this.startHour2.Location = new System.Drawing.Point(99, 192);
+            this.startHour2.Margin = new System.Windows.Forms.Padding(4);
+            this.startHour2.Name = "startHour2";
+            this.startHour2.Size = new System.Drawing.Size(82, 29);
+            this.startHour2.TabIndex = 54;
+            this.startHour2.Visible = false;
+            // 
+            // am_pmCombo3
+            // 
+            this.am_pmCombo3.FormattingEnabled = true;
+            this.am_pmCombo3.Location = new System.Drawing.Point(189, 192);
+            this.am_pmCombo3.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo3.Name = "am_pmCombo3";
+            this.am_pmCombo3.Size = new System.Drawing.Size(67, 29);
+            this.am_pmCombo3.TabIndex = 55;
+            this.am_pmCombo3.Visible = false;
+            // 
+            // plusBTN1
+            // 
+            this.plusBTN1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.plusBTN1.Location = new System.Drawing.Point(383, 111);
+            this.plusBTN1.Name = "plusBTN1";
+            this.plusBTN1.Size = new System.Drawing.Size(67, 30);
+            this.plusBTN1.TabIndex = 53;
+            this.plusBTN1.Text = "+";
+            this.plusBTN1.UseVisualStyleBackColor = true;
+            this.plusBTN1.Click += new System.EventHandler(this.plusBTN1_Click_1);
             // 
             // toLabel1
             // 
             this.toLabel1.AutoSize = true;
-            this.toLabel1.Location = new System.Drawing.Point(348, 39);
+            this.toLabel1.Location = new System.Drawing.Point(263, 48);
             this.toLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.toLabel1.Name = "toLabel1";
             this.toLabel1.Size = new System.Drawing.Size(24, 21);
             this.toLabel1.TabIndex = 52;
             this.toLabel1.Text = "to";
             // 
-            // destinationLabel
-            // 
-            this.destinationLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.destinationLabel.AutoEllipsis = true;
-            this.destinationLabel.AutoSize = true;
-            this.destinationLabel.Location = new System.Drawing.Point(13, 175);
-            this.destinationLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.destinationLabel.Name = "destinationLabel";
-            this.destinationLabel.Size = new System.Drawing.Size(150, 21);
-            this.destinationLabel.TabIndex = 52;
-            this.destinationLabel.Text = "Master Log location:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(11, 200);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(340, 29);
-            this.textBox1.TabIndex = 51;
-            // 
             // endHour1
             // 
             this.endHour1.FormattingEnabled = true;
-            this.endHour1.Location = new System.Drawing.Point(377, 36);
+            this.endHour1.Location = new System.Drawing.Point(292, 45);
             this.endHour1.Margin = new System.Windows.Forms.Padding(4);
             this.endHour1.Name = "endHour1";
             this.endHour1.Size = new System.Drawing.Size(83, 29);
@@ -192,7 +489,7 @@
             // createBTN
             // 
             this.createBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.createBTN.Location = new System.Drawing.Point(377, 197);
+            this.createBTN.Location = new System.Drawing.Point(195, 160);
             this.createBTN.Margin = new System.Windows.Forms.Padding(4);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(158, 31);
@@ -204,7 +501,7 @@
             // am_pmCombo2
             // 
             this.am_pmCombo2.FormattingEnabled = true;
-            this.am_pmCombo2.Location = new System.Drawing.Point(468, 36);
+            this.am_pmCombo2.Location = new System.Drawing.Point(383, 45);
             this.am_pmCombo2.Margin = new System.Windows.Forms.Padding(4);
             this.am_pmCombo2.Name = "am_pmCombo2";
             this.am_pmCombo2.Size = new System.Drawing.Size(67, 29);
@@ -213,7 +510,7 @@
             // numberOfShiftsLabel1
             // 
             this.numberOfShiftsLabel1.AutoSize = true;
-            this.numberOfShiftsLabel1.Location = new System.Drawing.Point(183, 78);
+            this.numberOfShiftsLabel1.Location = new System.Drawing.Point(98, 87);
             this.numberOfShiftsLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.numberOfShiftsLabel1.Name = "numberOfShiftsLabel1";
             this.numberOfShiftsLabel1.Size = new System.Drawing.Size(130, 21);
@@ -223,7 +520,7 @@
             // shiftTime1
             // 
             this.shiftTime1.AutoSize = true;
-            this.shiftTime1.Location = new System.Drawing.Point(183, 13);
+            this.shiftTime1.Location = new System.Drawing.Point(98, 22);
             this.shiftTime1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.shiftTime1.Name = "shiftTime1";
             this.shiftTime1.Size = new System.Drawing.Size(176, 21);
@@ -233,7 +530,7 @@
             // numberOfShiftsCombo1
             // 
             this.numberOfShiftsCombo1.FormattingEnabled = true;
-            this.numberOfShiftsCombo1.Location = new System.Drawing.Point(183, 103);
+            this.numberOfShiftsCombo1.Location = new System.Drawing.Point(98, 112);
             this.numberOfShiftsCombo1.Margin = new System.Windows.Forms.Padding(4);
             this.numberOfShiftsCombo1.Name = "numberOfShiftsCombo1";
             this.numberOfShiftsCombo1.Size = new System.Drawing.Size(177, 29);
@@ -242,7 +539,7 @@
             // startHour1
             // 
             this.startHour1.FormattingEnabled = true;
-            this.startHour1.Location = new System.Drawing.Point(183, 36);
+            this.startHour1.Location = new System.Drawing.Point(98, 45);
             this.startHour1.Margin = new System.Windows.Forms.Padding(4);
             this.startHour1.Name = "startHour1";
             this.startHour1.Size = new System.Drawing.Size(82, 29);
@@ -251,24 +548,11 @@
             // am_pmCombo1
             // 
             this.am_pmCombo1.FormattingEnabled = true;
-            this.am_pmCombo1.Location = new System.Drawing.Point(273, 36);
+            this.am_pmCombo1.Location = new System.Drawing.Point(188, 45);
             this.am_pmCombo1.Margin = new System.Windows.Forms.Padding(4);
             this.am_pmCombo1.Name = "am_pmCombo1";
             this.am_pmCombo1.Size = new System.Drawing.Size(67, 29);
             this.am_pmCombo1.TabIndex = 46;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Image = global::ClassOpsLogCreator.Properties.Resources.Main_thread_image;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(175, 165);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
             // 
             // tab2
             // 
@@ -283,7 +567,7 @@
             this.tab2.Location = new System.Drawing.Point(4, 30);
             this.tab2.Name = "tab2";
             this.tab2.Padding = new System.Windows.Forms.Padding(3);
-            this.tab2.Size = new System.Drawing.Size(540, 230);
+            this.tab2.Size = new System.Drawing.Size(540, 191);
             this.tab2.TabIndex = 1;
             this.tab2.Text = "CLO Generator";
             // 
@@ -298,9 +582,10 @@
             // 
             // createCLOBTN
             // 
-            this.createCLOBTN.Location = new System.Drawing.Point(197, 154);
+            this.createCLOBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.createCLOBTN.Location = new System.Drawing.Point(195, 153);
             this.createCLOBTN.Name = "createCLOBTN";
-            this.createCLOBTN.Size = new System.Drawing.Size(147, 32);
+            this.createCLOBTN.Size = new System.Drawing.Size(158, 31);
             this.createCLOBTN.TabIndex = 58;
             this.createCLOBTN.Text = "Create CLO log";
             this.createCLOBTN.UseVisualStyleBackColor = true;
@@ -465,7 +750,7 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.optionsToolStripMenuItem.Text = "&Options";
             // 
             // helpToolStripMenuItem1
@@ -496,7 +781,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(548, 321);
+            this.ClientSize = new System.Drawing.Size(548, 285);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.workProgressBar);
             this.Controls.Add(this.menuStrip1);
@@ -515,7 +800,6 @@
             this.tab1.ResumeLayout(false);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tab2.ResumeLayout(false);
             this.tab2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -538,10 +822,7 @@
         private System.Windows.Forms.ComboBox numberOfShiftsCombo1;
         private System.Windows.Forms.ComboBox startHour1;
         private System.Windows.Forms.ComboBox am_pmCombo1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label destinationLabel;
         private System.Windows.Forms.Button createBTN;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TabPage tab2;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
@@ -567,7 +848,33 @@
         private System.Windows.Forms.ComboBox cloAm_pmCombo1;
         private System.Windows.Forms.Button createCLOBTN;
         private System.Windows.Forms.Label selectTimeLabel;
-        private System.Windows.Forms.Button plusBTN;
+        private System.Windows.Forms.Button plusBTN1;
+        private System.Windows.Forms.Button plusBTN2;
+        private System.Windows.Forms.Label toLabel2;
+        private System.Windows.Forms.ComboBox endHour2;
+        private System.Windows.Forms.ComboBox am_pmCombo4;
+        private System.Windows.Forms.Label numberOfShiftsLabel2;
+        private System.Windows.Forms.Label shiftTime2;
+        private System.Windows.Forms.ComboBox numberOfShiftsCombo2;
+        private System.Windows.Forms.ComboBox startHour2;
+        private System.Windows.Forms.ComboBox am_pmCombo3;
+        private System.Windows.Forms.Label toLabel4;
+        private System.Windows.Forms.ComboBox endHour4;
+        private System.Windows.Forms.ComboBox am_pmCombo8;
+        private System.Windows.Forms.Label numberOfShiftsLabel4;
+        private System.Windows.Forms.Label shiftTime4;
+        private System.Windows.Forms.ComboBox numberOfShiftsCombo4;
+        private System.Windows.Forms.ComboBox startHour4;
+        private System.Windows.Forms.ComboBox am_pmCombo7;
+        private System.Windows.Forms.Button plusBTN3;
+        private System.Windows.Forms.Label toLabel3;
+        private System.Windows.Forms.ComboBox endHour3;
+        private System.Windows.Forms.ComboBox am_pmCombo6;
+        private System.Windows.Forms.Label numberOfShiftsLabel3;
+        private System.Windows.Forms.Label shiftTime3;
+        private System.Windows.Forms.ComboBox numberOfShiftsCombo3;
+        private System.Windows.Forms.ComboBox startHour3;
+        private System.Windows.Forms.ComboBox am_pmCombo5;
     }
 }
 
