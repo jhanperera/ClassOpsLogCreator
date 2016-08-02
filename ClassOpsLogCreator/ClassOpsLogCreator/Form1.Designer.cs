@@ -248,7 +248,6 @@
             this.plusBTN.TabIndex = 53;
             this.plusBTN.Text = "+";
             this.plusBTN.UseVisualStyleBackColor = true;
-            this.plusBTN.Click += new System.EventHandler(this.plusBTN_Click);
             // 
             // toLabel1
             // 
