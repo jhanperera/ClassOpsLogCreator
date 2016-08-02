@@ -79,7 +79,6 @@ namespace ClassOpsLogCreator
             System.Array rangeArray = (System.Array)range.Cells.Value2;
             string[,] zonedArray = covertToArray(rangeArray);
             string[,] result = null;
-            TaskRanks tr = new TaskRanks();
 
             //If we have 2 shifts
             if (shiftNumber == 2)
@@ -113,6 +112,10 @@ namespace ClassOpsLogCreator
                 zone1Array = ZoneSuperLogImporter.RemoveEmptyRows(zone1Array);
                 zone2Array = ZoneSuperLogImporter.RemoveEmptyRows(zone2Array);
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0), 7];
+
+                //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_2(), 8);
+
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
                 AddToArray(result, zone2Array, zone1Array.GetLength(0));
@@ -160,6 +163,12 @@ namespace ClassOpsLogCreator
                 zone2Array = ZoneSuperLogImporter.RemoveEmptyRows(zone2Array);
                 zone3Array = ZoneSuperLogImporter.RemoveEmptyRows(zone3Array);
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0) + zone3Array.GetLength(0), 7];
+
+                //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_3(1), 8);//North Central
+                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_3(2), 8);//Central South
+                this.applyRankAndOrganize(ref zone3Array, ref zone1Array, classinfo.boarderBuildingZone_3(3), 8);//South North
+
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
                 AddToArray(result, zone2Array, zone1Array.GetLength(0));
@@ -216,6 +225,13 @@ namespace ClassOpsLogCreator
                 zone3Array = ZoneSuperLogImporter.RemoveEmptyRows(zone3Array);
                 zone4Array = ZoneSuperLogImporter.RemoveEmptyRows(zone4Array);
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0) + zone3Array.GetLength(0) + zone4Array.GetLength(0), 7];
+
+                //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_4(1), 4);//North Central
+                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_4(2), 4);//Central South Central
+                this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_4(3), 4);//South Cnetral South East
+                this.applyRankAndOrganize(ref zone4Array, ref zone1Array, classinfo.boarderBuildingZone_4(4), 4);//South East Central
+
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
                 AddToArray(result, zone2Array, zone1Array.GetLength(0));
@@ -664,6 +680,117 @@ namespace ClassOpsLogCreator
                 distanceCount++;
             }
             return mark = mark.Where(n => n != null).ToArray();
+        }
+
+        /// <summary>
+        /// This method will score each zone and make a compairiosn
+        /// If the compairison is true, then we move items around in zones and 
+        /// return the new zones with balanced ranks
+        /// </summary>
+        /// <param name="zone1"></param>
+        /// <param name="zone2"></param>
+        /// <param name="borderBuildings"></param>
+        private void applyRankAndOrganize(ref string[,] zone1, ref string[,] zone2, List<string> borderBuildings, int discrepancy)
+        {
+            //Convert each zone to a list
+            List<string[]> zone1List = convertToList(zone1);
+            List<string[]> zone2List = convertToList(zone2);
+            TaskRanks tr = new TaskRanks();
+            int zone1Rank = tr.getTotalTaskValue(zone1);
+            int zone2Rank = tr.getTotalTaskValue(zone2);
+
+            //If the difference of the two zones ranks in 6
+            if(Math.Abs(zone1Rank - zone2Rank) > discrepancy)
+            {
+                if (zone1Rank > zone2Rank)
+                {
+                    int offset = 0;
+                    //move items from zone1 to zone2
+                    for (int i = 0; i <= zone1.GetUpperBound(0) && Math.Abs(zone1Rank - zone2Rank) > discrepancy; i++)
+                    {
+                        if (borderBuildings.Contains(zone1[i,4]))
+                        {
+                            var temp = zone1List[i - offset];
+                            zone1List.Remove(zone1List[i - offset]);
+                            zone2List.Add(temp);
+                            offset++;
+                            zone2 = CreateRectangularArray<string>(zone2List);
+                            zone2Rank = tr.getTotalTaskValue(zone2);
+                        }
+                    }
+                }
+                else if (zone1Rank < zone2Rank)
+                {
+                    int offset = 0;
+                    //move items from zone2 to zone1
+                    for (int i = 0; i <= zone2.GetUpperBound(0) && Math.Abs(zone1Rank - zone2Rank) > discrepancy;  i++)
+                    {
+                        if (borderBuildings.Contains(zone2[i, 4]))
+                        {
+                            var temp = zone2List[i - offset];
+                            zone2List.Remove(zone2List[i- offset]);
+                            zone1List.Add(temp);
+                            offset++;
+                            zone1 = CreateRectangularArray<string>(zone1List);
+                            zone1Rank = tr.getTotalTaskValue(zone1);
+                        }
+                    }
+                }
+            }
+            //Sort
+            zone1List = zone1List.OrderBy(arr => arr[3]).ToList<string[]>();
+            zone2List = zone2List.OrderBy(arr => arr[3]).ToList<string[]>();
+
+            //Convert back to 2d arrays
+            zone1 = CreateRectangularArray<string>(zone1List);
+            zone2 = CreateRectangularArray<string>(zone2List);
+        }
+
+        /// <summary>
+        /// This method converts a 2d arry to a list
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        private static List<string[]> convertToList(string[,] arr)
+        {
+            string[][] jagged = new string[arr.GetLength(0)][];
+
+            for (int i = 0; i < arr.GetLength(0); i++)
+            {
+                jagged[i] = new string[arr.GetLength(1)];
+                for (int j = 0; j < arr.GetLength(1); j++)
+                {
+                    jagged[i][j] = arr[i, j];
+                }
+            }
+            return jagged.ToList();
+        }
+
+        /// <summary>
+        /// This method converts a List<string[]> into a 2d array
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="arrays"></param>
+        /// <returns></returns>
+        private static T[,] CreateRectangularArray<T>(IList<T[]> arrays)
+        {
+            // TODO: Validation and special-casing for arrays.Count == 0
+            int minorLength = arrays[0].Length;
+            T[,] ret = new T[arrays.Count, minorLength];
+            for (int i = 0; i < arrays.Count; i++)
+            {
+                var array = arrays[i];
+                if (array.Length != minorLength)
+                {
+                    throw new ArgumentException
+                        ("All arrays must be the same length");
+                }
+                for (int j = 0; j < minorLength; j++)
+                {
+                    ret[i, j] = array[j];
+                }
+            }
+            return ret;
         }
     }
 }
