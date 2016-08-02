@@ -301,6 +301,14 @@ namespace ClassOpsLogCreator
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0) +
                                         zone3Array.GetLength(0) + zone4Array.GetLength(0) +
                                         zone5Array.GetLength(0), 7];
+
+                //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_5(1), 4);//North east and North West
+                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_5(2), 4);//North West and South West
+                this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_5(3), 4);//South West and South central
+                this.applyRankAndOrganize(ref zone4Array, ref zone5Array, classinfo.boarderBuildingZone_5(4), 4);//South Central and South East
+                this.applyRankAndOrganize(ref zone3Array, ref zone1Array, classinfo.boarderBuildingZone_5(4), 4);//North East (Central) and South West
+
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
                 AddToArray(result, zone2Array, zone1Array.GetLength(0));
