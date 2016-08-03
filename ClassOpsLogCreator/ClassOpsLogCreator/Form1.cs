@@ -39,12 +39,12 @@ namespace ClassOpsLogCreator
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
-        public readonly string JEANNINE_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
-        public readonly string RAUL_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
-        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
-        public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
+        public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
+        public readonly string JEANNINE_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
+        public readonly string EXISTING_MASTER_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
         public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_END_TIMES.xlsx";
 
         private static Excel.Application logoutMaster = null;
@@ -58,9 +58,9 @@ namespace ClassOpsLogCreator
         //Use a background worker to allow the GUI to still be functional and not hang.
         private static BackgroundWorker bw = null;
 
-        private string startTimeFromCombo = null;
-        private string endTimeFromCombo = null;
-        private int numberOfShifts = 0;
+        private string startTimeFromCombo1 = null;
+        private string endTimeFromCombo1 = null;
+        private int numberOfShifts1 = 0;
 
         private Boolean workDone = false;
         private Boolean plusClicked1 = false;
@@ -224,13 +224,13 @@ namespace ClassOpsLogCreator
         private void createBTN_Click_1(object sender, EventArgs e)
         {
             //Get the times set by the combo box and the number of shifts
-            startTimeFromCombo = this.startHour1.GetItemText(this.startHour1.SelectedItem) + "" + this.am_pmCombo1.GetItemText(this.am_pmCombo1.SelectedItem);
-            endTimeFromCombo = this.endHour1.GetItemText(this.endHour1.SelectedItem) + "" + this.am_pmCombo2.GetItemText(this.am_pmCombo2.SelectedItem);
-            numberOfShifts = int.Parse(this.numberOfShiftsCombo1.SelectedItem.ToString());
+            startTimeFromCombo1 = this.startHour1.GetItemText(this.startHour1.SelectedItem) + "" + this.am_pmCombo1.GetItemText(this.am_pmCombo1.SelectedItem);
+            endTimeFromCombo1 = this.endHour1.GetItemText(this.endHour1.SelectedItem) + "" + this.am_pmCombo2.GetItemText(this.am_pmCombo2.SelectedItem);
+            numberOfShifts1 = int.Parse(this.numberOfShiftsCombo1.SelectedItem.ToString());
 
             //Input Error checking!
-            if (startTimeFromCombo.Equals("PM") || startTimeFromCombo.Equals("AM") || startTimeFromCombo == null ||
-                endTimeFromCombo.Equals("PM") || endTimeFromCombo.Equals("AM") || endTimeFromCombo == null)
+            if (startTimeFromCombo1.Equals("PM") || startTimeFromCombo1.Equals("AM") || startTimeFromCombo1 == null ||
+                endTimeFromCombo1.Equals("PM") || endTimeFromCombo1.Equals("AM") || endTimeFromCombo1 == null)
             {
                 MessageBox.Show("Valid time must be set.",
                                  "Problem...",
@@ -239,7 +239,7 @@ namespace ClassOpsLogCreator
                                   MessageBoxDefaultButton.Button1);
                 return;
             }
-            else if (Convert.ToDateTime(startTimeFromCombo) >= Convert.ToDateTime(endTimeFromCombo))
+            else if (Convert.ToDateTime(startTimeFromCombo1) >= Convert.ToDateTime(endTimeFromCombo1))
             {
                 MessageBox.Show("Valid time must be set.",
                                  "Problem...",
@@ -276,12 +276,12 @@ namespace ClassOpsLogCreator
         private void createCLOBTN_Click(object sender, EventArgs e)
         {
             //Get the times set by the combo box
-            startTimeFromCombo = this.cloGenStart1.GetItemText(this.cloGenStart1.SelectedItem) + "" + this.cloAm_pmCombo1.GetItemText(this.cloAm_pmCombo1.SelectedItem);
-            endTimeFromCombo = this.cloGenEnd1.GetItemText(this.cloGenEnd1.SelectedItem) + "" + this.cloAm_pmCombo2.GetItemText(this.cloAm_pmCombo2.SelectedItem);
+            startTimeFromCombo1 = this.cloGenStart1.GetItemText(this.cloGenStart1.SelectedItem) + "" + this.cloAm_pmCombo1.GetItemText(this.cloAm_pmCombo1.SelectedItem);
+            endTimeFromCombo1 = this.cloGenEnd1.GetItemText(this.cloGenEnd1.SelectedItem) + "" + this.cloAm_pmCombo2.GetItemText(this.cloAm_pmCombo2.SelectedItem);
 
             //Input Error checking!
-            if (startTimeFromCombo.Equals("PM") || startTimeFromCombo.Equals("AM") || startTimeFromCombo == null ||
-                endTimeFromCombo.Equals("PM") || endTimeFromCombo.Equals("AM") || endTimeFromCombo == null)
+            if (startTimeFromCombo1.Equals("PM") || startTimeFromCombo1.Equals("AM") || startTimeFromCombo1 == null ||
+                endTimeFromCombo1.Equals("PM") || endTimeFromCombo1.Equals("AM") || endTimeFromCombo1 == null)
             {
                 MessageBox.Show("Valid time must be set.",
                                  "Problem...",
@@ -290,7 +290,7 @@ namespace ClassOpsLogCreator
                                   MessageBoxDefaultButton.Button1);
                 return;
             }
-            else if (Convert.ToDateTime(startTimeFromCombo) >= Convert.ToDateTime(endTimeFromCombo))
+            else if (Convert.ToDateTime(startTimeFromCombo1) >= Convert.ToDateTime(endTimeFromCombo1))
             {
                 MessageBox.Show("Valid time must be set.",
                                  "Problem...",
@@ -333,7 +333,7 @@ namespace ClassOpsLogCreator
             worker.ReportProgress(15);
 
             //***********************CREATE MASTER LOG FILE PT 1**********************
-            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo, endTimeFromCombo);
+            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo1, endTimeFromCombo1);
 
             //ACOUNT FOR WHEN WE HAVE MORE THAN ONE SEGMENT OPENED IN THE FORM 
 
@@ -350,7 +350,7 @@ namespace ClassOpsLogCreator
             worker.ReportProgress(50);
 
             //***********************CREATE MASTER LOG FILE PT 2***********************
-            ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this, startTimeFromCombo, endTimeFromCombo);
+            ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this, startTimeFromCombo1, endTimeFromCombo1);
              
             //Get the three logs
             string[,] JInstruction = ZoneLogs.getJeannineLog();
@@ -392,7 +392,7 @@ namespace ClassOpsLogCreator
         {
             var worker = sender as BackgroundWorker;
             //We are going to only open the clo with set start times and end times
-            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo, endTimeFromCombo);
+            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo1, endTimeFromCombo1);
 
             string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
 
@@ -585,8 +585,8 @@ namespace ClassOpsLogCreator
             logRange3.Value2 = array3;
 
             //Add ACE017 to the log if we have are in the time peiod
-            DateTime startingTime = Convert.ToDateTime(this.startTimeFromCombo.ToString());
-            DateTime endingTime = Convert.ToDateTime(this.endTimeFromCombo.ToString());
+            DateTime startingTime = Convert.ToDateTime(this.startTimeFromCombo1.ToString());
+            DateTime endingTime = Convert.ToDateTime(this.endTimeFromCombo1.ToString());
             DateTime check = DateTime.ParseExact("1600", "HHmm", null);
             if (includeACE &&(check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
             {
@@ -636,11 +636,11 @@ namespace ClassOpsLogCreator
             dividerRange.Interior.Color = darkRed;
 
             //Zoning is done here
-            if (numberOfShifts > 1)
+            if (numberOfShifts1 > 1)
             {
                 SchoolZoning sz = new SchoolZoning();
                 //Pass the zoning with the number of shifts
-                destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts);
+                destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts1);
             }
             else
             {
