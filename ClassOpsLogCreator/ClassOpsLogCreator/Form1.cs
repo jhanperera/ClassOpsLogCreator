@@ -39,12 +39,12 @@ namespace ClassOpsLogCreator
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
-        public readonly string JEANNINE_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
-        public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
-        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
-        public readonly string EXISTING_MASTER_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
+        public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
+        public readonly string JEANNINE_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
+        public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
         public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_END_TIMES.xlsx";
 
         private static Excel.Application logoutMaster = null;
@@ -518,7 +518,7 @@ namespace ClassOpsLogCreator
 
             //************************CONCATINATE CURRENT LOG WITH EXISTING MASTER*********
 
-            this.mergeMasterWithExisting(logoutMasterWorkSheet, true);
+            this.mergeMasterWithExisting(logoutMasterWorkSheet, numberOfShifts1, true);
             //********************END CONCATINATE CURRENT LOG WITH EXISTING MASTER**********
 
             //If the first plus button is clicked
@@ -546,7 +546,7 @@ namespace ClassOpsLogCreator
                                                                              true, startTimeFromCombo2, endTimeFromCombo2);
 
                 logoutMaster.DisplayAlerts = false;
-                this.mergeMasterWithExisting(logoutMasterWorkSheet2, false);
+                this.mergeMasterWithExisting(logoutMasterWorkSheet2, numberOfShifts2,  false);
                 worker.ReportProgress(45);
 
                 //If the second plus button is clicked
@@ -574,7 +574,7 @@ namespace ClassOpsLogCreator
                                                                                  true, startTimeFromCombo3, endTimeFromCombo3);
                 
                     logoutMaster.DisplayAlerts = false;
-                    this.mergeMasterWithExisting(logoutMasterWorkSheet3, false);
+                    this.mergeMasterWithExisting(logoutMasterWorkSheet3, numberOfShifts3, false);
                     worker.ReportProgress(65);
 
                     //If the third plus button is clicked
@@ -602,7 +602,7 @@ namespace ClassOpsLogCreator
                                                                                      true, startTimeFromCombo4, endTimeFromCombo4);
 
                         logoutMaster.DisplayAlerts = false;
-                        this.mergeMasterWithExisting(logoutMasterWorkSheet4, false);
+                        this.mergeMasterWithExisting(logoutMasterWorkSheet4, numberOfShifts4, false);
                         worker.ReportProgress(85);
                     }
                 }
@@ -724,6 +724,11 @@ namespace ClassOpsLogCreator
                 //Open the master log file
                 Excel.Application excel = new Excel.Application();
                 Excel.Workbook wb = excel.Workbooks.Open(EXISTING_MASTER_LOG);
+                Excel.Worksheet ws = (Excel.Worksheet)wb.Worksheets[1];
+                ws.Activate();
+                ws.Application.ActiveWindow.SplitRow = 1;
+                ws.Application.ActiveWindow.FreezePanes = true;
+
                 excel.Visible = true;
             }
         }
@@ -840,9 +845,8 @@ namespace ClassOpsLogCreator
         /// This method will merger our file with the already existing file in sorted order. 
         /// </summary>
         /// <param name="worksheet"></param>
-        public void mergeMasterWithExisting(Excel.Worksheet worksheet, bool redSeperator)
+        public void mergeMasterWithExisting(Excel.Worksheet worksheet, int numberOfShifts, bool redSeperator)
         {
-
             //Open the exisitng excel file
             existingMaster = new Excel.Application();
             existingMaster.Visible = false;
@@ -883,7 +887,7 @@ namespace ClassOpsLogCreator
             {
                 SchoolZoning sz = new SchoolZoning();
                 //Pass the zoning with the number of shifts
-                destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts1);
+                destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts);
             }
             else
             {
@@ -935,7 +939,7 @@ namespace ClassOpsLogCreator
             existingMaster = null;
             existingMasterWorkBook = null;
             existingMasterWorkSheet = null;
-            GC.Collect();
+            //GC.Collect();
         }
 
         /// <summary>
