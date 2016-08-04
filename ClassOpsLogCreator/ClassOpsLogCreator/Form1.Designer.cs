@@ -84,7 +84,7 @@
             // workProgressBar
             // 
             this.workProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.workProgressBar.Location = new System.Drawing.Point(0, 275);
+            this.workProgressBar.Location = new System.Drawing.Point(0, 274);
             this.workProgressBar.Margin = new System.Windows.Forms.Padding(4);
             this.workProgressBar.Name = "workProgressBar";
             this.workProgressBar.Size = new System.Drawing.Size(298, 25);
@@ -101,7 +101,7 @@
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(274, 256);
+            this.tabControl.Size = new System.Drawing.Size(274, 255);
             this.tabControl.TabIndex = 8;
             // 
             // tab1
@@ -111,7 +111,7 @@
             this.tab1.Location = new System.Drawing.Point(4, 30);
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Windows.Forms.Padding(3);
-            this.tab1.Size = new System.Drawing.Size(266, 222);
+            this.tab1.Size = new System.Drawing.Size(266, 221);
             this.tab1.TabIndex = 0;
             this.tab1.Text = "Log Creator";
             // 
@@ -158,13 +158,14 @@
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(3, 3);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(260, 216);
+            this.mainPanel.Size = new System.Drawing.Size(260, 215);
             this.mainPanel.TabIndex = 53;
             // 
             // shift1Label
             // 
             this.shift1Label.AutoSize = true;
             this.shift1Label.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shift1Label.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.shift1Label.Location = new System.Drawing.Point(7, 9);
             this.shift1Label.Name = "shift1Label";
             this.shift1Label.Size = new System.Drawing.Size(44, 17);
@@ -456,7 +457,7 @@
             // createBTN
             // 
             this.createBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.createBTN.Location = new System.Drawing.Point(51, 181);
+            this.createBTN.Location = new System.Drawing.Point(51, 180);
             this.createBTN.Margin = new System.Windows.Forms.Padding(4);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(158, 31);
@@ -570,6 +571,7 @@
             // 
             this.shift2Label.AutoSize = true;
             this.shift2Label.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shift2Label.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.shift2Label.Location = new System.Drawing.Point(7, 180);
             this.shift2Label.Name = "shift2Label";
             this.shift2Label.Size = new System.Drawing.Size(44, 17);
@@ -581,6 +583,7 @@
             // 
             this.shift3Label.AutoSize = true;
             this.shift3Label.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shift3Label.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.shift3Label.Location = new System.Drawing.Point(7, 351);
             this.shift3Label.Name = "shift3Label";
             this.shift3Label.Size = new System.Drawing.Size(44, 17);
@@ -592,6 +595,7 @@
             // 
             this.shift4Label.AutoSize = true;
             this.shift4Label.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shift4Label.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.shift4Label.Location = new System.Drawing.Point(7, 522);
             this.shift4Label.Name = "shift4Label";
             this.shift4Label.Size = new System.Drawing.Size(44, 17);
@@ -607,7 +611,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(298, 300);
+            this.ClientSize = new System.Drawing.Size(298, 299);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.workProgressBar);
             this.Cursor = System.Windows.Forms.Cursors.Default;
