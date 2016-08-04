@@ -39,21 +39,24 @@ namespace ClassOpsLogCreator
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
-        public readonly string JEANNINE_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
-        public readonly string RAUL_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
-        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
-        public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
+        public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
+        public readonly string JEANNINE_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
+        public readonly string EXISTING_MASTER_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
         public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_END_TIMES.xlsx";
 
         private static Excel.Application logoutMaster = null;
-        private static Excel.Workbook logoutMasterWorkBook = null;
-        private static Excel.Worksheet logoutMasterWorkSheet = null;
+        private static Excel.Workbook   logoutMasterWorkBook = null;
+        private static Excel.Worksheet  logoutMasterWorkSheet, 
+                                        logoutMasterWorkSheet2, 
+                                        logoutMasterWorkSheet3, 
+                                        logoutMasterWorkSheet4 = null;
 
         private static Excel.Application existingMaster = null;
-        private static Excel.Workbook existingMasterWorkBook = null;
-        private static Excel.Worksheet existingMasterWorkSheet = null;
+        private static Excel.Workbook    existingMasterWorkBook = null;
+        private static Excel.Worksheet   existingMasterWorkSheet = null; 
 
         //Use a background worker to allow the GUI to still be functional and not hang.
         private static BackgroundWorker bw = null;
@@ -505,25 +508,32 @@ namespace ClassOpsLogCreator
             //write all the data to the excel file
             //merg the all the data together into the master log
             this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms1, classRoomTimeLogs1.getLogOutArrayCount(),
-                                                                         JInstruction1, DInstruction1, RInstruction1, true, startTimeFromCombo1, endTimeFromCombo1);
+                                                                         JInstruction1, DInstruction1, RInstruction1, 
+                                                                         true, startTimeFromCombo1, endTimeFromCombo1);
 
             //Saving and closing the new excel file
             logoutMaster.DisplayAlerts = false;
 
             //***********************END OF CREATE MASTER LOG FILES PT 2*******************
-            worker.ReportProgress(85);
 
             //************************CONCATINATE CURRENT LOG WITH EXISTING MASTER*********
 
             this.mergeMasterWithExisting(logoutMasterWorkSheet, true);
-
             //********************END CONCATINATE CURRENT LOG WITH EXISTING MASTER**********
+
+            //If the first plus button is clicked
             if (plusClicked1)
             {
+                //Add a new worksheet to add the new 
+                logoutMasterWorkBook.Sheets.Add(After: logoutMasterWorkBook.Sheets[logoutMasterWorkBook.Sheets.Count]);
+                logoutMasterWorkSheet2 = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[2];
+
                 LogoutLogImporter classRoomTimeLogs2 = new LogoutLogImporter(this, startTimeFromCombo2, endTimeFromCombo2);
+
                 string[,] arrayClassRooms2 = classRoomTimeLogs2.getLogOutArray();
 
                 ZoneSuperLogImporter ZoneLogs2 = new ZoneSuperLogImporter(this, startTimeFromCombo2, endTimeFromCombo2);
+
                 //Get the three logs
                 string[,] JInstruction2 = ZoneLogs2.getJeannineLog();
                 string[,] DInstruction2 = ZoneLogs2.getDerekLog();
@@ -531,19 +541,27 @@ namespace ClassOpsLogCreator
 
                 //write all the data to the excel file
                 //merg the all the data together into the master log
-                this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms2, classRoomTimeLogs2.getLogOutArrayCount(),
-                                                                             JInstruction2, DInstruction2, RInstruction2, true, startTimeFromCombo2, endTimeFromCombo2);
-                //Saving and closing the new excel file
+                this.WriteLogOutArray(logoutMasterWorkSheet2, arrayClassRooms2, classRoomTimeLogs2.getLogOutArrayCount(),
+                                                                             JInstruction2, DInstruction2, RInstruction2, 
+                                                                             true, startTimeFromCombo2, endTimeFromCombo2);
+
                 logoutMaster.DisplayAlerts = false;
+                this.mergeMasterWithExisting(logoutMasterWorkSheet2, false);
+                worker.ReportProgress(45);
 
-                this.mergeMasterWithExisting(logoutMasterWorkSheet, false);
-
+                //If the second plus button is clicked
                 if (plusClicked2)
                 {
+                    //Add a new worksheet to add the new 
+                    logoutMasterWorkBook.Sheets.Add(After: logoutMasterWorkBook.Sheets[logoutMasterWorkBook.Sheets.Count]);
+                    logoutMasterWorkSheet3 = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[3];
+
                     LogoutLogImporter classRoomTimeLogs3 = new LogoutLogImporter(this, startTimeFromCombo3, endTimeFromCombo3);
+
                     string[,] arrayClassRooms3 = classRoomTimeLogs3.getLogOutArray();
 
                     ZoneSuperLogImporter ZoneLogs3 = new ZoneSuperLogImporter(this, startTimeFromCombo3, endTimeFromCombo3);
+
                     //Get the three logs
                     string[,] JInstruction3 = ZoneLogs3.getJeannineLog();
                     string[,] DInstruction3 = ZoneLogs3.getDerekLog();
@@ -551,16 +569,46 @@ namespace ClassOpsLogCreator
 
                     //write all the data to the excel file
                     //merg the all the data together into the master log
-                    this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms3, classRoomTimeLogs3.getLogOutArrayCount(),
-                                                                                 JInstruction3, DInstruction3, RInstruction3, true, startTimeFromCombo3, endTimeFromCombo3);
-                    //Saving and closing the new excel file
+                    this.WriteLogOutArray(logoutMasterWorkSheet3, arrayClassRooms3, classRoomTimeLogs3.getLogOutArrayCount(),
+                                                                                 JInstruction3, DInstruction3, RInstruction3,
+                                                                                 true, startTimeFromCombo3, endTimeFromCombo3);
+                
                     logoutMaster.DisplayAlerts = false;
+                    this.mergeMasterWithExisting(logoutMasterWorkSheet3, false);
+                    worker.ReportProgress(65);
 
-                    this.mergeMasterWithExisting(logoutMasterWorkSheet, false);
-                }                
+                    //If the third plus button is clicked
+                    if (plusClicked3)
+                    {
+                        //Add a new worksheet to add the new 
+                        logoutMasterWorkBook.Sheets.Add(After: logoutMasterWorkBook.Sheets[logoutMasterWorkBook.Sheets.Count]);
+                        logoutMasterWorkSheet4 = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[4];
+
+                        LogoutLogImporter classRoomTimeLogs4 = new LogoutLogImporter(this, startTimeFromCombo4, endTimeFromCombo4);
+
+                        string[,] arrayClassRooms4 = classRoomTimeLogs4.getLogOutArray();
+
+                        ZoneSuperLogImporter ZoneLogs4 = new ZoneSuperLogImporter(this, startTimeFromCombo4, endTimeFromCombo4);
+
+                        //Get the three logs
+                        string[,] JInstruction4 = ZoneLogs4.getJeannineLog();
+                        string[,] DInstruction4 = ZoneLogs4.getDerekLog();
+                        string[,] RInstruction4 = ZoneLogs4.getRaulLog();
+
+                        //write all the data to the excel file
+                        //merg the all the data together into the master log
+                        this.WriteLogOutArray(logoutMasterWorkSheet4, arrayClassRooms4, classRoomTimeLogs4.getLogOutArrayCount(),
+                                                                                     JInstruction4, DInstruction4, RInstruction4,
+                                                                                     true, startTimeFromCombo4, endTimeFromCombo4);
+
+                        logoutMaster.DisplayAlerts = false;
+                        this.mergeMasterWithExisting(logoutMasterWorkSheet4, false);
+                        worker.ReportProgress(85);
+                    }
+                }
             }
 
-            worker.ReportProgress(85);
+            worker.ReportProgress(95);
 
             //Gracefully close all instances
             Quit();
