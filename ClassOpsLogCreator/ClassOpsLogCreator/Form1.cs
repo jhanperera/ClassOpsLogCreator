@@ -752,7 +752,7 @@ namespace ClassOpsLogCreator
             Excel.Range logRange3 = worksheet.get_Range("B" + (array1.GetLength(0) + array2.GetLength(0) + index + 2), "G" +
                                                                 (array1.GetLength(0) + array2.GetLength(0) + array3.GetLength(0) + index + 1));
             Excel.Range ace017CloseRange = worksheet.get_Range("B" + (array1.GetLength(0) + array2.GetLength(0) + array3.GetLength(0) + index + 2),
-                                                                "G" + (array1.GetLength(0) + array2.GetLength(0) + array3.GetLength(0) + index + 3));
+                                                                "G" + (array1.GetLength(0) + array2.GetLength(0) + array3.GetLength(0) + index + 2));
 
             //Formatt for easy to read for "Crestron logout"
             taskType_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -818,10 +818,10 @@ namespace ClassOpsLogCreator
             int lastRowDestination = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Row;
 
             //Select the ranges from the worksheet and the existing work sheet we are going to work with. 
-            Excel.Range range = worksheet.get_Range("A2", "G" + sheetRowCount);
+            Excel.Range range = worksheet.get_Range("A2", "G" + (sheetRowCount + 1));
             Excel.Range dividerRange = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 1)).EntireRow;
             Excel.Range destinationRange = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 2), "G"
-                + (lastRowDestination + sheetRowCount));
+                + (lastRowDestination + sheetRowCount + 1));
 
             //Put red accross the divider
             Color darkRed = Color.FromArgb(204, 0, 51);
