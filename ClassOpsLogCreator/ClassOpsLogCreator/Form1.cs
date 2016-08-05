@@ -30,7 +30,7 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
           
-        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+         /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
          public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
          public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
          public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
@@ -823,15 +823,24 @@ namespace ClassOpsLogCreator
             Excel.Range destinationRange = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 2), "G"
                 + (lastRowDestination + sheetRowCount + 1));
 
-            //Put red accross the divider
+            //Put red accross the divider with todays date in it
             Color darkRed = Color.FromArgb(204, 0, 51);
             if(redSeperator)
             {
                 dividerRange.Interior.Color = darkRed;
+                dividerRange.Font.Color = Color.White;
+                dividerRange.Font.Bold = true;
+
+                Excel.Range dayOfWeek = existingMasterWorkSheet.get_Range("D" + (lastRowDestination + 1));
+                //Show the day of the week in the log
+                dayOfWeek.Value2 = DateTime.Now.ToString("dddd");
+
             }
             else
             {
+                //Make the interior white and make the borders are white
                 dividerRange.Interior.Color = Color.White;
+                dividerRange.Borders.Color = Color.White;             
             }
 
             //Zoning is done here
