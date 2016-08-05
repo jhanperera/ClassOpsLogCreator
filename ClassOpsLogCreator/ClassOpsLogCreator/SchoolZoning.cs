@@ -776,6 +776,8 @@ namespace ClassOpsLogCreator
 
         /// <summary>
         /// This method converts a List<string[]> into a 2d array
+        /// 
+        /// Returns an empty array if arrays.count = 0 
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="arrays"></param>
@@ -783,22 +785,27 @@ namespace ClassOpsLogCreator
         private static T[,] CreateRectangularArray<T>(IList<T[]> arrays)
         {
             // TODO: Validation and special-casing for arrays.Count == 0
-            int minorLength = arrays[0].Length;
-            T[,] ret = new T[arrays.Count, minorLength];
-            for (int i = 0; i < arrays.Count; i++)
+            if(arrays.Count !=0 )
             {
-                var array = arrays[i];
-                if (array.Length != minorLength)
+                int minorLength = arrays[0].Length;
+                T[,] ret = new T[arrays.Count, minorLength];
+                for (int i = 0; i < arrays.Count; i++)
                 {
-                    throw new ArgumentException
-                        ("All arrays must be the same length");
+                    var array = arrays[i];
+                    if (array.Length != minorLength)
+                    {
+                        throw new ArgumentException
+                            ("All arrays must be the same length");
+                    }
+                    for (int j = 0; j < minorLength; j++)
+                    {
+                        ret[i, j] = array[j];
+                    }
                 }
-                for (int j = 0; j < minorLength; j++)
-                {
-                    ret[i, j] = array[j];
-                }
+                return ret;
             }
-            return ret;
+            T[,] retDefault = new T[arrays.Count, 7];
+            return retDefault;
         }
     }
 }
