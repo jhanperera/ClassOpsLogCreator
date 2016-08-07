@@ -95,6 +95,12 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogViewer.Designer.cs">
+      <DependentUpon>LogViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Graph.cs" />
     <Compile Include="SchoolZoning.cs" />
     <Compile Include="LogoutLogImporter.cs" />
@@ -121,6 +127,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LogViewer.resx">
+      <DependentUpon>LogViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -128,6 +137,7 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
+    <None Include="Properties\DataSources\LogCreator.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
