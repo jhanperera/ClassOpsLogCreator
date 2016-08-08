@@ -13,7 +13,7 @@ namespace ClassOpsLogCreator
 {
     public partial class LogViewer : Form
     {
-        public readonly string EXISTING_MASTER_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
+        public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
 
         public LogViewer()
         {
@@ -56,7 +56,7 @@ namespace ClassOpsLogCreator
                     }
                     else
                     {
-                        dr[Cnum - 1] = classArray.GetValue(Rnum, Cnum).ToString();
+                        dr[Cnum - 1] = classArray.GetValue(Rnum, Cnum).ToString().Trim();
                     }                
                 }
                 dt.Rows.Add(dr);
