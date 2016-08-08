@@ -19,6 +19,16 @@ namespace ClassOpsLogCreator
         {
             InitializeComponent();
 
+        }
+
+        /// <summary>
+        /// The main form load event all the work will happen here
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LogViewer_Load(object sender, EventArgs e)
+        {
+            //All test code 
             Excel.Application appExl;
             Excel.Workbook workbook;
             Excel.Worksheet NwSheet;
@@ -32,43 +42,79 @@ namespace ClassOpsLogCreator
 
             ShtRange = NwSheet.UsedRange;
             DataTable dt = new DataTable();
-            dt.Columns.Add("name");
-            dt.Columns.Add("address");
-            // dt.Columns.Add("Status");
-            dt.Columns.Add("Phone1");
-            dt.Columns.Add("Phone2");
-            dt.Columns.Add("Phone3");
-            dt.Columns.Add("Phone4");
-            dt.Columns.Add("Phone5s");
+            dt.Columns.Add("Task Type");
+            dt.Columns.Add("Date(MM/DD/YYYY)");
+            dt.Columns.Add("Time");
+            dt.Columns.Add("Building");
+            dt.Columns.Add("Room");
+            dt.Columns.Add("Special Instructions/Comments");
 
             Excel.Range last = NwSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            Excel.Range shtRange = NwSheet.get_Range("B2", last);
+            Excel.Range shtRange = NwSheet.get_Range("B1563", "G" + last.Row);
+
             System.Array classArray = (System.Array)shtRange.Cells.Value2;
 
+            //Add all the elements in the range to the datatable
             for (Rnum = 1; Rnum <= classArray.GetUpperBound(0); Rnum++)
             {
                 DataRow dr = dt.NewRow();
                 for (Cnum = 1; Cnum <= classArray.GetUpperBound(1); Cnum++)
                 {
-                    if(classArray.GetValue(Rnum, Cnum) == null)
+                    if (classArray.GetValue(Rnum, Cnum) == null)
                     {
                         dr[Cnum - 1] = "";
                     }
                     else
                     {
                         dr[Cnum - 1] = classArray.GetValue(Rnum, Cnum).ToString().Trim();
-                    }                
+                    }
                 }
                 dt.Rows.Add(dr);
                 dt.AcceptChanges();
             }
+
+            //close to book
             workbook.Close(true);
             appExl.Quit();
 
 
             //Session["data"] = dt; 
             dataGridView1.DataSource = dt;
-            //dataGridView1.DataBind();*/
+
+            this.format_DataGirdView();
+            
+            
+        }
+
+        /// <summary>
+        /// All the formatting of the datagrid view will go here
+        /// This includes sizing and color of all the special cells
+        /// </summary>
+        private void format_DataGirdView()
+        {
+            //Increase the width of the last columns
+            dataGridView1.Columns[5].Width = 360;
+            dataGridView1.Columns[0].Width = 100;
+
+
+            //Enable text wraping
+            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            //dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            //Allight to the center
+            dataGridView1.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
     }
 }
