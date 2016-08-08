@@ -14,11 +14,15 @@ namespace ClassOpsLogCreator
     public partial class LogViewer : Form
     {
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
+        private System.Array RangeArray = null;
 
-        public LogViewer()
+        /// <summary>
+        /// Constructor for the log viewer
+        /// </summary>
+        public LogViewer(System.Array rangeArray)
         {
             InitializeComponent();
-
+            this.RangeArray = rangeArray;
         }
 
         /// <summary>
@@ -28,8 +32,9 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void LogViewer_Load(object sender, EventArgs e)
         {
+            //*************************************************************************************************
             //All test code 
-            Excel.Application appExl;
+            /*Excel.Application appExl;
             Excel.Workbook workbook;
             Excel.Worksheet NwSheet;
             Excel.Range ShtRange;
@@ -37,10 +42,15 @@ namespace ClassOpsLogCreator
             workbook = appExl.Workbooks.Open((EXISTING_MASTER_LOG));
             NwSheet = (Excel.Worksheet)workbook.Sheets.get_Item(1);
 
-            int Cnum = 0;
-            int Rnum = 0;
-
             ShtRange = NwSheet.UsedRange;
+
+            Excel.Range last = NwSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+            Excel.Range shtRange = NwSheet.get_Range("B1563", "G" + last.Row);
+            System.Array classArray = (System.Array)shtRange.Cells.Value2;*/
+
+            //*************************************************************************************************
+            
+            //Use a data table to store all the data and then apply it to the datagrid view
             DataTable dt = new DataTable();
             dt.Columns.Add("Task Type");
             dt.Columns.Add("Date(MM/DD/YYYY)");
@@ -49,41 +59,49 @@ namespace ClassOpsLogCreator
             dt.Columns.Add("Room");
             dt.Columns.Add("Special Instructions/Comments");
 
-            Excel.Range last = NwSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            Excel.Range shtRange = NwSheet.get_Range("B1563", "G" + last.Row);
-
-            System.Array classArray = (System.Array)shtRange.Cells.Value2;
+            int Cnum = 0;
+            int Rnum = 0;
 
             //Add all the elements in the range to the datatable
-            for (Rnum = 1; Rnum <= classArray.GetUpperBound(0); Rnum++)
+            for (Rnum = 1; Rnum <= RangeArray.GetUpperBound(0); Rnum++)
             {
                 DataRow dr = dt.NewRow();
-                for (Cnum = 1; Cnum <= classArray.GetUpperBound(1); Cnum++)
+                for (Cnum = 1; Cnum <= RangeArray.GetUpperBound(1); Cnum++)
                 {
-                    if (classArray.GetValue(Rnum, Cnum) == null)
+                    DateTime temp;
+                    //Reading in null values
+                    if (RangeArray.GetValue(Rnum, Cnum) == null)
                     {
                         dr[Cnum - 1] = "";
                     }
+                    //Formatting the time from excel to be correct
+                    else if((Cnum -1) == 1 && (!DateTime.TryParse((RangeArray.GetValue(Rnum, Cnum).ToString()), out temp)))
+                    {
+                        dr[Cnum - 1] = DateTime.FromOADate(double.Parse(RangeArray.GetValue(Rnum, Cnum).ToString())).ToString("M/dd/yyyy");
+                    }
+                    //everything else
                     else
                     {
-                        dr[Cnum - 1] = classArray.GetValue(Rnum, Cnum).ToString().Trim();
+                        dr[Cnum - 1] = RangeArray.GetValue(Rnum, Cnum).ToString().Trim();
                     }
                 }
+                //Add the row to the the data table
                 dt.Rows.Add(dr);
+                //Accept the changes
                 dt.AcceptChanges();
             }
 
             //close to book
-            workbook.Close(true);
-            appExl.Quit();
+            //workbook.Close(true);
+            //appExl.Quit();
 
-
-            //Session["data"] = dt; 
+            //Set the datagrid data source to the dataTable
             dataGridView1.DataSource = dt;
 
+            //Format the datagrid to look like the excel file
             this.format_DataGirdView();
-            
-            
+
+            dataGridView1.ClearSelection();
         }
 
         /// <summary>
@@ -92,29 +110,64 @@ namespace ClassOpsLogCreator
         /// </summary>
         private void format_DataGirdView()
         {
-            //Increase the width of the last columns
-            dataGridView1.Columns[5].Width = 360;
-            dataGridView1.Columns[0].Width = 100;
+            //Set some color formats
+            Color redBackground = Color.FromArgb(255, 199, 206);
+            Color redFont = Color.FromArgb(156, 0, 6);
+            Color lightblue = Color.FromArgb(225, 246, 255);
+            Color headerText = Color.FromArgb(156, 101, 0);
+            Color headerBackcolor = Color.FromArgb(235, 241, 222);
 
+
+            //Increase the width of the last columns
+            dataGridView1.Columns[0].Width = 100;
+            dataGridView1.Columns[1].Width = 150;
+            dataGridView1.Columns[2].Width = 75;
+            dataGridView1.Columns[3].Width = 75;
+            dataGridView1.Columns[4].Width = 75;
+            dataGridView1.Columns[5].Width = 360;
 
             //Enable text wraping
             dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            //dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
-            //Allight to the center
-            dataGridView1.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //Allight to the center and format 
+            foreach(DataGridViewColumn col in dataGridView1.Columns)
+            {
+                //Disable sorting
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
 
-            dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                //Format the headers
+                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.BottomCenter;
+                col.HeaderCell.Style.Font = new Font("Calibri", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+                col.HeaderCell.Style.BackColor = headerBackcolor;
+                col.HeaderCell.Style.ForeColor = headerText;
+
+                //Center the column text
+                col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            //Color the cells accordingly
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                if(dataGridView1.Rows[i].Cells[0].Value.ToString() != "Crestron Logout")
+                {
+                    //Background
+                    dataGridView1.Rows[i].Cells[0].Style.BackColor = redBackground;
+                    dataGridView1.Rows[i].Cells[5].Style.BackColor = redBackground;
+                    //Font
+                    dataGridView1.Rows[i].Cells[0].Style.ForeColor = redFont;
+                    dataGridView1.Rows[i].Cells[5].Style.ForeColor = redFont;
+                }
+                //Change the color of the neck mic tasks
+                if(dataGridView1.Rows[i].Cells[5].Value.ToString() == "Ensure neck mic goes back to equipment drawer.")
+                {
+                    //Background
+                    dataGridView1.Rows[i].Cells[0].Style.BackColor = lightblue;
+                    dataGridView1.Rows[i].Cells[5].Style.BackColor = lightblue;
+                }
+            }
+
+            //Do not accept the system style
+            dataGridView1.EnableHeadersVisualStyles = false;
         }
     }
 }

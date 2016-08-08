@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using Excel = Microsoft.Office.Interop.Excel;
 
 /// <summary>
@@ -29,23 +30,27 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
 
-        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        /*public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
+        public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+
+        //TEST
+        private readonly ConcurrentQueue<System.Array> _queue = new ConcurrentQueue<System.Array>();
+        //TEST
 
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook   logoutMasterWorkBook = null;
@@ -468,6 +473,8 @@ namespace ClassOpsLogCreator
             this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms1, classRoomTimeLogs1.getLogOutArrayCount(),
                                                                          JInstruction1, DInstruction1, RInstruction1, 
                                                                          true, startTimeFromCombo1, endTimeFromCombo1);
+            System.Array log = this.getLog(logoutMasterWorkSheet);
+            _queue.Enqueue(log);
 
             //Saving and closing the new excel file
             logoutMaster.DisplayAlerts = false;
@@ -564,7 +571,7 @@ namespace ClassOpsLogCreator
             worker.ReportProgress(95);
 
             //Gracefully close all instances
-            Quit();
+            //Quit();
 
             //Send report that we are all done 100%
             worker.ReportProgress(100);
@@ -674,6 +681,13 @@ namespace ClassOpsLogCreator
                 //Make a new copied file not hidden
                 System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Hidden);
 
+                System.Array item = null;
+                while(_queue.TryDequeue(out item))
+                {
+                    LogViewer lv = new LogViewer(item);
+                    lv.ShowDialog(this);
+                }
+
                 //Open the master log file and freez the first row
                 Excel.Application excel = new Excel.Application();
                 Excel.Workbook wb = excel.Workbooks.Open(EXISTING_MASTER_LOG);
@@ -685,7 +699,7 @@ namespace ClassOpsLogCreator
             }
         }
 
-        // <summary>
+        /// <summary>
         /// This event handler deals with the results of the
         /// background operation for tab2 work
         /// </summary>
@@ -904,6 +918,22 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
+        /// TEST CODE!
+        /// </summary>
+        /// <param name="worksheet"></param>
+        /// <returns></returns>
+        public System.Array getLog(Excel.Worksheet worksheet)
+        {
+            //Get the number of rowms from the worksheet and the existing worksheet
+            int sheetRowCount = worksheet.UsedRange.Rows.Count;
+
+            //Select the ranges from the worksheet and the existing work sheet we are going to work with. 
+            Excel.Range range = worksheet.get_Range("A2", "G" + (sheetRowCount + 1));
+
+            return (System.Array)range.Cells.Value2;
+        }
+
+        /// <summary>
         /// This will add a small addiction to the closing operation of the application
         /// Clear he clo file and clean up the memory.
         /// </summary>
@@ -977,7 +1007,6 @@ namespace ClassOpsLogCreator
             box.ShowDialog();
         }
 
-
         /// <summary>
         /// When the first + button is clicked
         /// 
@@ -1033,7 +1062,6 @@ namespace ClassOpsLogCreator
                 this.plusBTN2.Visible = false;
             }        
         }
-
 
         /// <summary>
         /// When the second + button is clicked
