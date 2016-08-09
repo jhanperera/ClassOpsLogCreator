@@ -921,7 +921,18 @@ namespace ClassOpsLogCreator
                 SchoolZoning sz = new SchoolZoning();
                 //Pass the zoning with the number of shifts
                 destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts);
+                //divide the zones
                 this.dividedLogs(destinationRange, numberOfShifts);
+
+                //pop from the queue and send the item to the log viewer
+                System.Array destinationArray = null;
+                while (this._queue.TryDequeue(out destinationArray))
+                {
+                    LogViewer lv = new LogViewer(destinationArray, startTime, endTime);
+                    lv.ShowDialog();
+                   // Excel.Range name_range = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 2), "A" + (last.Row));
+                   // name_range.Value2 = lv.getEmployeeName();
+                }
             }
             else
             {
@@ -991,32 +1002,71 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// Test code
+        /// This method splits the logs if we have more than one
+        /// employee working. This puts the logs into the Queue 
+        /// 
+        /// This returns an array with the start row and the end row of each log
+        /// array[i,j] where i is the starting row and j is the ending row
         /// </summary>
         /// <param name="range"></param>
-        /// <param name="numberOfShifts"></param>
         /// <returns></returns>
-        private System.Array dividedLogs(Excel.Range range, int numberOfShifts)
+        private long[,] dividedLogs(Excel.Range range, int numberOfShifts)
         {
+            //Set the start and end row variables
             System.Array value = null;
-            if(numberOfShifts > 1)
+            long[,] rowValues = new long[numberOfShifts, 2];
+
+            long startRow = Int64.Parse(range.Row.ToString());
+            long endRow = 0;
+            int count = 0;
+            int arrayCount = 0;
+
+            //loop through the rows and find were the split is based on the next time
+            for (int i = 1; (i < range.Rows.Count) && startRow < (startRow + range.Rows.Count); i++)
             {
-                for (int i = 1; i < range.Rows.Count; i++)
+                count++;
+                //Get the time string from the excel sheet
+                string startTimestring = (string)(range.Cells[i, 4] as Excel.Range).Value2;
+                string nextTimestring = (string)(range.Cells[i + 1, 4] as Excel.Range).Value2;
+                var firstTime = TimeSpan.Parse(startTimestring);
+                var nextTime = TimeSpan.Parse(nextTimestring);
+
+                //if the next time is less than the current time we know there is a split or we are at the end
+                if (nextTime < firstTime || (i + 1) == range.Rows.Count)
                 {
-                    string startTimestring = (string)(range.Cells[i, 4] as Excel.Range).Value2;
-                    string nextTimestring = (string)(range.Cells[i + 1, 4] as Excel.Range).Value2;
-                    var firstTime = TimeSpan.Parse(startTimestring);
-                    var nextTime = TimeSpan.Parse(nextTimestring);
-                    if (nextTime < firstTime)
+                    endRow = startRow + count;
+                    //The case when we are dealing with the last log
+                    if((i+1) == range.Rows.Count)
                     {
-
+                        Excel.Range toArrayRange = existingMasterWorkSheet.get_Range("A" + startRow, "G" + (endRow));
+                        value = (System.Array)toArrayRange.Value2;
+                        //Send the array to the queue
+                        this._queue.Enqueue(value);
+                        //save the start and end times
+                        rowValues[arrayCount, 0] = startRow;
+                        rowValues[arrayCount, 1] = endRow - 1;
+                        //Move the new start row poitner
+                        startRow = endRow;
+                        arrayCount++;
+                        count = 0;
                     }
-                }         
+                    else
+                    {
+                        Excel.Range toArrayRange = existingMasterWorkSheet.get_Range("A" + startRow, "G" + (endRow - 1));
+                        value = (System.Array)toArrayRange.Value2;
+                        //Send the array to the queue
+                        this._queue.Enqueue(value);
+                        //save the start and end times
+                        rowValues[arrayCount, 0] = startRow;
+                        rowValues[arrayCount, 1] = endRow - 1;
+                        //Move the new start row poitner
+                        startRow = endRow;
+                        arrayCount++;
+                        count = 0;
+                    }
+                }
             }
-
-
-
-            return value;
+            return rowValues;
         }
 
         /// <summary>
