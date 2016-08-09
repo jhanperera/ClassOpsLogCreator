@@ -14,15 +14,27 @@ namespace ClassOpsLogCreator
     public partial class LogViewer : Form
     {
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        private System.Array RangeArray = null;
+
+        private System.Array rangeArray = null;
+        private string startTime = null;
+        private string endTime = null;
+
+        //A lock object to lock this thread from being accessed accross memory
+        private Object thisLock = new Object();
+        bool done = false;
 
         /// <summary>
         /// Constructor for the log viewer
         /// </summary>
-        public LogViewer(System.Array rangeArray)
+        public LogViewer(System.Array Range, string StartTime, string EndTime)
         {
             InitializeComponent();
-            this.RangeArray = rangeArray;
+
+            //Get the array represenation of the range
+            this.rangeArray = Range;
+            //Start and end times
+            this.startTime = StartTime;
+            this.endTime = EndTime;
         }
 
         /// <summary>
@@ -49,6 +61,9 @@ namespace ClassOpsLogCreator
             System.Array classArray = (System.Array)shtRange.Cells.Value2;*/
 
             //*************************************************************************************************
+
+            //Set the time label for the shift time
+            this.timeLabel.Text = this.startTime + " to " + this.endTime;
             
             //Use a data table to store all the data and then apply it to the datagrid view
             DataTable dt = new DataTable();
@@ -62,34 +77,46 @@ namespace ClassOpsLogCreator
             int Cnum = 0;
             int Rnum = 0;
 
-            //Add all the elements in the range to the datatable
-            for (Rnum = 1; Rnum <= RangeArray.GetUpperBound(0); Rnum++)
+            if(!done)
             {
-                DataRow dr = dt.NewRow();
-                for (Cnum = 1; Cnum <= RangeArray.GetUpperBound(1); Cnum++)
+                lock (thisLock)
                 {
-                    DateTime temp;
-                    //Reading in null values
-                    if (RangeArray.GetValue(Rnum, Cnum) == null)
+                    if(!done)
                     {
-                        dr[Cnum - 1] = "";
-                    }
-                    //Formatting the time from excel to be correct
-                    else if((Cnum -1) == 1 && (!DateTime.TryParse((RangeArray.GetValue(Rnum, Cnum).ToString()), out temp)))
-                    {
-                        dr[Cnum - 1] = DateTime.FromOADate(double.Parse(RangeArray.GetValue(Rnum, Cnum).ToString())).ToString("M/dd/yyyy");
-                    }
-                    //everything else
-                    else
-                    {
-                        dr[Cnum - 1] = RangeArray.GetValue(Rnum, Cnum).ToString().Trim();
+                        //Add all the elements in the range to the datatable
+                        for (Rnum = 1; Rnum <= rangeArray.GetUpperBound(0); Rnum++)
+                        {
+                            DataRow dr = dt.NewRow();
+                            for (Cnum = 2; Cnum <= rangeArray.GetUpperBound(1); Cnum++)
+                            {
+                                DateTime temp;
+                                //Reading in null values
+                                if (rangeArray.GetValue(Rnum, Cnum) == null)
+                                {
+                                    dr[Cnum - 2] = "";
+                                }
+                                //Formatting the time from excel to be correct
+                                else if ((Cnum - 1) == 2 && (!DateTime.TryParse((rangeArray.GetValue(Rnum, Cnum).ToString()), out temp)))
+                                {
+                                    dr[Cnum - 2] = DateTime.FromOADate(double.Parse(rangeArray.GetValue(Rnum, Cnum).ToString())).ToString("M/dd/yyyy");
+                                }
+                                //everything else
+                                else
+                                {
+                                    dr[Cnum - 2] = rangeArray.GetValue(Rnum, Cnum).ToString().Trim();
+                                }
+                            }
+                            //Add the row to the the data table
+                            dt.Rows.Add(dr);
+                            //Accept the changes
+                            dt.AcceptChanges();
+                        }
+                        done = true;
                     }
                 }
-                //Add the row to the the data table
-                dt.Rows.Add(dr);
-                //Accept the changes
-                dt.AcceptChanges();
             }
+            
+            
 
             //close to book
             //workbook.Close(true);
@@ -168,6 +195,15 @@ namespace ClassOpsLogCreator
 
             //Do not accept the system style
             dataGridView1.EnableHeadersVisualStyles = false;
+        }
+
+        /// <summary>
+        /// This return the employee name that was entered into the text field
+        /// </summary>
+        /// <returns></returns>
+        public string getEmployeeName()
+        {
+            return this.nameTextBox.Text.ToString();
         }
     }
 }

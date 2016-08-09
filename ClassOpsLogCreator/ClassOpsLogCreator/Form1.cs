@@ -40,12 +40,12 @@ namespace ClassOpsLogCreator
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
-        public readonly string JEANNINE_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
-        public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
-        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
-        public readonly string EXISTING_MASTER_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
+        public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
+        public readonly string JEANNINE_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
+        public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
         public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
 
         //TEST
@@ -53,15 +53,15 @@ namespace ClassOpsLogCreator
         //TEST
 
         private static Excel.Application logoutMaster = null;
-        private static Excel.Workbook   logoutMasterWorkBook = null;
-        private static Excel.Worksheet  logoutMasterWorkSheet, 
-                                        logoutMasterWorkSheet2, 
-                                        logoutMasterWorkSheet3, 
+        private static Excel.Workbook logoutMasterWorkBook = null;
+        private static Excel.Worksheet logoutMasterWorkSheet,
+                                        logoutMasterWorkSheet2,
+                                        logoutMasterWorkSheet3,
                                         logoutMasterWorkSheet4 = null;
 
         private static Excel.Application existingMaster = null;
-        private static Excel.Workbook    existingMasterWorkBook = null;
-        private static Excel.Worksheet   existingMasterWorkSheet = null; 
+        private static Excel.Workbook existingMasterWorkBook = null;
+        private static Excel.Worksheet existingMasterWorkSheet = null;
 
         //Use a background worker to allow the GUI to still be functional and not hang.
         private static BackgroundWorker bw = null;
@@ -161,7 +161,7 @@ namespace ClassOpsLogCreator
             this.am_pmCombo1_1.Items.Add("PM");
             this.am_pmCombo1_2.Items.Add("AM");
             this.am_pmCombo1_2.Items.Add("PM");
-             //Tab 1 Select 2
+            //Tab 1 Select 2
             this.am_pmCombo2_1.Items.Add("AM");
             this.am_pmCombo2_1.Items.Add("PM");
             this.am_pmCombo2_2.Items.Add("AM");
@@ -217,7 +217,7 @@ namespace ClassOpsLogCreator
             //this.cloAm_pmCombo2.SelectedIndex = 1;
 
             //Make the combo box read only for tab 1 - select 1
-            this.startHour1.DropDownStyle = ComboBoxStyle.DropDownList; 
+            this.startHour1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.endHour1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.numberOfShiftsCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo1_1.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -263,16 +263,16 @@ namespace ClassOpsLogCreator
             if (plusClicked1 && !plusClicked2 && !plusClicked3)
             {
                 //Get the times set by the first set of combo boxes
-                startTimeFromCombo1 = this.startHour1.GetItemText(this.startHour1.SelectedItem) 
-                                    + "" + this.am_pmCombo1_1.GetItemText(this.am_pmCombo1_1.SelectedItem); 
-                endTimeFromCombo1 = this.endHour1.GetItemText(this.endHour1.SelectedItem) 
-                                    + "" + this.am_pmCombo1_2.GetItemText(this.am_pmCombo1_2.SelectedItem); 
+                startTimeFromCombo1 = this.startHour1.GetItemText(this.startHour1.SelectedItem)
+                                    + "" + this.am_pmCombo1_1.GetItemText(this.am_pmCombo1_1.SelectedItem);
+                endTimeFromCombo1 = this.endHour1.GetItemText(this.endHour1.SelectedItem)
+                                    + "" + this.am_pmCombo1_2.GetItemText(this.am_pmCombo1_2.SelectedItem);
                 numberOfShifts1 = int.Parse(this.numberOfShiftsCombo1.SelectedItem.ToString());
                 //Get the times set by the second set of combo boxes
                 startTimeFromCombo2 = this.startHour2.GetItemText(this.startHour2.SelectedItem)
                                      + "" + this.am_pmCombo2_1.GetItemText(this.am_pmCombo2_1.SelectedItem);
                 endTimeFromCombo2 = this.endHour2.GetItemText(this.endHour2.SelectedItem)
-                                     +"" + this.am_pmCombo2_2.GetItemText(this.am_pmCombo2_2.SelectedItem); 
+                                     + "" + this.am_pmCombo2_2.GetItemText(this.am_pmCombo2_2.SelectedItem);
                 numberOfShifts2 = int.Parse(this.numberOfShiftsCombo2.SelectedItem.ToString());
 
                 //Input Error checking!
@@ -305,7 +305,7 @@ namespace ClassOpsLogCreator
                 startTimeFromCombo1 = this.startHour1.GetItemText(this.startHour1.SelectedItem)
                                      + "" + this.am_pmCombo1_1.GetItemText(this.am_pmCombo1_1.SelectedItem);
                 endTimeFromCombo1 = this.endHour1.GetItemText(this.endHour1.SelectedItem)
-                                     + "" + this.am_pmCombo1_2.GetItemText(this.am_pmCombo1_2.SelectedItem); 
+                                     + "" + this.am_pmCombo1_2.GetItemText(this.am_pmCombo1_2.SelectedItem);
                 numberOfShifts1 = int.Parse(this.numberOfShiftsCombo1.SelectedItem.ToString());
                 //Get the times set by the second set of combo boxes
                 startTimeFromCombo2 = this.startHour2.GetItemText(this.startHour2.SelectedItem)
@@ -336,7 +336,7 @@ namespace ClassOpsLogCreator
                     return;
                 }
                 else if (Convert.ToDateTime(startTimeFromCombo1) >= Convert.ToDateTime(endTimeFromCombo1) ||
-                        Convert.ToDateTime(startTimeFromCombo2) >= Convert.ToDateTime(endTimeFromCombo2)  ||
+                        Convert.ToDateTime(startTimeFromCombo2) >= Convert.ToDateTime(endTimeFromCombo2) ||
                         Convert.ToDateTime(startTimeFromCombo3) >= Convert.ToDateTime(endTimeFromCombo3))
                 {
                     MessageBox.Show("Valid time must be set.",
@@ -447,7 +447,7 @@ namespace ClassOpsLogCreator
             //Get work completed events
             bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompletedTab1);
             //Do all the work
-            if(bw.IsBusy != true)
+            if (bw.IsBusy != true)
             {
                 //Disable the button
                 createBTN.Enabled = false;
@@ -538,15 +538,13 @@ namespace ClassOpsLogCreator
             //write all the data to the excel file
             //merg the all the data together into the master log
             this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms1, classRoomTimeLogs1.getLogOutArrayCount(),
-                                                                         JInstruction1, DInstruction1, RInstruction1, 
+                                                                         JInstruction1, DInstruction1, RInstruction1,
                                                                          true, startTimeFromCombo1, endTimeFromCombo1);
-            System.Array log = this.getLog(logoutMasterWorkSheet);
-            _queue.Enqueue(log);
 
             //Saving and closing the new excel file
             logoutMaster.DisplayAlerts = false;
 
-            this.mergeMasterWithExisting(logoutMasterWorkSheet, numberOfShifts1, true);
+            this.mergeMasterWithExisting(logoutMasterWorkSheet, numberOfShifts1, true, startTimeFromCombo1, endTimeFromCombo1);
 
             //If the first plus button is clicked
             if (plusClicked1)
@@ -569,11 +567,11 @@ namespace ClassOpsLogCreator
                 //write all the data to the excel file
                 //merg the all the data together into the master log
                 this.WriteLogOutArray(logoutMasterWorkSheet2, arrayClassRooms2, classRoomTimeLogs2.getLogOutArrayCount(),
-                                                                             JInstruction2, DInstruction2, RInstruction2, 
+                                                                             JInstruction2, DInstruction2, RInstruction2,
                                                                              true, startTimeFromCombo2, endTimeFromCombo2);
 
                 logoutMaster.DisplayAlerts = false;
-                this.mergeMasterWithExisting(logoutMasterWorkSheet2, numberOfShifts2,  false);
+                this.mergeMasterWithExisting(logoutMasterWorkSheet2, numberOfShifts2, false, startTimeFromCombo2, endTimeFromCombo2);
                 worker.ReportProgress(45);
 
                 //If the second plus button is clicked
@@ -599,9 +597,9 @@ namespace ClassOpsLogCreator
                     this.WriteLogOutArray(logoutMasterWorkSheet3, arrayClassRooms3, classRoomTimeLogs3.getLogOutArrayCount(),
                                                                                  JInstruction3, DInstruction3, RInstruction3,
                                                                                  true, startTimeFromCombo3, endTimeFromCombo3);
-                
+
                     logoutMaster.DisplayAlerts = false;
-                    this.mergeMasterWithExisting(logoutMasterWorkSheet3, numberOfShifts3, false);
+                    this.mergeMasterWithExisting(logoutMasterWorkSheet3, numberOfShifts3, false, startTimeFromCombo3, endTimeFromCombo3);
                     worker.ReportProgress(65);
 
                     //If the third plus button is clicked
@@ -629,7 +627,7 @@ namespace ClassOpsLogCreator
                                                                                      true, startTimeFromCombo4, endTimeFromCombo4);
 
                         logoutMaster.DisplayAlerts = false;
-                        this.mergeMasterWithExisting(logoutMasterWorkSheet4, numberOfShifts4, false);
+                        this.mergeMasterWithExisting(logoutMasterWorkSheet4, numberOfShifts4, false, startTimeFromCombo4, endTimeFromCombo4);
                         worker.ReportProgress(85);
                     }
                 }
@@ -748,13 +746,6 @@ namespace ClassOpsLogCreator
                 //Make a new copied file not hidden
                 System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Hidden);
 
-                /*System.Array item = null;
-                while(_queue.TryDequeue(out item))
-                {
-                    LogViewer lv = new LogViewer(item);
-                    lv.ShowDialog(this);
-                }*/
-
                 //Open the master log file and freez the first row
                 Excel.Application excel = new Excel.Application();
                 Excel.Workbook wb = excel.Workbooks.Open(EXISTING_MASTER_LOG);
@@ -819,7 +810,7 @@ namespace ClassOpsLogCreator
         /// This method will write our arrays to the excel file.
         /// This method generates the Excel output via the arrays
         /// </summary>
-        private void WriteLogOutArray(Excel.Worksheet worksheet, string[,] values, int index, 
+        private void WriteLogOutArray(Excel.Worksheet worksheet, string[,] values, int index,
                                             string[,] array1, string[,] array2, string[,] array3, bool includeACE, string startTime, string endTime)
         {
             //Setting up the cells to put the information into
@@ -862,23 +853,23 @@ namespace ClassOpsLogCreator
             DateTime startingTime = Convert.ToDateTime(startTime.ToString());
             DateTime endingTime = Convert.ToDateTime(endTime.ToString());
             DateTime check = DateTime.ParseExact("1600", "HHmm", null);
-            if (includeACE &&(check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
+            if (includeACE && (check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
             {
                 string[] ace017String = {"CLOSE ACE017", today.ToString("M/dd/yy"), "1600", "ACE", "017",
                 @"Keys are in ACE 015 storeroom. Make sure all workstations have a keyboard and a mouse, shut down the lights and lock the door.If the room is already locked please report on your log."};
-                ace017CloseRange.Value2 = ace017String; 
+                ace017CloseRange.Value2 = ace017String;
             }
 
             //Sorting it by time column
             dynamic allDataRange = worksheet.UsedRange;
-            allDataRange.Sort(allDataRange.Columns[3], Excel.XlSortOrder.xlAscending);   
+            allDataRange.Sort(allDataRange.Columns[3], Excel.XlSortOrder.xlAscending);
         }
 
         /// <summary>
         /// This method will merger our file with the already existing file in sorted order. 
         /// </summary>
         /// <param name="worksheet"></param>
-        public void mergeMasterWithExisting(Excel.Worksheet worksheet, int numberOfShifts, bool redSeperator)
+        public void mergeMasterWithExisting(Excel.Worksheet worksheet, int numberOfShifts, bool redSeperator, string startTime, string endTime)
         {
             //Open the exisitng excel file
             existingMaster = new Excel.Application();
@@ -906,7 +897,7 @@ namespace ClassOpsLogCreator
 
             //Put red accross the divider with todays date in it
             Color darkRed = Color.FromArgb(204, 0, 51);
-            if(redSeperator)
+            if (redSeperator)
             {
                 dividerRange.Interior.Color = darkRed;
                 dividerRange.Font.Color = Color.White;
@@ -921,7 +912,7 @@ namespace ClassOpsLogCreator
             {
                 //Make the interior white and make the borders are white
                 dividerRange.Interior.Color = Color.White;
-                dividerRange.Borders.Color = Color.White;             
+                dividerRange.Borders.Color = Color.White;
             }
 
             //Zoning is done here
@@ -930,14 +921,29 @@ namespace ClassOpsLogCreator
                 SchoolZoning sz = new SchoolZoning();
                 //Pass the zoning with the number of shifts
                 destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts);
+                this.dividedLogs(destinationRange, numberOfShifts);
             }
             else
             {
+                //Set the destination value to the range value
                 destinationRange.Value2 = range.Value2;
-            }
 
-            //Past the values from the current work sheet to the existing one
-            
+                //We open the log viewer at this point
+                Excel.Range last = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+
+                //Send the range into the queue so its thread safe
+                System.Array destinationArray = (System.Array)destinationRange.Cells.Value2;
+                this._queue.Enqueue(destinationArray);
+
+                //pop from the queue and send the item to the log viewer
+                if (this._queue.TryDequeue(out destinationArray))
+                {
+                    LogViewer lv = new LogViewer(destinationArray, startTime, endTime);
+                    lv.ShowDialog();
+                    Excel.Range name_range = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 2), "A" + (last.Row));
+                    name_range.Value2 = lv.getEmployeeName();
+                }
+            }
 
             //Get the new last row
             Excel.Range last_row = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
@@ -985,19 +991,32 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// TEST CODE!
+        /// Test code
         /// </summary>
-        /// <param name="worksheet"></param>
+        /// <param name="range"></param>
+        /// <param name="numberOfShifts"></param>
         /// <returns></returns>
-        public System.Array getLog(Excel.Worksheet worksheet)
+        private System.Array dividedLogs(Excel.Range range, int numberOfShifts)
         {
-            //Get the number of rowms from the worksheet and the existing worksheet
-            int sheetRowCount = worksheet.UsedRange.Rows.Count;
+            System.Array value = null;
+            if(numberOfShifts > 1)
+            {
+                for (int i = 1; i < range.Rows.Count; i++)
+                {
+                    string startTimestring = (string)(range.Cells[i, 4] as Excel.Range).Value2;
+                    string nextTimestring = (string)(range.Cells[i + 1, 4] as Excel.Range).Value2;
+                    var firstTime = TimeSpan.Parse(startTimestring);
+                    var nextTime = TimeSpan.Parse(nextTimestring);
+                    if (nextTime < firstTime)
+                    {
 
-            //Select the ranges from the worksheet and the existing work sheet we are going to work with. 
-            Excel.Range range = worksheet.get_Range("A2", "G" + (sheetRowCount + 1));
+                    }
+                }         
+            }
 
-            return (System.Array)range.Cells.Value2;
+
+
+            return value;
         }
 
         /// <summary>
