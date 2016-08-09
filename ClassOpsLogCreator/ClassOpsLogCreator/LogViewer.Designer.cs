@@ -103,10 +103,6 @@
             this.printBTN.Text = "Print";
             this.printBTN.UseVisualStyleBackColor = true;
             // 
-            // logCreatorBindingSource
-            // 
-            this.logCreatorBindingSource.DataSource = typeof(ClassOpsLogCreator.LogCreator);
-            // 
             // LogViewer
             // 
             this.AcceptButton = this.nextBTN;
