@@ -32,6 +32,8 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.timeLabel = new System.Windows.Forms.Label();
+            this.nextBTN = new System.Windows.Forms.Button();
+            this.printBTN = new System.Windows.Forms.Button();
             this.logCreatorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logCreatorBindingSource)).BeginInit();
@@ -49,11 +51,11 @@
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(2, 62);
+            this.dataGridView1.Location = new System.Drawing.Point(2, 86);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(854, 701);
+            this.dataGridView1.Size = new System.Drawing.Size(854, 663);
             this.dataGridView1.TabIndex = 0;
             // 
             // nameTextBox
@@ -62,7 +64,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.nameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameTextBox.Location = new System.Drawing.Point(303, 12);
+            this.nameTextBox.Location = new System.Drawing.Point(345, 38);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(160, 44);
             this.nameTextBox.TabIndex = 1;
@@ -71,10 +73,35 @@
             // 
             this.timeLabel.AutoSize = true;
             this.timeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeLabel.Location = new System.Drawing.Point(469, 18);
+            this.timeLabel.Location = new System.Drawing.Point(511, 44);
             this.timeLabel.Name = "timeLabel";
             this.timeLabel.Size = new System.Drawing.Size(0, 31);
             this.timeLabel.TabIndex = 2;
+            // 
+            // nextBTN
+            // 
+            this.nextBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nextBTN.Location = new System.Drawing.Point(743, 755);
+            this.nextBTN.Name = "nextBTN";
+            this.nextBTN.Size = new System.Drawing.Size(101, 26);
+            this.nextBTN.TabIndex = 3;
+            this.nextBTN.Text = "Next >";
+            this.nextBTN.UseVisualStyleBackColor = true;
+            this.nextBTN.Click += new System.EventHandler(this.nextBTN_Click);
+            // 
+            // printBTN
+            // 
+            this.printBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.printBTN.Location = new System.Drawing.Point(12, 755);
+            this.printBTN.Name = "printBTN";
+            this.printBTN.Size = new System.Drawing.Size(101, 26);
+            this.printBTN.TabIndex = 4;
+            this.printBTN.Text = "Print";
+            this.printBTN.UseVisualStyleBackColor = true;
             // 
             // logCreatorBindingSource
             // 
@@ -82,9 +109,12 @@
             // 
             // LogViewer
             // 
+            this.AcceptButton = this.nextBTN;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(856, 763);
+            this.ClientSize = new System.Drawing.Size(856, 793);
+            this.Controls.Add(this.printBTN);
+            this.Controls.Add(this.nextBTN);
             this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.dataGridView1);
@@ -107,5 +137,7 @@
         private System.Windows.Forms.BindingSource logCreatorBindingSource;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Label timeLabel;
+        private System.Windows.Forms.Button nextBTN;
+        private System.Windows.Forms.Button printBTN;
     }
 }

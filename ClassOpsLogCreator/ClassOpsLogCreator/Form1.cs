@@ -922,16 +922,20 @@ namespace ClassOpsLogCreator
                 //Pass the zoning with the number of shifts
                 destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts);
                 //divide the zones
-                this.dividedLogs(destinationRange, numberOfShifts);
+                long[,] rowNumbers = this.dividedLogs(destinationRange, numberOfShifts);
+                int indexCount = 0;
 
                 //pop from the queue and send the item to the log viewer
                 System.Array destinationArray = null;
                 while (this._queue.TryDequeue(out destinationArray))
                 {
+                    //Display the logviewer
                     LogViewer lv = new LogViewer(destinationArray, startTime, endTime);
                     lv.ShowDialog();
-                   // Excel.Range name_range = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 2), "A" + (last.Row));
-                   // name_range.Value2 = lv.getEmployeeName();
+                    //Set the employee name
+                    Excel.Range name_range = existingMasterWorkSheet.get_Range("A" + (rowNumbers[indexCount,0]), "A" + (rowNumbers[indexCount, 1]));
+                    name_range.Value2 = lv.getEmployeeName();
+                    indexCount++;
                 }
             }
             else
@@ -949,8 +953,10 @@ namespace ClassOpsLogCreator
                 //pop from the queue and send the item to the log viewer
                 if (this._queue.TryDequeue(out destinationArray))
                 {
+                    //Display the logviewer
                     LogViewer lv = new LogViewer(destinationArray, startTime, endTime);
                     lv.ShowDialog();
+                    //Set the employee name
                     Excel.Range name_range = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 2), "A" + (last.Row));
                     name_range.Value2 = lv.getEmployeeName();
                 }
@@ -1044,7 +1050,7 @@ namespace ClassOpsLogCreator
                         this._queue.Enqueue(value);
                         //save the start and end times
                         rowValues[arrayCount, 0] = startRow;
-                        rowValues[arrayCount, 1] = endRow - 1;
+                        rowValues[arrayCount, 1] = endRow;
                         //Move the new start row poitner
                         startRow = endRow;
                         arrayCount++;

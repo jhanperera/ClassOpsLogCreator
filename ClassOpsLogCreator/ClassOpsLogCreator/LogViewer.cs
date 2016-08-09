@@ -13,15 +13,14 @@ namespace ClassOpsLogCreator
 {
     public partial class LogViewer : Form
     {
-        public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-
+ 
         private System.Array rangeArray = null;
         private string startTime = null;
         private string endTime = null;
 
         //A lock object to lock this thread from being accessed accross memory
         private Object thisLock = new Object();
-        bool done = false;
+        private bool done = false;
 
         /// <summary>
         /// Constructor for the log viewer
@@ -38,30 +37,21 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
+        /// This return the employee name that was entered into the text field
+        /// </summary>
+        /// <returns></returns>
+        public string getEmployeeName()
+        {
+            return this.nameTextBox.Text.ToString();
+        }
+
+        /// <summary>
         /// The main form load event all the work will happen here
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void LogViewer_Load(object sender, EventArgs e)
         {
-            //*************************************************************************************************
-            //All test code 
-            /*Excel.Application appExl;
-            Excel.Workbook workbook;
-            Excel.Worksheet NwSheet;
-            Excel.Range ShtRange;
-            appExl = new Excel.ApplicationClass();
-            workbook = appExl.Workbooks.Open((EXISTING_MASTER_LOG));
-            NwSheet = (Excel.Worksheet)workbook.Sheets.get_Item(1);
-
-            ShtRange = NwSheet.UsedRange;
-
-            Excel.Range last = NwSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            Excel.Range shtRange = NwSheet.get_Range("B1563", "G" + last.Row);
-            System.Array classArray = (System.Array)shtRange.Cells.Value2;*/
-
-            //*************************************************************************************************
-
             //Set the time label for the shift time
             this.timeLabel.Text = this.startTime + " to " + this.endTime;
             
@@ -77,6 +67,7 @@ namespace ClassOpsLogCreator
             int Cnum = 0;
             int Rnum = 0;
 
+            //Lock the thread so we don't get a cross thread issue 
             if(!done)
             {
                 lock (thisLock)
@@ -116,18 +107,13 @@ namespace ClassOpsLogCreator
                 }
             }
             
-            
-
-            //close to book
-            //workbook.Close(true);
-            //appExl.Quit();
-
             //Set the datagrid data source to the dataTable
             dataGridView1.DataSource = dt;
 
             //Format the datagrid to look like the excel file
             this.format_DataGirdView();
 
+            //Clear the default selected
             dataGridView1.ClearSelection();
         }
 
@@ -198,12 +184,13 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This return the employee name that was entered into the text field
+        /// When the next button is clicked we close the current window and return
         /// </summary>
-        /// <returns></returns>
-        public string getEmployeeName()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void nextBTN_Click(object sender, EventArgs e)
         {
-            return this.nameTextBox.Text.ToString();
+            this.Close();
         }
     }
 }
