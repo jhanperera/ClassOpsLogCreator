@@ -190,7 +190,20 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void nextBTN_Click(object sender, EventArgs e)
         {
-            this.Close();
+            //INPUT VALIDATION!
+            if(this.nameTextBox.Text == "" || this.nameTextBox.Text == null)
+            {
+                MessageBox.Show("Text box cannot be empty!");
+            }
+            else
+            {
+                this.Close();
+            }          
+        }
+
+        private void printBTN_Click(object sender, EventArgs e)
+        {
+              
         }
     }
 }

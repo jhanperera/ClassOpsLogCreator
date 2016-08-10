@@ -64,7 +64,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.nameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameTextBox.Location = new System.Drawing.Point(345, 38);
+            this.nameTextBox.Location = new System.Drawing.Point(312, 36);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(160, 44);
             this.nameTextBox.TabIndex = 1;
@@ -73,7 +73,7 @@
             // 
             this.timeLabel.AutoSize = true;
             this.timeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeLabel.Location = new System.Drawing.Point(511, 44);
+            this.timeLabel.Location = new System.Drawing.Point(478, 42);
             this.timeLabel.Name = "timeLabel";
             this.timeLabel.Size = new System.Drawing.Size(0, 31);
             this.timeLabel.TabIndex = 2;
@@ -96,12 +96,14 @@
             this.printBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.printBTN.Enabled = false;
             this.printBTN.Location = new System.Drawing.Point(12, 755);
             this.printBTN.Name = "printBTN";
             this.printBTN.Size = new System.Drawing.Size(101, 26);
             this.printBTN.TabIndex = 4;
             this.printBTN.Text = "Print";
             this.printBTN.UseVisualStyleBackColor = true;
+            this.printBTN.Click += new System.EventHandler(this.printBTN_Click);
             // 
             // LogViewer
             // 

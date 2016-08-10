@@ -34,6 +34,16 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tab1 = new System.Windows.Forms.TabPage();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo4_2 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo4_1 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo3_2 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo3_1 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo2_2 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo2_1 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo1_2 = new System.Windows.Forms.ComboBox();
+            this.am_pmCombo1_1 = new System.Windows.Forms.ComboBox();
             this.shift4Label = new System.Windows.Forms.Label();
             this.shift3Label = new System.Windows.Forms.Label();
             this.shift2Label = new System.Windows.Forms.Label();
@@ -77,16 +87,6 @@
             this.cloGenEnd1 = new System.Windows.Forms.ComboBox();
             this.cloGenStart1 = new System.Windows.Forms.ComboBox();
             this.mainToolTop = new System.Windows.Forms.ToolTip(this.components);
-            this.am_pmCombo1_1 = new System.Windows.Forms.ComboBox();
-            this.am_pmCombo1_2 = new System.Windows.Forms.ComboBox();
-            this.am_pmCombo2_1 = new System.Windows.Forms.ComboBox();
-            this.am_pmCombo2_2 = new System.Windows.Forms.ComboBox();
-            this.am_pmCombo3_1 = new System.Windows.Forms.ComboBox();
-            this.am_pmCombo3_2 = new System.Windows.Forms.ComboBox();
-            this.am_pmCombo4_1 = new System.Windows.Forms.ComboBox();
-            this.am_pmCombo4_2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.tab1.SuspendLayout();
             this.mainPanel.SuspendLayout();
@@ -183,6 +183,110 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(438, 215);
             this.mainPanel.TabIndex = 53;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(338, 575);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(47, 29);
+            this.comboBox2.TabIndex = 95;
+            this.comboBox2.Visible = false;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(160, 575);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(47, 29);
+            this.comboBox1.TabIndex = 94;
+            this.comboBox1.Visible = false;
+            // 
+            // am_pmCombo4_2
+            // 
+            this.am_pmCombo4_2.FormattingEnabled = true;
+            this.am_pmCombo4_2.Location = new System.Drawing.Point(338, 575);
+            this.am_pmCombo4_2.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo4_2.Name = "am_pmCombo4_2";
+            this.am_pmCombo4_2.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo4_2.TabIndex = 95;
+            this.mainToolTop.SetToolTip(this.am_pmCombo4_2, "Start time of the shift");
+            // 
+            // am_pmCombo4_1
+            // 
+            this.am_pmCombo4_1.FormattingEnabled = true;
+            this.am_pmCombo4_1.Location = new System.Drawing.Point(160, 575);
+            this.am_pmCombo4_1.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo4_1.Name = "am_pmCombo4_1";
+            this.am_pmCombo4_1.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo4_1.TabIndex = 94;
+            this.mainToolTop.SetToolTip(this.am_pmCombo4_1, "Start time of the shift");
+            // 
+            // am_pmCombo3_2
+            // 
+            this.am_pmCombo3_2.FormattingEnabled = true;
+            this.am_pmCombo3_2.Location = new System.Drawing.Point(338, 404);
+            this.am_pmCombo3_2.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo3_2.Name = "am_pmCombo3_2";
+            this.am_pmCombo3_2.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo3_2.TabIndex = 93;
+            this.mainToolTop.SetToolTip(this.am_pmCombo3_2, "Start time of the shift");
+            this.am_pmCombo3_2.Visible = false;
+            // 
+            // am_pmCombo3_1
+            // 
+            this.am_pmCombo3_1.FormattingEnabled = true;
+            this.am_pmCombo3_1.Location = new System.Drawing.Point(159, 404);
+            this.am_pmCombo3_1.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo3_1.Name = "am_pmCombo3_1";
+            this.am_pmCombo3_1.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo3_1.TabIndex = 92;
+            this.mainToolTop.SetToolTip(this.am_pmCombo3_1, "Start time of the shift");
+            this.am_pmCombo3_1.Visible = false;
+            // 
+            // am_pmCombo2_2
+            // 
+            this.am_pmCombo2_2.FormattingEnabled = true;
+            this.am_pmCombo2_2.Location = new System.Drawing.Point(338, 233);
+            this.am_pmCombo2_2.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo2_2.Name = "am_pmCombo2_2";
+            this.am_pmCombo2_2.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo2_2.TabIndex = 91;
+            this.mainToolTop.SetToolTip(this.am_pmCombo2_2, "Start time of the shift");
+            this.am_pmCombo2_2.Visible = false;
+            // 
+            // am_pmCombo2_1
+            // 
+            this.am_pmCombo2_1.FormattingEnabled = true;
+            this.am_pmCombo2_1.Location = new System.Drawing.Point(160, 233);
+            this.am_pmCombo2_1.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo2_1.Name = "am_pmCombo2_1";
+            this.am_pmCombo2_1.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo2_1.TabIndex = 90;
+            this.mainToolTop.SetToolTip(this.am_pmCombo2_1, "Start time of the shift");
+            this.am_pmCombo2_1.Visible = false;
+            // 
+            // am_pmCombo1_2
+            // 
+            this.am_pmCombo1_2.FormattingEnabled = true;
+            this.am_pmCombo1_2.Location = new System.Drawing.Point(338, 62);
+            this.am_pmCombo1_2.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo1_2.Name = "am_pmCombo1_2";
+            this.am_pmCombo1_2.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo1_2.TabIndex = 89;
+            this.mainToolTop.SetToolTip(this.am_pmCombo1_2, "Start time of the shift");
+            // 
+            // am_pmCombo1_1
+            // 
+            this.am_pmCombo1_1.FormattingEnabled = true;
+            this.am_pmCombo1_1.Location = new System.Drawing.Point(160, 62);
+            this.am_pmCombo1_1.Margin = new System.Windows.Forms.Padding(4);
+            this.am_pmCombo1_1.Name = "am_pmCombo1_1";
+            this.am_pmCombo1_1.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo1_1.TabIndex = 88;
+            this.mainToolTop.SetToolTip(this.am_pmCombo1_1, "Start time of the shift");
             // 
             // shift4Label
             // 
@@ -579,7 +683,7 @@
             this.tab2.Location = new System.Drawing.Point(4, 30);
             this.tab2.Name = "tab2";
             this.tab2.Padding = new System.Windows.Forms.Padding(3);
-            this.tab2.Size = new System.Drawing.Size(344, 224);
+            this.tab2.Size = new System.Drawing.Size(444, 221);
             this.tab2.TabIndex = 1;
             this.tab2.Text = "CLO Generator";
             this.tab2.ToolTipText = "Create a Crestron Logout sheet only";
@@ -631,110 +735,6 @@
             this.cloGenStart1.Name = "cloGenStart1";
             this.cloGenStart1.Size = new System.Drawing.Size(82, 29);
             this.cloGenStart1.TabIndex = 53;
-            // 
-            // am_pmCombo1_1
-            // 
-            this.am_pmCombo1_1.FormattingEnabled = true;
-            this.am_pmCombo1_1.Location = new System.Drawing.Point(160, 62);
-            this.am_pmCombo1_1.Margin = new System.Windows.Forms.Padding(4);
-            this.am_pmCombo1_1.Name = "am_pmCombo1_1";
-            this.am_pmCombo1_1.Size = new System.Drawing.Size(47, 29);
-            this.am_pmCombo1_1.TabIndex = 88;
-            this.mainToolTop.SetToolTip(this.am_pmCombo1_1, "Start time of the shift");
-            // 
-            // am_pmCombo1_2
-            // 
-            this.am_pmCombo1_2.FormattingEnabled = true;
-            this.am_pmCombo1_2.Location = new System.Drawing.Point(338, 62);
-            this.am_pmCombo1_2.Margin = new System.Windows.Forms.Padding(4);
-            this.am_pmCombo1_2.Name = "am_pmCombo1_2";
-            this.am_pmCombo1_2.Size = new System.Drawing.Size(47, 29);
-            this.am_pmCombo1_2.TabIndex = 89;
-            this.mainToolTop.SetToolTip(this.am_pmCombo1_2, "Start time of the shift");
-            // 
-            // am_pmCombo2_1
-            // 
-            this.am_pmCombo2_1.FormattingEnabled = true;
-            this.am_pmCombo2_1.Location = new System.Drawing.Point(160, 233);
-            this.am_pmCombo2_1.Margin = new System.Windows.Forms.Padding(4);
-            this.am_pmCombo2_1.Name = "am_pmCombo2_1";
-            this.am_pmCombo2_1.Size = new System.Drawing.Size(47, 29);
-            this.am_pmCombo2_1.TabIndex = 90;
-            this.mainToolTop.SetToolTip(this.am_pmCombo2_1, "Start time of the shift");
-            this.am_pmCombo2_1.Visible = false;
-            // 
-            // am_pmCombo2_2
-            // 
-            this.am_pmCombo2_2.FormattingEnabled = true;
-            this.am_pmCombo2_2.Location = new System.Drawing.Point(338, 233);
-            this.am_pmCombo2_2.Margin = new System.Windows.Forms.Padding(4);
-            this.am_pmCombo2_2.Name = "am_pmCombo2_2";
-            this.am_pmCombo2_2.Size = new System.Drawing.Size(47, 29);
-            this.am_pmCombo2_2.TabIndex = 91;
-            this.mainToolTop.SetToolTip(this.am_pmCombo2_2, "Start time of the shift");
-            this.am_pmCombo2_2.Visible = false;
-            // 
-            // am_pmCombo3_1
-            // 
-            this.am_pmCombo3_1.FormattingEnabled = true;
-            this.am_pmCombo3_1.Location = new System.Drawing.Point(159, 404);
-            this.am_pmCombo3_1.Margin = new System.Windows.Forms.Padding(4);
-            this.am_pmCombo3_1.Name = "am_pmCombo3_1";
-            this.am_pmCombo3_1.Size = new System.Drawing.Size(47, 29);
-            this.am_pmCombo3_1.TabIndex = 92;
-            this.mainToolTop.SetToolTip(this.am_pmCombo3_1, "Start time of the shift");
-            this.am_pmCombo3_1.Visible = false;
-            // 
-            // am_pmCombo3_2
-            // 
-            this.am_pmCombo3_2.FormattingEnabled = true;
-            this.am_pmCombo3_2.Location = new System.Drawing.Point(338, 404);
-            this.am_pmCombo3_2.Margin = new System.Windows.Forms.Padding(4);
-            this.am_pmCombo3_2.Name = "am_pmCombo3_2";
-            this.am_pmCombo3_2.Size = new System.Drawing.Size(47, 29);
-            this.am_pmCombo3_2.TabIndex = 93;
-            this.mainToolTop.SetToolTip(this.am_pmCombo3_2, "Start time of the shift");
-            this.am_pmCombo3_2.Visible = false;
-            // 
-            // am_pmCombo4_1
-            // 
-            this.am_pmCombo4_1.FormattingEnabled = true;
-            this.am_pmCombo4_1.Location = new System.Drawing.Point(160, 575);
-            this.am_pmCombo4_1.Margin = new System.Windows.Forms.Padding(4);
-            this.am_pmCombo4_1.Name = "am_pmCombo4_1";
-            this.am_pmCombo4_1.Size = new System.Drawing.Size(47, 29);
-            this.am_pmCombo4_1.TabIndex = 94;
-            this.mainToolTop.SetToolTip(this.am_pmCombo4_1, "Start time of the shift");
-            // 
-            // am_pmCombo4_2
-            // 
-            this.am_pmCombo4_2.FormattingEnabled = true;
-            this.am_pmCombo4_2.Location = new System.Drawing.Point(338, 575);
-            this.am_pmCombo4_2.Margin = new System.Windows.Forms.Padding(4);
-            this.am_pmCombo4_2.Name = "am_pmCombo4_2";
-            this.am_pmCombo4_2.Size = new System.Drawing.Size(47, 29);
-            this.am_pmCombo4_2.TabIndex = 95;
-            this.mainToolTop.SetToolTip(this.am_pmCombo4_2, "Start time of the shift");
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(160, 575);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(47, 29);
-            this.comboBox1.TabIndex = 94;
-            this.comboBox1.Visible = false;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(338, 575);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(47, 29);
-            this.comboBox2.TabIndex = 95;
-            this.comboBox2.Visible = false;
             // 
             // LogCreator
             // 

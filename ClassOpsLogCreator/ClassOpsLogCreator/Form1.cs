@@ -314,9 +314,9 @@ namespace ClassOpsLogCreator
                                      + "" + this.am_pmCombo2_2.GetItemText(this.am_pmCombo2_2.SelectedItem);
                 numberOfShifts2 = int.Parse(this.numberOfShiftsCombo2.SelectedItem.ToString());
                 //Get the times set by the third set of combo boxes
-                startTimeFromCombo3 = this.startHour2.GetItemText(this.startHour2.SelectedItem)
+                startTimeFromCombo3 = this.startHour3.GetItemText(this.startHour3.SelectedItem)
                                      + "" + this.am_pmCombo3_1.GetItemText(this.am_pmCombo3_1.SelectedItem);
-                endTimeFromCombo3 = this.endHour2.GetItemText(this.endHour2.SelectedItem)
+                endTimeFromCombo3 = this.endHour3.GetItemText(this.endHour3.SelectedItem)
                                      + "" + this.am_pmCombo3_2.GetItemText(this.am_pmCombo3_2.SelectedItem);
                 numberOfShifts3 = int.Parse(this.numberOfShiftsCombo3.SelectedItem.ToString());
 
@@ -362,9 +362,9 @@ namespace ClassOpsLogCreator
                                      + "" + this.am_pmCombo2_2.GetItemText(this.am_pmCombo2_2.SelectedItem);
                 numberOfShifts2 = int.Parse(this.numberOfShiftsCombo2.SelectedItem.ToString());
                 //Get the times set by the third set of combo boxes
-                startTimeFromCombo3 = this.startHour2.GetItemText(this.startHour2.SelectedItem)
+                startTimeFromCombo3 = this.startHour3.GetItemText(this.startHour3.SelectedItem)
                                      + "" + this.am_pmCombo3_1.GetItemText(this.am_pmCombo3_1.SelectedItem);
-                endTimeFromCombo3 = this.endHour2.GetItemText(this.endHour2.SelectedItem)
+                endTimeFromCombo3 = this.endHour3.GetItemText(this.endHour3.SelectedItem)
                                      + "" + this.am_pmCombo3_2.GetItemText(this.am_pmCombo3_2.SelectedItem);
                 numberOfShifts3 = int.Parse(this.numberOfShiftsCombo3.SelectedItem.ToString());
                 //Get the times set by the fourth set of combo boxes
@@ -745,15 +745,6 @@ namespace ClassOpsLogCreator
                 System.IO.File.Copy(EXISTING_MASTER_LOG, EXISTING_MASTER_LOG_COPY, true);
                 //Make a new copied file not hidden
                 System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Hidden);
-
-                //Open the master log file and freez the first row
-                Excel.Application excel = new Excel.Application();
-                Excel.Workbook wb = excel.Workbooks.Open(EXISTING_MASTER_LOG);
-                Excel.Worksheet ws = (Excel.Worksheet)wb.Worksheets[1];
-                ws.Activate();
-                ws.Application.ActiveWindow.SplitRow = 1;
-                ws.Application.ActiveWindow.FreezePanes = true;
-                excel.Visible = true;
             }
         }
 
@@ -934,7 +925,7 @@ namespace ClassOpsLogCreator
                     lv.ShowDialog();
                     //Set the employee name
                     Excel.Range name_range = existingMasterWorkSheet.get_Range("A" + (rowNumbers[indexCount,0]), "A" + (rowNumbers[indexCount, 1]));
-                    name_range.Value2 = lv.getEmployeeName();
+                    name_range.Value2 = lv.getEmployeeName(); 
                     indexCount++;
                 }
             }
@@ -998,13 +989,50 @@ namespace ClassOpsLogCreator
             //Save
             existingMaster.DisplayAlerts = false;
             existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);
+            existingMaster.Visible = true;
+            
+            //Print all the pages here
+            if (numberOfShifts > 1)
+            {
+                //Prints all the various logs when there is more than one emplyee, this also accounts
+                //for when the zoning returns only one log.
+                long[,] rowNumbers = this.dividedLogs(destinationRange, numberOfShifts);
+                for(int i = 0; i <= rowNumbers.GetUpperBound(0) && (rowNumbers[i,0] != 0 || rowNumbers[i,1] != 0); i++)
+                {
+                    Excel.Range logRange = existingMasterWorkSheet.get_Range("B" + (rowNumbers[i, 0]), "H" + (rowNumbers[i, 1]));
+                    Excel.Range name = existingMasterWorkSheet.get_Range("A" + rowNumbers[i, 0]);
+                    string nameText = name.Cells.Value2.ToString();
+
+                    existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + startTime + " to " + endTime;
+                    logRange.PrintPreview(true);
+                }
+            }
+            else
+            {
+                //We open the log viewer at this point
+                Excel.Range last = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+                Excel.Range logRange = existingMasterWorkSheet.get_Range("B" + (lastRowDestination + 2), "H" + (last.Row));
+                Excel.Range name = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 2));
+                string nameText = name.Cells.Value2.ToString();
+
+                existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + startTime + " to " + endTime;
+                logRange.PrintPreview(true);
+            }
+
+            //Empty the queue for the next operation
+            System.Array someItem = null;
+            while(!this._queue.IsEmpty)
+            {
+                this._queue.TryDequeue(out someItem);
+            }
+
+            //Close the workbook and the excel file
             existingMasterWorkBook.Close();
             existingMaster.Quit();
             System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
             existingMaster = null;
             existingMasterWorkBook = null;
             existingMasterWorkSheet = null;
-            //GC.Collect();
         }
 
         /// <summary>
