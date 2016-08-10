@@ -96,7 +96,7 @@
             // workProgressBar
             // 
             this.workProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.workProgressBar.Location = new System.Drawing.Point(0, 274);
+            this.workProgressBar.Location = new System.Drawing.Point(0, 270);
             this.workProgressBar.Margin = new System.Windows.Forms.Padding(4);
             this.workProgressBar.Name = "workProgressBar";
             this.workProgressBar.Size = new System.Drawing.Size(476, 25);
@@ -113,7 +113,7 @@
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(452, 255);
+            this.tabControl.Size = new System.Drawing.Size(452, 251);
             this.tabControl.TabIndex = 8;
             // 
             // tab1
@@ -123,7 +123,7 @@
             this.tab1.Location = new System.Drawing.Point(4, 30);
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Windows.Forms.Padding(3);
-            this.tab1.Size = new System.Drawing.Size(444, 221);
+            this.tab1.Size = new System.Drawing.Size(444, 217);
             this.tab1.TabIndex = 0;
             this.tab1.Text = "Log Creator";
             this.tab1.ToolTipText = "Create Class Ops logs";
@@ -181,7 +181,7 @@
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(3, 3);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(438, 215);
+            this.mainPanel.Size = new System.Drawing.Size(438, 211);
             this.mainPanel.TabIndex = 53;
             // 
             // comboBox2
@@ -340,18 +340,18 @@
             this.lineDivide1.AutoSize = true;
             this.lineDivide1.Location = new System.Drawing.Point(54, 18);
             this.lineDivide1.Name = "lineDivide1";
-            this.lineDivide1.Size = new System.Drawing.Size(280, 21);
+            this.lineDivide1.Size = new System.Drawing.Size(382, 21);
             this.lineDivide1.TabIndex = 83;
-            this.lineDivide1.Text = "---------------------------------------------";
+            this.lineDivide1.Text = "--------------------------------------------------------------";
             // 
             // lineDivide4
             // 
             this.lineDivide4.AutoSize = true;
             this.lineDivide4.Location = new System.Drawing.Point(54, 531);
             this.lineDivide4.Name = "lineDivide4";
-            this.lineDivide4.Size = new System.Drawing.Size(280, 21);
+            this.lineDivide4.Size = new System.Drawing.Size(382, 21);
             this.lineDivide4.TabIndex = 82;
-            this.lineDivide4.Text = "---------------------------------------------";
+            this.lineDivide4.Text = "--------------------------------------------------------------";
             this.lineDivide4.Visible = false;
             // 
             // lineDivide3
@@ -359,9 +359,9 @@
             this.lineDivide3.AutoSize = true;
             this.lineDivide3.Location = new System.Drawing.Point(54, 360);
             this.lineDivide3.Name = "lineDivide3";
-            this.lineDivide3.Size = new System.Drawing.Size(280, 21);
+            this.lineDivide3.Size = new System.Drawing.Size(382, 21);
             this.lineDivide3.TabIndex = 81;
-            this.lineDivide3.Text = "---------------------------------------------";
+            this.lineDivide3.Text = "--------------------------------------------------------------";
             this.lineDivide3.Visible = false;
             // 
             // lineDivide2
@@ -369,9 +369,9 @@
             this.lineDivide2.AutoSize = true;
             this.lineDivide2.Location = new System.Drawing.Point(54, 189);
             this.lineDivide2.Name = "lineDivide2";
-            this.lineDivide2.Size = new System.Drawing.Size(280, 21);
+            this.lineDivide2.Size = new System.Drawing.Size(382, 21);
             this.lineDivide2.TabIndex = 80;
-            this.lineDivide2.Text = "---------------------------------------------";
+            this.lineDivide2.Text = "--------------------------------------------------------------";
             this.lineDivide2.Visible = false;
             // 
             // toLabel4
@@ -622,7 +622,7 @@
             // createBTN
             // 
             this.createBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.createBTN.Location = new System.Drawing.Point(140, 180);
+            this.createBTN.Location = new System.Drawing.Point(140, 176);
             this.createBTN.Margin = new System.Windows.Forms.Padding(4);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(158, 31);
@@ -683,7 +683,7 @@
             this.tab2.Location = new System.Drawing.Point(4, 30);
             this.tab2.Name = "tab2";
             this.tab2.Padding = new System.Windows.Forms.Padding(3);
-            this.tab2.Size = new System.Drawing.Size(444, 221);
+            this.tab2.Size = new System.Drawing.Size(444, 217);
             this.tab2.TabIndex = 1;
             this.tab2.Text = "CLO Generator";
             this.tab2.ToolTipText = "Create a Crestron Logout sheet only";
@@ -691,7 +691,7 @@
             // selectTimeLabel
             // 
             this.selectTimeLabel.AutoSize = true;
-            this.selectTimeLabel.Location = new System.Drawing.Point(105, 40);
+            this.selectTimeLabel.Location = new System.Drawing.Point(155, 40);
             this.selectTimeLabel.Name = "selectTimeLabel";
             this.selectTimeLabel.Size = new System.Drawing.Size(123, 21);
             this.selectTimeLabel.TabIndex = 59;
@@ -700,7 +700,7 @@
             // createCLOBTN
             // 
             this.createCLOBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.createCLOBTN.Location = new System.Drawing.Point(93, 182);
+            this.createCLOBTN.Location = new System.Drawing.Point(143, 178);
             this.createCLOBTN.Name = "createCLOBTN";
             this.createCLOBTN.Size = new System.Drawing.Size(158, 31);
             this.createCLOBTN.TabIndex = 58;
@@ -711,7 +711,7 @@
             // toLabel
             // 
             this.toLabel.AutoSize = true;
-            this.toLabel.Location = new System.Drawing.Point(163, 68);
+            this.toLabel.Location = new System.Drawing.Point(213, 68);
             this.toLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.toLabel.Name = "toLabel";
             this.toLabel.Size = new System.Drawing.Size(24, 21);
@@ -721,7 +721,7 @@
             // cloGenEnd1
             // 
             this.cloGenEnd1.FormattingEnabled = true;
-            this.cloGenEnd1.Location = new System.Drawing.Point(192, 65);
+            this.cloGenEnd1.Location = new System.Drawing.Point(242, 65);
             this.cloGenEnd1.Margin = new System.Windows.Forms.Padding(4);
             this.cloGenEnd1.Name = "cloGenEnd1";
             this.cloGenEnd1.Size = new System.Drawing.Size(83, 29);
@@ -730,7 +730,7 @@
             // cloGenStart1
             // 
             this.cloGenStart1.FormattingEnabled = true;
-            this.cloGenStart1.Location = new System.Drawing.Point(69, 65);
+            this.cloGenStart1.Location = new System.Drawing.Point(119, 65);
             this.cloGenStart1.Margin = new System.Windows.Forms.Padding(4);
             this.cloGenStart1.Name = "cloGenStart1";
             this.cloGenStart1.Size = new System.Drawing.Size(82, 29);
@@ -744,7 +744,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(476, 299);
+            this.ClientSize = new System.Drawing.Size(476, 295);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.workProgressBar);
             this.Cursor = System.Windows.Forms.Cursors.Default;
