@@ -58,7 +58,7 @@ namespace ClassOpsLogCreator
             //Use a data table to store all the data and then apply it to the datagrid view
             DataTable dt = new DataTable();
             dt.Columns.Add("Task Type");
-            dt.Columns.Add("Date(MM/DD/YYYY)");
+            dt.Columns.Add("Date");
             dt.Columns.Add("Time");
             dt.Columns.Add("Building");
             dt.Columns.Add("Room");
@@ -90,6 +90,7 @@ namespace ClassOpsLogCreator
                                 else if ((Cnum - 1) == 2 && (!DateTime.TryParse((rangeArray.GetValue(Rnum, Cnum).ToString()), out temp)))
                                 {
                                     dr[Cnum - 2] = DateTime.FromOADate(double.Parse(rangeArray.GetValue(Rnum, Cnum).ToString())).ToString("M/dd/yyyy");
+                                    this.dateLabel.Text = DateTime.FromOADate(double.Parse(rangeArray.GetValue(Rnum, Cnum).ToString())).ToString("M/dd/yyyy");
                                 }
                                 //everything else
                                 else
@@ -106,7 +107,7 @@ namespace ClassOpsLogCreator
                     }
                 }
             }
-            
+            dt.Columns.Remove("Date");
             //Set the datagrid data source to the dataTable
             dataGridView1.DataSource = dt;
 
@@ -133,11 +134,11 @@ namespace ClassOpsLogCreator
 
             //Increase the width of the last columns
             dataGridView1.Columns[0].Width = 100;
-            dataGridView1.Columns[1].Width = 150;
+            dataGridView1.Columns[1].Width = 75;
             dataGridView1.Columns[2].Width = 75;
             dataGridView1.Columns[3].Width = 75;
-            dataGridView1.Columns[4].Width = 75;
-            dataGridView1.Columns[5].Width = 360;
+            dataGridView1.Columns[4].Width = 400;
+
 
             //Enable text wraping
             dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
@@ -165,17 +166,17 @@ namespace ClassOpsLogCreator
                 {
                     //Background
                     dataGridView1.Rows[i].Cells[0].Style.BackColor = redBackground;
-                    dataGridView1.Rows[i].Cells[5].Style.BackColor = redBackground;
+                    dataGridView1.Rows[i].Cells[4].Style.BackColor = redBackground;
                     //Font
                     dataGridView1.Rows[i].Cells[0].Style.ForeColor = redFont;
-                    dataGridView1.Rows[i].Cells[5].Style.ForeColor = redFont;
+                    dataGridView1.Rows[i].Cells[4].Style.ForeColor = redFont;
                 }
                 //Change the color of the neck mic tasks
-                if(dataGridView1.Rows[i].Cells[5].Value.ToString() == "Ensure neck mic goes back to equipment drawer.")
+                if(dataGridView1.Rows[i].Cells[4].Value.ToString() == "Ensure neck mic goes back to equipment drawer.")
                 {
                     //Background
                     dataGridView1.Rows[i].Cells[0].Style.BackColor = lightblue;
-                    dataGridView1.Rows[i].Cells[5].Style.BackColor = lightblue;
+                    dataGridView1.Rows[i].Cells[4].Style.BackColor = lightblue;
                 }
             }
 
@@ -204,6 +205,16 @@ namespace ClassOpsLogCreator
         private void printBTN_Click(object sender, EventArgs e)
         {
               
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void nameTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

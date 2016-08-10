@@ -30,23 +30,23 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
 
-        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
-        public readonly string JEANNINE_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
-        public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
-        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
-        public readonly string EXISTING_MASTER_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        /*public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
+        public readonly string JEANNINE_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
+        public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
 
         //TEST
         private readonly ConcurrentQueue<System.Array> _queue = new ConcurrentQueue<System.Array>();
@@ -636,7 +636,7 @@ namespace ClassOpsLogCreator
             worker.ReportProgress(95);
 
             //Gracefully close all instances
-            //Quit();
+            Quit();
 
             //Send report that we are all done 100%
             worker.ReportProgress(100);
@@ -745,6 +745,8 @@ namespace ClassOpsLogCreator
                 System.IO.File.Copy(EXISTING_MASTER_LOG, EXISTING_MASTER_LOG_COPY, true);
                 //Make a new copied file not hidden
                 System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Hidden);
+
+                Quit();
             }
         }
 
@@ -1012,10 +1014,12 @@ namespace ClassOpsLogCreator
                 //We open the log viewer at this point
                 Excel.Range last = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
                 Excel.Range logRange = existingMasterWorkSheet.get_Range("B" + (lastRowDestination + 2), "H" + (last.Row));
+
                 Excel.Range name = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 2));
                 string nameText = name.Cells.Value2.ToString();
 
                 existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + startTime + " to " + endTime;
+                
                 logRange.PrintPreview(true);
             }
 
@@ -1189,7 +1193,7 @@ namespace ClassOpsLogCreator
                 this.lineDivide2.Height = 2;
 
                 //Make them all visable
-                this.Height += 170;
+                this.Height += 95;
                 this.Top -= 72;
                 this.shift2Label.Visible = true;
                 this.lineDivide2.Visible = true;
@@ -1211,7 +1215,7 @@ namespace ClassOpsLogCreator
                 this.plusBTN1.Text = "+";
 
                 //Make them all visable
-                this.Height -= 170;
+                this.Height -= 95;
                 this.Top += 72;
                 this.shift2Label.Visible = false;
                 this.lineDivide2.Visible = false;
@@ -1251,7 +1255,7 @@ namespace ClassOpsLogCreator
                 this.lineDivide3.Height = 2;
 
                 //Make them all visable
-                this.Height += 170;
+                this.Height += 95;
                 this.Top -= 72;
                 this.shift3Label.Visible = true;
                 this.lineDivide3.Visible = true;
@@ -1275,7 +1279,7 @@ namespace ClassOpsLogCreator
                 this.plusBTN2.Text = "+";
 
                 //Make them all visable
-                this.Height -= 170;
+                this.Height -= 95;
                 this.Top += 72;
                 this.shift3Label.Visible = false;
                 this.lineDivide3.Visible = false;
@@ -1314,7 +1318,7 @@ namespace ClassOpsLogCreator
 
 
                 //Make them all visable
-                this.Height += 170;
+                this.Height += 100;
                 this.Top -= 72;
                 this.shift4Label.Visible = true;
                 this.lineDivide4.Visible = true;
@@ -1336,7 +1340,7 @@ namespace ClassOpsLogCreator
                 this.plusBTN3.Text = "+";
 
                 //Make them all visable
-                this.Height -= 170;
+                this.Height -= 100;
                 this.Top += 72;
                 this.shift4Label.Visible = false;
                 this.lineDivide4.Visible = false;
