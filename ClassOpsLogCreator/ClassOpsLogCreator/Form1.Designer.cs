@@ -78,13 +78,13 @@
             this.shiftTime1 = new System.Windows.Forms.Label();
             this.numberOfShiftsCombo1 = new System.Windows.Forms.ComboBox();
             this.startHour1 = new System.Windows.Forms.ComboBox();
-            this.tab2 = new System.Windows.Forms.TabPage();
-            this.selectTimeLabel = new System.Windows.Forms.Label();
-            this.createCLOBTN = new System.Windows.Forms.Button();
-            this.toLabel = new System.Windows.Forms.Label();
-            this.cloGenEnd1 = new System.Windows.Forms.ComboBox();
-            this.cloGenStart1 = new System.Windows.Forms.ComboBox();
             this.mainToolTop = new System.Windows.Forms.ToolTip(this.components);
+            this.cloGenStart1 = new System.Windows.Forms.ComboBox();
+            this.cloGenEnd1 = new System.Windows.Forms.ComboBox();
+            this.toLabel = new System.Windows.Forms.Label();
+            this.createCLOBTN = new System.Windows.Forms.Button();
+            this.selectTimeLabel = new System.Windows.Forms.Label();
+            this.tab2 = new System.Windows.Forms.TabPage();
             this.tabControl.SuspendLayout();
             this.tab1.SuspendLayout();
             this.mainPanel.SuspendLayout();
@@ -99,6 +99,7 @@
             this.workProgressBar.Name = "workProgressBar";
             this.workProgressBar.Size = new System.Drawing.Size(701, 25);
             this.workProgressBar.TabIndex = 7;
+            this.workProgressBar.Visible = false;
             // 
             // tabControl
             // 
@@ -654,6 +655,57 @@
             this.startHour1.TabIndex = 45;
             this.mainToolTop.SetToolTip(this.startHour1, "Start time of the shift");
             // 
+            // cloGenStart1
+            // 
+            this.cloGenStart1.FormattingEnabled = true;
+            this.cloGenStart1.Location = new System.Drawing.Point(231, 65);
+            this.cloGenStart1.Margin = new System.Windows.Forms.Padding(4);
+            this.cloGenStart1.Name = "cloGenStart1";
+            this.cloGenStart1.Size = new System.Drawing.Size(82, 29);
+            this.cloGenStart1.TabIndex = 53;
+            this.cloGenStart1.Visible = false;
+            // 
+            // cloGenEnd1
+            // 
+            this.cloGenEnd1.FormattingEnabled = true;
+            this.cloGenEnd1.Location = new System.Drawing.Point(354, 65);
+            this.cloGenEnd1.Margin = new System.Windows.Forms.Padding(4);
+            this.cloGenEnd1.Name = "cloGenEnd1";
+            this.cloGenEnd1.Size = new System.Drawing.Size(83, 29);
+            this.cloGenEnd1.TabIndex = 55;
+            this.cloGenEnd1.Visible = false;
+            // 
+            // toLabel
+            // 
+            this.toLabel.AutoSize = true;
+            this.toLabel.Location = new System.Drawing.Point(325, 68);
+            this.toLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.toLabel.Name = "toLabel";
+            this.toLabel.Size = new System.Drawing.Size(0, 21);
+            this.toLabel.TabIndex = 57;
+            this.toLabel.Visible = false;
+            // 
+            // createCLOBTN
+            // 
+            this.createCLOBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.createCLOBTN.Enabled = false;
+            this.createCLOBTN.Location = new System.Drawing.Point(255, 125);
+            this.createCLOBTN.Name = "createCLOBTN";
+            this.createCLOBTN.Size = new System.Drawing.Size(158, 31);
+            this.createCLOBTN.TabIndex = 58;
+            this.createCLOBTN.Text = "Create CLO log";
+            this.createCLOBTN.UseVisualStyleBackColor = true;
+            this.createCLOBTN.Click += new System.EventHandler(this.createCLOBTN_Click);
+            // 
+            // selectTimeLabel
+            // 
+            this.selectTimeLabel.AutoSize = true;
+            this.selectTimeLabel.Location = new System.Drawing.Point(267, 40);
+            this.selectTimeLabel.Name = "selectTimeLabel";
+            this.selectTimeLabel.Size = new System.Drawing.Size(0, 21);
+            this.selectTimeLabel.TabIndex = 59;
+            this.selectTimeLabel.Visible = false;
+            // 
             // tab2
             // 
             this.tab2.BackColor = System.Drawing.SystemColors.Menu;
@@ -669,59 +721,6 @@
             this.tab2.TabIndex = 1;
             this.tab2.Text = "CLO Generator";
             this.tab2.ToolTipText = "Create a Crestron Logout sheet only";
-            // 
-            // selectTimeLabel
-            // 
-            this.selectTimeLabel.AutoSize = true;
-            this.selectTimeLabel.Location = new System.Drawing.Point(267, 40);
-            this.selectTimeLabel.Name = "selectTimeLabel";
-            this.selectTimeLabel.Size = new System.Drawing.Size(124, 21);
-            this.selectTimeLabel.TabIndex = 59;
-            this.selectTimeLabel.Text = "Set a Valid Time:";
-            this.selectTimeLabel.Visible = false;
-            // 
-            // createCLOBTN
-            // 
-            this.createCLOBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.createCLOBTN.Enabled = false;
-            this.createCLOBTN.Location = new System.Drawing.Point(255, 125);
-            this.createCLOBTN.Name = "createCLOBTN";
-            this.createCLOBTN.Size = new System.Drawing.Size(158, 31);
-            this.createCLOBTN.TabIndex = 58;
-            this.createCLOBTN.Text = "Create CLO log";
-            this.createCLOBTN.UseVisualStyleBackColor = true;
-            this.createCLOBTN.Click += new System.EventHandler(this.createCLOBTN_Click);
-            // 
-            // toLabel
-            // 
-            this.toLabel.AutoSize = true;
-            this.toLabel.Location = new System.Drawing.Point(325, 68);
-            this.toLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.toLabel.Name = "toLabel";
-            this.toLabel.Size = new System.Drawing.Size(24, 21);
-            this.toLabel.TabIndex = 57;
-            this.toLabel.Text = "to";
-            this.toLabel.Visible = false;
-            // 
-            // cloGenEnd1
-            // 
-            this.cloGenEnd1.FormattingEnabled = true;
-            this.cloGenEnd1.Location = new System.Drawing.Point(354, 65);
-            this.cloGenEnd1.Margin = new System.Windows.Forms.Padding(4);
-            this.cloGenEnd1.Name = "cloGenEnd1";
-            this.cloGenEnd1.Size = new System.Drawing.Size(83, 29);
-            this.cloGenEnd1.TabIndex = 55;
-            this.cloGenEnd1.Visible = false;
-            // 
-            // cloGenStart1
-            // 
-            this.cloGenStart1.FormattingEnabled = true;
-            this.cloGenStart1.Location = new System.Drawing.Point(231, 65);
-            this.cloGenStart1.Margin = new System.Windows.Forms.Padding(4);
-            this.cloGenStart1.Name = "cloGenStart1";
-            this.cloGenStart1.Size = new System.Drawing.Size(82, 29);
-            this.cloGenStart1.TabIndex = 53;
-            this.cloGenStart1.Visible = false;
             // 
             // LogCreator
             // 
@@ -768,12 +767,6 @@
         private System.Windows.Forms.ComboBox numberOfShiftsCombo1;
         private System.Windows.Forms.ComboBox startHour1;
         private System.Windows.Forms.Button createBTN;
-        private System.Windows.Forms.TabPage tab2;
-        private System.Windows.Forms.Label toLabel;
-        private System.Windows.Forms.ComboBox cloGenEnd1;
-        private System.Windows.Forms.ComboBox cloGenStart1;
-        private System.Windows.Forms.Button createCLOBTN;
-        private System.Windows.Forms.Label selectTimeLabel;
         private System.Windows.Forms.Button plusBTN1;
         private System.Windows.Forms.Button plusBTN2;
         private System.Windows.Forms.Label toLabel2;
@@ -812,6 +805,12 @@
         private System.Windows.Forms.ComboBox am_pmCombo3_1;
         private System.Windows.Forms.ComboBox am_pmCombo2_2;
         private System.Windows.Forms.ComboBox am_pmCombo2_1;
+        private System.Windows.Forms.TabPage tab2;
+        private System.Windows.Forms.Label selectTimeLabel;
+        private System.Windows.Forms.Button createCLOBTN;
+        private System.Windows.Forms.Label toLabel;
+        private System.Windows.Forms.ComboBox cloGenEnd1;
+        private System.Windows.Forms.ComboBox cloGenStart1;
     }
 }
 

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ClassOpsLogCreator - BETA")]
+[assembly: AssemblyTitle("CLog - BETA")]
 [assembly: AssemblyDescription("This applicaion is for UIT Client Services to help with Classroom Operations")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jhan Perera")]
-[assembly: AssemblyProduct("ClassOpsLogCreator")]
+[assembly: AssemblyProduct("CLog")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("Jhan_P")]
 [assembly: AssemblyCulture("")]

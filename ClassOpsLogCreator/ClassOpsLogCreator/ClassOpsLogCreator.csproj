@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClassOpsLogCreator</RootNamespace>
-    <AssemblyName>ClassOpsLogCreator</AssemblyName>
+    <AssemblyName>CLog</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -59,7 +59,7 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>xxx016_512_wcJ_icon.ico</ApplicationIcon>
+    <ApplicationIcon>green_c_md_VTs_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MetroFramework, Version=1.3.5.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
@@ -214,6 +214,7 @@
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="green_c_md_VTs_icon.ico" />
     <Content Include="xxx016_512_HTk_icon.ico" />
     <Content Include="xxx016_512_KXk_icon.ico" />
     <Content Include="xxx016_512_wcJ_icon.ico" />
