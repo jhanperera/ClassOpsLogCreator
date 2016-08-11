@@ -111,39 +111,33 @@ namespace ClassOpsLogCreator
             //fill the combo boxes
             for (int i = 1; i <= 12; i++)
             {
-                //Tab 1 Select 1
+                //Select 1
                 this.startHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
                 this.endHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
-                //Tab 1 Select 2
+                //Select 2
                 this.startHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
                 this.endHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
-                //Tab 1 Select 3
+                //Select 3
                 this.startHour3.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
                 this.endHour3.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
-                //Tab 1 Select 4
+                //Select 4
                 this.startHour4.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
                 this.endHour4.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
-                //Tab 2
-                this.cloGenStart1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
-                this.cloGenEnd1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = "00" });
                 //15 minute intervals
                 for (int k = 15; k <= 45; k += 15)
                 {
-                    //Tab 1 Select 1
+                    //Select 1
                     this.startHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
                     this.endHour1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
-                    //Tab 1 Select 2
+                    //Select 2
                     this.startHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
                     this.endHour2.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
-                    //Tab 1 Select 3
+                    //Select 3
                     this.startHour3.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
                     this.endHour3.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
-                    //Tab 1 Select 4
+                    //Select 4
                     this.startHour4.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
                     this.endHour4.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
-                    //Tab 2
-                    this.cloGenStart1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
-                    this.cloGenEnd1.Items.Add(new TimeItem { Hour = i.ToString(), Minute = k.ToString() });
                 }
             }
 
@@ -156,31 +150,27 @@ namespace ClassOpsLogCreator
                 this.numberOfShiftsCombo4.Items.Add(j.ToString());
             }
 
-            //Fill the am/pm selector for tab 1
+            //Fill the am/pm selector
             this.am_pmCombo1_1.Items.Add("AM");
             this.am_pmCombo1_1.Items.Add("PM");
             this.am_pmCombo1_2.Items.Add("AM");
             this.am_pmCombo1_2.Items.Add("PM");
-            //Tab 1 Select 2
+            //Select 2
             this.am_pmCombo2_1.Items.Add("AM");
             this.am_pmCombo2_1.Items.Add("PM");
             this.am_pmCombo2_2.Items.Add("AM");
             this.am_pmCombo2_2.Items.Add("PM");
-            //Tab 1 Select 3
+            //Select 3
             this.am_pmCombo3_1.Items.Add("AM");
             this.am_pmCombo3_1.Items.Add("PM");
             this.am_pmCombo3_2.Items.Add("AM");
             this.am_pmCombo3_2.Items.Add("PM");
-            //Tab 1 Select 4
+            //Select 4
             this.am_pmCombo4_1.Items.Add("AM");
             this.am_pmCombo4_1.Items.Add("PM");
             this.am_pmCombo4_2.Items.Add("AM");
             this.am_pmCombo4_2.Items.Add("PM");
-            /*         //Fill the am/pm selector for tab 2
-            -this.cloAm_pmCombo1.Items.Add("AM");
-            -this.cloAm_pmCombo1.Items.Add("PM");
-            -this.cloAm_pmCombo2.Items.Add("AM");
-            -this.cloAm_pmCombo2.Items.Add("PM");*/
+
 
             //set the default view for the combo for tab 1
             this.startHour1.SelectedIndex = -1;
@@ -189,66 +179,54 @@ namespace ClassOpsLogCreator
             this.am_pmCombo1_1.SelectedIndex = 1;
             this.am_pmCombo1_2.SelectedIndex = 1;
 
-            //Tab 1 Select 2
+            //Select 2
             this.startHour2.SelectedIndex = -1;
             this.endHour2.SelectedIndex = -1;
             this.numberOfShiftsCombo2.SelectedIndex = 0;
             this.am_pmCombo2_1.SelectedIndex = 1;
             this.am_pmCombo2_2.SelectedIndex = 1;
 
-            //Tab 1 Select 3
+            //Select 3
             this.startHour3.SelectedIndex = -1;
             this.endHour3.SelectedIndex = -1;
             this.numberOfShiftsCombo3.SelectedIndex = 0;
             this.am_pmCombo3_1.SelectedIndex = 1;
             this.am_pmCombo3_2.SelectedIndex = 1;
 
-            //Tab 1 Select 4
+            //Select 4
             this.startHour4.SelectedIndex = -1;
             this.endHour4.SelectedIndex = -1;
             this.numberOfShiftsCombo4.SelectedIndex = 0;
             this.am_pmCombo4_1.SelectedIndex = 1;
             this.am_pmCombo4_2.SelectedIndex = 1;
 
-            ////set the default view for the combo for tab 1
-            this.cloGenStart1.SelectedIndex = -1;
-            this.cloGenEnd1.SelectedIndex = -1;
-            //this.cloAm_pmCombo1.SelectedIndex = 1;
-            //this.cloAm_pmCombo2.SelectedIndex = 1;
-
-            //Make the combo box read only for tab 1 - select 1
+            //Make the combo box read only for  select 1
             this.startHour1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.endHour1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.numberOfShiftsCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo1_1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo1_2.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            //Make the combo box read only for tab 1 - select 2
+            //Make the combo box read only for select 2
             this.startHour2.DropDownStyle = ComboBoxStyle.DropDownList;
             this.endHour2.DropDownStyle = ComboBoxStyle.DropDownList;
             this.numberOfShiftsCombo2.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo2_1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo2_2.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            //Make the combo box read only for tab 1 - select 3
+            //Make the combo box read only for select 3
             this.startHour3.DropDownStyle = ComboBoxStyle.DropDownList;
             this.endHour3.DropDownStyle = ComboBoxStyle.DropDownList;
             this.numberOfShiftsCombo3.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo3_1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo3_2.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            //Make the combo box read only for tab 1 - select 4
+            //Make the combo box read only for select 4
             this.startHour4.DropDownStyle = ComboBoxStyle.DropDownList;
             this.endHour4.DropDownStyle = ComboBoxStyle.DropDownList;
             this.numberOfShiftsCombo4.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo4_1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.am_pmCombo4_2.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            //Make the combo box read only for tab 2
-            this.cloGenStart1.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cloGenEnd1.DropDownStyle = ComboBoxStyle.DropDownList;
-            //this.cloAm_pmCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
-            //this.cloAm_pmCombo2.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         /// <summary>
@@ -256,7 +234,7 @@ namespace ClassOpsLogCreator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void createBTN_Click_1(object sender, EventArgs e)
+        private void createBTN_Click(object sender, EventArgs e)
         {
             /**************************************INPUT VALIDATION***********************/
             //If the first plus button is clicked
@@ -456,58 +434,7 @@ namespace ClassOpsLogCreator
             }
         }
 
-        /// <summary>
-        /// When the user clicks "Create CLO log" on tab 2
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void createCLOBTN_Click(object sender, EventArgs e)
-        {
-            //Get the times set by the combo box
-            startTimeFromCombo1 = this.cloGenStart1.GetItemText(this.cloGenStart1.SelectedItem);
-            endTimeFromCombo1 = this.cloGenEnd1.GetItemText(this.cloGenEnd1.SelectedItem);
-
-            //Input Error checking!
-            if (startTimeFromCombo1.Equals("") || startTimeFromCombo1 == null ||
-                endTimeFromCombo1.Equals("") || endTimeFromCombo1 == null)
-            {
-                MessageBox.Show("Valid time must be set.",
-                                 "Problem...",
-                                  MessageBoxButtons.OK,
-                                  MessageBoxIcon.Exclamation,
-                                  MessageBoxDefaultButton.Button1);
-                return;
-            }
-            else if (Convert.ToDateTime(startTimeFromCombo1) >= Convert.ToDateTime(endTimeFromCombo1))
-            {
-                MessageBox.Show("Valid time must be set.",
-                                 "Problem...",
-                                  MessageBoxButtons.OK,
-                                  MessageBoxIcon.Exclamation,
-                                  MessageBoxDefaultButton.Button1);
-                return;
-            }
-
-            bw = new BackgroundWorker();
-            //Initialize the Background worker and report progress
-            bw.WorkerReportsProgress = true;
-            //Add Work to the worker thread
-            bw.DoWork += new DoWorkEventHandler(Bw_DoWorkTab2);
-            //Get progress changes
-            bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
-            //Get work completed events
-            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompletedTab2);
-            //Do all the work
-            if (bw.IsBusy != true)
-            {
-                //Disable the button
-                createCLOBTN.Enabled = false;
-                //Run the work
-                bw.RunWorkerAsync();
-            }
-
-        }
-
+        
         /// <summary>
         /// All log (tab1) work is done in this method
         /// </summary>
@@ -645,49 +572,6 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// All clo (tab2) work is done in this method
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Bw_DoWorkTab2(object sender, DoWorkEventArgs e)
-        {
-            var worker = sender as BackgroundWorker;
-            //We are going to only open the clo with set start times and end times
-            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo1, endTimeFromCombo1);
-
-            string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
-
-            //Create the new Excel file where we will store all the new information
-            logoutMaster = new Excel.Application();
-            logoutMasterWorkBook = logoutMaster.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
-            logoutMasterWorkSheet = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[1];
-
-            //Get the three logs (Empty logs for this purpos)
-            string[,] JInstruction = new string[1, 1];
-            string[,] DInstruction = new string[1, 1];
-            string[,] RInstruction = new string[1, 1];
-
-            //write all the data to the excel file
-            this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, classRoomTimeLogs.getLogOutArrayCount(),
-                                                                         JInstruction, DInstruction, RInstruction, false, startTimeFromCombo1, endTimeFromCombo1);
-            //Format the sheet for easy reading
-            Excel.Range G_range = logoutMasterWorkSheet.get_Range("G2", "G" + (classRoomTimeLogs.getLogOutArrayCount() + 1));
-            G_range.ColumnWidth = 49;
-
-            //Save to desktop
-            logoutMaster.DisplayAlerts = false;
-            logoutMasterWorkBook.SaveAs(CLO_GENERATED_LOG);
-
-            //update progress bar
-            worker.ReportProgress(100);
-
-            //Clean up and close all instances
-            Quit();
-
-            return;
-        }
-
-        /// <summary>
         /// Update the progress bar 
         /// </summary>
         /// <param name="sender"></param>
@@ -747,53 +631,6 @@ namespace ClassOpsLogCreator
                 System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Hidden);
 
                 Quit();
-            }
-        }
-
-        /// <summary>
-        /// This event handler deals with the results of the
-        /// background operation for tab2 work
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void bw_RunWorkerCompletedTab2(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                MessageBox.Show(e.Error.Message, "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.workProgressBar.Value = 0;
-                this.workProgressBar.Refresh();
-                Quit();
-            }
-            else if (e.Cancelled)
-            {
-                // Next, handle the case where the user canceled 
-                // the operation.
-                // Note that due to a race condition in 
-                // the DoWork event handler, the Cancelled
-                // flag may not have been set, even though
-                // CancelAsync was called.
-                this.workProgressBar.Value = 0;
-                this.workProgressBar.Refresh();
-                Quit();
-            }
-            else
-            {
-                // Finally, handle the case where the operation 
-                // succeeded.
-                workDone = true;
-                Quit();
-            }
-            //Enable the button
-            createCLOBTN.Enabled = true;
-
-            //Open the CLO file
-            if (workDone)
-            {
-                Excel.Application excel = new Excel.Application();
-                Excel.Workbook wb = excel.Workbooks.Open(CLO_GENERATED_LOG);
-                excel.Visible = true;
             }
         }
 
@@ -1178,7 +1015,7 @@ namespace ClassOpsLogCreator
         /// </summary>
         /// <param name="sender">a sender object (A controller)</param>
         /// <param name="e"> a helper argument</param>
-        private void plusBTN1_Click_1(object sender, EventArgs e)
+        private void plusBTN1_Click(object sender, EventArgs e)
         {
             //initalize all components
 
@@ -1238,7 +1075,7 @@ namespace ClassOpsLogCreator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"> a helper argument</param>
-        private void plusBTN2_Click(object sender, EventArgs e)
+        private void plusBTN2_Click_1(object sender, EventArgs e)
         {
             //initalize all components
 
@@ -1296,13 +1133,12 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// When the third + button is clicked
+        /// When the second + button is clicked
         /// 
         /// Make the new controls apear and extend the frame
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void plusBTN3_Click(object sender, EventArgs e)
+        private void plusBTN3_Click_1(object sender, EventArgs e)
         {
             if (!plusClicked3)
             {

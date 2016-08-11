@@ -31,8 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogCreator));
             this.workProgressBar = new System.Windows.Forms.ProgressBar();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tab1 = new System.Windows.Forms.TabPage();
+            this.mainToolTop = new System.Windows.Forms.ToolTip(this.components);
             this.mainPanel = new System.Windows.Forms.Panel();
             this.am_pmCombo4_2 = new System.Windows.Forms.ComboBox();
             this.am_pmCombo4_1 = new System.Windows.Forms.ComboBox();
@@ -78,54 +77,18 @@
             this.shiftTime1 = new System.Windows.Forms.Label();
             this.numberOfShiftsCombo1 = new System.Windows.Forms.ComboBox();
             this.startHour1 = new System.Windows.Forms.ComboBox();
-            this.tab2 = new System.Windows.Forms.TabPage();
-            this.selectTimeLabel = new System.Windows.Forms.Label();
-            this.createCLOBTN = new System.Windows.Forms.Button();
-            this.toLabel = new System.Windows.Forms.Label();
-            this.cloGenEnd1 = new System.Windows.Forms.ComboBox();
-            this.cloGenStart1 = new System.Windows.Forms.ComboBox();
-            this.mainToolTop = new System.Windows.Forms.ToolTip(this.components);
-            this.tabControl.SuspendLayout();
-            this.tab1.SuspendLayout();
             this.mainPanel.SuspendLayout();
-            this.tab2.SuspendLayout();
             this.SuspendLayout();
             // 
             // workProgressBar
             // 
             this.workProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.workProgressBar.Location = new System.Drawing.Point(0, 215);
+            this.workProgressBar.Location = new System.Drawing.Point(0, 156);
             this.workProgressBar.Margin = new System.Windows.Forms.Padding(4);
             this.workProgressBar.Name = "workProgressBar";
-            this.workProgressBar.Size = new System.Drawing.Size(701, 25);
+            this.workProgressBar.Size = new System.Drawing.Size(670, 25);
             this.workProgressBar.TabIndex = 7;
             this.workProgressBar.Visible = false;
-            // 
-            // tabControl
-            // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Controls.Add(this.tab1);
-            this.tabControl.Controls.Add(this.tab2);
-            this.tabControl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl.Location = new System.Drawing.Point(12, 12);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(677, 196);
-            this.tabControl.TabIndex = 8;
-            // 
-            // tab1
-            // 
-            this.tab1.BackColor = System.Drawing.SystemColors.Menu;
-            this.tab1.Controls.Add(this.mainPanel);
-            this.tab1.Location = new System.Drawing.Point(4, 30);
-            this.tab1.Name = "tab1";
-            this.tab1.Padding = new System.Windows.Forms.Padding(3);
-            this.tab1.Size = new System.Drawing.Size(669, 162);
-            this.tab1.TabIndex = 0;
-            this.tab1.Text = "Log Creator";
-            this.tab1.ToolTipText = "Create Class Ops logs";
             // 
             // mainPanel
             // 
@@ -176,10 +139,10 @@
             this.mainPanel.Controls.Add(this.numberOfShiftsCombo1);
             this.mainPanel.Controls.Add(this.startHour1);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanel.Location = new System.Drawing.Point(3, 3);
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(663, 156);
-            this.mainPanel.TabIndex = 53;
+            this.mainPanel.Size = new System.Drawing.Size(670, 156);
+            this.mainPanel.TabIndex = 54;
             // 
             // am_pmCombo4_2
             // 
@@ -187,7 +150,7 @@
             this.am_pmCombo4_2.Location = new System.Drawing.Point(338, 354);
             this.am_pmCombo4_2.Margin = new System.Windows.Forms.Padding(4);
             this.am_pmCombo4_2.Name = "am_pmCombo4_2";
-            this.am_pmCombo4_2.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo4_2.Size = new System.Drawing.Size(47, 24);
             this.am_pmCombo4_2.TabIndex = 95;
             this.mainToolTop.SetToolTip(this.am_pmCombo4_2, "Start time of the shift");
             this.am_pmCombo4_2.Visible = false;
@@ -198,7 +161,7 @@
             this.am_pmCombo4_1.Location = new System.Drawing.Point(160, 354);
             this.am_pmCombo4_1.Margin = new System.Windows.Forms.Padding(4);
             this.am_pmCombo4_1.Name = "am_pmCombo4_1";
-            this.am_pmCombo4_1.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo4_1.Size = new System.Drawing.Size(47, 24);
             this.am_pmCombo4_1.TabIndex = 94;
             this.mainToolTop.SetToolTip(this.am_pmCombo4_1, "Start time of the shift");
             this.am_pmCombo4_1.Visible = false;
@@ -209,7 +172,7 @@
             this.am_pmCombo3_2.Location = new System.Drawing.Point(338, 253);
             this.am_pmCombo3_2.Margin = new System.Windows.Forms.Padding(4);
             this.am_pmCombo3_2.Name = "am_pmCombo3_2";
-            this.am_pmCombo3_2.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo3_2.Size = new System.Drawing.Size(47, 24);
             this.am_pmCombo3_2.TabIndex = 93;
             this.mainToolTop.SetToolTip(this.am_pmCombo3_2, "Start time of the shift");
             this.am_pmCombo3_2.Visible = false;
@@ -220,7 +183,7 @@
             this.am_pmCombo3_1.Location = new System.Drawing.Point(159, 253);
             this.am_pmCombo3_1.Margin = new System.Windows.Forms.Padding(4);
             this.am_pmCombo3_1.Name = "am_pmCombo3_1";
-            this.am_pmCombo3_1.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo3_1.Size = new System.Drawing.Size(47, 24);
             this.am_pmCombo3_1.TabIndex = 92;
             this.mainToolTop.SetToolTip(this.am_pmCombo3_1, "Start time of the shift");
             this.am_pmCombo3_1.Visible = false;
@@ -231,7 +194,7 @@
             this.am_pmCombo2_2.Location = new System.Drawing.Point(338, 154);
             this.am_pmCombo2_2.Margin = new System.Windows.Forms.Padding(4);
             this.am_pmCombo2_2.Name = "am_pmCombo2_2";
-            this.am_pmCombo2_2.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo2_2.Size = new System.Drawing.Size(47, 24);
             this.am_pmCombo2_2.TabIndex = 91;
             this.mainToolTop.SetToolTip(this.am_pmCombo2_2, "Start time of the shift");
             this.am_pmCombo2_2.Visible = false;
@@ -242,7 +205,7 @@
             this.am_pmCombo2_1.Location = new System.Drawing.Point(160, 154);
             this.am_pmCombo2_1.Margin = new System.Windows.Forms.Padding(4);
             this.am_pmCombo2_1.Name = "am_pmCombo2_1";
-            this.am_pmCombo2_1.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo2_1.Size = new System.Drawing.Size(47, 24);
             this.am_pmCombo2_1.TabIndex = 90;
             this.mainToolTop.SetToolTip(this.am_pmCombo2_1, "Start time of the shift");
             this.am_pmCombo2_1.Visible = false;
@@ -253,7 +216,7 @@
             this.am_pmCombo1_2.Location = new System.Drawing.Point(338, 62);
             this.am_pmCombo1_2.Margin = new System.Windows.Forms.Padding(4);
             this.am_pmCombo1_2.Name = "am_pmCombo1_2";
-            this.am_pmCombo1_2.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo1_2.Size = new System.Drawing.Size(47, 24);
             this.am_pmCombo1_2.TabIndex = 89;
             this.mainToolTop.SetToolTip(this.am_pmCombo1_2, "Start time of the shift");
             // 
@@ -263,7 +226,7 @@
             this.am_pmCombo1_1.Location = new System.Drawing.Point(160, 62);
             this.am_pmCombo1_1.Margin = new System.Windows.Forms.Padding(4);
             this.am_pmCombo1_1.Name = "am_pmCombo1_1";
-            this.am_pmCombo1_1.Size = new System.Drawing.Size(47, 29);
+            this.am_pmCombo1_1.Size = new System.Drawing.Size(47, 24);
             this.am_pmCombo1_1.TabIndex = 88;
             this.mainToolTop.SetToolTip(this.am_pmCombo1_1, "Start time of the shift");
             // 
@@ -310,7 +273,7 @@
             this.shift1Label.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.shift1Label.Location = new System.Drawing.Point(9, 9);
             this.shift1Label.Name = "shift1Label";
-            this.shift1Label.Size = new System.Drawing.Size(44, 17);
+            this.shift1Label.Size = new System.Drawing.Size(46, 17);
             this.shift1Label.TabIndex = 84;
             this.shift1Label.Text = "Shift 1";
             // 
@@ -319,20 +282,20 @@
             this.lineDivide1.AutoSize = true;
             this.lineDivide1.Location = new System.Drawing.Point(54, 18);
             this.lineDivide1.Name = "lineDivide1";
-            this.lineDivide1.Size = new System.Drawing.Size(604, 21);
+            this.lineDivide1.Size = new System.Drawing.Size(613, 16);
             this.lineDivide1.TabIndex = 83;
             this.lineDivide1.Text = "---------------------------------------------------------------------------------" +
-    "------------------";
+    "----------------------------------------";
             // 
             // lineDivide4
             // 
             this.lineDivide4.AutoSize = true;
             this.lineDivide4.Location = new System.Drawing.Point(54, 310);
             this.lineDivide4.Name = "lineDivide4";
-            this.lineDivide4.Size = new System.Drawing.Size(604, 21);
+            this.lineDivide4.Size = new System.Drawing.Size(613, 16);
             this.lineDivide4.TabIndex = 82;
             this.lineDivide4.Text = "---------------------------------------------------------------------------------" +
-    "------------------";
+    "----------------------------------------";
             this.lineDivide4.Visible = false;
             // 
             // lineDivide3
@@ -340,10 +303,10 @@
             this.lineDivide3.AutoSize = true;
             this.lineDivide3.Location = new System.Drawing.Point(54, 209);
             this.lineDivide3.Name = "lineDivide3";
-            this.lineDivide3.Size = new System.Drawing.Size(604, 21);
+            this.lineDivide3.Size = new System.Drawing.Size(613, 16);
             this.lineDivide3.TabIndex = 81;
             this.lineDivide3.Text = "---------------------------------------------------------------------------------" +
-    "------------------";
+    "----------------------------------------";
             this.lineDivide3.Visible = false;
             // 
             // lineDivide2
@@ -351,10 +314,10 @@
             this.lineDivide2.AutoSize = true;
             this.lineDivide2.Location = new System.Drawing.Point(54, 110);
             this.lineDivide2.Name = "lineDivide2";
-            this.lineDivide2.Size = new System.Drawing.Size(604, 21);
+            this.lineDivide2.Size = new System.Drawing.Size(613, 16);
             this.lineDivide2.TabIndex = 80;
             this.lineDivide2.Text = "---------------------------------------------------------------------------------" +
-    "------------------";
+    "----------------------------------------";
             this.lineDivide2.Visible = false;
             // 
             // toLabel4
@@ -363,7 +326,7 @@
             this.toLabel4.Location = new System.Drawing.Point(215, 357);
             this.toLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.toLabel4.Name = "toLabel4";
-            this.toLabel4.Size = new System.Drawing.Size(24, 21);
+            this.toLabel4.Size = new System.Drawing.Size(21, 16);
             this.toLabel4.TabIndex = 79;
             this.toLabel4.Text = "to";
             this.toLabel4.Visible = false;
@@ -374,7 +337,7 @@
             this.endHour4.Location = new System.Drawing.Point(247, 354);
             this.endHour4.Margin = new System.Windows.Forms.Padding(4);
             this.endHour4.Name = "endHour4";
-            this.endHour4.Size = new System.Drawing.Size(83, 29);
+            this.endHour4.Size = new System.Drawing.Size(83, 24);
             this.endHour4.TabIndex = 77;
             this.endHour4.Visible = false;
             // 
@@ -384,7 +347,7 @@
             this.numberOfShiftsLabel4.Location = new System.Drawing.Point(412, 331);
             this.numberOfShiftsLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.numberOfShiftsLabel4.Name = "numberOfShiftsLabel4";
-            this.numberOfShiftsLabel4.Size = new System.Drawing.Size(168, 21);
+            this.numberOfShiftsLabel4.Size = new System.Drawing.Size(164, 16);
             this.numberOfShiftsLabel4.TabIndex = 76;
             this.numberOfShiftsLabel4.Text = "Number of employees:";
             this.numberOfShiftsLabel4.Visible = false;
@@ -395,7 +358,7 @@
             this.shiftTime4.Location = new System.Drawing.Point(70, 331);
             this.shiftTime4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.shiftTime4.Name = "shiftTime4";
-            this.shiftTime4.Size = new System.Drawing.Size(176, 21);
+            this.shiftTime4.Size = new System.Drawing.Size(180, 16);
             this.shiftTime4.TabIndex = 75;
             this.shiftTime4.Text = "Please select shift times:";
             this.shiftTime4.Visible = false;
@@ -406,7 +369,7 @@
             this.numberOfShiftsCombo4.Location = new System.Drawing.Point(410, 354);
             this.numberOfShiftsCombo4.Margin = new System.Windows.Forms.Padding(4);
             this.numberOfShiftsCombo4.Name = "numberOfShiftsCombo4";
-            this.numberOfShiftsCombo4.Size = new System.Drawing.Size(168, 29);
+            this.numberOfShiftsCombo4.Size = new System.Drawing.Size(168, 24);
             this.numberOfShiftsCombo4.TabIndex = 74;
             this.numberOfShiftsCombo4.Visible = false;
             // 
@@ -416,7 +379,7 @@
             this.startHour4.Location = new System.Drawing.Point(70, 354);
             this.startHour4.Margin = new System.Windows.Forms.Padding(4);
             this.startHour4.Name = "startHour4";
-            this.startHour4.Size = new System.Drawing.Size(82, 29);
+            this.startHour4.Size = new System.Drawing.Size(82, 24);
             this.startHour4.TabIndex = 72;
             this.startHour4.Visible = false;
             // 
@@ -430,7 +393,7 @@
             this.plusBTN3.Text = "+";
             this.plusBTN3.UseVisualStyleBackColor = true;
             this.plusBTN3.Visible = false;
-            this.plusBTN3.Click += new System.EventHandler(this.plusBTN3_Click);
+            this.plusBTN3.Click += new System.EventHandler(this.plusBTN3_Click_1);
             // 
             // toLabel3
             // 
@@ -438,7 +401,7 @@
             this.toLabel3.Location = new System.Drawing.Point(215, 256);
             this.toLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.toLabel3.Name = "toLabel3";
-            this.toLabel3.Size = new System.Drawing.Size(24, 21);
+            this.toLabel3.Size = new System.Drawing.Size(21, 16);
             this.toLabel3.TabIndex = 70;
             this.toLabel3.Text = "to";
             this.toLabel3.Visible = false;
@@ -449,7 +412,7 @@
             this.endHour3.Location = new System.Drawing.Point(247, 253);
             this.endHour3.Margin = new System.Windows.Forms.Padding(4);
             this.endHour3.Name = "endHour3";
-            this.endHour3.Size = new System.Drawing.Size(83, 29);
+            this.endHour3.Size = new System.Drawing.Size(83, 24);
             this.endHour3.TabIndex = 68;
             this.endHour3.Visible = false;
             // 
@@ -459,7 +422,7 @@
             this.numberOfShiftsLabel3.Location = new System.Drawing.Point(410, 230);
             this.numberOfShiftsLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.numberOfShiftsLabel3.Name = "numberOfShiftsLabel3";
-            this.numberOfShiftsLabel3.Size = new System.Drawing.Size(168, 21);
+            this.numberOfShiftsLabel3.Size = new System.Drawing.Size(164, 16);
             this.numberOfShiftsLabel3.TabIndex = 67;
             this.numberOfShiftsLabel3.Text = "Number of employees:";
             this.numberOfShiftsLabel3.Visible = false;
@@ -470,7 +433,7 @@
             this.shiftTime3.Location = new System.Drawing.Point(69, 230);
             this.shiftTime3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.shiftTime3.Name = "shiftTime3";
-            this.shiftTime3.Size = new System.Drawing.Size(176, 21);
+            this.shiftTime3.Size = new System.Drawing.Size(180, 16);
             this.shiftTime3.TabIndex = 66;
             this.shiftTime3.Text = "Please select shift times:";
             this.shiftTime3.Visible = false;
@@ -481,7 +444,7 @@
             this.numberOfShiftsCombo3.Location = new System.Drawing.Point(409, 252);
             this.numberOfShiftsCombo3.Margin = new System.Windows.Forms.Padding(4);
             this.numberOfShiftsCombo3.Name = "numberOfShiftsCombo3";
-            this.numberOfShiftsCombo3.Size = new System.Drawing.Size(169, 29);
+            this.numberOfShiftsCombo3.Size = new System.Drawing.Size(169, 24);
             this.numberOfShiftsCombo3.TabIndex = 65;
             this.numberOfShiftsCombo3.Visible = false;
             // 
@@ -491,7 +454,7 @@
             this.startHour3.Location = new System.Drawing.Point(69, 253);
             this.startHour3.Margin = new System.Windows.Forms.Padding(4);
             this.startHour3.Name = "startHour3";
-            this.startHour3.Size = new System.Drawing.Size(82, 29);
+            this.startHour3.Size = new System.Drawing.Size(82, 24);
             this.startHour3.TabIndex = 63;
             this.startHour3.Visible = false;
             // 
@@ -505,7 +468,7 @@
             this.plusBTN2.Text = "+";
             this.plusBTN2.UseVisualStyleBackColor = true;
             this.plusBTN2.Visible = false;
-            this.plusBTN2.Click += new System.EventHandler(this.plusBTN2_Click);
+            this.plusBTN2.Click += new System.EventHandler(this.plusBTN2_Click_1);
             // 
             // toLabel2
             // 
@@ -513,7 +476,7 @@
             this.toLabel2.Location = new System.Drawing.Point(215, 157);
             this.toLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.toLabel2.Name = "toLabel2";
-            this.toLabel2.Size = new System.Drawing.Size(24, 21);
+            this.toLabel2.Size = new System.Drawing.Size(21, 16);
             this.toLabel2.TabIndex = 61;
             this.toLabel2.Text = "to";
             this.toLabel2.Visible = false;
@@ -524,7 +487,7 @@
             this.endHour2.Location = new System.Drawing.Point(247, 154);
             this.endHour2.Margin = new System.Windows.Forms.Padding(4);
             this.endHour2.Name = "endHour2";
-            this.endHour2.Size = new System.Drawing.Size(83, 29);
+            this.endHour2.Size = new System.Drawing.Size(83, 24);
             this.endHour2.TabIndex = 59;
             this.endHour2.Visible = false;
             // 
@@ -534,7 +497,7 @@
             this.numberOfShiftsLabel2.Location = new System.Drawing.Point(412, 131);
             this.numberOfShiftsLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.numberOfShiftsLabel2.Name = "numberOfShiftsLabel2";
-            this.numberOfShiftsLabel2.Size = new System.Drawing.Size(168, 21);
+            this.numberOfShiftsLabel2.Size = new System.Drawing.Size(164, 16);
             this.numberOfShiftsLabel2.TabIndex = 58;
             this.numberOfShiftsLabel2.Text = "Number of employees:";
             this.numberOfShiftsLabel2.Visible = false;
@@ -545,7 +508,7 @@
             this.shiftTime2.Location = new System.Drawing.Point(70, 131);
             this.shiftTime2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.shiftTime2.Name = "shiftTime2";
-            this.shiftTime2.Size = new System.Drawing.Size(176, 21);
+            this.shiftTime2.Size = new System.Drawing.Size(180, 16);
             this.shiftTime2.TabIndex = 57;
             this.shiftTime2.Text = "Please select shift times:";
             this.shiftTime2.Visible = false;
@@ -556,7 +519,7 @@
             this.numberOfShiftsCombo2.Location = new System.Drawing.Point(412, 154);
             this.numberOfShiftsCombo2.Margin = new System.Windows.Forms.Padding(4);
             this.numberOfShiftsCombo2.Name = "numberOfShiftsCombo2";
-            this.numberOfShiftsCombo2.Size = new System.Drawing.Size(168, 29);
+            this.numberOfShiftsCombo2.Size = new System.Drawing.Size(168, 24);
             this.numberOfShiftsCombo2.TabIndex = 56;
             this.numberOfShiftsCombo2.Visible = false;
             // 
@@ -566,21 +529,21 @@
             this.startHour2.Location = new System.Drawing.Point(70, 154);
             this.startHour2.Margin = new System.Windows.Forms.Padding(4);
             this.startHour2.Name = "startHour2";
-            this.startHour2.Size = new System.Drawing.Size(82, 29);
+            this.startHour2.Size = new System.Drawing.Size(82, 24);
             this.startHour2.TabIndex = 54;
             this.startHour2.Visible = false;
             // 
             // plusBTN1
             // 
             this.plusBTN1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.plusBTN1.Location = new System.Drawing.Point(604, 63);
+            this.plusBTN1.Location = new System.Drawing.Point(604, 57);
             this.plusBTN1.Name = "plusBTN1";
             this.plusBTN1.Size = new System.Drawing.Size(47, 29);
             this.plusBTN1.TabIndex = 53;
             this.plusBTN1.Text = "+";
             this.mainToolTop.SetToolTip(this.plusBTN1, "Add a shift");
             this.plusBTN1.UseVisualStyleBackColor = true;
-            this.plusBTN1.Click += new System.EventHandler(this.plusBTN1_Click_1);
+            this.plusBTN1.Click += new System.EventHandler(this.plusBTN1_Click);
             // 
             // toLabel1
             // 
@@ -588,7 +551,7 @@
             this.toLabel1.Location = new System.Drawing.Point(215, 65);
             this.toLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.toLabel1.Name = "toLabel1";
-            this.toLabel1.Size = new System.Drawing.Size(24, 21);
+            this.toLabel1.Size = new System.Drawing.Size(21, 16);
             this.toLabel1.TabIndex = 52;
             this.toLabel1.Text = "to";
             // 
@@ -598,14 +561,14 @@
             this.endHour1.Location = new System.Drawing.Point(247, 62);
             this.endHour1.Margin = new System.Windows.Forms.Padding(4);
             this.endHour1.Name = "endHour1";
-            this.endHour1.Size = new System.Drawing.Size(83, 29);
+            this.endHour1.Size = new System.Drawing.Size(83, 24);
             this.endHour1.TabIndex = 50;
             this.mainToolTop.SetToolTip(this.endHour1, "End time of the shift");
             // 
             // createBTN
             // 
             this.createBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.createBTN.Location = new System.Drawing.Point(252, 121);
+            this.createBTN.Location = new System.Drawing.Point(256, 121);
             this.createBTN.Margin = new System.Windows.Forms.Padding(4);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(158, 31);
@@ -613,7 +576,7 @@
             this.createBTN.Text = "Create Logs";
             this.mainToolTop.SetToolTip(this.createBTN, "Create the logs");
             this.createBTN.UseVisualStyleBackColor = true;
-            this.createBTN.Click += new System.EventHandler(this.createBTN_Click_1);
+            this.createBTN.Click += new System.EventHandler(this.createBTN_Click);
             // 
             // numberOfShiftsLabel1
             // 
@@ -621,7 +584,7 @@
             this.numberOfShiftsLabel1.Location = new System.Drawing.Point(410, 39);
             this.numberOfShiftsLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.numberOfShiftsLabel1.Name = "numberOfShiftsLabel1";
-            this.numberOfShiftsLabel1.Size = new System.Drawing.Size(168, 21);
+            this.numberOfShiftsLabel1.Size = new System.Drawing.Size(164, 16);
             this.numberOfShiftsLabel1.TabIndex = 49;
             this.numberOfShiftsLabel1.Text = "Number of employees:";
             // 
@@ -631,7 +594,7 @@
             this.shiftTime1.Location = new System.Drawing.Point(68, 39);
             this.shiftTime1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.shiftTime1.Name = "shiftTime1";
-            this.shiftTime1.Size = new System.Drawing.Size(176, 21);
+            this.shiftTime1.Size = new System.Drawing.Size(180, 16);
             this.shiftTime1.TabIndex = 48;
             this.shiftTime1.Text = "Please select shift times:";
             // 
@@ -641,7 +604,7 @@
             this.numberOfShiftsCombo1.Location = new System.Drawing.Point(410, 62);
             this.numberOfShiftsCombo1.Margin = new System.Windows.Forms.Padding(4);
             this.numberOfShiftsCombo1.Name = "numberOfShiftsCombo1";
-            this.numberOfShiftsCombo1.Size = new System.Drawing.Size(168, 29);
+            this.numberOfShiftsCombo1.Size = new System.Drawing.Size(168, 24);
             this.numberOfShiftsCombo1.TabIndex = 47;
             this.mainToolTop.SetToolTip(this.numberOfShiftsCombo1, "Number of employees working the shift");
             // 
@@ -651,76 +614,9 @@
             this.startHour1.Location = new System.Drawing.Point(70, 62);
             this.startHour1.Margin = new System.Windows.Forms.Padding(4);
             this.startHour1.Name = "startHour1";
-            this.startHour1.Size = new System.Drawing.Size(82, 29);
+            this.startHour1.Size = new System.Drawing.Size(82, 24);
             this.startHour1.TabIndex = 45;
             this.mainToolTop.SetToolTip(this.startHour1, "Start time of the shift");
-            // 
-            // tab2
-            // 
-            this.tab2.BackColor = System.Drawing.SystemColors.Menu;
-            this.tab2.Controls.Add(this.selectTimeLabel);
-            this.tab2.Controls.Add(this.createCLOBTN);
-            this.tab2.Controls.Add(this.toLabel);
-            this.tab2.Controls.Add(this.cloGenEnd1);
-            this.tab2.Controls.Add(this.cloGenStart1);
-            this.tab2.Location = new System.Drawing.Point(4, 30);
-            this.tab2.Name = "tab2";
-            this.tab2.Padding = new System.Windows.Forms.Padding(3);
-            this.tab2.Size = new System.Drawing.Size(669, 162);
-            this.tab2.TabIndex = 1;
-            this.tab2.Text = "CLO Generator";
-            this.tab2.ToolTipText = "Create a Crestron Logout sheet only";
-            // 
-            // selectTimeLabel
-            // 
-            this.selectTimeLabel.AutoSize = true;
-            this.selectTimeLabel.Location = new System.Drawing.Point(267, 40);
-            this.selectTimeLabel.Name = "selectTimeLabel";
-            this.selectTimeLabel.Size = new System.Drawing.Size(0, 21);
-            this.selectTimeLabel.TabIndex = 59;
-            this.selectTimeLabel.Visible = false;
-            // 
-            // createCLOBTN
-            // 
-            this.createCLOBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.createCLOBTN.Enabled = false;
-            this.createCLOBTN.Location = new System.Drawing.Point(255, 125);
-            this.createCLOBTN.Name = "createCLOBTN";
-            this.createCLOBTN.Size = new System.Drawing.Size(158, 31);
-            this.createCLOBTN.TabIndex = 58;
-            this.createCLOBTN.Text = "Create CLO log";
-            this.createCLOBTN.UseVisualStyleBackColor = true;
-            this.createCLOBTN.Click += new System.EventHandler(this.createCLOBTN_Click);
-            // 
-            // toLabel
-            // 
-            this.toLabel.AutoSize = true;
-            this.toLabel.Location = new System.Drawing.Point(325, 68);
-            this.toLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.toLabel.Name = "toLabel";
-            this.toLabel.Size = new System.Drawing.Size(0, 21);
-            this.toLabel.TabIndex = 57;
-            this.toLabel.Visible = false;
-            // 
-            // cloGenEnd1
-            // 
-            this.cloGenEnd1.FormattingEnabled = true;
-            this.cloGenEnd1.Location = new System.Drawing.Point(354, 65);
-            this.cloGenEnd1.Margin = new System.Windows.Forms.Padding(4);
-            this.cloGenEnd1.Name = "cloGenEnd1";
-            this.cloGenEnd1.Size = new System.Drawing.Size(83, 29);
-            this.cloGenEnd1.TabIndex = 55;
-            this.cloGenEnd1.Visible = false;
-            // 
-            // cloGenStart1
-            // 
-            this.cloGenStart1.FormattingEnabled = true;
-            this.cloGenStart1.Location = new System.Drawing.Point(231, 65);
-            this.cloGenStart1.Margin = new System.Windows.Forms.Padding(4);
-            this.cloGenStart1.Name = "cloGenStart1";
-            this.cloGenStart1.Size = new System.Drawing.Size(82, 29);
-            this.cloGenStart1.TabIndex = 53;
-            this.cloGenStart1.Visible = false;
             // 
             // LogCreator
             // 
@@ -730,8 +626,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(701, 240);
-            this.Controls.Add(this.tabControl);
+            this.ClientSize = new System.Drawing.Size(670, 181);
+            this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.workProgressBar);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.DoubleBuffered = true;
@@ -741,40 +637,35 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "LogCreator";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Log Creator";
             this.TransparencyKey = System.Drawing.SystemColors.ControlDarkDark;
-            this.tabControl.ResumeLayout(false);
-            this.tab1.ResumeLayout(false);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
-            this.tab2.ResumeLayout(false);
-            this.tab2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.ProgressBar workProgressBar;
-        private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tab1;
+        private System.Windows.Forms.ToolTip mainToolTop;
         private System.Windows.Forms.Panel mainPanel;
-        private System.Windows.Forms.Label toLabel1;
-        private System.Windows.Forms.ComboBox endHour1;
-        private System.Windows.Forms.Label numberOfShiftsLabel1;
-        private System.Windows.Forms.Label shiftTime1;
-        private System.Windows.Forms.ComboBox numberOfShiftsCombo1;
-        private System.Windows.Forms.ComboBox startHour1;
-        private System.Windows.Forms.Button createBTN;
-        private System.Windows.Forms.Button plusBTN1;
-        private System.Windows.Forms.Button plusBTN2;
-        private System.Windows.Forms.Label toLabel2;
-        private System.Windows.Forms.ComboBox endHour2;
-        private System.Windows.Forms.Label numberOfShiftsLabel2;
-        private System.Windows.Forms.Label shiftTime2;
-        private System.Windows.Forms.ComboBox numberOfShiftsCombo2;
-        private System.Windows.Forms.ComboBox startHour2;
+        private System.Windows.Forms.ComboBox am_pmCombo4_2;
+        private System.Windows.Forms.ComboBox am_pmCombo4_1;
+        private System.Windows.Forms.ComboBox am_pmCombo3_2;
+        private System.Windows.Forms.ComboBox am_pmCombo3_1;
+        private System.Windows.Forms.ComboBox am_pmCombo2_2;
+        private System.Windows.Forms.ComboBox am_pmCombo2_1;
+        private System.Windows.Forms.ComboBox am_pmCombo1_2;
+        private System.Windows.Forms.ComboBox am_pmCombo1_1;
+        private System.Windows.Forms.Label shift4Label;
+        private System.Windows.Forms.Label shift3Label;
+        private System.Windows.Forms.Label shift2Label;
+        private System.Windows.Forms.Label shift1Label;
+        private System.Windows.Forms.Label lineDivide1;
+        private System.Windows.Forms.Label lineDivide4;
+        private System.Windows.Forms.Label lineDivide3;
+        private System.Windows.Forms.Label lineDivide2;
         private System.Windows.Forms.Label toLabel4;
         private System.Windows.Forms.ComboBox endHour4;
         private System.Windows.Forms.Label numberOfShiftsLabel4;
@@ -788,29 +679,21 @@
         private System.Windows.Forms.Label shiftTime3;
         private System.Windows.Forms.ComboBox numberOfShiftsCombo3;
         private System.Windows.Forms.ComboBox startHour3;
-        private System.Windows.Forms.Label lineDivide4;
-        private System.Windows.Forms.Label lineDivide3;
-        private System.Windows.Forms.Label lineDivide2;
-        private System.Windows.Forms.Label shift1Label;
-        private System.Windows.Forms.Label lineDivide1;
-        private System.Windows.Forms.Label shift4Label;
-        private System.Windows.Forms.Label shift3Label;
-        private System.Windows.Forms.Label shift2Label;
-        private System.Windows.Forms.ToolTip mainToolTop;
-        private System.Windows.Forms.ComboBox am_pmCombo1_2;
-        private System.Windows.Forms.ComboBox am_pmCombo1_1;
-        private System.Windows.Forms.ComboBox am_pmCombo4_2;
-        private System.Windows.Forms.ComboBox am_pmCombo4_1;
-        private System.Windows.Forms.ComboBox am_pmCombo3_2;
-        private System.Windows.Forms.ComboBox am_pmCombo3_1;
-        private System.Windows.Forms.ComboBox am_pmCombo2_2;
-        private System.Windows.Forms.ComboBox am_pmCombo2_1;
-        private System.Windows.Forms.TabPage tab2;
-        private System.Windows.Forms.Label selectTimeLabel;
-        private System.Windows.Forms.Button createCLOBTN;
-        private System.Windows.Forms.Label toLabel;
-        private System.Windows.Forms.ComboBox cloGenEnd1;
-        private System.Windows.Forms.ComboBox cloGenStart1;
+        private System.Windows.Forms.Button plusBTN2;
+        private System.Windows.Forms.Label toLabel2;
+        private System.Windows.Forms.ComboBox endHour2;
+        private System.Windows.Forms.Label numberOfShiftsLabel2;
+        private System.Windows.Forms.Label shiftTime2;
+        private System.Windows.Forms.ComboBox numberOfShiftsCombo2;
+        private System.Windows.Forms.ComboBox startHour2;
+        private System.Windows.Forms.Button plusBTN1;
+        private System.Windows.Forms.Label toLabel1;
+        private System.Windows.Forms.ComboBox endHour1;
+        private System.Windows.Forms.Button createBTN;
+        private System.Windows.Forms.Label numberOfShiftsLabel1;
+        private System.Windows.Forms.Label shiftTime1;
+        private System.Windows.Forms.ComboBox numberOfShiftsCombo1;
+        private System.Windows.Forms.ComboBox startHour1;
     }
 }
 
