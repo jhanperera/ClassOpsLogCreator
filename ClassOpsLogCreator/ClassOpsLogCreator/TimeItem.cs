@@ -22,9 +22,9 @@ namespace ClassOpsLogCreator
 {
     class TimeItem
     {
-       /// <summary>
-       /// Private attributes
-       /// </summary>
+        /// <summary>
+        /// Private attributes
+        /// </summary>
         public string Hour { get; set; }
         public string Minute { get; set; }
         public string Am { get; set; }

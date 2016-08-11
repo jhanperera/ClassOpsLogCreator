@@ -98,7 +98,7 @@ namespace ClassOpsLogCreator
                                     dr[Cnum - 2] = rangeArray.GetValue(Rnum, Cnum).ToString().Trim();
                                 }
                             }
-                            //Add the row to the the data table
+                            //Add the row to the data table
                             dt.Rows.Add(dr);
                             //Accept the changes
                             dt.AcceptChanges();
@@ -124,6 +124,12 @@ namespace ClassOpsLogCreator
         /// </summary>
         private void format_DataGirdView()
         {
+            //Set the date if it is empty
+            if(dateLabel.Text.Equals("") || dateLabel.Text == null)
+            {
+                this.dateLabel.Text = DateTime.Now.ToString("M/dd/yyyy");
+            }
+
             //Set some color formats
             Color redBackground = Color.FromArgb(255, 199, 206);
             Color redFont = Color.FromArgb(156, 0, 6);
@@ -131,14 +137,12 @@ namespace ClassOpsLogCreator
             Color headerText = Color.FromArgb(156, 101, 0);
             Color headerBackcolor = Color.FromArgb(235, 241, 222);
 
-
             //Increase the width of the last columns
             dataGridView1.Columns[0].Width = 100;
             dataGridView1.Columns[1].Width = 75;
             dataGridView1.Columns[2].Width = 75;
             dataGridView1.Columns[3].Width = 75;
             dataGridView1.Columns[4].Width = 400;
-
 
             //Enable text wraping
             dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;

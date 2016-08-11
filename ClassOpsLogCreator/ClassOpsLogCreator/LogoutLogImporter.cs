@@ -28,7 +28,7 @@ namespace ClassOpsLogCreator
         /// Private Attributes
         /// </summary>
         private LogCreator form1 = null;
- 
+
         private static Excel.Application roomSched = null;
         private static Excel.Workbook roomWorkBook = null;
         private static Excel.Worksheet roomSheet1 = null;
@@ -71,7 +71,7 @@ namespace ClassOpsLogCreator
             catch (Exception)
             {
                 //File not found...
-                
+
                 Quit();
                 return;
             }
@@ -94,7 +94,7 @@ namespace ClassOpsLogCreator
             arrayLastTimes = this.extract_last_time(arrayTimes, arrayEvent);
 
             //Check if the arrayLastTimes and the classarray are the same length, if so then we get correct results.
-            if(arrayLastTimes.GetUpperBound(0) != arrayClassRooms.GetUpperBound(0))
+            if (arrayLastTimes.GetUpperBound(0) != arrayClassRooms.GetUpperBound(0))
             {
                 Quit();
                 throw new System.IO.FileLoadException("Error: While parsing clo.xlsx we ran into a problem:" + Environment.NewLine +
@@ -104,7 +104,7 @@ namespace ClassOpsLogCreator
             {
                 masterArray = this.convertToString2DArray(arrayClassRooms, arrayLastTimes);
             }
-            
+
             //Close all open processes
             Quit();
         }
@@ -130,7 +130,7 @@ namespace ClassOpsLogCreator
         {
             return this.masterArrayCounter;
         }
-        
+
         /// <summary>
         /// /**A Helper converter that will take our "values" and convert them into a string array. 
         /// String parsing IS requires for now until we make it smart.
@@ -186,7 +186,7 @@ namespace ClassOpsLogCreator
         {
             //Check if the clo is empty or not
             //Throw an excpetion to cause the system to hault
-            if(classArray.GetUpperBound(0) < 1)
+            if (classArray.GetUpperBound(0) < 1)
             {
                 Quit();
                 throw new System.IO.FileLoadException("Error: It seems the CLO is empty!");
@@ -194,8 +194,8 @@ namespace ClassOpsLogCreator
 
             masterArray = new string[classArray.GetUpperBound(0), 4];
             ClassInfo classList = new ClassInfo();
-            DateTime startingTime = Convert.ToDateTime(this.startTime.ToString());  
-            DateTime endingTime = Convert.ToDateTime(this.endTime.ToString());  
+            DateTime startingTime = Convert.ToDateTime(this.startTime.ToString());
+            DateTime endingTime = Convert.ToDateTime(this.endTime.ToString());
 
             //Add all the elements of the array's into one array. 
             int index = 0;
@@ -211,21 +211,27 @@ namespace ClassOpsLogCreator
 
                     //Split the building from the room 
                     string[] token = classArray[i].Split(' ');
+                    //Remove any blanks in between
+                    if (token.Length > 2)
+                    {
+                        token = token.Where(n => n != "").ToArray();
+                    }
+
                     //Add it to the array
                     masterArray[index, 1] = token[0];
-                    //Acount for Ross
+                    //Account for Ross
                     if (token[0].Equals("R"))
                     {
                         masterArray[index, 2] = token[2];
                     }
                     //Change IKB to OSG 
-                    else if(token[0].Equals("IKB"))
+                    else if (token[0].Equals("IKB"))
                     {
                         masterArray[index, 1] = "OSG";
                         masterArray[index, 2] = token[1];
                     }
                     //Add a logout comment for MC157A
-                    else if(token[0].Equals("MC") && token[1].Equals("157A"))
+                    else if (token[0].Equals("MC") && token[1].Equals("157A"))
                     {
                         masterArray[index, 3] = "Door code 11012*";
                     }
@@ -235,7 +241,7 @@ namespace ClassOpsLogCreator
                     }
                     //Adding notes
                     //Does the class have a neck mic?
-                    if(classList.hasLapelMic(classArray[i]))
+                    if (classList.hasLapelMic(classArray[i]))
                     {
                         masterArray[index, 3] = "Ensure neck mic goes back to equipment drawer.";
                     }
@@ -268,7 +274,7 @@ namespace ClassOpsLogCreator
                 if (eventarray[i].ToString().Length != 0)
                 {
                     //Check if it is the last elemtn in the array
-                    if(i == eventarray.GetUpperBound(0))
+                    if (i == eventarray.GetUpperBound(0))
                     {
                         //add the last time in a formatted way to the list
                         newArray[index] = DateTime.FromOADate(double.Parse(timearray[i])).ToString("HH:mm");
@@ -279,7 +285,7 @@ namespace ClassOpsLogCreator
                     {
                         //check the time array for the corresponding times 
                         //If it is not null or empty we know this is the last time.
-                        if((timearray[i] != null) && (timearray[i].ToString().Length != 0 ))
+                        if ((timearray[i] != null) && (timearray[i].ToString().Length != 0))
                         {
                             newArray[index] = DateTime.FromOADate(double.Parse(timearray[i])).ToString("HH:mm");
                             index++;
@@ -287,7 +293,7 @@ namespace ClassOpsLogCreator
                         //else we are goning to check at most 2 elements up to see if its not null or not empty
                         else
                         {
-                            for(int j = 1; j < 2; j++)
+                            for (int j = 1; j < 2; j++)
                             {
                                 if ((timearray[i - j] != null) && (timearray[i - j].ToString().Length != 0))
                                 {

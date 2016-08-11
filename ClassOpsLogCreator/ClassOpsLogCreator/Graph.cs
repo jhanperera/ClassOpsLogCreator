@@ -43,7 +43,7 @@ namespace ClassOpsLogCreator
         {
             //Create the building dictionary 
             this.createBuildingDictionary();
-            
+
             this.vertexCount = buildingDictionary.Count;
             this.edgeCount = 0;
 
@@ -61,7 +61,7 @@ namespace ClassOpsLogCreator
             buildingDictionary.TryGetValue(Building1, out i);
             buildingDictionary.TryGetValue(Building2, out j);
 
-            if(i >= 0 && i < vertexCount && j >= 0 && j < vertexCount)
+            if (i >= 0 && i < vertexCount && j >= 0 && j < vertexCount)
             {
                 adjacecnyMatrix[i, j] = true;
                 adjacecnyMatrix[j, i] = true;
@@ -200,6 +200,6 @@ namespace ClassOpsLogCreator
             buildingDictionary.Add("CC", 32);
             buildingDictionary.Add("LSB", 33);
             buildingDictionary.Add("LUM", 34);
-        }  
+        }
     }
 }

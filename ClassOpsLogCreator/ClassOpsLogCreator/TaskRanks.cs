@@ -45,12 +45,12 @@ namespace ClassOpsLogCreator
            };
 
             //Value = 2 tasks
-             value3 = new string[]
-           {
+            value3 = new string[]
+          {
                "Inperson Technical Assistance", "Demo", "CLOSE ACE017", "Lockup",
                "Pickup Large PA","Pickup Mic", "Pickup PC","Pickup Projector",
                "Pickup Skype Kit","Pickup Small PA"
-           };
+          };
 
             // Value = 3 tasks
             value4 = new string[]
@@ -71,7 +71,7 @@ namespace ClassOpsLogCreator
         public int getTaskValue(string task)
         {
             int value = 0;
-            if(value1.Contains(task))
+            if (value1.Contains(task))
             {
                 value = 1;
             }
@@ -99,7 +99,7 @@ namespace ClassOpsLogCreator
         public int getTotalTaskValue(string[,] taskArray)
         {
             int value = 0;
-            for(int i = 0; i <= taskArray.GetUpperBound(0); i++)
+            for (int i = 0; i <= taskArray.GetUpperBound(0); i++)
             {
                 value += this.getTaskValue(taskArray[i, 1]);
             }

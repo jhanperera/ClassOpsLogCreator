@@ -38,7 +38,7 @@ namespace ClassOpsLogCreator
             //Create the graph
             schoolGraph = new Graph();
             classinfo = new ClassInfo();
-            
+
             this.numberOfBuildings = schoolGraph.numberOfVerticies();
             this.numberOfConnections = schoolGraph.numberOfEdges();
         }
@@ -60,7 +60,7 @@ namespace ClassOpsLogCreator
         {
             return this.numberOfConnections;
         }
-        
+
         /**All the methods under here are not using BFS yet
          * The BFS algo needs to be modified to work correctly
          * before we use it to be dynamic and "Smart"
@@ -119,7 +119,7 @@ namespace ClassOpsLogCreator
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
                 AddToArray(result, zone2Array, zone1Array.GetLength(0));
- 
+
             }
 
             //If we have 3 Shifts
@@ -671,14 +671,14 @@ namespace ClassOpsLogCreator
             reachable.Enqueue(root);
 
             //While our queue is not empty and while we are within the distance
-            while(reachable.Count > 0 && distanceCount < distance)
+            while (reachable.Count > 0 && distanceCount < distance)
             {
                 //Pop the top of the queue
                 string current = reachable.Dequeue();
                 //Look at all the adjacent 
-                foreach(string v in schoolGraph.adjacentTo(current))
+                foreach (string v in schoolGraph.adjacentTo(current))
                 {
-                    if(!(mark.Contains(v)))
+                    if (!(mark.Contains(v)))
                     {
                         index++;
                         mark[index] = v;
@@ -708,7 +708,7 @@ namespace ClassOpsLogCreator
             int zone2Rank = tr.getTotalTaskValue(zone2);
 
             //If the difference of the two zones ranks in 6
-            if(Math.Abs(zone1Rank - zone2Rank) > discrepancy)
+            if (Math.Abs(zone1Rank - zone2Rank) > discrepancy)
             {
                 if (zone1Rank > zone2Rank)
                 {
@@ -716,7 +716,7 @@ namespace ClassOpsLogCreator
                     //move items from zone1 to zone2
                     for (int i = 0; i <= zone1.GetUpperBound(0) && Math.Abs(zone1Rank - zone2Rank) > discrepancy; i++)
                     {
-                        if (borderBuildings.Contains(zone1[i,4]))
+                        if (borderBuildings.Contains(zone1[i, 4]))
                         {
                             var temp = zone1List[i - offset];
                             zone1List.Remove(zone1List[i - offset]);
@@ -731,12 +731,12 @@ namespace ClassOpsLogCreator
                 {
                     int offset = 0;
                     //move items from zone2 to zone1
-                    for (int i = 0; i <= zone2.GetUpperBound(0) && Math.Abs(zone1Rank - zone2Rank) > discrepancy;  i++)
+                    for (int i = 0; i <= zone2.GetUpperBound(0) && Math.Abs(zone1Rank - zone2Rank) > discrepancy; i++)
                     {
                         if (borderBuildings.Contains(zone2[i, 4]))
                         {
                             var temp = zone2List[i - offset];
-                            zone2List.Remove(zone2List[i- offset]);
+                            zone2List.Remove(zone2List[i - offset]);
                             zone1List.Add(temp);
                             offset++;
                             zone1 = CreateRectangularArray<string>(zone1List);
@@ -785,7 +785,7 @@ namespace ClassOpsLogCreator
         private static T[,] CreateRectangularArray<T>(IList<T[]> arrays)
         {
             // TODO: Validation and special-casing for arrays.Count == 0
-            if(arrays.Count !=0 )
+            if (arrays.Count != 0)
             {
                 int minorLength = arrays[0].Length;
                 T[,] ret = new T[arrays.Count, minorLength];

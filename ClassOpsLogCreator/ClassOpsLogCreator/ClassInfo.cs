@@ -590,7 +590,7 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         public List<string> boarderBuildingZone_3(int i)
         {
-              
+
             List<string> zone1BoarderList = new List<string>();
 
             if (i == 1)
@@ -601,7 +601,7 @@ namespace ClassOpsLogCreator
                 };
                 zone1BoarderList.AddRange(zone1Boarder);
             }
-            else if(i == 2)
+            else if (i == 2)
             {
                 string[] zone2Boarder = new string[] //Central and South
                 {
@@ -616,7 +616,7 @@ namespace ClassOpsLogCreator
                      "VC", "WC", "YL", "KT"
                  };
                 zone1BoarderList.AddRange(zone3Boarder);
-            }                
+            }
             return zone1BoarderList;
         }
 
@@ -642,7 +642,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone2Boarder = new string[] //Central and South Central
                 {
-                    "VH", "ACW", "ATK", "CFA", "TEL", "CFT", 
+                    "VH", "ACW", "ATK", "CFA", "TEL", "CFT",
                 };
                 zone1BoarderList.AddRange(zone2Boarder);
             }
@@ -699,7 +699,7 @@ namespace ClassOpsLogCreator
                 };
                 zone1BoarderList.AddRange(zone3Boarder);
             }
-            else if(i == 4)
+            else if (i == 4)
             {
                 string[] zone4Boarder = new string[] //South Central and South East
                  {

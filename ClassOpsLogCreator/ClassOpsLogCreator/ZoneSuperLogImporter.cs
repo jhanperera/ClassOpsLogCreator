@@ -19,8 +19,8 @@ namespace ClassOpsLogCreator
 {
     public class ZoneSuperLogImporter
     {
-         /// <summary>
-         /// Private attributes
+        /// <summary>
+        /// Private attributes
         /// </summary>
         private LogCreator Form1 = null;
 
@@ -155,7 +155,7 @@ namespace ClassOpsLogCreator
             {
                 //Export to array 
                 System.Array array = (System.Array)range.Cells.Value2;
-                
+
                 for (int i = array.GetUpperBound(0);
                      i >= array.GetLowerBound(0); i--)
                 {
@@ -175,7 +175,7 @@ namespace ClassOpsLogCreator
                 {
                     numberOfRows++;
                 }
-            }   
+            }
             return numberOfRows;
         }
 
@@ -188,7 +188,7 @@ namespace ClassOpsLogCreator
         {
             DateTime startingTime = Convert.ToDateTime(this.startTime.ToString());
             DateTime endingTime = Convert.ToDateTime(this.endTime.ToString());
-            
+
             //initialization of all the ranges that we are going to collect.
             Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
             int start = last.Row - this.numberOfRows(ExSheet, this.getLastDate());
@@ -198,7 +198,7 @@ namespace ClassOpsLogCreator
             Excel.Range rangeD = ExSheet.get_Range("D" + start, "D" + last.Row);
             Excel.Range rangeE = ExSheet.get_Range("E" + start, "E" + last.Row);
             Excel.Range rangeF = ExSheet.get_Range("F" + start, "F" + last.Row);
-            
+
             string[,] values = new string[(last.Row - start) + 1, 6];
 
             //If the range is not just one element we make arrays out of them
