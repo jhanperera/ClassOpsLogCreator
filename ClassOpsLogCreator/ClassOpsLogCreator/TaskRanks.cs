@@ -27,7 +27,7 @@ namespace ClassOpsLogCreator
         private string[] value4 = null;
 
         /// <summary>
-        /// The constructor that inistalizes all the arrays
+        /// The constructor that initializes all the arrays
         /// </summary>
         public TaskRanks()
         {
@@ -61,7 +61,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This method evalutes the current task and determines the 
+        /// This method evaluates the current task and determines the 
         /// weight of the task. 
         /// 
         /// return -1 if the task does not exist in our database                                                                                                                                                                                                                                                                  

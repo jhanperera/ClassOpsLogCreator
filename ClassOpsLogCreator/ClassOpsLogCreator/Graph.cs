@@ -17,7 +17,7 @@ using System.Collections;
 /// shifts that day. 
 /// 
 /// The Buildings are held in a Dictionary to map them to
-/// an integer for the adjacecny matrix that is the
+/// an integer for the adjacency matrix that is the
 /// backbone of the graph. 
 ///
 /// Class Version: 0.1.0.0 - BETA - 7182016
@@ -89,7 +89,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This methos returns the number of Vertex in the graph
+        /// This method returns the number of Vertex in the graph
         /// </summary>
         /// <returns></returns>
         public int numberOfVerticies()
@@ -107,7 +107,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This method will return true if there is an edge between builidng 1 
+        /// This method will return true if there is an edge between building 1 
         /// building 2
         /// </summary>
         /// <param name="Building1"></param>
@@ -130,7 +130,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This method will return all the buildinds adjacent to 
+        /// This method will return all the buildings adjacent to 
         /// the building in question
         /// </summary>
         /// <param name="building"></param>
@@ -158,7 +158,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This method will create our Dictionary of buildinds and 
+        /// This method will create our Dictionary of buildings and 
         /// a corresponding integer which represents a spot in the 
         /// matrix
         /// </summary>

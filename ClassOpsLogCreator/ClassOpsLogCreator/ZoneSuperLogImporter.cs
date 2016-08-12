@@ -8,7 +8,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 /// 
 /// Description of class: This class will take in 3 input logs 
 /// and sort the most important components. This will output only 
-/// demos/setups/picksups and any other speical taskt.
+/// demos/setups/pickups and any other special tasks.
 ///
 /// Class Version: 0.1.0.2 - BETA - 7202016
 /// 
@@ -91,7 +91,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        ///  All Public Accesor methods
+        ///  All Public Accessors methods
         /// </summary>
         /// <returns></returns>
         //Return the Last Date AKA todays date
@@ -136,7 +136,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This method retun how many entries we need to copy over
+        /// This method return how many entries we need to copy over
         /// We start from the bottom of the excel sheet and look for the first null, or when date != the date in cell
         /// </summary>
         /// <param name="ExSheet"></param>
@@ -159,7 +159,7 @@ namespace ClassOpsLogCreator
                 for (int i = array.GetUpperBound(0);
                      i >= array.GetLowerBound(0); i--)
                 {
-                    //This finds all number of columsn that happen today. 
+                    //This finds all number of columns that happen today. 
                     if ((array.GetValue(i, 1) != null) && (array.GetValue(i, 1) is double)
                         && (DateTime.FromOADate(double.Parse((string)array.GetValue(i, 1).ToString())).ToString("M/dd/yy").Equals(date)))
                     {
@@ -224,7 +224,7 @@ namespace ClassOpsLogCreator
                         DateTime check = DateTime.ParseExact(arrayC.GetValue(i + 1, 1).ToString(), "HHmm", null);
                         if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
                         {
-                            //Taskt type
+                            //Tasks type
                             values[index, 0] = arrayA.GetValue(i + 1, 1).ToString();
                             //Date
                             values[index, 1] = DateTime.FromOADate(double.Parse((string)arrayB.GetValue(i + 1, 1).ToString())).ToString("M/dd/yy");
@@ -293,7 +293,7 @@ namespace ClassOpsLogCreator
             int length1 = strs.GetLength(0);
             int length2 = strs.GetLength(1);
 
-            // First we count the non-emtpy rows
+            // First we count the non-empty rows
             int nonEmpty = 0;
 
             for (int i = 0; i < length1; i++)

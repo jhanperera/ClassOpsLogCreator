@@ -44,7 +44,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This reuturn how many buildings we are working with
+        /// This return how many buildings we are working with
         /// </summary>
         /// <returns></returns>
         public int getNumberOfBuilding()
@@ -67,7 +67,7 @@ namespace ClassOpsLogCreator
          */
 
         /// <summary>
-        /// This method is resposible for the zoning of all the elements in the range.
+        /// This method is responsible for the zoning of all the elements in the range.
         /// This will return an array with all the elements in it and with zones.
         /// </summary>
         /// <param name="range"></param>
@@ -229,7 +229,7 @@ namespace ClassOpsLogCreator
                 //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
                 this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_4(1), 4);//North Central
                 this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_4(2), 4);//Central South Central
-                this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_4(3), 4);//South Cnetral South East
+                this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_4(3), 4);//South Central South East
                 this.applyRankAndOrganize(ref zone4Array, ref zone1Array, classinfo.boarderBuildingZone_4(4), 4);//South East Central
 
                 //Merge the arrays together
@@ -608,7 +608,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// A Helper method to quickly convery an array object to a string array
+        /// A Helper method to quickly convert an array object to a string array
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
@@ -634,7 +634,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This method combines two rectange arrays together.
+        /// This method combines two rectangle arrays together.
         /// This writes it element by element. (Might have to switch this to BlockCopy for optimization)
         /// </summary>
         /// <param name="result"></param>
@@ -652,7 +652,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This method will find the hosrtest path from the root
+        /// This method will find the shortest path from the root
         /// to all other nodes within a given distance
         /// </summary>
         /// <param name="root"></param>
@@ -691,8 +691,8 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This method will score each zone and make a compairiosn
-        /// If the compairison is true, then we move items around in zones and 
+        /// This method will score each zone and make a comparison
+        /// If the comparison is true, then we move items around in zones and 
         /// return the new zones with balanced ranks
         /// </summary>
         /// <param name="zone1"></param>
@@ -755,7 +755,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This method converts a 2d arry to a list
+        /// This method converts a 2d array to a list
         /// </summary>
         /// <param name="arr"></param>
         /// <returns></returns>

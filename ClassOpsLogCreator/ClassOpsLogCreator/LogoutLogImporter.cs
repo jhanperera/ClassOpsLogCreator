@@ -10,10 +10,10 @@ using System.Windows.Forms;
 /// 
 /// 
 /// Description of class: This class is a helper class that 
-/// will assis with creating the Crestron Logouts of the 
+/// will assist with creating the Crestron Logouts of the 
 /// input excel file. This class also assists with sorting and 
-/// presenting a nice arnagment of all last times for the 
-/// events heald around School. 
+/// presenting a nice arrangement of all last times for the 
+/// events held around School. 
 ///
 /// Class Version: 0.1.0.0 - BETA - 7152016
 /// 
@@ -93,7 +93,7 @@ namespace ClassOpsLogCreator
             arrayEvent = this.ConvertToStringArray(eventArray, 1);
             arrayLastTimes = this.extract_last_time(arrayTimes, arrayEvent);
 
-            //Check if the arrayLastTimes and the classarray are the same length, if so then we get correct results.
+            //Check if the arrayLastTimes and the class array are the same length, if so then we get correct results.
             if (arrayLastTimes.GetUpperBound(0) != arrayClassRooms.GetUpperBound(0))
             {
                 Quit();
@@ -161,7 +161,7 @@ namespace ClassOpsLogCreator
                             index++;
                         }
                     }
-                    //this puts in the sting representaion of what is in cell i, j
+                    //this puts in the sting representation of what is in cell i, j
                     // can be 1 of three types: a normal string, an integer, or a double. 
                     else
                     {
@@ -185,7 +185,7 @@ namespace ClassOpsLogCreator
         private string[,] convertToString2DArray(string[] classArray, string[] timeArray)
         {
             //Check if the clo is empty or not
-            //Throw an excpetion to cause the system to hault
+            //Throw an exception to cause the system to halt
             if (classArray.GetUpperBound(0) < 1)
             {
                 Quit();
@@ -262,14 +262,14 @@ namespace ClassOpsLogCreator
         {
             string[] newArray = new string[eventarray.GetUpperBound(0) + 1];
             int index = 0;
-            //Iterate throught the list and find the ending time of the las class in said room.
+            //Iterate through the list and find the ending time of the las class in said room.
             //Getlowerbound and GetUpperBound is safer then .Length
             for (int i = eventarray.GetLowerBound(0); i <= eventarray.GetUpperBound(0); i++)
             {
                 //if the next cell is empty we found the last time, add it to the array
                 if (eventarray[i].ToString().Length != 0)
                 {
-                    //Check if it is the last elemtn in the array
+                    //Check if it is the last element in the array
                     if (i == eventarray.GetUpperBound(0))
                     {
                         //add the last time in a formatted way to the list
@@ -286,7 +286,7 @@ namespace ClassOpsLogCreator
                             newArray[index] = DateTime.FromOADate(double.Parse(timearray[i])).ToString("HH:mm");
                             index++;
                         }
-                        //else we are goning to check at most 2 elements up to see if its not null or not empty
+                        //else we are going to check at most 2 elements up to see if its not null or not empty
                         else
                         {
                             for (int j = 1; j < 2; j++)

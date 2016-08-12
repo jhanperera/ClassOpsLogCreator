@@ -10,8 +10,8 @@ using System.Windows.Forms;
 /// Department: UIT Client Services
 /// 
 /// 
-/// Description of class: This is the main excecution point. 
-/// All the action startes here when the application opens. 
+/// Description of class: This is the main execution point. 
+/// All the action started here when the application opens. 
 ///
 /// Class Version: 0.1.0.0 - BETA - 7152016
 /// 

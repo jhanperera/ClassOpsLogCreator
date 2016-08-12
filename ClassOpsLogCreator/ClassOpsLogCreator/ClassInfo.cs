@@ -14,7 +14,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 /// 
 /// Description of class: This is a utility class
 /// of all the classes in the school. This class contains 
-/// information about each class and any special instuctions. 
+/// information about each class and any special instructions. 
 /// 
 /// This class also houses and important zone and building info
 ///
@@ -37,11 +37,11 @@ namespace ClassOpsLogCreator
 
         /// <summary>
         /// Constructor for this class
-        /// This will import the master classlist and give access to other helper methods.
+        /// This will import the master class list and give access to other helper methods.
         /// </summary>
         public ClassInfo()
         {
-            //Initalize the Absent crestron list
+            //Initialize the Absent crestron list
             ClassArray = new string[]
             {
                 "ACE001","ACE002","ACE003","ACE004","ACE005","ACE006","ACE007","ACE008","ACE009",
@@ -159,7 +159,7 @@ namespace ClassOpsLogCreator
         {
             //trim the string
             classroom = classroom.Trim();
-            //replace any of the sapces in the middle
+            //replace any of the spaces in the middle
             classroom = Regex.Replace(classroom, @"\s+", "");
 
             //find the class with a lapel mic
@@ -569,7 +569,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// Get the boarder Buildings for the zoneing of 2 areas
+        /// Get the boarder Buildings for the zoning of 2 areas
         /// </summary>
         /// <returns></returns>
         public List<string> boarderBuildingZone_2()
@@ -584,7 +584,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// Get the boarder Buildings for the zoneing of 3 areas
+        /// Get the boarder Buildings for the zoning of 3 areas
         /// </summary>
         /// <param name="i"></param>
         /// <returns></returns>
@@ -621,7 +621,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// Get the boarder Buildings for the zoneing of 4 areas
+        /// Get the boarder Buildings for the zoning of 4 areas
         /// </summary>
         /// <param name="i"></param>
         /// <returns></returns>
@@ -648,7 +648,7 @@ namespace ClassOpsLogCreator
             }
             else if (i == 2)
             {
-                string[] zone3Boarder = new string[] //Sount Central and South East
+                string[] zone3Boarder = new string[] //South Central and South East
                 {
                     "KT", "YL", "SSB", "ELC", "ACE", "TEL", "CFT"
                 };
@@ -666,7 +666,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// Get the boarder Buildings for the zoneing of 5 areas
+        /// Get the boarder Buildings for the zoning of 5 areas
         /// </summary>
         /// <param name="i"></param>
         /// <returns></returns>

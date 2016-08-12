@@ -18,7 +18,7 @@ namespace ClassOpsLogCreator
         private string startTime = null;
         private string endTime = null;
 
-        //A lock object to lock this thread from being accessed accross memory
+        //A lock object to lock this thread from being accessed across memory
         private Object thisLock = new Object();
         private bool done = false;
 
@@ -29,7 +29,7 @@ namespace ClassOpsLogCreator
         {
             InitializeComponent();
 
-            //Get the array represenation of the range
+            //Get the array representation of the range
             this.rangeArray = Range;
             //Start and end times
             this.startTime = StartTime;
@@ -144,10 +144,10 @@ namespace ClassOpsLogCreator
             dataGridView1.Columns[3].Width = 75;
             dataGridView1.Columns[4].Width = 400;
 
-            //Enable text wraping
+            //Enable text wrapping
             dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
-            //Allight to the center and format 
+            //Allin to the center and format 
             foreach(DataGridViewColumn col in dataGridView1.Columns)
             {
                 //Disable sorting
