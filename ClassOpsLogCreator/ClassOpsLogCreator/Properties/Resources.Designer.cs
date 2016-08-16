@@ -73,9 +73,29 @@ namespace ClassOpsLogCreator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap green_plus_icon_13 {
+            get {
+                object obj = ResourceManager.GetObject("green-plus-icon-13", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Main_thread_image {
             get {
                 object obj = ResourceManager.GetObject("Main_thread_image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap rsz_green_plus_icon_13 {
+            get {
+                object obj = ResourceManager.GetObject("rsz_green-plus-icon-13", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

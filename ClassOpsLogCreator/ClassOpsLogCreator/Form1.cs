@@ -32,26 +32,32 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
 
-        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        /*public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
+        public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
 
         //A queue for some thread safer operations
         private readonly ConcurrentQueue<System.Array> _queue = new ConcurrentQueue<System.Array>();
+        long[,] rowNumbers1 = null;
+        long[,] rowNumbers2 = null;
+        long[,] rowNumbers3 = null;
+        long[,] rowNumbers4 = null;
+
+        PrintDialog printDlg;
 
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
@@ -95,6 +101,8 @@ namespace ClassOpsLogCreator
         {
             InitializeComponent();
 
+            this.plusBTN1.TextAlign = ContentAlignment.TopCenter;
+                      
             //A pop up message to ensure that the user is aware that the zone super logs need to be in before running this application
             DialogResult checkMessage = checkMessage = MessageBox.Show("Ensure all Zone Supervisor Logs have been submitted before running this application. "
                                + Environment.NewLine +
@@ -466,7 +474,7 @@ namespace ClassOpsLogCreator
             //Create the new Excel file where we will store all the new information
             logoutMaster = new Excel.Application();
             logoutMasterWorkBook = logoutMaster.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
-            this.logCreationAndExcelWriter(1, startTimeFromCombo1, endTimeFromCombo1, numberOfShifts1, true);
+            this.logCreationAndExcelWriter(1, startTimeFromCombo1, endTimeFromCombo1, numberOfShifts1, true, ref rowNumbers1);
 
             //If the first plus button is clicked
             if (plusClicked1)
@@ -474,7 +482,7 @@ namespace ClassOpsLogCreator
                 worker.ReportProgress(45);
                 //Add a new worksheet to add the new 
                 logoutMasterWorkBook.Sheets.Add(After: logoutMasterWorkBook.Sheets[logoutMasterWorkBook.Sheets.Count]);
-                this.logCreationAndExcelWriter(2, startTimeFromCombo2, endTimeFromCombo2, numberOfShifts2, false);
+                this.logCreationAndExcelWriter(2, startTimeFromCombo2, endTimeFromCombo2, numberOfShifts2, false, ref rowNumbers2);
 
                 //If the second plus button is clicked
                 if (plusClicked2)
@@ -482,7 +490,7 @@ namespace ClassOpsLogCreator
                     worker.ReportProgress(65);
                     //Add a new worksheet to add the new 
                     logoutMasterWorkBook.Sheets.Add(After: logoutMasterWorkBook.Sheets[logoutMasterWorkBook.Sheets.Count]);
-                    this.logCreationAndExcelWriter(3, startTimeFromCombo3, endTimeFromCombo3, numberOfShifts3, false);
+                    this.logCreationAndExcelWriter(3, startTimeFromCombo3, endTimeFromCombo3, numberOfShifts3, false, ref rowNumbers3);
 
                     //If the third plus button is clicked
                     if (plusClicked3)
@@ -490,7 +498,7 @@ namespace ClassOpsLogCreator
                         worker.ReportProgress(85);
                         //Add a new worksheet to add the new 
                         logoutMasterWorkBook.Sheets.Add(After: logoutMasterWorkBook.Sheets[logoutMasterWorkBook.Sheets.Count]);
-                        this.logCreationAndExcelWriter(4, startTimeFromCombo4, endTimeFromCombo4, numberOfShifts4, false);
+                        this.logCreationAndExcelWriter(4, startTimeFromCombo4, endTimeFromCombo4, numberOfShifts4, false, ref rowNumbers4);
                     }
                 }
             }
@@ -550,7 +558,7 @@ namespace ClassOpsLogCreator
                 // Next, handle the case where the user canceled 
                 // the operation.
                 // Note that due to a race condition in 
-                // the DoWork event handler, the Cancelled
+                // the DoWork event handler, the Canceled
                 // flag may not have been set, even though
                 // CancelAsync was called.
                 this.workProgressBar.Value = 0;
@@ -573,11 +581,74 @@ namespace ClassOpsLogCreator
             //Open the merged file
             if (workDone)
             {
-                //Make a copy of the exel file
+                printDlg = new PrintDialog();
+                PrinterSettings defaultSettings = new PrinterSettings();
+                string defaultPrinterName = defaultSettings.PrinterName;
+                //Display all the logs
+                if (plusClicked1 && !plusClicked2 && !plusClicked3)
+                {
+                    //Display the logs 
+                    displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
+                    displayLogs(this.startTimeFromCombo2, this.endTimeFromCombo2, rowNumbers2, numberOfShifts2);
+
+                    //Print the logs
+                    if (printDlg.ShowDialog() == DialogResult.OK)
+                    {
+                        printOutLog(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
+                        printOutLog(this.startTimeFromCombo2, this.endTimeFromCombo2, rowNumbers2, numberOfShifts2);
+                    }
+                    
+                }
+                else if(plusClicked1 && plusClicked2 && !plusClicked3)
+                {
+                    //Display the logs 
+                    displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
+                    displayLogs(this.startTimeFromCombo2, this.endTimeFromCombo2, rowNumbers2, numberOfShifts2);
+                    displayLogs(this.startTimeFromCombo3, this.endTimeFromCombo3, rowNumbers3, numberOfShifts3);
+
+                    //Print the logs
+                    if (printDlg.ShowDialog() == DialogResult.OK)
+                    {
+                        printOutLog(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
+                        printOutLog(this.startTimeFromCombo2, this.endTimeFromCombo2, rowNumbers2, numberOfShifts2);
+                        printOutLog(this.startTimeFromCombo3, this.endTimeFromCombo3, rowNumbers3, numberOfShifts3);
+                    }
+                }
+                else if(plusClicked1 && plusClicked2 && plusClicked3)
+                {
+                    //Display the logs 
+                    displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
+                    displayLogs(this.startTimeFromCombo2, this.endTimeFromCombo2, rowNumbers2, numberOfShifts2);
+                    displayLogs(this.startTimeFromCombo3, this.endTimeFromCombo3, rowNumbers3, numberOfShifts3);
+                    displayLogs(this.startTimeFromCombo4, this.endTimeFromCombo4, rowNumbers4, numberOfShifts4);
+
+                    //Print the logs
+                    if (printDlg.ShowDialog() == DialogResult.OK)
+                    {
+                        printOutLog(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
+                        printOutLog(this.startTimeFromCombo2, this.endTimeFromCombo2, rowNumbers2, numberOfShifts2);
+                        printOutLog(this.startTimeFromCombo3, this.endTimeFromCombo3, rowNumbers3, numberOfShifts3);
+                        printOutLog(this.startTimeFromCombo4, this.endTimeFromCombo4, rowNumbers4, numberOfShifts4);
+                    }
+                }
+                else
+                {
+                    //Display the logs 
+                    displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
+
+                    //Print the logs
+                    if (printDlg.ShowDialog() == DialogResult.OK)
+                    {
+                        printOutLog(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
+                    }
+                }
+                SetDefaultPrinter(defaultPrinterName);
+
+                //Make a copy of the excel file
                 System.IO.File.Delete(EXISTING_MASTER_LOG_COPY);
                 System.IO.File.Copy(EXISTING_MASTER_LOG, EXISTING_MASTER_LOG_COPY, true);
                 //Make a new copied file not hidden
-                System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Hidden);
+                System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Hidden);               
 
                 Quit();
             }
@@ -594,7 +665,7 @@ namespace ClassOpsLogCreator
         /// <param name="startTimeFromCombo"></param>
         /// <param name="endTimeFromCombo"></param>
         /// <param name="numberOfShifts"></param> 
-        private void logCreationAndExcelWriter(int worksheetNumber, string startTimeFromCombo, string endTimeFromCombo, int numberOfShifts, bool redSeperator)
+        private void logCreationAndExcelWriter(int worksheetNumber, string startTimeFromCombo, string endTimeFromCombo, int numberOfShifts, bool redSeperator, ref long[,] rowNumbers)
         {
             logoutMasterWorkSheet = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[worksheetNumber];
 
@@ -610,7 +681,7 @@ namespace ClassOpsLogCreator
             string[,] RInstruction = ZoneLogs.getRaulLog();
 
             //write all the data to the excel file
-            //merg the all the data together into the master log
+            //merge the all the data together into the master log
             this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, classRoomTimeLogs.getLogOutArrayCount(),
                                                                          JInstruction, DInstruction, RInstruction,
                                                                          true, startTimeFromCombo, endTimeFromCombo);
@@ -618,7 +689,7 @@ namespace ClassOpsLogCreator
             //Saving and closing the new excel file
             logoutMaster.DisplayAlerts = false;
 
-            this.mergeMasterWithExisting(logoutMasterWorkSheet, numberOfShifts, redSeperator, startTimeFromCombo, endTimeFromCombo);
+            this.mergeMasterWithExisting(logoutMasterWorkSheet, numberOfShifts, redSeperator, startTimeFromCombo, endTimeFromCombo, ref rowNumbers);
         }
 
         /// <summary>
@@ -647,7 +718,7 @@ namespace ClassOpsLogCreator
             taskType_range.ColumnWidth = 20;
             taskType_range.Value2 = "Crestron Logout";
 
-            //Formatt for east reading of the date
+            //Format for east reading of the date
             date_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             date_range.ColumnWidth = 10;
             DateTime today = DateTime.Today;
@@ -685,7 +756,7 @@ namespace ClassOpsLogCreator
         /// This method will merger our file with the already existing file in sorted order. 
         /// </summary>
         /// <param name="worksheet"></param>
-        public void mergeMasterWithExisting(Excel.Worksheet worksheet, int numberOfShifts, bool redSeperator, string startTime, string endTime)
+        public void mergeMasterWithExisting(Excel.Worksheet worksheet, int numberOfShifts, bool redSeperator, string startTime, string endTime, ref long[,] rowNumbers)
         {
             //Open the existing excel file
             existingMaster = new Excel.Application();
@@ -738,22 +809,7 @@ namespace ClassOpsLogCreator
                 //Pass the zoning with the number of shifts
                 destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts);
                 //divide the zones
-                long[,] rowNumbers = this.dividedLogs(destinationRange, numberOfShifts);
-                int indexCount = 0;
-
-
-                //pop from the queue and send the item to the log viewer
-                System.Array destinationArray = null;
-                while (this._queue.TryDequeue(out destinationArray))
-                {
-                    //Display the log viewer
-                    LogViewer lv = new LogViewer(destinationArray, startTime, endTime);
-                    lv.ShowDialog();
-                    //Set the employee name
-                    Excel.Range name_range = existingMasterWorkSheet.get_Range("A" + (rowNumbers[indexCount, 0]), "A" + (rowNumbers[indexCount, 1]));
-                    name_range.Value2 = lv.getEmployeeName();
-                    indexCount++;
-                }
+                rowNumbers = this.dividedLogs(destinationRange, numberOfShifts);
             }
             else
             {
@@ -765,19 +821,11 @@ namespace ClassOpsLogCreator
 
                 //Send the range into the queue so its thread safe
                 System.Array destinationArray = (System.Array)destinationRange.Cells.Value2;
+
+                //Save the rows and enqueue into the queue
+                rowNumbers = new long[,] { { lastRowDestination + 2, last.Row } };
                 this._queue.Enqueue(destinationArray);
 
-
-                //pop from the queue and send the item to the log viewer
-                if (this._queue.TryDequeue(out destinationArray))
-                {
-                    //Display the logviewer
-                    LogViewer lv = new LogViewer(destinationArray, startTime, endTime);
-                    lv.ShowDialog();
-                    //Set the employee name
-                    Excel.Range name_range = existingMasterWorkSheet.get_Range("A" + (lastRowDestination + 2), "A" + (last.Row));
-                    name_range.Value2 = lv.getEmployeeName();
-                }
             }
 
             //Get the new last row
@@ -821,22 +869,22 @@ namespace ClassOpsLogCreator
             string defaultPrinterName = defaultSettings.PrinterName;
 
             //Print all the pages here
-            if (numberOfShifts > 1)
+            /*if (numberOfShifts > 1)
             {
                 
                 if (printDlg.ShowDialog() == DialogResult.OK)
                 {
-                    //Prints all the various logs when there is more than one emplyee, this also accounts
+                    //Prints all the various logs when there is more than one employee, this also accounts
                     //for when the zoning returns only one log.
-                    long[,] rowNumbers = this.dividedLogs(destinationRange, numberOfShifts);
+                    long[,] rowNumbers1 = this.dividedLogs(destinationRange, numberOfShifts);
 
                     SetDefaultPrinter(printDlg.PrinterSettings.PrinterName);
                     existingMaster.Visible = true;
 
-                    for (int i = 0; i <= rowNumbers.GetUpperBound(0) && (rowNumbers[i, 0] != 0 || rowNumbers[i, 1] != 0); i++)
+                    for (int i = 0; i <= rowNumbers1.GetUpperBound(0) && (rowNumbers1[i, 0] != 0 || rowNumbers1[i, 1] != 0); i++)
                     {
-                        Excel.Range logRange = existingMasterWorkSheet.get_Range("B" + (rowNumbers[i, 0]), "H" + (rowNumbers[i, 1]));
-                        Excel.Range name = existingMasterWorkSheet.get_Range("A" + rowNumbers[i, 0]);
+                        Excel.Range logRange = existingMasterWorkSheet.get_Range("B" + (rowNumbers1[i, 0]), "H" + (rowNumbers1[i, 1]));
+                        Excel.Range name = existingMasterWorkSheet.get_Range("A" + rowNumbers1[i, 0]);
                         string nameText = name.Cells.Value2.ToString();
 
                         existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + startTime + " to " + endTime;
@@ -864,16 +912,16 @@ namespace ClassOpsLogCreator
                     existingMaster.Visible = true;
                     logRange.PrintPreview(true);
                 }
-            }
+            }*/
 
             SetDefaultPrinter(defaultPrinterName);
 
             //Empty the queue for the next operation
-            System.Array someItem = null;
+            /*System.Array someItem = null;
             while (!this._queue.IsEmpty)
             {
                 this._queue.TryDequeue(out someItem);
-            }
+            }*/
 
             //Close the workbook and the excel file
             existingMasterWorkBook.Close();
@@ -940,7 +988,7 @@ namespace ClassOpsLogCreator
                         //save the start and end times
                         rowValues[arrayCount, 0] = startRow;
                         rowValues[arrayCount, 1] = endRow;
-                        //Move the new start row poitner
+                        //Move the new start row pointer
                         startRow = endRow;
                         arrayCount++;
                         count = 0;
@@ -954,7 +1002,7 @@ namespace ClassOpsLogCreator
                         //save the start and end times
                         rowValues[arrayCount, 0] = startRow;
                         rowValues[arrayCount, 1] = endRow - 1;
-                        //Move the new start row poitner
+                        //Move the new start row pointer
                         startRow = endRow;
                         arrayCount++;
                         count = 0;
@@ -962,6 +1010,143 @@ namespace ClassOpsLogCreator
                 }
             }
             return rowValues;
+        }
+
+        /// <summary>
+        /// This method will display all the logs that are created
+        /// 
+        /// TO DO: account for when the previous button is clicked!
+        /// </summary>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <param name="rowNumbers"></param>
+        /// <param name="numberOfShifts"></param>
+        private void displayLogs(string startTime, string endTime, long[,] rowNumbers, int numberOfShifts)
+        {
+            //Open the existing excel file
+            existingMaster = new Excel.Application();
+            existingMaster.Visible = false;
+            try
+            {
+                existingMasterWorkBook = existingMaster.Workbooks.Open(EXISTING_MASTER_LOG);
+                existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
+            }
+            catch (Exception)
+            {
+                Quit();
+                return;
+            }
+
+            System.Array destinationArray = null;
+            if (numberOfShifts == 1)
+            {
+                //pop from the queue and send the item to the log viewer
+                if (this._queue.TryDequeue(out destinationArray))
+                {
+                    //Display the log viewer
+                    LogViewer lv = new LogViewer(destinationArray, startTime, endTime);
+                    lv.ShowDialog();
+                    //Set the employee name
+                    Excel.Range name_range = existingMasterWorkSheet.get_Range("A" + (rowNumbers[0,0]), "A" + (rowNumbers[0, 1]));
+                    name_range.Value2 = lv.getEmployeeName();
+                }
+            }
+            else
+            {
+                int indexCount = 0;
+                //pop from the queue and send the item to the log viewer
+                while (indexCount <= rowNumbers.GetUpperBound(0) && this._queue.TryDequeue(out destinationArray) )
+                {
+                    //Display the log viewer
+                    LogViewer lv = new LogViewer(destinationArray, startTime, endTime);
+                    lv.ShowDialog();
+                    //Set the employee name
+                    Excel.Range name_range = existingMasterWorkSheet.get_Range("A" + (rowNumbers[indexCount, 0]), "A" + (rowNumbers[indexCount, 1]));
+                    name_range.Value2 = lv.getEmployeeName();
+                    indexCount++;
+                }
+            }
+
+            //Save
+            existingMaster.DisplayAlerts = false;
+            existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);
+            //Close the workbook and the excel file
+            existingMasterWorkBook.Close();
+            existingMaster.Quit();
+            System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
+            existingMaster = null;
+            existingMasterWorkBook = null;
+            existingMasterWorkSheet = null;
+        }
+
+        /// <summary>
+        /// This method will print out all the logs that have been named.
+        /// </summary>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <param name="numberOfShifts"></param>
+        /// <param name="rowNumbers"></param>
+        private void printOutLog(string startTime, string endTime, long[,] rowNumbers, int numberOfShifts)
+        {
+            //Open the existing excel file
+            existingMaster = new Excel.Application();
+            existingMaster.Visible = false;
+            try
+            {
+                existingMasterWorkBook = existingMaster.Workbooks.Open(EXISTING_MASTER_LOG);
+                existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
+            }
+            catch (Exception)
+            {
+                Quit();
+                return;
+            }
+
+            //Print all the pages here
+            if (numberOfShifts > 1)
+            {
+                SetDefaultPrinter(printDlg.PrinterSettings.PrinterName);
+                existingMaster.Visible = true;
+
+                 for (int i = 0; i <= rowNumbers.GetUpperBound(0) && (rowNumbers[i, 0] != 0 || rowNumbers[i, 1] != 0); i++)
+                 {
+                      Excel.Range logRange = existingMasterWorkSheet.get_Range("B" + (rowNumbers[i, 0]), "H" + (rowNumbers[i, 1]));
+                      Excel.Range name = existingMasterWorkSheet.get_Range("A" + rowNumbers[i, 0]);
+                      string nameText = name.Cells.Value2.ToString();
+
+                      existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + startTime + " to " + endTime;
+
+                      logRange.PrintPreview(true);
+                  }
+ 
+            }
+            else
+            {
+                //We open the log viewer at this point
+                Excel.Range last = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+                Excel.Range logRange = existingMasterWorkSheet.get_Range("B" + (rowNumbers[0, 0]), "H" + (rowNumbers[0, 1]));
+
+                Excel.Range name = existingMasterWorkSheet.get_Range("A" + (rowNumbers[0, 0]));
+                string nameText = name.Cells.Value2.ToString();
+
+                existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + startTime + " to " + endTime;
+
+                SetDefaultPrinter(printDlg.PrinterSettings.PrinterName);
+                existingMaster.Visible = true;
+                logRange.PrintPreview(true);
+
+            }
+
+            //Save
+            existingMaster.DisplayAlerts = false;
+            existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);
+            //Close the workbook and the excel file
+            existingMasterWorkBook.Close();
+            existingMaster.Quit();
+            System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
+            existingMaster = null;
+            existingMasterWorkBook = null;
+            existingMasterWorkSheet = null;
         }
 
         /// <summary>
@@ -974,7 +1159,7 @@ namespace ClassOpsLogCreator
             //We are going to use the base onFormClose operations and add more
             base.OnFormClosing(e);
 
-            //If the sysstem gets shutdown we close eveything gracefully
+            //If the system gets shutdown we close everything gracefully
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
 
             // Confirm user wants to close
@@ -1037,7 +1222,7 @@ namespace ClassOpsLogCreator
         /// <param name="e"> a helper argument</param>
         private void plusBTN1_Click(object sender, EventArgs e)
         {
-            //initalize all components
+            //initialize all components
 
             if (!plusClicked1)
             {
@@ -1049,7 +1234,7 @@ namespace ClassOpsLogCreator
                 this.lineDivide2.AutoSize = false;
                 this.lineDivide2.Height = 2;
 
-                //Make them all visable
+                //Make them all visible
                 this.Height += 95;
                 this.Top -= 72;
                 this.shift2Label.Visible = true;
@@ -1097,7 +1282,7 @@ namespace ClassOpsLogCreator
         /// <param name="e"> a helper argument</param>
         private void plusBTN2_Click_1(object sender, EventArgs e)
         {
-            //initalize all components
+            //initialize all components
 
             if (!plusClicked2)
             {
@@ -1111,7 +1296,7 @@ namespace ClassOpsLogCreator
                 this.lineDivide3.AutoSize = false;
                 this.lineDivide3.Height = 2;
 
-                //Make them all visable
+                //Make them all visible
                 this.Height += 95;
                 this.Top -= 72;
                 this.shift3Label.Visible = true;
@@ -1173,7 +1358,7 @@ namespace ClassOpsLogCreator
                 this.lineDivide4.Height = 2;
 
 
-                //Make them all visable
+                //Make them all visible
                 this.Height += 100;
                 this.Top -= 72;
                 this.shift4Label.Visible = true;

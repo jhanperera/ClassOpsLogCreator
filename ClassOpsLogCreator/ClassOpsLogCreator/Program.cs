@@ -31,7 +31,6 @@ namespace ClassOpsLogCreator
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LogCreator());
-            //Application.Run(new LogViewer());
         }
     }
 }

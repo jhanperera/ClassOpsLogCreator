@@ -218,6 +218,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="green_c_md_VTs_icon.ico" />
+    <None Include="Resources\rsz_green-plus-icon-13.bmp" />
+    <None Include="Resources\green-plus-icon-13.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
