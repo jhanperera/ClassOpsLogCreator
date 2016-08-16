@@ -33,7 +33,7 @@
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.timeLabel = new System.Windows.Forms.Label();
             this.nextBTN = new System.Windows.Forms.Button();
-            this.printBTN = new System.Windows.Forms.Button();
+            this.previousBTN = new System.Windows.Forms.Button();
             this.logCreatorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dateLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -57,7 +57,6 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(744, 663);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // nameTextBox
             // 
@@ -67,7 +66,6 @@
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(149, 44);
             this.nameTextBox.TabIndex = 1;
-            this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
             // 
             // timeLabel
             // 
@@ -90,17 +88,16 @@
             this.nextBTN.UseVisualStyleBackColor = true;
             this.nextBTN.Click += new System.EventHandler(this.nextBTN_Click);
             // 
-            // printBTN
+            // previousBTN
             // 
-            this.printBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.printBTN.Enabled = false;
-            this.printBTN.Location = new System.Drawing.Point(14, 755);
-            this.printBTN.Name = "printBTN";
-            this.printBTN.Size = new System.Drawing.Size(90, 26);
-            this.printBTN.TabIndex = 4;
-            this.printBTN.Text = "Print";
-            this.printBTN.UseVisualStyleBackColor = true;
-            this.printBTN.Click += new System.EventHandler(this.printBTN_Click);
+            this.previousBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.previousBTN.Enabled = false;
+            this.previousBTN.Location = new System.Drawing.Point(12, 755);
+            this.previousBTN.Name = "previousBTN";
+            this.previousBTN.Size = new System.Drawing.Size(90, 26);
+            this.previousBTN.TabIndex = 4;
+            this.previousBTN.Text = "< Previous";
+            this.previousBTN.UseVisualStyleBackColor = true;
             // 
             // dateLabel
             // 
@@ -117,10 +114,11 @@
             this.AcceptButton = this.nextBTN;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(748, 793);
             this.ControlBox = false;
             this.Controls.Add(this.dateLabel);
-            this.Controls.Add(this.printBTN);
+            this.Controls.Add(this.previousBTN);
             this.Controls.Add(this.nextBTN);
             this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.nameTextBox);
@@ -145,7 +143,7 @@
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.Button nextBTN;
-        private System.Windows.Forms.Button printBTN;
+        private System.Windows.Forms.Button previousBTN;
         private System.Windows.Forms.Label dateLabel;
     }
 }
