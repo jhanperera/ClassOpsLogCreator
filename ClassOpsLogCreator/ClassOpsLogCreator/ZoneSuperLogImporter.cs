@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Excel = Microsoft.Office.Interop.Excel;
 
 /// <summary>
@@ -36,10 +37,13 @@ namespace ClassOpsLogCreator
         private static Excel.Workbook DerekWorkBook = null;
         private static Excel.Worksheet DerekSheet1 = null;
 
+        private static Excel.Worksheet databaseSheet = null;
+
         private string lastDate = null;
         private string[,] JeannineLogArray = null;
         private string[,] RaulLogArray = null;
         private string[,] DerekLogArray = null;
+        List<string> employeeNameList = null;
 
         private string startTime = null;
         private string endTime = null;
@@ -73,6 +77,9 @@ namespace ClassOpsLogCreator
                 JeannineSheet1 = (Excel.Worksheet)JeannineWorkBook.Sheets[1];
                 RaulSheet1 = (Excel.Worksheet)RaulWorkBook.Sheets[1];
                 DerekSheet1 = (Excel.Worksheet)DerekWorkBook.Sheets[1];
+
+                //Get the database for the employee names
+                databaseSheet = (Excel.Worksheet)JeannineWorkBook.Sheets[2];
             }
             catch (Exception)
             {
@@ -86,6 +93,7 @@ namespace ClassOpsLogCreator
             JeannineLogArray = this.ConvertToStringArray2D(JeannineSheet1);
             DerekLogArray = this.ConvertToStringArray2D(DerekSheet1);
             RaulLogArray = this.ConvertToStringArray2D(RaulSheet1);
+            employeeNameList = this.getEmployeeNamesList();
 
             this.Quit();
         }
@@ -122,6 +130,31 @@ namespace ClassOpsLogCreator
         public string[,] getDerekLog()
         {
             return this.DerekLogArray;
+        }
+
+        public List<string> getEmployeeNames()
+        {
+            return this.employeeNameList;
+        }
+
+        private List<string> getEmployeeNamesList()
+        {
+            List<string> values = new List<string>();
+            //Extract the name range
+            Excel.Range last = databaseSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+            int lastRow = databaseSheet.UsedRange.Rows.Count;
+            Excel.Range nameRange = databaseSheet.get_Range("A2", "A" + (lastRow));
+            //Convert to an array
+            System.Array array = (System.Array)nameRange.Cells.Value2;
+            
+            foreach(string name in array)
+            {
+                if(name != null)
+                {
+                    values.Add(name.ToLower());
+                }
+            }
+            return values;
         }
 
         /// <summary>

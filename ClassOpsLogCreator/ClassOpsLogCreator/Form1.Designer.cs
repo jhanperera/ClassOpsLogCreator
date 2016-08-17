@@ -44,6 +44,7 @@
             this.createBTN = new System.Windows.Forms.Button();
             this.numberOfShiftsCombo1 = new System.Windows.Forms.ComboBox();
             this.startHour1 = new System.Windows.Forms.ComboBox();
+            this.plusBTN1 = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.statusText = new System.Windows.Forms.Label();
             this.shift4Label = new System.Windows.Forms.Label();
@@ -78,7 +79,6 @@
             this.numberOfShiftsLabel1 = new System.Windows.Forms.Label();
             this.shiftTime1 = new System.Windows.Forms.Label();
             this.printDialog = new System.Windows.Forms.PrintDialog();
-            this.plusBTN1 = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,15 +86,18 @@
             // 
             this.workProgressBar.BackColor = System.Drawing.SystemColors.InfoText;
             this.workProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.workProgressBar.Location = new System.Drawing.Point(0, 142);
+            this.workProgressBar.Location = new System.Drawing.Point(0, 140);
             this.workProgressBar.Margin = new System.Windows.Forms.Padding(4);
             this.workProgressBar.Name = "workProgressBar";
-            this.workProgressBar.Size = new System.Drawing.Size(676, 28);
+            this.workProgressBar.Size = new System.Drawing.Size(679, 28);
             this.workProgressBar.TabIndex = 7;
             this.workProgressBar.Visible = false;
             // 
             // am_pmCombo4_2
             // 
+            this.am_pmCombo4_2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.am_pmCombo4_2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.am_pmCombo4_2.FormattingEnabled = true;
             this.am_pmCombo4_2.Location = new System.Drawing.Point(341, 354);
             this.am_pmCombo4_2.Margin = new System.Windows.Forms.Padding(4);
@@ -106,6 +109,9 @@
             // 
             // am_pmCombo4_1
             // 
+            this.am_pmCombo4_1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.am_pmCombo4_1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.am_pmCombo4_1.FormattingEnabled = true;
             this.am_pmCombo4_1.Location = new System.Drawing.Point(163, 354);
             this.am_pmCombo4_1.Margin = new System.Windows.Forms.Padding(4);
@@ -117,6 +123,9 @@
             // 
             // am_pmCombo3_2
             // 
+            this.am_pmCombo3_2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.am_pmCombo3_2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.am_pmCombo3_2.FormattingEnabled = true;
             this.am_pmCombo3_2.Location = new System.Drawing.Point(341, 253);
             this.am_pmCombo3_2.Margin = new System.Windows.Forms.Padding(4);
@@ -128,6 +137,9 @@
             // 
             // am_pmCombo3_1
             // 
+            this.am_pmCombo3_1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.am_pmCombo3_1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.am_pmCombo3_1.FormattingEnabled = true;
             this.am_pmCombo3_1.Location = new System.Drawing.Point(162, 253);
             this.am_pmCombo3_1.Margin = new System.Windows.Forms.Padding(4);
@@ -139,6 +151,9 @@
             // 
             // am_pmCombo2_2
             // 
+            this.am_pmCombo2_2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.am_pmCombo2_2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.am_pmCombo2_2.FormattingEnabled = true;
             this.am_pmCombo2_2.Location = new System.Drawing.Point(341, 154);
             this.am_pmCombo2_2.Margin = new System.Windows.Forms.Padding(4);
@@ -150,6 +165,9 @@
             // 
             // am_pmCombo2_1
             // 
+            this.am_pmCombo2_1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.am_pmCombo2_1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.am_pmCombo2_1.FormattingEnabled = true;
             this.am_pmCombo2_1.Location = new System.Drawing.Point(163, 154);
             this.am_pmCombo2_1.Margin = new System.Windows.Forms.Padding(4);
@@ -161,6 +179,9 @@
             // 
             // am_pmCombo1_2
             // 
+            this.am_pmCombo1_2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.am_pmCombo1_2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.am_pmCombo1_2.FormattingEnabled = true;
             this.am_pmCombo1_2.Location = new System.Drawing.Point(341, 62);
             this.am_pmCombo1_2.Margin = new System.Windows.Forms.Padding(4);
@@ -171,6 +192,9 @@
             // 
             // am_pmCombo1_1
             // 
+            this.am_pmCombo1_1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.am_pmCombo1_1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.am_pmCombo1_1.FormattingEnabled = true;
             this.am_pmCombo1_1.Location = new System.Drawing.Point(163, 62);
             this.am_pmCombo1_1.Margin = new System.Windows.Forms.Padding(4);
@@ -181,7 +205,13 @@
             // 
             // endHour1
             // 
+            this.endHour1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.endHour1.DropDownHeight = 200;
+            this.endHour1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.endHour1.DropDownWidth = 82;
             this.endHour1.FormattingEnabled = true;
+            this.endHour1.IntegralHeight = false;
             this.endHour1.Location = new System.Drawing.Point(250, 62);
             this.endHour1.Margin = new System.Windows.Forms.Padding(4);
             this.endHour1.Name = "endHour1";
@@ -192,7 +222,7 @@
             // createBTN
             // 
             this.createBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.createBTN.Location = new System.Drawing.Point(259, 107);
+            this.createBTN.Location = new System.Drawing.Point(260, 105);
             this.createBTN.Margin = new System.Windows.Forms.Padding(4);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(158, 31);
@@ -204,6 +234,9 @@
             // 
             // numberOfShiftsCombo1
             // 
+            this.numberOfShiftsCombo1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numberOfShiftsCombo1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.numberOfShiftsCombo1.FormattingEnabled = true;
             this.numberOfShiftsCombo1.Location = new System.Drawing.Point(413, 62);
             this.numberOfShiftsCombo1.Margin = new System.Windows.Forms.Padding(4);
@@ -214,13 +247,32 @@
             // 
             // startHour1
             // 
+            this.startHour1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.startHour1.DropDownHeight = 200;
+            this.startHour1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.startHour1.FormattingEnabled = true;
+            this.startHour1.IntegralHeight = false;
             this.startHour1.Location = new System.Drawing.Point(73, 62);
             this.startHour1.Margin = new System.Windows.Forms.Padding(4);
             this.startHour1.Name = "startHour1";
             this.startHour1.Size = new System.Drawing.Size(82, 29);
             this.startHour1.TabIndex = 45;
             this.mainToolTop.SetToolTip(this.startHour1, "Start time of the shift");
+            // 
+            // plusBTN1
+            // 
+            this.plusBTN1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.plusBTN1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.plusBTN1.Location = new System.Drawing.Point(607, 62);
+            this.plusBTN1.Name = "plusBTN1";
+            this.plusBTN1.Size = new System.Drawing.Size(50, 29);
+            this.plusBTN1.TabIndex = 53;
+            this.plusBTN1.Text = "+";
+            this.mainToolTop.SetToolTip(this.plusBTN1, "Add a shift");
+            this.plusBTN1.UseVisualStyleBackColor = true;
+            this.plusBTN1.Click += new System.EventHandler(this.plusBTN1_Click);
             // 
             // mainPanel
             // 
@@ -275,7 +327,7 @@
             this.mainPanel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(676, 142);
+            this.mainPanel.Size = new System.Drawing.Size(679, 140);
             this.mainPanel.TabIndex = 54;
             // 
             // statusText
@@ -283,13 +335,15 @@
             this.statusText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.statusText.AutoSize = true;
             this.statusText.BackColor = System.Drawing.Color.Transparent;
-            this.statusText.Location = new System.Drawing.Point(8, 114);
+            this.statusText.Location = new System.Drawing.Point(11, 112);
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(0, 21);
             this.statusText.TabIndex = 55;
             // 
             // shift4Label
             // 
+            this.shift4Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.shift4Label.AutoSize = true;
             this.shift4Label.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             this.shift4Label.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -302,6 +356,8 @@
             // 
             // shift3Label
             // 
+            this.shift3Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.shift3Label.AutoSize = true;
             this.shift3Label.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             this.shift3Label.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -314,6 +370,8 @@
             // 
             // shift2Label
             // 
+            this.shift2Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.shift2Label.AutoSize = true;
             this.shift2Label.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.shift2Label.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -326,6 +384,8 @@
             // 
             // shift1Label
             // 
+            this.shift1Label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.shift1Label.AutoSize = true;
             this.shift1Label.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.shift1Label.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -337,6 +397,8 @@
             // 
             // lineDivide1
             // 
+            this.lineDivide1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lineDivide1.AutoSize = true;
             this.lineDivide1.Location = new System.Drawing.Point(57, 18);
             this.lineDivide1.Name = "lineDivide1";
@@ -347,6 +409,8 @@
             // 
             // lineDivide4
             // 
+            this.lineDivide4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lineDivide4.AutoSize = true;
             this.lineDivide4.Location = new System.Drawing.Point(57, 310);
             this.lineDivide4.Name = "lineDivide4";
@@ -358,6 +422,8 @@
             // 
             // lineDivide3
             // 
+            this.lineDivide3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lineDivide3.AutoSize = true;
             this.lineDivide3.Location = new System.Drawing.Point(57, 209);
             this.lineDivide3.Name = "lineDivide3";
@@ -369,6 +435,8 @@
             // 
             // lineDivide2
             // 
+            this.lineDivide2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lineDivide2.AutoSize = true;
             this.lineDivide2.Location = new System.Drawing.Point(57, 110);
             this.lineDivide2.Name = "lineDivide2";
@@ -380,6 +448,8 @@
             // 
             // toLabel4
             // 
+            this.toLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.toLabel4.AutoSize = true;
             this.toLabel4.Location = new System.Drawing.Point(218, 357);
             this.toLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -391,7 +461,13 @@
             // 
             // endHour4
             // 
+            this.endHour4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.endHour4.DropDownHeight = 200;
+            this.endHour4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.endHour4.DropDownWidth = 82;
             this.endHour4.FormattingEnabled = true;
+            this.endHour4.IntegralHeight = false;
             this.endHour4.Location = new System.Drawing.Point(250, 354);
             this.endHour4.Margin = new System.Windows.Forms.Padding(4);
             this.endHour4.Name = "endHour4";
@@ -401,6 +477,8 @@
             // 
             // numberOfShiftsLabel4
             // 
+            this.numberOfShiftsLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.numberOfShiftsLabel4.AutoSize = true;
             this.numberOfShiftsLabel4.Location = new System.Drawing.Point(415, 331);
             this.numberOfShiftsLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -412,6 +490,8 @@
             // 
             // shiftTime4
             // 
+            this.shiftTime4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.shiftTime4.AutoSize = true;
             this.shiftTime4.Location = new System.Drawing.Point(73, 331);
             this.shiftTime4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -423,6 +503,9 @@
             // 
             // numberOfShiftsCombo4
             // 
+            this.numberOfShiftsCombo4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numberOfShiftsCombo4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.numberOfShiftsCombo4.FormattingEnabled = true;
             this.numberOfShiftsCombo4.Location = new System.Drawing.Point(413, 354);
             this.numberOfShiftsCombo4.Margin = new System.Windows.Forms.Padding(4);
@@ -433,7 +516,12 @@
             // 
             // startHour4
             // 
+            this.startHour4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.startHour4.DropDownHeight = 200;
+            this.startHour4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.startHour4.FormattingEnabled = true;
+            this.startHour4.IntegralHeight = false;
             this.startHour4.Location = new System.Drawing.Point(73, 354);
             this.startHour4.Margin = new System.Windows.Forms.Padding(4);
             this.startHour4.Name = "startHour4";
@@ -443,10 +531,12 @@
             // 
             // plusBTN3
             // 
+            this.plusBTN3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.plusBTN3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.plusBTN3.Location = new System.Drawing.Point(607, 253);
             this.plusBTN3.Name = "plusBTN3";
-            this.plusBTN3.Size = new System.Drawing.Size(47, 29);
+            this.plusBTN3.Size = new System.Drawing.Size(50, 29);
             this.plusBTN3.TabIndex = 71;
             this.plusBTN3.Text = "+";
             this.plusBTN3.UseVisualStyleBackColor = true;
@@ -455,6 +545,8 @@
             // 
             // toLabel3
             // 
+            this.toLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.toLabel3.AutoSize = true;
             this.toLabel3.Location = new System.Drawing.Point(218, 256);
             this.toLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -466,7 +558,13 @@
             // 
             // endHour3
             // 
+            this.endHour3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.endHour3.DropDownHeight = 200;
+            this.endHour3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.endHour3.DropDownWidth = 82;
             this.endHour3.FormattingEnabled = true;
+            this.endHour3.IntegralHeight = false;
             this.endHour3.Location = new System.Drawing.Point(250, 253);
             this.endHour3.Margin = new System.Windows.Forms.Padding(4);
             this.endHour3.Name = "endHour3";
@@ -476,6 +574,8 @@
             // 
             // numberOfShiftsLabel3
             // 
+            this.numberOfShiftsLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.numberOfShiftsLabel3.AutoSize = true;
             this.numberOfShiftsLabel3.Location = new System.Drawing.Point(413, 230);
             this.numberOfShiftsLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -487,6 +587,8 @@
             // 
             // shiftTime3
             // 
+            this.shiftTime3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.shiftTime3.AutoSize = true;
             this.shiftTime3.Location = new System.Drawing.Point(72, 230);
             this.shiftTime3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -498,17 +600,25 @@
             // 
             // numberOfShiftsCombo3
             // 
+            this.numberOfShiftsCombo3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numberOfShiftsCombo3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.numberOfShiftsCombo3.FormattingEnabled = true;
             this.numberOfShiftsCombo3.Location = new System.Drawing.Point(412, 252);
             this.numberOfShiftsCombo3.Margin = new System.Windows.Forms.Padding(4);
             this.numberOfShiftsCombo3.Name = "numberOfShiftsCombo3";
-            this.numberOfShiftsCombo3.Size = new System.Drawing.Size(169, 29);
+            this.numberOfShiftsCombo3.Size = new System.Drawing.Size(168, 29);
             this.numberOfShiftsCombo3.TabIndex = 65;
             this.numberOfShiftsCombo3.Visible = false;
             // 
             // startHour3
             // 
+            this.startHour3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.startHour3.DropDownHeight = 200;
+            this.startHour3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.startHour3.FormattingEnabled = true;
+            this.startHour3.IntegralHeight = false;
             this.startHour3.Location = new System.Drawing.Point(72, 253);
             this.startHour3.Margin = new System.Windows.Forms.Padding(4);
             this.startHour3.Name = "startHour3";
@@ -518,10 +628,12 @@
             // 
             // plusBTN2
             // 
+            this.plusBTN2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.plusBTN2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.plusBTN2.Location = new System.Drawing.Point(607, 154);
             this.plusBTN2.Name = "plusBTN2";
-            this.plusBTN2.Size = new System.Drawing.Size(47, 29);
+            this.plusBTN2.Size = new System.Drawing.Size(50, 29);
             this.plusBTN2.TabIndex = 62;
             this.plusBTN2.Text = "+";
             this.plusBTN2.UseVisualStyleBackColor = true;
@@ -530,6 +642,8 @@
             // 
             // toLabel2
             // 
+            this.toLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.toLabel2.AutoSize = true;
             this.toLabel2.Location = new System.Drawing.Point(218, 157);
             this.toLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -541,7 +655,13 @@
             // 
             // endHour2
             // 
+            this.endHour2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.endHour2.DropDownHeight = 200;
+            this.endHour2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.endHour2.DropDownWidth = 82;
             this.endHour2.FormattingEnabled = true;
+            this.endHour2.IntegralHeight = false;
             this.endHour2.Location = new System.Drawing.Point(250, 154);
             this.endHour2.Margin = new System.Windows.Forms.Padding(4);
             this.endHour2.Name = "endHour2";
@@ -551,6 +671,8 @@
             // 
             // numberOfShiftsLabel2
             // 
+            this.numberOfShiftsLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.numberOfShiftsLabel2.AutoSize = true;
             this.numberOfShiftsLabel2.Location = new System.Drawing.Point(415, 131);
             this.numberOfShiftsLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -562,6 +684,8 @@
             // 
             // shiftTime2
             // 
+            this.shiftTime2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.shiftTime2.AutoSize = true;
             this.shiftTime2.Location = new System.Drawing.Point(73, 131);
             this.shiftTime2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -573,6 +697,9 @@
             // 
             // numberOfShiftsCombo2
             // 
+            this.numberOfShiftsCombo2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numberOfShiftsCombo2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.numberOfShiftsCombo2.FormattingEnabled = true;
             this.numberOfShiftsCombo2.Location = new System.Drawing.Point(415, 154);
             this.numberOfShiftsCombo2.Margin = new System.Windows.Forms.Padding(4);
@@ -583,7 +710,12 @@
             // 
             // startHour2
             // 
+            this.startHour2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.startHour2.DropDownHeight = 200;
+            this.startHour2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.startHour2.FormattingEnabled = true;
+            this.startHour2.IntegralHeight = false;
             this.startHour2.Location = new System.Drawing.Point(73, 154);
             this.startHour2.Margin = new System.Windows.Forms.Padding(4);
             this.startHour2.Name = "startHour2";
@@ -593,6 +725,8 @@
             // 
             // toLabel1
             // 
+            this.toLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.toLabel1.AutoSize = true;
             this.toLabel1.Location = new System.Drawing.Point(218, 65);
             this.toLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -603,6 +737,8 @@
             // 
             // numberOfShiftsLabel1
             // 
+            this.numberOfShiftsLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.numberOfShiftsLabel1.AutoSize = true;
             this.numberOfShiftsLabel1.Location = new System.Drawing.Point(413, 39);
             this.numberOfShiftsLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -613,6 +749,8 @@
             // 
             // shiftTime1
             // 
+            this.shiftTime1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.shiftTime1.AutoSize = true;
             this.shiftTime1.Location = new System.Drawing.Point(71, 39);
             this.shiftTime1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -625,18 +763,6 @@
             // 
             this.printDialog.UseEXDialog = true;
             // 
-            // plusBTN1
-            // 
-            this.plusBTN1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.plusBTN1.Location = new System.Drawing.Point(607, 62);
-            this.plusBTN1.Name = "plusBTN1";
-            this.plusBTN1.Size = new System.Drawing.Size(47, 29);
-            this.plusBTN1.TabIndex = 53;
-            this.plusBTN1.Text = "+";
-            this.mainToolTop.SetToolTip(this.plusBTN1, "Add a shift");
-            this.plusBTN1.UseVisualStyleBackColor = true;
-            this.plusBTN1.Click += new System.EventHandler(this.plusBTN1_Click);
-            // 
             // LogCreator
             // 
             this.AcceptButton = this.createBTN;
@@ -646,7 +772,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(676, 170);
+            this.ClientSize = new System.Drawing.Size(679, 168);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.workProgressBar);
             this.Cursor = System.Windows.Forms.Cursors.Default;

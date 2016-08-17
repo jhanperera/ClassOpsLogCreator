@@ -1,22 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Excel = Microsoft.Office.Interop.Excel;
+using System.Collections.Generic;
+
 
 namespace ClassOpsLogCreator
 {
     public partial class LogViewer : Form
     {
  
+        //Private variables to hold some important vales
         private System.Array rangeArray = null;
         private string startTime = null;
         private string endTime = null;
+        private int shiftNumber = 0;
+        private int numberOfShifts = 0;
+
+        //Flags for when the buttons are clicked
+        private bool previousClicked = false;
+        private bool nextClicked = false;
+
+        //List of employees
+        List<string> employeeNameList;
 
         //A lock object to lock this thread from being accessed across memory
         private Object thisLock = new Object();
@@ -25,15 +31,25 @@ namespace ClassOpsLogCreator
         /// <summary>
         /// Constructor for the log viewer
         /// </summary>
-        public LogViewer(System.Array Range, string StartTime, string EndTime)
+        public LogViewer(System.Array Range, string StartTime, string EndTime, int ShiftNumber, int NumberOfShifts, List<string> EmployeeNameList)
         {
             InitializeComponent();
+
+            this.nameTextBox.ForeColor = SystemColors.GrayText;
+            this.nameTextBox.Text = "Name";
+            this.nameTextBox.Leave += new System.EventHandler(this.nameTextBox_Leave);
+            this.nameTextBox.Enter += new System.EventHandler(this.nameTextBox_Enter);
 
             //Get the array representation of the range
             this.rangeArray = Range;
             //Start and end times
             this.startTime = StartTime;
             this.endTime = EndTime;
+            //Number of shifts
+            this.shiftNumber = ShiftNumber;
+            this.numberOfShifts = NumberOfShifts;
+            //EmployeeList
+            this.employeeNameList = EmployeeNameList;
         }
 
         /// <summary>
@@ -42,7 +58,31 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         public string getEmployeeName()
         {
-            return this.nameTextBox.Text.ToString();
+            if (this.nameTextBox.Text == null)
+                return null;
+
+            if (this.nameTextBox.Text.Length > 1)
+                return char.ToUpper(this.nameTextBox.Text[0]) + this.nameTextBox.Text.Substring(1);
+
+            return this.nameTextBox.Text.ToUpper();
+        }
+
+        /// <summary>
+        /// Return whether the previous button was clicked
+        /// </summary>
+        /// <returns></returns>
+        public bool isPreviousClicked()
+        {
+            return this.previousClicked;
+        }
+
+        /// <summary>
+        /// Return whether the next button was clicked
+        /// </summary>
+        /// <returns></returns>
+        public bool isNextClicked()
+        {
+            return this.nextClicked;
         }
 
         /// <summary>
@@ -52,9 +92,16 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void LogViewer_Load(object sender, EventArgs e)
         {
-            //Set the time label for the shift time
+            if(this.numberOfShifts == 1)
+            {
+                this.previousBTN.Enabled = false;
+            }
+
+            //Set the labels
             this.timeLabel.Text = this.startTime + " to " + this.endTime;
-            
+            this.numberOfLogsLabel.Text = this.shiftNumber + " of " + this.numberOfShifts;
+            this.dateLabel.Text = DateTime.Now.ToString("M/dd/yyyy");
+
             //Use a data table to store all the data and then apply it to the datagrid view
             DataTable dt = new DataTable();
             dt.Columns.Add("Task Type");
@@ -124,12 +171,6 @@ namespace ClassOpsLogCreator
         /// </summary>
         private void format_DataGirdView()
         {
-            //Set the date if it is empty
-            if(dateLabel.Text.Equals("") || dateLabel.Text == null)
-            {
-                this.dateLabel.Text = DateTime.Now.ToString("M/dd/yyyy");
-            }
-
             //Set some color formats
             Color redBackground = Color.FromArgb(255, 199, 206);
             Color redFont = Color.FromArgb(156, 0, 6);
@@ -188,6 +229,24 @@ namespace ClassOpsLogCreator
             dataGridView1.EnableHeadersVisualStyles = false;
         }
 
+        private void nameTextBox_Leave(object sender, EventArgs e)
+        {
+            if (nameTextBox.Text.Length == 0)
+            {
+                nameTextBox.Text = "Name";
+                nameTextBox.ForeColor = SystemColors.GrayText;
+            }
+        }
+
+        private void nameTextBox_Enter(object sender, EventArgs e)
+        {
+            if (nameTextBox.Text == "Name")
+            {
+                nameTextBox.Text = "";
+                nameTextBox.ForeColor = SystemColors.WindowText;
+            }
+        }
+
         /// <summary>
         /// When the next button is clicked we close the current window and return
         /// </summary>
@@ -196,14 +255,32 @@ namespace ClassOpsLogCreator
         private void nextBTN_Click(object sender, EventArgs e)
         {
             //INPUT VALIDATION!
-            if(this.nameTextBox.Text == "" || this.nameTextBox.Text == null)
+            if(this.nameTextBox.Text.Equals("Name"))
             {
-                MessageBox.Show("Text box cannot be empty!");
+                MessageBox.Show("Name Box cannot be empty!");
             }
-            else
+            else if(!(employeeNameList.Contains(this.nameTextBox.Text.ToLower())))
             {
+                MessageBox.Show("Invalid employee name!");
+            }
+            else //Everything is good
+            {
+                this.previousClicked = false;
+                this.nextClicked = true;
                 this.Close();
             }          
+        }
+
+        /// <summary>
+        /// When the previous button is clicked we close the current window and send a signal.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void previousBTN_Click(object sender, EventArgs e)
+        {
+            this.nextClicked = false;
+            this.previousClicked = true;
+            this.Close();
         }
     }
 }
