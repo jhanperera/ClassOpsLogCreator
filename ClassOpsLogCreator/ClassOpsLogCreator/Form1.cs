@@ -30,25 +30,27 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
 
-        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        /*public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
-        public readonly string JEANNINE_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
-        public readonly string RAUL_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
-        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
-        public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
+        public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
+        public readonly string JEANNINE_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
+        public readonly string EXISTING_MASTER_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
 
         //A stack for some thread safer operations
+        private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();
+
         private readonly ConcurrentStack<System.Array> logNextStack = new ConcurrentStack<System.Array>();
         private readonly ConcurrentStack<System.Array> logPretStack = new ConcurrentStack<System.Array>();
 
@@ -578,11 +580,6 @@ namespace ClassOpsLogCreator
                 workDone = true;
                 Quit();
             }
-            //Enable the button again
-            createBTN.Enabled = true;
-            plusBTN1.Enabled = true;
-            plusBTN2.Enabled = true;
-            plusBTN3.Enabled = true;
 
             if (workDone)
             {
@@ -593,9 +590,9 @@ namespace ClassOpsLogCreator
                 if (plusClicked1 && !plusClicked2 && !plusClicked3)
                 {
                     //Display the logs 
-                    displayLogs(this.startTimeFromCombo2, this.endTimeFromCombo2, rowNumbers2, numberOfShifts2);
-                    displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
-
+                    displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1, "Shift #1:");
+                    displayLogs(this.startTimeFromCombo2, this.endTimeFromCombo2, rowNumbers2, numberOfShifts2, "Shift #2:");
+                    
                     //Print the logs
                     if (printDlg.ShowDialog() == DialogResult.OK)
                     {
@@ -606,11 +603,11 @@ namespace ClassOpsLogCreator
                 }
                 else if(plusClicked1 && plusClicked2 && !plusClicked3)
                 {
-                    //Display the logs 
-                    displayLogs(this.startTimeFromCombo3, this.endTimeFromCombo3, rowNumbers3, numberOfShifts3);
-                    displayLogs(this.startTimeFromCombo2, this.endTimeFromCombo2, rowNumbers2, numberOfShifts2);
-                    displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
-                    
+                    //Display the logs                                
+                    displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1, "Shift #1:");
+                    displayLogs(this.startTimeFromCombo2, this.endTimeFromCombo2, rowNumbers2, numberOfShifts2, "Shift #2:");
+                    displayLogs(this.startTimeFromCombo3, this.endTimeFromCombo3, rowNumbers3, numberOfShifts3, "Shift #3:");
+
                     //Print the logs
                     if (printDlg.ShowDialog() == DialogResult.OK)
                     {
@@ -621,11 +618,11 @@ namespace ClassOpsLogCreator
                 }
                 else if(plusClicked1 && plusClicked2 && plusClicked3)
                 {
-                    //Display the logs
-                    displayLogs(this.startTimeFromCombo4, this.endTimeFromCombo4, rowNumbers4, numberOfShifts4);
-                    displayLogs(this.startTimeFromCombo3, this.endTimeFromCombo3, rowNumbers3, numberOfShifts3);
-                    displayLogs(this.startTimeFromCombo2, this.endTimeFromCombo2, rowNumbers2, numberOfShifts2);
-                    displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
+                    //Display the logs                                                          
+                    displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1, "Shift #1:");
+                    displayLogs(this.startTimeFromCombo2, this.endTimeFromCombo2, rowNumbers2, numberOfShifts2, "Shift #2:");
+                    displayLogs(this.startTimeFromCombo3, this.endTimeFromCombo3, rowNumbers3, numberOfShifts3, "Shift #3:");
+                    displayLogs(this.startTimeFromCombo4, this.endTimeFromCombo4, rowNumbers4, numberOfShifts4, "Shift #4:");
 
                     if (printDlg.ShowDialog() == DialogResult.OK)
                     {
@@ -638,7 +635,7 @@ namespace ClassOpsLogCreator
                 else
                 {
                     //Display the logs 
-                    displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
+                    displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1, "Shift #1:");
 
                     //Print the logs
                     if (printDlg.ShowDialog() == DialogResult.OK)
@@ -646,13 +643,21 @@ namespace ClassOpsLogCreator
                         printOutLog(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
                     }
                 }
+
                 SetDefaultPrinter(defaultPrinterName);
+                printDlg.Dispose();
 
                 //Make a copy of the excel file
                 System.IO.File.Delete(EXISTING_MASTER_LOG_COPY);
                 System.IO.File.Copy(EXISTING_MASTER_LOG, EXISTING_MASTER_LOG_COPY, true);
                 //Make a new copied file not hidden
-                System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Hidden);               
+                System.IO.File.SetAttributes(EXISTING_MASTER_LOG_COPY, System.IO.FileAttributes.Hidden);
+
+                //Enable the button again
+                createBTN.Enabled = true;
+                plusBTN1.Enabled = true;
+                plusBTN2.Enabled = true;
+                plusBTN3.Enabled = true;
 
                 Quit();
             }
@@ -833,8 +838,7 @@ namespace ClassOpsLogCreator
 
                 //Save the rows and push into the stack
                 rowNumbers = new long[,] { { lastRowDestination + 2, last.Row } };
-                this.logNextStack.Push(destinationArray);
-
+                this.logNextQueue.Enqueue(destinationArray);
             }
 
             //Get the new last row
@@ -939,7 +943,7 @@ namespace ClassOpsLogCreator
                         Excel.Range toArrayRange = existingMasterWorkSheet.get_Range("A" + startRow, "G" + (endRow));
                         value = (System.Array)toArrayRange.Value2;
                         //Send the array to the stack
-                        this.logNextStack.Push(value);
+                        this.logNextQueue.Enqueue(value);
                         //save the start and end times
                         rowValues[arrayCount, 0] = startRow;
                         rowValues[arrayCount, 1] = endRow;
@@ -953,7 +957,7 @@ namespace ClassOpsLogCreator
                         Excel.Range toArrayRange = existingMasterWorkSheet.get_Range("A" + startRow, "G" + (endRow - 1));
                         value = (System.Array)toArrayRange.Value2;
                         //Send the array to the stack
-                        this.logNextStack.Push(value);
+                        this.logNextQueue.Enqueue(value);
                         //save the start and end times
                         rowValues[arrayCount, 0] = startRow;
                         rowValues[arrayCount, 1] = endRow - 1;
@@ -970,13 +974,14 @@ namespace ClassOpsLogCreator
         /// <summary>
         /// This method will display all the logs that are created
         /// 
-        /// TO DO: account for when the previous button is clicked!
+        /// This also accounts for the previous and next button being clicked
+        /// 
         /// </summary>
         /// <param name="startTime"></param>
         /// <param name="endTime"></param>
         /// <param name="rowNumbers"></param>
         /// <param name="numberOfShifts"></param>
-        private void displayLogs(string startTime, string endTime, long[,] rowNumbers, int numberOfShifts)
+        private void displayLogs(string startTime, string endTime, long[,] rowNumbers, int numberOfShifts, string shiftTitle)
         {
             //Open the existing excel file
             existingMaster = new Excel.Application();
@@ -996,10 +1001,10 @@ namespace ClassOpsLogCreator
             if (numberOfShifts == 1)
             {
                 //pop from the stack and send the item to the log viewer
-                if(this.logNextStack.TryPop(out destinationArray))
+                if(this.logNextQueue.TryDequeue(out destinationArray))
                 {
                     //Display the log viewer
-                    LogViewer lv = new LogViewer(destinationArray, startTime, endTime, numberOfShifts, numberOfShifts, employeeNames);
+                    LogViewer lv = new LogViewer(destinationArray, startTime, endTime, numberOfShifts, numberOfShifts, employeeNames, shiftTitle);
                     lv.ShowDialog();
                     //Set the employee name if the next button is clicked.
                     Excel.Range name_range = existingMasterWorkSheet.get_Range("A" + (rowNumbers[0, 0]), "A" + (rowNumbers[0, 1]));
@@ -1008,13 +1013,13 @@ namespace ClassOpsLogCreator
             }
             else
             {
-                int indexCount = rowNumbers.GetUpperBound(0);
+                int indexCount = 0; 
                 int shiftCounter = 1;
                 //pop from the stack and send the item to the log viewer
-                while (indexCount >= 0 && this.logNextStack.TryPop(out destinationArray))
+                while (indexCount <= rowNumbers.GetUpperBound(0) && this.logNextQueue.TryDequeue(out destinationArray))
                 {
                     //Display the log viewer
-                    LogViewer lv = new LogViewer(destinationArray, startTime, endTime, shiftCounter, numberOfShifts, employeeNames);
+                    LogViewer lv = new LogViewer(destinationArray, startTime, endTime, shiftCounter, numberOfShifts, employeeNames, shiftTitle);
                     lv.ShowDialog();
                     //Set the employee name
                     if (lv.isNextClicked())
@@ -1023,36 +1028,66 @@ namespace ClassOpsLogCreator
                         this.logPretStack.Push(destinationArray);
                         Excel.Range name_range = existingMasterWorkSheet.get_Range("A" + (rowNumbers[indexCount, 0]), "A" + (rowNumbers[indexCount, 1]));
                         name_range.Value2 = lv.getEmployeeName();
-                        indexCount--;
+                        indexCount++;
                         shiftCounter++;
                     }
                     //If the previous button is clicked
                     else if(lv.isPreviousClicked() && shiftCounter > 1)
-                    {
+                    {                        
                         //Push the current destination array
                         this.logNextStack.Push(destinationArray);
                         while(this.logPretStack.TryPop(out destinationArray))
                         {
-                            indexCount++;
+                            indexCount--;
                             shiftCounter--;
                             //Display the log viewer
-                            lv = new LogViewer(destinationArray, startTime, endTime, shiftCounter, numberOfShifts, employeeNames);
+                            lv = new LogViewer(destinationArray, startTime, endTime, shiftCounter, numberOfShifts, employeeNames, shiftTitle);
                             lv.ShowDialog();
-                            if (lv.isNextClicked())
+                            if (lv.isNextClicked() && !this.logNextStack.IsEmpty)
                             {
                                 //Put this log into the previous Stack 
                                 this.logPretStack.Push(destinationArray);
                                 Excel.Range name_range = existingMasterWorkSheet.get_Range("A" + (rowNumbers[indexCount, 0]), "A" + (rowNumbers[indexCount, 1]));
                                 name_range.Value2 = lv.getEmployeeName();
-                                indexCount--;
+                                indexCount++;
                                 shiftCounter++;
+                                //Try to pop from the next stack 
+                                while (this.logNextStack.TryPop(out destinationArray))
+                                {
+                                    //display the log
+                                    lv = new LogViewer(destinationArray, startTime, endTime, shiftCounter, numberOfShifts, employeeNames, shiftTitle);
+                                    lv.ShowDialog();
+                                    //If next is clicked we continue on the next stack and save
+                                    if(lv.isNextClicked())
+                                    {
+                                        this.logPretStack.Push(destinationArray);
+                                        name_range = existingMasterWorkSheet.get_Range("A" + (rowNumbers[indexCount, 0]), "A" + (rowNumbers[indexCount, 1]));
+                                        name_range.Value2 = lv.getEmployeeName();
+                                        indexCount++;
+                                        shiftCounter++;
+                                    }
+                                    //If previous is clicked we break out and go to previous sack
+                                    if(lv.isPreviousClicked())
+                                    {
+                                        break;
+                                    }
+                                }  
+                            }
+                            //If the next stack is empty we need to break out
+                            if(lv.isNextClicked() && this.logNextStack.IsEmpty)
+                            {
                                 break;
                             }
-                            this.logNextStack.Push(destinationArray);
+                            //Push it into the next stack if we have room in it.
+                            this.logNextStack.Push(destinationArray);  
                         }
                     }         
                 }
             }
+
+            //Empty the stacks
+            this.logNextStack.Clear();
+            this.logPretStack.Clear();
 
             //Save
             existingMaster.DisplayAlerts = false;

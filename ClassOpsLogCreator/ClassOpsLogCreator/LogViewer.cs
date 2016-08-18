@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace ClassOpsLogCreator
 {
-    public partial class LogViewer : Form
+    public partial class LogViewer : MetroFramework.Forms.MetroForm
     {
  
         //Private variables to hold some important vales
@@ -31,9 +31,11 @@ namespace ClassOpsLogCreator
         /// <summary>
         /// Constructor for the log viewer
         /// </summary>
-        public LogViewer(System.Array Range, string StartTime, string EndTime, int ShiftNumber, int NumberOfShifts, List<string> EmployeeNameList)
+        public LogViewer(System.Array Range, string StartTime, string EndTime, int ShiftNumber, int NumberOfShifts, List<string> EmployeeNameList, string shiftTitle)
         {
             InitializeComponent();
+
+            this.Text = shiftTitle;
 
             this.nameTextBox.ForeColor = SystemColors.GrayText;
             this.nameTextBox.Text = "Name";
@@ -92,9 +94,14 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void LogViewer_Load(object sender, EventArgs e)
         {
-            if(this.numberOfShifts == 1)
+            if(this.shiftNumber == 1)
             {
                 this.previousBTN.Enabled = false;
+            }
+
+            if(this.shiftNumber == this.numberOfShifts)
+            {
+                this.nextBTN.Text = "Done";
             }
 
             //Set the labels
@@ -252,7 +259,7 @@ namespace ClassOpsLogCreator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void nextBTN_Click(object sender, EventArgs e)
+        private void nextBTN_Click_1(object sender, EventArgs e)
         {
             //INPUT VALIDATION!
             if(this.nameTextBox.Text.Equals("Name"))

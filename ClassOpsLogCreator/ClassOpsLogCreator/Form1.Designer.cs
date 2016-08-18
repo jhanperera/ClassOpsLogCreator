@@ -86,7 +86,7 @@
             // 
             this.workProgressBar.BackColor = System.Drawing.SystemColors.InfoText;
             this.workProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.workProgressBar.Location = new System.Drawing.Point(0, 140);
+            this.workProgressBar.Location = new System.Drawing.Point(0, 143);
             this.workProgressBar.Margin = new System.Windows.Forms.Padding(4);
             this.workProgressBar.Name = "workProgressBar";
             this.workProgressBar.Size = new System.Drawing.Size(679, 28);
@@ -222,7 +222,7 @@
             // createBTN
             // 
             this.createBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.createBTN.Location = new System.Drawing.Point(260, 105);
+            this.createBTN.Location = new System.Drawing.Point(260, 108);
             this.createBTN.Margin = new System.Windows.Forms.Padding(4);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(158, 31);
@@ -327,7 +327,7 @@
             this.mainPanel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(679, 140);
+            this.mainPanel.Size = new System.Drawing.Size(679, 143);
             this.mainPanel.TabIndex = 54;
             // 
             // statusText
@@ -335,7 +335,7 @@
             this.statusText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.statusText.AutoSize = true;
             this.statusText.BackColor = System.Drawing.Color.Transparent;
-            this.statusText.Location = new System.Drawing.Point(11, 112);
+            this.statusText.Location = new System.Drawing.Point(11, 115);
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(0, 21);
             this.statusText.TabIndex = 55;
@@ -391,7 +391,7 @@
             this.shift1Label.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.shift1Label.Location = new System.Drawing.Point(12, 9);
             this.shift1Label.Name = "shift1Label";
-            this.shift1Label.Size = new System.Drawing.Size(46, 17);
+            this.shift1Label.Size = new System.Drawing.Size(44, 17);
             this.shift1Label.TabIndex = 84;
             this.shift1Label.Text = "Shift 1";
             // 
@@ -772,13 +772,13 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(679, 168);
+            this.ClientSize = new System.Drawing.Size(679, 171);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.workProgressBar);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
