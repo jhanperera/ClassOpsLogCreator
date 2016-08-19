@@ -137,7 +137,7 @@
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(20, 60);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(639, 159);
+            this.metroPanel1.Size = new System.Drawing.Size(639, 158);
             this.metroPanel1.TabIndex = 55;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
@@ -147,7 +147,7 @@
             // 
             this.createBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.createBTN.Highlight = true;
-            this.createBTN.Location = new System.Drawing.Point(240, 118);
+            this.createBTN.Location = new System.Drawing.Point(240, 117);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(158, 31);
             this.createBTN.TabIndex = 49;
@@ -159,7 +159,7 @@
             // 
             this.statusText.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.statusText.AutoSize = true;
-            this.statusText.Location = new System.Drawing.Point(16, 129);
+            this.statusText.Location = new System.Drawing.Point(16, 128);
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(0, 0);
             this.statusText.TabIndex = 50;
@@ -608,17 +608,19 @@
             // LogCreator
             // 
             this.AcceptButton = this.createBTN;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(679, 239);
+            this.ClientSize = new System.Drawing.Size(679, 238);
             this.Controls.Add(this.metroPanel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(679, 544);
+            this.MinimumSize = new System.Drawing.Size(679, 238);
             this.Name = "LogCreator";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;

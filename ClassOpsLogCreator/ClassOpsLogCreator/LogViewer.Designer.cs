@@ -103,7 +103,7 @@
             // 
             this.AcceptButton = this.nextBTN;
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ControlBox = false;
             this.Controls.Add(this.nextBTN);
             this.Controls.Add(this.previousBTN);
@@ -116,6 +116,7 @@
             this.Name = "LogViewer";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.LogViewer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logCreatorBindingSource)).EndInit();

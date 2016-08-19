@@ -130,7 +130,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
     <value>dataGridView1</value>
@@ -148,7 +148,7 @@
     <value>17, 17</value>
   </metadata>
   <data name="numberOfLogsLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Bottom, Left, Right</value>
   </data>
   <data name="numberOfLogsLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -157,7 +157,7 @@
     <value>Segoe UI, 12pt</value>
   </data>
   <data name="numberOfLogsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>357, 541</value>
+    <value>382, 540</value>
   </data>
   <data name="numberOfLogsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 21</value>
@@ -237,8 +237,11 @@
   <data name="&gt;&gt;dateLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <metadata name="metroToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>205, 17</value>
+  </metadata>
   <data name="nameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="nameTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>287, 73</value>
@@ -252,9 +255,6 @@
   <data name="nameTextBox.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <metadata name="metroToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>205, 17</value>
-  </metadata>
   <data name="nameTextBox.ToolTip" xml:space="preserve">
     <value>Please enter an employee name.</value>
   </data>
@@ -271,16 +271,16 @@
     <value>2</value>
   </data>
   <data name="previousBTN.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Bottom, Left, Right</value>
   </data>
   <data name="previousBTN.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 531</value>
   </data>
   <data name="previousBTN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 30</value>
+    <value>135, 30</value>
   </data>
   <data name="previousBTN.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>2</value>
   </data>
   <data name="previousBTN.Text" xml:space="preserve">
     <value>&lt; Previous</value>
@@ -301,13 +301,13 @@
     <value>1</value>
   </data>
   <data name="nextBTN.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Bottom, Left, Right</value>
   </data>
   <data name="nextBTN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>648, 531</value>
+    <value>656, 531</value>
   </data>
   <data name="nextBTN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 30</value>
+    <value>135, 30</value>
   </data>
   <data name="nextBTN.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -330,11 +330,14 @@
   <data name="&gt;&gt;nextBTN.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="metroToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>205, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1298,6 +1301,12 @@
         3yZ+cx/AbvK/zQNojtuWuG2ddwmB/JnzbTFpPx/ccXuPD4C9AHx6eJsgAPyUzHdZ9rvIv+sx74Lccdwl
         Am/zFNp/v+sx4Y7be/wO+P9zGQX/Xes44AAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>814, 775</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>814, 580</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Log Viewer</value>
