@@ -94,6 +94,7 @@
             // nextBTN
             // 
             resources.ApplyResources(this.nextBTN, "nextBTN");
+            this.nextBTN.Highlight = true;
             this.nextBTN.Name = "nextBTN";
             this.metroToolTip1.SetToolTip(this.nextBTN, resources.GetString("nextBTN.ToolTip"));
             this.nextBTN.Click += new System.EventHandler(this.nextBTN_Click_1);

@@ -30,23 +30,23 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
 
-        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
+        /*public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
 
         //A stack for some thread safer operations
         private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();
@@ -108,8 +108,6 @@ namespace ClassOpsLogCreator
         public LogCreator()
         {
             InitializeComponent();
-
-            this.plusBTN1.TextAlign = ContentAlignment.TopCenter;
                       
             //A pop up message to ensure that the user is aware that the zone super logs need to be in before running this application
             DialogResult checkMessage = checkMessage = MessageBox.Show("Ensure all Zone Supervisor Logs have been submitted before running this application. "
@@ -266,7 +264,7 @@ namespace ClassOpsLogCreator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void createBTN_Click(object sender, EventArgs e)
+        private void createBTN_Click_1(object sender, EventArgs e)
         {
             /**************************************INPUT VALIDATION***********************/
             //If the first plus button is clicked
@@ -560,6 +558,11 @@ namespace ClassOpsLogCreator
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //this.workProgressBar.Value = 0;
                 //this.workProgressBar.Refresh();
+                createBTN.Enabled = true;
+                plusBTN1.Enabled = true;
+                plusBTN2.Enabled = true;
+                plusBTN3.Enabled = true;
+
                 Quit();
             }
             else if (e.Cancelled)
@@ -572,6 +575,11 @@ namespace ClassOpsLogCreator
                 // CancelAsync was called.
                 //this.workProgressBar.Value = 0;
                 //this.workProgressBar.Refresh();
+                createBTN.Enabled = true;
+                plusBTN1.Enabled = true;
+                plusBTN2.Enabled = true;
+                plusBTN3.Enabled = true;
+
                 Quit();
             }
             else
@@ -1188,7 +1196,7 @@ namespace ClassOpsLogCreator
             switch (MessageBox.Show(this, "Closing, clear CLO?","Closing", MessageBoxButtons.YesNo))
             {
                 //No the person does not want to close the application
-                //Else we go to defualt case
+                //Else we go to default case
                 case DialogResult.No:
                     //Close with no clear
                     break;
@@ -1241,7 +1249,7 @@ namespace ClassOpsLogCreator
         /// </summary>
         /// <param name="sender">a sender object (A controller)</param>
         /// <param name="e"> a helper argument</param>
-        private void plusBTN1_Click(object sender, EventArgs e)
+        private void plusBTN1_Click_1(object sender, EventArgs e)
         {
             //initialize all components
 
@@ -1256,7 +1264,7 @@ namespace ClassOpsLogCreator
                 this.lineDivide2.Height = 2;
 
                 //Make them all visible
-                this.Height += 95;
+                this.Height += 100;
                 this.Top -= 72;
                 this.shift2Label.Visible = true;
                 this.lineDivide2.Visible = true;
@@ -1277,8 +1285,8 @@ namespace ClassOpsLogCreator
                 this.plusClicked1 = false;
                 this.plusBTN1.Text = "+";
 
-                //Make them all visable
-                this.Height -= 95;
+                //Make them all visible
+                this.Height -= 100;
                 this.Top += 72;
                 this.shift2Label.Visible = false;
                 this.lineDivide2.Visible = false;
@@ -1301,7 +1309,7 @@ namespace ClassOpsLogCreator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"> a helper argument</param>
-        private void plusBTN2_Click_1(object sender, EventArgs e)
+        private void plusBTN2_Click(object sender, EventArgs e)
         {
             //initialize all components
 
@@ -1318,7 +1326,7 @@ namespace ClassOpsLogCreator
                 this.lineDivide3.Height = 2;
 
                 //Make them all visible
-                this.Height += 95;
+                this.Height += 100;
                 this.Top -= 72;
                 this.shift3Label.Visible = true;
                 this.lineDivide3.Visible = true;
@@ -1341,8 +1349,8 @@ namespace ClassOpsLogCreator
                 this.plusClicked2 = false;
                 this.plusBTN2.Text = "+";
 
-                //Make them all visable
-                this.Height -= 95;
+                //Make them all visible
+                this.Height -= 100;
                 this.Top += 72;
                 this.shift3Label.Visible = false;
                 this.lineDivide3.Visible = false;
@@ -1364,7 +1372,7 @@ namespace ClassOpsLogCreator
         /// Make the new controls appear and extend the frame
         /// </summary>
         /// <param name="sender"></param>
-        private void plusBTN3_Click_1(object sender, EventArgs e)
+        private void plusBTN3_Click(object sender, EventArgs e)
         {
             if (!plusClicked3)
             {
@@ -1401,7 +1409,7 @@ namespace ClassOpsLogCreator
                 this.plusClicked3 = false;
                 this.plusBTN3.Text = "+";
 
-                //Make them all visable
+                //Make them all visible
                 this.Height -= 100;
                 this.Top += 72;
                 this.shift4Label.Visible = false;
