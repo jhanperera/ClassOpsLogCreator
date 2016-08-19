@@ -26,7 +26,7 @@ using System.Drawing.Printing;
 /// </summary>
 namespace ClassOpsLogCreator
 {
-    public partial class LogCreator : Form
+    public partial class LogCreator : MetroFramework.Forms.MetroForm
     {
         #region Private Attributes/Variables
 
@@ -135,7 +135,8 @@ namespace ClassOpsLogCreator
                 ControlStyles.DoubleBuffer,
                 true);
 
-            this.lineDivide1.BorderStyle = BorderStyle.Fixed3D;
+
+            //this.lineDivide1.BorderStyle = BorderStyle.Fixed3D;
             this.lineDivide1.AutoSize = false;
             this.lineDivide1.Height = 2;
 
@@ -541,7 +542,7 @@ namespace ClassOpsLogCreator
             {
                 this.statusText.Text = "";
             }
-            this.workProgressBar.Value = e.ProgressPercentage;
+            //this.workProgressBar.Value = e.ProgressPercentage;
         }
 
         /// <summary>
@@ -557,8 +558,8 @@ namespace ClassOpsLogCreator
             {
                 MessageBox.Show(e.Error.Message, "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.workProgressBar.Value = 0;
-                this.workProgressBar.Refresh();
+                //this.workProgressBar.Value = 0;
+                //this.workProgressBar.Refresh();
                 Quit();
             }
             else if (e.Cancelled)
@@ -569,8 +570,8 @@ namespace ClassOpsLogCreator
                 // the DoWork event handler, the Canceled
                 // flag may not have been set, even though
                 // CancelAsync was called.
-                this.workProgressBar.Value = 0;
-                this.workProgressBar.Refresh();
+                //this.workProgressBar.Value = 0;
+                //this.workProgressBar.Refresh();
                 Quit();
             }
             else
@@ -1250,7 +1251,7 @@ namespace ClassOpsLogCreator
                 this.plusClicked1 = true;
                 this.plusBTN1.Text = "-";
                 //Set the divider
-                this.lineDivide2.BorderStyle = BorderStyle.Fixed3D;
+                //this.lineDivide2.BorderStyle = BorderStyle.Fixed3D;
                 this.lineDivide2.AutoSize = false;
                 this.lineDivide2.Height = 2;
 
@@ -1312,7 +1313,7 @@ namespace ClassOpsLogCreator
                 this.plusClicked2 = true;
                 this.plusBTN2.Text = "-";
                 //Set the divider
-                this.lineDivide3.BorderStyle = BorderStyle.Fixed3D;
+                //this.lineDivide3.BorderStyle = BorderStyle.Fixed3D;
                 this.lineDivide3.AutoSize = false;
                 this.lineDivide3.Height = 2;
 
@@ -1373,7 +1374,7 @@ namespace ClassOpsLogCreator
                 this.plusClicked3 = true;
                 this.plusBTN3.Text = "-";
                 //Set the divider
-                this.lineDivide4.BorderStyle = BorderStyle.Fixed3D;
+                //this.lineDivide4.BorderStyle = BorderStyle.Fixed3D;
                 this.lineDivide4.AutoSize = false;
                 this.lineDivide4.Height = 2;
 
