@@ -558,6 +558,7 @@ namespace ClassOpsLogCreator
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //this.workProgressBar.Value = 0;
                 //this.workProgressBar.Refresh();
+                this.statusText.Text = "Error!";
                 createBTN.Enabled = true;
                 plusBTN1.Enabled = true;
                 plusBTN2.Enabled = true;
@@ -575,6 +576,7 @@ namespace ClassOpsLogCreator
                 // CancelAsync was called.
                 //this.workProgressBar.Value = 0;
                 //this.workProgressBar.Refresh();
+                this.statusText.Text = "Canceled!";
                 createBTN.Enabled = true;
                 plusBTN1.Enabled = true;
                 plusBTN2.Enabled = true;

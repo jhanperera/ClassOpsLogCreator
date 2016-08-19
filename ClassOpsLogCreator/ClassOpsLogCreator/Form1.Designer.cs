@@ -513,7 +513,6 @@
             // 
             // numberOfShiftsCombo1
             // 
-            this.numberOfShiftsCombo1.FormattingEnabled = true;
             this.numberOfShiftsCombo1.ItemHeight = 23;
             this.numberOfShiftsCombo1.Location = new System.Drawing.Point(407, 62);
             this.numberOfShiftsCombo1.Name = "numberOfShiftsCombo1";
