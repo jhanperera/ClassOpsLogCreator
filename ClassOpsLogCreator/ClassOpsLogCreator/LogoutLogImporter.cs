@@ -203,7 +203,7 @@ namespace ClassOpsLogCreator
             {
                 //and remove all classes with no crestron. 
                 DateTime check = Convert.ToDateTime(timeArray[i]);
-                if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay)
+                if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay < endingTime.TimeOfDay)
                     && (classList.hasCrestron(classArray[i])))
                 {
                     //Set the time

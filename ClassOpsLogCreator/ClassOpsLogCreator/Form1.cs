@@ -30,23 +30,23 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
 
-        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        /*public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
-        public readonly string JEANNINE_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
-        public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
-        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
-        public readonly string EXISTING_MASTER_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
+        public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
+        public readonly string JEANNINE_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
+        public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
 
         //A stack for some thread safer operations
         private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();
@@ -675,7 +675,7 @@ namespace ClassOpsLogCreator
         }
 
 
-        // ALL HELPER METHODS GO HERE BELLOW HERE!
+        // ALL HELPER/WORKER METHODS GO HERE BELLOW HERE!
 
         /// <summary>
         /// This method will create the logs and write to the excel file with assistance 
@@ -919,7 +919,7 @@ namespace ClassOpsLogCreator
         /// This returns an array with the start row and the end row of each log
         /// array[i,j] where i is the starting row and j is the ending row
         /// 
-        /// THIS METHOD ALSO ADDS THE LOG TO THE Stack! 
+        /// THIS METHOD ALSO ADDS THE LOG TO THE QUEUE! 
         /// </summary>
         /// <param name="range"></param>
         /// <returns></returns>
@@ -953,7 +953,7 @@ namespace ClassOpsLogCreator
                     {
                         Excel.Range toArrayRange = existingMasterWorkSheet.get_Range("A" + startRow, "G" + (endRow));
                         value = (System.Array)toArrayRange.Value2;
-                        //Send the array to the stack
+                        //Send the array to the Queue
                         this.logNextQueue.Enqueue(value);
                         //save the start and end times
                         rowValues[arrayCount, 0] = startRow;
@@ -967,7 +967,7 @@ namespace ClassOpsLogCreator
                     {
                         Excel.Range toArrayRange = existingMasterWorkSheet.get_Range("A" + startRow, "G" + (endRow - 1));
                         value = (System.Array)toArrayRange.Value2;
-                        //Send the array to the stack
+                        //Send the array to the Queue
                         this.logNextQueue.Enqueue(value);
                         //save the start and end times
                         rowValues[arrayCount, 0] = startRow;
@@ -1011,8 +1011,8 @@ namespace ClassOpsLogCreator
             System.Array destinationArray = null;
             if (numberOfShifts == 1)
             {
-                //pop from the stack and send the item to the log viewer
-                if(this.logNextQueue.TryDequeue(out destinationArray))
+                //Dequeue from the Queue and send the item to the log viewer
+                if (this.logNextQueue.TryDequeue(out destinationArray))
                 {
                     //Display the log viewer
                     LogViewer lv = new LogViewer(destinationArray, startTime, endTime, numberOfShifts, numberOfShifts, employeeNames, shiftTitle);
@@ -1026,7 +1026,7 @@ namespace ClassOpsLogCreator
             {
                 int indexCount = 0; 
                 int shiftCounter = 1;
-                //pop from the stack and send the item to the log viewer
+                //Dequeue from the Queue and send the item to the log viewer
                 while (indexCount <= rowNumbers.GetUpperBound(0) && this.logNextQueue.TryDequeue(out destinationArray))
                 {
                     //Display the log viewer

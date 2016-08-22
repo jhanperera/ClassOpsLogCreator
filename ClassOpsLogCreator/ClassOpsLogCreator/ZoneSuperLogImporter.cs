@@ -255,7 +255,7 @@ namespace ClassOpsLogCreator
                     {
                         //Check if the event is between the selected times
                         DateTime check = DateTime.ParseExact(arrayC.GetValue(i + 1, 1).ToString(), "HHmm", null);
-                        if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay <= endingTime.TimeOfDay))
+                        if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay < endingTime.TimeOfDay))
                         {
                             //Tasks type
                             values[index, 0] = arrayA.GetValue(i + 1, 1).ToString();
