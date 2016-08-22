@@ -82,13 +82,11 @@
             this.nameTextBox.FontWeight = MetroFramework.MetroTextBoxWeight.Bold;
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.metroToolTip1.SetToolTip(this.nameTextBox, resources.GetString("nameTextBox.ToolTip"));
             // 
             // previousBTN
             // 
             resources.ApplyResources(this.previousBTN, "previousBTN");
             this.previousBTN.Name = "previousBTN";
-            this.metroToolTip1.SetToolTip(this.previousBTN, resources.GetString("previousBTN.ToolTip"));
             this.previousBTN.Click += new System.EventHandler(this.previousBTN_Click);
             // 
             // nextBTN
@@ -96,7 +94,6 @@
             resources.ApplyResources(this.nextBTN, "nextBTN");
             this.nextBTN.Highlight = true;
             this.nextBTN.Name = "nextBTN";
-            this.metroToolTip1.SetToolTip(this.nextBTN, resources.GetString("nextBTN.ToolTip"));
             this.nextBTN.Click += new System.EventHandler(this.nextBTN_Click_1);
             // 
             // LogViewer

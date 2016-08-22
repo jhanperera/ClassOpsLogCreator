@@ -126,7 +126,7 @@
     <value>23, 114</value>
   </data>
   <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>768, 411</value>
+    <value>744, 411</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
@@ -157,7 +157,7 @@
     <value>Segoe UI, 12pt</value>
   </data>
   <data name="numberOfLogsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>382, 540</value>
+    <value>370, 540</value>
   </data>
   <data name="numberOfLogsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 21</value>
@@ -214,7 +214,7 @@
     <value>True</value>
   </data>
   <data name="dateLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>665, 78</value>
+    <value>653, 78</value>
   </data>
   <data name="dateLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 25</value>
@@ -237,9 +237,6 @@
   <data name="&gt;&gt;dateLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <metadata name="metroToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>205, 17</value>
-  </metadata>
   <data name="nameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -247,16 +244,13 @@
     <value>287, 73</value>
   </data>
   <data name="nameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 34</value>
+    <value>217, 34</value>
   </data>
   <data name="nameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="nameTextBox.Text" xml:space="preserve">
     <value>Name</value>
-  </data>
-  <data name="nameTextBox.ToolTip" xml:space="preserve">
-    <value>Please enter an employee name.</value>
   </data>
   <data name="&gt;&gt;nameTextBox.Name" xml:space="preserve">
     <value>nameTextBox</value>
@@ -277,16 +271,13 @@
     <value>23, 531</value>
   </data>
   <data name="previousBTN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 30</value>
+    <value>111, 30</value>
   </data>
   <data name="previousBTN.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="previousBTN.Text" xml:space="preserve">
     <value>&lt; Previous</value>
-  </data>
-  <data name="previousBTN.ToolTip" xml:space="preserve">
-    <value>Move to the previous step.</value>
   </data>
   <data name="&gt;&gt;previousBTN.Name" xml:space="preserve">
     <value>previousBTN</value>
@@ -307,16 +298,13 @@
     <value>656, 531</value>
   </data>
   <data name="nextBTN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 30</value>
+    <value>111, 30</value>
   </data>
   <data name="nextBTN.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="nextBTN.Text" xml:space="preserve">
     <value>Next &gt; </value>
-  </data>
-  <data name="nextBTN.ToolTip" xml:space="preserve">
-    <value>Move to the next step.</value>
   </data>
   <data name="&gt;&gt;nextBTN.Name" xml:space="preserve">
     <value>nextBTN</value>
@@ -352,7 +340,7 @@
     <value>None</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>814, 580</value>
+    <value>790, 580</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1303,10 +1291,10 @@
 </value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>814, 775</value>
+    <value>790, 775</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>814, 580</value>
+    <value>790, 580</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Log Viewer</value>

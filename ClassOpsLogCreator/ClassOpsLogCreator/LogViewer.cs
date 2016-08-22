@@ -264,11 +264,19 @@ namespace ClassOpsLogCreator
             //INPUT VALIDATION!
             if(this.nameTextBox.Text.Equals("Name"))
             {
-                MessageBox.Show("Name Box cannot be empty!");
+                MessageBox.Show("Name Box cannot be empty!",
+                                "Error!",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Exclamation,
+                                 MessageBoxDefaultButton.Button1);
             }
             else if(!(employeeNameList.Contains(this.nameTextBox.Text.ToLower())))
             {
-                MessageBox.Show("Invalid employee name!");
+                MessageBox.Show("Invalid employee name!",
+                                "Error!",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Exclamation,
+                                 MessageBoxDefaultButton.Button1);
             }
             else //Everything is good
             {

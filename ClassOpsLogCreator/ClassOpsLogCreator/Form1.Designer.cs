@@ -150,7 +150,7 @@
             this.createBTN.Location = new System.Drawing.Point(240, 117);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(158, 31);
-            this.createBTN.TabIndex = 49;
+            this.createBTN.TabIndex = 0;
             this.createBTN.Text = "Create Logs";
             this.metroToolTip1.SetToolTip(this.createBTN, "Add another shift.");
             this.createBTN.Click += new System.EventHandler(this.createBTN_Click_1);
@@ -171,7 +171,9 @@
             this.numberOfShiftsCombo4.Location = new System.Drawing.Point(407, 363);
             this.numberOfShiftsCombo4.Name = "numberOfShiftsCombo4";
             this.numberOfShiftsCombo4.Size = new System.Drawing.Size(144, 29);
-            this.numberOfShiftsCombo4.TabIndex = 47;
+            this.numberOfShiftsCombo4.Style = MetroFramework.MetroColorStyle.Green;
+            this.numberOfShiftsCombo4.TabIndex = 23;
+            this.numberOfShiftsCombo4.TabStop = false;
             this.metroToolTip1.SetToolTip(this.numberOfShiftsCombo4, "Select number of employees working.");
             this.numberOfShiftsCombo4.Visible = false;
             // 
@@ -182,7 +184,9 @@
             this.am_pmCombo4_2.Location = new System.Drawing.Point(325, 364);
             this.am_pmCombo4_2.Name = "am_pmCombo4_2";
             this.am_pmCombo4_2.Size = new System.Drawing.Size(53, 29);
-            this.am_pmCombo4_2.TabIndex = 46;
+            this.am_pmCombo4_2.Style = MetroFramework.MetroColorStyle.Green;
+            this.am_pmCombo4_2.TabIndex = 22;
+            this.am_pmCombo4_2.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo4_2, "Am or PM.");
             this.am_pmCombo4_2.Visible = false;
             // 
@@ -193,7 +197,9 @@
             this.endHour4.Location = new System.Drawing.Point(231, 364);
             this.endHour4.Name = "endHour4";
             this.endHour4.Size = new System.Drawing.Size(88, 29);
-            this.endHour4.TabIndex = 45;
+            this.endHour4.Style = MetroFramework.MetroColorStyle.Green;
+            this.endHour4.TabIndex = 21;
+            this.endHour4.TabStop = false;
             this.metroToolTip1.SetToolTip(this.endHour4, "Select end time.");
             this.endHour4.Visible = false;
             // 
@@ -214,7 +220,9 @@
             this.am_pmCombo4_1.Location = new System.Drawing.Point(145, 364);
             this.am_pmCombo4_1.Name = "am_pmCombo4_1";
             this.am_pmCombo4_1.Size = new System.Drawing.Size(53, 29);
-            this.am_pmCombo4_1.TabIndex = 43;
+            this.am_pmCombo4_1.Style = MetroFramework.MetroColorStyle.Green;
+            this.am_pmCombo4_1.TabIndex = 20;
+            this.am_pmCombo4_1.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo4_1, "Am or PM.");
             this.am_pmCombo4_1.Visible = false;
             // 
@@ -225,16 +233,19 @@
             this.startHour4.Location = new System.Drawing.Point(51, 364);
             this.startHour4.Name = "startHour4";
             this.startHour4.Size = new System.Drawing.Size(88, 29);
-            this.startHour4.TabIndex = 42;
+            this.startHour4.Style = MetroFramework.MetroColorStyle.Green;
+            this.startHour4.TabIndex = 19;
+            this.startHour4.TabStop = false;
             this.metroToolTip1.SetToolTip(this.startHour4, "Select start time.");
             this.startHour4.Visible = false;
             // 
             // numberOfShiftsLabel4
             // 
             this.numberOfShiftsLabel4.AutoSize = true;
+            this.numberOfShiftsLabel4.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.numberOfShiftsLabel4.Location = new System.Drawing.Point(407, 340);
             this.numberOfShiftsLabel4.Name = "numberOfShiftsLabel4";
-            this.numberOfShiftsLabel4.Size = new System.Drawing.Size(144, 19);
+            this.numberOfShiftsLabel4.Size = new System.Drawing.Size(147, 19);
             this.numberOfShiftsLabel4.TabIndex = 41;
             this.numberOfShiftsLabel4.Text = "Number of employees:";
             this.numberOfShiftsLabel4.Visible = false;
@@ -253,9 +264,10 @@
             // shiftTime4
             // 
             this.shiftTime4.AutoSize = true;
+            this.shiftTime4.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.shiftTime4.Location = new System.Drawing.Point(51, 340);
             this.shiftTime4.Name = "shiftTime4";
-            this.shiftTime4.Size = new System.Drawing.Size(147, 19);
+            this.shiftTime4.Size = new System.Drawing.Size(155, 19);
             this.shiftTime4.TabIndex = 40;
             this.shiftTime4.Text = "Please select shift times:";
             this.shiftTime4.Visible = false;
@@ -274,7 +286,7 @@
             this.plusBTN3.Location = new System.Drawing.Point(572, 262);
             this.plusBTN3.Name = "plusBTN3";
             this.plusBTN3.Size = new System.Drawing.Size(56, 29);
-            this.plusBTN3.TabIndex = 37;
+            this.plusBTN3.TabIndex = 18;
             this.plusBTN3.Text = "+";
             this.metroToolTip1.SetToolTip(this.plusBTN3, "Add another shift.");
             this.plusBTN3.Visible = false;
@@ -287,7 +299,8 @@
             this.numberOfShiftsCombo3.Location = new System.Drawing.Point(407, 262);
             this.numberOfShiftsCombo3.Name = "numberOfShiftsCombo3";
             this.numberOfShiftsCombo3.Size = new System.Drawing.Size(144, 29);
-            this.numberOfShiftsCombo3.TabIndex = 36;
+            this.numberOfShiftsCombo3.TabIndex = 17;
+            this.numberOfShiftsCombo3.TabStop = false;
             this.metroToolTip1.SetToolTip(this.numberOfShiftsCombo3, "Select number of employees working.");
             this.numberOfShiftsCombo3.Visible = false;
             // 
@@ -298,7 +311,8 @@
             this.am_pmCombo3_2.Location = new System.Drawing.Point(325, 263);
             this.am_pmCombo3_2.Name = "am_pmCombo3_2";
             this.am_pmCombo3_2.Size = new System.Drawing.Size(53, 29);
-            this.am_pmCombo3_2.TabIndex = 35;
+            this.am_pmCombo3_2.TabIndex = 16;
+            this.am_pmCombo3_2.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo3_2, "Am or PM.");
             this.am_pmCombo3_2.Visible = false;
             // 
@@ -309,7 +323,8 @@
             this.endHour3.Location = new System.Drawing.Point(231, 263);
             this.endHour3.Name = "endHour3";
             this.endHour3.Size = new System.Drawing.Size(88, 29);
-            this.endHour3.TabIndex = 34;
+            this.endHour3.TabIndex = 15;
+            this.endHour3.TabStop = false;
             this.metroToolTip1.SetToolTip(this.endHour3, "Select end time.");
             this.endHour3.Visible = false;
             // 
@@ -330,7 +345,8 @@
             this.am_pmCombo3_1.Location = new System.Drawing.Point(145, 263);
             this.am_pmCombo3_1.Name = "am_pmCombo3_1";
             this.am_pmCombo3_1.Size = new System.Drawing.Size(53, 29);
-            this.am_pmCombo3_1.TabIndex = 32;
+            this.am_pmCombo3_1.TabIndex = 14;
+            this.am_pmCombo3_1.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo3_1, "Am or PM.");
             this.am_pmCombo3_1.Visible = false;
             // 
@@ -341,16 +357,18 @@
             this.startHour3.Location = new System.Drawing.Point(51, 263);
             this.startHour3.Name = "startHour3";
             this.startHour3.Size = new System.Drawing.Size(88, 29);
-            this.startHour3.TabIndex = 31;
+            this.startHour3.TabIndex = 13;
+            this.startHour3.TabStop = false;
             this.metroToolTip1.SetToolTip(this.startHour3, "Select start time.");
             this.startHour3.Visible = false;
             // 
             // numberOfShiftsLabel3
             // 
             this.numberOfShiftsLabel3.AutoSize = true;
+            this.numberOfShiftsLabel3.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.numberOfShiftsLabel3.Location = new System.Drawing.Point(407, 239);
             this.numberOfShiftsLabel3.Name = "numberOfShiftsLabel3";
-            this.numberOfShiftsLabel3.Size = new System.Drawing.Size(144, 19);
+            this.numberOfShiftsLabel3.Size = new System.Drawing.Size(147, 19);
             this.numberOfShiftsLabel3.TabIndex = 30;
             this.numberOfShiftsLabel3.Text = "Number of employees:";
             this.numberOfShiftsLabel3.Visible = false;
@@ -369,9 +387,10 @@
             // shiftTime3
             // 
             this.shiftTime3.AutoSize = true;
+            this.shiftTime3.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.shiftTime3.Location = new System.Drawing.Point(51, 239);
             this.shiftTime3.Name = "shiftTime3";
-            this.shiftTime3.Size = new System.Drawing.Size(147, 19);
+            this.shiftTime3.Size = new System.Drawing.Size(155, 19);
             this.shiftTime3.TabIndex = 29;
             this.shiftTime3.Text = "Please select shift times:";
             this.shiftTime3.Visible = false;
@@ -390,7 +409,7 @@
             this.plusBTN2.Location = new System.Drawing.Point(572, 161);
             this.plusBTN2.Name = "plusBTN2";
             this.plusBTN2.Size = new System.Drawing.Size(56, 29);
-            this.plusBTN2.TabIndex = 26;
+            this.plusBTN2.TabIndex = 12;
             this.plusBTN2.Text = "+";
             this.metroToolTip1.SetToolTip(this.plusBTN2, "Add another shift.");
             this.plusBTN2.Visible = false;
@@ -403,7 +422,8 @@
             this.numberOfShiftsCombo2.Location = new System.Drawing.Point(407, 161);
             this.numberOfShiftsCombo2.Name = "numberOfShiftsCombo2";
             this.numberOfShiftsCombo2.Size = new System.Drawing.Size(144, 29);
-            this.numberOfShiftsCombo2.TabIndex = 25;
+            this.numberOfShiftsCombo2.TabIndex = 11;
+            this.numberOfShiftsCombo2.TabStop = false;
             this.metroToolTip1.SetToolTip(this.numberOfShiftsCombo2, "Select number of employees working.");
             this.numberOfShiftsCombo2.Visible = false;
             // 
@@ -414,7 +434,8 @@
             this.am_pmCombo2_2.Location = new System.Drawing.Point(325, 162);
             this.am_pmCombo2_2.Name = "am_pmCombo2_2";
             this.am_pmCombo2_2.Size = new System.Drawing.Size(53, 29);
-            this.am_pmCombo2_2.TabIndex = 24;
+            this.am_pmCombo2_2.TabIndex = 10;
+            this.am_pmCombo2_2.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo2_2, "Am or PM.");
             this.am_pmCombo2_2.Visible = false;
             // 
@@ -425,7 +446,8 @@
             this.endHour2.Location = new System.Drawing.Point(231, 162);
             this.endHour2.Name = "endHour2";
             this.endHour2.Size = new System.Drawing.Size(88, 29);
-            this.endHour2.TabIndex = 23;
+            this.endHour2.TabIndex = 9;
+            this.endHour2.TabStop = false;
             this.metroToolTip1.SetToolTip(this.endHour2, "Select end time.");
             this.endHour2.Visible = false;
             // 
@@ -446,7 +468,8 @@
             this.am_pmCombo2_1.Location = new System.Drawing.Point(145, 162);
             this.am_pmCombo2_1.Name = "am_pmCombo2_1";
             this.am_pmCombo2_1.Size = new System.Drawing.Size(53, 29);
-            this.am_pmCombo2_1.TabIndex = 21;
+            this.am_pmCombo2_1.TabIndex = 8;
+            this.am_pmCombo2_1.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo2_1, "Am or PM.");
             this.am_pmCombo2_1.Visible = false;
             // 
@@ -457,16 +480,18 @@
             this.startHour2.Location = new System.Drawing.Point(51, 162);
             this.startHour2.Name = "startHour2";
             this.startHour2.Size = new System.Drawing.Size(88, 29);
-            this.startHour2.TabIndex = 20;
+            this.startHour2.TabIndex = 7;
+            this.startHour2.TabStop = false;
             this.metroToolTip1.SetToolTip(this.startHour2, "Select start time.");
             this.startHour2.Visible = false;
             // 
             // numberOfShiftsLabel2
             // 
             this.numberOfShiftsLabel2.AutoSize = true;
+            this.numberOfShiftsLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.numberOfShiftsLabel2.Location = new System.Drawing.Point(407, 138);
             this.numberOfShiftsLabel2.Name = "numberOfShiftsLabel2";
-            this.numberOfShiftsLabel2.Size = new System.Drawing.Size(144, 19);
+            this.numberOfShiftsLabel2.Size = new System.Drawing.Size(147, 19);
             this.numberOfShiftsLabel2.TabIndex = 19;
             this.numberOfShiftsLabel2.Text = "Number of employees:";
             this.numberOfShiftsLabel2.Visible = false;
@@ -485,9 +510,10 @@
             // shiftTime2
             // 
             this.shiftTime2.AutoSize = true;
-            this.shiftTime2.Location = new System.Drawing.Point(51, 138);
+            this.shiftTime2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.shiftTime2.Location = new System.Drawing.Point(51, 140);
             this.shiftTime2.Name = "shiftTime2";
-            this.shiftTime2.Size = new System.Drawing.Size(147, 19);
+            this.shiftTime2.Size = new System.Drawing.Size(155, 19);
             this.shiftTime2.TabIndex = 18;
             this.shiftTime2.Text = "Please select shift times:";
             this.shiftTime2.Visible = false;
@@ -506,7 +532,7 @@
             this.plusBTN1.Location = new System.Drawing.Point(572, 62);
             this.plusBTN1.Name = "plusBTN1";
             this.plusBTN1.Size = new System.Drawing.Size(56, 29);
-            this.plusBTN1.TabIndex = 15;
+            this.plusBTN1.TabIndex = 6;
             this.plusBTN1.Text = "+";
             this.metroToolTip1.SetToolTip(this.plusBTN1, "Add another shift.");
             this.plusBTN1.Click += new System.EventHandler(this.plusBTN1_Click_1);
@@ -517,7 +543,8 @@
             this.numberOfShiftsCombo1.Location = new System.Drawing.Point(407, 62);
             this.numberOfShiftsCombo1.Name = "numberOfShiftsCombo1";
             this.numberOfShiftsCombo1.Size = new System.Drawing.Size(144, 29);
-            this.numberOfShiftsCombo1.TabIndex = 14;
+            this.numberOfShiftsCombo1.TabIndex = 5;
+            this.numberOfShiftsCombo1.TabStop = false;
             this.metroToolTip1.SetToolTip(this.numberOfShiftsCombo1, "Select number of employees working.");
             // 
             // am_pmCombo1_2
@@ -527,7 +554,8 @@
             this.am_pmCombo1_2.Location = new System.Drawing.Point(325, 63);
             this.am_pmCombo1_2.Name = "am_pmCombo1_2";
             this.am_pmCombo1_2.Size = new System.Drawing.Size(53, 29);
-            this.am_pmCombo1_2.TabIndex = 13;
+            this.am_pmCombo1_2.TabIndex = 4;
+            this.am_pmCombo1_2.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo1_2, "Am or PM.");
             // 
             // endHour1
@@ -537,7 +565,8 @@
             this.endHour1.Location = new System.Drawing.Point(231, 63);
             this.endHour1.Name = "endHour1";
             this.endHour1.Size = new System.Drawing.Size(88, 29);
-            this.endHour1.TabIndex = 12;
+            this.endHour1.TabIndex = 3;
+            this.endHour1.TabStop = false;
             this.metroToolTip1.SetToolTip(this.endHour1, "Select end time.");
             // 
             // toLabel1
@@ -556,7 +585,8 @@
             this.am_pmCombo1_1.Location = new System.Drawing.Point(145, 63);
             this.am_pmCombo1_1.Name = "am_pmCombo1_1";
             this.am_pmCombo1_1.Size = new System.Drawing.Size(53, 29);
-            this.am_pmCombo1_1.TabIndex = 10;
+            this.am_pmCombo1_1.TabIndex = 2;
+            this.am_pmCombo1_1.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo1_1, "Am or PM.");
             // 
             // startHour1
@@ -566,15 +596,17 @@
             this.startHour1.Location = new System.Drawing.Point(51, 63);
             this.startHour1.Name = "startHour1";
             this.startHour1.Size = new System.Drawing.Size(88, 29);
-            this.startHour1.TabIndex = 9;
+            this.startHour1.TabIndex = 1;
+            this.startHour1.TabStop = false;
             this.metroToolTip1.SetToolTip(this.startHour1, "Select start time.");
             // 
             // numberOfShiftsLabel1
             // 
             this.numberOfShiftsLabel1.AutoSize = true;
+            this.numberOfShiftsLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.numberOfShiftsLabel1.Location = new System.Drawing.Point(407, 39);
             this.numberOfShiftsLabel1.Name = "numberOfShiftsLabel1";
-            this.numberOfShiftsLabel1.Size = new System.Drawing.Size(144, 19);
+            this.numberOfShiftsLabel1.Size = new System.Drawing.Size(147, 19);
             this.numberOfShiftsLabel1.TabIndex = 8;
             this.numberOfShiftsLabel1.Text = "Number of employees:";
             // 
@@ -591,9 +623,10 @@
             // shiftTime1
             // 
             this.shiftTime1.AutoSize = true;
+            this.shiftTime1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.shiftTime1.Location = new System.Drawing.Point(51, 39);
             this.shiftTime1.Name = "shiftTime1";
-            this.shiftTime1.Size = new System.Drawing.Size(147, 19);
+            this.shiftTime1.Size = new System.Drawing.Size(155, 19);
             this.shiftTime1.TabIndex = 7;
             this.shiftTime1.Text = "Please select shift times:";
             // 
