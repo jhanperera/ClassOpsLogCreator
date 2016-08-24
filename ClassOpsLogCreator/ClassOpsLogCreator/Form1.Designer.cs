@@ -138,7 +138,9 @@
             this.metroPanel1.Location = new System.Drawing.Point(20, 60);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(639, 158);
+            this.metroPanel1.Style = MetroFramework.MetroColorStyle.Green;
             this.metroPanel1.TabIndex = 55;
+            this.metroPanel1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
@@ -166,6 +168,7 @@
             // 
             // numberOfShiftsCombo4
             // 
+            this.numberOfShiftsCombo4.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.numberOfShiftsCombo4.FormattingEnabled = true;
             this.numberOfShiftsCombo4.ItemHeight = 23;
             this.numberOfShiftsCombo4.Location = new System.Drawing.Point(407, 363);
@@ -179,6 +182,7 @@
             // 
             // am_pmCombo4_2
             // 
+            this.am_pmCombo4_2.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.am_pmCombo4_2.FormattingEnabled = true;
             this.am_pmCombo4_2.ItemHeight = 23;
             this.am_pmCombo4_2.Location = new System.Drawing.Point(325, 364);
@@ -192,6 +196,7 @@
             // 
             // endHour4
             // 
+            this.endHour4.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.endHour4.FormattingEnabled = true;
             this.endHour4.ItemHeight = 23;
             this.endHour4.Location = new System.Drawing.Point(231, 364);
@@ -215,6 +220,7 @@
             // 
             // am_pmCombo4_1
             // 
+            this.am_pmCombo4_1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.am_pmCombo4_1.FormattingEnabled = true;
             this.am_pmCombo4_1.ItemHeight = 23;
             this.am_pmCombo4_1.Location = new System.Drawing.Point(145, 364);
@@ -228,6 +234,7 @@
             // 
             // startHour4
             // 
+            this.startHour4.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.startHour4.FormattingEnabled = true;
             this.startHour4.ItemHeight = 23;
             this.startHour4.Location = new System.Drawing.Point(51, 364);
@@ -294,6 +301,7 @@
             // 
             // numberOfShiftsCombo3
             // 
+            this.numberOfShiftsCombo3.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.numberOfShiftsCombo3.FormattingEnabled = true;
             this.numberOfShiftsCombo3.ItemHeight = 23;
             this.numberOfShiftsCombo3.Location = new System.Drawing.Point(407, 262);
@@ -306,6 +314,7 @@
             // 
             // am_pmCombo3_2
             // 
+            this.am_pmCombo3_2.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.am_pmCombo3_2.FormattingEnabled = true;
             this.am_pmCombo3_2.ItemHeight = 23;
             this.am_pmCombo3_2.Location = new System.Drawing.Point(325, 263);
@@ -318,6 +327,7 @@
             // 
             // endHour3
             // 
+            this.endHour3.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.endHour3.FormattingEnabled = true;
             this.endHour3.ItemHeight = 23;
             this.endHour3.Location = new System.Drawing.Point(231, 263);
@@ -340,6 +350,7 @@
             // 
             // am_pmCombo3_1
             // 
+            this.am_pmCombo3_1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.am_pmCombo3_1.FormattingEnabled = true;
             this.am_pmCombo3_1.ItemHeight = 23;
             this.am_pmCombo3_1.Location = new System.Drawing.Point(145, 263);
@@ -352,6 +363,7 @@
             // 
             // startHour3
             // 
+            this.startHour3.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.startHour3.FormattingEnabled = true;
             this.startHour3.ItemHeight = 23;
             this.startHour3.Location = new System.Drawing.Point(51, 263);
@@ -417,6 +429,7 @@
             // 
             // numberOfShiftsCombo2
             // 
+            this.numberOfShiftsCombo2.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.numberOfShiftsCombo2.FormattingEnabled = true;
             this.numberOfShiftsCombo2.ItemHeight = 23;
             this.numberOfShiftsCombo2.Location = new System.Drawing.Point(407, 161);
@@ -429,6 +442,7 @@
             // 
             // am_pmCombo2_2
             // 
+            this.am_pmCombo2_2.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.am_pmCombo2_2.FormattingEnabled = true;
             this.am_pmCombo2_2.ItemHeight = 23;
             this.am_pmCombo2_2.Location = new System.Drawing.Point(325, 162);
@@ -441,6 +455,7 @@
             // 
             // endHour2
             // 
+            this.endHour2.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.endHour2.FormattingEnabled = true;
             this.endHour2.ItemHeight = 23;
             this.endHour2.Location = new System.Drawing.Point(231, 162);
@@ -463,6 +478,7 @@
             // 
             // am_pmCombo2_1
             // 
+            this.am_pmCombo2_1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.am_pmCombo2_1.FormattingEnabled = true;
             this.am_pmCombo2_1.ItemHeight = 23;
             this.am_pmCombo2_1.Location = new System.Drawing.Point(145, 162);
@@ -475,6 +491,7 @@
             // 
             // startHour2
             // 
+            this.startHour2.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.startHour2.FormattingEnabled = true;
             this.startHour2.ItemHeight = 23;
             this.startHour2.Location = new System.Drawing.Point(51, 162);
@@ -539,6 +556,7 @@
             // 
             // numberOfShiftsCombo1
             // 
+            this.numberOfShiftsCombo1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.numberOfShiftsCombo1.ItemHeight = 23;
             this.numberOfShiftsCombo1.Location = new System.Drawing.Point(407, 62);
             this.numberOfShiftsCombo1.Name = "numberOfShiftsCombo1";
@@ -549,6 +567,7 @@
             // 
             // am_pmCombo1_2
             // 
+            this.am_pmCombo1_2.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.am_pmCombo1_2.FormattingEnabled = true;
             this.am_pmCombo1_2.ItemHeight = 23;
             this.am_pmCombo1_2.Location = new System.Drawing.Point(325, 63);
@@ -560,6 +579,7 @@
             // 
             // endHour1
             // 
+            this.endHour1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.endHour1.FormattingEnabled = true;
             this.endHour1.ItemHeight = 23;
             this.endHour1.Location = new System.Drawing.Point(231, 63);
@@ -580,6 +600,7 @@
             // 
             // am_pmCombo1_1
             // 
+            this.am_pmCombo1_1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.am_pmCombo1_1.FormattingEnabled = true;
             this.am_pmCombo1_1.ItemHeight = 23;
             this.am_pmCombo1_1.Location = new System.Drawing.Point(145, 63);
@@ -591,10 +612,11 @@
             // 
             // startHour1
             // 
-            this.startHour1.FormattingEnabled = true;
+            this.startHour1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.startHour1.ItemHeight = 23;
             this.startHour1.Location = new System.Drawing.Point(51, 63);
             this.startHour1.Name = "startHour1";
+            this.startHour1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.startHour1.Size = new System.Drawing.Size(88, 29);
             this.startHour1.TabIndex = 1;
             this.startHour1.TabStop = false;
@@ -658,6 +680,7 @@
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Log Creator";
+            this.Theme = MetroFramework.MetroThemeStyle.Light;
             this.TransparencyKey = System.Drawing.SystemColors.ControlDarkDark;
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();

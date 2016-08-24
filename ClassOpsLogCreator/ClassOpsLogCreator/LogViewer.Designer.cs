@@ -79,9 +79,12 @@
             // 
             resources.ApplyResources(this.nameTextBox, "nameTextBox");
             this.nameTextBox.FontSize = MetroFramework.MetroTextBoxSize.Tall;
-            this.nameTextBox.FontWeight = MetroFramework.MetroTextBoxWeight.Bold;
+            this.nameTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.PromptText = "Name";
+            this.nameTextBox.Style = MetroFramework.MetroColorStyle.Yellow;
             this.nameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.metroToolTip1.SetToolTip(this.nameTextBox, resources.GetString("nameTextBox.ToolTip"));
             // 
             // previousBTN
             // 

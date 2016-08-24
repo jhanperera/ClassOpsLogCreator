@@ -37,6 +37,7 @@ namespace ClassOpsLogCreator
 
             this.Text = shiftTitle;
 
+            //Add the gray text for the name text box
             this.nameTextBox.ForeColor = SystemColors.GrayText;
             this.nameTextBox.Text = "Name";
             this.nameTextBox.Leave += new System.EventHandler(this.nameTextBox_Leave);
@@ -236,6 +237,11 @@ namespace ClassOpsLogCreator
             dataGridView1.EnableHeadersVisualStyles = false;
         }
 
+        /// <summary>
+        /// Event handles for then the focus is lost in the name text box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void nameTextBox_Leave(object sender, EventArgs e)
         {
             if (nameTextBox.Text.Length == 0)
@@ -245,6 +251,11 @@ namespace ClassOpsLogCreator
             }
         }
 
+        /// <summary>
+        /// Event handler when the focus is gained in the name text box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void nameTextBox_Enter(object sender, EventArgs e)
         {
             if (nameTextBox.Text == "Name")

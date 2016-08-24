@@ -84,7 +84,7 @@ namespace ClassOpsLogCreator
                 "VC115","VC116","VC117","VC118","VC119","VC135","VC107A","VH1005","VH1016","VH1018","VH1020",
                 "VH1022","VH1152","VH1152A","VH1154","VH1156","VH1158","VH2000","VH2005","VH2009","VH2016",
                 "VH3000","VH3003","VH3004","VH3005","VH3006","VH3009","VH3017","VHA","VHB","VHC","VHD","WC012",
-                "WC117","WC118","WC283A","WC283B","YL232","YL234","YL305","YL390","YL246B","YL280A","YL280N"
+                "WC117","WC118","WC283A","YL232","YL234","YL305","YL390","YL246B","YL280A","YL280N"
             };
 
             ClassArrayWithNoCrestron = new string[]

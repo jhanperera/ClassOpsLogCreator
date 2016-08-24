@@ -229,34 +229,6 @@ namespace ClassOpsLogCreator
             this.numberOfShiftsCombo4.SelectedIndex = 0;
             this.am_pmCombo4_1.SelectedIndex = 1;
             this.am_pmCombo4_2.SelectedIndex = 1;
-
-            //Make the combo box read only for  select 1
-            //this.startHour1.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.endHour1.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.numberOfShiftsCombo1.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.am_pmCombo1_1.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.am_pmCombo1_2.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            //Make the combo box read only for select 2
-            this.startHour2.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.endHour2.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.numberOfShiftsCombo2.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.am_pmCombo2_1.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.am_pmCombo2_2.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            //Make the combo box read only for select 3
-            this.startHour3.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.endHour3.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.numberOfShiftsCombo3.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.am_pmCombo3_1.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.am_pmCombo3_2.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            //Make the combo box read only for select 4
-            this.startHour4.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.endHour4.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.numberOfShiftsCombo4.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.am_pmCombo4_1.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.am_pmCombo4_2.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         /// <summary>
@@ -608,10 +580,10 @@ namespace ClassOpsLogCreator
                 }
                 catch (Exception)
                 {
+                    //file not found
                     Quit();
-                    return;
+                    throw new System.FieldAccessException("File not found!");
                 }
-
 
                 //Display all the logs
                 if (plusClicked1 && !plusClicked2 && !plusClicked3)
