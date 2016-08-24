@@ -8,24 +8,22 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.Drawing.Printing;
 
-/// <summary>
-///
-/// Author: Jhan Perera
-/// Department: UIT Client Services
-///
-///
-/// Description of class: This is the main thread class
-/// all the main event handlers and work is done here.
-/// All output is generated from here and main features are
-/// all called here.
-///
-/// Class Version: 0.2.0.0 - BETA - 852016
-///
-/// System Version: 0.1.0.0 - BETA - 7152016
-///
-/// </summary>
 namespace ClassOpsLogCreator
 {
+    /// <summary>
+    /// /// Author: Jhan Perera
+    /// Department: UIT Client Services
+    ///
+    ///
+    /// Description of class: This is the main thread class
+    /// all the main event handlers and work is done here.
+    /// All output is generated from here and main features are
+    /// all called here.
+    ///
+    /// Class Version: 0.2.0.0 - BETA - 852016
+    ///
+    /// System Version: 0.1.0.0 - BETA - 7152016
+    /// </summary>
     public partial class LogCreator : MetroFramework.Forms.MetroForm
     {
         #region Private Attributes/Variables
@@ -708,7 +706,7 @@ namespace ClassOpsLogCreator
 
             //write all the data to the excel file
             //merge the all the data together into the master log
-            this.WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, classRoomTimeLogs.getLogOutArrayCount(),
+            WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, classRoomTimeLogs.getLogOutArrayCount(),
                                                                          JInstruction, DInstruction, RInstruction,
                                                                          true, startTimeFromCombo, endTimeFromCombo);
 
@@ -731,7 +729,7 @@ namespace ClassOpsLogCreator
         /// <param name="includeACE"></param>
         /// <param name="startTime"></param>
         /// <param name="endTime"></param>
-        private void WriteLogOutArray(Excel.Worksheet worksheet, string[,] values, int index,
+        private static void WriteLogOutArray(Excel.Worksheet worksheet, string[,] values, int index,
                                             string[,] array1, string[,] array2, string[,] array3, bool includeACE, string startTime, string endTime)
         {
             //Setting up the cells to put the information into
