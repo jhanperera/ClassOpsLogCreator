@@ -9,20 +9,20 @@ using System.Runtime.InteropServices;
 using System.Drawing.Printing;
 
 /// <summary>
-/// 
+///
 /// Author: Jhan Perera
 /// Department: UIT Client Services
-/// 
-/// 
+///
+///
 /// Description of class: This is the main thread class
-/// all the main event handlers and work is done here. 
-/// All output is generated from here and main features are 
-/// all called here. 
+/// all the main event handlers and work is done here.
+/// All output is generated from here and main features are
+/// all called here.
 ///
 /// Class Version: 0.2.0.0 - BETA - 852016
-/// 
+///
 /// System Version: 0.1.0.0 - BETA - 7152016
-/// 
+///
 /// </summary>
 namespace ClassOpsLogCreator
 {
@@ -683,7 +683,9 @@ namespace ClassOpsLogCreator
         /// <param name="worksheetNumber"></param>
         /// <param name="startTimeFromCombo"></param>
         /// <param name="endTimeFromCombo"></param>
-        /// <param name="numberOfShifts"></param> 
+        /// <param name="numberOfShifts"></param>
+        /// <param name="redSeperator"></param>
+        /// <param name="rowNumbers"></param>
         private void logCreationAndExcelWriter(int worksheetNumber, string startTimeFromCombo, string endTimeFromCombo, int numberOfShifts, bool redSeperator, ref long[,] rowNumbers)
         {
             logoutMasterWorkSheet = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[worksheetNumber];
@@ -717,10 +719,18 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// 
         /// This method will write our arrays to the excel file.
         /// This method generates the Excel output via the arrays
         /// </summary>
+        /// <param name="worksheet"></param>
+        /// <param name="values"></param>
+        /// <param name="index"></param>
+        /// <param name="array1"></param>
+        /// <param name="array2"></param>
+        /// <param name="array3"></param>
+        /// <param name="includeACE"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
         private void WriteLogOutArray(Excel.Worksheet worksheet, string[,] values, int index,
                                             string[,] array1, string[,] array2, string[,] array3, bool includeACE, string startTime, string endTime)
         {
@@ -780,6 +790,11 @@ namespace ClassOpsLogCreator
         /// This method will merger our file with the already existing file in sorted order. 
         /// </summary>
         /// <param name="worksheet"></param>
+        /// <param name="numberOfShifts"></param>
+        /// <param name="redSeperator"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <param name="rowNumbers"></param>
         public void mergeMasterWithExisting(Excel.Worksheet worksheet, int numberOfShifts, bool redSeperator, string startTime, string endTime, ref long[,] rowNumbers)
         {
             //Open the existing excel file
@@ -921,6 +936,7 @@ namespace ClassOpsLogCreator
         /// THIS METHOD ALSO ADDS THE LOG TO THE QUEUE! 
         /// </summary>
         /// <param name="range"></param>
+        /// <param name="numberOfShifts"></param>
         /// <returns></returns>
         private long[,] dividedLogs(Excel.Range range, int numberOfShifts)
         {
@@ -982,15 +998,13 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This method will display all the logs that are created
-        /// 
         /// This also accounts for the previous and next button being clicked
-        /// 
         /// </summary>
         /// <param name="startTime"></param>
         /// <param name="endTime"></param>
         /// <param name="rowNumbers"></param>
         /// <param name="numberOfShifts"></param>
+        /// <param name="shiftTitle"></param>
         private void displayLogs(string startTime, string endTime, long[,] rowNumbers, int numberOfShifts, string shiftTitle)
         {
             
@@ -1324,6 +1338,7 @@ namespace ClassOpsLogCreator
         /// Make the new controls appear and extend the frame
         /// </summary>
         /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void plusBTN3_Click(object sender, EventArgs e)
         {
             if (!plusClicked3)
