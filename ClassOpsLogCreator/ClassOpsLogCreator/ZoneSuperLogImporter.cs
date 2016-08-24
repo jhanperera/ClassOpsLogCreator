@@ -85,7 +85,7 @@ namespace ClassOpsLogCreator
             {
                 //File not found...
                 Quit();
-                return;
+                throw new System.FieldAccessException("File not found!");
             }
 
             // Get the last date and create the 2D array for each log.

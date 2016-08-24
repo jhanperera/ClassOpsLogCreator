@@ -40,12 +40,12 @@ namespace ClassOpsLogCreator
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY! 
-        public readonly string ROOM_SCHED = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
-        public readonly string JEANNINE_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
-        public readonly string RAUL_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
-        public readonly string DEREK_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
-        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
-        public readonly string EXISTING_MASTER_LOG = @"C:\Users\jhan\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
+        public readonly string ROOM_SCHED = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
+        public readonly string JEANNINE_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
+        public readonly string RAUL_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
+        public readonly string DEREK_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
+        public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
+        public readonly string EXISTING_MASTER_LOG = @"C:\Users\pereraj\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
         public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
 
         //A stack for some thread safer operations
@@ -597,6 +597,22 @@ namespace ClassOpsLogCreator
                 printDlg = new PrintDialog();
                 PrinterSettings defaultSettings = new PrinterSettings();
                 string defaultPrinterName = defaultSettings.PrinterName;
+
+                //Open the existing excel file
+                existingMaster = new Excel.Application();
+                existingMaster.Visible = false;
+                try
+                {
+                    existingMasterWorkBook = existingMaster.Workbooks.Open(EXISTING_MASTER_LOG);
+                    existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
+                }
+                catch (Exception)
+                {
+                    Quit();
+                    return;
+                }
+
+
                 //Display all the logs
                 if (plusClicked1 && !plusClicked2 && !plusClicked3)
                 {
@@ -654,6 +670,17 @@ namespace ClassOpsLogCreator
                         printOutLog(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
                     }
                 }
+
+                //Save
+                existingMaster.DisplayAlerts = false;
+                existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);
+                //Close the workbook and the excel file
+                existingMasterWorkBook.Close();
+                existingMaster.Quit();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
+                existingMaster = null;
+                existingMasterWorkBook = null;
+                existingMasterWorkSheet = null;
 
                 SetDefaultPrinter(defaultPrinterName);
                 printDlg.Dispose();
@@ -994,20 +1021,7 @@ namespace ClassOpsLogCreator
         /// <param name="numberOfShifts"></param>
         private void displayLogs(string startTime, string endTime, long[,] rowNumbers, int numberOfShifts, string shiftTitle)
         {
-            //Open the existing excel file
-            existingMaster = new Excel.Application();
-            existingMaster.Visible = false;
-            try
-            {
-                existingMasterWorkBook = existingMaster.Workbooks.Open(EXISTING_MASTER_LOG);
-                existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
-            }
-            catch (Exception)
-            {
-                Quit();
-                return;
-            }
-
+            
             System.Array destinationArray = null;
             if (numberOfShifts == 1)
             {
@@ -1099,17 +1113,6 @@ namespace ClassOpsLogCreator
             //Empty the stacks
             this.logNextStack.Clear();
             this.logPretStack.Clear();
-
-            //Save
-            existingMaster.DisplayAlerts = false;
-            existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);
-            //Close the workbook and the excel file
-            existingMasterWorkBook.Close();
-            existingMaster.Quit();
-            System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
-            existingMaster = null;
-            existingMasterWorkBook = null;
-            existingMasterWorkSheet = null;
         }
 
         /// <summary>
@@ -1121,20 +1124,6 @@ namespace ClassOpsLogCreator
         /// <param name="rowNumbers"></param>
         private void printOutLog(string startTime, string endTime, long[,] rowNumbers, int numberOfShifts)
         {
-            //Open the existing excel file
-            existingMaster = new Excel.Application();
-            existingMaster.Visible = false;
-            try
-            {
-                existingMasterWorkBook = existingMaster.Workbooks.Open(EXISTING_MASTER_LOG);
-                existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
-            }
-            catch (Exception)
-            {
-                Quit();
-                return;
-            }
-
             //Print all the pages here
             if (numberOfShifts > 1)
             {
@@ -1167,17 +1156,6 @@ namespace ClassOpsLogCreator
                 existingMaster.Visible = true;
                 logRange.PrintPreview(true);
             }
-
-            //Save
-            existingMaster.DisplayAlerts = false;
-            existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);
-            //Close the workbook and the excel file
-            existingMasterWorkBook.Close();
-            existingMaster.Quit();
-            System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
-            existingMaster = null;
-            existingMasterWorkBook = null;
-            existingMasterWorkSheet = null;
         }
 
         /// <summary>

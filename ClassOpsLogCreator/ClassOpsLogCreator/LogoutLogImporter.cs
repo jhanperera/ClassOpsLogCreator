@@ -73,7 +73,7 @@ namespace ClassOpsLogCreator
                 //File not found...
 
                 Quit();
-                return;
+                throw new System.FieldAccessException("File not found!");
             }
 
             //Get the range we are working within. (A1, A.LastRow)
@@ -92,6 +92,12 @@ namespace ClassOpsLogCreator
             arrayTimes = this.ConvertToStringArray(timeArray, 1);
             arrayEvent = this.ConvertToStringArray(eventArray, 1);
             arrayLastTimes = this.extract_last_time(arrayTimes, arrayEvent);
+
+            //Remove the sql entry in the array
+            if(arrayClassRooms[arrayClassRooms.GetUpperBound(0)].Contains("SQL"))
+            {
+                arrayClassRooms = arrayClassRooms.Take(arrayClassRooms.Count() - 1).ToArray();
+            }
 
             //Check if the arrayLastTimes and the class array are the same length, if so then we get correct results.
             if (arrayLastTimes.GetUpperBound(0) != arrayClassRooms.GetUpperBound(0))
