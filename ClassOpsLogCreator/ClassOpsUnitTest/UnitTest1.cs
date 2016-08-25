@@ -120,5 +120,22 @@ namespace ClassOpsUnitTest
             //We should get 
             Assert.AreEqual(10, taskRank);
         }
+
+        [TestMethod]
+        public void Create_Email_Scanner()
+        {
+            EmailScanner es = new EmailScanner();
+            Assert.IsTrue(es.isConnected());
+        }
+
+        [TestMethod]
+        public void Create_Email_Scanner_Check_MsgFrom()
+        {
+            EmailScanner es = new EmailScanner();
+
+            string msgFrom = es.messageFrom();
+
+            Assert.AreEqual("pereraj@yorku.ca", msgFrom);
+        }
     }
 }
