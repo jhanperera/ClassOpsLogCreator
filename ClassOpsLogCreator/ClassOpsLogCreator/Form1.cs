@@ -1417,5 +1417,10 @@ namespace ClassOpsLogCreator
             }
             GC.Collect();
         }
+
+        private void metroTile1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("CLICKED");
+        }
     }
 }
