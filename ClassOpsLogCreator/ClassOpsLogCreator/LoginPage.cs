@@ -63,12 +63,10 @@ namespace ClassOpsLogCreator
             {
                 this.loginClicked = true;
                 Properties.Settings.Default.UserName = usernameTextBox.Text;
-
-                //Encript this text some how
-                ///using(var secureString = passwordTextBox.Text.ToSecureString())
                 Properties.Settings.Default.Password = passwordTextBox.Text;
                 Properties.Settings.Default.Upgrade();
                 Properties.Settings.Default.Save();
+                Properties.Settings.Default.Reload();
                 this.Close();
             }
         }

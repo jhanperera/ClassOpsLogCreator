@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginPage));
             this.usernameLabel = new MetroFramework.Controls.MetroLabel();
             this.passwordLabel = new MetroFramework.Controls.MetroLabel();
             this.usernameTextBox = new MetroFramework.Controls.MetroTextBox();
@@ -39,60 +40,68 @@
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Location = new System.Drawing.Point(74, 78);
+            this.usernameLabel.Location = new System.Drawing.Point(99, 96);
+            this.usernameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(68, 19);
+            this.usernameLabel.Size = new System.Drawing.Size(73, 20);
             this.usernameLabel.TabIndex = 0;
             this.usernameLabel.Text = "Username";
             // 
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(74, 124);
+            this.passwordLabel.Location = new System.Drawing.Point(99, 153);
+            this.passwordLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(64, 19);
+            this.passwordLabel.Size = new System.Drawing.Size(66, 20);
             this.passwordLabel.TabIndex = 1;
             this.passwordLabel.Text = "Password";
             // 
             // usernameTextBox
             // 
-            this.usernameTextBox.Location = new System.Drawing.Point(163, 78);
+            this.usernameTextBox.Location = new System.Drawing.Point(217, 96);
+            this.usernameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(219, 23);
-            this.usernameTextBox.TabIndex = 2;
+            this.usernameTextBox.Size = new System.Drawing.Size(292, 28);
+            this.usernameTextBox.TabIndex = 0;
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(163, 124);
+            this.passwordTextBox.Location = new System.Drawing.Point(217, 153);
+            this.passwordTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '●';
-            this.passwordTextBox.Size = new System.Drawing.Size(219, 23);
-            this.passwordTextBox.TabIndex = 3;
+            this.passwordTextBox.Size = new System.Drawing.Size(292, 28);
+            this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
             // loginBTN
             // 
-            this.loginBTN.Location = new System.Drawing.Point(82, 175);
+            this.loginBTN.Highlight = true;
+            this.loginBTN.Location = new System.Drawing.Point(109, 215);
+            this.loginBTN.Margin = new System.Windows.Forms.Padding(4);
             this.loginBTN.Name = "loginBTN";
-            this.loginBTN.Size = new System.Drawing.Size(75, 23);
-            this.loginBTN.TabIndex = 4;
+            this.loginBTN.Size = new System.Drawing.Size(100, 28);
+            this.loginBTN.TabIndex = 2;
             this.loginBTN.Text = "Login";
             this.loginBTN.Click += new System.EventHandler(this.loginBTN_Click);
             // 
             // cancelBTN
             // 
-            this.cancelBTN.Location = new System.Drawing.Point(307, 175);
+            this.cancelBTN.Location = new System.Drawing.Point(409, 215);
+            this.cancelBTN.Margin = new System.Windows.Forms.Padding(4);
             this.cancelBTN.Name = "cancelBTN";
-            this.cancelBTN.Size = new System.Drawing.Size(75, 23);
+            this.cancelBTN.Size = new System.Drawing.Size(100, 28);
             this.cancelBTN.TabIndex = 5;
             this.cancelBTN.Text = "Cancel";
             this.cancelBTN.Click += new System.EventHandler(this.cancelBTN_Click);
             // 
             // LoginPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 221);
+            this.AcceptButton = this.loginBTN;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(625, 272);
             this.ControlBox = false;
             this.Controls.Add(this.cancelBTN);
             this.Controls.Add(this.loginBTN);
@@ -100,7 +109,10 @@
             this.Controls.Add(this.usernameTextBox);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.usernameLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "LoginPage";
+            this.Padding = new System.Windows.Forms.Padding(27, 74, 27, 25);
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "MyMail Login Page";
