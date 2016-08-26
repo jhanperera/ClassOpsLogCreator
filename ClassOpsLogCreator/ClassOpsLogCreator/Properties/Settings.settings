@@ -3,9 +3,9 @@
   <Profiles />
   <Settings>
     <Setting Name="UserName" Description="The username of the Yorku email login." Type="System.String" Scope="User">
-      <Value Profile="(Default)">pereraj</Value>
+      <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Setting" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="Password" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

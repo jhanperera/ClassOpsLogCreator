@@ -111,6 +111,12 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="EmailScanner.cs" />
+    <Compile Include="LoginPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginPage.Designer.cs">
+      <DependentUpon>LoginPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +131,7 @@
     </Compile>
     <Compile Include="SchoolZoning.cs" />
     <Compile Include="LogoutLogImporter.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="TaskRanks.cs" />
     <Compile Include="ZoneSuperLogImporter.cs" />
     <Compile Include="ClassInfo.cs" />
@@ -142,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginPage.resx">
+      <DependentUpon>LoginPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogViewer.resx">
       <DependentUpon>LogViewer.cs</DependentUpon>

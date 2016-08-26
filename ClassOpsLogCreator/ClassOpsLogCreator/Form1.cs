@@ -11,7 +11,7 @@ using System.Drawing.Printing;
 namespace ClassOpsLogCreator
 {
     /// <summary>
-    /// /// Author: Jhan Perera
+    /// Author: Jhan Perera
     /// Department: UIT Client Services
     ///
     ///
@@ -122,6 +122,13 @@ namespace ClassOpsLogCreator
                 //Use an anonymous event handler to take care of this
                 Load += (s, e) => Close();
                 return;
+            }
+
+            //Check if we have a valid mail login credentials
+            if (Properties.Settings.Default.UserName == "" || Properties.Settings.Default.Password == "")
+            {
+                LoginPage lp = new LoginPage();
+                lp.ShowDialog();
             }
 
             //Use this for smooth panel updates (double buffering is enabled)
@@ -1207,6 +1214,18 @@ namespace ClassOpsLogCreator
         }*/
 
         /// <summary>
+        /// This will open a login page so we can get the users MyMail login
+        /// for the email scanner class
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void loginBTN_Click(object sender, EventArgs e)
+        {
+            LoginPage login = new LoginPage();
+            login.ShowDialog();
+        }
+
+        /// <summary>
         /// When the first + button is clicked
         /// 
         /// Make the new controls appear and extend the frame
@@ -1418,9 +1437,5 @@ namespace ClassOpsLogCreator
             GC.Collect();
         }
 
-        private void metroTile1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("CLICKED");
-        }
     }
 }

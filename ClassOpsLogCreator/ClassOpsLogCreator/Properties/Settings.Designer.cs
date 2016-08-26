@@ -29,7 +29,7 @@ namespace ClassOpsLogCreator.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Configuration.SettingsDescriptionAttribute("The username of the Yorku email login.")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("pereraj")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string UserName {
             get {
                 return ((string)(this["UserName"]));
@@ -41,12 +41,13 @@ namespace ClassOpsLogCreator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection Setting {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Password {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["Setting"]));
+                return ((string)(this["Password"]));
             }
             set {
-                this["Setting"] = value;
+                this["Password"] = value;
             }
         }
     }

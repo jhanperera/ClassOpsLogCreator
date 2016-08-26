@@ -11,8 +11,8 @@ namespace ClassOpsLogCreator
     public class EmailScanner
     {
         private static string hostname = "mypost.yorku.ca";
-        private static string username = "pereraj";
-        private static string password = "pooman12";
+        private static string username = Properties.Settings.Default.UserName;
+        private static string password = Properties.Settings.Default.Password;
         private bool isConnectedFlag = false;
 
         private string msgFrom;
