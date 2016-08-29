@@ -21,7 +21,7 @@ namespace ClassOpsLogCreator
         public LoginPage()
         {
             InitializeComponent();
-            if(Properties.Settings.Default.UserName != "" || Properties.Settings.Default.Password != "")
+            if(!Properties.Settings.Default.UserName.Equals("")||!Properties.Settings.Default.Password.Equals(""))
             {
                 this.usernameTextBox.Text = Properties.Settings.Default.UserName;
                 this.passwordTextBox.Text = Properties.Settings.Default.Password;
@@ -62,11 +62,9 @@ namespace ClassOpsLogCreator
             else
             {
                 this.loginClicked = true;
-                Properties.Settings.Default.UserName = usernameTextBox.Text;
-                Properties.Settings.Default.Password = passwordTextBox.Text;
-                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UserName = this.usernameTextBox.Text;
+                Properties.Settings.Default.Password = this.passwordTextBox.Text;
                 Properties.Settings.Default.Save();
-                Properties.Settings.Default.Reload();
                 this.Close();
             }
         }

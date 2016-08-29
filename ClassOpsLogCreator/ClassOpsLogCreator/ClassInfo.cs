@@ -77,10 +77,10 @@ namespace ClassOpsLogCreator
                 "SSBW141","SSBW253","SSBW254","SSBW255","SSBW256","SSBW257","SSBW356","SSBW357","SLH107",
                 "SLHA","SLHB","SLHC","SLHD","SLHE","SLHF","SC114","SC116","SC203","SC205","SC211","SC212",
                 "SC214","SC216","SC218","SC219","SC220","SC221","SC222","SC223","SC224","SC302","SC303",
-                "SC304","TEL0001","TEL0004","TEL0005","TEL0006","TEL0007","TEL0009","TEL0010","TEL0011",
-                "TEL0013","TEL0014","TEL0015","TEL0016","TEL1004","TEL1005","TEL1015","TEL1016","TEL2003",
-                "TEL2027","TEL2032","TEL2114","TEL2116","TEL2118","TEL3001","TEL3069","TEL3072","TEL4023",
-                "TEL4028","TEL4031","TEL4034","VC102","VC103","VC104","VC105","VC106","VC107","VC108","VC114",
+                "SC304","DB0001","DB0004","DB0005","DB0006","DB0007","DB0009","DB0010","DB0011",
+                "DB0013","DB0014","DB0015","DB0016","DB1004","DB1005","DB1015","DB1016","DB2003",
+                "DB2027","DB2032","DB2114","DB2116","DB2118","DB3001","DB3069","DB3072","DB4023",
+                "DB4028","DB4031","DB4034","VC102","VC103","VC104","VC105","VC106","VC107","VC108","VC114",
                 "VC115","VC116","VC117","VC118","VC119","VC135","VC107A","VH1005","VH1016","VH1018","VH1020",
                 "VH1022","VH1152","VH1152A","VH1154","VH1156","VH1158","VH2000","VH2005","VH2009","VH2016",
                 "VH3000","VH3003","VH3004","VH3005","VH3006","VH3009","VH3017","VHA","VHB","VHC","VHD","WC012",
@@ -119,8 +119,8 @@ namespace ClassOpsLogCreator
                 "IKB2027", "RS137", "RS201", "RS205", "RS802", "SSBE111", "SSBE112", "SSBE115",
                 "SSBE118", "SSBN105", "SSBN106", "SSBN107", "SSBN108", "SSBN109", "SSBS124",
                 "SSBS235", "SSBS335", "SSBW132", "SSBW133", "SSBW136", "SSBW141", "SLHA",
-                "SLHB", "SLHC", "SLHD", "SLHE", "SLHF", "SC302", "SC303", "TEL0001", "TEL0005",
-                "TEL0006", "TEL0007", "TEL0010", "TEL0014", "TEL0016", "TEL1004", "TEL1005",
+                "SLHB", "SLHC", "SLHD", "SLHE", "SLHF", "SC302", "SC303", "DB0001", "DB0005",
+                "DB0006", "DB0007", "DB0010", "DB0014", "DB0016", "DB1004", "DB1005",
                 "VC135", "VH3006", "VH3009", "VH1152A", "VHA", "VHB", "VHC", "VHD"
             };
         }
@@ -181,7 +181,7 @@ namespace ClassOpsLogCreator
 
             string[] zone2 = new string[] //South East
             {
-                "CSQ", "SLH", "R", "ACW", "CFT", "CFA", "TEL", "STC", "ATK", "BCS", "SSB", "ACE", "YL",
+                "CSQ", "SLH", "R", "ACW", "CFT", "CFA", "DB", "STC", "ATK", "BCS", "SSB", "ACE", "YL",
                 "KT", "HNE", "OSG", "ELC"
             };
 
@@ -221,7 +221,7 @@ namespace ClassOpsLogCreator
 
             string[] zone3 = new string[] //South
             {
-                "CFT", "ACE", "SSB", "CFA", "TEL", "ELC", "BGS", "ATK", "YL",
+                "CFT", "ACE", "SSB", "CFA", "DB", "ELC", "BGS", "ATK", "YL",
                 "KT"
             };
 
@@ -261,7 +261,7 @@ namespace ClassOpsLogCreator
 
             string[] zone3 = new string[] //South Central
             {
-                "CFT", "CFA", "TEL", "STC", "ATK"
+                "CFT", "CFA", "DB", "STC", "ATK"
             };
 
             string[] zone4 = new string[] //South East
@@ -313,7 +313,7 @@ namespace ClassOpsLogCreator
 
             string[] zone4 = new string[] //South central
             {
-               "CFT", "CFA", "TEL", "STC", "ATK"
+               "CFT", "CFA", "DB", "STC", "ATK"
             };
 
             string[] zone5 = new string[] //South East
@@ -375,7 +375,7 @@ namespace ClassOpsLogCreator
 
             string[] zone5 = new string[]
             {
-                "CFT", "CFA", "TEL", "STC", "ATK"
+                "CFT", "CFA", "DB", "STC", "ATK"
             };
 
             string[] zone6 = new string[]
@@ -446,7 +446,7 @@ namespace ClassOpsLogCreator
 
             string[] zone6 = new string[]
             {
-                "CFT", "CFA", "TEL", "STC", "ATK"
+                "CFT", "CFA", "DB", "STC", "ATK"
             };
 
             string[] zone7 = new string[]
@@ -520,7 +520,7 @@ namespace ClassOpsLogCreator
 
             string[] zone6 = new string[]
             {
-                "CFT", "CFA", "TEL", "STC", "ATK"
+                "CFT", "CFA", "DB", "STC", "ATK"
             };
 
             string[] zone7 = new string[]
@@ -605,7 +605,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone2Boarder = new string[] //Central and South
                 {
-                    "YL", "KT", "CFT", "TEL", "CFA", "ACW", "VH", "ATK", "R", "OSG"
+                    "YL", "KT", "CFT", "DB", "CFA", "ACW", "VH", "ATK", "R", "OSG"
                 };
                 zone1BoarderList.AddRange(zone2Boarder);
             }
@@ -642,7 +642,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone2Boarder = new string[] //Central and South Central
                 {
-                    "VH", "ACW", "ATK", "CFA", "TEL", "CFT",
+                    "VH", "ACW", "ATK", "CFA", "DB", "CFT",
                 };
                 zone1BoarderList.AddRange(zone2Boarder);
             }
@@ -650,7 +650,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone3Boarder = new string[] //South Central and South East
                 {
-                    "KT", "YL", "SSB", "ELC", "ACE", "TEL", "CFT"
+                    "KT", "YL", "SSB", "ELC", "ACE", "DB", "CFT"
                 };
                 zone1BoarderList.AddRange(zone3Boarder);
             }
@@ -695,7 +695,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone3Boarder = new string[] //South West and South central
                 {
-                    "ACW", "VH", "ATK", "CFA", "CFT", "TEL"
+                    "ACW", "VH", "ATK", "CFA", "CFT", "DB"
                 };
                 zone1BoarderList.AddRange(zone3Boarder);
             }
@@ -703,7 +703,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone4Boarder = new string[] //South Central and South East
                  {
-                     "YL", "KT", "SSB", "ELC", "CFT", "ACE", "TEL"
+                     "YL", "KT", "SSB", "ELC", "CFT", "ACE", "DB"
                  };
                 zone1BoarderList.AddRange(zone4Boarder);
             }

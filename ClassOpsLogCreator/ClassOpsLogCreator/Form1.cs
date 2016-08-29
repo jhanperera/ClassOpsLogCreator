@@ -753,7 +753,7 @@ namespace ClassOpsLogCreator
             Excel.Range ace017CloseRange = worksheet.get_Range("B" + (array1.GetLength(0) + array2.GetLength(0) + array3.GetLength(0) + index + 2),
                                                                 "G" + (array1.GetLength(0) + array2.GetLength(0) + array3.GetLength(0) + index + 2));
 
-            //Formatt for easy to read for "Crestron logout"
+            //Format for easy to read for "Crestron logout"
             taskType_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             taskType_range.ColumnWidth = 20;
             taskType_range.Value2 = "Crestron Logout";

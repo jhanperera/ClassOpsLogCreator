@@ -170,7 +170,7 @@ namespace ClassOpsLogCreator
             buildingDictionary.Add("SSB", 2);
             buildingDictionary.Add("ACE", 3);
             buildingDictionary.Add("CFT", 4);
-            buildingDictionary.Add("TEL", 5);
+            buildingDictionary.Add("DB", 5);
             buildingDictionary.Add("AK", 6);
             buildingDictionary.Add("CFA", 7);
             buildingDictionary.Add("ACW", 8);

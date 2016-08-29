@@ -23,11 +23,7 @@ namespace ClassOpsLogCreator.Properties {
             }
         }
         
-        /// <summary>
-        /// The username of the Yorku email login.
-        /// </summary>
         [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Configuration.SettingsDescriptionAttribute("The username of the Yorku email login.")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string UserName {
