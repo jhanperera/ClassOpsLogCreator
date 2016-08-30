@@ -125,13 +125,6 @@ namespace ClassOpsLogCreator
                 return;
             }
 
-            //Check if we have a valid mail login credentials
-            if (Properties.Settings.Default.UserName == "" || Properties.Settings.Default.Password == "")
-            {
-                LoginPage lp = new LoginPage();
-                lp.ShowDialog();  
-            }
-
             //Use this for smooth panel updates (double buffering is enabled)
             this.SetStyle(
                 ControlStyles.AllPaintingInWmPaint |
@@ -435,6 +428,7 @@ namespace ClassOpsLogCreator
             //Do all the work
             if (bw.IsBusy != true)
             {
+                this.TopMost = false;
                 //Disable the button
                 createBTN.Enabled = false;
                 plusBTN1.Enabled = false;
@@ -1129,9 +1123,10 @@ namespace ClassOpsLogCreator
                       string nameText = name.Cells.Value2.ToString();
 
                       existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + startTime + " to " + endTime;
-
+                      existingMaster.get_Range("C:C").EntireColumn.Hidden = true;
                       logRange.PrintPreview(true);
-                  }
+                      existingMaster.get_Range("C:C").EntireColumn.Hidden = false;
+                }
             }
             else
             {
@@ -1145,8 +1140,10 @@ namespace ClassOpsLogCreator
                 existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + startTime + " to " + endTime;
 
                 SetDefaultPrinter(printDlg.PrinterSettings.PrinterName);
+                existingMaster.get_Range("C:C").EntireColumn.Hidden = true;
                 existingMaster.Visible = true;
                 logRange.PrintPreview(true);
+                existingMaster.get_Range("C:C").EntireColumn.Hidden = false;
             }
         }
 

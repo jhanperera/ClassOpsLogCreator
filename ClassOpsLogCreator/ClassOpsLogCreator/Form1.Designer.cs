@@ -668,7 +668,8 @@
             this.loginBTN.Name = "loginBTN";
             this.loginBTN.Size = new System.Drawing.Size(34, 27);
             this.loginBTN.Style = MetroFramework.MetroColorStyle.White;
-            this.loginBTN.TabIndex = 51;
+            this.loginBTN.TabIndex = 50;
+            this.loginBTN.TabStop = false;
             this.loginBTN.TileImage = ((System.Drawing.Image)(resources.GetObject("loginBTN.TileImage")));
             this.loginBTN.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.loginBTN.UseTileImage = true;
@@ -696,6 +697,7 @@
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Log Creator";
             this.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.TopMost = true;
             this.TransparencyKey = System.Drawing.SystemColors.ControlDarkDark;
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
