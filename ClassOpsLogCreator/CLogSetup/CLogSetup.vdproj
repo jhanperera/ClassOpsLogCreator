@@ -46,13 +46,13 @@
         "Entry"
         {
         "MsmKey" = "8:_320A1F56EDC853E94150C8CD219F6C0E"
-        "OwnerKey" = "8:_3651A2C02C7A761833B0A2869BD59370"
+        "OwnerKey" = "8:_5C1767576D364F27B290ED7CA15FCA6A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_320A1F56EDC853E94150C8CD219F6C0E"
-        "OwnerKey" = "8:_5C1767576D364F27B290ED7CA15FCA6A"
+        "OwnerKey" = "8:_3651A2C02C7A761833B0A2869BD59370"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -118,49 +118,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_543CFB68C159F650284905E1A559C6A5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A4CAB00301F38F6412F3A433AFD43AB0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_320A1F56EDC853E94150C8CD219F6C0E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FB25DCE48D8A2A6E5002246FE2DAE91D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3651A2C02C7A761833B0A2869BD59370"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7F347E644FC9C89A01CAC3A8670545C7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0113D008A9ED3C2AFDCF6AF107286D46"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_04708188ECFF113F27B1926C8A836005"
+        "OwnerKey" = "8:_72F6D541E9FB04D955CB3C466170B674"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -172,7 +130,49 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_72F6D541E9FB04D955CB3C466170B674"
+        "OwnerKey" = "8:_04708188ECFF113F27B1926C8A836005"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0113D008A9ED3C2AFDCF6AF107286D46"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7F347E644FC9C89A01CAC3A8670545C7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3651A2C02C7A761833B0A2869BD59370"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FB25DCE48D8A2A6E5002246FE2DAE91D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_320A1F56EDC853E94150C8CD219F6C0E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A4CAB00301F38F6412F3A433AFD43AB0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_543CFB68C159F650284905E1A559C6A5"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -636,12 +636,12 @@
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:0.1.33"
         "Manufacturer" = "8:YorkUIT"
-        "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:"
+        "ARPHELPTELEPHONE" = "8:4167365800"
+        "ARPHELPLINK" = "8:computing.yorku.ca"
         "Title" = "8:CLog-Beta-Setup"
-        "Subject" = "8:"
+        "Subject" = "8:Create Class Ops logs for part time staff"
         "ARPCONTACT" = "8:Jhan Perera"
-        "Keywords" = "8:"
+        "Keywords" = "8:CLog"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
         "ARPPRODUCTICON" = "8:_C8497F65B6144186A6DF6E6C70C27FF5"
