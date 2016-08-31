@@ -1110,6 +1110,7 @@ namespace ClassOpsLogCreator
         /// <param name="rowNumbers"></param>
         private void printOutLog(string startTime, string endTime, long[,] rowNumbers, int numberOfShifts)
         {
+            existingMaster.get_Range("C:C").EntireColumn.Hidden = true;
             //Print all the pages here
             if (numberOfShifts > 1)
             {
@@ -1123,9 +1124,7 @@ namespace ClassOpsLogCreator
                       string nameText = name.Cells.Value2.ToString();
 
                       existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + startTime + " to " + endTime;
-                      existingMaster.get_Range("C:C").EntireColumn.Hidden = true;
                       logRange.PrintPreview(true);
-                      existingMaster.get_Range("C:C").EntireColumn.Hidden = false;
                 }
             }
             else
@@ -1139,12 +1138,11 @@ namespace ClassOpsLogCreator
 
                 existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + startTime + " to " + endTime;
 
-                SetDefaultPrinter(printDlg.PrinterSettings.PrinterName);
-                existingMaster.get_Range("C:C").EntireColumn.Hidden = true;
+                SetDefaultPrinter(printDlg.PrinterSettings.PrinterName); 
                 existingMaster.Visible = true;
                 logRange.PrintPreview(true);
-                existingMaster.get_Range("C:C").EntireColumn.Hidden = false;
             }
+            existingMaster.get_Range("C:C").EntireColumn.Hidden = false;
         }
 
         /// <summary>
