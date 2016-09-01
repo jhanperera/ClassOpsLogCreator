@@ -179,6 +179,7 @@ namespace ClassOpsLogCreator
         {
 
             Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+
             int lastRow = ExSheet.UsedRange.Rows.Count;
             Excel.Range range = ExSheet.get_Range("B2", "B" + lastRow);
 
@@ -224,6 +225,18 @@ namespace ClassOpsLogCreator
 
             //initialization of all the ranges that we are going to collect.
             Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+
+            foreach(Excel.Range cell in last.Cells)
+            {
+                if(cell == null)
+                {
+                    last.EntireRow.Delete(Excel.XlDeleteShiftDirection.xlShiftUp);
+                    last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+                    break;
+                }
+                break;
+            }
+
             int start = last.Row - this.numberOfRows(ExSheet, this.getLastDate());
             Excel.Range rangeA = ExSheet.get_Range("A" + start, "A" + last.Row);
             Excel.Range rangeB = ExSheet.get_Range("B" + start, "B" + last.Row);
