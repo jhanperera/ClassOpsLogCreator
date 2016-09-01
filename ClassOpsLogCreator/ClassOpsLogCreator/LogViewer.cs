@@ -162,7 +162,9 @@ namespace ClassOpsLogCreator
                     }
                 }
             }
+            //Remove the data column because we don't need
             dt.Columns.Remove("Date");
+
             //Set the datagrid data source to the dataTable
             dataGridView1.DataSource = dt;
 
