@@ -6,24 +6,6 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Excel = Microsoft.Office.Interop.Excel;
 
-/// <summary>
-/// 
-/// Author: Jhan Perera
-/// Department: UIT Client Services
-/// 
-/// 
-/// Description of class: This is a utility class
-/// of all the classes in the school. This class contains 
-/// information about each class and any special instructions. 
-/// 
-/// This class also houses and important zone and building info
-///
-/// Class Version: 0.1.0.2 - BETA - 7272016
-/// 
-/// System Version: 0.1.0.0 - BETA - 7152016
-/// 
-/// </summary>
-
 namespace ClassOpsLogCreator
 {
     class ClassInfo

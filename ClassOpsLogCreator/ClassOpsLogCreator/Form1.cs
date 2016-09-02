@@ -10,20 +10,6 @@ using System.Drawing.Printing;
 
 namespace ClassOpsLogCreator
 {
-    /// <summary>
-    /// Author: Jhan Perera
-    /// Department: UIT Client Services
-    ///
-    ///
-    /// Description of class: This is the main thread class
-    /// all the main event handlers and work is done here.
-    /// All output is generated from here and main features are
-    /// all called here.
-    ///
-    /// Class Version: 0.2.0.0 - BETA - 852016
-    ///
-    /// System Version: 0.1.0.0 - BETA - 7152016
-    /// </summary>
     public partial class LogCreator : MetroFramework.Forms.MetroForm
     {
         #region Private Attributes/Variables
@@ -123,24 +109,6 @@ namespace ClassOpsLogCreator
                 //Use an anonymous event handler to take care of this
                 Load += (s, e) => Close();
                 return;
-            }
-
-            string jLastAccess = System.IO.File.GetLastAccessTime(JEANNINE_LOG).ToString("M/dd/yyyy");
-            string dLastAccess = System.IO.File.GetLastAccessTime(DEREK_LOG).ToString("M/dd/yyyy");
-            string rLastAccess = System.IO.File.GetLastAccessTime(RAUL_LOG).ToString("M/dd/yyyy");
-            string today = DateTime.Now.ToString("M/dd/yyyy");
-
-            bool checkJlastAccess = !jLastAccess.Equals(today);
-            bool checkDlastAccess = !dLastAccess.Equals(today);
-            bool checkRlastAccess = !rLastAccess.Equals(today);
-
-            if (checkJlastAccess || checkDlastAccess || checkRlastAccess)
-            {
-                string msg = string.Format("One or more Zone Supervisor logs was not updated today: {0} {1} {2}."
-                    , checkJlastAccess ? "Jeannine" : ""
-                    , checkDlastAccess ? "Derek" : ""
-                    , checkRlastAccess ? "Raul" : "");
-                MessageBox.Show(msg); 
             }
 
             //Use this for smooth panel updates (double buffering is enabled)

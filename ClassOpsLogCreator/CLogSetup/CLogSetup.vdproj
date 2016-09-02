@@ -124,25 +124,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1ECDCDBF74219D3BC07586DFFB218510"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_FCEBB757F441CD75D7C94EB04C145071"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0DEA487F4D032EFE24E9DF31A0DDD0D7"
+        "OwnerKey" = "8:_1ECDCDBF74219D3BC07586DFFB218510"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_1D8F206A38E6DCB73E6B40D62AE63A4F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0DEA487F4D032EFE24E9DF31A0DDD0D7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -699,15 +699,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:CLog-Beta"
-        "ProductCode" = "8:{BCC0E274-1656-49C8-9234-92C68321CEA3}"
-        "PackageCode" = "8:{E53CE392-2F54-4886-B287-D8409D8FC5C9}"
+        "ProductCode" = "8:{3AA27CB0-55C2-4540-A261-102F958E40B2}"
+        "PackageCode" = "8:{565DF383-75E2-48F4-A377-63383C11FD02}"
         "UpgradeCode" = "8:{4E7F0324-B8A6-48D4-BD44-83224D0C0CB6}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:0.1.36"
+        "InstallAllUsers" = "11:FALSE"
+        "ProductVersion" = "8:0.2.1"
         "Manufacturer" = "8:YorkUIT"
         "ARPHELPTELEPHONE" = "8:4167365800"
         "ARPHELPLINK" = "8:computing.yorku.ca"

@@ -249,6 +249,7 @@ namespace ClassOpsLogCreator
                     //Add a logout comment for MC157A
                     else if (token[0].Equals("MC") && token[1].Equals("157A"))
                     {
+                        masterArray[index, 2] = token[1];
                         masterArray[index, 3] = "Door code 11012*";
                     }
                     else
@@ -257,11 +258,11 @@ namespace ClassOpsLogCreator
                     }
                     //Adding notes
                     //Does the class have a neck mic?
-                    if (classList.hasLapelMic(classArray[i]))
+                    if (classList.hasLapelMic(classArray[i]) && masterArray[index, 3] == null)
                     {
                         masterArray[index, 3] = "Ensure neck mic goes back to equipment drawer.";
                     }
-                    else
+                    else if(masterArray[index, 3] == null)
                     {
                         masterArray[index, 3] = "";
                     }

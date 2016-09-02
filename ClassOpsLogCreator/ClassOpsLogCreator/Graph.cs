@@ -5,26 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 
-/// <summary>
-/// 
-/// Author: Jhan Perera
-/// Department: UIT Client Services
-/// 
-/// 
-///
-/// Description of class: This class will create the graph for the school so we can quickly 
-/// check distances and get shortest paths for the number of 
-/// shifts that day. 
-/// 
-/// The Buildings are held in a Dictionary to map them to
-/// an integer for the adjacency matrix that is the
-/// backbone of the graph. 
-///
-/// Class Version: 0.1.0.0 - BETA - 7182016
-/// 
-/// System Version: 0.1.0.0 - BETA - 7152016
-/// 
-/// </summary>
 namespace ClassOpsLogCreator
 {
     public class Graph

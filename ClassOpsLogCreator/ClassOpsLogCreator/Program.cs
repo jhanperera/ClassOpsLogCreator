@@ -7,20 +7,6 @@ using System.Windows.Forms;
 
 namespace ClassOpsLogCreator
 {
-    /// <summary>
-    /// 
-    /// Author: Jhan Perera
-    /// Department: UIT Client Services
-    /// 
-    /// 
-    /// Description of class: This is the main execution point. 
-    /// All the action started here when the application opens. 
-    ///
-    /// Class Version: 0.1.0.0 - BETA - 7152016
-    /// 
-    /// System Version: 0.1.0.0 - BETA - 7152016
-    /// 
-    /// </summary>
     static class Program
     {
         /// <summary>
