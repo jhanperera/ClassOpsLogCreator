@@ -82,6 +82,20 @@ namespace ClassOpsLogCreator
             Excel.Range timeRange = roomSheet1.get_Range("C5", "C" + last.Row);
             Excel.Range eventRange = roomSheet1.get_Range("D5", "D" + last.Row);
 
+            //Delete entire row if c.value2 is null but d.value2 is not null. 
+            for(int i = 1; i <= last.Row; i++)
+            {
+                Excel.Range timeItem = (Excel.Range)timeRange.Item[i];
+                Excel.Range eventItem = (Excel.Range)eventRange.Item[i];
+                if(timeItem.Value2 == null && eventItem.Value2 != null)
+                {
+                    timeItem.EntireRow.Delete(Excel.XlDeleteShiftDirection.xlShiftUp);
+                    
+                }
+            }
+            //Save the changes
+            roomWorkBook.Save();
+
             //Lets export the whole range of raw data into an array. (Cell.Value2 is a fast and accurate operation to use)
             System.Array classArray = (System.Array)classRange.Cells.Value2;
             System.Array timeArray = (System.Array)timeRange.Cells.Value2;
@@ -93,7 +107,7 @@ namespace ClassOpsLogCreator
             arrayEvent = this.ConvertToStringArray(eventArray, 1);
             arrayLastTimes = this.extract_last_time(arrayTimes, arrayEvent);
 
-            //Remove the sql entry in the array
+            //Remove the sql entry in the array if they exist
             if(arrayClassRooms[arrayClassRooms.GetUpperBound(0)].Contains("SQL"))
             {
                 arrayClassRooms = arrayClassRooms.Take(arrayClassRooms.Count() - 1).ToArray();

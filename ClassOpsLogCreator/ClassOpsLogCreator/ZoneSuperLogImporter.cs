@@ -226,15 +226,18 @@ namespace ClassOpsLogCreator
             //initialization of all the ranges that we are going to collect.
             Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
 
+            //Delete any empty rows (This 
             foreach(Excel.Range cell in last.Cells)
             {
                 if(cell == null)
                 {
                     last.EntireRow.Delete(Excel.XlDeleteShiftDirection.xlShiftUp);
                     last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-                    break;
                 }
-                break;
+                else
+                {
+                    break;
+                }  
             }
 
             int start = last.Row - this.numberOfRows(ExSheet, this.getLastDate());

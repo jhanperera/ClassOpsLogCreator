@@ -28,24 +28,24 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
 
-        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY!
-        private static string username = Environment.UserName; 
+        /*private static string username = Environment.UserName; 
         public readonly string ROOM_SCHED = @"C:\Users\" + username+ @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
 
         //A stack for some thread safer operations
         private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();
@@ -123,6 +123,24 @@ namespace ClassOpsLogCreator
                 //Use an anonymous event handler to take care of this
                 Load += (s, e) => Close();
                 return;
+            }
+
+            string jLastAccess = System.IO.File.GetLastAccessTime(JEANNINE_LOG).ToString("M/dd/yyyy");
+            string dLastAccess = System.IO.File.GetLastAccessTime(DEREK_LOG).ToString("M/dd/yyyy");
+            string rLastAccess = System.IO.File.GetLastAccessTime(RAUL_LOG).ToString("M/dd/yyyy");
+            string today = DateTime.Now.ToString("M/dd/yyyy");
+
+            bool checkJlastAccess = !jLastAccess.Equals(today);
+            bool checkDlastAccess = !dLastAccess.Equals(today);
+            bool checkRlastAccess = !rLastAccess.Equals(today);
+
+            if (checkJlastAccess || checkDlastAccess || checkRlastAccess)
+            {
+                string msg = string.Format("One or more Zone Supervisor logs was not updated today: {0} {1} {2}."
+                    , checkJlastAccess ? "Jeannine" : ""
+                    , checkDlastAccess ? "Derek" : ""
+                    , checkRlastAccess ? "Raul" : "");
+                MessageBox.Show(msg); 
             }
 
             //Use this for smooth panel updates (double buffering is enabled)
