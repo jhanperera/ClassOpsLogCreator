@@ -13,6 +13,7 @@ namespace ClassOpsLogCreator
         private ClassInfo classinfo;
         private int numberOfBuildings;
         private int numberOfConnections;
+        private int[] numberOfElementsPerZone;
 
         /// <summary>
         /// This will create a the map for the school and 
@@ -46,10 +47,10 @@ namespace ClassOpsLogCreator
             return this.numberOfConnections;
         }
 
-        /**All the methods under here are not using BFS yet
-         * The BFS algo needs to be modified to work correctly
-         * before we use it to be dynamic and "Smart"
-         */
+        public int[] numberOfRows()
+        {
+            return this.numberOfElementsPerZone;
+        }
 
         /// <summary>
         /// This method is responsible for the zoning of all the elements in the range.
@@ -100,6 +101,10 @@ namespace ClassOpsLogCreator
 
                 //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
                 this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_2(), 8);
+
+                numberOfElementsPerZone = new int[2];
+                numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);
+                numberOfElementsPerZone[1] = zone2Array.GetUpperBound(0);
 
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
@@ -153,6 +158,11 @@ namespace ClassOpsLogCreator
                 this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_3(1), 8);//North Central
                 this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_3(2), 8);//Central South
                 this.applyRankAndOrganize(ref zone3Array, ref zone1Array, classinfo.boarderBuildingZone_3(3), 8);//South North
+
+                numberOfElementsPerZone = new int[3];
+                numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);
+                numberOfElementsPerZone[1] = zone2Array.GetUpperBound(0);
+                numberOfElementsPerZone[2] = zone3Array.GetUpperBound(0);
 
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
@@ -216,6 +226,12 @@ namespace ClassOpsLogCreator
                 this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_4(2), 4);//Central South Central
                 this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_4(3), 4);//South Central South East
                 this.applyRankAndOrganize(ref zone4Array, ref zone1Array, classinfo.boarderBuildingZone_4(4), 4);//South East Central
+
+                numberOfElementsPerZone = new int[4];
+                numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);
+                numberOfElementsPerZone[1] = zone2Array.GetUpperBound(0);
+                numberOfElementsPerZone[2] = zone3Array.GetUpperBound(0);
+                numberOfElementsPerZone[3] = zone4Array.GetUpperBound(0);
 
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
@@ -294,6 +310,13 @@ namespace ClassOpsLogCreator
                 this.applyRankAndOrganize(ref zone4Array, ref zone5Array, classinfo.boarderBuildingZone_5(4), 4);//South Central and South East
                 this.applyRankAndOrganize(ref zone3Array, ref zone1Array, classinfo.boarderBuildingZone_5(4), 4);//North East (Central) and South West
 
+                numberOfElementsPerZone = new int[5];
+                numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);
+                numberOfElementsPerZone[1] = zone2Array.GetUpperBound(0);
+                numberOfElementsPerZone[2] = zone3Array.GetUpperBound(0);
+                numberOfElementsPerZone[3] = zone4Array.GetUpperBound(0);
+                numberOfElementsPerZone[4] = zone5Array.GetUpperBound(0);
+
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
                 AddToArray(result, zone2Array, zone1Array.GetLength(0));
@@ -371,9 +394,19 @@ namespace ClassOpsLogCreator
                 zone5Array = ZoneSuperLogImporter.RemoveEmptyRows(zone5Array);
                 zone6Array = ZoneSuperLogImporter.RemoveEmptyRows(zone6Array);
 
+                numberOfElementsPerZone = new int[6];
+                numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);
+                numberOfElementsPerZone[1] = zone2Array.GetUpperBound(0);
+                numberOfElementsPerZone[2] = zone3Array.GetUpperBound(0);
+                numberOfElementsPerZone[3] = zone4Array.GetUpperBound(0);
+                numberOfElementsPerZone[4] = zone5Array.GetUpperBound(0);
+                numberOfElementsPerZone[5] = zone6Array.GetUpperBound(0);
+
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0) +
                                         zone3Array.GetLength(0) + zone4Array.GetLength(0) +
                                         zone5Array.GetLength(0) + zone6Array.GetLength(0), 7];
+
+
                 //Merge the arrays together
                 AddToArray(result, zone1Array);
                 AddToArray(result, zone2Array, zone1Array.GetLength(0));
@@ -461,6 +494,15 @@ namespace ClassOpsLogCreator
                 zone5Array = ZoneSuperLogImporter.RemoveEmptyRows(zone5Array);
                 zone6Array = ZoneSuperLogImporter.RemoveEmptyRows(zone6Array);
                 zone7Array = ZoneSuperLogImporter.RemoveEmptyRows(zone7Array);
+
+                numberOfElementsPerZone = new int[7];
+                numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);
+                numberOfElementsPerZone[1] = zone2Array.GetUpperBound(0);
+                numberOfElementsPerZone[2] = zone3Array.GetUpperBound(0);
+                numberOfElementsPerZone[3] = zone4Array.GetUpperBound(0);
+                numberOfElementsPerZone[4] = zone5Array.GetUpperBound(0);
+                numberOfElementsPerZone[5] = zone6Array.GetUpperBound(0);
+                numberOfElementsPerZone[6] = zone7Array.GetUpperBound(0);
 
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0) +
                                         zone3Array.GetLength(0) + zone4Array.GetLength(0) +
@@ -565,6 +607,16 @@ namespace ClassOpsLogCreator
                 zone6Array = ZoneSuperLogImporter.RemoveEmptyRows(zone6Array);
                 zone7Array = ZoneSuperLogImporter.RemoveEmptyRows(zone7Array);
                 zone8Array = ZoneSuperLogImporter.RemoveEmptyRows(zone8Array);
+
+                numberOfElementsPerZone = new int[8];
+                numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);
+                numberOfElementsPerZone[1] = zone2Array.GetUpperBound(0);
+                numberOfElementsPerZone[2] = zone3Array.GetUpperBound(0);
+                numberOfElementsPerZone[3] = zone4Array.GetUpperBound(0);
+                numberOfElementsPerZone[4] = zone5Array.GetUpperBound(0);
+                numberOfElementsPerZone[5] = zone6Array.GetUpperBound(0);
+                numberOfElementsPerZone[6] = zone7Array.GetUpperBound(0);
+                numberOfElementsPerZone[7] = zone8Array.GetUpperBound(0);
 
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0) +
                                         zone3Array.GetLength(0) + zone4Array.GetLength(0) +

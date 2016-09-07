@@ -14,24 +14,24 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
 
-        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+       /* public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY!
-        /*private static string username = Environment.UserName; 
+        private static string username = Environment.UserName; 
         public readonly string ROOM_SCHED = @"C:\Users\" + username+ @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
 
         //A stack for some thread safer operations
         private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();
@@ -470,7 +470,7 @@ namespace ClassOpsLogCreator
             worker.ReportProgress(95);
 
             //Gracefully close all instances
-            Quit();
+            //Quit();
 
             //Send report that we are all done 100%
             worker.ReportProgress(100);
@@ -547,11 +547,6 @@ namespace ClassOpsLogCreator
                 // Finally, handle the case where the operation 
                 // succeeded.
                 workDone = true;
-                Quit();
-            }
-
-            if (workDone)
-            {
                 printDlg = new PrintDialog();
                 PrinterSettings defaultSettings = new PrinterSettings();
                 string defaultPrinterName = defaultSettings.PrinterName;
@@ -577,16 +572,16 @@ namespace ClassOpsLogCreator
                     //Display the logs 
                     displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1, "Shift #1:");
                     displayLogs(this.startTimeFromCombo2, this.endTimeFromCombo2, rowNumbers2, numberOfShifts2, "Shift #2:");
-                    
+
                     //Print the logs
                     if (printDlg.ShowDialog() == DialogResult.OK)
                     {
                         printOutLog(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1);
                         printOutLog(this.startTimeFromCombo2, this.endTimeFromCombo2, rowNumbers2, numberOfShifts2);
                     }
-                    
+
                 }
-                else if(plusClicked1 && plusClicked2 && !plusClicked3)
+                else if (plusClicked1 && plusClicked2 && !plusClicked3)
                 {
                     //Display the logs                                
                     displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1, "Shift #1:");
@@ -601,7 +596,7 @@ namespace ClassOpsLogCreator
                         printOutLog(this.startTimeFromCombo3, this.endTimeFromCombo3, rowNumbers3, numberOfShifts3);
                     }
                 }
-                else if(plusClicked1 && plusClicked2 && plusClicked3)
+                else if (plusClicked1 && plusClicked2 && plusClicked3)
                 {
                     //Display the logs                                                          
                     displayLogs(this.startTimeFromCombo1, this.endTimeFromCombo1, rowNumbers1, numberOfShifts1, "Shift #1:");
@@ -632,7 +627,7 @@ namespace ClassOpsLogCreator
                 //Save
                 existingMaster.DisplayAlerts = false;
                 existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);
-                //Close the workbook and the excel file
+
                 existingMasterWorkBook.Close();
                 existingMaster.Quit();
                 System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
@@ -658,7 +653,6 @@ namespace ClassOpsLogCreator
                 Quit();
             }
         }
-
 
         // ALL HELPER/WORKER METHODS GO HERE BELLOW HERE!
 
@@ -702,6 +696,7 @@ namespace ClassOpsLogCreator
             logoutMaster.DisplayAlerts = false;
 
             this.mergeMasterWithExisting(logoutMasterWorkSheet, numberOfShifts, redSeperator, startTimeFromCombo, endTimeFromCombo, ref rowNumbers);
+
         }
 
         /// <summary>
@@ -833,8 +828,9 @@ namespace ClassOpsLogCreator
                 SchoolZoning sz = new SchoolZoning();
                 //Pass the zoning with the number of shifts
                 destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts);
+                int[] numberOfRowsPerZone = sz.numberOfRows();
                 //divide the zones
-                rowNumbers = this.dividedLogs(destinationRange, numberOfShifts);
+                rowNumbers = this.dividedLogs(destinationRange, numberOfShifts, numberOfRowsPerZone);
             }
             else
             {
@@ -923,62 +919,24 @@ namespace ClassOpsLogCreator
         /// </summary>
         /// <param name="range"></param>
         /// <param name="numberOfShifts"></param>
+        /// <param name="numberOfRowsPerZone"></param>
         /// <returns></returns>
-        private long[,] dividedLogs(Excel.Range range, int numberOfShifts)
+        private long[,] dividedLogs(Excel.Range range, int numberOfShifts, int[] numberOfRowsPerZone)
         {
             //Set the start and end row variables
             System.Array value = null;
             long[,] rowValues = new long[numberOfShifts, 2];
-
             long startRow = Int64.Parse(range.Row.ToString());
-            long endRow = 0;
-            int count = 0;
-            int arrayCount = 0;
-
-            //loop through the rows and find were the split is based on the next time
-            for (int i = 1; (i < range.Rows.Count) && startRow < (startRow + range.Rows.Count); i++)
+            
+            for(int i = 0; i <= numberOfRowsPerZone.GetUpperBound(0); i++)
             {
-                count++;
-                //Get the time string from the excel sheet
-                string startTimestring = (string)(range.Cells[i, 4] as Excel.Range).Value2;
-                string nextTimestring = (string)(range.Cells[i + 1, 4] as Excel.Range).Value2;
-                var firstTime = TimeSpan.Parse(startTimestring);
-                var nextTime = TimeSpan.Parse(nextTimestring);
-
-                //if the next time is less than the current time we know there is a split or we are at the end
-                if (nextTime < firstTime || (i + 1) == range.Rows.Count)
-                {
-                    endRow = startRow + count;
-                    //The case when we are dealing with the last log
-                    if ((i + 1) == range.Rows.Count)
-                    {
-                        Excel.Range toArrayRange = existingMasterWorkSheet.get_Range("A" + startRow, "G" + (endRow));
-                        value = (System.Array)toArrayRange.Value2;
-                        //Send the array to the Queue
-                        this.logNextQueue.Enqueue(value);
-                        //save the start and end times
-                        rowValues[arrayCount, 0] = startRow;
-                        rowValues[arrayCount, 1] = endRow;
-                        //Move the new start row pointer
-                        startRow = endRow;
-                        arrayCount++;
-                        count = 0;
-                    }
-                    else
-                    {
-                        Excel.Range toArrayRange = existingMasterWorkSheet.get_Range("A" + startRow, "G" + (endRow - 1));
-                        value = (System.Array)toArrayRange.Value2;
-                        //Send the array to the Queue
-                        this.logNextQueue.Enqueue(value);
-                        //save the start and end times
-                        rowValues[arrayCount, 0] = startRow;
-                        rowValues[arrayCount, 1] = endRow - 1;
-                        //Move the new start row pointer
-                        startRow = endRow;
-                        arrayCount++;
-                        count = 0;
-                    }
-                }
+                Excel.Range toArrayRange = existingMasterWorkSheet.get_Range("A" + startRow, "G" + (startRow + numberOfRowsPerZone[i]));
+                value = (System.Array)toArrayRange.Value2;
+                //Send the array to the Queue
+                this.logNextQueue.Enqueue(value);
+                rowValues[i, 0] = startRow;
+                rowValues[i, 1] = startRow + numberOfRowsPerZone[i];
+                startRow += numberOfRowsPerZone[i] + 1;
             }
             return rowValues;
         }
@@ -1417,7 +1375,9 @@ namespace ClassOpsLogCreator
                 existingMasterWorkSheet = null;
             }
             GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
-
     }
 }
