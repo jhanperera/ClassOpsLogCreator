@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ClassOpsLogCreator
 {
-    public partial class LoginPage : MetroFramework.Forms.MetroForm
+    public partial class SettingForm : MetroFramework.Forms.MetroForm
     {
         private bool loginClicked = false;
         private bool canceledClicked = false;
@@ -18,7 +18,7 @@ namespace ClassOpsLogCreator
         /// <summary>
         /// Constructor
         /// </summary>
-        public LoginPage()
+        public SettingForm()
         {
             InitializeComponent();
             if(!Properties.Settings.Default.UserName.Equals("")||!Properties.Settings.Default.Password.Equals(""))

@@ -1,6 +1,6 @@
 ﻿namespace ClassOpsLogCreator
 {
-    partial class LoginPage
+    partial class SettingForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginPage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingForm));
             this.usernameLabel = new MetroFramework.Controls.MetroLabel();
             this.passwordLabel = new MetroFramework.Controls.MetroLabel();
             this.usernameTextBox = new MetroFramework.Controls.MetroTextBox();
             this.passwordTextBox = new MetroFramework.Controls.MetroTextBox();
             this.loginBTN = new MetroFramework.Controls.MetroButton();
             this.cancelBTN = new MetroFramework.Controls.MetroButton();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // usernameLabel
@@ -51,7 +52,7 @@
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Location = new System.Drawing.Point(79, 122);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(64, 19);
+            this.passwordLabel.Size = new System.Drawing.Size(63, 19);
             this.passwordLabel.TabIndex = 1;
             this.passwordLabel.Text = "Password";
             // 
@@ -90,13 +91,23 @@
             this.cancelBTN.Text = "Cancel";
             this.cancelBTN.Click += new System.EventHandler(this.cancelBTN_Click);
             // 
-            // LoginPage
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(327, 216);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(81, 19);
+            this.metroLabel1.TabIndex = 6;
+            this.metroLabel1.Text = "metroLabel1";
+            // 
+            // SettingForm
             // 
             this.AcceptButton = this.loginBTN;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(500, 218);
+            this.ClientSize = new System.Drawing.Size(500, 258);
             this.ControlBox = false;
+            this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.cancelBTN);
             this.Controls.Add(this.loginBTN);
             this.Controls.Add(this.passwordTextBox);
@@ -104,8 +115,8 @@
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.usernameLabel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "LoginPage";
-            this.Padding = new System.Windows.Forms.Padding(22, 59, 22, 20);
+            this.Name = "SettingForm";
+            this.Padding = new System.Windows.Forms.Padding(22, 60, 22, 20);
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "MyMail Login Page";
@@ -123,5 +134,6 @@
         private MetroFramework.Controls.MetroTextBox passwordTextBox;
         private MetroFramework.Controls.MetroButton loginBTN;
         private MetroFramework.Controls.MetroButton cancelBTN;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
     }
 }

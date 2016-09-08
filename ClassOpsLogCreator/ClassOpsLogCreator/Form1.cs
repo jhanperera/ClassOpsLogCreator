@@ -1161,7 +1161,7 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void loginBTN_Click(object sender, EventArgs e)
         {
-            LoginPage login = new LoginPage();
+            SettingForm login = new SettingForm();
             login.ShowDialog();
         }
 
