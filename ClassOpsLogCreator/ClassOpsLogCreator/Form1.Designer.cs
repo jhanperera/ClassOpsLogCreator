@@ -77,7 +77,7 @@
             this.shiftTime1 = new MetroFramework.Controls.MetroLabel();
             this.lineDivide1 = new MetroFramework.Controls.MetroLabel();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.loginBTN = new MetroFramework.Controls.MetroTile();
+            this.settingsBTN = new MetroFramework.Controls.MetroTile();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -661,19 +661,19 @@
             this.lineDivide1.Size = new System.Drawing.Size(577, 2);
             this.lineDivide1.TabIndex = 6;
             // 
-            // loginBTN
+            // settingsBTN
             // 
-            this.loginBTN.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.loginBTN.Location = new System.Drawing.Point(592, 6);
-            this.loginBTN.Name = "loginBTN";
-            this.loginBTN.Size = new System.Drawing.Size(34, 27);
-            this.loginBTN.Style = MetroFramework.MetroColorStyle.White;
-            this.loginBTN.TabIndex = 50;
-            this.loginBTN.TabStop = false;
-            this.loginBTN.TileImage = ((System.Drawing.Image)(resources.GetObject("loginBTN.TileImage")));
-            this.loginBTN.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.loginBTN.UseTileImage = true;
-            this.loginBTN.Click += new System.EventHandler(this.loginBTN_Click);
+            this.settingsBTN.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.settingsBTN.Location = new System.Drawing.Point(592, 6);
+            this.settingsBTN.Name = "settingsBTN";
+            this.settingsBTN.Size = new System.Drawing.Size(34, 27);
+            this.settingsBTN.Style = MetroFramework.MetroColorStyle.White;
+            this.settingsBTN.TabIndex = 50;
+            this.settingsBTN.TabStop = false;
+            this.settingsBTN.TileImage = ((System.Drawing.Image)(resources.GetObject("settingsBTN.TileImage")));
+            this.settingsBTN.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.settingsBTN.UseTileImage = true;
+            this.settingsBTN.Click += new System.EventHandler(this.settingsBTN_Click);
             // 
             // LogCreator
             // 
@@ -683,7 +683,7 @@
             this.AutoScroll = true;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(679, 238);
-            this.Controls.Add(this.loginBTN);
+            this.Controls.Add(this.settingsBTN);
             this.Controls.Add(this.metroPanel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -754,7 +754,7 @@
         private MetroFramework.Controls.MetroLabel numberOfShiftsLabel1;
         private MetroFramework.Controls.MetroLabel statusText;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
-        private MetroFramework.Controls.MetroTile loginBTN;
+        private MetroFramework.Controls.MetroTile settingsBTN;
     }
 }
 

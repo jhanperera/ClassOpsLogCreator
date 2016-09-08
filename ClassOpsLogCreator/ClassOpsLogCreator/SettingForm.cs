@@ -14,14 +14,22 @@ namespace ClassOpsLogCreator
     {
         private bool loginClicked = false;
         private bool canceledClicked = false;
+        private Form mainForm;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public SettingForm()
+        public SettingForm(Form MainForm)
         {
             InitializeComponent();
-            if(!Properties.Settings.Default.UserName.Equals("")||!Properties.Settings.Default.Password.Equals(""))
+
+            this.mainForm = MainForm;
+
+            //Set the version number
+            this.versionLabel.Text += Application.ProductVersion;
+
+            //Fill the password and username field if we already have a username and password saved.
+            if (!Properties.Settings.Default.UserName.Equals("")||!Properties.Settings.Default.Password.Equals(""))
             {
                 this.usernameTextBox.Text = Properties.Settings.Default.UserName;
                 this.passwordTextBox.Text = Properties.Settings.Default.Password;

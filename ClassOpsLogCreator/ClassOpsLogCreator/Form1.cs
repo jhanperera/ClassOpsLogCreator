@@ -35,7 +35,7 @@ namespace ClassOpsLogCreator
 
         //A stack for some thread safer operations
         private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();
-
+         
         private readonly ConcurrentStack<System.Array> logNextStack = new ConcurrentStack<System.Array>();
         private readonly ConcurrentStack<System.Array> logPretStack = new ConcurrentStack<System.Array>();
 
@@ -514,8 +514,6 @@ namespace ClassOpsLogCreator
             {
                 MessageBox.Show(e.Error.Message, "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //this.workProgressBar.Value = 0;
-                //this.workProgressBar.Refresh();
                 this.statusText.Text = "Error!";
                 createBTN.Enabled = true;
                 plusBTN1.Enabled = true;
@@ -532,8 +530,6 @@ namespace ClassOpsLogCreator
                 // the DoWork event handler, the Canceled
                 // flag may not have been set, even though
                 // CancelAsync was called.
-                //this.workProgressBar.Value = 0;
-                //this.workProgressBar.Refresh();
                 this.statusText.Text = "Canceled!";
                 createBTN.Enabled = true;
                 plusBTN1.Enabled = true;
@@ -627,7 +623,6 @@ namespace ClassOpsLogCreator
                 //Save
                 existingMaster.DisplayAlerts = false;
                 existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);
-
                 existingMasterWorkBook.Close();
                 existingMaster.Quit();
                 System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
@@ -635,6 +630,7 @@ namespace ClassOpsLogCreator
                 existingMasterWorkBook = null;
                 existingMasterWorkSheet = null;
 
+                //Reset the default printer and close the print dialog
                 SetDefaultPrinter(defaultPrinterName);
                 printDlg.Dispose();
 
@@ -668,14 +664,18 @@ namespace ClassOpsLogCreator
         /// <param name="rowNumbers"></param>
         private void logCreationAndExcelWriter(int worksheetNumber, string startTimeFromCombo, string endTimeFromCombo, int numberOfShifts, bool redSeperator, ref long[,] rowNumbers)
         {
+            //Open up a new worksheet
             logoutMasterWorkSheet = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[worksheetNumber];
 
+            //Get the logouts from the clo
             LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo, endTimeFromCombo);
 
             string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
 
+            //Get all the zone super events
             ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this, startTimeFromCombo, endTimeFromCombo);
 
+            //Get the employee names
             if(employeeNames == null)
             {
                 this.employeeNames = ZoneLogs.getEmployeeNames();
@@ -692,11 +692,10 @@ namespace ClassOpsLogCreator
                                                                          JInstruction, DInstruction, RInstruction,
                                                                          true, startTimeFromCombo, endTimeFromCombo);
 
-            //Saving and closing the new excel file
             logoutMaster.DisplayAlerts = false;
 
+            //Merg all the data with the exisitng excel workbook
             this.mergeMasterWithExisting(logoutMasterWorkSheet, numberOfShifts, redSeperator, startTimeFromCombo, endTimeFromCombo, ref rowNumbers);
-
         }
 
         /// <summary>
@@ -828,6 +827,7 @@ namespace ClassOpsLogCreator
                 SchoolZoning sz = new SchoolZoning();
                 //Pass the zoning with the number of shifts
                 destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts);
+                //Get the number of rows
                 int[] numberOfRowsPerZone = sz.numberOfRows();
                 //divide the zones
                 rowNumbers = this.dividedLogs(destinationRange, numberOfShifts, numberOfRowsPerZone);
@@ -925,17 +925,23 @@ namespace ClassOpsLogCreator
         {
             //Set the start and end row variables
             System.Array value = null;
+            //Save the row values 
             long[,] rowValues = new long[numberOfShifts, 2];
+            //The satrting row
             long startRow = Int64.Parse(range.Row.ToString());
             
             for(int i = 0; i <= numberOfRowsPerZone.GetUpperBound(0); i++)
             {
+                //get the range to add to the queue
                 Excel.Range toArrayRange = existingMasterWorkSheet.get_Range("A" + startRow, "G" + (startRow + numberOfRowsPerZone[i]));
                 value = (System.Array)toArrayRange.Value2;
                 //Send the array to the Queue
                 this.logNextQueue.Enqueue(value);
+
+                //Save the row numbers in the array
                 rowValues[i, 0] = startRow;
                 rowValues[i, 1] = startRow + numberOfRowsPerZone[i];
+                //Move to the next starting point
                 startRow += numberOfRowsPerZone[i] + 1;
             }
             return rowValues;
@@ -1159,10 +1165,10 @@ namespace ClassOpsLogCreator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void loginBTN_Click(object sender, EventArgs e)
+        private void settingsBTN_Click(object sender, EventArgs e)
         {
-            SettingForm login = new SettingForm();
-            login.ShowDialog();
+            SettingForm settings = new SettingForm(this);
+            settings.ShowDialog();
         }
 
         /// <summary>
