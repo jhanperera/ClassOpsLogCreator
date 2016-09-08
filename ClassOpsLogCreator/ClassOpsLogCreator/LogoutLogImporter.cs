@@ -87,7 +87,7 @@ namespace ClassOpsLogCreator
             {
                 Excel.Range timeItem = (Excel.Range)timeRange.Item[i];
                 Excel.Range eventItem = (Excel.Range)eventRange.Item[i];
-                if(timeItem.Value2 == null && eventItem.Value2 != null)
+                if(eventItem.Value2 != null && timeItem.Value2 == null)
                 {
                     timeItem.EntireRow.Delete(Excel.XlDeleteShiftDirection.xlShiftUp);
                     

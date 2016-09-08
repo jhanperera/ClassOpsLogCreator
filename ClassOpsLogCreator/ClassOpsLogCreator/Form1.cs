@@ -1075,6 +1075,7 @@ namespace ClassOpsLogCreator
 
                       existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + startTime + " to " + endTime;
                       logRange.PrintPreview(true);
+                      
                 }
             }
             else
