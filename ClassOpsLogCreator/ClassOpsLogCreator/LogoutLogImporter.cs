@@ -82,19 +82,8 @@ namespace ClassOpsLogCreator
             Excel.Range timeRange = roomSheet1.get_Range("C5", "C" + last.Row);
             Excel.Range eventRange = roomSheet1.get_Range("D5", "D" + last.Row);
 
-            //Delete entire row if c.value2 is null but d.value2 is not null. 
-            for(int i = 1; i <= last.Row; i++)
-            {
-                Excel.Range timeItem = (Excel.Range)timeRange.Item[i];
-                Excel.Range eventItem = (Excel.Range)eventRange.Item[i];
-                if(eventItem.Value2 != null && (timeItem.Value2 == null || timeItem.Value2.Equals("")))
-                {
-                    timeItem.EntireRow.Delete(Excel.XlDeleteShiftDirection.xlShiftUp);
-                    
-                }
-            }
-            //Save the changes
-            roomWorkBook.Save();
+            //Delete any invalid rows in the clo
+            deleteInValidRows();
 
             //Lets export the whole range of raw data into an array. (Cell.Value2 is a fast and accurate operation to use)
             System.Array classArray = (System.Array)classRange.Cells.Value2;
@@ -150,6 +139,48 @@ namespace ClassOpsLogCreator
         {
             return this.masterArrayCounter;
         }
+
+        /// <summary>
+        /// This method deletes any invalid rows that are present in the clo file
+        /// </summary>
+        private void deleteInValidRows()
+        {           
+            //Get the range we are working within. (A1, A.LastRow)
+             Excel.Range last = roomSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+             Excel.Range timeRange = roomSheet1.get_Range("C1", "C" + last.Row);
+             Excel.Range eventRange = roomSheet1.get_Range("D1", "D" + last.Row);
+
+            System.Array timeRangeArray = (System.Array)timeRange.Cells.Value2;
+
+             //Delete entire row if c.value2 is null but d.value2 is not null. 
+             for (int i = 5; i <= last.Row; i++)
+             {
+                 Excel.Range timeItem = (Excel.Range)timeRange.Item[i];
+                 Excel.Range eventItem = (Excel.Range)eventRange.Item[i];
+                 if (timeItem.Value2 != null && eventItem.Value2 != null)
+                 {
+                     string eventItemString = eventItem.Value2.ToString().Trim();
+                     string timeItemString = timeItem.Value2.ToString().Trim();
+                     if (timeItemString.Length == 0 && eventItemString.Length != 0)
+                     {
+                         timeItem.EntireRow.Delete(Excel.XlDeleteShiftDirection.xlShiftUp);
+                         i--;
+                     }
+                 }
+                 else if (timeItem.Value2 == null && eventItem.Value2 != null)
+                 {
+                     timeItem.EntireRow.Delete(Excel.XlDeleteShiftDirection.xlShiftUp);
+                     i--;
+                }
+             }
+             //Save the changes
+             roomWorkBook.Save();
+
+             last = null;
+             timeRange = null;
+             eventRange = null;
+        }
+
 
         /// <summary>
         /// /**A Helper converter that will take our "values" and convert them into a string array. 
@@ -234,7 +265,7 @@ namespace ClassOpsLogCreator
                     //Remove any blanks in between
                     if (token.Length > 2)
                     {
-                        token = token.Where(n => n != "").ToArray();
+                        token = token.Where(n => !String.IsNullOrWhiteSpace(n)).ToArray();
                     }
 
                     //Add it to the array
@@ -251,6 +282,11 @@ namespace ClassOpsLogCreator
                     {
                         masterArray[index, 2] = token[1];
                         masterArray[index, 3] = "Door code 11012*";
+                    }
+                    else if(token[0].Equals("R") && token[1].Equals("N102"))
+                    {
+                        masterArray[index, 2] = token[1];
+                        masterArray[index, 3] = @"Lock upper cinema doors (2) with allen key by releasing the crash bar. Pull side stage door shut from the inside. Make sure the stage lights at the front are off. Make sure the projector room is not open. Make sure the cinema lights are off, switched across from the projector room.";
                     }
                     else
                     {

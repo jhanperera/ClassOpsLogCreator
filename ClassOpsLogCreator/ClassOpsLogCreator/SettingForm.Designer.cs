@@ -39,13 +39,13 @@
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
-            this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
+            this.createBTN = new MetroFramework.Controls.MetroButton();
             this.am_pmCombo1_2 = new MetroFramework.Controls.MetroComboBox();
             this.endHour1 = new MetroFramework.Controls.MetroComboBox();
             this.toLabel1 = new MetroFramework.Controls.MetroLabel();
             this.am_pmCombo1_1 = new MetroFramework.Controls.MetroComboBox();
             this.startHour1 = new MetroFramework.Controls.MetroComboBox();
-            this.createBTN = new MetroFramework.Controls.MetroButton();
+            this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -66,7 +66,7 @@
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Location = new System.Drawing.Point(3, 60);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(64, 19);
+            this.passwordLabel.Size = new System.Drawing.Size(63, 19);
             this.passwordLabel.TabIndex = 1;
             this.passwordLabel.Text = "Password";
             // 
@@ -110,18 +110,18 @@
             this.versionLabel.AutoSize = true;
             this.versionLabel.Location = new System.Drawing.Point(140, 61);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(59, 19);
+            this.versionLabel.Size = new System.Drawing.Size(58, 19);
             this.versionLabel.TabIndex = 6;
             this.versionLabel.Text = "Version: ";
             // 
             // metroTabControl1
             // 
-            this.metroTabControl1.Controls.Add(this.metroTabPage1);
-            this.metroTabControl1.Controls.Add(this.metroTabPage2);
             this.metroTabControl1.Controls.Add(this.metroTabPage3);
+            this.metroTabControl1.Controls.Add(this.metroTabPage2);
+            this.metroTabControl1.Controls.Add(this.metroTabPage1);
             this.metroTabControl1.Location = new System.Drawing.Point(25, 63);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 1;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(394, 179);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Green;
             this.metroTabControl1.TabIndex = 7;
@@ -158,16 +158,13 @@
             this.metroTabPage2.Text = "Logout Generator";
             this.metroTabPage2.VerticalScrollbarBarColor = true;
             // 
-            // metroTabPage3
+            // createBTN
             // 
-            this.metroTabPage3.Controls.Add(this.versionLabel);
-            this.metroTabPage3.HorizontalScrollbarBarColor = true;
-            this.metroTabPage3.Location = new System.Drawing.Point(4, 35);
-            this.metroTabPage3.Name = "metroTabPage3";
-            this.metroTabPage3.Size = new System.Drawing.Size(386, 140);
-            this.metroTabPage3.TabIndex = 2;
-            this.metroTabPage3.Text = "Version";
-            this.metroTabPage3.VerticalScrollbarBarColor = true;
+            this.createBTN.Location = new System.Drawing.Point(152, 92);
+            this.createBTN.Name = "createBTN";
+            this.createBTN.Size = new System.Drawing.Size(87, 27);
+            this.createBTN.TabIndex = 18;
+            this.createBTN.Text = "Create";
             // 
             // am_pmCombo1_2
             // 
@@ -222,13 +219,16 @@
             this.startHour1.TabIndex = 12;
             this.startHour1.TabStop = false;
             // 
-            // createBTN
+            // metroTabPage3
             // 
-            this.createBTN.Location = new System.Drawing.Point(152, 92);
-            this.createBTN.Name = "createBTN";
-            this.createBTN.Size = new System.Drawing.Size(87, 27);
-            this.createBTN.TabIndex = 18;
-            this.createBTN.Text = "Create";
+            this.metroTabPage3.Controls.Add(this.versionLabel);
+            this.metroTabPage3.HorizontalScrollbarBarColor = true;
+            this.metroTabPage3.Location = new System.Drawing.Point(4, 35);
+            this.metroTabPage3.Name = "metroTabPage3";
+            this.metroTabPage3.Size = new System.Drawing.Size(386, 140);
+            this.metroTabPage3.TabIndex = 2;
+            this.metroTabPage3.Text = "Version";
+            this.metroTabPage3.VerticalScrollbarBarColor = true;
             // 
             // SettingForm
             // 

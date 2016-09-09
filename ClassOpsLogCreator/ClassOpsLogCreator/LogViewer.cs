@@ -225,6 +225,12 @@ namespace ClassOpsLogCreator
                     //Font
                     dataGridView1.Rows[i].Cells[0].Style.ForeColor = redFont;
                     dataGridView1.Rows[i].Cells[4].Style.ForeColor = redFont;
+                    if(dataGridView1.Rows[i].Cells[0].Value.ToString() == "Demo" &&
+                            String.IsNullOrWhiteSpace(dataGridView1.Rows[i].Cells[4].Value.ToString()))
+                    {
+                        dataGridView1.Rows[i].Cells[4].Value = "Arrive 10 minutes early. Ensure that the instructor does not require further assistance before you leave.";
+                    }
+                 
                 }
                 //Change the color of the neck mic tasks
                 if(dataGridView1.Rows[i].Cells[4].Value.ToString() == "Ensure neck mic goes back to equipment drawer.")
