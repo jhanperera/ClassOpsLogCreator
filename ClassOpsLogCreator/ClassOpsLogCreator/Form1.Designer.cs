@@ -697,7 +697,6 @@
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Log Creator";
             this.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.TopMost = true;
             this.TransparencyKey = System.Drawing.SystemColors.ControlDarkDark;
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();

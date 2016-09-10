@@ -123,10 +123,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 114</value>
+    <value>23, 104</value>
   </data>
   <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>744, 411</value>
+    <value>744, 421</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
@@ -142,7 +142,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <metadata name="logCreatorBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;numberOfLogsLabel.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="timeLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -184,16 +184,16 @@
     <value>True</value>
   </data>
   <data name="timeLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 78</value>
+    <value>128, 68</value>
   </data>
   <data name="timeLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 25</value>
+    <value>37, 25</value>
   </data>
   <data name="timeLabel.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="timeLabel.Text" xml:space="preserve">
-    <value>##:##PM to ##:##PM</value>
+    <value> to </value>
   </data>
   <data name="&gt;&gt;timeLabel.Name" xml:space="preserve">
     <value>timeLabel</value>
@@ -205,7 +205,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;timeLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="dateLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -214,7 +214,7 @@
     <value>True</value>
   </data>
   <data name="dateLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>653, 78</value>
+    <value>653, 68</value>
   </data>
   <data name="dateLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 25</value>
@@ -235,13 +235,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dateLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
+  <metadata name="metroToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>205, 17</value>
+  </metadata>
   <data name="nameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="nameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>287, 73</value>
+    <value>287, 63</value>
   </data>
   <data name="nameTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>217, 34</value>
@@ -249,9 +252,6 @@
   <data name="nameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <metadata name="metroToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>205, 17</value>
-  </metadata>
   <data name="nameTextBox.ToolTip" xml:space="preserve">
     <value>Please enter a employee name!</value>
   </data>
@@ -265,7 +265,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;nameTextBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="previousBTN.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -292,7 +292,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;previousBTN.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="nextBTN.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -319,6 +319,69 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;nextBTN.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <metadata name="metroToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>205, 17</value>
+  </metadata>
+  <data name="endTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="endTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 63</value>
+  </data>
+  <data name="endTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 34</value>
+  </data>
+  <data name="endTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="endTextBox.Text" xml:space="preserve">
+    <value>##:##PM</value>
+  </data>
+  <data name="endTextBox.ToolTip" xml:space="preserve">
+    <value>Edit the end time.</value>
+  </data>
+  <data name="&gt;&gt;endTextBox.Name" xml:space="preserve">
+    <value>endTextBox</value>
+  </data>
+  <data name="&gt;&gt;endTextBox.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTextBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;endTextBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;endTextBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="startTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="startTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 63</value>
+  </data>
+  <data name="startTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 34</value>
+  </data>
+  <data name="startTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="startTextBox.Text" xml:space="preserve">
+    <value>##:##PM</value>
+  </data>
+  <data name="startTextBox.ToolTip" xml:space="preserve">
+    <value>Edit the start time.</value>
+  </data>
+  <data name="&gt;&gt;startTextBox.Name" xml:space="preserve">
+    <value>startTextBox</value>
+  </data>
+  <data name="&gt;&gt;startTextBox.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTextBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;startTextBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;startTextBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

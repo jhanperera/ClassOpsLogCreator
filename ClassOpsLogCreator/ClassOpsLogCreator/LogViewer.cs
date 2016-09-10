@@ -3,7 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
-
+using System.Text.RegularExpressions;
 
 namespace ClassOpsLogCreator
 {
@@ -88,6 +88,16 @@ namespace ClassOpsLogCreator
             return this.nextClicked;
         }
 
+        public string getStartTime()
+        {
+            return this.startTime;
+        }
+
+        public string getEndTime()
+        {
+            return this.endTime;
+        }
+
         /// <summary>
         /// The main form load event all the work will happen here
         /// </summary>
@@ -106,7 +116,8 @@ namespace ClassOpsLogCreator
             }
 
             //Set the labels
-            this.timeLabel.Text = this.startTime + " to " + this.endTime;
+            this.startTextBox.Text = this.startTime;
+            this.endTextBox.Text = this.endTime;
             this.numberOfLogsLabel.Text = this.shiftNumber + " of " + this.numberOfShifts;
             this.dateLabel.Text = DateTime.Now.ToString("M/dd/yyyy");
 
@@ -280,8 +291,10 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void nextBTN_Click_1(object sender, EventArgs e)
         {
+            var timeString = new Regex("(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(am|pm)");
+            
             //INPUT VALIDATION!
-            if(this.nameTextBox.Text.Equals("Name"))
+            if (this.nameTextBox.Text.Equals("Name"))
             {
                 MessageBox.Show("Name Box cannot be empty!",
                                 "Error!",
@@ -297,8 +310,26 @@ namespace ClassOpsLogCreator
                                  MessageBoxIcon.Exclamation,
                                  MessageBoxDefaultButton.Button1);
             }
+            else if(this.startTextBox.Text.Length == 0 || this.endTextBox.Text.Length == 0)
+            {
+                MessageBox.Show("The shift times cannot be empty!",
+                               "Error!",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Exclamation,
+                                MessageBoxDefaultButton.Button1);
+            }
+            else if(!timeString.IsMatch(this.startTextBox.Text) || !timeString.IsMatch(this.endTextBox.Text))
+            {
+                MessageBox.Show("The time format is incorrect!",
+                              "Error!",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Exclamation,
+                               MessageBoxDefaultButton.Button1);
+            }
             else //Everything is good
             {
+                this.startTime = this.startTextBox.Text;
+                this.endTime = this.endTextBox.Text;
                 this.previousClicked = false;
                 this.nextClicked = true;
                 this.Close();

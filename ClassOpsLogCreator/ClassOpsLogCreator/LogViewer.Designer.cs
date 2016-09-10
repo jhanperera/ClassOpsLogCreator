@@ -39,6 +39,8 @@
             this.previousBTN = new MetroFramework.Controls.MetroButton();
             this.nextBTN = new MetroFramework.Controls.MetroButton();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.endTextBox = new MetroFramework.Controls.MetroTextBox();
+            this.startTextBox = new MetroFramework.Controls.MetroTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logCreatorBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -99,12 +101,36 @@
             this.nextBTN.Name = "nextBTN";
             this.nextBTN.Click += new System.EventHandler(this.nextBTN_Click_1);
             // 
+            // endTextBox
+            // 
+            resources.ApplyResources(this.endTextBox, "endTextBox");
+            this.endTextBox.FontSize = MetroFramework.MetroTextBoxSize.Tall;
+            this.endTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.endTextBox.Name = "endTextBox";
+            this.endTextBox.PromptText = "##:##PM";
+            this.endTextBox.Style = MetroFramework.MetroColorStyle.Yellow;
+            this.endTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.metroToolTip1.SetToolTip(this.endTextBox, resources.GetString("endTextBox.ToolTip"));
+            // 
+            // startTextBox
+            // 
+            resources.ApplyResources(this.startTextBox, "startTextBox");
+            this.startTextBox.FontSize = MetroFramework.MetroTextBoxSize.Tall;
+            this.startTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.startTextBox.Name = "startTextBox";
+            this.startTextBox.PromptText = "##:##PM";
+            this.startTextBox.Style = MetroFramework.MetroColorStyle.Yellow;
+            this.startTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.metroToolTip1.SetToolTip(this.startTextBox, resources.GetString("startTextBox.ToolTip"));
+            // 
             // LogViewer
             // 
             this.AcceptButton = this.nextBTN;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ControlBox = false;
+            this.Controls.Add(this.startTextBox);
+            this.Controls.Add(this.endTextBox);
             this.Controls.Add(this.nextBTN);
             this.Controls.Add(this.previousBTN);
             this.Controls.Add(this.nameTextBox);
@@ -116,7 +142,6 @@
             this.Name = "LogViewer";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.LogViewer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logCreatorBindingSource)).EndInit();
@@ -136,5 +161,7 @@
         private MetroFramework.Controls.MetroButton previousBTN;
         private MetroFramework.Controls.MetroButton nextBTN;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Controls.MetroTextBox endTextBox;
+        private MetroFramework.Controls.MetroTextBox startTextBox;
     }
 }
