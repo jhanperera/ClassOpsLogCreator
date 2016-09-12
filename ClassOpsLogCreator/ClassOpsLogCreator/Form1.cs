@@ -762,7 +762,7 @@ namespace ClassOpsLogCreator
             logRange2.Value2 = array2;
             logRange3.Value2 = array3;
 
-            //Add ACE017 to the log if we have are in the time peiod
+            //Add ACE017 to the log if we have are in the time period
             DateTime startingTime = Convert.ToDateTime(startTime.ToString());
             DateTime endingTime = Convert.ToDateTime(endTime.ToString());
             DateTime check = DateTime.ParseExact("1600", "HHmm", null);
@@ -943,7 +943,7 @@ namespace ClassOpsLogCreator
             System.Array value = null;
             //Save the row values 
             long[,] rowValues = new long[numberOfShifts, 2];
-            //The satrting row
+            //The starting row
             long startRow = Int64.Parse(range.Row.ToString());
             
             for(int i = 0; i <= numberOfRowsPerZone.GetUpperBound(0); i++)
