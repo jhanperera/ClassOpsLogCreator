@@ -149,6 +149,7 @@
             // createBTN
             // 
             this.createBTN.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.createBTN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.createBTN.Highlight = true;
             this.createBTN.Location = new System.Drawing.Point(240, 117);
             this.createBTN.Name = "createBTN";
@@ -291,6 +292,7 @@
             // 
             // plusBTN3
             // 
+            this.plusBTN3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.plusBTN3.Location = new System.Drawing.Point(572, 262);
             this.plusBTN3.Name = "plusBTN3";
             this.plusBTN3.Size = new System.Drawing.Size(56, 29);
@@ -419,6 +421,7 @@
             // 
             // plusBTN2
             // 
+            this.plusBTN2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.plusBTN2.Location = new System.Drawing.Point(572, 161);
             this.plusBTN2.Name = "plusBTN2";
             this.plusBTN2.Size = new System.Drawing.Size(56, 29);
@@ -547,6 +550,7 @@
             // 
             // plusBTN1
             // 
+            this.plusBTN1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.plusBTN1.Location = new System.Drawing.Point(572, 62);
             this.plusBTN1.Name = "plusBTN1";
             this.plusBTN1.Size = new System.Drawing.Size(56, 29);
@@ -664,6 +668,7 @@
             // settingsBTN
             // 
             this.settingsBTN.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.settingsBTN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.settingsBTN.Location = new System.Drawing.Point(592, 6);
             this.settingsBTN.Name = "settingsBTN";
             this.settingsBTN.Size = new System.Drawing.Size(34, 27);

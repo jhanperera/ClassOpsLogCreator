@@ -37,7 +37,7 @@
             this.cancelBTN = new MetroFramework.Controls.MetroButton();
             this.versionLabel = new MetroFramework.Controls.MetroLabel();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.createBTN = new MetroFramework.Controls.MetroButton();
             this.am_pmCombo1_2 = new MetroFramework.Controls.MetroComboBox();
@@ -45,11 +45,11 @@
             this.toLabel1 = new MetroFramework.Controls.MetroLabel();
             this.am_pmCombo1_1 = new MetroFramework.Controls.MetroComboBox();
             this.startHour1 = new MetroFramework.Controls.MetroComboBox();
-            this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
+            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabControl1.SuspendLayout();
-            this.metroTabPage1.SuspendLayout();
-            this.metroTabPage2.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
+            this.metroTabPage2.SuspendLayout();
+            this.metroTabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // usernameLabel
@@ -66,7 +66,7 @@
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Location = new System.Drawing.Point(3, 60);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(63, 19);
+            this.passwordLabel.Size = new System.Drawing.Size(64, 19);
             this.passwordLabel.TabIndex = 1;
             this.passwordLabel.Text = "Password";
             // 
@@ -88,6 +88,7 @@
             // 
             // loginBTN
             // 
+            this.loginBTN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loginBTN.Highlight = true;
             this.loginBTN.Location = new System.Drawing.Point(11, 110);
             this.loginBTN.Name = "loginBTN";
@@ -98,6 +99,7 @@
             // 
             // cancelBTN
             // 
+            this.cancelBTN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cancelBTN.Location = new System.Drawing.Point(251, 110);
             this.cancelBTN.Name = "cancelBTN";
             this.cancelBTN.Size = new System.Drawing.Size(80, 22);
@@ -110,7 +112,7 @@
             this.versionLabel.AutoSize = true;
             this.versionLabel.Location = new System.Drawing.Point(140, 61);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(58, 19);
+            this.versionLabel.Size = new System.Drawing.Size(59, 19);
             this.versionLabel.TabIndex = 6;
             this.versionLabel.Text = "Version: ";
             // 
@@ -126,21 +128,16 @@
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Green;
             this.metroTabControl1.TabIndex = 7;
             // 
-            // metroTabPage1
+            // metroTabPage3
             // 
-            this.metroTabPage1.Controls.Add(this.cancelBTN);
-            this.metroTabPage1.Controls.Add(this.usernameLabel);
-            this.metroTabPage1.Controls.Add(this.loginBTN);
-            this.metroTabPage1.Controls.Add(this.passwordLabel);
-            this.metroTabPage1.Controls.Add(this.passwordTextBox);
-            this.metroTabPage1.Controls.Add(this.usernameTextBox);
-            this.metroTabPage1.HorizontalScrollbarBarColor = true;
-            this.metroTabPage1.Location = new System.Drawing.Point(4, 35);
-            this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(386, 140);
-            this.metroTabPage1.TabIndex = 0;
-            this.metroTabPage1.Text = "Email Login";
-            this.metroTabPage1.VerticalScrollbarBarColor = true;
+            this.metroTabPage3.Controls.Add(this.versionLabel);
+            this.metroTabPage3.HorizontalScrollbarBarColor = true;
+            this.metroTabPage3.Location = new System.Drawing.Point(4, 35);
+            this.metroTabPage3.Name = "metroTabPage3";
+            this.metroTabPage3.Size = new System.Drawing.Size(386, 140);
+            this.metroTabPage3.TabIndex = 2;
+            this.metroTabPage3.Text = "Version";
+            this.metroTabPage3.VerticalScrollbarBarColor = true;
             // 
             // metroTabPage2
             // 
@@ -160,11 +157,13 @@
             // 
             // createBTN
             // 
+            this.createBTN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.createBTN.Location = new System.Drawing.Point(152, 92);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(87, 27);
             this.createBTN.TabIndex = 18;
             this.createBTN.Text = "Create";
+            this.createBTN.Click += new System.EventHandler(this.createBTN_Click);
             // 
             // am_pmCombo1_2
             // 
@@ -219,16 +218,21 @@
             this.startHour1.TabIndex = 12;
             this.startHour1.TabStop = false;
             // 
-            // metroTabPage3
+            // metroTabPage1
             // 
-            this.metroTabPage3.Controls.Add(this.versionLabel);
-            this.metroTabPage3.HorizontalScrollbarBarColor = true;
-            this.metroTabPage3.Location = new System.Drawing.Point(4, 35);
-            this.metroTabPage3.Name = "metroTabPage3";
-            this.metroTabPage3.Size = new System.Drawing.Size(386, 140);
-            this.metroTabPage3.TabIndex = 2;
-            this.metroTabPage3.Text = "Version";
-            this.metroTabPage3.VerticalScrollbarBarColor = true;
+            this.metroTabPage1.Controls.Add(this.cancelBTN);
+            this.metroTabPage1.Controls.Add(this.usernameLabel);
+            this.metroTabPage1.Controls.Add(this.loginBTN);
+            this.metroTabPage1.Controls.Add(this.passwordLabel);
+            this.metroTabPage1.Controls.Add(this.passwordTextBox);
+            this.metroTabPage1.Controls.Add(this.usernameTextBox);
+            this.metroTabPage1.HorizontalScrollbarBarColor = true;
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 35);
+            this.metroTabPage1.Name = "metroTabPage1";
+            this.metroTabPage1.Size = new System.Drawing.Size(386, 140);
+            this.metroTabPage1.TabIndex = 0;
+            this.metroTabPage1.Text = "Email Login";
+            this.metroTabPage1.VerticalScrollbarBarColor = true;
             // 
             // SettingForm
             // 
@@ -247,12 +251,12 @@
             this.Text = "Settings";
             this.TopMost = true;
             this.metroTabControl1.ResumeLayout(false);
-            this.metroTabPage1.ResumeLayout(false);
-            this.metroTabPage1.PerformLayout();
-            this.metroTabPage2.ResumeLayout(false);
-            this.metroTabPage2.PerformLayout();
             this.metroTabPage3.ResumeLayout(false);
             this.metroTabPage3.PerformLayout();
+            this.metroTabPage2.ResumeLayout(false);
+            this.metroTabPage2.PerformLayout();
+            this.metroTabPage1.ResumeLayout(false);
+            this.metroTabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }

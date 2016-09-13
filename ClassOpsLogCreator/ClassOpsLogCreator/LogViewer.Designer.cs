@@ -91,12 +91,14 @@
             // previousBTN
             // 
             resources.ApplyResources(this.previousBTN, "previousBTN");
+            this.previousBTN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.previousBTN.Name = "previousBTN";
             this.previousBTN.Click += new System.EventHandler(this.previousBTN_Click);
             // 
             // nextBTN
             // 
             resources.ApplyResources(this.nextBTN, "nextBTN");
+            this.nextBTN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.nextBTN.Highlight = true;
             this.nextBTN.Name = "nextBTN";
             this.nextBTN.Click += new System.EventHandler(this.nextBTN_Click_1);

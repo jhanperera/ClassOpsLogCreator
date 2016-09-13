@@ -27,7 +27,9 @@ namespace ClassOpsLogCreator
             {
                 this.isConnectedFlag = true;
 
-                IEnumerable<uint> uids = client.Search(SearchCondition.From("pereraj@yorku.ca").And(SearchCondition.Subject("Room Report")));
+                string dayOfTheWeek = DateTime.Now.ToString("dddd"); 
+
+                IEnumerable<uint> uids = client.Search(SearchCondition.From("pereraj@yorku.ca").And(SearchCondition.Subject("Room Report " + dayOfTheWeek)));
                 IEnumerable <MailMessage> messages = client.GetMessages(uids, FetchOptions.Normal);
 
                 foreach(MailMessage msg in messages)
@@ -35,7 +37,6 @@ namespace ClassOpsLogCreator
                     msgFrom = msg.From.ToString();
                     msgBody = msg.Body.ToString();
                 }
-
             }
         }
 
@@ -64,7 +65,7 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         public string messageBody()
         {
-            return "";
+            return msgBody;
         }
     }
 }

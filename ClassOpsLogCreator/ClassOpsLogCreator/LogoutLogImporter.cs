@@ -114,6 +114,11 @@ namespace ClassOpsLogCreator
                 masterArray = this.convertToString2DArray(arrayClassRooms, arrayLastTimes);
             }
 
+
+            last = null;
+            classRange = null;
+            timeRange = null;
+            eventRange = null;
             //Close all open processes
             Quit();
         }

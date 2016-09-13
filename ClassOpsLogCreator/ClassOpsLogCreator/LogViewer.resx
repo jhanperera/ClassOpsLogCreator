@@ -237,9 +237,6 @@
   <data name="&gt;&gt;dateLabel.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <metadata name="metroToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>205, 17</value>
-  </metadata>
   <data name="nameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -252,6 +249,9 @@
   <data name="nameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <metadata name="metroToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>205, 17</value>
+  </metadata>
   <data name="nameTextBox.ToolTip" xml:space="preserve">
     <value>Please enter a employee name!</value>
   </data>
@@ -321,9 +321,6 @@
   <data name="&gt;&gt;nextBTN.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="metroToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>205, 17</value>
-  </metadata>
   <data name="endTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
