@@ -140,6 +140,10 @@ namespace ClassOpsLogCreator
                     values.Add(name.ToLower());
                 }
             }
+
+            last = null;
+            nameRange = null;
+
             return values;
         }
 
@@ -196,6 +200,10 @@ namespace ClassOpsLogCreator
                     numberOfRows++;
                 }
             }
+
+            last = null;
+            range = null;
+
             return numberOfRows;
         }
 
@@ -252,7 +260,7 @@ namespace ClassOpsLogCreator
                 int index = 0;
                 for (int i = 0; i < arrayA.GetUpperBound(0); i++)
                 {
-                    //Only going to get the events that are not Crestron Logouts
+                    //Only going to get the events that are not Crestron Logout
                     if ((arrayA.GetValue(i + 1, 1) != null) && (arrayC.GetValue(i + 1, 1) != null) && !(arrayA.GetValue(i + 1, 1).Equals("Crestron Logout")))
                     {
                         //Check if the event is between the selected times
@@ -312,6 +320,15 @@ namespace ClassOpsLogCreator
                     }
                 }
             }
+
+            //Clean up
+            last = null;
+            rangeA = null;
+            rangeB = null;
+            rangeC = null;
+            rangeD = null;
+            rangeE = null;
+            rangeF = null;
 
             //Remove all null/empty rows
             string[,] temp = RemoveEmptyRows(values);
@@ -399,6 +416,10 @@ namespace ClassOpsLogCreator
                 DerekLog = null;
                 DerekWorkBook = null;
                 DerekSheet1 = null;
+            }
+            if(databaseSheet != null)
+            {
+                databaseSheet = null;
             }
             GC.Collect();
         }

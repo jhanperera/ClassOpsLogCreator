@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Drawing;
@@ -104,9 +105,18 @@ namespace ClassOpsLogCreator
             //Bring this to the font
             this.Activate();
 
+            //Get the last access times to display during the first message
+            string JLastAccess = File.GetLastWriteTime(JEANNINE_LOG).ToString("dd MMMM yyyy - hh:mm tt");
+            string RLastAccess = File.GetLastWriteTime(RAUL_LOG).ToString("dd MMMM yyyy - hh:mm tt");
+            string DLastAccess = File.GetLastWriteTime(DEREK_LOG).ToString("dd MMMM yyyy - hh:mm tt");
+
             //A pop up message to ensure that the user is aware that the zone super logs need to be in before running this application
-            DialogResult checkMessage = checkMessage = MessageBox.Show("Ensure all Zone Supervisor Logs have been submitted before running this application. "
-                               + Environment.NewLine +
+            DialogResult checkMessage = checkMessage = MessageBox.Show("Ensure all Zone logs have been submitted before preceding."
+                               + Environment.NewLine + Environment.NewLine +
+                               "Jeannine's log was last written to on:  " + JLastAccess + Environment.NewLine +
+                               "Raul's log was last written to on:  " + RLastAccess + Environment.NewLine +
+                               "Derek's log was last written to on:  " + DLastAccess + Environment.NewLine +
+                               Environment.NewLine +
                                "Failure to do so will result in incorrect output being generated",
                                "Important Notice",
                                 MessageBoxButtons.OKCancel,
@@ -129,7 +139,6 @@ namespace ClassOpsLogCreator
                 true);
 
 
-            //this.lineDivide1.BorderStyle = BorderStyle.Fixed3D;
             this.lineDivide1.AutoSize = false;
             this.lineDivide1.Height = 2;
 
@@ -478,7 +487,7 @@ namespace ClassOpsLogCreator
                 }
             }
             worker.ReportProgress(95);
-
+            
             //Gracefully close all instances
             //Quit();
 
@@ -644,9 +653,15 @@ namespace ClassOpsLogCreator
                 existingMasterWorkBook.Close();
                 existingMaster.Quit();
                 System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMasterWorkBook);
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMasterWorkSheet);
                 existingMaster = null;
                 existingMasterWorkBook = null;
                 existingMasterWorkSheet = null;
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
 
                 //Reset the default printer and close the print dialog
                 SetDefaultPrinter(defaultPrinterName);
@@ -785,6 +800,16 @@ namespace ClassOpsLogCreator
             //Sorting it by time column
             dynamic allDataRange = worksheet.UsedRange;
             allDataRange.Sort(allDataRange.Columns[3], Excel.XlSortOrder.xlAscending);
+
+            //Clean up the Excel range objects
+            taskType_range = null;
+            date_range = null;
+            value_range = null;
+            logRange1 = null;
+            logRange2 = null;
+            logRange3 = null;
+            ace017CloseRange = null;
+            allDataRange = null;
         }
 
         /// <summary>
@@ -905,6 +930,14 @@ namespace ClassOpsLogCreator
                     task_color_change.Interior.Color = lightblue;
                 }
             }
+
+            //Clean the range items
+            range = null;
+            dividerRange = null;
+            destinationRange = null;
+            last_row = null;
+            task_range = null;
+            instuciton_range = null;
 
             //Save
             existingMaster.DisplayAlerts = false;
@@ -1423,6 +1456,22 @@ namespace ClassOpsLogCreator
             GC.WaitForPendingFinalizers();
             GC.Collect();
             GC.WaitForPendingFinalizers();
+
+            //TEST CODE!
+            //If we still have open instance of excel lets force close
+            System.Diagnostics.Process[] process = System.Diagnostics.Process.GetProcessesByName("Excel");
+            foreach (System.Diagnostics.Process p in process)
+            {
+                if (!string.IsNullOrEmpty(p.ProcessName))
+                {
+                    try
+                    {
+                        p.Kill();
+                    }
+                    catch { }
+                }
+            }
+            //TEST CODE!
         }
     }
 }

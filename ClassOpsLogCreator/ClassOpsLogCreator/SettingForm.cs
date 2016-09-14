@@ -122,10 +122,10 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void createBTN_Click(object sender, EventArgs e)
         {
-            createBTN.Enabled = false;
+            //createBTN.Enabled = false;
             /******************************INPUT VALIDATION********************************************/
             //Get the times set by the first set of combo boxes
-            string startTimeFromCombo1 = this.startHour1.GetItemText(this.startHour1.SelectedItem)
+            /*string startTimeFromCombo1 = this.startHour1.GetItemText(this.startHour1.SelectedItem)
                                  + "" + this.am_pmCombo1_1.GetItemText(this.am_pmCombo1_1.SelectedItem);
             string endTimeFromCombo1 = this.endHour1.GetItemText(this.endHour1.SelectedItem)
                                  + "" + this.am_pmCombo1_2.GetItemText(this.am_pmCombo1_2.SelectedItem);
@@ -156,14 +156,14 @@ namespace ClassOpsLogCreator
             }
             /****************************END INPUT VALIDATION********************************************/
 
-            Cursor.Current = Cursors.WaitCursor;
+            /*Cursor.Current = Cursors.WaitCursor;
 
             LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this.mainForm, startTimeFromCombo1, endTimeFromCombo1);
 
             string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
 
             createBTN.Enabled = true;
-            Cursor.Current = Cursors.Default;
+            Cursor.Current = Cursors.Default;*/
 
         }
     }
