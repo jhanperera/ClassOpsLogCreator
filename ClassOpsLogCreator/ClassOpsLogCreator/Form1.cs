@@ -1459,7 +1459,7 @@ namespace ClassOpsLogCreator
 
             //TEST CODE!
             //If we still have open instance of excel lets force close
-            System.Diagnostics.Process[] process = System.Diagnostics.Process.GetProcessesByName("Excel");
+            /*System.Diagnostics.Process[] process = System.Diagnostics.Process.GetProcessesByName("Excel");
             foreach (System.Diagnostics.Process p in process)
             {
                 if (!string.IsNullOrEmpty(p.ProcessName))
@@ -1470,7 +1470,7 @@ namespace ClassOpsLogCreator
                     }
                     catch { }
                 }
-            }
+            }*/
             //TEST CODE!
         }
     }
