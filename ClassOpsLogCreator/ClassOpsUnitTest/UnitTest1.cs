@@ -118,7 +118,7 @@ namespace ClassOpsUnitTest
             };
             int taskRank = tr.getTotalTaskValue(input);
             //We should get 
-            Assert.AreEqual(10, taskRank);
+            Assert.AreEqual(6, taskRank);
         }
 
         [TestMethod]

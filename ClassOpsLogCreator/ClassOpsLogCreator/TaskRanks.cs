@@ -18,20 +18,20 @@ namespace ClassOpsLogCreator
         /// </summary>
         public TaskRanks()
         {
-            //Value = 0 tasks
+            //Value = 1 tasks
             value1 = new string[]
             {
-                "AV Shutdown",  "Crestron Logout", "Proactive Classroom Check",
+                /*"AV Shutdown",*/ "Proactive Classroom Check",
                 "Other", "SCLD Student Logout"
             };
 
-            // Value = 1 tasks
+            // Value = 2 tasks
             value2 = new string[]
            {
                "Operator", "Replace Battery", "SCLD Student Event"
            };
 
-            //Value = 2 tasks
+            //Value = 3 tasks
             value3 = new string[]
           {
                "Inperson Technical Assistance", "Demo", "CLOSE ACE017", "Lockup",
@@ -39,7 +39,7 @@ namespace ClassOpsLogCreator
                "Pickup Skype Kit","Pickup Small PA"
           };
 
-            // Value = 3 tasks
+            // Value = 4 tasks
             value4 = new string[]
            {
                "Setup Large PA","Setup Mic","Setup PC","Setup Projector",
