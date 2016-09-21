@@ -236,7 +236,9 @@ namespace ClassOpsLogCreator
                 this.numberOfShiftsCombo4.SelectedIndex = Properties.Settings.Default.numberOfShiftsCombo4;
                 this.am_pmCombo4_1.SelectedIndex = Properties.Settings.Default.am_pmCombo4_1;
                 this.am_pmCombo4_2.SelectedIndex = Properties.Settings.Default.am_pmCombo4_2;
-            }else
+            }
+            //If the settings aren't 
+            else
             {
                 //set the default view for the combo for tab 1
                 this.startHour1.SelectedIndex = -1;
