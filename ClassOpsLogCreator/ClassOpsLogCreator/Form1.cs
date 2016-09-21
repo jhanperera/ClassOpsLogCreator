@@ -138,7 +138,7 @@ namespace ClassOpsLogCreator
                 ControlStyles.DoubleBuffer,
                 true);
 
-
+            //Setting the line divide height and auto size settings
             this.lineDivide1.AutoSize = false;
             this.lineDivide1.Height = 2;
 
@@ -205,34 +205,67 @@ namespace ClassOpsLogCreator
             this.am_pmCombo4_2.Items.Add("AM");
             this.am_pmCombo4_2.Items.Add("PM");
 
+            //If save changes has been checked before we keep the state of it on this session
+            if (Properties.Settings.Default.saveCheckedBoxState == true)
+            {
+                //Select 1
+                this.saveSettingCheckBox.Checked = true;
+                this.startHour1.SelectedIndex = Properties.Settings.Default.startHour1;
+                this.endHour1.SelectedIndex = Properties.Settings.Default.endHour1;
+                this.numberOfShiftsCombo1.SelectedIndex = Properties.Settings.Default.numberOfShiftsCombo1;
+                this.am_pmCombo1_1.SelectedIndex = Properties.Settings.Default.am_pmCombo1_1;
+                this.am_pmCombo1_2.SelectedIndex = Properties.Settings.Default.am_pmCombo1_2;
 
-            //set the default view for the combo for tab 1
-            this.startHour1.SelectedIndex = -1;
-            this.endHour1.SelectedIndex = -1;
-            this.numberOfShiftsCombo1.SelectedIndex = 0;
-            this.am_pmCombo1_1.SelectedIndex = 1;
-            this.am_pmCombo1_2.SelectedIndex = 1;
+                //Select 2
+                this.startHour2.SelectedIndex = Properties.Settings.Default.startHour2;
+                this.endHour2.SelectedIndex = Properties.Settings.Default.endHour2;
+                this.numberOfShiftsCombo2.SelectedIndex = Properties.Settings.Default.numberOfShiftsCombo2;
+                this.am_pmCombo2_1.SelectedIndex = Properties.Settings.Default.am_pmCombo2_1;
+                this.am_pmCombo2_2.SelectedIndex = Properties.Settings.Default.am_pmCombo2_2;
 
-            //Select 2
-            this.startHour2.SelectedIndex = -1;
-            this.endHour2.SelectedIndex = -1;
-            this.numberOfShiftsCombo2.SelectedIndex = 0;
-            this.am_pmCombo2_1.SelectedIndex = 1;
-            this.am_pmCombo2_2.SelectedIndex = 1;
+                //Select 3
+                this.startHour3.SelectedIndex = Properties.Settings.Default.startHour3;
+                this.endHour3.SelectedIndex = Properties.Settings.Default.endHour3;
+                this.numberOfShiftsCombo3.SelectedIndex = Properties.Settings.Default.numberOfShiftsCombo3;
+                this.am_pmCombo3_1.SelectedIndex = Properties.Settings.Default.am_pmCombo3_1;
+                this.am_pmCombo3_2.SelectedIndex = Properties.Settings.Default.am_pmCombo3_2;
 
-            //Select 3
-            this.startHour3.SelectedIndex = -1;
-            this.endHour3.SelectedIndex = -1;
-            this.numberOfShiftsCombo3.SelectedIndex = 0;
-            this.am_pmCombo3_1.SelectedIndex = 1;
-            this.am_pmCombo3_2.SelectedIndex = 1;
+                //Select 4
+                this.startHour4.SelectedIndex = Properties.Settings.Default.startHour4;
+                this.endHour4.SelectedIndex = Properties.Settings.Default.endHour4;
+                this.numberOfShiftsCombo4.SelectedIndex = Properties.Settings.Default.numberOfShiftsCombo4;
+                this.am_pmCombo4_1.SelectedIndex = Properties.Settings.Default.am_pmCombo4_1;
+                this.am_pmCombo4_2.SelectedIndex = Properties.Settings.Default.am_pmCombo4_2;
+            }else
+            {
+                //set the default view for the combo for tab 1
+                this.startHour1.SelectedIndex = -1;
+                this.endHour1.SelectedIndex = -1;
+                this.numberOfShiftsCombo1.SelectedIndex = 0;
+                this.am_pmCombo1_1.SelectedIndex = 1;
+                this.am_pmCombo1_2.SelectedIndex = 1;
 
-            //Select 4
-            this.startHour4.SelectedIndex = -1;
-            this.endHour4.SelectedIndex = -1;
-            this.numberOfShiftsCombo4.SelectedIndex = 0;
-            this.am_pmCombo4_1.SelectedIndex = 1;
-            this.am_pmCombo4_2.SelectedIndex = 1;
+                //Select 2
+                this.startHour2.SelectedIndex = -1;
+                this.endHour2.SelectedIndex = -1;
+                this.numberOfShiftsCombo2.SelectedIndex = 0;
+                this.am_pmCombo2_1.SelectedIndex = 1;
+                this.am_pmCombo2_2.SelectedIndex = 1;
+
+                //Select 3
+                this.startHour3.SelectedIndex = -1;
+                this.endHour3.SelectedIndex = -1;
+                this.numberOfShiftsCombo3.SelectedIndex = 0;
+                this.am_pmCombo3_1.SelectedIndex = 1;
+                this.am_pmCombo3_2.SelectedIndex = 1;
+
+                //Select 4
+                this.startHour4.SelectedIndex = -1;
+                this.endHour4.SelectedIndex = -1;
+                this.numberOfShiftsCombo4.SelectedIndex = 0;
+                this.am_pmCombo4_1.SelectedIndex = 1;
+                this.am_pmCombo4_2.SelectedIndex = 1;
+            }
         }
 
         /// <summary>
@@ -1172,64 +1205,56 @@ namespace ClassOpsLogCreator
         /// Clear he clo file and clean up the memory.
         /// </summary>
         /// <param name="e">Form Closing Event </param>
-        /*protected override void OnFormClosing(FormClosingEventArgs e)
+        protected override void OnFormClosing(FormClosingEventArgs e)
         {
             //We are going to use the base onFormClose operations and add more
             base.OnFormClosing(e);
-
-            //If the system gets shutdown we close everything gracefully
-            if (e.CloseReason == CloseReason.WindowsShutDown) return;
-
-            // Confirm user wants to close
             
-            switch (MessageBox.Show(this, "Closing, clear CLO?","Closing", MessageBoxButtons.YesNo))
+            //If "Saved Selected" is check we are going to save the state of all the settings
+            if(this.saveSettingCheckBox.Checked)
             {
-                //No the person does not want to close the application
-                //Else we go to default case
-                case DialogResult.No:
-                    //Close with no clear
-                    break;
-                default:
-                    Excel.Application roomSched = new Excel.Application();
-                    Excel.Workbook roomWorkBook = null;
-                    Excel.Worksheet roomSheet1 = null;
-                    roomSched.Visible = false;
+                //Save the state of the check box
+                Properties.Settings.Default.saveCheckedBoxState = true;
 
-                    try
-                    {
-                        //This should look for the file
-                        roomWorkBook = roomSched.Workbooks.Open(ROOM_SCHED);
-                        //Work in worksheet number 1
-                        roomSheet1 = (Excel.Worksheet)roomWorkBook.Sheets[1];
+                //Save for select 1
+                Properties.Settings.Default.startHour1 = this.startHour1.SelectedIndex;
+                Properties.Settings.Default.endHour1 = this.endHour1.SelectedIndex;
+                Properties.Settings.Default.numberOfShiftsCombo1 = this.numberOfShiftsCombo1.SelectedIndex;
+                Properties.Settings.Default.am_pmCombo1_1 = this.am_pmCombo1_1.SelectedIndex;
+                Properties.Settings.Default.am_pmCombo1_2 = this.am_pmCombo1_2.SelectedIndex;
 
-                    }
-                    catch (Exception)
-                    {
-                        //File not found...
+                //Save for select 2
+                Properties.Settings.Default.startHour2 = this.startHour2.SelectedIndex;
+                Properties.Settings.Default.endHour2 = this.endHour2.SelectedIndex;
+                Properties.Settings.Default.numberOfShiftsCombo2 = this.numberOfShiftsCombo2.SelectedIndex;
+                Properties.Settings.Default.am_pmCombo2_1 = this.am_pmCombo2_1.SelectedIndex;
+                Properties.Settings.Default.am_pmCombo2_2 = this.am_pmCombo2_2.SelectedIndex;
 
-                        Quit();
-                        return;
-                    }
+                //Save for select 3
+                Properties.Settings.Default.startHour3 = this.startHour3.SelectedIndex;
+                Properties.Settings.Default.endHour3 = this.endHour3.SelectedIndex;
+                Properties.Settings.Default.numberOfShiftsCombo3 = this.numberOfShiftsCombo3.SelectedIndex;
+                Properties.Settings.Default.am_pmCombo3_1 = this.am_pmCombo3_1.SelectedIndex;
+                Properties.Settings.Default.am_pmCombo3_2 = this.am_pmCombo3_2.SelectedIndex;
 
-                    //Clean out the clo file
-                    Excel.Range clearAllRange = roomSheet1.UsedRange;
-                    clearAllRange.Clear();
-                    //Save
-                    roomWorkBook.Save();
+                //Save for select 4
+                Properties.Settings.Default.startHour4 = this.startHour4.SelectedIndex;
+                Properties.Settings.Default.endHour4 = this.endHour4.SelectedIndex;
+                Properties.Settings.Default.numberOfShiftsCombo4 = this.numberOfShiftsCombo4.SelectedIndex;
+                Properties.Settings.Default.am_pmCombo4_1 = this.am_pmCombo4_1.SelectedIndex;
+                Properties.Settings.Default.am_pmCombo4_2 = this.am_pmCombo4_2.SelectedIndex;
 
-                    //Clean up the memory
-                    if (roomWorkBook != null)
-                    {
-                        roomWorkBook.Close(false, Type.Missing, Type.Missing);
-                        roomSched.Quit();
-                        System.Runtime.InteropServices.Marshal.FinalReleaseComObject(roomSched);
-                        roomSched = null;
-                        roomWorkBook = null;
-                        roomSheet1 = null;
-                    }
-                    break;
             }
-        }*/
+            else
+            {
+                //Reset the check-box flag
+                Properties.Settings.Default.saveCheckedBoxState = false;
+                //Reset all the settings
+                Properties.Settings.Default.Reset();   
+            }
+            //Save settings to the xml file
+            Properties.Settings.Default.Save();
+        }
 
         /// <summary>
         /// This will open a login page so we can get the users MyMail login

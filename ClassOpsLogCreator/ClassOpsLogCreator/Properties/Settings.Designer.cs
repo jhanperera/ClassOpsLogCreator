@@ -46,5 +46,257 @@ namespace ClassOpsLogCreator.Properties {
                 this["Password"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int startHour1 {
+            get {
+                return ((int)(this["startHour1"]));
+            }
+            set {
+                this["startHour1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int endHour1 {
+            get {
+                return ((int)(this["endHour1"]));
+            }
+            set {
+                this["endHour1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int am_pmCombo1_1 {
+            get {
+                return ((int)(this["am_pmCombo1_1"]));
+            }
+            set {
+                this["am_pmCombo1_1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int am_pmCombo1_2 {
+            get {
+                return ((int)(this["am_pmCombo1_2"]));
+            }
+            set {
+                this["am_pmCombo1_2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int numberOfShiftsCombo1 {
+            get {
+                return ((int)(this["numberOfShiftsCombo1"]));
+            }
+            set {
+                this["numberOfShiftsCombo1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int startHour2 {
+            get {
+                return ((int)(this["startHour2"]));
+            }
+            set {
+                this["startHour2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int endHour2 {
+            get {
+                return ((int)(this["endHour2"]));
+            }
+            set {
+                this["endHour2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int am_pmCombo2_1 {
+            get {
+                return ((int)(this["am_pmCombo2_1"]));
+            }
+            set {
+                this["am_pmCombo2_1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int am_pmCombo2_2 {
+            get {
+                return ((int)(this["am_pmCombo2_2"]));
+            }
+            set {
+                this["am_pmCombo2_2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int numberOfShiftsCombo2 {
+            get {
+                return ((int)(this["numberOfShiftsCombo2"]));
+            }
+            set {
+                this["numberOfShiftsCombo2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int startHour3 {
+            get {
+                return ((int)(this["startHour3"]));
+            }
+            set {
+                this["startHour3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int endHour3 {
+            get {
+                return ((int)(this["endHour3"]));
+            }
+            set {
+                this["endHour3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int am_pmCombo3_1 {
+            get {
+                return ((int)(this["am_pmCombo3_1"]));
+            }
+            set {
+                this["am_pmCombo3_1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int am_pmCombo3_2 {
+            get {
+                return ((int)(this["am_pmCombo3_2"]));
+            }
+            set {
+                this["am_pmCombo3_2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int numberOfShiftsCombo3 {
+            get {
+                return ((int)(this["numberOfShiftsCombo3"]));
+            }
+            set {
+                this["numberOfShiftsCombo3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int startHour4 {
+            get {
+                return ((int)(this["startHour4"]));
+            }
+            set {
+                this["startHour4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int endHour4 {
+            get {
+                return ((int)(this["endHour4"]));
+            }
+            set {
+                this["endHour4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int am_pmCombo4_1 {
+            get {
+                return ((int)(this["am_pmCombo4_1"]));
+            }
+            set {
+                this["am_pmCombo4_1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int am_pmCombo4_2 {
+            get {
+                return ((int)(this["am_pmCombo4_2"]));
+            }
+            set {
+                this["am_pmCombo4_2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int numberOfShiftsCombo4 {
+            get {
+                return ((int)(this["numberOfShiftsCombo4"]));
+            }
+            set {
+                this["numberOfShiftsCombo4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool saveCheckedBoxState {
+            get {
+                return ((bool)(this["saveCheckedBoxState"]));
+            }
+            set {
+                this["saveCheckedBoxState"] = value;
+            }
+        }
     }
 }

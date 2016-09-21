@@ -78,6 +78,7 @@
             this.lineDivide1 = new MetroFramework.Controls.MetroLabel();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.settingsBTN = new MetroFramework.Controls.MetroTile();
+            this.saveSettingCheckBox = new MetroFramework.Controls.MetroCheckBox();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,6 +88,7 @@
             // 
             // metroPanel1
             // 
+            this.metroPanel1.Controls.Add(this.saveSettingCheckBox);
             this.metroPanel1.Controls.Add(this.createBTN);
             this.metroPanel1.Controls.Add(this.statusText);
             this.metroPanel1.Controls.Add(this.numberOfShiftsCombo4);
@@ -680,6 +682,21 @@
             this.settingsBTN.UseTileImage = true;
             this.settingsBTN.Click += new System.EventHandler(this.settingsBTN_Click);
             // 
+            // saveSettingCheckBox
+            // 
+            this.saveSettingCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.saveSettingCheckBox.AutoSize = true;
+            this.saveSettingCheckBox.FontSize = MetroFramework.MetroLinkSize.Medium;
+            this.saveSettingCheckBox.Location = new System.Drawing.Point(521, 117);
+            this.saveSettingCheckBox.Name = "saveSettingCheckBox";
+            this.saveSettingCheckBox.Size = new System.Drawing.Size(107, 19);
+            this.saveSettingCheckBox.Style = MetroFramework.MetroColorStyle.Green;
+            this.saveSettingCheckBox.TabIndex = 53;
+            this.saveSettingCheckBox.TabStop = false;
+            this.saveSettingCheckBox.Text = "Save Selected";
+            this.metroToolTip1.SetToolTip(this.saveSettingCheckBox, "Save fields for future sessions?");
+            this.saveSettingCheckBox.UseVisualStyleBackColor = true;
+            // 
             // LogCreator
             // 
             this.AcceptButton = this.createBTN;
@@ -759,6 +776,7 @@
         private MetroFramework.Controls.MetroLabel statusText;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
         private MetroFramework.Controls.MetroTile settingsBTN;
+        private MetroFramework.Controls.MetroCheckBox saveSettingCheckBox;
     }
 }
 
