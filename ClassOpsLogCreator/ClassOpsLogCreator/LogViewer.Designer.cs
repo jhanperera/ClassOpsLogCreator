@@ -143,7 +143,7 @@
             this.MaximizeBox = false;
             this.Name = "LogViewer";
             this.Resizable = false;
-            this.Style = MetroFramework.MetroColorStyle.Green;
+            this.Style = MetroFramework.MetroColorStyle.Red;
             this.Load += new System.EventHandler(this.LogViewer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logCreatorBindingSource)).EndInit();

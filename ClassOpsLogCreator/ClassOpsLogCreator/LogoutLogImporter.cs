@@ -3,25 +3,15 @@ using System.Linq;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Windows.Forms;
 
-/// <summary>
-/// 
-/// Author: Jhan Perera
-/// Department: UIT Client Services
-/// 
-/// 
-/// Description of class: This class is a helper class that 
-/// will assist with creating the Crestron Logouts of the 
-/// input excel file. This class also assists with sorting and 
-/// presenting a nice arrangement of all last times for the 
-/// events held around School. 
-///
-/// Class Version: 0.1.0.0 - BETA - 7152016
-/// 
-/// System Version: 0.1.0.0 - BETA - 7152016
-/// 
-/// </summary>
 namespace ClassOpsLogCreator
 {
+    /// <summary>
+    /// Description of class: This class is a helper class that 
+    /// will assist with creating the Crestron Logouts of the 
+    /// input excel file. This class also assists with sorting and 
+    /// presenting a nice arrangement of all last times for the 
+    /// events held around School. 
+    /// </summary>
     class LogoutLogImporter
     {
         /// <summary>

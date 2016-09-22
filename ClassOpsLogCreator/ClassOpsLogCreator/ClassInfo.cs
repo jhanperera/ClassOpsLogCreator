@@ -8,6 +8,10 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ClassOpsLogCreator
 {
+    /// <summary>
+    /// This class hold the information about class rooms and other
+    /// vital information about the school buildings 
+    /// </summary>
     class ClassInfo
     {
         /// <summary>

@@ -125,7 +125,7 @@
             this.metroTabControl1.Name = "metroTabControl1";
             this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(394, 179);
-            this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Green;
+            this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Red;
             this.metroTabControl1.TabIndex = 7;
             // 
             // metroTabPage3
@@ -247,7 +247,7 @@
             this.Name = "SettingForm";
             this.Padding = new System.Windows.Forms.Padding(22, 60, 22, 20);
             this.Resizable = false;
-            this.Style = MetroFramework.MetroColorStyle.Green;
+            this.Style = MetroFramework.MetroColorStyle.Red;
             this.Text = "Settings";
             this.TopMost = true;
             this.metroTabControl1.ResumeLayout(false);

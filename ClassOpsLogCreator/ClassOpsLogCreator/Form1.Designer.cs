@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogCreator));
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.saveSettingCheckBox = new MetroFramework.Controls.MetroCheckBox();
             this.createBTN = new MetroFramework.Controls.MetroButton();
             this.statusText = new MetroFramework.Controls.MetroLabel();
             this.numberOfShiftsCombo4 = new MetroFramework.Controls.MetroComboBox();
@@ -78,7 +79,6 @@
             this.lineDivide1 = new MetroFramework.Controls.MetroLabel();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.settingsBTN = new MetroFramework.Controls.MetroTile();
-            this.saveSettingCheckBox = new MetroFramework.Controls.MetroCheckBox();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -147,6 +147,21 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // saveSettingCheckBox
+            // 
+            this.saveSettingCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.saveSettingCheckBox.AutoSize = true;
+            this.saveSettingCheckBox.FontSize = MetroFramework.MetroLinkSize.Medium;
+            this.saveSettingCheckBox.Location = new System.Drawing.Point(521, 128);
+            this.saveSettingCheckBox.Name = "saveSettingCheckBox";
+            this.saveSettingCheckBox.Size = new System.Drawing.Size(107, 19);
+            this.saveSettingCheckBox.Style = MetroFramework.MetroColorStyle.Red;
+            this.saveSettingCheckBox.TabIndex = 53;
+            this.saveSettingCheckBox.TabStop = false;
+            this.saveSettingCheckBox.Text = "Save Selected";
+            this.metroToolTip1.SetToolTip(this.saveSettingCheckBox, "Save fields for future sessions?");
+            this.saveSettingCheckBox.UseVisualStyleBackColor = true;
             // 
             // createBTN
             // 
@@ -682,21 +697,6 @@
             this.settingsBTN.UseTileImage = true;
             this.settingsBTN.Click += new System.EventHandler(this.settingsBTN_Click);
             // 
-            // saveSettingCheckBox
-            // 
-            this.saveSettingCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.saveSettingCheckBox.AutoSize = true;
-            this.saveSettingCheckBox.FontSize = MetroFramework.MetroLinkSize.Medium;
-            this.saveSettingCheckBox.Location = new System.Drawing.Point(521, 117);
-            this.saveSettingCheckBox.Name = "saveSettingCheckBox";
-            this.saveSettingCheckBox.Size = new System.Drawing.Size(107, 19);
-            this.saveSettingCheckBox.Style = MetroFramework.MetroColorStyle.Green;
-            this.saveSettingCheckBox.TabIndex = 53;
-            this.saveSettingCheckBox.TabStop = false;
-            this.saveSettingCheckBox.Text = "Save Selected";
-            this.metroToolTip1.SetToolTip(this.saveSettingCheckBox, "Save fields for future sessions?");
-            this.saveSettingCheckBox.UseVisualStyleBackColor = true;
-            // 
             // LogCreator
             // 
             this.AcceptButton = this.createBTN;
@@ -716,7 +716,7 @@
             this.MinimumSize = new System.Drawing.Size(679, 238);
             this.Name = "LogCreator";
             this.Resizable = false;
-            this.Style = MetroFramework.MetroColorStyle.Green;
+            this.Style = MetroFramework.MetroColorStyle.Red;
             this.Text = "Log Creator";
             this.Theme = MetroFramework.MetroThemeStyle.Light;
             this.TransparencyKey = System.Drawing.SystemColors.ControlDarkDark;

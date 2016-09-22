@@ -7,6 +7,11 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ClassOpsLogCreator
 {
+    /// <summary>
+    /// This class is used to zone each of logs in a meaningful way
+    /// This class also attempt to balance the logs to have a fair
+    /// distribution of work across the workers. 
+    /// </summary>
     public class SchoolZoning
     {
         private Graph schoolGraph;

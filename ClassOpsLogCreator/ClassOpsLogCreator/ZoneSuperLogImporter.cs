@@ -4,6 +4,9 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ClassOpsLogCreator
 {
+    /// <summary>
+    /// This class imports the Zone Super excel logs
+    /// </summary>
     public class ZoneSuperLogImporter
     {
         /// <summary>
@@ -88,6 +91,7 @@ namespace ClassOpsLogCreator
         ///  All Public Accessors methods
         /// </summary>
         /// <returns></returns>
+        
         //Return the Last Date AKA todays date
         public string getLastDate()
         {

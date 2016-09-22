@@ -89,7 +89,6 @@ namespace ClassOpsLogCreator
         private int numberOfShifts4 = 0;
 
         //Boolean values for setting flags through execution
-        private Boolean workDone = false;
         private Boolean plusClicked1 = false;
         private Boolean plusClicked2 = false;
         private Boolean plusClicked3 = false;
@@ -269,6 +268,8 @@ namespace ClassOpsLogCreator
                 this.am_pmCombo4_2.SelectedIndex = 1;
             }
         }
+
+        #region Button Operations
 
         /// <summary>
         /// When the user clicks the "Create" Button this is what will happen
@@ -480,6 +481,205 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
+        /// This will open a login page so we can get the users MyMail login
+        /// for the email scanner class
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void settingsBTN_Click(object sender, EventArgs e)
+        {
+            SettingForm settings = new SettingForm(this);
+            settings.ShowDialog();
+        }
+
+        /// <summary>
+        /// When the first + button is clicked
+        /// 
+        /// Make the new controls appear and extend the frame
+        /// </summary>
+        /// <param name="sender">a sender object (A controller)</param>
+        /// <param name="e"> a helper argument</param>
+        private void plusBTN1_Click_1(object sender, EventArgs e)
+        {
+            //initialize all components
+
+            if (!plusClicked1)
+            {
+                //set the clicked flag
+                this.plusClicked1 = true;
+                this.plusBTN1.Text = "-";
+                //Set the divider
+                //this.lineDivide2.BorderStyle = BorderStyle.Fixed3D;
+                this.lineDivide2.AutoSize = false;
+                this.lineDivide2.Height = 2;
+
+                //Make them all visible
+                this.Height += 100;
+                this.Top -= 72;
+                this.shift2Label.Visible = true;
+                this.lineDivide2.Visible = true;
+                this.shiftTime2.Visible = true;
+                this.startHour2.Visible = true;
+                this.toLabel2.Visible = true;
+                this.endHour2.Visible = true;
+                this.am_pmCombo2_1.Visible = true;
+                this.am_pmCombo2_2.Visible = true;
+                this.numberOfShiftsLabel2.Visible = true;
+                this.numberOfShiftsCombo2.Visible = true;
+                this.plusBTN2.Visible = true;
+
+            }
+            else if (plusClicked1)
+            {
+                //set the clicked flag
+                this.plusClicked1 = false;
+                this.plusBTN1.Text = "+";
+
+                //Make them all visible
+                this.Height -= 100;
+                this.Top += 72;
+                this.shift2Label.Visible = false;
+                this.lineDivide2.Visible = false;
+                this.shiftTime2.Visible = false;
+                this.startHour2.Visible = false;
+                this.toLabel2.Visible = false;
+                this.endHour2.Visible = false;
+                this.am_pmCombo2_1.Visible = false;
+                this.am_pmCombo2_2.Visible = false;
+                this.numberOfShiftsLabel2.Visible = false;
+                this.numberOfShiftsCombo2.Visible = false;
+                this.plusBTN2.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// When the second + button is clicked
+        /// 
+        /// Make the new controls appear and extend the frame
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"> a helper argument</param>
+        private void plusBTN2_Click(object sender, EventArgs e)
+        {
+            //initialize all components
+
+            if (!plusClicked2)
+            {
+                //Disable the previous + button
+                this.plusBTN1.Enabled = false;
+                //set the clicked flag
+                this.plusClicked2 = true;
+                this.plusBTN2.Text = "-";
+                //Set the divider
+                //this.lineDivide3.BorderStyle = BorderStyle.Fixed3D;
+                this.lineDivide3.AutoSize = false;
+                this.lineDivide3.Height = 2;
+
+                //Make them all visible
+                this.Height += 100;
+                this.Top -= 72;
+                this.shift3Label.Visible = true;
+                this.lineDivide3.Visible = true;
+                this.shiftTime3.Visible = true;
+                this.startHour3.Visible = true;
+                this.toLabel3.Visible = true;
+                this.endHour3.Visible = true;
+                this.am_pmCombo3_1.Visible = true;
+                this.am_pmCombo3_2.Visible = true;
+                this.numberOfShiftsLabel3.Visible = true;
+                this.numberOfShiftsCombo3.Visible = true;
+                this.plusBTN3.Visible = true;
+
+            }
+            else if (plusClicked2)
+            {
+                //Disable the previous + button
+                this.plusBTN1.Enabled = true;
+                //set the clicked flag
+                this.plusClicked2 = false;
+                this.plusBTN2.Text = "+";
+
+                //Make them all visible
+                this.Height -= 100;
+                this.Top += 72;
+                this.shift3Label.Visible = false;
+                this.lineDivide3.Visible = false;
+                this.shiftTime3.Visible = false;
+                this.startHour3.Visible = false;
+                this.toLabel3.Visible = false;
+                this.endHour3.Visible = false;
+                this.am_pmCombo3_1.Visible = false;
+                this.am_pmCombo3_2.Visible = false;
+                this.numberOfShiftsLabel3.Visible = false;
+                this.numberOfShiftsCombo3.Visible = false;
+                this.plusBTN3.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// When the second + button is clicked
+        /// 
+        /// Make the new controls appear and extend the frame
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void plusBTN3_Click(object sender, EventArgs e)
+        {
+            if (!plusClicked3)
+            {
+                //Disable the previous + button
+                this.plusBTN2.Enabled = false;
+                //set the clicked flag
+                this.plusClicked3 = true;
+                this.plusBTN3.Text = "-";
+                //Set the divider
+                //this.lineDivide4.BorderStyle = BorderStyle.Fixed3D;
+                this.lineDivide4.AutoSize = false;
+                this.lineDivide4.Height = 2;
+
+
+                //Make them all visible
+                this.Height += 100;
+                this.Top -= 72;
+                this.shift4Label.Visible = true;
+                this.lineDivide4.Visible = true;
+                this.shiftTime4.Visible = true;
+                this.startHour4.Visible = true;
+                this.toLabel4.Visible = true;
+                this.endHour4.Visible = true;
+                this.am_pmCombo4_1.Visible = true;
+                this.am_pmCombo4_2.Visible = true;
+                this.numberOfShiftsLabel4.Visible = true;
+                this.numberOfShiftsCombo4.Visible = true;
+            }
+            else if (plusClicked3)
+            {
+                //Disable the previous + button
+                this.plusBTN2.Enabled = true;
+                //set the clicked flag
+                this.plusClicked3 = false;
+                this.plusBTN3.Text = "+";
+
+                //Make them all visible
+                this.Height -= 100;
+                this.Top += 72;
+                this.shift4Label.Visible = false;
+                this.lineDivide4.Visible = false;
+                this.shiftTime4.Visible = false;
+                this.startHour4.Visible = false;
+                this.toLabel4.Visible = false;
+                this.endHour4.Visible = false;
+                this.am_pmCombo4_1.Visible = false;
+                this.am_pmCombo4_2.Visible = false;
+                this.numberOfShiftsLabel4.Visible = false;
+                this.numberOfShiftsCombo4.Visible = false;
+            }
+        }
+        #endregion
+
+        #region All Thread Related Work
+
+        /// <summary>
         /// All log (tab1) work is done in this method
         /// </summary>
         /// <param name="sender"></param>
@@ -596,7 +796,6 @@ namespace ClassOpsLogCreator
             {
                 // Finally, handle the case where the operation 
                 // succeeded.
-                workDone = true;
                 printDlg = new PrintDialog();
                 PrinterSettings defaultSettings = new PrinterSettings();
                 string defaultPrinterName = defaultSettings.PrinterName;
@@ -720,8 +919,9 @@ namespace ClassOpsLogCreator
                 Quit();
             }
         }
+        #endregion
 
-        // ALL HELPER/WORKER METHODS GO HERE BELLOW HERE!
+        #region Helper/Worker Methods
 
         /// <summary>
         /// This method will create the logs and write to the excel file with assistance 
@@ -1177,43 +1377,55 @@ namespace ClassOpsLogCreator
 
                  for (int i = 0; i <= rowNumbers.GetUpperBound(0) && (rowNumbers[i, 0] != 0 || rowNumbers[i, 1] != 0); i++)
                  {
-                      Excel.Range logRange = existingMasterWorkSheet.get_Range("B" + (rowNumbers[i, 0]), "H" + (rowNumbers[i, 1]));
-                      Excel.Range name = existingMasterWorkSheet.get_Range("A" + rowNumbers[i, 0]);
-                      string nameText = name.Cells.Value2.ToString();
+                    Excel.Range logRange = existingMasterWorkSheet.get_Range("B" + (rowNumbers[i, 0]), "H" + (rowNumbers[i, 1]));
+                    Excel.Range name = existingMasterWorkSheet.get_Range("A" + rowNumbers[i, 0]);
 
-                      existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + timeArray[i,0] + " to " + timeArray[i,1];
-                      logRange.PrintPreview(true);    
+                    string nameText;
+                    if (name.Cells.Value2 == null)
+                    {
+                        nameText = "null";
+                    }
+                    else
+                    {
+                       nameText = name.Cells.Value2.ToString();
+                    }
+                      
+
+                    existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + timeArray[i,0] + " to " + timeArray[i,1];
+                    logRange.PrintPreview(true);    
                 }
             }
             else
             {
-                //We open the log viewer at this point
-                Excel.Range last = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-                Excel.Range logRange = existingMasterWorkSheet.get_Range("B" + (rowNumbers[0, 0]), "H" + (rowNumbers[0, 1]));
+               //We open the log viewer at this point
+               Excel.Range last = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+               Excel.Range logRange = existingMasterWorkSheet.get_Range("B" + (rowNumbers[0, 0]), "H" + (rowNumbers[0, 1]));
 
-                Excel.Range name = existingMasterWorkSheet.get_Range("A" + (rowNumbers[0, 0]));
-                string nameText = name.Cells.Value2.ToString();
+               Excel.Range name = existingMasterWorkSheet.get_Range("A" + (rowNumbers[0, 0]));
+               string nameText = name.Cells.Value2.ToString();
 
-                existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + timeArray[0, 0] + " to " + timeArray[0, 1];
-                SetDefaultPrinter(printDlg.PrinterSettings.PrinterName); 
-                existingMaster.Visible = true;
-                logRange.PrintPreview(true);
+               existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + timeArray[0, 0] + " to " + timeArray[0, 1];
+               SetDefaultPrinter(printDlg.PrinterSettings.PrinterName); 
+               existingMaster.Visible = true;
+               logRange.PrintPreview(true);
             }
             existingMaster.get_Range("C:C").EntireColumn.Hidden = false;
         }
+        #endregion
+
+        #region Cleanup/Closing Methods
 
         /// <summary>
-        /// This will add a small addiction to the closing operation of the application
-        /// Clear he clo file and clean up the memory.
+        /// This will save all settings on closing
         /// </summary>
         /// <param name="e">Form Closing Event </param>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             //We are going to use the base onFormClose operations and add more
             base.OnFormClosing(e);
-            
+
             //If "Saved Selected" is check we are going to save the state of all the settings
-            if(this.saveSettingCheckBox.Checked)
+            if (this.saveSettingCheckBox.Checked)
             {
                 //Save the state of the check box
                 Properties.Settings.Default.saveCheckedBoxState = true;
@@ -1252,206 +1464,10 @@ namespace ClassOpsLogCreator
                 //Reset the check-box flag
                 Properties.Settings.Default.saveCheckedBoxState = false;
                 //Reset all the settings
-                Properties.Settings.Default.Reset();   
+                Properties.Settings.Default.Reset();
             }
             //Save settings to the xml file
             Properties.Settings.Default.Save();
-        }
-
-        /// <summary>
-        /// This will open a login page so we can get the users MyMail login
-        /// for the email scanner class
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void settingsBTN_Click(object sender, EventArgs e)
-        {
-            SettingForm settings = new SettingForm(this);
-            settings.ShowDialog();
-        }
-
-        /// <summary>
-        /// When the first + button is clicked
-        /// 
-        /// Make the new controls appear and extend the frame
-        /// </summary>
-        /// <param name="sender">a sender object (A controller)</param>
-        /// <param name="e"> a helper argument</param>
-        private void plusBTN1_Click_1(object sender, EventArgs e)
-        {
-            //initialize all components
-
-            if (!plusClicked1)
-            {
-                //set the clicked flag
-                this.plusClicked1 = true;
-                this.plusBTN1.Text = "-";
-                //Set the divider
-                //this.lineDivide2.BorderStyle = BorderStyle.Fixed3D;
-                this.lineDivide2.AutoSize = false;
-                this.lineDivide2.Height = 2;
-
-                //Make them all visible
-                this.Height += 100;
-                this.Top -= 72;
-                this.shift2Label.Visible = true;
-                this.lineDivide2.Visible = true;
-                this.shiftTime2.Visible = true;
-                this.startHour2.Visible = true;
-                this.toLabel2.Visible = true;
-                this.endHour2.Visible = true;
-                this.am_pmCombo2_1.Visible = true;
-                this.am_pmCombo2_2.Visible = true;
-                this.numberOfShiftsLabel2.Visible = true;
-                this.numberOfShiftsCombo2.Visible = true;
-                this.plusBTN2.Visible = true;
-
-            }
-            else if (plusClicked1)
-            {
-                //set the clicked flag
-                this.plusClicked1 = false;
-                this.plusBTN1.Text = "+";
-
-                //Make them all visible
-                this.Height -= 100;
-                this.Top += 72;
-                this.shift2Label.Visible = false;
-                this.lineDivide2.Visible = false;
-                this.shiftTime2.Visible = false;
-                this.startHour2.Visible = false;
-                this.toLabel2.Visible = false;
-                this.endHour2.Visible = false;
-                this.am_pmCombo2_1.Visible = false;
-                this.am_pmCombo2_2.Visible = false;
-                this.numberOfShiftsLabel2.Visible = false;
-                this.numberOfShiftsCombo2.Visible = false;
-                this.plusBTN2.Visible = false;
-            }
-        }
-
-        /// <summary>
-        /// When the second + button is clicked
-        /// 
-        /// Make the new controls appear and extend the frame
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"> a helper argument</param>
-        private void plusBTN2_Click(object sender, EventArgs e)
-        {
-            //initialize all components
-
-            if (!plusClicked2)
-            {
-                //Disable the previous + button
-                this.plusBTN1.Enabled = false;
-                //set the clicked flag
-                this.plusClicked2 = true;
-                this.plusBTN2.Text = "-";
-                //Set the divider
-                //this.lineDivide3.BorderStyle = BorderStyle.Fixed3D;
-                this.lineDivide3.AutoSize = false;
-                this.lineDivide3.Height = 2;
-
-                //Make them all visible
-                this.Height += 100;
-                this.Top -= 72;
-                this.shift3Label.Visible = true;
-                this.lineDivide3.Visible = true;
-                this.shiftTime3.Visible = true;
-                this.startHour3.Visible = true;
-                this.toLabel3.Visible = true;
-                this.endHour3.Visible = true;
-                this.am_pmCombo3_1.Visible = true;
-                this.am_pmCombo3_2.Visible = true;
-                this.numberOfShiftsLabel3.Visible = true;
-                this.numberOfShiftsCombo3.Visible = true;
-                this.plusBTN3.Visible = true;
-
-            }
-            else if (plusClicked2)
-            {
-                //Disable the previous + button
-                this.plusBTN1.Enabled = true;
-                //set the clicked flag
-                this.plusClicked2 = false;
-                this.plusBTN2.Text = "+";
-
-                //Make them all visible
-                this.Height -= 100;
-                this.Top += 72;
-                this.shift3Label.Visible = false;
-                this.lineDivide3.Visible = false;
-                this.shiftTime3.Visible = false;
-                this.startHour3.Visible = false;
-                this.toLabel3.Visible = false;
-                this.endHour3.Visible = false;
-                this.am_pmCombo3_1.Visible = false;
-                this.am_pmCombo3_2.Visible = false;
-                this.numberOfShiftsLabel3.Visible = false;
-                this.numberOfShiftsCombo3.Visible = false;
-                this.plusBTN3.Visible = false;
-            }
-        }
-
-        /// <summary>
-        /// When the second + button is clicked
-        /// 
-        /// Make the new controls appear and extend the frame
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void plusBTN3_Click(object sender, EventArgs e)
-        {
-            if (!plusClicked3)
-            {
-                //Disable the previous + button
-                this.plusBTN2.Enabled = false;
-                //set the clicked flag
-                this.plusClicked3 = true;
-                this.plusBTN3.Text = "-";
-                //Set the divider
-                //this.lineDivide4.BorderStyle = BorderStyle.Fixed3D;
-                this.lineDivide4.AutoSize = false;
-                this.lineDivide4.Height = 2;
-
-
-                //Make them all visible
-                this.Height += 100;
-                this.Top -= 72;
-                this.shift4Label.Visible = true;
-                this.lineDivide4.Visible = true;
-                this.shiftTime4.Visible = true;
-                this.startHour4.Visible = true;
-                this.toLabel4.Visible = true;
-                this.endHour4.Visible = true;
-                this.am_pmCombo4_1.Visible = true;
-                this.am_pmCombo4_2.Visible = true;
-                this.numberOfShiftsLabel4.Visible = true;
-                this.numberOfShiftsCombo4.Visible = true;
-            }
-            else if (plusClicked3)
-            {
-                //Disable the previous + button
-                this.plusBTN2.Enabled = true;
-                //set the clicked flag
-                this.plusClicked3 = false;
-                this.plusBTN3.Text = "+";
-
-                //Make them all visible
-                this.Height -= 100;
-                this.Top += 72;
-                this.shift4Label.Visible = false;
-                this.lineDivide4.Visible = false;
-                this.shiftTime4.Visible = false;
-                this.startHour4.Visible = false;
-                this.toLabel4.Visible = false;
-                this.endHour4.Visible = false;
-                this.am_pmCombo4_1.Visible = false;
-                this.am_pmCombo4_2.Visible = false;
-                this.numberOfShiftsLabel4.Visible = false;
-                this.numberOfShiftsCombo4.Visible = false;
-            }
         }
 
         /// <summary>
@@ -1500,5 +1516,6 @@ namespace ClassOpsLogCreator
             }*/
             //TEST CODE!
         }
+        #endregion
     }
 }

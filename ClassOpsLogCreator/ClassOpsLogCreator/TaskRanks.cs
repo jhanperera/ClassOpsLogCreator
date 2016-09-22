@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace ClassOpsLogCreator
 {
+    /// <summary>
+    /// This class is used to rank the final logs
+    /// A rank can be any integer n >= 0
+    /// The ranks are used to determine if we need to re-sort/distribute some tasks.
+    /// </summary>
     public class TaskRanks
     {
         private string[] value1 = null;
@@ -21,7 +26,7 @@ namespace ClassOpsLogCreator
             //Value = 1 tasks
             value1 = new string[]
             {
-                /*"AV Shutdown",*/ "Proactive Classroom Check",
+                "AV Shutdown", "Proactive Classroom Check",
                 "Other", "SCLD Student Logout"
             };
 
