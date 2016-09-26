@@ -66,6 +66,19 @@ namespace ClassOpsLogCreator
                 throw new System.FieldAccessException("File not found!");
             }
 
+            //Get the date from the clo file (For reference checking)
+            Excel.Range cloDate = roomSheet1.get_Range("A1", "B1");
+            System.Array cloDateArray = (System.Array)cloDate.Cells.Value2;
+            string cloDateString = ((string)cloDateArray.GetValue(1, 1) + "," + (string)cloDateArray.GetValue(1, 2)).Replace(" ", "");
+
+            //Get todays date and do a check to see if the clo is updated.
+            string todaysDate = DateTime.Now.ToString("dddd,d,yyyy");
+            if (!cloDateString.Equals(todaysDate))
+            {
+                Quit();
+                throw new Exception(form1.ROOM_SCHED + " is out of date!");
+            }
+
             //Get the range we are working within. (A1, A.LastRow)
             Excel.Range last = roomSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
             Excel.Range classRange = roomSheet1.get_Range("A5", "A" + last.Row);
