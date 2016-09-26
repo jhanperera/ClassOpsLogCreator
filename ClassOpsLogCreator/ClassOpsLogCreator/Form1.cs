@@ -56,6 +56,9 @@ namespace ClassOpsLogCreator
         //The print dialog object to chose a printer
         PrintDialog printDlg;
 
+        //Detail window to show information to users
+        DetailForm detailForm;
+
         //All the excel elements we use to read and write data from and to.
         private static Excel.Application logoutMaster = null;
         private static Excel.Workbook logoutMasterWorkBook = null;
@@ -457,6 +460,7 @@ namespace ClassOpsLogCreator
             }
             /************************************END OF INPUT VALIDATION***********************/
 
+            //Create the background worker
             bw = new BackgroundWorker();
             //Initialize the Background worker and report progress
             bw.WorkerReportsProgress = true;
@@ -469,12 +473,19 @@ namespace ClassOpsLogCreator
             //Do all the work
             if (bw.IsBusy != true)
             {
+                //create and open the detail from to show information about the system
+                detailForm = new DetailForm("Starting Work...");
+                detailForm.Show();
+
+                //Throw this window into the background.
                 this.TopMost = false;
+
                 //Disable the button
                 createBTN.Enabled = false;
                 plusBTN1.Enabled = false;
                 plusBTN2.Enabled = false;
                 plusBTN3.Enabled = false;
+
                 //Run the work
                 bw.RunWorkerAsync();
             }
@@ -794,6 +805,7 @@ namespace ClassOpsLogCreator
             }
             else
             {
+
                 // Finally, handle the case where the operation 
                 // succeeded.
                 printDlg = new PrintDialog();
@@ -814,7 +826,7 @@ namespace ClassOpsLogCreator
                     Quit();
                     throw new System.FieldAccessException("File not found!");
                 }
-
+                
                 //Display all the logs
                 if (plusClicked1 && !plusClicked2 && !plusClicked3)
                 {

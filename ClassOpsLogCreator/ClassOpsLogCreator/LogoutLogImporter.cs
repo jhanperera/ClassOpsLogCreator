@@ -69,7 +69,7 @@ namespace ClassOpsLogCreator
             //Get the date from the clo file (For reference checking)
             Excel.Range cloDate = roomSheet1.get_Range("A1", "B1");
             System.Array cloDateArray = (System.Array)cloDate.Cells.Value2;
-            string cloDateString = ((string)cloDateArray.GetValue(1, 1) + "," + (string)cloDateArray.GetValue(1, 2)).Replace(" ", "");
+            string cloDateString = ((string)cloDateArray.GetValue(1, 1).ToString().Trim() + "," + (string)cloDateArray.GetValue(1, 2).ToString().Trim()).Replace(" ", "");
 
             //Get todays date and do a check to see if the clo is updated.
             string todaysDate = DateTime.Now.ToString("dddd,d,yyyy");
