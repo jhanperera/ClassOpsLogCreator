@@ -49,7 +49,7 @@
             this.detailLabel.AutoSize = true;
             this.detailLabel.Location = new System.Drawing.Point(4, 4);
             this.detailLabel.Name = "detailLabel";
-            this.detailLabel.Size = new System.Drawing.Size(83, 19);
+            this.detailLabel.Size = new System.Drawing.Size(81, 19);
             this.detailLabel.TabIndex = 0;
             this.detailLabel.Text = "metroLabel1";
             // 
@@ -66,10 +66,10 @@
             this.Name = "DetailForm";
             this.Padding = new System.Windows.Forms.Padding(20, 30, 20, 20);
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "DetailForm";
-            this.Theme = MetroFramework.MetroThemeStyle.Light;
             this.detailPanel.ResumeLayout(false);
             this.detailPanel.PerformLayout();
             this.ResumeLayout(false);

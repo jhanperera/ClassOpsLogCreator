@@ -4,10 +4,12 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using MetroFramework;
+using MetroFramework.Forms;
 
 namespace ClassOpsLogCreator
 {
-    public partial class LogViewer : MetroFramework.Forms.MetroForm
+    public partial class LogViewer : MetroForm
     {
  
         //Private variables to hold some important vales
@@ -38,10 +40,10 @@ namespace ClassOpsLogCreator
             this.Text = shiftTitle;
 
             //Add the gray text for the name text box
-            this.nameTextBox.ForeColor = SystemColors.GrayText;
+            /*this.nameTextBox.ForeColor = SystemColors.GrayText;
             this.nameTextBox.Text = "Name";
             this.nameTextBox.Leave += new System.EventHandler(this.nameTextBox_Leave);
-            this.nameTextBox.Enter += new System.EventHandler(this.nameTextBox_Enter);
+            this.nameTextBox.Enter += new System.EventHandler(this.nameTextBox_Enter);*/
 
             //Get the array representation of the range
             this.rangeArray = Range;
@@ -296,7 +298,7 @@ namespace ClassOpsLogCreator
             //INPUT VALIDATION!
             if (this.nameTextBox.Text.Equals("Name"))
             {
-                MessageBox.Show("Name Box cannot be empty!",
+                MetroMessageBox.Show(this, "Name Box cannot be empty!",
                                 "Error!",
                                  MessageBoxButtons.OK,
                                  MessageBoxIcon.Exclamation,
@@ -304,7 +306,7 @@ namespace ClassOpsLogCreator
             }
             else if(!(employeeNameList.Contains(this.nameTextBox.Text.ToLower())))
             {
-                MessageBox.Show("Invalid employee name!",
+                MetroMessageBox.Show(this, "Invalid employee name!",
                                 "Error!",
                                  MessageBoxButtons.OK,
                                  MessageBoxIcon.Exclamation,
@@ -312,7 +314,7 @@ namespace ClassOpsLogCreator
             }
             else if(this.startTextBox.Text.Length == 0 || this.endTextBox.Text.Length == 0)
             {
-                MessageBox.Show("The shift times cannot be empty!",
+                MetroMessageBox.Show(this, "The shift times cannot be empty!",
                                "Error!",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Exclamation,
@@ -320,7 +322,7 @@ namespace ClassOpsLogCreator
             }
             else if(!timeString.IsMatch(this.startTextBox.Text) || !timeString.IsMatch(this.endTextBox.Text))
             {
-                MessageBox.Show("The time format is incorrect!",
+                MetroMessageBox.Show(this, "The time format is incorrect!",
                               "Error!",
                                MessageBoxButtons.OK,
                                MessageBoxIcon.Exclamation,

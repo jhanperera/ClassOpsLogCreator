@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework;
+using MetroFramework.Forms;
 
 namespace ClassOpsLogCreator
 {
@@ -91,7 +93,7 @@ namespace ClassOpsLogCreator
 
             if (this.usernameTextBox.Text == "" || this.passwordTextBox.Text == "")
             {
-                MessageBox.Show("Please provide a User name and Password.");
+                MetroMessageBox.Show(this, "Please provide a User name and Password.");
                 return;
             }
             else

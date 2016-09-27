@@ -17,6 +17,10 @@ namespace ClassOpsLogCreator
             InitializeComponent();
 
             this.detailLabel.Text = initString;
+
+            //Set the location to the left of the main Window
+            int y = (Screen.PrimaryScreen.Bounds.Bottom/2) -  (this.Height/2);
+            this.Location = new Point(0, y);
         }
 
         public void updateDetail(string updateString)

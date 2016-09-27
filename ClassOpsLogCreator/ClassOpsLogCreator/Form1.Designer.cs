@@ -152,16 +152,15 @@
             // 
             this.saveSettingCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.saveSettingCheckBox.AutoSize = true;
-            this.saveSettingCheckBox.FontSize = MetroFramework.MetroLinkSize.Medium;
-            this.saveSettingCheckBox.Location = new System.Drawing.Point(521, 128);
+            this.saveSettingCheckBox.Location = new System.Drawing.Point(521, 132);
             this.saveSettingCheckBox.Name = "saveSettingCheckBox";
-            this.saveSettingCheckBox.Size = new System.Drawing.Size(107, 19);
+            this.saveSettingCheckBox.Size = new System.Drawing.Size(94, 15);
             this.saveSettingCheckBox.Style = MetroFramework.MetroColorStyle.Red;
             this.saveSettingCheckBox.TabIndex = 53;
             this.saveSettingCheckBox.TabStop = false;
             this.saveSettingCheckBox.Text = "Save Selected";
             this.metroToolTip1.SetToolTip(this.saveSettingCheckBox, "Save fields for future sessions?");
-            this.saveSettingCheckBox.UseVisualStyleBackColor = true;
+            this.saveSettingCheckBox.UseSelectable = true;
             // 
             // createBTN
             // 
@@ -171,9 +170,11 @@
             this.createBTN.Location = new System.Drawing.Point(240, 117);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(158, 31);
+            this.createBTN.Style = MetroFramework.MetroColorStyle.Red;
             this.createBTN.TabIndex = 0;
             this.createBTN.Text = "Create Logs";
             this.metroToolTip1.SetToolTip(this.createBTN, "Add another shift.");
+            this.createBTN.UseSelectable = true;
             this.createBTN.Click += new System.EventHandler(this.createBTN_Click_1);
             // 
             // statusText
@@ -187,44 +188,47 @@
             // 
             // numberOfShiftsCombo4
             // 
-            this.numberOfShiftsCombo4.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.numberOfShiftsCombo4.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.numberOfShiftsCombo4.FormattingEnabled = true;
             this.numberOfShiftsCombo4.ItemHeight = 23;
             this.numberOfShiftsCombo4.Location = new System.Drawing.Point(407, 363);
             this.numberOfShiftsCombo4.Name = "numberOfShiftsCombo4";
             this.numberOfShiftsCombo4.Size = new System.Drawing.Size(144, 29);
-            this.numberOfShiftsCombo4.Style = MetroFramework.MetroColorStyle.Green;
+            this.numberOfShiftsCombo4.Style = MetroFramework.MetroColorStyle.Red;
             this.numberOfShiftsCombo4.TabIndex = 23;
             this.numberOfShiftsCombo4.TabStop = false;
             this.metroToolTip1.SetToolTip(this.numberOfShiftsCombo4, "Select number of employees working.");
+            this.numberOfShiftsCombo4.UseSelectable = true;
             this.numberOfShiftsCombo4.Visible = false;
             // 
             // am_pmCombo4_2
             // 
-            this.am_pmCombo4_2.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.am_pmCombo4_2.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.am_pmCombo4_2.FormattingEnabled = true;
             this.am_pmCombo4_2.ItemHeight = 23;
             this.am_pmCombo4_2.Location = new System.Drawing.Point(325, 364);
             this.am_pmCombo4_2.Name = "am_pmCombo4_2";
             this.am_pmCombo4_2.Size = new System.Drawing.Size(53, 29);
-            this.am_pmCombo4_2.Style = MetroFramework.MetroColorStyle.Green;
+            this.am_pmCombo4_2.Style = MetroFramework.MetroColorStyle.Red;
             this.am_pmCombo4_2.TabIndex = 22;
             this.am_pmCombo4_2.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo4_2, "Am or PM.");
+            this.am_pmCombo4_2.UseSelectable = true;
             this.am_pmCombo4_2.Visible = false;
             // 
             // endHour4
             // 
-            this.endHour4.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.endHour4.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.endHour4.FormattingEnabled = true;
             this.endHour4.ItemHeight = 23;
             this.endHour4.Location = new System.Drawing.Point(231, 364);
             this.endHour4.Name = "endHour4";
             this.endHour4.Size = new System.Drawing.Size(88, 29);
-            this.endHour4.Style = MetroFramework.MetroColorStyle.Green;
+            this.endHour4.Style = MetroFramework.MetroColorStyle.Red;
             this.endHour4.TabIndex = 21;
             this.endHour4.TabStop = false;
             this.metroToolTip1.SetToolTip(this.endHour4, "Select end time.");
+            this.endHour4.UseSelectable = true;
             this.endHour4.Visible = false;
             // 
             // toLabel4
@@ -239,30 +243,32 @@
             // 
             // am_pmCombo4_1
             // 
-            this.am_pmCombo4_1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.am_pmCombo4_1.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.am_pmCombo4_1.FormattingEnabled = true;
             this.am_pmCombo4_1.ItemHeight = 23;
             this.am_pmCombo4_1.Location = new System.Drawing.Point(145, 364);
             this.am_pmCombo4_1.Name = "am_pmCombo4_1";
             this.am_pmCombo4_1.Size = new System.Drawing.Size(53, 29);
-            this.am_pmCombo4_1.Style = MetroFramework.MetroColorStyle.Green;
+            this.am_pmCombo4_1.Style = MetroFramework.MetroColorStyle.Red;
             this.am_pmCombo4_1.TabIndex = 20;
             this.am_pmCombo4_1.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo4_1, "Am or PM.");
+            this.am_pmCombo4_1.UseSelectable = true;
             this.am_pmCombo4_1.Visible = false;
             // 
             // startHour4
             // 
-            this.startHour4.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.startHour4.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.startHour4.FormattingEnabled = true;
             this.startHour4.ItemHeight = 23;
             this.startHour4.Location = new System.Drawing.Point(51, 364);
             this.startHour4.Name = "startHour4";
             this.startHour4.Size = new System.Drawing.Size(88, 29);
-            this.startHour4.Style = MetroFramework.MetroColorStyle.Green;
+            this.startHour4.Style = MetroFramework.MetroColorStyle.Red;
             this.startHour4.TabIndex = 19;
             this.startHour4.TabStop = false;
             this.metroToolTip1.SetToolTip(this.startHour4, "Select start time.");
+            this.startHour4.UseSelectable = true;
             this.startHour4.Visible = false;
             // 
             // numberOfShiftsLabel4
@@ -313,49 +319,57 @@
             this.plusBTN3.Location = new System.Drawing.Point(572, 262);
             this.plusBTN3.Name = "plusBTN3";
             this.plusBTN3.Size = new System.Drawing.Size(56, 29);
+            this.plusBTN3.Style = MetroFramework.MetroColorStyle.Red;
             this.plusBTN3.TabIndex = 18;
             this.plusBTN3.Text = "+";
             this.metroToolTip1.SetToolTip(this.plusBTN3, "Add another shift.");
+            this.plusBTN3.UseSelectable = true;
             this.plusBTN3.Visible = false;
             this.plusBTN3.Click += new System.EventHandler(this.plusBTN3_Click);
             // 
             // numberOfShiftsCombo3
             // 
-            this.numberOfShiftsCombo3.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.numberOfShiftsCombo3.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.numberOfShiftsCombo3.FormattingEnabled = true;
             this.numberOfShiftsCombo3.ItemHeight = 23;
             this.numberOfShiftsCombo3.Location = new System.Drawing.Point(407, 262);
             this.numberOfShiftsCombo3.Name = "numberOfShiftsCombo3";
             this.numberOfShiftsCombo3.Size = new System.Drawing.Size(144, 29);
+            this.numberOfShiftsCombo3.Style = MetroFramework.MetroColorStyle.Red;
             this.numberOfShiftsCombo3.TabIndex = 17;
             this.numberOfShiftsCombo3.TabStop = false;
             this.metroToolTip1.SetToolTip(this.numberOfShiftsCombo3, "Select number of employees working.");
+            this.numberOfShiftsCombo3.UseSelectable = true;
             this.numberOfShiftsCombo3.Visible = false;
             // 
             // am_pmCombo3_2
             // 
-            this.am_pmCombo3_2.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.am_pmCombo3_2.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.am_pmCombo3_2.FormattingEnabled = true;
             this.am_pmCombo3_2.ItemHeight = 23;
             this.am_pmCombo3_2.Location = new System.Drawing.Point(325, 263);
             this.am_pmCombo3_2.Name = "am_pmCombo3_2";
             this.am_pmCombo3_2.Size = new System.Drawing.Size(53, 29);
+            this.am_pmCombo3_2.Style = MetroFramework.MetroColorStyle.Red;
             this.am_pmCombo3_2.TabIndex = 16;
             this.am_pmCombo3_2.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo3_2, "Am or PM.");
+            this.am_pmCombo3_2.UseSelectable = true;
             this.am_pmCombo3_2.Visible = false;
             // 
             // endHour3
             // 
-            this.endHour3.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.endHour3.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.endHour3.FormattingEnabled = true;
             this.endHour3.ItemHeight = 23;
             this.endHour3.Location = new System.Drawing.Point(231, 263);
             this.endHour3.Name = "endHour3";
             this.endHour3.Size = new System.Drawing.Size(88, 29);
+            this.endHour3.Style = MetroFramework.MetroColorStyle.Red;
             this.endHour3.TabIndex = 15;
             this.endHour3.TabStop = false;
             this.metroToolTip1.SetToolTip(this.endHour3, "Select end time.");
+            this.endHour3.UseSelectable = true;
             this.endHour3.Visible = false;
             // 
             // toLabel3
@@ -370,28 +384,32 @@
             // 
             // am_pmCombo3_1
             // 
-            this.am_pmCombo3_1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.am_pmCombo3_1.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.am_pmCombo3_1.FormattingEnabled = true;
             this.am_pmCombo3_1.ItemHeight = 23;
             this.am_pmCombo3_1.Location = new System.Drawing.Point(145, 263);
             this.am_pmCombo3_1.Name = "am_pmCombo3_1";
             this.am_pmCombo3_1.Size = new System.Drawing.Size(53, 29);
+            this.am_pmCombo3_1.Style = MetroFramework.MetroColorStyle.Red;
             this.am_pmCombo3_1.TabIndex = 14;
             this.am_pmCombo3_1.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo3_1, "Am or PM.");
+            this.am_pmCombo3_1.UseSelectable = true;
             this.am_pmCombo3_1.Visible = false;
             // 
             // startHour3
             // 
-            this.startHour3.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.startHour3.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.startHour3.FormattingEnabled = true;
             this.startHour3.ItemHeight = 23;
             this.startHour3.Location = new System.Drawing.Point(51, 263);
             this.startHour3.Name = "startHour3";
             this.startHour3.Size = new System.Drawing.Size(88, 29);
+            this.startHour3.Style = MetroFramework.MetroColorStyle.Red;
             this.startHour3.TabIndex = 13;
             this.startHour3.TabStop = false;
             this.metroToolTip1.SetToolTip(this.startHour3, "Select start time.");
+            this.startHour3.UseSelectable = true;
             this.startHour3.Visible = false;
             // 
             // numberOfShiftsLabel3
@@ -442,49 +460,57 @@
             this.plusBTN2.Location = new System.Drawing.Point(572, 161);
             this.plusBTN2.Name = "plusBTN2";
             this.plusBTN2.Size = new System.Drawing.Size(56, 29);
+            this.plusBTN2.Style = MetroFramework.MetroColorStyle.Red;
             this.plusBTN2.TabIndex = 12;
             this.plusBTN2.Text = "+";
             this.metroToolTip1.SetToolTip(this.plusBTN2, "Add another shift.");
+            this.plusBTN2.UseSelectable = true;
             this.plusBTN2.Visible = false;
             this.plusBTN2.Click += new System.EventHandler(this.plusBTN2_Click);
             // 
             // numberOfShiftsCombo2
             // 
-            this.numberOfShiftsCombo2.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.numberOfShiftsCombo2.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.numberOfShiftsCombo2.FormattingEnabled = true;
             this.numberOfShiftsCombo2.ItemHeight = 23;
             this.numberOfShiftsCombo2.Location = new System.Drawing.Point(407, 161);
             this.numberOfShiftsCombo2.Name = "numberOfShiftsCombo2";
             this.numberOfShiftsCombo2.Size = new System.Drawing.Size(144, 29);
+            this.numberOfShiftsCombo2.Style = MetroFramework.MetroColorStyle.Red;
             this.numberOfShiftsCombo2.TabIndex = 11;
             this.numberOfShiftsCombo2.TabStop = false;
             this.metroToolTip1.SetToolTip(this.numberOfShiftsCombo2, "Select number of employees working.");
+            this.numberOfShiftsCombo2.UseSelectable = true;
             this.numberOfShiftsCombo2.Visible = false;
             // 
             // am_pmCombo2_2
             // 
-            this.am_pmCombo2_2.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.am_pmCombo2_2.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.am_pmCombo2_2.FormattingEnabled = true;
             this.am_pmCombo2_2.ItemHeight = 23;
             this.am_pmCombo2_2.Location = new System.Drawing.Point(325, 162);
             this.am_pmCombo2_2.Name = "am_pmCombo2_2";
             this.am_pmCombo2_2.Size = new System.Drawing.Size(53, 29);
+            this.am_pmCombo2_2.Style = MetroFramework.MetroColorStyle.Red;
             this.am_pmCombo2_2.TabIndex = 10;
             this.am_pmCombo2_2.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo2_2, "Am or PM.");
+            this.am_pmCombo2_2.UseSelectable = true;
             this.am_pmCombo2_2.Visible = false;
             // 
             // endHour2
             // 
-            this.endHour2.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.endHour2.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.endHour2.FormattingEnabled = true;
             this.endHour2.ItemHeight = 23;
             this.endHour2.Location = new System.Drawing.Point(231, 162);
             this.endHour2.Name = "endHour2";
             this.endHour2.Size = new System.Drawing.Size(88, 29);
+            this.endHour2.Style = MetroFramework.MetroColorStyle.Red;
             this.endHour2.TabIndex = 9;
             this.endHour2.TabStop = false;
             this.metroToolTip1.SetToolTip(this.endHour2, "Select end time.");
+            this.endHour2.UseSelectable = true;
             this.endHour2.Visible = false;
             // 
             // toLabel2
@@ -499,28 +525,32 @@
             // 
             // am_pmCombo2_1
             // 
-            this.am_pmCombo2_1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.am_pmCombo2_1.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.am_pmCombo2_1.FormattingEnabled = true;
             this.am_pmCombo2_1.ItemHeight = 23;
             this.am_pmCombo2_1.Location = new System.Drawing.Point(145, 162);
             this.am_pmCombo2_1.Name = "am_pmCombo2_1";
             this.am_pmCombo2_1.Size = new System.Drawing.Size(53, 29);
+            this.am_pmCombo2_1.Style = MetroFramework.MetroColorStyle.Red;
             this.am_pmCombo2_1.TabIndex = 8;
             this.am_pmCombo2_1.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo2_1, "Am or PM.");
+            this.am_pmCombo2_1.UseSelectable = true;
             this.am_pmCombo2_1.Visible = false;
             // 
             // startHour2
             // 
-            this.startHour2.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.startHour2.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.startHour2.FormattingEnabled = true;
             this.startHour2.ItemHeight = 23;
             this.startHour2.Location = new System.Drawing.Point(51, 162);
             this.startHour2.Name = "startHour2";
             this.startHour2.Size = new System.Drawing.Size(88, 29);
+            this.startHour2.Style = MetroFramework.MetroColorStyle.Red;
             this.startHour2.TabIndex = 7;
             this.startHour2.TabStop = false;
             this.metroToolTip1.SetToolTip(this.startHour2, "Select start time.");
+            this.startHour2.UseSelectable = true;
             this.startHour2.Visible = false;
             // 
             // numberOfShiftsLabel2
@@ -571,45 +601,53 @@
             this.plusBTN1.Location = new System.Drawing.Point(572, 62);
             this.plusBTN1.Name = "plusBTN1";
             this.plusBTN1.Size = new System.Drawing.Size(56, 29);
+            this.plusBTN1.Style = MetroFramework.MetroColorStyle.Red;
             this.plusBTN1.TabIndex = 6;
             this.plusBTN1.Text = "+";
             this.metroToolTip1.SetToolTip(this.plusBTN1, "Add another shift.");
+            this.plusBTN1.UseSelectable = true;
             this.plusBTN1.Click += new System.EventHandler(this.plusBTN1_Click_1);
             // 
             // numberOfShiftsCombo1
             // 
-            this.numberOfShiftsCombo1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.numberOfShiftsCombo1.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.numberOfShiftsCombo1.ItemHeight = 23;
             this.numberOfShiftsCombo1.Location = new System.Drawing.Point(407, 62);
             this.numberOfShiftsCombo1.Name = "numberOfShiftsCombo1";
             this.numberOfShiftsCombo1.Size = new System.Drawing.Size(144, 29);
+            this.numberOfShiftsCombo1.Style = MetroFramework.MetroColorStyle.Red;
             this.numberOfShiftsCombo1.TabIndex = 5;
             this.numberOfShiftsCombo1.TabStop = false;
             this.metroToolTip1.SetToolTip(this.numberOfShiftsCombo1, "Select number of employees working.");
+            this.numberOfShiftsCombo1.UseSelectable = true;
             // 
             // am_pmCombo1_2
             // 
-            this.am_pmCombo1_2.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.am_pmCombo1_2.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.am_pmCombo1_2.FormattingEnabled = true;
             this.am_pmCombo1_2.ItemHeight = 23;
             this.am_pmCombo1_2.Location = new System.Drawing.Point(325, 63);
             this.am_pmCombo1_2.Name = "am_pmCombo1_2";
             this.am_pmCombo1_2.Size = new System.Drawing.Size(53, 29);
+            this.am_pmCombo1_2.Style = MetroFramework.MetroColorStyle.Red;
             this.am_pmCombo1_2.TabIndex = 4;
             this.am_pmCombo1_2.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo1_2, "Am or PM.");
+            this.am_pmCombo1_2.UseSelectable = true;
             // 
             // endHour1
             // 
-            this.endHour1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.endHour1.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.endHour1.FormattingEnabled = true;
             this.endHour1.ItemHeight = 23;
             this.endHour1.Location = new System.Drawing.Point(231, 63);
             this.endHour1.Name = "endHour1";
             this.endHour1.Size = new System.Drawing.Size(88, 29);
+            this.endHour1.Style = MetroFramework.MetroColorStyle.Red;
             this.endHour1.TabIndex = 3;
             this.endHour1.TabStop = false;
             this.metroToolTip1.SetToolTip(this.endHour1, "Select end time.");
+            this.endHour1.UseSelectable = true;
             // 
             // toLabel1
             // 
@@ -622,27 +660,31 @@
             // 
             // am_pmCombo1_1
             // 
-            this.am_pmCombo1_1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.am_pmCombo1_1.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.am_pmCombo1_1.FormattingEnabled = true;
             this.am_pmCombo1_1.ItemHeight = 23;
             this.am_pmCombo1_1.Location = new System.Drawing.Point(145, 63);
             this.am_pmCombo1_1.Name = "am_pmCombo1_1";
             this.am_pmCombo1_1.Size = new System.Drawing.Size(53, 29);
+            this.am_pmCombo1_1.Style = MetroFramework.MetroColorStyle.Red;
             this.am_pmCombo1_1.TabIndex = 2;
             this.am_pmCombo1_1.TabStop = false;
             this.metroToolTip1.SetToolTip(this.am_pmCombo1_1, "Am or PM.");
+            this.am_pmCombo1_1.UseSelectable = true;
             // 
             // startHour1
             // 
-            this.startHour1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.startHour1.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.startHour1.ItemHeight = 23;
             this.startHour1.Location = new System.Drawing.Point(51, 63);
             this.startHour1.Name = "startHour1";
             this.startHour1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.startHour1.Size = new System.Drawing.Size(88, 29);
+            this.startHour1.Style = MetroFramework.MetroColorStyle.Red;
             this.startHour1.TabIndex = 1;
             this.startHour1.TabStop = false;
             this.metroToolTip1.SetToolTip(this.startHour1, "Select start time.");
+            this.startHour1.UseSelectable = true;
             // 
             // numberOfShiftsLabel1
             // 
@@ -682,8 +724,15 @@
             this.lineDivide1.Size = new System.Drawing.Size(577, 2);
             this.lineDivide1.TabIndex = 6;
             // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
             // settingsBTN
             // 
+            this.settingsBTN.ActiveControl = null;
             this.settingsBTN.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.settingsBTN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.settingsBTN.Location = new System.Drawing.Point(592, 6);
@@ -694,6 +743,7 @@
             this.settingsBTN.TabStop = false;
             this.settingsBTN.TileImage = ((System.Drawing.Image)(resources.GetObject("settingsBTN.TileImage")));
             this.settingsBTN.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.settingsBTN.UseSelectable = true;
             this.settingsBTN.UseTileImage = true;
             this.settingsBTN.Click += new System.EventHandler(this.settingsBTN_Click);
             // 
@@ -716,10 +766,11 @@
             this.MinimumSize = new System.Drawing.Size(679, 238);
             this.Name = "LogCreator";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Red;
             this.Text = "Log Creator";
-            this.Theme = MetroFramework.MetroThemeStyle.Light;
             this.TransparencyKey = System.Drawing.SystemColors.ControlDarkDark;
+            this.Load += new System.EventHandler(this.LogCreator_Load);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
             this.ResumeLayout(false);

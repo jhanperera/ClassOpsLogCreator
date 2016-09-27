@@ -8,10 +8,12 @@ using System.Collections.Concurrent;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.Drawing.Printing;
+using MetroFramework;
+using MetroFramework.Forms;
 
 namespace ClassOpsLogCreator
 {
-    public partial class LogCreator : MetroFramework.Forms.MetroForm
+    public partial class LogCreator : MetroForm
     {
         #region Private Attributes/Variables
 
@@ -97,6 +99,7 @@ namespace ClassOpsLogCreator
         private Boolean plusClicked3 = false;
         #endregion
 
+        #region Constructor/Load Handlers
         /// <summary>
         /// Constructor for the system. (Changes here should be confirmed with everyone first)
         /// </summary>
@@ -107,31 +110,6 @@ namespace ClassOpsLogCreator
             //Bring this to the font
             this.Activate();
 
-            //Get the last access times to display during the first message
-            string JLastAccess = File.GetLastWriteTime(JEANNINE_LOG).ToString("dd MMMM yyyy - hh:mm tt");
-            string RLastAccess = File.GetLastWriteTime(RAUL_LOG).ToString("dd MMMM yyyy - hh:mm tt");
-            string DLastAccess = File.GetLastWriteTime(DEREK_LOG).ToString("dd MMMM yyyy - hh:mm tt");
-
-            //A pop up message to ensure that the user is aware that the zone super logs need to be in before running this application
-            DialogResult checkMessage = checkMessage = MessageBox.Show("Ensure all Zone logs have been submitted before preceding."
-                               + Environment.NewLine + Environment.NewLine +
-                               "Jeannine's log was last written to on:  " + JLastAccess + Environment.NewLine +
-                               "Raul's log was last written to on:  " + RLastAccess + Environment.NewLine +
-                               "Derek's log was last written to on:  " + DLastAccess + Environment.NewLine +
-                               Environment.NewLine +
-                               "Failure to do so will result in incorrect output being generated",
-                               "Important Notice",
-                                MessageBoxButtons.OKCancel,
-                                MessageBoxIcon.Information,
-                                MessageBoxDefaultButton.Button1);
-
-            //If the user click cancel we close the application
-            if (checkMessage == DialogResult.Cancel)
-            {
-                //Use an anonymous event handler to take care of this
-                Load += (s, e) => Close();
-                return;
-            }
 
             //Use this for smooth panel updates (double buffering is enabled)
             this.SetStyle(
@@ -270,7 +248,47 @@ namespace ClassOpsLogCreator
                 this.am_pmCombo4_1.SelectedIndex = 1;
                 this.am_pmCombo4_2.SelectedIndex = 1;
             }
+
+            
+
+            
         }
+
+        /// <summary>
+        /// This is the "Load" event for the main window. All on lead activities go in here
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LogCreator_Load(object sender, EventArgs e)
+        {
+            //Get the last access times to display during the first message
+            string JLastAccess = File.GetLastWriteTime(JEANNINE_LOG).ToString("dd MMMM yyyy - hh:mm tt");
+            string RLastAccess = File.GetLastWriteTime(RAUL_LOG).ToString("dd MMMM yyyy - hh:mm tt");
+            string DLastAccess = File.GetLastWriteTime(DEREK_LOG).ToString("dd MMMM yyyy - hh:mm tt");
+
+            //A pop up message to ensure that the user is aware that the zone super logs need to be in before running this application
+            DialogResult checkMessage = checkMessage = MetroMessageBox.Show(this, "Ensure all Zone logs have been submitted before preceding."
+                               + Environment.NewLine + Environment.NewLine +
+                               "Jeannine's log was last written to on:  " + JLastAccess + Environment.NewLine +
+                               "Raul's log was last written to on:  " + RLastAccess + Environment.NewLine +
+                               "Derek's log was last written to on:  " + DLastAccess + Environment.NewLine +
+                               Environment.NewLine +
+                               "Failure to do so will result in incorrect output being generated",
+                               "Important Notice",
+                                MessageBoxButtons.OKCancel,
+                                MessageBoxIcon.Information,
+                                MessageBoxDefaultButton.Button1, 250);
+
+            //If the user click cancel we close the application
+            if (checkMessage == DialogResult.Cancel)
+            {
+                //Use an anonymous event handler to take care of this
+                this.BeginInvoke(new MethodInvoker(this.Close));
+                this.Quit();
+                return;
+            }
+        }
+        #endregion
 
         #region Button Operations
 
@@ -304,8 +322,8 @@ namespace ClassOpsLogCreator
                     startTimeFromCombo2.Equals("PM") || startTimeFromCombo2.Equals("AM") || startTimeFromCombo2 == null ||
                     endTimeFromCombo2.Equals("PM") || endTimeFromCombo2.Equals("AM") || endTimeFromCombo2 == null)
                 {
-                    MessageBox.Show("Valid time must be set.",
-                                     "Problem...",
+                    MetroMessageBox.Show(this,"Valid start and end time must be set.",
+                                     "Oops...there was a problem.",
                                       MessageBoxButtons.OK,
                                       MessageBoxIcon.Exclamation,
                                       MessageBoxDefaultButton.Button1);
@@ -314,8 +332,8 @@ namespace ClassOpsLogCreator
                 else if (Convert.ToDateTime(startTimeFromCombo1) >= Convert.ToDateTime(endTimeFromCombo1) ||
                         Convert.ToDateTime(startTimeFromCombo2) >= Convert.ToDateTime(endTimeFromCombo2))
                 {
-                    MessageBox.Show("Valid time must be set.",
-                                     "Problem...",
+                    MetroMessageBox.Show(this, "Valid start and end time must be set.",
+                                     "Oops...there was a problem",
                                       MessageBoxButtons.OK,
                                       MessageBoxIcon.Exclamation,
                                       MessageBoxDefaultButton.Button1);
@@ -351,8 +369,8 @@ namespace ClassOpsLogCreator
                     startTimeFromCombo3.Equals("PM") || startTimeFromCombo3.Equals("AM") || startTimeFromCombo3 == null ||
                     endTimeFromCombo3.Equals("PM") || endTimeFromCombo3.Equals("AM") || endTimeFromCombo3 == null)
                 {
-                    MessageBox.Show("Valid time must be set.",
-                                     "Problem...",
+                    MetroMessageBox.Show(this, "Valid start and end time must be set.",
+                                     "Oops...there was a problem.",
                                       MessageBoxButtons.OK,
                                       MessageBoxIcon.Exclamation,
                                       MessageBoxDefaultButton.Button1);
@@ -362,11 +380,11 @@ namespace ClassOpsLogCreator
                         Convert.ToDateTime(startTimeFromCombo2) >= Convert.ToDateTime(endTimeFromCombo2) ||
                         Convert.ToDateTime(startTimeFromCombo3) >= Convert.ToDateTime(endTimeFromCombo3))
                 {
-                    MessageBox.Show("Valid time must be set.",
-                                     "Problem...",
-                                      MessageBoxButtons.OK,
-                                      MessageBoxIcon.Exclamation,
-                                      MessageBoxDefaultButton.Button1);
+                    MetroMessageBox.Show(this, "Valid start and end time must be set.",
+                                      "Oops...there was a problem.",
+                                       MessageBoxButtons.OK,
+                                       MessageBoxIcon.Exclamation,
+                                       MessageBoxDefaultButton.Button1);
                     return;
                 }
             }
@@ -407,11 +425,11 @@ namespace ClassOpsLogCreator
                     startTimeFromCombo4.Equals("PM") || startTimeFromCombo4.Equals("AM") || startTimeFromCombo4 == null ||
                     endTimeFromCombo4.Equals("PM") || endTimeFromCombo4.Equals("AM") || endTimeFromCombo4 == null)
                 {
-                    MessageBox.Show("Valid time must be set.",
-                                     "Problem...",
-                                      MessageBoxButtons.OK,
-                                      MessageBoxIcon.Exclamation,
-                                      MessageBoxDefaultButton.Button1);
+                    MetroMessageBox.Show(this, "Valid start and end time must be set.",
+                                      "Oops...there was a problem.",
+                                       MessageBoxButtons.OK,
+                                       MessageBoxIcon.Exclamation,
+                                       MessageBoxDefaultButton.Button1);
                     return;
                 }
                 else if (Convert.ToDateTime(startTimeFromCombo1) >= Convert.ToDateTime(endTimeFromCombo1) ||
@@ -419,11 +437,11 @@ namespace ClassOpsLogCreator
                         Convert.ToDateTime(startTimeFromCombo3) >= Convert.ToDateTime(endTimeFromCombo3) ||
                         Convert.ToDateTime(startTimeFromCombo4) >= Convert.ToDateTime(endTimeFromCombo4))
                 {
-                    MessageBox.Show("Valid time must be set.",
-                                     "Problem...",
-                                      MessageBoxButtons.OK,
-                                      MessageBoxIcon.Exclamation,
-                                      MessageBoxDefaultButton.Button1);
+                    MetroMessageBox.Show(this, "Valid start and end time must be set.",
+                                      "Oops...there was a problem.",
+                                       MessageBoxButtons.OK,
+                                       MessageBoxIcon.Exclamation,
+                                       MessageBoxDefaultButton.Button1);
                     return;
                 }
             }
@@ -440,8 +458,8 @@ namespace ClassOpsLogCreator
                 if (startTimeFromCombo1.Equals("PM") || startTimeFromCombo1.Equals("AM") || startTimeFromCombo1 == null ||
                     endTimeFromCombo1.Equals("PM") || endTimeFromCombo1.Equals("AM") || endTimeFromCombo1 == null)
                 {
-                    MessageBox.Show("Valid time must be set.",
-                                     "Problem...",
+                    MetroMessageBox.Show(this, "Valid start and end time must be set.",
+                                     "Oops...there was a problem.",
                                       MessageBoxButtons.OK,
                                       MessageBoxIcon.Exclamation,
                                       MessageBoxDefaultButton.Button1);
@@ -449,8 +467,8 @@ namespace ClassOpsLogCreator
                 }
                 else if (Convert.ToDateTime(startTimeFromCombo1) >= Convert.ToDateTime(endTimeFromCombo1))
                 {
-                    MessageBox.Show("Valid time must be set.",
-                                     "Problem...",
+                    MetroMessageBox.Show(this, "Valid start and end time must be set.",
+                                     "Oops...there was a problem.",
                                       MessageBoxButtons.OK,
                                       MessageBoxIcon.Exclamation,
                                       MessageBoxDefaultButton.Button1);
@@ -777,7 +795,7 @@ namespace ClassOpsLogCreator
             // First, handle the case where an exception was thrown.
             if (e.Error != null)
             {
-                MessageBox.Show(e.Error.Message, "Error",
+                MetroMessageBox.Show(this, e.Error.Message, "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.statusText.Text = "Error!";
                 createBTN.Enabled = true;
@@ -1529,5 +1547,7 @@ namespace ClassOpsLogCreator
             //TEST CODE!
         }
         #endregion
+
+
     }
 }
