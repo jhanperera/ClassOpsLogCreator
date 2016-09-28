@@ -227,10 +227,11 @@ namespace ClassOpsLogCreator
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0) + zone3Array.GetLength(0) + zone4Array.GetLength(0), 7];
 
                 //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
-                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_4(1), 6);//North Central
-                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_4(2), 6);//Central South Central
-                this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_4(3), 6);//South Central South East
-                this.applyRankAndOrganize(ref zone4Array, ref zone1Array, classinfo.boarderBuildingZone_4(4), 6);//South East Central
+
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_4(1), 3);//North Central
+                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_4(2), 5);//Central South Central
+                this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_4(3), 5);//South Central South East
+                this.applyRankAndOrganize(ref zone4Array, ref zone1Array, classinfo.boarderBuildingZone_4(4), 3);//South East Central
 
                 numberOfElementsPerZone = new int[4];
                 numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);
@@ -754,16 +755,15 @@ namespace ClassOpsLogCreator
             {
                 if (zone1Rank > zone2Rank)
                 {
-                    int offset = 0;
                     //move items from zone1 to zone2
-                    for (int i = 0; i <= zone1.GetUpperBound(0) && Math.Abs(zone1Rank - zone2Rank) > discrepancy; i++)
+                    for (int i = 0; i < zone1List.Count && Math.Abs(zone1Rank - zone2Rank) > discrepancy; i++)
                     {
-                        if (borderBuildings.Contains(zone1[i, 4]))
+                        if (borderBuildings.Contains(zone1List[i][4]) && zone1List[i][1].Equals("Crestron Logout"))
                         {
-                            var temp = zone1List[i - offset];
-                            zone1List.Remove(zone1List[i - offset]);
+                            var temp = zone1List[i];
+                            zone1List.Remove(zone1List[i]);
                             zone2List.Add(temp);
-                            offset++;
+                            i--;
                             zone2 = CreateRectangularArray<string>(zone2List);
                             zone2Rank = tr.getTotalTaskValue(zone2);
                             zone1 = CreateRectangularArray<string>(zone1List);
@@ -773,20 +773,19 @@ namespace ClassOpsLogCreator
                 }
                 else if (zone1Rank < zone2Rank)
                 {
-                    int offset = 0;
                     //move items from zone2 to zone1
-                    for (int i = 0; i <= zone2.GetUpperBound(0) && Math.Abs(zone1Rank - zone2Rank) > discrepancy; i++)
+                    for (int i = 0; i < zone2List.Count && Math.Abs(zone1Rank - zone2Rank) > discrepancy; i++)
                     {
-                        if (borderBuildings.Contains(zone2[i, 4]))
+                        if (borderBuildings.Contains(zone2List[i][4]) && zone2List[i][1].Equals("Crestron Logout"))
                         {
-                            var temp = zone2List[i - offset];
-                            zone2List.Remove(zone2List[i - offset]);
+                            var temp = zone2List[i];
+                            zone2List.Remove(zone2List[i]);
                             zone1List.Add(temp);
-                            offset++;
+                            i--;
                             zone1 = CreateRectangularArray<string>(zone1List);
                             zone1Rank = tr.getTotalTaskValue(zone1);
                             zone2 = CreateRectangularArray<string>(zone2List);
-                            zone1Rank = tr.getTotalTaskValue(zone2);
+                            zone2Rank = tr.getTotalTaskValue(zone2);
                         }
                     }
                 }

@@ -110,7 +110,6 @@ namespace ClassOpsLogCreator
             //Bring this to the font
             this.Activate();
 
-
             //Use this for smooth panel updates (double buffering is enabled)
             this.SetStyle(
                 ControlStyles.AllPaintingInWmPaint |
@@ -121,6 +120,44 @@ namespace ClassOpsLogCreator
             //Setting the line divide height and auto size settings
             this.lineDivide1.AutoSize = false;
             this.lineDivide1.Height = 2;
+
+            //create the detail from to show information about the system
+            detailForm = new DetailForm("Starting Work...");
+        }
+
+        /// <summary>
+        /// This is the "Load" event for the main window. All on lead activities go in here
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LogCreator_Load(object sender, EventArgs e)
+        {
+            //Get the last access times to display during the first message
+            string JLastAccess = File.GetLastWriteTime(JEANNINE_LOG).ToString("dd MMMM yyyy - hh:mm tt");
+            string RLastAccess = File.GetLastWriteTime(RAUL_LOG).ToString("dd MMMM yyyy - hh:mm tt");
+            string DLastAccess = File.GetLastWriteTime(DEREK_LOG).ToString("dd MMMM yyyy - hh:mm tt");
+
+            //A pop up message to ensure that the user is aware that the zone super logs need to be in before running this application
+            DialogResult checkMessage = checkMessage = MetroMessageBox.Show(this, "Ensure all Zone logs have been submitted before preceding."
+                               + Environment.NewLine + Environment.NewLine +
+                               "Jeannine's log was last written to on:  " + JLastAccess + Environment.NewLine +
+                               "Raul's log was last written to on:  " + RLastAccess + Environment.NewLine +
+                               "Derek's log was last written to on:  " + DLastAccess + Environment.NewLine +
+                               Environment.NewLine +
+                               "Failure to do so will result in incorrect output being generated",
+                               "Important Notice",
+                                MessageBoxButtons.OKCancel,
+                                MessageBoxIcon.Information,
+                                MessageBoxDefaultButton.Button1, 250);
+
+            //If the user click cancel we close the application
+            if (checkMessage == DialogResult.Cancel)
+            {
+                //Use an anonymous event handler to take care of this
+                this.BeginInvoke(new MethodInvoker(this.Close));
+                this.Quit();
+                return;
+            }
 
             //fill the combo boxes
             for (int i = 1; i <= 12; i++)
@@ -249,44 +286,6 @@ namespace ClassOpsLogCreator
                 this.am_pmCombo4_2.SelectedIndex = 1;
             }
 
-            
-
-            
-        }
-
-        /// <summary>
-        /// This is the "Load" event for the main window. All on lead activities go in here
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void LogCreator_Load(object sender, EventArgs e)
-        {
-            //Get the last access times to display during the first message
-            string JLastAccess = File.GetLastWriteTime(JEANNINE_LOG).ToString("dd MMMM yyyy - hh:mm tt");
-            string RLastAccess = File.GetLastWriteTime(RAUL_LOG).ToString("dd MMMM yyyy - hh:mm tt");
-            string DLastAccess = File.GetLastWriteTime(DEREK_LOG).ToString("dd MMMM yyyy - hh:mm tt");
-
-            //A pop up message to ensure that the user is aware that the zone super logs need to be in before running this application
-            DialogResult checkMessage = checkMessage = MetroMessageBox.Show(this, "Ensure all Zone logs have been submitted before preceding."
-                               + Environment.NewLine + Environment.NewLine +
-                               "Jeannine's log was last written to on:  " + JLastAccess + Environment.NewLine +
-                               "Raul's log was last written to on:  " + RLastAccess + Environment.NewLine +
-                               "Derek's log was last written to on:  " + DLastAccess + Environment.NewLine +
-                               Environment.NewLine +
-                               "Failure to do so will result in incorrect output being generated",
-                               "Important Notice",
-                                MessageBoxButtons.OKCancel,
-                                MessageBoxIcon.Information,
-                                MessageBoxDefaultButton.Button1, 250);
-
-            //If the user click cancel we close the application
-            if (checkMessage == DialogResult.Cancel)
-            {
-                //Use an anonymous event handler to take care of this
-                this.BeginInvoke(new MethodInvoker(this.Close));
-                this.Quit();
-                return;
-            }
         }
         #endregion
 
@@ -491,9 +490,16 @@ namespace ClassOpsLogCreator
             //Do all the work
             if (bw.IsBusy != true)
             {
-                //create and open the detail from to show information about the system
-                detailForm = new DetailForm("Starting Work...");
-                detailForm.Show();
+                //Check if we have the detailForm open
+                if(!detailForm.Visible)
+                {
+                    if(detailForm.IsDisposed)
+                    {
+                        detailForm = new DetailForm("Starting Work...");
+                    }
+                    //If not we open it
+                    detailForm.Show();
+                }        
 
                 //Throw this window into the background.
                 this.TopMost = false;
@@ -718,7 +724,8 @@ namespace ClassOpsLogCreator
             //Sender to send info to progress bar
             var worker = sender as BackgroundWorker;
 
-            worker.ReportProgress(15);
+            worker.ReportProgress(10); //Opening the Master log
+
             //Create the new Excel file where we will store all the new information
             logoutMaster = new Excel.Application();
             logoutMasterWorkBook = logoutMaster.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
@@ -750,6 +757,8 @@ namespace ClassOpsLogCreator
                     }
                 }
             }
+
+
             worker.ReportProgress(95);
             
             //Gracefully close all instances
@@ -772,14 +781,21 @@ namespace ClassOpsLogCreator
             if(e.ProgressPercentage > 0 && e.ProgressPercentage <= 95)
             {
                 this.statusText.Text = "Working...";
+                this.detailForm.updateDetail("Working...");
+                this.detailForm.Invalidate();
+                this.detailForm.Update();
+                this.detailForm.Refresh();
+                Application.DoEvents();
             }
             else if(e.ProgressPercentage > 95)
             {
                 this.statusText.Text = "Done";
+                this.detailForm.updateDetail("Done");
             }
             else
             {
                 this.statusText.Text = "";
+                this.detailForm.updateDetail("");
             }
             //this.workProgressBar.Value = e.ProgressPercentage;
         }
@@ -823,7 +839,6 @@ namespace ClassOpsLogCreator
             }
             else
             {
-
                 // Finally, handle the case where the operation 
                 // succeeded.
                 printDlg = new PrintDialog();
@@ -855,10 +870,17 @@ namespace ClassOpsLogCreator
                     //Print the logs
                     if (printDlg.ShowDialog() == DialogResult.OK)
                     {
+                        //Hide the windows.
                         this.Visible = false;
+                        this.detailForm.Visible = false;
+
+                        //Print out the logs
                         printOutLog(this.shiftTimeArray1, rowNumbers1, numberOfShifts1);
                         printOutLog(this.shiftTimeArray2, rowNumbers2, numberOfShifts2);
+
+                        //Show the windows.
                         this.Visible = true;
+                        this.detailForm.Visible = true;
                     }
 
                 }
@@ -872,11 +894,18 @@ namespace ClassOpsLogCreator
                     //Print the logs
                     if (printDlg.ShowDialog() == DialogResult.OK)
                     {
+                        //Hide the windows.
                         this.Visible = false;
+                        this.detailForm.Visible = false;
+
+                        //Print out the logs.
                         printOutLog(this.shiftTimeArray1, rowNumbers1, numberOfShifts1);
                         printOutLog(this.shiftTimeArray2, rowNumbers2, numberOfShifts2);
                         printOutLog(this.shiftTimeArray3, rowNumbers3, numberOfShifts3);
+
+                        //Show the windows.
                         this.Visible = true;
+                        this.detailForm.Visible = true;
                     }
                 }
                 else if (plusClicked1 && plusClicked2 && plusClicked3)
@@ -889,12 +918,19 @@ namespace ClassOpsLogCreator
 
                     if (printDlg.ShowDialog() == DialogResult.OK)
                     {
+                        //Hide the windows.
                         this.Visible = false;
+                        this.detailForm.Visible = false;
+
+                        //Print out the logs
                         printOutLog(this.shiftTimeArray1, rowNumbers1, numberOfShifts1);
                         printOutLog(this.shiftTimeArray2, rowNumbers2, numberOfShifts2);
                         printOutLog(this.shiftTimeArray3, rowNumbers3, numberOfShifts3);
                         printOutLog(this.shiftTimeArray4, rowNumbers4, numberOfShifts4);
+
+                        //Show the windows.
                         this.Visible = true;
+                        this.detailForm.Visible = true;
                     }
                 }
                 else
@@ -905,13 +941,20 @@ namespace ClassOpsLogCreator
                     //Print the logs
                     if (printDlg.ShowDialog() == DialogResult.OK)
                     {
+                        //Hide the windows.
                         this.Visible = false;
+                        this.detailForm.Visible = false;
+
+                        //Print out the logs
                         printOutLog(this.shiftTimeArray1, rowNumbers1, numberOfShifts1);
+
+                        //Show the windows.
                         this.Visible = true;
+                        this.detailForm.Visible = true;
                     }
                 }
 
-                //Save
+                //Save and close the exel application
                 existingMaster.DisplayAlerts = false;
                 existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);
                 existingMasterWorkBook.Close();
@@ -946,6 +989,7 @@ namespace ClassOpsLogCreator
                 plusBTN2.Enabled = true;
                 plusBTN3.Enabled = true;
 
+                //Quit
                 Quit();
             }
         }
@@ -1547,7 +1591,6 @@ namespace ClassOpsLogCreator
             //TEST CODE!
         }
         #endregion
-
 
     }
 }

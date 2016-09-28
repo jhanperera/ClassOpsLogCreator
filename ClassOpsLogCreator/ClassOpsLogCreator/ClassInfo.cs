@@ -162,7 +162,7 @@ namespace ClassOpsLogCreator
             string[] zone1 = new string[] //North West
             {
                 "CLH", "FRQ", "LAS", "LUM", "CC", "LSB", "BC", "PSE", "SC", "BSB", "SLH", "VH",
-                "FC", "MC", "VC", "WC", "CB"
+                "FC", "MC", "VC", "WC", "CB","BRG"
             };
 
             string[] zone2 = new string[] //South East
@@ -242,7 +242,7 @@ namespace ClassOpsLogCreator
 
             string[] zone2 = new string[] // Central
             {
-                "CSQ", "R", "SCL", "ACW", "HNE", "OSG", "VH"
+                "CSQ", "R", "SCL", "ACW", "HNE", "OSG", "VH", "BRG"
             };
 
             string[] zone3 = new string[] //South Central
@@ -351,7 +351,7 @@ namespace ClassOpsLogCreator
 
             string[] zone3 = new string[]
             {
-                "CSQ", "R", "SCL", "ACW", "HNE", "OSG", "VH"
+                "CSQ", "R", "SCL", "ACW", "HNE", "OSG", "VH","BRG"
             };
 
             string[] zone4 = new string[]
@@ -417,12 +417,12 @@ namespace ClassOpsLogCreator
 
             string[] zone3 = new string[]
             {
-                "BSB", "SLH", "VH"
+                "BSB", "SLH", "VH", 
             };
 
             string[] zone4 = new string[]
             {
-               "CSQ", "R", "SCL", "ACW", "HNE", "OSG"
+               "CSQ", "R", "SCL", "ACW", "HNE", "OSG", "BRG"
             };
 
             string[] zone5 = new string[]
@@ -496,7 +496,7 @@ namespace ClassOpsLogCreator
 
             string[] zone4 = new string[]
             {
-               "CSQ", "R", "SCL", "ACW"
+               "CSQ", "R", "SCL", "ACW", "BRG"
             };
 
             string[] zone5 = new string[]
@@ -620,7 +620,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone1Boarder = new string[]//North and central
                 {
-                    "SCL", "CLH", "BSB", "VH", "R", "CSQ"
+                    "SCL", "CLH", "BSB", "VH", "R", "CSQ", "PSE", "LAS"
                 };
                 zone1BoarderList.AddRange(zone1Boarder);
             }
@@ -628,7 +628,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone2Boarder = new string[] //Central and South Central
                 {
-                    "VH", "ACW", "ATK", "CFA", "DB", "CFT",
+                    "VH", "ACW", "ATK", "CFA", "DB", "CFT", "R"
                 };
                 zone1BoarderList.AddRange(zone2Boarder);
             }
@@ -644,7 +644,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone4Boarder = new string[] //North and South East
                  {
-                     "VC", "WC", "YL", "KT"
+                     "VC", "WC", "YL", "KT", "WC", "FC", "MC"
                  };
                 zone1BoarderList.AddRange(zone4Boarder);
             }
