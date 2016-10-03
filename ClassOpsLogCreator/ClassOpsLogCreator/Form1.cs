@@ -17,24 +17,24 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
 
-        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY!
-        private static string username = Environment.UserName; 
+        /*private static string username = Environment.UserName; 
         public readonly string ROOM_SCHED = @"C:\Users\" + username+ @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
 
         //A stack for some thread safer operations
         private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();
@@ -724,43 +724,40 @@ namespace ClassOpsLogCreator
             //Sender to send info to progress bar
             var worker = sender as BackgroundWorker;
 
-            worker.ReportProgress(10); //Opening the Master log
+            worker.ReportProgress(10);
 
             //Create the new Excel file where we will store all the new information
             logoutMaster = new Excel.Application();
             logoutMasterWorkBook = logoutMaster.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
-            this.logCreationAndExcelWriter(1, startTimeFromCombo1, endTimeFromCombo1, numberOfShifts1, true, ref rowNumbers1);
+            this.logCreationAndExcelWriter(1, startTimeFromCombo1, endTimeFromCombo1, numberOfShifts1, true, ref rowNumbers1, worker);
 
             //If the first plus button is clicked
             if (plusClicked1)
             {
-                worker.ReportProgress(45);
+                worker.ReportProgress(20);
                 //Add a new worksheet to add the new 
                 logoutMasterWorkBook.Sheets.Add(After: logoutMasterWorkBook.Sheets[logoutMasterWorkBook.Sheets.Count]);
-                this.logCreationAndExcelWriter(2, startTimeFromCombo2, endTimeFromCombo2, numberOfShifts2, false, ref rowNumbers2);
+                this.logCreationAndExcelWriter(2, startTimeFromCombo2, endTimeFromCombo2, numberOfShifts2, false, ref rowNumbers2, worker);
 
                 //If the second plus button is clicked
                 if (plusClicked2)
                 {
-                    worker.ReportProgress(65);
+                    worker.ReportProgress(30);
                     //Add a new worksheet to add the new 
                     logoutMasterWorkBook.Sheets.Add(After: logoutMasterWorkBook.Sheets[logoutMasterWorkBook.Sheets.Count]);
-                    this.logCreationAndExcelWriter(3, startTimeFromCombo3, endTimeFromCombo3, numberOfShifts3, false, ref rowNumbers3);
+                    this.logCreationAndExcelWriter(3, startTimeFromCombo3, endTimeFromCombo3, numberOfShifts3, false, ref rowNumbers3, worker);
 
                     //If the third plus button is clicked
                     if (plusClicked3)
                     {
-                        worker.ReportProgress(85);
+                        worker.ReportProgress(40);
                         //Add a new worksheet to add the new 
                         logoutMasterWorkBook.Sheets.Add(After: logoutMasterWorkBook.Sheets[logoutMasterWorkBook.Sheets.Count]);
-                        this.logCreationAndExcelWriter(4, startTimeFromCombo4, endTimeFromCombo4, numberOfShifts4, false, ref rowNumbers4);
+                        this.logCreationAndExcelWriter(4, startTimeFromCombo4, endTimeFromCombo4, numberOfShifts4, false, ref rowNumbers4, worker);
                     }
                 }
             }
-
-
-            worker.ReportProgress(95);
-            
+           
             //Gracefully close all instances
             //Quit();
 
@@ -778,16 +775,58 @@ namespace ClassOpsLogCreator
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //This is called on GUI/main thread, so you can access the controls properly
-            if(e.ProgressPercentage > 0 && e.ProgressPercentage <= 95)
+            if (e.ProgressPercentage == 10)
             {
-                this.statusText.Text = "Working...";
-                this.detailForm.updateDetail("Working...");
-                this.detailForm.Invalidate();
-                this.detailForm.Update();
-                this.detailForm.Refresh();
-                Application.DoEvents();
+                this.statusText.Text = "Working";
+                this.detailForm.updateDetail("Preparing shift #1 files.");
             }
-            else if(e.ProgressPercentage > 95)
+            else if(e.ProgressPercentage == 11)
+            {
+                this.detailForm.updateDetail("Importing the room schedule from: " + ROOM_SCHED);
+            }
+            else if (e.ProgressPercentage == 12)
+            {
+                this.detailForm.updateDetail("Successfully imported room schedule and Crestron Logout times.");
+            }
+            else if (e.ProgressPercentage == 13)
+            {
+                this.detailForm.updateDetail("Importing Zone Supervisor logs from: " + Environment.NewLine +
+                                               JEANNINE_LOG + Environment.NewLine + DEREK_LOG + Environment.NewLine
+                                               + RAUL_LOG);
+            }
+            else if (e.ProgressPercentage == 14)
+            {
+                this.detailForm.updateDetail("Successfully imported Zone Supervisor logs.");
+            }
+            else if (e.ProgressPercentage == 15)
+            {
+                this.detailForm.updateDetail("Generating PT-Staff logs");
+            }
+            else if (e.ProgressPercentage == 16)
+            {
+                this.detailForm.updateDetail("Successfully generated PT-Staff logs");
+            }
+            else if (e.ProgressPercentage == 17)
+            {
+                this.detailForm.updateDetail("Writing logs to the master file: " + EXISTING_MASTER_LOG);
+            }
+            else if (e.ProgressPercentage == 18)
+            {
+                this.detailForm.updateDetail("Successfully write logs to the master file.");
+            }
+            else if (e.ProgressPercentage == 20)
+            {
+                this.detailForm.updateDetail("Preparing shift #2 files.");
+            }
+            else if (e.ProgressPercentage == 30)
+            {
+                this.detailForm.updateDetail("Preparing shift #3 files.");
+            }
+            else if (e.ProgressPercentage == 40)
+            {
+                this.detailForm.updateDetail("Preparing shift #4 files.");
+            }
+            else if (e.ProgressPercentage > 95)
             {
                 this.statusText.Text = "Done";
                 this.detailForm.updateDetail("Done");
@@ -813,6 +852,7 @@ namespace ClassOpsLogCreator
             {
                 MetroMessageBox.Show(this, e.Error.Message, "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.detailForm.updateDetail("Error! - " + e.Error.Message);
                 this.statusText.Text = "Error!";
                 createBTN.Enabled = true;
                 plusBTN1.Enabled = true;
@@ -829,6 +869,7 @@ namespace ClassOpsLogCreator
                 // the DoWork event handler, the Canceled
                 // flag may not have been set, even though
                 // CancelAsync was called.
+                this.detailForm.updateDetail("Canceled!");
                 this.statusText.Text = "Canceled!";
                 createBTN.Enabled = true;
                 plusBTN1.Enabled = true;
@@ -1007,15 +1048,21 @@ namespace ClassOpsLogCreator
         /// <param name="numberOfShifts"></param>
         /// <param name="redSeperator"></param>
         /// <param name="rowNumbers"></param>
-        private void logCreationAndExcelWriter(int worksheetNumber, string startTimeFromCombo, string endTimeFromCombo, int numberOfShifts, bool redSeperator, ref long[,] rowNumbers)
+        private void logCreationAndExcelWriter(int worksheetNumber, string startTimeFromCombo, string endTimeFromCombo, int numberOfShifts, bool redSeperator, ref long[,] rowNumbers, BackgroundWorker worker)
         {
             //Open up a new worksheet
             logoutMasterWorkSheet = (Excel.Worksheet)logoutMasterWorkBook.Worksheets[worksheetNumber];
 
+            worker.ReportProgress(11); //Importing Room Schedule
+
             //Get the logout from the clo
             LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo, endTimeFromCombo);
-
+           
             string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
+
+            worker.ReportProgress(12); //Complete importing room schedule
+
+            worker.ReportProgress(13); //Importing Zone Super log events
 
             //Get all the zone super events
             ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this, startTimeFromCombo, endTimeFromCombo);
@@ -1031,16 +1078,26 @@ namespace ClassOpsLogCreator
             string[,] DInstruction = ZoneLogs.getDerekLog();
             string[,] RInstruction = ZoneLogs.getRaulLog();
 
+            worker.ReportProgress(14); //Complete Importing Zone Super log events
+
+            worker.ReportProgress(15); //Generating logs
+
             //write all the data to the excel file
             //merge the all the data together into the master log
             WriteLogOutArray(logoutMasterWorkSheet, arrayClassRooms, classRoomTimeLogs.getLogOutArrayCount(),
                                                                          JInstruction, DInstruction, RInstruction,
                                                                          true, startTimeFromCombo, endTimeFromCombo);
 
+            worker.ReportProgress(16); //Complete generating logs
+
             logoutMaster.DisplayAlerts = false;
+
+            worker.ReportProgress(17); //Writing and sorting logs into the master file
 
             //Merge all the data with the existing excel workbook
             this.mergeMasterWithExisting(logoutMasterWorkSheet, numberOfShifts, redSeperator, startTimeFromCombo, endTimeFromCombo, ref rowNumbers);
+
+            worker.ReportProgress(18); //Complete Writing and sorting of logs into the master file.
         }
 
         /// <summary>

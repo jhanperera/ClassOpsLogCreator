@@ -29,36 +29,51 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DetailForm));
-            this.detailPanel = new System.Windows.Forms.Panel();
-            this.detailLabel = new MetroFramework.Controls.MetroLabel();
-            this.detailPanel.SuspendLayout();
+            this.detailTextBox = new MetroFramework.Controls.MetroTextBox();
             this.SuspendLayout();
             // 
-            // detailPanel
+            // detailTextBox
             // 
-            this.detailPanel.AutoScroll = true;
-            this.detailPanel.Controls.Add(this.detailLabel);
-            this.detailPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.detailPanel.Location = new System.Drawing.Point(20, 30);
-            this.detailPanel.Name = "detailPanel";
-            this.detailPanel.Size = new System.Drawing.Size(521, 250);
-            this.detailPanel.TabIndex = 0;
             // 
-            // detailLabel
             // 
-            this.detailLabel.AutoSize = true;
-            this.detailLabel.Location = new System.Drawing.Point(4, 4);
-            this.detailLabel.Name = "detailLabel";
-            this.detailLabel.Size = new System.Drawing.Size(81, 19);
-            this.detailLabel.TabIndex = 0;
-            this.detailLabel.Text = "metroLabel1";
+            // 
+            this.detailTextBox.CustomButton.Image = null;
+            this.detailTextBox.CustomButton.Location = new System.Drawing.Point(273, 2);
+            this.detailTextBox.CustomButton.Name = "";
+            this.detailTextBox.CustomButton.Size = new System.Drawing.Size(245, 245);
+            this.detailTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.detailTextBox.CustomButton.TabIndex = 1;
+            this.detailTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.detailTextBox.CustomButton.UseSelectable = true;
+            this.detailTextBox.CustomButton.Visible = false;
+            this.detailTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.detailTextBox.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.detailTextBox.Lines = new string[0];
+            this.detailTextBox.Location = new System.Drawing.Point(20, 30);
+            this.detailTextBox.MaxLength = 32767;
+            this.detailTextBox.Multiline = true;
+            this.detailTextBox.Name = "detailTextBox";
+            this.detailTextBox.PasswordChar = '\0';
+            this.detailTextBox.ReadOnly = true;
+            this.detailTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.detailTextBox.SelectedText = "";
+            this.detailTextBox.SelectionLength = 0;
+            this.detailTextBox.SelectionStart = 0;
+            this.detailTextBox.ShortcutsEnabled = true;
+            this.detailTextBox.Size = new System.Drawing.Size(521, 250);
+            this.detailTextBox.Style = MetroFramework.MetroColorStyle.Black;
+            this.detailTextBox.TabIndex = 1;
+            this.detailTextBox.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.detailTextBox.UseSelectable = true;
+            this.detailTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.detailTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // DetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(561, 300);
-            this.Controls.Add(this.detailPanel);
+            this.Controls.Add(this.detailTextBox);
             this.DisplayHeader = false;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -70,15 +85,12 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "DetailForm";
-            this.detailPanel.ResumeLayout(false);
-            this.detailPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel detailPanel;
-        private MetroFramework.Controls.MetroLabel detailLabel;
+        private MetroFramework.Controls.MetroTextBox detailTextBox;
     }
 }
