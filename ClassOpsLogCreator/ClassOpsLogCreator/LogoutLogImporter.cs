@@ -72,7 +72,7 @@ namespace ClassOpsLogCreator
             string cloDateString = ((string)cloDateArray.GetValue(1, 1).ToString().Trim() + "," + (string)cloDateArray.GetValue(1, 2).ToString().Trim()).Replace(" ", "");
 
             //Get todays date and do a check to see if the clo is updated.
-            string todaysDate = DateTime.Now.ToString("dddd,d,yyyy");
+            string todaysDate = DateTime.Now.ToString("dddd,dd,yyyy");
             if (!cloDateString.Equals(todaysDate))
             {
                 Quit();

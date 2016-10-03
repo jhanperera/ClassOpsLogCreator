@@ -38,9 +38,9 @@
             // 
             // 
             this.detailTextBox.CustomButton.Image = null;
-            this.detailTextBox.CustomButton.Location = new System.Drawing.Point(273, 2);
+            this.detailTextBox.CustomButton.Location = new System.Drawing.Point(104, 1);
             this.detailTextBox.CustomButton.Name = "";
-            this.detailTextBox.CustomButton.Size = new System.Drawing.Size(245, 245);
+            this.detailTextBox.CustomButton.Size = new System.Drawing.Size(557, 557);
             this.detailTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.detailTextBox.CustomButton.TabIndex = 1;
             this.detailTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -60,7 +60,7 @@
             this.detailTextBox.SelectionLength = 0;
             this.detailTextBox.SelectionStart = 0;
             this.detailTextBox.ShortcutsEnabled = true;
-            this.detailTextBox.Size = new System.Drawing.Size(521, 250);
+            this.detailTextBox.Size = new System.Drawing.Size(662, 559);
             this.detailTextBox.Style = MetroFramework.MetroColorStyle.Black;
             this.detailTextBox.TabIndex = 1;
             this.detailTextBox.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -72,7 +72,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(561, 300);
+            this.ClientSize = new System.Drawing.Size(702, 609);
             this.Controls.Add(this.detailTextBox);
             this.DisplayHeader = false;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
