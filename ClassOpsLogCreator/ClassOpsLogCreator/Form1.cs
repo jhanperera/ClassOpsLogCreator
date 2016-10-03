@@ -17,24 +17,24 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
 
-        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY!
-        /*private static string username = Environment.UserName; 
+        private static string username = Environment.UserName; 
         public readonly string ROOM_SCHED = @"C:\Users\" + username+ @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
 
         //A stack for some thread safer operations
         private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();
@@ -69,6 +69,7 @@ namespace ClassOpsLogCreator
         private static Excel.Application existingMaster = null;
         private static Excel.Workbook existingMasterWorkBook = null;
         private static Excel.Worksheet existingMasterWorkSheet = null;
+        private static Excel.Worksheet databaseMasterWorkSheet = null;
 
         //A list of employee Names
         List<string> employeeNames = null;
@@ -768,7 +769,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// Update the progress bar 
+        /// Update the detail window
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1067,12 +1068,6 @@ namespace ClassOpsLogCreator
             //Get all the zone super events
             ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this, startTimeFromCombo, endTimeFromCombo);
 
-            //Get the employee names
-            if(employeeNames == null)
-            {
-                this.employeeNames = ZoneLogs.getEmployeeNames();
-            }
-
             //Get the three logs
             string[,] JInstruction = ZoneLogs.getJeannineLog();
             string[,] DInstruction = ZoneLogs.getDerekLog();
@@ -1196,6 +1191,7 @@ namespace ClassOpsLogCreator
             {
                 existingMasterWorkBook = existingMaster.Workbooks.Open(EXISTING_MASTER_LOG);
                 existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
+                databaseMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[2];
             }
             catch (Exception)
             {
@@ -1297,6 +1293,32 @@ namespace ClassOpsLogCreator
                 }
             }
 
+            //************************* GET THE EMPLYEE NAMES *********************/
+            //Get the employee names
+            if (employeeNames == null)
+            {
+                employeeNames = new List<string>();
+                //Extract the name range
+                Excel.Range last = databaseMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+                int lastRow = databaseMasterWorkSheet.UsedRange.Rows.Count;
+                Excel.Range nameRange = databaseMasterWorkSheet.get_Range("A2", "A" + (lastRow));
+                //Convert to an array
+                System.Array array = (System.Array)nameRange.Cells.Value2;
+
+                foreach (string name in array)
+                {
+                    if (name != null)
+                    {
+                        employeeNames.Add(name.ToLower());
+                    }
+                }
+
+                last = null;
+                nameRange = null;
+            }
+            
+            //***********************END GET THE EMPLYEE NAMES *********************/
+
             //Clean the range items
             range = null;
             dividerRange = null;
@@ -1316,6 +1338,7 @@ namespace ClassOpsLogCreator
             existingMaster = null;
             existingMasterWorkBook = null;
             existingMasterWorkSheet = null;
+            databaseMasterWorkSheet = null;
         }
 
 
