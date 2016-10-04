@@ -17,24 +17,24 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
 
-        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY!
-        private static string username = Environment.UserName; 
+        /*private static string username = Environment.UserName; 
         public readonly string ROOM_SCHED = @"C:\Users\" + username+ @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
 
         //A stack for some thread safer operations
         private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();
@@ -829,7 +829,6 @@ namespace ClassOpsLogCreator
             else if (e.ProgressPercentage > 95)
             {
                 this.statusText.Text = "Done";
-                this.detailForm.updateDetail("Done");
             }
             else
             {
@@ -900,6 +899,8 @@ namespace ClassOpsLogCreator
                     Quit();
                     throw new System.FieldAccessException("File not found!");
                 }
+
+                detailForm.updateDetail("Displaying Logs...");
                 
                 //Display all the logs
                 if (plusClicked1 && !plusClicked2 && !plusClicked3)
@@ -995,7 +996,7 @@ namespace ClassOpsLogCreator
                     }
                 }
 
-                //Save and close the exel application
+                //Save and close the excel application
                 existingMaster.DisplayAlerts = false;
                 existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);
                 existingMasterWorkBook.Close();
@@ -1030,8 +1031,12 @@ namespace ClassOpsLogCreator
                 plusBTN2.Enabled = true;
                 plusBTN3.Enabled = true;
 
+                detailForm.updateDetail("Saving and Cleaning up.");
+
                 //Quit
                 Quit();
+
+                detailForm.updateDetail("Done!");
             }
         }
         #endregion
@@ -1648,6 +1653,5 @@ namespace ClassOpsLogCreator
             //TEST CODE!
         }
         #endregion
-
     }
 }

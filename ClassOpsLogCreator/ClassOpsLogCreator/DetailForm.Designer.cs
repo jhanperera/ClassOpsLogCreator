@@ -48,6 +48,7 @@
             this.detailTextBox.CustomButton.Visible = false;
             this.detailTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.detailTextBox.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.detailTextBox.FontWeight = MetroFramework.MetroTextBoxWeight.Bold;
             this.detailTextBox.Lines = new string[0];
             this.detailTextBox.Location = new System.Drawing.Point(20, 30);
             this.detailTextBox.MaxLength = 32767;
