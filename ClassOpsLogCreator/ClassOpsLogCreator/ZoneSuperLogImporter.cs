@@ -264,8 +264,9 @@ namespace ClassOpsLogCreator
                 int index = 0;
                 for (int i = 0; i < arrayA.GetUpperBound(0); i++)
                 {
-                    //Only going to get the events that are not Crestron Logout
-                    if ((arrayA.GetValue(i + 1, 1) != null) && (arrayC.GetValue(i + 1, 1) != null) && !(arrayA.GetValue(i + 1, 1).Equals("Crestron Logout")))
+                    //Only going to get the events that are not Crestron Logout and account for R N102
+                    if ((arrayA.GetValue(i + 1, 1) != null) && (arrayC.GetValue(i + 1, 1) != null) && !(arrayA.GetValue(i + 1, 1).Equals("Crestron Logout")) &&
+                        (!(arrayD.GetValue(i + 1, 1).Equals("R") && !(arrayE.GetValue(i + 1, 1).Equals("N102")))))
                     {
                         //Check if the event is between the selected times
                         DateTime check = DateTime.ParseExact(arrayC.GetValue(i + 1, 1).ToString(), "HHmm", null);

@@ -27,6 +27,9 @@ namespace ClassOpsLogCreator
 
             this.mainForm = MainForm;
 
+            this.metroTabControl1.SelectedIndexChanged += MetroTabControl1_SelectedIndexChanged;
+
+
             //Fill the combo boxes
             for (int i = 1; i <= 12; i++)
             {
@@ -81,6 +84,24 @@ namespace ClassOpsLogCreator
         public bool isCanceledClicked()
         {
             return this.canceledClicked;
+        }
+
+        /// <summary>
+        /// Check if we change the tab, if we change to tab 3 then we ask for a password.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MetroTabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(metroTabControl1.SelectedIndex == 3)
+            {
+                PasswordInput passInput = new PasswordInput();
+                passInput.ShowDialog(this);
+                if(passInput.DialogResult == DialogResult.OK)
+                {
+                    //Make all controls visible.
+                }
+            }
         }
 
         /// <summary>

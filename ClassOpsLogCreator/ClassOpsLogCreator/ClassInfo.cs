@@ -235,6 +235,7 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         public List<string> getZone_4(int i)
         {
+
             string[] zone1 = new string[] //North
             {
                "CLH", "FRQ", "LAS", "LUM", "SLH", "BSB", "FC", "VC", "WC", "CC", "CB", "LSB", "BC", "PSE", "SC", "MC"
@@ -628,7 +629,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone2Boarder = new string[] //Central and South Central
                 {
-                    "VH", "ACW", "ATK", "CFA", "DB", "CFT", "R"
+                    "VH", "ACW", "ATK", "CFA", "DB", "CFT", "R", "HNE"
                 };
                 zone1BoarderList.AddRange(zone2Boarder);
             }
@@ -644,7 +645,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone4Boarder = new string[] //North and South East
                  {
-                     "VC", "WC", "YL", "KT", "FC"
+                     "VC", "YL", "KT", "FC"
                  };
                 zone1BoarderList.AddRange(zone4Boarder);
             }

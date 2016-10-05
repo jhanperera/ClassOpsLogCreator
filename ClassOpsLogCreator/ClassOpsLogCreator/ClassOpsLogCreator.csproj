@@ -117,6 +117,12 @@
       <DependentUpon>DetailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="EmailScanner.cs" />
+    <Compile Include="PasswordInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasswordInput.Designer.cs">
+      <DependentUpon>PasswordInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswordInput.resx">
+      <DependentUpon>PasswordInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
