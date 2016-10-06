@@ -633,7 +633,7 @@ namespace ClassOpsLogCreator
                 };
                 zone1BoarderList.AddRange(zone2Boarder);
             }
-            else if (i == 2)
+            else if (i == 3)
             {
                 string[] zone3Boarder = new string[] //South Central and South East
                 {
@@ -645,7 +645,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone4Boarder = new string[] //North and South East
                  {
-                     "VC", "YL", "KT", "FC"
+                     "VC", "YL", "KT", "WC"
                  };
                 zone1BoarderList.AddRange(zone4Boarder);
             }
@@ -678,7 +678,7 @@ namespace ClassOpsLogCreator
                 };
                 zone1BoarderList.AddRange(zone2Boarder);
             }
-            else if (i == 2)
+            else if (i == 3)
             {
                 string[] zone3Boarder = new string[] //South West and South central
                 {

@@ -63,12 +63,18 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         public string getEmployeeName()
         {
+            //If there is nothing in the text box
             if (this.nameTextBox.Text == null)
+            {
                 return null;
-
+            }
+                
+            //If the text box has more than one character in it.
             if (this.nameTextBox.Text.Length > 1)
-                return char.ToUpper(this.nameTextBox.Text[0]) + this.nameTextBox.Text.Substring(1);
-
+            {
+                return char.ToUpper(this.nameTextBox.Text[0]) + this.nameTextBox.Text.Substring(1).ToLower();
+            }                
+            //Else we just return the one character
             return this.nameTextBox.Text.ToUpper();
         }
 
@@ -90,11 +96,19 @@ namespace ClassOpsLogCreator
             return this.nextClicked;
         }
 
+        /// <summary>
+        /// Return the start time, could be the same or different.
+        /// </summary>
+        /// <returns></returns>
         public string getStartTime()
         {
             return this.startTime;
         }
 
+        /// <summary>
+        /// Return the end time, could be the same or different.
+        /// </summary>
+        /// <returns></returns>
         public string getEndTime()
         {
             return this.endTime;
@@ -256,34 +270,6 @@ namespace ClassOpsLogCreator
 
             //Do not accept the system style
             dataGridView1.EnableHeadersVisualStyles = false;
-        }
-
-        /// <summary>
-        /// Event handles for then the focus is lost in the name text box
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void nameTextBox_Leave(object sender, EventArgs e)
-        {
-            if (nameTextBox.Text.Length == 0)
-            {
-                nameTextBox.Text = "Name";
-                nameTextBox.ForeColor = SystemColors.GrayText;
-            }
-        }
-
-        /// <summary>
-        /// Event handler when the focus is gained in the name text box
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void nameTextBox_Enter(object sender, EventArgs e)
-        {
-            if (nameTextBox.Text == "Name")
-            {
-                nameTextBox.Text = "";
-                nameTextBox.ForeColor = SystemColors.WindowText;
-            }
         }
 
         /// <summary>

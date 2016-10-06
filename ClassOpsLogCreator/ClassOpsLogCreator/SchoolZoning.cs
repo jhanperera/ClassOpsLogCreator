@@ -19,6 +19,7 @@ namespace ClassOpsLogCreator
         private int numberOfBuildings;
         private int numberOfConnections;
         private int[] numberOfElementsPerZone;
+        private List<string> taskList;
 
         /// <summary>
         /// This will create a the map for the school and 
@@ -32,6 +33,11 @@ namespace ClassOpsLogCreator
 
             this.numberOfBuildings = schoolGraph.numberOfVerticies();
             this.numberOfConnections = schoolGraph.numberOfEdges();
+
+            taskList = new List<string>();
+            string[] taskArray = { "AV Shutdown", "Crestron Logout", "Lockup", "Pickup Large PA",
+                    "Pickup Mic", "Pickup PC", "Pickup Projector", "Pickup Skype Kit", "Pickup Small PA", "Demo" };
+            taskList.AddRange(taskArray);
         }
 
         /// <summary>
@@ -52,6 +58,10 @@ namespace ClassOpsLogCreator
             return this.numberOfConnections;
         }
 
+        /// <summary>
+        /// Return the number of rows
+        /// </summary>
+        /// <returns></returns>
         public int[] numberOfRows()
         {
             return this.numberOfElementsPerZone;
@@ -105,7 +115,7 @@ namespace ClassOpsLogCreator
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0), 7];
 
                 //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
-                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_2(), 10);
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_2(), 5);
 
                 numberOfElementsPerZone = new int[2];
                 numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);
@@ -160,9 +170,9 @@ namespace ClassOpsLogCreator
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0) + zone3Array.GetLength(0), 7];
 
                 //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
-                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_3(1), 8);//North Central
-                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_3(2), 8);//Central South
-                this.applyRankAndOrganize(ref zone3Array, ref zone1Array, classinfo.boarderBuildingZone_3(3), 8);//South North
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_3(1), 4);//North Central
+                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_3(2), 4);//Central South
+                this.applyRankAndOrganize(ref zone3Array, ref zone1Array, classinfo.boarderBuildingZone_3(3), 4);//South North
 
                 numberOfElementsPerZone = new int[3];
                 numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);
@@ -229,8 +239,8 @@ namespace ClassOpsLogCreator
                 //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
 
                 this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_4(1), 3);//North Central
-                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_4(2), 5);//Central South Central
-                this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_4(3), 5);//South Central South East
+                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_4(2), 3);//Central South Central
+                this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_4(3), 3);//South Central South East
                 this.applyRankAndOrganize(ref zone4Array, ref zone1Array, classinfo.boarderBuildingZone_4(4), 3);//South East Central
 
                 numberOfElementsPerZone = new int[4];
@@ -310,11 +320,11 @@ namespace ClassOpsLogCreator
                                         zone5Array.GetLength(0), 7];
 
                 //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
-                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_5(1), 4);//North east and North West
-                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_5(2), 4);//North West and South West
-                this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_5(3), 4);//South West and South central
-                this.applyRankAndOrganize(ref zone4Array, ref zone5Array, classinfo.boarderBuildingZone_5(4), 4);//South Central and South East
-                this.applyRankAndOrganize(ref zone3Array, ref zone1Array, classinfo.boarderBuildingZone_5(4), 4);//North East (Central) and South West
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_5(1), 2);//North east and North West
+                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_5(2), 2);//North West and South West
+                this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_5(3), 2);//South West and South central
+                this.applyRankAndOrganize(ref zone4Array, ref zone5Array, classinfo.boarderBuildingZone_5(4), 2);//South Central and South East
+                this.applyRankAndOrganize(ref zone3Array, ref zone1Array, classinfo.boarderBuildingZone_5(4), 2);//North East (Central) and South West
 
                 numberOfElementsPerZone = new int[5];
                 numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);
@@ -758,7 +768,7 @@ namespace ClassOpsLogCreator
                     //move items from zone1 to zone2
                     for (int i = 0; i < zone1List.Count && Math.Abs(zone1Rank - zone2Rank) > discrepancy; i++)
                     {
-                        if (borderBuildings.Contains(zone1List[i][4]) && zone1List[i][1].Equals("Crestron Logout"))
+                        if (borderBuildings.Contains(zone1List[i][4]) && taskList.Contains(zone1List[i][1]))
                         {
                             var temp = zone1List[i];
                             zone1List.Remove(zone1List[i]);
@@ -776,7 +786,7 @@ namespace ClassOpsLogCreator
                     //move items from zone2 to zone1
                     for (int i = 0; i < zone2List.Count && Math.Abs(zone1Rank - zone2Rank) > discrepancy; i++)
                     {
-                        if (borderBuildings.Contains(zone2List[i][4]) && zone2List[i][1].Equals("Crestron Logout"))
+                        if (borderBuildings.Contains(zone2List[i][4]) && taskList.Contains(zone2List[i][1]))
                         {
                             var temp = zone2List[i];
                             zone2List.Remove(zone2List[i]);

@@ -67,6 +67,7 @@ namespace ClassOpsLogCreator
         private static Excel.Application existingMaster = null;
         private static Excel.Workbook existingMasterWorkBook = null;
         private static Excel.Worksheet existingMasterWorkSheet = null;
+        private static Excel.Worksheet databaseSheet = null;
 
         //A list of employee Names
         List<string> employeeNames = null;
@@ -1070,13 +1071,7 @@ namespace ClassOpsLogCreator
             //Get all the zone super events
             ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this, startTimeFromCombo, endTimeFromCombo);
 
-            //Get the employee names
-            if(employeeNames == null)
-            {
-                this.employeeNames = ZoneLogs.getEmployeeNames();
-            }
-
-            //Get the three logs
+                      //Get the three logs
             string[,] JInstruction = ZoneLogs.getJeannineLog();
             string[,] DInstruction = ZoneLogs.getDerekLog();
             string[,] RInstruction = ZoneLogs.getRaulLog();
@@ -1199,6 +1194,7 @@ namespace ClassOpsLogCreator
             {
                 existingMasterWorkBook = existingMaster.Workbooks.Open(EXISTING_MASTER_LOG);
                 existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
+                databaseSheet = (Excel.Worksheet)existingMasterWorkBook.Sheets[2];
             }
             catch (Exception)
             {
@@ -1300,6 +1296,30 @@ namespace ClassOpsLogCreator
                 }
             }
 
+            //Get the employee names
+            if (employeeNames == null)
+            {
+                // Get the employee names and save it to the employee list
+                this.employeeNames = new List<string>();
+                //Extract the name range
+                Excel.Range last = databaseSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+                int lastRow = databaseSheet.UsedRange.Rows.Count;
+                Excel.Range nameRange = databaseSheet.get_Range("A2", "A" + (lastRow));
+                //Convert to an array
+                System.Array array = (System.Array)nameRange.Cells.Value2;
+
+                foreach (string name in array)
+                {
+                    if (name != null)
+                    {
+                        employeeNames.Add(name.ToLower());
+                    }
+                }
+
+                last = null;
+                nameRange = null;
+            }
+            
             //Clean the range items
             range = null;
             dividerRange = null;
@@ -1319,6 +1339,7 @@ namespace ClassOpsLogCreator
             existingMaster = null;
             existingMasterWorkBook = null;
             existingMasterWorkSheet = null;
+            databaseSheet = null;
         }
 
 
