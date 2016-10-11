@@ -645,7 +645,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone4Boarder = new string[] //North and South East
                  {
-                     "VC", "YL", "KT", "WC"
+                     "YL", "KT"
                  };
                 zone1BoarderList.AddRange(zone4Boarder);
             }
