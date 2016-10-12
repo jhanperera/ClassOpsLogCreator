@@ -238,10 +238,10 @@ namespace ClassOpsLogCreator
 
                 //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
 
-                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_4(1), 3);//North Central
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_4(1), 1);//North Central
                 this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_4(2), 3);//Central South Central
                 this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_4(3), 3);//South Central South East
-                this.applyRankAndOrganize(ref zone4Array, ref zone1Array, classinfo.boarderBuildingZone_4(4), 3);//South East Central
+                this.applyRankAndOrganize(ref zone4Array, ref zone1Array, classinfo.boarderBuildingZone_4(4), 1);//South East Central
 
                 numberOfElementsPerZone = new int[4];
                 numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);
@@ -324,7 +324,7 @@ namespace ClassOpsLogCreator
                 this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_5(2), 2);//North West and South West
                 this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_5(3), 2);//South West and South central
                 this.applyRankAndOrganize(ref zone4Array, ref zone5Array, classinfo.boarderBuildingZone_5(4), 2);//South Central and South East
-                this.applyRankAndOrganize(ref zone3Array, ref zone1Array, classinfo.boarderBuildingZone_5(4), 2);//North East (Central) and South West
+                this.applyRankAndOrganize(ref zone3Array, ref zone1Array, classinfo.boarderBuildingZone_5(5), 2);//North East (Central) and South West
 
                 numberOfElementsPerZone = new int[5];
                 numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);

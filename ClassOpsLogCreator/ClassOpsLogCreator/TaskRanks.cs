@@ -27,13 +27,13 @@ namespace ClassOpsLogCreator
             value1 = new string[]
             {
                 "AV Shutdown", "Proactive Classroom Check",
-                "Other", "SCLD Student Logout", "Crestron Logout"
+                "SCLD Student Logout", "Crestron Logout"
             };
 
             // Value = 2 tasks
             value2 = new string[]
            {
-               "Operator", "Replace Battery", "SCLD Student Event"
+               "Operator", "Replace Battery", "SCLD Student Event", "Other"
            };
 
             //Value = 3 tasks
