@@ -230,8 +230,7 @@ namespace ClassOpsLogCreator
                 for (int i = 0; i < arrayA.GetUpperBound(0); i++)
                 {
                     //Only going to get the events that are not Crestron Logout and account for R N102
-                    if ((arrayA.GetValue(i + 1, 1) != null) && (arrayC.GetValue(i + 1, 1) != null) && !(arrayA.GetValue(i + 1, 1).Equals("Crestron Logout")) &&
-                        (!(arrayD.GetValue(i + 1, 1).Equals("R") && !(arrayE.GetValue(i + 1, 1).Equals("N102")))))
+                    if ((arrayA.GetValue(i + 1, 1) != null) && (arrayC.GetValue(i + 1, 1) != null) && !(arrayA.GetValue(i + 1, 1).Equals("Crestron Logout")))
                     {
                         //Check if the event is between the selected times
                         DateTime check = DateTime.ParseExact(arrayC.GetValue(i + 1, 1).ToString(), "HHmm", null);
@@ -252,6 +251,10 @@ namespace ClassOpsLogCreator
                             if (arrayF.GetValue(i + 1, 1) == null)
                             {
                                 values[index, 5] = "";
+                            }
+                            else if(arrayD.GetValue(i + 1, 1).Equals("R") && arrayE.GetValue(i + 1, 1).Equals("N102") && arrayA.GetValue(i + 1, 1).Equals("AV Shutdown"))
+                            {
+                                values[index, 5] = arrayF.GetValue(i+ 1, 1).ToString() + @" Lock upper cinema doors (2) with allen key by releasing the crash bar.Pull side stage door shut from the inside.Make sure the stage lights at the front are off.Make sure the projector room is not open.Make sure the cinema lights are off, switched across from the projector room."; 
                             }
                             else
                             {

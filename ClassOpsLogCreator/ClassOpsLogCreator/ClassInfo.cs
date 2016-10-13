@@ -236,24 +236,24 @@ namespace ClassOpsLogCreator
         public List<string> getZone_4(int i)
         {
 
-            string[] zone1 = new string[] //North
+            string[] zone1 = new string[] //North West
             {
-               "CLH", "FRQ", "LAS", "LUM", "SLH", "BSB", "FC", "VC", "WC", "CC", "CB", "LSB", "BC", "PSE", "MC"
+               "CLH", "LAS", "PSE", "CB", "LSB", "CB", "BC", "CC", "SC", "FRQ"
             };
 
             string[] zone2 = new string[] // Central
             {
-                "CSQ", "R", "SCL", "ACW", "HNE", "OSG", "VH", "SC", "BRG"
+                "BSB", "R", "CSQ", "SCL", "BRG", "HNE", "OSG", "VH", "ATK", "ACW"
             };
 
-            string[] zone3 = new string[] //South Central
+            string[] zone3 = new string[] //South
             {
-                "CFT", "CFA", "DB", "STC", "ATK"
+               "SSB", "ELC", "BGS", "DB", "ACE", "CFT", "ACE","KT","KT", "CFA"
             };
 
-            string[] zone4 = new string[] //South East
+            string[] zone4 = new string[] //Noth East
             {
-               "BCS", "SSB", "ACE", "YL", "KT", "ELC"
+               "MC", "FC", "VC", "WC", "SLH", "YL", "LUM"
             };
 
             List<string> buildingList = new List<string>();
@@ -619,33 +619,33 @@ namespace ClassOpsLogCreator
 
             if (i == 1)
             {
-                string[] zone1Boarder = new string[]//North and central
+                string[] zone1Boarder = new string[]//North West and central
                 {
-                    "SCL", "CLH", "BSB", "VH", "R", "CSQ", "PSE", "LAS", "SC", "CC", "BC", "CB"
+                    "CLH", "R", "CSQ", "LAS", "FRQ", "BSB", "HNE", "BRG"
                 };
                 zone1BoarderList.AddRange(zone1Boarder);
             }
             else if (i == 2)
             {
-                string[] zone2Boarder = new string[] //Central and South Central
+                string[] zone2Boarder = new string[] //Central and South
                 {
-                    "VH", "ACW", "ATK", "CFA", "DB", "CFT", "R", "HNE"
+                    "ACW", "CFA", "ATK", "DB", "VH"
                 };
                 zone1BoarderList.AddRange(zone2Boarder);
             }
             else if (i == 3)
             {
-                string[] zone3Boarder = new string[] //South Central and South East
+                string[] zone3Boarder = new string[] //South North East
                 {
-                    "KT", "YL", "SSB", "ELC", "ACE", "DB", "CFT"
+                    "YL", "KT"
                 };
                 zone1BoarderList.AddRange(zone3Boarder);
             }
             else
             {
-                string[] zone4Boarder = new string[] //North and South East
+                string[] zone4Boarder = new string[] //North East and North West
                  {
-                     "YL", "KT", "WC", "VC"
+                     "FC", "LUM", "SLH", "FRQ"
                  };
                 zone1BoarderList.AddRange(zone4Boarder);
             }

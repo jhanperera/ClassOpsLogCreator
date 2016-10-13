@@ -36,7 +36,7 @@ namespace ClassOpsLogCreator
 
             taskList = new List<string>();
             string[] taskArray = { "AV Shutdown", "Crestron Logout", "Lockup", "Pickup Large PA",
-                    "Pickup Mic", "Pickup PC", "Pickup Projector", "Pickup Skype Kit", "Pickup Small PA", "Demo" };
+                    "Pickup Mic", "Pickup PC", "Pickup Projector", "Pickup Skype Kit", "Pickup Small PA" };
             taskList.AddRange(taskArray);
         }
 
@@ -230,18 +230,18 @@ namespace ClassOpsLogCreator
                     }
                 }
                 //Remove all empty rows
-                zone1Array = ZoneSuperLogImporter.RemoveEmptyRows(zone1Array);
-                zone2Array = ZoneSuperLogImporter.RemoveEmptyRows(zone2Array);
-                zone3Array = ZoneSuperLogImporter.RemoveEmptyRows(zone3Array);
-                zone4Array = ZoneSuperLogImporter.RemoveEmptyRows(zone4Array);
+                zone1Array = ZoneSuperLogImporter.RemoveEmptyRows(zone1Array); //North West
+                zone2Array = ZoneSuperLogImporter.RemoveEmptyRows(zone2Array); //Central
+                zone3Array = ZoneSuperLogImporter.RemoveEmptyRows(zone3Array); //South
+                zone4Array = ZoneSuperLogImporter.RemoveEmptyRows(zone4Array); //North East
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0) + zone3Array.GetLength(0) + zone4Array.GetLength(0), 7];
 
                 //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
 
-                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_4(1), 1);//North Central
-                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_4(2), 3);//Central South Central
-                this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_4(3), 3);//South Central South East
-                this.applyRankAndOrganize(ref zone4Array, ref zone1Array, classinfo.boarderBuildingZone_4(4), 1);//South East Central
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_4(1), 1);//North West and Central
+                this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_4(2), 3);//Central and South
+                this.applyRankAndOrganize(ref zone3Array, ref zone4Array, classinfo.boarderBuildingZone_4(3), 3);//South and North East
+                this.applyRankAndOrganize(ref zone4Array, ref zone1Array, classinfo.boarderBuildingZone_4(4), 1);//North West and North East
 
                 numberOfElementsPerZone = new int[4];
                 numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);
