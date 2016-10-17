@@ -291,11 +291,6 @@ namespace ClassOpsLogCreator
                         masterArray[index, 2] = token[1];
                         masterArray[index, 3] = "Door code 11012*";
                     }
-                    else if(token[0].Equals("R") && token[1].Equals("N102"))
-                    {
-                        masterArray[index, 2] = token[1];
-                        masterArray[index, 3] = @"Lock upper cinema doors (2) with allen key by releasing the crash bar. Pull side stage door shut from the inside. Make sure the stage lights at the front are off. Make sure the projector room is not open. Make sure the cinema lights are off, switched across from the projector room.";
-                    }
                     else
                     {
                         masterArray[index, 2] = token[1];

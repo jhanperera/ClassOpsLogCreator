@@ -35,8 +35,9 @@ namespace ClassOpsLogCreator
             this.numberOfConnections = schoolGraph.numberOfEdges();
 
             taskList = new List<string>();
-            string[] taskArray = { "AV Shutdown", "Crestron Logout", "Lockup", "Pickup Large PA",
-                    "Pickup Mic", "Pickup PC", "Pickup Projector", "Pickup Skype Kit", "Pickup Small PA" };
+            string[] taskArray = { "AV Shutdown", "Crestron Logout", "Lockup", "Proactive Classroom Check",
+                       "SCLD Student Event", "SCLD Student Logout", "Operator", "Pickup Large PA", "Pickup Mic",
+                "Pickup PC", "Pickup Projector", "Pickup Skype Kit","Pickup Small PA" };
             taskList.AddRange(taskArray);
         }
 
@@ -770,14 +771,17 @@ namespace ClassOpsLogCreator
                     {
                         if (borderBuildings.Contains(zone1List[i][4]) && taskList.Contains(zone1List[i][1]))
                         {
-                            var temp = zone1List[i];
-                            zone1List.Remove(zone1List[i]);
-                            zone2List.Add(temp);
-                            i--;
-                            zone2 = CreateRectangularArray<string>(zone2List);
-                            zone2Rank = tr.getTotalTaskValue(zone2);
-                            zone1 = CreateRectangularArray<string>(zone1List);
-                            zone1Rank = tr.getTotalTaskValue(zone1);
+                            if(i + 1 < zone1List.Count && zone1List[i][4] != zone1List[i + 1][4] && zone1List[i][5] != zone1List[i + 1][5])
+                            {
+                                var temp = zone1List[i];
+                                zone1List.Remove(zone1List[i]);
+                                zone2List.Add(temp);
+                                i--;
+                                zone2 = CreateRectangularArray<string>(zone2List);
+                                zone2Rank = tr.getTotalTaskValue(zone2);
+                                zone1 = CreateRectangularArray<string>(zone1List);
+                                zone1Rank = tr.getTotalTaskValue(zone1);
+                            }           
                         }
                     }
                 }
@@ -788,14 +792,17 @@ namespace ClassOpsLogCreator
                     {
                         if (borderBuildings.Contains(zone2List[i][4]) && taskList.Contains(zone2List[i][1]))
                         {
-                            var temp = zone2List[i];
-                            zone2List.Remove(zone2List[i]);
-                            zone1List.Add(temp);
-                            i--;
-                            zone1 = CreateRectangularArray<string>(zone1List);
-                            zone1Rank = tr.getTotalTaskValue(zone1);
-                            zone2 = CreateRectangularArray<string>(zone2List);
-                            zone2Rank = tr.getTotalTaskValue(zone2);
+                            if(i + 1 < zone2List.Count && zone2List[i][4] != zone2List[i + 1][4] && zone2List[i][5] != zone2List[i + 1][5])
+                            {
+                                var temp = zone2List[i];
+                                zone2List.Remove(zone2List[i]);
+                                zone1List.Add(temp);
+                                i--;
+                                zone1 = CreateRectangularArray<string>(zone1List);
+                                zone1Rank = tr.getTotalTaskValue(zone1);
+                                zone2 = CreateRectangularArray<string>(zone2List);
+                                zone2Rank = tr.getTotalTaskValue(zone2);
+                            }                           
                         }
                     }
                 }
