@@ -799,11 +799,12 @@ namespace ClassOpsLogCreator
             }
             else if (e.ProgressPercentage == 15)
             {
-                this.detailForm.updateDetail("Generating PT-Staff logs");
+                this.detailForm.updateDetail("Sorting the events into zones.");
+                this.detailForm.updateDetail("Generating PT-Staff logs.");
             }
             else if (e.ProgressPercentage == 16)
             {
-                this.detailForm.updateDetail("Successfully generated PT-Staff logs");
+                this.detailForm.updateDetail("Successfully generated PT-Staff logs.");
             }
             else if (e.ProgressPercentage == 17)
             {
@@ -811,7 +812,7 @@ namespace ClassOpsLogCreator
             }
             else if (e.ProgressPercentage == 18)
             {
-                this.detailForm.updateDetail("Successfully write logs to the master file.");
+                this.detailForm.updateDetail("Successfully wrote logs to the master file.");
             }
             else if (e.ProgressPercentage == 20)
             {
@@ -1030,7 +1031,7 @@ namespace ClassOpsLogCreator
                 plusBTN2.Enabled = true;
                 plusBTN3.Enabled = true;
 
-                detailForm.updateDetail("Saving and Cleaning up.");
+                detailForm.updateDetail("Saving and cleaning up background processes.");
 
                 //Quit
                 Quit();

@@ -29,45 +29,22 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DetailForm));
-            this.detailTextBox = new MetroFramework.Controls.MetroTextBox();
+            this.detailTextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // detailTextBox
             // 
-            // 
-            // 
-            // 
-            this.detailTextBox.CustomButton.Image = null;
-            this.detailTextBox.CustomButton.Location = new System.Drawing.Point(104, 1);
-            this.detailTextBox.CustomButton.Name = "";
-            this.detailTextBox.CustomButton.Size = new System.Drawing.Size(557, 557);
-            this.detailTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.detailTextBox.CustomButton.TabIndex = 1;
-            this.detailTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.detailTextBox.CustomButton.UseSelectable = true;
-            this.detailTextBox.CustomButton.Visible = false;
+            this.detailTextBox.BackColor = System.Drawing.SystemColors.Window;
+            this.detailTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.detailTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.detailTextBox.FontSize = MetroFramework.MetroTextBoxSize.Medium;
-            this.detailTextBox.FontWeight = MetroFramework.MetroTextBoxWeight.Bold;
-            this.detailTextBox.Lines = new string[0];
+            this.detailTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.detailTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
             this.detailTextBox.Location = new System.Drawing.Point(20, 30);
-            this.detailTextBox.MaxLength = 32767;
-            this.detailTextBox.Multiline = true;
             this.detailTextBox.Name = "detailTextBox";
-            this.detailTextBox.PasswordChar = '\0';
             this.detailTextBox.ReadOnly = true;
-            this.detailTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.detailTextBox.SelectedText = "";
-            this.detailTextBox.SelectionLength = 0;
-            this.detailTextBox.SelectionStart = 0;
-            this.detailTextBox.ShortcutsEnabled = true;
             this.detailTextBox.Size = new System.Drawing.Size(662, 559);
-            this.detailTextBox.Style = MetroFramework.MetroColorStyle.Black;
-            this.detailTextBox.TabIndex = 1;
-            this.detailTextBox.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.detailTextBox.UseSelectable = true;
-            this.detailTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.detailTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.detailTextBox.TabIndex = 2;
+            this.detailTextBox.Text = "";
             // 
             // DetailForm
             // 
@@ -91,7 +68,6 @@
         }
 
         #endregion
-
-        private MetroFramework.Controls.MetroTextBox detailTextBox;
+        private System.Windows.Forms.RichTextBox detailTextBox;
     }
 }

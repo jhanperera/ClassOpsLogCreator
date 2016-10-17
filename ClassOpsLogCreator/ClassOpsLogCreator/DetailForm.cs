@@ -33,13 +33,38 @@ namespace ClassOpsLogCreator
         /// <param name="updateString"></param>
         public void updateDetail(string updateString)
         {
+            //Write the time and the text to the detail window
             string time = DateTime.Now.ToString("H:mm:ss");
+
             this.detailTextBox.AppendText(Environment.NewLine +
-                                    "(" + time + ") " + updateString);
+                                    "(" + time + ") ", Color.Red);
+            this.detailTextBox.AppendText(updateString);
+
+            //Update the textbox to go to the bottom 
+            detailTextBox.SelectionStart = detailTextBox.Text.Length;
+            detailTextBox.ScrollToCaret();
+
+            //Force the window to update when text is written to it. 
             this.Invalidate();
             this.Update();
             this.Refresh();
             Application.DoEvents();
+        }
+    }
+
+    /// <summary>
+    /// A public inner class that helps us append text with different text colors.
+    /// </summary>
+    public static class RichTextBoxExtensions
+    {
+        public static void AppendText(this RichTextBox box, string text, Color color)
+        {
+            box.SelectionStart = box.TextLength;
+            box.SelectionLength = 0;
+
+            box.SelectionColor = color;
+            box.AppendText(text);
+            box.SelectionColor = box.ForeColor;
         }
     }
 }
