@@ -17,24 +17,24 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
 
-        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY!
-        /*private static string username = Environment.UserName; 
+        private static string username = Environment.UserName; 
         public readonly string ROOM_SCHED = @"C:\Users\" + username+ @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
 
         //A stack for some thread safer operations
         private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();        
@@ -1070,7 +1070,7 @@ namespace ClassOpsLogCreator
             worker.ReportProgress(13); //Importing Zone Super log events
 
             //Get all the zone super events
-            ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this, startTimeFromCombo, endTimeFromCombo);
+            ZoneSuperLogImporter ZoneLogs = new ZoneSuperLogImporter(this, startTimeFromCombo, endTimeFromCombo, ref arrayClassRooms);
 
                       //Get the three logs
             string[,] JInstruction = ZoneLogs.getJeannineLog();
@@ -1268,6 +1268,19 @@ namespace ClassOpsLogCreator
             Color redFont = Color.FromArgb(156, 0, 6);
             Excel.Range task_range = existingMasterWorkSheet.get_Range("B" + (lastRowDestination + 2), "B" + (last_row.Row));
             task_range.WrapText = true;
+            //High light all the cells that have lapel mics
+            Color lightblue = Color.FromArgb(225, 246, 255);
+            Excel.Range instuciton_range = existingMasterWorkSheet.get_Range("G" + (lastRowDestination + 2), "G" + (last_row.Row));
+            foreach (Excel.Range cell in instuciton_range)
+            {
+                if (cell.Value2 is string &&  (string)cell.Value2.ToString().Trim() != "")
+                {
+                    cell.Interior.Color = lightblue;
+                    Excel.Range task_color_change = existingMasterWorkSheet.get_Range("B" + cell.Row, "B" + cell.Row);
+                    task_color_change.Interior.Color = lightblue;
+                }
+            }
+
             foreach (Excel.Range cell in task_range)
             {
                 if (cell.Value2 is string && (string)cell.Value2 != "Crestron Logout")
@@ -1277,23 +1290,10 @@ namespace ClassOpsLogCreator
                     Excel.Range task_color_change = existingMasterWorkSheet.get_Range("G" + cell.Row, "G" + cell.Row);
                     task_color_change.Interior.Color = redBackground;
                     task_color_change.Font.Color = redFont;
-                    if ((string)cell.Value2 == "Demo" && task_color_change.Value2 == null )
+                    if ((string)cell.Value2 == "Demo" && task_color_change.Value2 == null)
                     {
                         task_color_change.Value2 += " Arrive 10 minutes early. Ensure that the instructor does not require further assistance before you leave.";
                     }
-                }
-            }
-
-            //High light all the cells that have lapel mics
-            Color lightblue = Color.FromArgb(225, 246, 255);
-            Excel.Range instuciton_range = existingMasterWorkSheet.get_Range("G" + (lastRowDestination + 2), "G" + (last_row.Row));
-            foreach (Excel.Range cell in instuciton_range)
-            {
-                if (cell.Value2 is string &&  (string)cell.Value2 == "Ensure neck mic goes back to equipment drawer.")
-                {
-                    cell.Interior.Color = lightblue;
-                    Excel.Range task_color_change = existingMasterWorkSheet.get_Range("B" + cell.Row, "B" + cell.Row);
-                    task_color_change.Interior.Color = lightblue;
                 }
             }
 
@@ -1545,25 +1545,29 @@ namespace ClassOpsLogCreator
                     {
                        nameText = name.Cells.Value2.ToString();
                     }
-                      
 
-                    existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + timeArray[i,0] + " to " + timeArray[i,1];
+                    existingMasterWorkSheet.PageSetup.LeftHeader = "&\"Calibri,Bold\"&20&KFF0000" + DateTime.Now.ToString("dddd");
+                    existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&20" + nameText + ", " + timeArray[i,0] + " to " + timeArray[i,1];
+                    existingMasterWorkSheet.PageSetup.RightHeader = "&\"Calibri,Bold\"&20" + DateTime.Now.ToString("MMM dd yyyy");
                     logRange.PrintPreview(true);    
                 }
             }
             else
             {
-               //We open the log viewer at this point
-               Excel.Range last = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-               Excel.Range logRange = existingMasterWorkSheet.get_Range("B" + (rowNumbers[0, 0]), "H" + (rowNumbers[0, 1]));
+                //We open the log viewer at this point
+                Excel.Range last = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+                Excel.Range logRange = existingMasterWorkSheet.get_Range("B" + (rowNumbers[0, 0]), "H" + (rowNumbers[0, 1]));
 
-               Excel.Range name = existingMasterWorkSheet.get_Range("A" + (rowNumbers[0, 0]));
-               string nameText = name.Cells.Value2.ToString();
+                Excel.Range name = existingMasterWorkSheet.get_Range("A" + (rowNumbers[0, 0]));
+                string nameText = name.Cells.Value2.ToString();
 
-               existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&22" + nameText + ", " + timeArray[0, 0] + " to " + timeArray[0, 1];
-               SetDefaultPrinter(printDlg.PrinterSettings.PrinterName); 
-               existingMaster.Visible = true;
-               logRange.PrintPreview(true);
+                existingMasterWorkSheet.PageSetup.LeftHeader = "&\"Calibri,Bold\"&20&KFF0000" + DateTime.Now.ToString("dddd");
+                existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&20" + nameText + ", " + timeArray[0, 0] + " to " + timeArray[0, 1];
+                existingMasterWorkSheet.PageSetup.RightHeader = "&\"Calibri,Bold\"&20" + DateTime.Now.ToString("MMM dd yyyy");
+
+                SetDefaultPrinter(printDlg.PrinterSettings.PrinterName); 
+                existingMaster.Visible = true;
+                logRange.PrintPreview(true);
             }
             existingMaster.get_Range("C:C").EntireColumn.Hidden = false;
         }

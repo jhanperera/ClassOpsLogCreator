@@ -115,6 +115,8 @@ namespace ClassOpsLogCreator
             else
             {
                 masterArray = this.convertToString2DArray(arrayClassRooms, arrayLastTimes);
+                masterArray = RemoveEmptyRows(masterArray);
+                
             }
 
 
@@ -363,6 +365,54 @@ namespace ClassOpsLogCreator
             }
             //Return an array with no null characters. 
             return newArray = newArray.Where(n => n != null).ToArray();
+        }
+
+        /// <summary>
+        /// Remove empty Rows from jagged array
+        /// </summary>
+        /// <param name="strs"></param>
+        /// <returns></returns>
+        private static string[,] RemoveEmptyRows(string[,] strs)
+        {
+            int length1 = strs.GetLength(0);
+            int length2 = strs.GetLength(1);
+
+            // First we count the non-emtpy rows
+            int nonEmpty = 0;
+
+            for (int i = 0; i < length1; i++)
+            {
+                for (int j = 0; j < length2; j++)
+                {
+                    if (strs[i, j] != null)
+                    {
+                        nonEmpty++;
+                        break;
+                    }
+                }
+            }
+
+            // Then we create an array of the right size
+            string[,] strs2 = new string[nonEmpty, length2];
+
+            for (int i1 = 0, i2 = 0; i2 < nonEmpty; i1++)
+            {
+                for (int j = 0; j < length2; j++)
+                {
+                    if (strs[i1, j] != null)
+                    {
+                        // If the i1 row is not empty, we copy it
+                        for (int k = 0; k < length2; k++)
+                        {
+                            strs2[i2, k] = strs[i1, k];
+                        }
+
+                        i2++;
+                        break;
+                    }
+                }
+            }
+            return strs2;
         }
 
         /// <summary>

@@ -27,9 +27,11 @@ namespace ClassOpsLogCreator
         private static Excel.Worksheet DerekSheet1 = null;
 
         private string lastDate = null;
+        private string[,] ArrayClassRooms = null;
         private string[,] JeannineLogArray = null;
         private string[,] RaulLogArray = null;
         private string[,] DerekLogArray = null;
+        private List<string> buildingAndRooms = null;
 
         private string startTime = null;
         private string endTime = null;
@@ -38,13 +40,18 @@ namespace ClassOpsLogCreator
         /// This Class will import all the zone supervisor logs and assist with 
         /// modification and find operations. 
         /// </summary>
-        public ZoneSuperLogImporter(LogCreator form1, string StartTime, string EndTime)
+        public ZoneSuperLogImporter(LogCreator form1, string StartTime, string EndTime, ref string[,] arrayClassRooms)
         {
             //Assigning the variables
             this.Form1 = form1;
             this.startTime = StartTime;
             this.endTime = EndTime;
+            this.ArrayClassRooms = arrayClassRooms;
 
+            //Get the buildings and rooms
+            buildingAndRooms = this.getBuildingsAndRoom();
+
+            //Open the Excel Work books
             JeannineLog = new Excel.Application();
             RaulLog = new Excel.Application();
             DerekLog = new Excel.Application();
@@ -125,6 +132,17 @@ namespace ClassOpsLogCreator
         {
             string dateToday = DateTime.Today.ToString("M/dd/yy");
             return dateToday;
+        }
+
+        private List<string> getBuildingsAndRoom()
+        {
+            List<string> buildingAndRooms = new List<string>();
+
+            for(int i = 0; i <= this.ArrayClassRooms.GetUpperBound(0); i++ )
+            {
+                buildingAndRooms.Add(this.ArrayClassRooms[i, 1].ToString() + " " + this.ArrayClassRooms[i, 2].ToString());
+            }
+            return buildingAndRooms;
         }
 
         /// <summary>
@@ -236,31 +254,84 @@ namespace ClassOpsLogCreator
                         DateTime check = DateTime.ParseExact(arrayC.GetValue(i + 1, 1).ToString(), "HHmm", null);
                         if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay < endingTime.TimeOfDay))
                         {
-                            //Tasks type
-                            values[index, 0] = arrayA.GetValue(i + 1, 1).ToString();
-                            //Date
-                            values[index, 1] = DateTime.FromOADate(double.Parse((string)arrayB.GetValue(i + 1, 1).ToString())).ToString("M/dd/yy");
-                            //Time
-                            values[index, 2] = arrayC.GetValue(i + 1, 1).ToString();
-                            //Building
-                            values[index, 3] = arrayD.GetValue(i + 1, 1).ToString();
-                            //Room
-                            values[index, 4] = arrayE.GetValue(i + 1, 1).ToString();
+                            //If we get an AV shutdown. See if we have it in our logout master first
+                            if(arrayA.GetValue(i + 1, 1).Equals("AV Shutdown"))
+                            {
+                                //A string we will use to compare too
+                                string buildingandRoomCompareString = arrayD.GetValue(i + 1, 1).ToString() + " " + arrayE.GetValue(i + 1, 1).ToString(); 
 
-                            //Comment, add a space if no comment is present
-                            if (arrayF.GetValue(i + 1, 1) == null)
-                            {
-                                values[index, 5] = "";
-                            }
-                            else if(arrayD.GetValue(i + 1, 1).Equals("R") && arrayE.GetValue(i + 1, 1).Equals("N102") && arrayA.GetValue(i + 1, 1).Equals("AV Shutdown"))
-                            {
-                                values[index, 5] = arrayF.GetValue(i+ 1, 1).ToString() + @" Lock upper cinema doors (2) with allen key by releasing the crash bar.Pull side stage door shut from the inside.Make sure the stage lights at the front are off.Make sure the projector room is not open.Make sure the cinema lights are off, switched across from the projector room."; 
+                                //The vase of R N102 has special instructions
+                                if (arrayD.GetValue(i + 1, 1).Equals("R") && arrayE.GetValue(i + 1, 1).Equals("N102"))
+                                {
+                                    //If fount in the logout master
+                                    if (buildingAndRooms.Contains(buildingandRoomCompareString))
+                                    {
+
+                                        int indexOf = buildingAndRooms.IndexOf(buildingandRoomCompareString);
+                                        this.ArrayClassRooms[indexOf, 3] = arrayF.GetValue(i + 1, 1).ToString() + @" Lock upper cinema doors (2) with allen key by releasing the crash bar.Pull side stage door shut from the inside.Make sure the stage lights at the front are off.Make sure the projector room is not open.Make sure the cinema lights are off, switched across from the projector room.";
+                                    }
+                                    //If not add it in normally
+                                    else
+                                    {
+                                        //Tasks type
+                                        values[index, 0] = arrayA.GetValue(i + 1, 1).ToString();
+                                        //Date
+                                        values[index, 1] = DateTime.FromOADate(double.Parse((string)arrayB.GetValue(i + 1, 1).ToString())).ToString("M/dd/yy");
+                                        //Time
+                                        values[index, 2] = arrayC.GetValue(i + 1, 1).ToString();
+                                        //Building
+                                        values[index, 3] = arrayD.GetValue(i + 1, 1).ToString();
+                                        //Room
+                                        values[index, 4] = arrayE.GetValue(i + 1, 1).ToString();
+
+                                        //Comment, add a space if no comment is present
+                                        if (arrayF.GetValue(i + 1, 1) == null)
+                                        {
+                                            values[index, 5] = "";
+                                        }
+                                        else if (arrayD.GetValue(i + 1, 1).Equals("R") && arrayE.GetValue(i + 1, 1).Equals("N102") && arrayA.GetValue(i + 1, 1).Equals("AV Shutdown"))
+                                        {
+                                            values[index, 5] = arrayF.GetValue(i + 1, 1).ToString() + @" Lock upper cinema doors (2) with allen key by releasing the crash bar.Pull side stage door shut from the inside.Make sure the stage lights at the front are off.Make sure the projector room is not open.Make sure the cinema lights are off, switched across from the projector room.";
+                                        }
+                                        else
+                                        {
+                                            values[index, 5] = arrayF.GetValue(i + 1, 1).ToString();
+                                        }
+                                        index++;
+                                    }
+                                }
+                                //Any other buildings and rooms that are in the logut master just add the Zone Supers comments
+                                else if(buildingAndRooms.Contains(buildingandRoomCompareString))
+                                {
+                                    int indexOf = buildingAndRooms.IndexOf(buildingandRoomCompareString);
+                                    this.ArrayClassRooms[indexOf, 3] = arrayF.GetValue(i + 1, 1).ToString();
+                                }
+                                
                             }
                             else
                             {
-                                values[index, 5] = arrayF.GetValue(i + 1, 1).ToString();
+                                //Tasks type
+                                values[index, 0] = arrayA.GetValue(i + 1, 1).ToString();
+                                //Date
+                                values[index, 1] = DateTime.FromOADate(double.Parse((string)arrayB.GetValue(i + 1, 1).ToString())).ToString("M/dd/yy");
+                                //Time
+                                values[index, 2] = arrayC.GetValue(i + 1, 1).ToString();
+                                //Building
+                                values[index, 3] = arrayD.GetValue(i + 1, 1).ToString();
+                                //Room
+                                values[index, 4] = arrayE.GetValue(i + 1, 1).ToString();
+
+                                //Comment, add a space if no comment is present
+                                if (arrayF.GetValue(i + 1, 1) == null)
+                                {
+                                    values[index, 5] = "";
+                                }
+                                else
+                                {
+                                    values[index, 5] = arrayF.GetValue(i + 1, 1).ToString();
+                                }
+                                index++;
                             }
-                            index++;
                         }
                     }
                 }
