@@ -80,6 +80,7 @@
             // nameTextBox
             // 
             resources.ApplyResources(this.nameTextBox, "nameTextBox");
+            this.nameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             // 
             // 
             // 

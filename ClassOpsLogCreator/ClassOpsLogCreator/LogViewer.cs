@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using MetroFramework;
 using MetroFramework.Forms;
+using System.Globalization;
 
 namespace ClassOpsLogCreator
 {
@@ -38,6 +39,13 @@ namespace ClassOpsLogCreator
             InitializeComponent();
 
             this.Text = shiftTitle;
+
+            //AutoSuggestion for the name textbox
+            this.nameTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+            this.nameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            var autocomplete = new AutoCompleteStringCollection();
+            autocomplete.AddRange(EmployeeNameList.ToArray());
+            this.nameTextBox.AutoCompleteCustomSource = autocomplete;
 
             //Add the gray text for the name text box
             /*this.nameTextBox.ForeColor = SystemColors.GrayText;
@@ -244,27 +252,21 @@ namespace ClassOpsLogCreator
             //Color the cells accordingly
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
-                if(dataGridView1.Rows[i].Cells[0].Value.ToString() != "Crestron Logout")
+                //Change the color of the neck mic tasks
+                if (dataGridView1.Rows[i].Cells[4].Value.ToString().Trim() != "")
+                {
+                    //Background
+                    dataGridView1.Rows[i].Cells[0].Style.BackColor = lightblue;
+                    dataGridView1.Rows[i].Cells[4].Style.BackColor = lightblue;
+                }
+                if (dataGridView1.Rows[i].Cells[0].Value.ToString() != "Crestron Logout")
                 {
                     //Background
                     dataGridView1.Rows[i].Cells[0].Style.BackColor = redBackground;
                     dataGridView1.Rows[i].Cells[4].Style.BackColor = redBackground;
                     //Font
                     dataGridView1.Rows[i].Cells[0].Style.ForeColor = redFont;
-                    dataGridView1.Rows[i].Cells[4].Style.ForeColor = redFont;
-                    if(dataGridView1.Rows[i].Cells[0].Value.ToString() == "Demo" &&
-                            String.IsNullOrWhiteSpace(dataGridView1.Rows[i].Cells[4].Value.ToString()))
-                    {
-                        dataGridView1.Rows[i].Cells[4].Value = "Arrive 10 minutes early. Ensure that the instructor does not require further assistance before you leave.";
-                    }
-                 
-                }
-                //Change the color of the neck mic tasks
-                if(dataGridView1.Rows[i].Cells[4].Value.ToString() == "Ensure neck mic goes back to equipment drawer.")
-                {
-                    //Background
-                    dataGridView1.Rows[i].Cells[0].Style.BackColor = lightblue;
-                    dataGridView1.Rows[i].Cells[4].Style.BackColor = lightblue;
+                    dataGridView1.Rows[i].Cells[4].Style.ForeColor = redFont;                 
                 }
             }
 
@@ -280,6 +282,7 @@ namespace ClassOpsLogCreator
         private void nextBTN_Click_1(object sender, EventArgs e)
         {
             var timeString = new Regex("(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(am|pm)");
+
             
             //INPUT VALIDATION!
             if (this.nameTextBox.Text.Equals("Name"))

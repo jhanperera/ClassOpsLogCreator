@@ -171,9 +171,9 @@ namespace ClassOpsLogCreator
                 result = new string[zone1Array.GetLength(0) + zone2Array.GetLength(0) + zone3Array.GetLength(0), 7];
 
                 //AT THIS POINT IS WHERE WE DO THE "SMART" zoning
-                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_3(1), 4);//North Center and north east
+                this.applyRankAndOrganize(ref zone1Array, ref zone2Array, classinfo.boarderBuildingZone_3(1), 2);//North Center and north east
                 this.applyRankAndOrganize(ref zone2Array, ref zone3Array, classinfo.boarderBuildingZone_3(2), 4);//North East and South
-                this.applyRankAndOrganize(ref zone3Array, ref zone1Array, classinfo.boarderBuildingZone_3(3), 4);//North Central and south
+                this.applyRankAndOrganize(ref zone3Array, ref zone1Array, classinfo.boarderBuildingZone_3(3), 2);//North Central and south
 
                 numberOfElementsPerZone = new int[3];
                 numberOfElementsPerZone[0] = zone1Array.GetUpperBound(0);

@@ -1290,10 +1290,6 @@ namespace ClassOpsLogCreator
                     Excel.Range task_color_change = existingMasterWorkSheet.get_Range("G" + cell.Row, "G" + cell.Row);
                     task_color_change.Interior.Color = redBackground;
                     task_color_change.Font.Color = redFont;
-                    if ((string)cell.Value2 == "Demo" && task_color_change.Value2 == null)
-                    {
-                        task_color_change.Value2 += " Arrive 10 minutes early. Ensure that the instructor does not require further assistance before you leave.";
-                    }
                 }
             }
 

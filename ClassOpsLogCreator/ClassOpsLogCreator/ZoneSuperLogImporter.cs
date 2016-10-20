@@ -85,6 +85,12 @@ namespace ClassOpsLogCreator
             DerekLogArray = this.ConvertToStringArray2D(DerekSheet1);
             RaulLogArray = this.ConvertToStringArray2D(RaulSheet1);
 
+            //Special case were we account for R N102 being in the building list already and doesn't have the description.
+            if (buildingAndRooms.Contains("R N102") && arrayClassRooms[buildingAndRooms.IndexOf("R N102"), 3].ToString() == "")
+            {
+                this.ArrayClassRooms[buildingAndRooms.IndexOf("R N102"), 3] = @"Lock upper cinema doors (2) with allen key by releasing the crash bar.Pull side stage door shut from the inside.Make sure the stage lights at the front are off.Make sure the projector room is not open.Make sure the cinema lights are off, switched across from the projector room.";
+            }
+
             this.Quit();
         }
 
@@ -258,7 +264,7 @@ namespace ClassOpsLogCreator
                             if(arrayA.GetValue(i + 1, 1).Equals("AV Shutdown"))
                             {
                                 //A string we will use to compare too
-                                string buildingandRoomCompareString = arrayD.GetValue(i + 1, 1).ToString() + " " + arrayE.GetValue(i + 1, 1).ToString(); 
+                                string buildingandRoomCompareString = arrayD.GetValue(i + 1, 1).ToString() + " " + arrayE.GetValue(i + 1, 1).ToString();
 
                                 //The vase of R N102 has special instructions
                                 if (arrayD.GetValue(i + 1, 1).Equals("R") && arrayE.GetValue(i + 1, 1).Equals("N102"))
@@ -300,13 +306,36 @@ namespace ClassOpsLogCreator
                                         index++;
                                     }
                                 }
-                                //Any other buildings and rooms that are in the logut master just add the Zone Supers comments
+                                //Any other buildings and rooms that are in the logout master just add the Zone Supers comments
                                 else if(buildingAndRooms.Contains(buildingandRoomCompareString))
                                 {
                                     int indexOf = buildingAndRooms.IndexOf(buildingandRoomCompareString);
                                     this.ArrayClassRooms[indexOf, 3] = arrayF.GetValue(i + 1, 1).ToString();
                                 }
-                                
+                                else
+                                {
+                                    //Tasks type
+                                    values[index, 0] = arrayA.GetValue(i + 1, 1).ToString();
+                                    //Date
+                                    values[index, 1] = DateTime.FromOADate(double.Parse((string)arrayB.GetValue(i + 1, 1).ToString())).ToString("M/dd/yy");
+                                    //Time
+                                    values[index, 2] = arrayC.GetValue(i + 1, 1).ToString();
+                                    //Building
+                                    values[index, 3] = arrayD.GetValue(i + 1, 1).ToString();
+                                    //Room
+                                    values[index, 4] = arrayE.GetValue(i + 1, 1).ToString();
+
+                                    //Comment, add a space if no comment is present
+                                    if (arrayF.GetValue(i + 1, 1) == null)
+                                    {
+                                        values[index, 5] = "";
+                                    }
+                                    else
+                                    {
+                                        values[index, 5] = arrayF.GetValue(i + 1, 1).ToString();
+                                    }
+                                    index++;
+                                }                               
                             }
                             else
                             {
@@ -322,7 +351,16 @@ namespace ClassOpsLogCreator
                                 values[index, 4] = arrayE.GetValue(i + 1, 1).ToString();
 
                                 //Comment, add a space if no comment is present
-                                if (arrayF.GetValue(i + 1, 1) == null)
+                                if (arrayF.GetValue(i + 1, 1) == null && arrayA.GetValue(i + 1, 1).ToString().Trim().Equals("Demo"))
+                                {
+                                    values[index, 5] = "Arrive 10 minutes early. Ensure that the instructor does not require further assistance before you leave.";
+                                }
+                                else if(arrayF.GetValue(i + 1, 1) != null && arrayA.GetValue(i + 1, 1).ToString().Trim().Equals("Demo"))
+                                {
+                                    values[index, 5] = arrayF.GetValue(i + 1, 1).ToString() +
+                                                " Arrive 10 minutes early. Ensure that the instructor does not require further assistance before you leave.";
+                                }
+                                else if(arrayF.GetValue(i + 1, 1) == null)
                                 {
                                     values[index, 5] = "";
                                 }
