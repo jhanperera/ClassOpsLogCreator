@@ -41,7 +41,7 @@ namespace ClassOpsLogCreator
             this.Text = shiftTitle;
 
             //AutoSuggestion for the name textbox
-            this.nameTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+            this.nameTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             this.nameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             var autocomplete = new AutoCompleteStringCollection();
             autocomplete.AddRange(EmployeeNameList.ToArray());
