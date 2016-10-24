@@ -40,7 +40,7 @@ namespace ClassOpsLogCreator
                                     "(" + time + ") ", Color.Red);
             this.detailTextBox.AppendText(updateString);
 
-            //Update the textbox to go to the bottom 
+            //Update the text box to go to the bottom 
             detailTextBox.SelectionStart = detailTextBox.Text.Length;
             detailTextBox.ScrollToCaret();
 

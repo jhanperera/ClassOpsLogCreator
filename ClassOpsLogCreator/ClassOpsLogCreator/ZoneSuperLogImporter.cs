@@ -310,7 +310,16 @@ namespace ClassOpsLogCreator
                                 else if(buildingAndRooms.Contains(buildingandRoomCompareString))
                                 {
                                     int indexOf = buildingAndRooms.IndexOf(buildingandRoomCompareString);
-                                    this.ArrayClassRooms[indexOf, 3] = arrayF.GetValue(i + 1, 1).ToString();
+                                    //Account if there is nothing in the Comments
+                                    if (arrayF.GetValue(i + 1, 1) != null)
+                                    {
+                                        this.ArrayClassRooms[indexOf, 3] = arrayF.GetValue(i + 1, 1).ToString();
+                                    }
+                                    else
+                                    {
+                                        this.ArrayClassRooms[indexOf, 3] = this.ArrayClassRooms[indexOf, 3];
+                                    }
+                                    
                                 }
                                 else
                                 {
