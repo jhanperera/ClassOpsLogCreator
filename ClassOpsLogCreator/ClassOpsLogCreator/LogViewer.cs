@@ -38,20 +38,8 @@ namespace ClassOpsLogCreator
         {
             InitializeComponent();
 
+            //Set the title of the window
             this.Text = shiftTitle;
-
-            //AutoSuggestion for the name textbox
-            this.nameTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            this.nameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            var autocomplete = new AutoCompleteStringCollection();
-            autocomplete.AddRange(EmployeeNameList.ToArray());
-            this.nameTextBox.AutoCompleteCustomSource = autocomplete;
-
-            //Add the gray text for the name text box
-            /*this.nameTextBox.ForeColor = SystemColors.GrayText;
-            this.nameTextBox.Text = "Name";
-            this.nameTextBox.Leave += new System.EventHandler(this.nameTextBox_Leave);
-            this.nameTextBox.Enter += new System.EventHandler(this.nameTextBox_Enter);*/
 
             //Get the array representation of the range
             this.rangeArray = Range;
@@ -63,6 +51,18 @@ namespace ClassOpsLogCreator
             this.numberOfShifts = NumberOfShifts;
             //EmployeeList
             this.employeeNameList = EmployeeNameList;
+
+            //AutoSuggestion for the name text box
+            this.nameTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            this.nameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            var autocomplete = new AutoCompleteStringCollection();
+            //Add all the names with capital first letters into the auto complete list
+            for (int i = 0; i < EmployeeNameList.Count; i++)
+            {
+                autocomplete.Add(this.FirstLetterToUpper(EmployeeNameList[i]));
+            }
+            //Set the source of the auto complete list.
+            this.nameTextBox.AutoCompleteCustomSource = autocomplete;
         }
 
         /// <summary>
@@ -337,6 +337,22 @@ namespace ClassOpsLogCreator
             this.nextClicked = false;
             this.previousClicked = true;
             this.Close();
+        }
+
+        /// <summary>
+        /// A method to capitalize the first letter of a string
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        private string FirstLetterToUpper(string str)
+        {
+            if (str == null)
+                return null;
+
+            if (str.Length > 1)
+                return char.ToUpper(str[0]) + str.Substring(1);
+
+            return str.ToUpper();
         }
     }
 }

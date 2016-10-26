@@ -167,7 +167,7 @@ namespace ClassOpsLogCreator
 
             string[] zone2 = new string[] //South East
             {
-                "CSQ", "SLH", "R", "ACW", "CFT", "CFA", "DB", "STC", "ATK", "BCS", "SSB", "ACE", "YL",
+                "CSQ", "R", "ACW", "CFT", "CFA", "DB", "STC", "ATK", "BCS", "SSB", "ACE", "YL",
                 "KT", "HNE", "OSG", "ELC"
             };
 
@@ -205,7 +205,7 @@ namespace ClassOpsLogCreator
 
             string[] zone3 = new string[] //South
             {
-                "SSB", "ELC", "BGS", "DB", "ACE", "CFT", "ACW", "CFA", "STC"
+                "SSB", "ELC", "BCS", "DB", "ACE", "CFT", "ACW", "CFA", "STC", "ATK"
             };
 
             List<string> buildingList = new List<string>();
@@ -245,7 +245,7 @@ namespace ClassOpsLogCreator
 
             string[] zone3 = new string[] //South
             {
-               "SSB", "ELC", "BGS", "DB", "ACE", "CFT", "ACE","KT", "CFA"
+               "SSB", "ELC", "BCS", "DB", "ACE", "CFT","KT", "CFA"
             };
 
             string[] zone4 = new string[] //Noth East
