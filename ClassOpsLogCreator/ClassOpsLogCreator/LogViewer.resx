@@ -214,16 +214,16 @@
     <value>True</value>
   </data>
   <data name="dateLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>653, 68</value>
+    <value>595, 68</value>
   </data>
   <data name="dateLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 25</value>
+    <value>172, 25</value>
   </data>
   <data name="dateLabel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="dateLabel.Text" xml:space="preserve">
-    <value>##/##/####</value>
+    <value>dddd, MMM dd, yyyy</value>
   </data>
   <data name="&gt;&gt;dateLabel.Name" xml:space="preserve">
     <value>dateLabel</value>

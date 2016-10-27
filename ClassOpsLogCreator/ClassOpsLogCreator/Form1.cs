@@ -17,24 +17,24 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
 
-        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY!
-        /*private static string username = Environment.UserName; 
+        private static string username = Environment.UserName; 
         public readonly string ROOM_SCHED = @"C:\Users\" + username+ @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
 
         //A stack for some thread safer operations
         private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();        
@@ -1542,9 +1542,9 @@ namespace ClassOpsLogCreator
                        nameText = name.Cells.Value2.ToString();
                     }
 
-                    existingMasterWorkSheet.PageSetup.LeftHeader = "&\"Calibri,Bold\"&20&KFF0000" + DateTime.Now.ToString("dddd");
                     existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&20" + nameText + ", " + timeArray[i,0] + " to " + timeArray[i,1];
-                    existingMasterWorkSheet.PageSetup.RightHeader = "&\"Calibri,Bold\"&20" + DateTime.Now.ToString("MMM dd yyyy");
+                    existingMasterWorkSheet.PageSetup.RightHeader = "&\"Calibri,Bold\"&20&KFF0000" + DateTime.Now.ToString("dddd");
+                    existingMasterWorkSheet.PageSetup.RightHeader = existingMasterWorkSheet.PageSetup.RightHeader + "&\"Calibri,Bold\"&20&K000000" + DateTime.Now.ToString(", MMM dd, yyyy");
                     logRange.PrintPreview(true);    
                 }
             }
@@ -1554,16 +1554,19 @@ namespace ClassOpsLogCreator
                 Excel.Range last = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
                 Excel.Range logRange = existingMasterWorkSheet.get_Range("B" + (rowNumbers[0, 0]), "H" + (rowNumbers[0, 1]));
 
+
                 Excel.Range name = existingMasterWorkSheet.get_Range("A" + (rowNumbers[0, 0]));
                 string nameText = name.Cells.Value2.ToString();
-
-                existingMasterWorkSheet.PageSetup.LeftHeader = "&\"Calibri,Bold\"&20&KFF0000" + DateTime.Now.ToString("dddd");
+            
                 existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&20" + nameText + ", " + timeArray[0, 0] + " to " + timeArray[0, 1];
-                existingMasterWorkSheet.PageSetup.RightHeader = "&\"Calibri,Bold\"&20" + DateTime.Now.ToString("MMM dd yyyy");
+                existingMasterWorkSheet.PageSetup.RightHeader = "&\"Calibri,Bold\"&20&KFF0000" + DateTime.Now.ToString("dddd");
+                existingMasterWorkSheet.PageSetup.RightHeader = existingMasterWorkSheet.PageSetup.RightHeader + "&\"Calibri,Bold\"&20&K000000" + DateTime.Now.ToString(", MMM dd, yyyy");
 
                 SetDefaultPrinter(printDlg.PrinterSettings.PrinterName); 
                 existingMaster.Visible = true;
                 logRange.PrintPreview(true);
+
+                
             }
             existingMaster.get_Range("C:C").EntireColumn.Hidden = false;
         }

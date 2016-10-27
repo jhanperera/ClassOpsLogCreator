@@ -37,7 +37,7 @@
             this.detailTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.detailTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.detailTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.detailTextBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.detailTextBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.detailTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
             this.detailTextBox.Location = new System.Drawing.Point(20, 30);
             this.detailTextBox.Name = "detailTextBox";

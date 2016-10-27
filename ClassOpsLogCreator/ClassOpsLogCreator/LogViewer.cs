@@ -143,7 +143,7 @@ namespace ClassOpsLogCreator
             this.startTextBox.Text = this.startTime;
             this.endTextBox.Text = this.endTime;
             this.numberOfLogsLabel.Text = this.shiftNumber + " of " + this.numberOfShifts;
-            this.dateLabel.Text = DateTime.Now.ToString("M/dd/yyyy");
+            this.dateLabel.Text = DateTime.Now.ToString("dddd, MMM dd, yyyy");
 
             //Use a data table to store all the data and then apply it to the datagrid view
             DataTable dt = new DataTable();
@@ -180,7 +180,6 @@ namespace ClassOpsLogCreator
                                 else if ((Cnum - 1) == 2 && (!DateTime.TryParse((rangeArray.GetValue(Rnum, Cnum).ToString()), out temp)))
                                 {
                                     dr[Cnum - 2] = DateTime.FromOADate(double.Parse(rangeArray.GetValue(Rnum, Cnum).ToString())).ToString("M/dd/yyyy");
-                                    this.dateLabel.Text = DateTime.FromOADate(double.Parse(rangeArray.GetValue(Rnum, Cnum).ToString())).ToString("M/dd/yyyy");
                                 }
                                 //everything else
                                 else
