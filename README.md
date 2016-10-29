@@ -38,6 +38,7 @@ Listed bellow are the minimum requirements for this application to run. **PLEASE
 ***
 1. Click on the download button bellow and save the install zip anywhere on your computer.
 <p align="center">
+  <a href="www.google.com">
   <img src="http://diylogodesigns.com/blog/wp-content/uploads/2016/04/download-button.png">
 </p>
 
