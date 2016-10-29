@@ -38,7 +38,6 @@ Listed bellow are the minimum requirements for this application to run. **PLEASE
 ***
 1. Click on the download button bellow and save the install zip anywhere on your computer.
 <p align="center">
-  <a href="https://s3.amazonaws.com/jhansapps/CLog-Beta_v0.2.9_Setup.zip">
   <img src="http://diylogodesigns.com/blog/wp-content/uploads/2016/04/download-button.png">
 </p>
 
@@ -48,10 +47,12 @@ Listed bellow are the minimum requirements for this application to run. **PLEASE
    <img height="150" width="150" src="http://www.clipartbest.com/cliparts/nTE/xEk/nTExEk5TA.jpeg">
    <img src="https://s3.amazonaws.com/jhansapps/docImages/Capture2.PNG">
 </p>
+
 3. Enter into the newly extracted _CLog-Beta_vX.X.X_Setup_ folder and double click on **CLogSetup.msi** installer file. NOTE: Sometimes the installer might need admin privileges to execute. If this is the case, you can right-click on **CLogSetup.msi** and then select **Run as administrator**.
 <p align="center">
    <img src="https://s3.amazonaws.com/jhansapps/docImages/Capture3.PNG">
 </p>
+
 4. If a _Open File - Security Warning_ appears you can click **Run**. 
 
 5. Follow the installation instruction that follow. Ensure the installation locations is set to: **C:\Program Files (x86)\YorkUIT\CLog-Beta\**. Otherwise there will be problems with saving and loading user settings.
