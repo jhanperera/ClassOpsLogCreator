@@ -37,10 +37,7 @@ Listed bellow are the minimum requirements for this application to run. **PLEASE
 ## <a name="install"></a>How to Install CLog
 ***
 1. Click on the download button bellow and save the install zip anywhere on your computer.
-<p align="center">
-  <a href="https://s3.amazonaws.com/jhansapps/CLog-Beta_v0.2.9_Setup.zip" target="_blank">
-  <img src="http://diylogodesigns.com/blog/wp-content/uploads/2016/04/download-button.png">
-</p>
+
 2. Unzip the _CLog-Beta_vX.X.X_Setup.zip_ file anywhere on your computer. This can be done by right-clicking the zip file and selecting **Extract All...**. Follow the prompts and save the output folder anywhere on your computer. 
 <p align="center">
    <img src="https://s3.amazonaws.com/jhansapps/docImages/Capture.PNG">
