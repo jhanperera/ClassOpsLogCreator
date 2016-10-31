@@ -580,7 +580,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone1Boarder = new string[] // North Central and North East
                 {
-                    "LUM", "FC", "LAS", "VH", "BSB", "VC", "SLH", "FRQ", "R", "LSB"
+                    "LUM", "LAS", "VH", "BSB", "VC", "SLH", "FRQ", "R", "LSB"
                 };
                 zone1BoarderList.AddRange(zone1Boarder);
             }
