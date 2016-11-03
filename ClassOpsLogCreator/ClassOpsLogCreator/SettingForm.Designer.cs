@@ -36,7 +36,7 @@
             this.loginBTN = new MetroFramework.Controls.MetroButton();
             this.cancelBTN = new MetroFramework.Controls.MetroButton();
             this.versionLabel = new MetroFramework.Controls.MetroLabel();
-            this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+            this.emailLoginTab = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.createBTN = new MetroFramework.Controls.MetroButton();
@@ -47,16 +47,24 @@
             this.startHour1 = new MetroFramework.Controls.MetroComboBox();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.buildingUpdateTab = new MetroFramework.Controls.MetroTabPage();
-            this.metroTabControl1.SuspendLayout();
+            this.statisticsTab = new MetroFramework.Controls.MetroTabPage();
+            this.selectorLabel = new MetroFramework.Controls.MetroLabel();
+            this.weeklyRadio = new MetroFramework.Controls.MetroRadioButton();
+            this.monthlyRadio = new MetroFramework.Controls.MetroRadioButton();
+            this.yearlyRadio = new MetroFramework.Controls.MetroRadioButton();
+            this.generateBTN = new MetroFramework.Controls.MetroButton();
+            this.dateTimePicker = new MetroFramework.Controls.MetroDateTime();
+            this.emailLoginTab.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
+            this.statisticsTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Location = new System.Drawing.Point(3, 15);
+            this.usernameLabel.Location = new System.Drawing.Point(87, 38);
             this.usernameLabel.Name = "usernameLabel";
             this.usernameLabel.Size = new System.Drawing.Size(68, 19);
             this.usernameLabel.TabIndex = 0;
@@ -65,9 +73,9 @@
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(3, 60);
+            this.passwordLabel.Location = new System.Drawing.Point(87, 83);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(64, 19);
+            this.passwordLabel.Size = new System.Drawing.Size(63, 19);
             this.passwordLabel.TabIndex = 1;
             this.passwordLabel.Text = "Password";
             // 
@@ -86,7 +94,7 @@
             this.usernameTextBox.CustomButton.UseSelectable = true;
             this.usernameTextBox.CustomButton.Visible = false;
             this.usernameTextBox.Lines = new string[0];
-            this.usernameTextBox.Location = new System.Drawing.Point(98, 15);
+            this.usernameTextBox.Location = new System.Drawing.Point(182, 38);
             this.usernameTextBox.MaxLength = 32767;
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.PasswordChar = '\0';
@@ -116,7 +124,7 @@
             this.passwordTextBox.CustomButton.UseSelectable = true;
             this.passwordTextBox.CustomButton.Visible = false;
             this.passwordTextBox.Lines = new string[0];
-            this.passwordTextBox.Location = new System.Drawing.Point(98, 60);
+            this.passwordTextBox.Location = new System.Drawing.Point(182, 83);
             this.passwordTextBox.MaxLength = 32767;
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '●';
@@ -136,7 +144,7 @@
             // 
             this.loginBTN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loginBTN.Highlight = true;
-            this.loginBTN.Location = new System.Drawing.Point(11, 110);
+            this.loginBTN.Location = new System.Drawing.Point(95, 133);
             this.loginBTN.Name = "loginBTN";
             this.loginBTN.Size = new System.Drawing.Size(80, 22);
             this.loginBTN.TabIndex = 2;
@@ -147,7 +155,7 @@
             // cancelBTN
             // 
             this.cancelBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cancelBTN.Location = new System.Drawing.Point(251, 110);
+            this.cancelBTN.Location = new System.Drawing.Point(335, 133);
             this.cancelBTN.Name = "cancelBTN";
             this.cancelBTN.Size = new System.Drawing.Size(80, 22);
             this.cancelBTN.TabIndex = 5;
@@ -158,26 +166,29 @@
             // versionLabel
             // 
             this.versionLabel.AutoSize = true;
-            this.versionLabel.Location = new System.Drawing.Point(140, 61);
+            this.versionLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.versionLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.versionLabel.Location = new System.Drawing.Point(187, 87);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(59, 19);
+            this.versionLabel.Size = new System.Drawing.Size(79, 25);
             this.versionLabel.TabIndex = 6;
             this.versionLabel.Text = "Version: ";
             // 
-            // metroTabControl1
+            // emailLoginTab
             // 
-            this.metroTabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.metroTabControl1.Controls.Add(this.metroTabPage3);
-            this.metroTabControl1.Controls.Add(this.metroTabPage2);
-            this.metroTabControl1.Controls.Add(this.metroTabPage1);
-            this.metroTabControl1.Controls.Add(this.buildingUpdateTab);
-            this.metroTabControl1.Location = new System.Drawing.Point(25, 63);
-            this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
-            this.metroTabControl1.Size = new System.Drawing.Size(394, 179);
-            this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Red;
-            this.metroTabControl1.TabIndex = 7;
-            this.metroTabControl1.UseSelectable = true;
+            this.emailLoginTab.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.emailLoginTab.Controls.Add(this.metroTabPage3);
+            this.emailLoginTab.Controls.Add(this.metroTabPage2);
+            this.emailLoginTab.Controls.Add(this.metroTabPage1);
+            this.emailLoginTab.Controls.Add(this.buildingUpdateTab);
+            this.emailLoginTab.Controls.Add(this.statisticsTab);
+            this.emailLoginTab.Location = new System.Drawing.Point(25, 63);
+            this.emailLoginTab.Name = "emailLoginTab";
+            this.emailLoginTab.SelectedIndex = 4;
+            this.emailLoginTab.Size = new System.Drawing.Size(510, 238);
+            this.emailLoginTab.Style = MetroFramework.MetroColorStyle.Red;
+            this.emailLoginTab.TabIndex = 7;
+            this.emailLoginTab.UseSelectable = true;
             // 
             // metroTabPage3
             // 
@@ -187,7 +198,7 @@
             this.metroTabPage3.HorizontalScrollbarSize = 10;
             this.metroTabPage3.Location = new System.Drawing.Point(4, 41);
             this.metroTabPage3.Name = "metroTabPage3";
-            this.metroTabPage3.Size = new System.Drawing.Size(386, 134);
+            this.metroTabPage3.Size = new System.Drawing.Size(502, 193);
             this.metroTabPage3.TabIndex = 2;
             this.metroTabPage3.Text = "Version";
             this.metroTabPage3.VerticalScrollbarBarColor = true;
@@ -207,7 +218,7 @@
             this.metroTabPage2.HorizontalScrollbarSize = 10;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 41);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(386, 134);
+            this.metroTabPage2.Size = new System.Drawing.Size(502, 193);
             this.metroTabPage2.TabIndex = 1;
             this.metroTabPage2.Text = "Logout Generator";
             this.metroTabPage2.VerticalScrollbarBarColor = true;
@@ -217,7 +228,7 @@
             // createBTN
             // 
             this.createBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.createBTN.Location = new System.Drawing.Point(152, 92);
+            this.createBTN.Location = new System.Drawing.Point(210, 113);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(87, 27);
             this.createBTN.TabIndex = 18;
@@ -229,7 +240,7 @@
             // 
             this.am_pmCombo1_2.FormattingEnabled = true;
             this.am_pmCombo1_2.ItemHeight = 23;
-            this.am_pmCombo1_2.Location = new System.Drawing.Point(304, 31);
+            this.am_pmCombo1_2.Location = new System.Drawing.Point(362, 52);
             this.am_pmCombo1_2.Name = "am_pmCombo1_2";
             this.am_pmCombo1_2.Size = new System.Drawing.Size(53, 29);
             this.am_pmCombo1_2.TabIndex = 15;
@@ -240,7 +251,7 @@
             // 
             this.endHour1.FormattingEnabled = true;
             this.endHour1.ItemHeight = 23;
-            this.endHour1.Location = new System.Drawing.Point(210, 31);
+            this.endHour1.Location = new System.Drawing.Point(268, 52);
             this.endHour1.Name = "endHour1";
             this.endHour1.Size = new System.Drawing.Size(88, 29);
             this.endHour1.TabIndex = 14;
@@ -250,7 +261,7 @@
             // toLabel1
             // 
             this.toLabel1.AutoSize = true;
-            this.toLabel1.Location = new System.Drawing.Point(183, 33);
+            this.toLabel1.Location = new System.Drawing.Point(241, 54);
             this.toLabel1.Name = "toLabel1";
             this.toLabel1.Size = new System.Drawing.Size(21, 19);
             this.toLabel1.TabIndex = 17;
@@ -260,7 +271,7 @@
             // 
             this.am_pmCombo1_1.FormattingEnabled = true;
             this.am_pmCombo1_1.ItemHeight = 23;
-            this.am_pmCombo1_1.Location = new System.Drawing.Point(124, 31);
+            this.am_pmCombo1_1.Location = new System.Drawing.Point(182, 52);
             this.am_pmCombo1_1.Name = "am_pmCombo1_1";
             this.am_pmCombo1_1.Size = new System.Drawing.Size(53, 29);
             this.am_pmCombo1_1.TabIndex = 13;
@@ -270,7 +281,7 @@
             // startHour1
             // 
             this.startHour1.ItemHeight = 23;
-            this.startHour1.Location = new System.Drawing.Point(30, 31);
+            this.startHour1.Location = new System.Drawing.Point(88, 52);
             this.startHour1.Name = "startHour1";
             this.startHour1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.startHour1.Size = new System.Drawing.Size(88, 29);
@@ -291,7 +302,7 @@
             this.metroTabPage1.HorizontalScrollbarSize = 10;
             this.metroTabPage1.Location = new System.Drawing.Point(4, 41);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(386, 134);
+            this.metroTabPage1.Size = new System.Drawing.Size(502, 193);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "Email Login";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
@@ -305,20 +316,105 @@
             this.buildingUpdateTab.HorizontalScrollbarSize = 10;
             this.buildingUpdateTab.Location = new System.Drawing.Point(4, 41);
             this.buildingUpdateTab.Name = "buildingUpdateTab";
-            this.buildingUpdateTab.Size = new System.Drawing.Size(386, 134);
+            this.buildingUpdateTab.Size = new System.Drawing.Size(502, 193);
             this.buildingUpdateTab.TabIndex = 3;
             this.buildingUpdateTab.Text = "Edit Buildings";
             this.buildingUpdateTab.VerticalScrollbarBarColor = true;
             this.buildingUpdateTab.VerticalScrollbarHighlightOnWheel = false;
             this.buildingUpdateTab.VerticalScrollbarSize = 10;
             // 
+            // statisticsTab
+            // 
+            this.statisticsTab.Controls.Add(this.dateTimePicker);
+            this.statisticsTab.Controls.Add(this.generateBTN);
+            this.statisticsTab.Controls.Add(this.yearlyRadio);
+            this.statisticsTab.Controls.Add(this.monthlyRadio);
+            this.statisticsTab.Controls.Add(this.weeklyRadio);
+            this.statisticsTab.Controls.Add(this.selectorLabel);
+            this.statisticsTab.HorizontalScrollbarBarColor = true;
+            this.statisticsTab.HorizontalScrollbarHighlightOnWheel = false;
+            this.statisticsTab.HorizontalScrollbarSize = 10;
+            this.statisticsTab.Location = new System.Drawing.Point(4, 41);
+            this.statisticsTab.Name = "statisticsTab";
+            this.statisticsTab.Size = new System.Drawing.Size(502, 193);
+            this.statisticsTab.TabIndex = 4;
+            this.statisticsTab.Text = "Statistics";
+            this.statisticsTab.VerticalScrollbarBarColor = true;
+            this.statisticsTab.VerticalScrollbarHighlightOnWheel = false;
+            this.statisticsTab.VerticalScrollbarSize = 10;
+            // 
+            // selectorLabel
+            // 
+            this.selectorLabel.AutoSize = true;
+            this.selectorLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.selectorLabel.Location = new System.Drawing.Point(87, 73);
+            this.selectorLabel.Name = "selectorLabel";
+            this.selectorLabel.Size = new System.Drawing.Size(106, 25);
+            this.selectorLabel.TabIndex = 3;
+            this.selectorLabel.Text = "Select a day:";
+            // 
+            // weeklyRadio
+            // 
+            this.weeklyRadio.AutoSize = true;
+            this.weeklyRadio.Checked = true;
+            this.weeklyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.weeklyRadio.Location = new System.Drawing.Point(138, 26);
+            this.weeklyRadio.Name = "weeklyRadio";
+            this.weeklyRadio.Size = new System.Drawing.Size(68, 19);
+            this.weeklyRadio.TabIndex = 4;
+            this.weeklyRadio.TabStop = true;
+            this.weeklyRadio.Text = "Weekly";
+            this.weeklyRadio.UseSelectable = true;
+            // 
+            // monthlyRadio
+            // 
+            this.monthlyRadio.AutoSize = true;
+            this.monthlyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.monthlyRadio.Location = new System.Drawing.Point(212, 26);
+            this.monthlyRadio.Name = "monthlyRadio";
+            this.monthlyRadio.Size = new System.Drawing.Size(77, 19);
+            this.monthlyRadio.TabIndex = 5;
+            this.monthlyRadio.Text = "Monthly";
+            this.monthlyRadio.UseSelectable = true;
+            // 
+            // yearlyRadio
+            // 
+            this.yearlyRadio.AutoSize = true;
+            this.yearlyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.yearlyRadio.Location = new System.Drawing.Point(295, 26);
+            this.yearlyRadio.Name = "yearlyRadio";
+            this.yearlyRadio.Size = new System.Drawing.Size(61, 19);
+            this.yearlyRadio.TabIndex = 6;
+            this.yearlyRadio.Text = "Yearly";
+            this.yearlyRadio.UseSelectable = true;
+            // 
+            // generateBTN
+            // 
+            this.generateBTN.Location = new System.Drawing.Point(197, 126);
+            this.generateBTN.Name = "generateBTN";
+            this.generateBTN.Size = new System.Drawing.Size(117, 35);
+            this.generateBTN.TabIndex = 7;
+            this.generateBTN.Text = "Generate Statistics";
+            this.generateBTN.UseSelectable = true;
+            this.generateBTN.Click += new System.EventHandler(this.generateBTN_Click);
+            // 
+            // dateTimePicker
+            // 
+            this.dateTimePicker.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dateTimePicker.Location = new System.Drawing.Point(216, 73);
+            this.dateTimePicker.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(200, 29);
+            this.dateTimePicker.Style = MetroFramework.MetroColorStyle.Red;
+            this.dateTimePicker.TabIndex = 8;
+            // 
             // SettingForm
             // 
             this.AcceptButton = this.loginBTN;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(444, 265);
-            this.Controls.Add(this.metroTabControl1);
+            this.ClientSize = new System.Drawing.Size(560, 324);
+            this.Controls.Add(this.emailLoginTab);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -329,13 +425,15 @@
             this.Style = MetroFramework.MetroColorStyle.Red;
             this.Text = "Settings";
             this.TopMost = true;
-            this.metroTabControl1.ResumeLayout(false);
+            this.emailLoginTab.ResumeLayout(false);
             this.metroTabPage3.ResumeLayout(false);
             this.metroTabPage3.PerformLayout();
             this.metroTabPage2.ResumeLayout(false);
             this.metroTabPage2.PerformLayout();
             this.metroTabPage1.ResumeLayout(false);
             this.metroTabPage1.PerformLayout();
+            this.statisticsTab.ResumeLayout(false);
+            this.statisticsTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -349,7 +447,7 @@
         private MetroFramework.Controls.MetroButton loginBTN;
         private MetroFramework.Controls.MetroButton cancelBTN;
         private MetroFramework.Controls.MetroLabel versionLabel;
-        private MetroFramework.Controls.MetroTabControl metroTabControl1;
+        private MetroFramework.Controls.MetroTabControl emailLoginTab;
         private MetroFramework.Controls.MetroTabPage metroTabPage1;
         private MetroFramework.Controls.MetroTabPage metroTabPage2;
         private MetroFramework.Controls.MetroTabPage metroTabPage3;
@@ -360,5 +458,12 @@
         private MetroFramework.Controls.MetroComboBox am_pmCombo1_1;
         private MetroFramework.Controls.MetroComboBox startHour1;
         private MetroFramework.Controls.MetroTabPage buildingUpdateTab;
+        private MetroFramework.Controls.MetroTabPage statisticsTab;
+        private MetroFramework.Controls.MetroRadioButton yearlyRadio;
+        private MetroFramework.Controls.MetroRadioButton monthlyRadio;
+        private MetroFramework.Controls.MetroRadioButton weeklyRadio;
+        private MetroFramework.Controls.MetroLabel selectorLabel;
+        private MetroFramework.Controls.MetroButton generateBTN;
+        private MetroFramework.Controls.MetroDateTime dateTimePicker;
     }
 }

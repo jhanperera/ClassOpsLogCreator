@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework;
 using MetroFramework.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ClassOpsLogCreator
 {
@@ -17,6 +18,17 @@ namespace ClassOpsLogCreator
         private bool loginClicked = false;
         private bool canceledClicked = false;
         private LogCreator mainForm;
+
+        //Use a background worker to allow the GUI to still be functional and not hang.
+        private static BackgroundWorker bw = null;
+
+        //Start and end time that are picked
+        DateTime startDate;
+        DateTime endDate;
+
+        //Store the starting and ending index of the range
+        int startingRowIndex = -1;
+        int endingRowIndex = -1;
 
         /// <summary>
         /// Constructor
@@ -27,8 +39,24 @@ namespace ClassOpsLogCreator
 
             this.mainForm = MainForm;
 
-            this.metroTabControl1.SelectedIndexChanged += MetroTabControl1_SelectedIndexChanged;
+            //Add event handlers
+            this.emailLoginTab.SelectedIndexChanged += MetroTabControl1_SelectedIndexChanged;
+            this.weeklyRadio.CheckedChanged += new EventHandler(weeklyRadio_CheckedChanged);
+            this.monthlyRadio.CheckedChanged += new EventHandler(monthlyRadio_CheckedChanged);
+            this.yearlyRadio.CheckedChanged += new EventHandler(yearlyRadio_CheckedChanged);
 
+            //Get last weeks start and end date.
+            DateTime date = DateTime.Now.AddDays(-7);
+            while (date.DayOfWeek != DayOfWeek.Sunday)
+            {
+                date = date.AddDays(-1);
+            }
+            DateTime startDateNow = date;
+            DateTime endOfWeek = date.AddDays(6);
+
+            //Set the min and max date for the picker
+            dateTimePicker.MinDate = new DateTime(2016, 9, 1);
+            dateTimePicker.MaxDate = endOfWeek;
 
             //Fill the combo boxes
             for (int i = 1; i <= 12; i++)
@@ -68,6 +96,48 @@ namespace ClassOpsLogCreator
             }
         }
 
+        #region Radio button event handlers
+
+        /// <summary>
+        /// yearlyRadio event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void yearlyRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePicker.Format = DateTimePickerFormat.Custom;
+            dateTimePicker.CustomFormat = "yyyy";
+            selectorLabel.Text = "Select a year:";
+            
+        }
+
+        /// <summary>
+        /// monthlyRadio event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void monthlyRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePicker.Format = DateTimePickerFormat.Custom;
+            dateTimePicker.CustomFormat = "MM/yyyy";
+            selectorLabel.Text = "Select a month:";
+        }
+
+        /// <summary>
+        /// weeklyRadio event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void weeklyRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePicker.Format = DateTimePickerFormat.Long;
+            selectorLabel.Text = "Select a day:";
+        }
+
+        #endregion
+
+        #region Public status click events
+
         /// <summary>
         /// Return if the login button is clicked
         /// </summary>
@@ -86,6 +156,9 @@ namespace ClassOpsLogCreator
             return this.canceledClicked;
         }
 
+        #endregion
+
+        #region Admin Controls
         /// <summary>
         /// Check if we change the tab, if we change to tab 3 then we ask for a password.
         /// </summary>
@@ -93,7 +166,7 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void MetroTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(metroTabControl1.SelectedIndex == 3)
+            if(emailLoginTab.SelectedIndex == 3)
             {
                 PasswordInput passInput = new PasswordInput();
                 passInput.ShowDialog(this);
@@ -103,6 +176,9 @@ namespace ClassOpsLogCreator
                 }
             }
         }
+        #endregion
+
+        #region Button Operations
 
         /// <summary>
         /// When the user clicked login. 
@@ -188,6 +264,190 @@ namespace ClassOpsLogCreator
             createBTN.Enabled = true;
             Cursor.Current = Cursors.Default;*/
 
+        }
+
+        /// <summary>
+        /// Generate and send statistics according to the given date and time.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void generateBTN_Click(object sender, EventArgs e)
+        {
+            //Generate the stats for the week.
+            if (weeklyRadio.Checked)
+            {
+                //get Monday and Friday of a selected week.
+                DateTime date = this.dateTimePicker.Value.Date;
+                while (date.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    date = date.AddDays(-1);
+                }
+
+                //Start of selected week and end of the given week.
+                startDate = date;
+                endDate = date.AddDays(6);
+
+            }
+            //Generate the stats for the month.
+            else if(monthlyRadio.Checked)
+            {
+                //get the first day of the month and last day of the month
+                startDate = new DateTime(dateTimePicker.Value.Date.Year, dateTimePicker.Value.Date.Month, 1);
+                endDate = startDate.AddMonths(1).AddDays(-1);
+            }
+            //Generate the stats for the year.
+            else
+            {
+                startDate = new DateTime(dateTimePicker.Value.Date.Year, 1, 1);
+                endDate = new DateTime(dateTimePicker.Value.Date.Year, 12, 31);
+            }
+
+            //Create the background worker
+            bw = new BackgroundWorker();
+            //Initialize the Background worker and report progress
+            bw.WorkerReportsProgress = true;
+            //Add Work to the worker thread
+            bw.DoWork += new DoWorkEventHandler(Bw_DoWork);
+            //Get progress changes
+            bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
+            //Get work completed events
+            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+            //Do all the work
+            if (bw.IsBusy != true)
+            {
+                //Disable the button
+                generateBTN.Enabled = false;
+
+                //Run the work
+                bw.RunWorkerAsync();
+            }
+        }
+        #endregion
+
+        #region Thread work
+
+        /// <summary>
+        /// A work complete method to update files and send out messages
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // First, handle the case where an exception was thrown.
+            if (e.Error != null)
+            {
+                MetroMessageBox.Show(this, e.Error.Message, "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                generateBTN.Enabled = true;
+            }
+            else if (e.Cancelled)
+            {
+                // Next, handle the case where the user canceled 
+                // the operation.
+                // Note that due to a race condition in 
+                // the DoWork event handler, the Canceled
+                // flag may not have been set, even though
+                // CancelAsync was called.
+                generateBTN.Enabled = true;
+               
+            }
+            else
+            {
+                generateBTN.Enabled = true;
+            }
+        }
+        
+        /// <summary>
+        /// Progress change method to update the detail window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            return;
+        }
+
+        /// <summary>
+        /// Do the work
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Bw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var worker = sender as BackgroundWorker;
+
+            generateStats();
+            return;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// A helper/worker method that will generate statistics
+        /// </summary>
+        private void generateStats()
+        {
+            Excel.Application masterExcel = new Excel.Application();
+            Excel.Workbook masterExcelWorkBook = masterExcel.Workbooks.Open(mainForm.EXISTING_MASTER_LOG);
+            Excel.Worksheet masterExcelWorkSheet = (Excel.Worksheet)masterExcelWorkBook.Worksheets[1];
+
+            //get the last filled cell
+            Excel.Range last = masterExcelWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+            numberOfRows(masterExcelWorkSheet, startDate, endDate);
+            
+
+            //Keep track of how many events occur.
+            Dictionary<string, int> eventCounter = new Dictionary<string, int>();
+            masterExcel.Visible = true;      
+        }
+
+        private int numberOfRows(Excel.Worksheet ExSheet, DateTime startDate, DateTime endDate)
+        {
+
+            Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+
+            int lastRow = ExSheet.UsedRange.Rows.Count;
+            //Obtain all the dates
+            Excel.Range range = ExSheet.get_Range("C1", "C" + lastRow);
+
+            int numberOfRows = 0;
+
+            if (range.Rows.Count != 1)
+            {
+                //Export to array 
+                System.Array array = (System.Array)range.Cells.Value2;
+
+                for (int i = array.GetUpperBound(0);
+                     i >= array.GetLowerBound(0); i--)
+                {
+                    //This finds all number of columns that happen today. 
+                    if ((array.GetValue(i, 1) != null) && (array.GetValue(i, 1) is double))
+                    {
+                        DateTime dateToCheck = DateTime.FromOADate(double.Parse((string)array.GetValue(i, 1)));
+                        if (dateToCheck >= startDate && dateToCheck <= endDate)
+                        {
+                            if (startingRowIndex == -1) { startingRowIndex = i; }
+                            numberOfRows++;
+                            endingRowIndex = i;
+                        }               
+                    }
+                    else if(array.GetValue(i, 1) != null && (array.GetValue(i, 1) is string))
+                    {
+                        DateTime dateToCheck = Convert.ToDateTime(array.GetValue(i, 1));
+                        if (dateToCheck >= startDate && dateToCheck <= endDate)
+                        {
+                            if(startingRowIndex == -1) { startingRowIndex = i; }
+                            numberOfRows++;
+                            endingRowIndex = i;
+                        }
+                    }
+                }
+            }
+
+            last = null;
+            range = null;
+
+            return numberOfRows;
         }
     }
 }
