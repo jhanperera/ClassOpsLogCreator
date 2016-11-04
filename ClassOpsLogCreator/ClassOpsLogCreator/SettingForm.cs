@@ -291,9 +291,40 @@ namespace ClassOpsLogCreator
             //Generate the stats for the month.
             else if(monthlyRadio.Checked)
             {
-                //get the first day of the month and last day of the month
-                startDate = new DateTime(dateTimePicker.Value.Date.Year, dateTimePicker.Value.Date.Month, 1);
-                endDate = startDate.AddMonths(1).AddDays(-1);
+                var holidays = new List<DateTime> {/* list of observed holidays */};
+                var i = DateTime.DaysInMonth(dateTimePicker.Value.Date.Year, dateTimePicker.Value.Date.Month);
+                while (i > 0)
+                {
+                    var dtCurrent = new DateTime(dateTimePicker.Value.Date.Year, dateTimePicker.Value.Date.Month, i);
+                    if (dtCurrent.DayOfWeek < DayOfWeek.Saturday && dtCurrent.DayOfWeek > DayOfWeek.Sunday &&
+                     !holidays.Contains(dtCurrent))
+                    {
+                        endDate = dtCurrent;
+                        i = 0;
+                    }
+                    else
+                    {
+                        i--;
+                    }
+                }
+
+                var j = 1;
+                while (j < 7)
+                {
+                    var dtCurrent = new DateTime(dateTimePicker.Value.Date.Year, dateTimePicker.Value.Date.Month, j);
+                    if (dtCurrent.DayOfWeek < DayOfWeek.Saturday && dtCurrent.DayOfWeek > DayOfWeek.Sunday &&
+                     !holidays.Contains(dtCurrent))
+                    {
+                        startDate = dtCurrent;
+                        j = 8;
+                    }
+                    else
+                    {
+                        j++;
+                    }
+
+                }
+
             }
             //Generate the stats for the year.
             else
@@ -376,78 +407,11 @@ namespace ClassOpsLogCreator
         {
             var worker = sender as BackgroundWorker;
 
-            generateStats();
+            StatsGen statGenerator = new StatsGen(this.mainForm, this.startDate, this.endDate);
             return;
         }
 
         #endregion
 
-        /// <summary>
-        /// A helper/worker method that will generate statistics
-        /// </summary>
-        private void generateStats()
-        {
-            Excel.Application masterExcel = new Excel.Application();
-            Excel.Workbook masterExcelWorkBook = masterExcel.Workbooks.Open(mainForm.EXISTING_MASTER_LOG);
-            Excel.Worksheet masterExcelWorkSheet = (Excel.Worksheet)masterExcelWorkBook.Worksheets[1];
-
-            //get the last filled cell
-            Excel.Range last = masterExcelWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            numberOfRows(masterExcelWorkSheet, startDate, endDate);
-            
-
-            //Keep track of how many events occur.
-            Dictionary<string, int> eventCounter = new Dictionary<string, int>();
-            masterExcel.Visible = true;      
-        }
-
-        private int numberOfRows(Excel.Worksheet ExSheet, DateTime startDate, DateTime endDate)
-        {
-
-            Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-
-            int lastRow = ExSheet.UsedRange.Rows.Count;
-            //Obtain all the dates
-            Excel.Range range = ExSheet.get_Range("C1", "C" + lastRow);
-
-            int numberOfRows = 0;
-
-            if (range.Rows.Count != 1)
-            {
-                //Export to array 
-                System.Array array = (System.Array)range.Cells.Value2;
-
-                for (int i = array.GetUpperBound(0);
-                     i >= array.GetLowerBound(0); i--)
-                {
-                    //This finds all number of columns that happen today. 
-                    if ((array.GetValue(i, 1) != null) && (array.GetValue(i, 1) is double))
-                    {
-                        DateTime dateToCheck = DateTime.FromOADate(double.Parse((string)array.GetValue(i, 1)));
-                        if (dateToCheck >= startDate && dateToCheck <= endDate)
-                        {
-                            if (startingRowIndex == -1) { startingRowIndex = i; }
-                            numberOfRows++;
-                            endingRowIndex = i;
-                        }               
-                    }
-                    else if(array.GetValue(i, 1) != null && (array.GetValue(i, 1) is string))
-                    {
-                        DateTime dateToCheck = Convert.ToDateTime(array.GetValue(i, 1));
-                        if (dateToCheck >= startDate && dateToCheck <= endDate)
-                        {
-                            if(startingRowIndex == -1) { startingRowIndex = i; }
-                            numberOfRows++;
-                            endingRowIndex = i;
-                        }
-                    }
-                }
-            }
-
-            last = null;
-            range = null;
-
-            return numberOfRows;
-        }
     }
 }

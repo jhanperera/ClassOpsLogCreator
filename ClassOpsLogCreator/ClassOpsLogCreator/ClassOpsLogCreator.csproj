@@ -82,7 +82,8 @@
     <ManifestCertificateThumbprint>89854D62484F2C86AC33DBE8C617EAF0367B4F51</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>ClassOpsLogCreator_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
@@ -161,6 +162,7 @@
     <Compile Include="SchoolZoning.cs" />
     <Compile Include="LogoutLogImporter.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="StatsGen.cs" />
     <Compile Include="TaskRanks.cs" />
     <Compile Include="ZoneSuperLogImporter.cs" />
     <Compile Include="ClassInfo.cs" />
