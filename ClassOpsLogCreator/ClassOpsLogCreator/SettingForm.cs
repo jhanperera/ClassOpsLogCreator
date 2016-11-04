@@ -278,14 +278,14 @@ namespace ClassOpsLogCreator
             {
                 //get Monday and Friday of a selected week.
                 DateTime date = this.dateTimePicker.Value.Date;
-                while (date.DayOfWeek != DayOfWeek.Sunday)
+                while (date.DayOfWeek != DayOfWeek.Monday)
                 {
                     date = date.AddDays(-1);
                 }
 
                 //Start of selected week and end of the given week.
                 startDate = date;
-                endDate = date.AddDays(6);
+                endDate = date.AddDays(4);
 
             }
             //Generate the stats for the month.
@@ -329,8 +329,40 @@ namespace ClassOpsLogCreator
             //Generate the stats for the year.
             else
             {
-                startDate = new DateTime(dateTimePicker.Value.Date.Year, 1, 1);
-                endDate = new DateTime(dateTimePicker.Value.Date.Year, 12, 31);
+                var holidays = new List<DateTime> {/* list of observed holidays */};
+                var i = DateTime.DaysInMonth(dateTimePicker.Value.Date.Year, 12);
+                while (i > 0)
+                {
+                    var dtCurrent = new DateTime(dateTimePicker.Value.Date.Year, 12, i);
+                    if (dtCurrent.DayOfWeek < DayOfWeek.Saturday && dtCurrent.DayOfWeek > DayOfWeek.Sunday &&
+                     !holidays.Contains(dtCurrent))
+                    {
+                        endDate = dtCurrent;
+                        i = 0;
+                    }
+                    else
+                    {
+                        i--;
+                    }
+                }
+
+                var j = 1;
+                while (j < 7)
+                {
+                    var dtCurrent = new DateTime(dateTimePicker.Value.Date.Year, 1, j);
+                    if (dtCurrent.DayOfWeek < DayOfWeek.Saturday && dtCurrent.DayOfWeek > DayOfWeek.Sunday &&
+                     !holidays.Contains(dtCurrent))
+                    {
+                        startDate = dtCurrent;
+                        j = 8;
+                    }
+                    else
+                    {
+                        j++;
+                    }
+
+                }
+
             }
 
             //Create the background worker

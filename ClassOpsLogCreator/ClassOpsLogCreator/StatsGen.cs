@@ -76,6 +76,9 @@ namespace ClassOpsLogCreator
             //Get the first and last row of the time period we are looking for.
             int[,] rowNumbers = startAndEndingIndex(masterExcelWorkSheet, startDate, endDate);
 
+            //Get the stats date
+            var data = this.dataFromFile(masterExcelWorkSheet, rowNumbers[0, 0], rowNumbers[0, 1]);
+
             masterExcel.Visible = true;
 
             //Close all excel instances
@@ -136,6 +139,27 @@ namespace ClassOpsLogCreator
             return eventList;
         }
 
+        private Tuple<DateTime,string,string>[] dataFromFile(Excel.Worksheet ExSheet, int startingIndex, int endingIndex)
+        {
+            Excel.Range eventRange = ExSheet.get_Range("B" + startingIndex, "B" + endingIndex);
+            Excel.Range buildingRange = ExSheet.get_Range("E" + startingIndex, "E" + endingIndex);
+
+            System.Array eventArray = (System.Array)eventRange.Cells.Value2;
+            System.Array buildingArray = (System.Array)buildingRange.Cells.Value2;
+
+            return null;
+        }
+        
+        /// <summary>
+        /// Return the starting and ending index of the range we are looking for
+        /// 
+        /// If no dates between startDate and endDate are found then we return range 
+        /// 2 - lastrow.rows.count
+        /// </summary>
+        /// <param name="ExSheet"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
         private int[,] startAndEndingIndex(Excel.Worksheet ExSheet, DateTime startDate, DateTime endDate)
         {
 
@@ -156,15 +180,17 @@ namespace ClassOpsLogCreator
                 int firstIndex = this.first(stringArray, 0, stringArray.Length - 1, startDate);
                 if (firstIndex == -1)
                 {
-                    firstIndex = 0;
+                    firstIndex = 2;
                 }
                 int lastIndex = this.last(stringArray, firstIndex, stringArray.Length - 1, endDate);
+                if (lastIndex == -1)
+                {
+                    lastIndex = last.Rows.Count;
+                }
 
                 indexArray[0, 0] = stringArray[firstIndex].Item2;
                 indexArray[0, 1] = stringArray[lastIndex].Item2;
-
             }
-
             last = null;
             range = null;
 
