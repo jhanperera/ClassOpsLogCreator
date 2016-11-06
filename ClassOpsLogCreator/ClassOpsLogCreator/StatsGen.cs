@@ -79,6 +79,16 @@ namespace ClassOpsLogCreator
             //Get the stats date
             var data = this.dataFromFile(masterExcelWorkSheet, rowNumbers[0, 0], rowNumbers[0, 1]);
 
+            //Tally up the data
+            foreach(Tuple<string,string> obj in data)
+            {
+                eventCounter[obj.Item1] += 1;
+                buildingCounter[obj.Item2] += 1;
+            }
+
+            StatsGenForm sgf = new StatsGenForm(eventList, buildingList, eventCounter, buildingCounter);
+            sgf.ShowDialog();
+
             masterExcel.Visible = true;
 
             //Close all excel instances
@@ -139,15 +149,27 @@ namespace ClassOpsLogCreator
             return eventList;
         }
 
-        private Tuple<DateTime,string,string>[] dataFromFile(Excel.Worksheet ExSheet, int startingIndex, int endingIndex)
-        {
+        private Tuple<string,string>[] dataFromFile(Excel.Worksheet ExSheet, int startingIndex, int endingIndex)
+        {        
             Excel.Range eventRange = ExSheet.get_Range("B" + startingIndex, "B" + endingIndex);
             Excel.Range buildingRange = ExSheet.get_Range("E" + startingIndex, "E" + endingIndex);
 
             System.Array eventArray = (System.Array)eventRange.Cells.Value2;
             System.Array buildingArray = (System.Array)buildingRange.Cells.Value2;
 
-            return null;
+            Tuple<string, string>[] data = new Tuple<string, string>[eventArray.Length];
+
+            int dataCount = 0;
+
+            for(int i = 1; i <= eventArray.GetUpperBound(0); i ++)
+            {
+                if (eventArray.GetValue(i, 1) != null || buildingArray.GetValue(i, 1) != null)
+                {
+                    data[dataCount] = new Tuple<string, string>(eventArray.GetValue(i, 1).ToString(), buildingArray.GetValue(i, 1).ToString());
+                    dataCount++;
+                }
+            }
+            return data = data.Where(x => x != null).ToArray();
         }
         
         /// <summary>
@@ -162,9 +184,6 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         private int[,] startAndEndingIndex(Excel.Worksheet ExSheet, DateTime startDate, DateTime endDate)
         {
-
-            Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-
             int lastRow = ExSheet.UsedRange.Rows.Count;
             //Obtain all the dates
             Excel.Range range = ExSheet.get_Range("C1", "C" + lastRow);
@@ -180,18 +199,18 @@ namespace ClassOpsLogCreator
                 int firstIndex = this.first(stringArray, 0, stringArray.Length - 1, startDate);
                 if (firstIndex == -1)
                 {
-                    firstIndex = 2;
+                    firstIndex = 0;
                 }
                 int lastIndex = this.last(stringArray, firstIndex, stringArray.Length - 1, endDate);
                 if (lastIndex == -1)
                 {
-                    lastIndex = last.Rows.Count;
+                    lastIndex = stringArray.Length - 1; 
                 }
 
                 indexArray[0, 0] = stringArray[firstIndex].Item2;
                 indexArray[0, 1] = stringArray[lastIndex].Item2;
             }
-            last = null;
+
             range = null;
 
             return indexArray;
@@ -248,7 +267,7 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         private int first(Tuple<DateTime, int>[] array, int low, int high, DateTime startDateL)
         {
-            if (high >= low)
+            if (high >= low && ((low + high) / 2 > 0))
             {
                 int mid = (low + high) / 2;
                 DateTime checkDateMIDMINUS1 = Convert.ToDateTime(array[mid - 1].Item1);
@@ -281,7 +300,7 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         private int last(Tuple<DateTime, int>[] array, int low, int high, DateTime endDateL)
         {
-            if (high >= low)
+            if (high >= low && ((low + high) / 2 < array.Length - 1))
             {
                 int mid = (low + high) / 2;
                 DateTime checkDateMIDPLUS1 = Convert.ToDateTime(array[mid + 1].Item1);

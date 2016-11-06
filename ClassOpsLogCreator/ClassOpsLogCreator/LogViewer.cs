@@ -156,6 +156,7 @@ namespace ClassOpsLogCreator
 
             int Cnum = 0;
             int Rnum = 0;
+            
 
             //Lock the thread so we don't get a cross thread issue 
             if(!done)
