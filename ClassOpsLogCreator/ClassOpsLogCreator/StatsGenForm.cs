@@ -41,6 +41,7 @@ namespace ClassOpsLogCreator
             //Create the chart
             this.createEventChart(eventList, eventCounter);
             this.createBuildingChart(buildingList, buildingCounter);
+            this.createBuildingtoEventChart();
 
             //eventChart memory block to add to pdf
             var eventChartImage = new MemoryStream();
@@ -199,6 +200,51 @@ namespace ClassOpsLogCreator
             this.eventChart.Series[0].LegendText = "#PERCENT #VALX";
             //Set the legend at the bottom
             this.eventChart.Legends[0].Docking = Docking.Bottom;
+        }
+
+        /// <summary>
+        /// This method will create the stacked bar chart with the combined chart
+        /// </summary>
+        /// <param name="eventList"></param>
+        /// <param name="buildingList"></param>
+        /// <param name="combinedDic"></param>
+        private void createBuildingtoEventChart(/*List<string> eventList, List<string> buildingList, Dictionary<string, Dictionary<string, int>> combinedDic*/)
+        {
+            //Add the eventList to the series
+            /*foreach(string e in eventList)
+            {
+                Series seriesToAdd = new Series(e.ToString());
+                this.distrabutionChart.Series.Add(seriesToAdd);
+            }*/
+            this.distrabutionChart.Series["Series1"].ChartType = SeriesChartType.StackedColumn;
+            this.distrabutionChart.Series["Series2"].ChartType = SeriesChartType.StackedColumn;
+            this.distrabutionChart.Series["Series3"].ChartType = SeriesChartType.StackedColumn;
+            this.distrabutionChart.Series["Series4"].ChartType = SeriesChartType.StackedColumn;
+            this.distrabutionChart.Series["Series5"].ChartType = SeriesChartType.StackedColumn;
+
+            this.distrabutionChart.Series["Series1"].Points.AddXY(1, 50);
+            this.distrabutionChart.Series["Series2"].Points.AddXY(1, 100);
+            this.distrabutionChart.Series["Series3"].Points.AddXY(1, 0);
+            this.distrabutionChart.Series["Series4"].Points.AddXY(1, 0);
+            this.distrabutionChart.Series["Series5"].Points.AddXY(1, 0);
+
+            this.distrabutionChart.Series["Series1"].Points.AddXY(2, 0);
+            this.distrabutionChart.Series["Series2"].Points.AddXY(2, 50);
+            this.distrabutionChart.Series["Series3"].Points.AddXY(2, 200);
+            this.distrabutionChart.Series["Series4"].Points.AddXY(2, 0);
+            this.distrabutionChart.Series["Series5"].Points.AddXY(2, 0);
+
+            this.distrabutionChart.Series["Series1"].Points.AddXY(3, 0);
+            this.distrabutionChart.Series["Series2"].Points.AddXY(3, 0);
+            this.distrabutionChart.Series["Series3"].Points.AddXY(3, 100);
+            this.distrabutionChart.Series["Series4"].Points.AddXY(3, 50);
+            this.distrabutionChart.Series["Series5"].Points.AddXY(3, 0);
+
+            this.distrabutionChart.Series["Series1"].Points.AddXY(5, 0);
+            this.distrabutionChart.Series["Series2"].Points.AddXY(5, 0);
+            this.distrabutionChart.Series["Series3"].Points.AddXY(5, 0);
+            this.distrabutionChart.Series["Series4"].Points.AddXY(5, 0);
+            this.distrabutionChart.Series["Series5"].Points.AddXY(5, 150);
         }
 
         /// <summary>
