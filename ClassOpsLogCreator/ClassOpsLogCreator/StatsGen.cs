@@ -60,15 +60,25 @@ namespace ClassOpsLogCreator
             //Keep track of how many events occur.
             Dictionary<string, int> eventCounter = new Dictionary<string, int>();
             Dictionary<string, int> buildingCounter = new Dictionary<string, int>();
+            Dictionary<string, Dictionary<string, int>> combinedData = new Dictionary<string, Dictionary<string, int>>();
 
+            bool eventCounterFull = false;
             //Initialize the dictionary's
-            foreach (string s in eventList)
-            {
-                eventCounter.Add(s, 0);
-            }
             foreach(string s in buildingList)
             {
                 buildingCounter.Add(s, 0);
+                var eventDic = new Dictionary<string, int>();
+                foreach (string e in eventList)
+                {
+                    if (eventCounterFull == false)
+                    {
+                        eventCounter.Add(e, 0);
+                    }
+                   
+                    eventDic.Add(e, 0);
+                }
+                eventCounterFull = true;
+                combinedData.Add(s, eventDic);          
             }
 
             //get the last filled cell
@@ -82,11 +92,15 @@ namespace ClassOpsLogCreator
             //Tally up the data
             foreach(Tuple<string,string> obj in data)
             {
+                //Item1 = taskts! and item2 = building
                 eventCounter[obj.Item1] += 1;
                 buildingCounter[obj.Item2] += 1;
+                var internalDic = combinedData[obj.Item2];
+                internalDic[obj.Item1] += 1;
             }
 
-            StatsGenForm sgf = new StatsGenForm(eventList, buildingList, eventCounter, buildingCounter);
+            //Send all the dictionaries with data to be processed and writen to a pdf
+            StatsGenForm sgf = new StatsGenForm(eventList, buildingList, eventCounter, buildingCounter, startDate, endDate);
             sgf.ShowDialog();
 
             masterExcel.Visible = true;
