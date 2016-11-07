@@ -17,6 +17,7 @@ namespace ClassOpsLogCreator
     public partial class StatsGenForm : MetroFramework.Forms.MetroForm
     {
         iTextSharp.text.Font titleFont = FontFactory.GetFont("Arial", 19);
+        iTextSharp.text.Font smallertitleFont = FontFactory.GetFont("Arial", 12);
 
         /// <summary>
         /// Create a statics visualization and writes the data to a pdf
@@ -25,7 +26,8 @@ namespace ClassOpsLogCreator
         /// <param name="buildingList"></param>
         /// <param name="eventCounter"></param>
         /// <param name="buildingCounter"></param>
-        public StatsGenForm(List<string> eventList, List<string> buildingList, Dictionary<string, int> eventCounter, Dictionary<string, int> buildingCounter, DateTime StartDate, DateTime EndDate)
+        public StatsGenForm(List<string> eventList, List<string> buildingList, Dictionary<string, int> eventCounter, Dictionary<string, int> buildingCounter, 
+                            Dictionary<string,Dictionary<string,int>> combineDic , DateTime StartDate, DateTime EndDate)
         {
             InitializeComponent();
 
@@ -41,15 +43,19 @@ namespace ClassOpsLogCreator
             //Create the chart
             this.createEventChart(eventList, eventCounter);
             this.createBuildingChart(buildingList, buildingCounter);
-            this.createBuildingtoEventChart();
+            this.createBuildingtoEventChart(eventList, buildingList, combineDic);
 
             //eventChart memory block to add to pdf
             var eventChartImage = new MemoryStream();
-            this.eventChart.SaveImage(eventChartImage, ChartImageFormat.Tiff);
+            this.eventChart.SaveImage(eventChartImage, ChartImageFormat.Png);
+
+            //buildingChart memory block to add to pdf
+            var buildingChartImage = new MemoryStream();
+            this.buildingChart.SaveImage(buildingChartImage, ChartImageFormat.Png);
 
             //eventChart memory block to add to pdf
-            var buildingChartImage = new MemoryStream();
-            this.buildingChart.SaveImage(buildingChartImage, ChartImageFormat.Tiff);
+            var combinedChartImage = new MemoryStream();
+            this.distrabutionChart.SaveImage(combinedChartImage, ChartImageFormat.Png);
 
             //Exporting to PDF
             /*string folderPath = @"‪C:\Users\jhan\Desktop\PDF";
@@ -80,19 +86,24 @@ namespace ClassOpsLogCreator
                 //Add the charts to a table
                 iTextSharp.text.Image eventChart_Image = iTextSharp.text.Image.GetInstance(eventChartImage.GetBuffer());
                 iTextSharp.text.Image buildingChart_Image = iTextSharp.text.Image.GetInstance(buildingChartImage.GetBuffer());
+                iTextSharp.text.Image distrabutionChart_Image = iTextSharp.text.Image.GetInstance(combinedChartImage.GetBuffer());
 
-                eventChart_Image.ScaleAbsolute(200f, 50f);
-                buildingChart_Image.ScaleAbsolute(200f, 50f);
+                //eventChart_Image.ScaleAbsolute(200f, 300f);
+                //buildingChart_Image.ScaleAbsolute(200f, 300f);
 
                 PdfPTable imageTable = new PdfPTable(1);
+                imageTable.DefaultCell.Border = 0;
                 imageTable.AddCell(eventChart_Image);
                 imageTable.AddCell(buildingChart_Image);
+                imageTable.AddCell(distrabutionChart_Image);
                 imageTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                imageTable.HorizontalAlignment = Element.ALIGN_LEFT;
+                imageTable.WidthPercentage = 100;
                 pdfDoc.Add(imageTable);
 
                 //Add a new title
                 Paragraph title2 = new Paragraph("Raw Data", titleFont);
-                title1.Alignment = Element.ALIGN_LEFT;
+                title2.Alignment = Element.ALIGN_LEFT;
                 pdfDoc.Add(title2);
 
                 //add a line and add it in to the pdf
@@ -100,24 +111,23 @@ namespace ClassOpsLogCreator
                 pdfDoc.Add(p);
 
                 //Add a title for the second table
-                Paragraph title3 = new Paragraph("Task Count Data", titleFont);
-                title2.Alignment = Element.ALIGN_CENTER;
-                addEmptyLine(title2, 1);
-                pdfDoc.Add(title2);
+                Paragraph title3 = new Paragraph("Task Count Data", smallertitleFont);
+                title3.Alignment = Element.ALIGN_CENTER;
+                addEmptyLine(title3, 1);
+                pdfDoc.Add(title3);
 
                 //Add the fist table
                 pdfDoc.Add(this.writeDataGridViewstoPDF(dataGridofEvents, 80));
 
                 //Add some space
                 Paragraph space = new Paragraph("");
-                addEmptyLine(space, 1);
                 pdfDoc.Add(space);
 
                 //Add a title for the second table
-                Paragraph title4 = new Paragraph("Building Count Data", titleFont);
-                title2.Alignment = Element.ALIGN_CENTER;
-                addEmptyLine(title2, 2);
-                pdfDoc.Add(title2);
+                Paragraph title4 = new Paragraph("Building Count Data", smallertitleFont);
+                title4.Alignment = Element.ALIGN_CENTER;
+                addEmptyLine(title4, 1);
+                pdfDoc.Add(title4);
 
                 //Add the second table
                 pdfDoc.Add(this.writeDataGridViewstoPDF(dataGridofBuildinds, 100));
@@ -203,51 +213,6 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This method will create the stacked bar chart with the combined chart
-        /// </summary>
-        /// <param name="eventList"></param>
-        /// <param name="buildingList"></param>
-        /// <param name="combinedDic"></param>
-        private void createBuildingtoEventChart(/*List<string> eventList, List<string> buildingList, Dictionary<string, Dictionary<string, int>> combinedDic*/)
-        {
-            //Add the eventList to the series
-            /*foreach(string e in eventList)
-            {
-                Series seriesToAdd = new Series(e.ToString());
-                this.distrabutionChart.Series.Add(seriesToAdd);
-            }*/
-            this.distrabutionChart.Series["Series1"].ChartType = SeriesChartType.StackedColumn;
-            this.distrabutionChart.Series["Series2"].ChartType = SeriesChartType.StackedColumn;
-            this.distrabutionChart.Series["Series3"].ChartType = SeriesChartType.StackedColumn;
-            this.distrabutionChart.Series["Series4"].ChartType = SeriesChartType.StackedColumn;
-            this.distrabutionChart.Series["Series5"].ChartType = SeriesChartType.StackedColumn;
-
-            this.distrabutionChart.Series["Series1"].Points.AddXY(1, 50);
-            this.distrabutionChart.Series["Series2"].Points.AddXY(1, 100);
-            this.distrabutionChart.Series["Series3"].Points.AddXY(1, 0);
-            this.distrabutionChart.Series["Series4"].Points.AddXY(1, 0);
-            this.distrabutionChart.Series["Series5"].Points.AddXY(1, 0);
-
-            this.distrabutionChart.Series["Series1"].Points.AddXY(2, 0);
-            this.distrabutionChart.Series["Series2"].Points.AddXY(2, 50);
-            this.distrabutionChart.Series["Series3"].Points.AddXY(2, 200);
-            this.distrabutionChart.Series["Series4"].Points.AddXY(2, 0);
-            this.distrabutionChart.Series["Series5"].Points.AddXY(2, 0);
-
-            this.distrabutionChart.Series["Series1"].Points.AddXY(3, 0);
-            this.distrabutionChart.Series["Series2"].Points.AddXY(3, 0);
-            this.distrabutionChart.Series["Series3"].Points.AddXY(3, 100);
-            this.distrabutionChart.Series["Series4"].Points.AddXY(3, 50);
-            this.distrabutionChart.Series["Series5"].Points.AddXY(3, 0);
-
-            this.distrabutionChart.Series["Series1"].Points.AddXY(5, 0);
-            this.distrabutionChart.Series["Series2"].Points.AddXY(5, 0);
-            this.distrabutionChart.Series["Series3"].Points.AddXY(5, 0);
-            this.distrabutionChart.Series["Series4"].Points.AddXY(5, 0);
-            this.distrabutionChart.Series["Series5"].Points.AddXY(5, 150);
-        }
-
-        /// <summary>
         /// Create the building chart
         /// </summary>
         /// <param name="buildingList"></param>
@@ -275,6 +240,31 @@ namespace ClassOpsLogCreator
             this.buildingChart.Legends[0].Docking = Docking.Bottom;
         }
 
+        /// <summary>
+        /// This method will create the stacked bar chart with the combined chart
+        /// </summary>
+        /// <param name="eventList"></param>
+        /// <param name="buildingList"></param>
+        /// <param name="combinedDic"></param>
+        private void createBuildingtoEventChart(List<string> eventList, List<string> buildingList, Dictionary<string, Dictionary<string, int>> combinedDic)
+        {
+            //Add the eventList to the series
+            foreach (string e in eventList)
+            {
+                //add the event as a series
+                Series seriesToAdd = new Series(e.ToString());
+                this.distrabutionChart.Series.Add(seriesToAdd);
+                //Set it as a Stacking Column
+                this.distrabutionChart.Series[e.ToString()].ChartType = SeriesChartType.StackedColumn;
+                foreach (string s in buildingList)
+                {
+                    //Add out X value to the building, and our Y value as the number of occurances.
+                    this.distrabutionChart.Series[e.ToString()].Points.AddXY(s, (combinedDic[s])[e]);
+                }
+            }
+            this.distrabutionChart.ChartAreas["ChartArea1"].AxisX.LabelStyle.Interval = 1;
+            this.distrabutionChart.Legends[0].Docking = Docking.Bottom;
+        }
 
         /// <summary>
         /// Write the datagrid to a pdf table. return a table to be added to the pdf

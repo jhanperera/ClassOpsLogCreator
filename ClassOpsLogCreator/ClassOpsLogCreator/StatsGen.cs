@@ -100,7 +100,7 @@ namespace ClassOpsLogCreator
             }
 
             //Send all the dictionaries with data to be processed and writen to a pdf
-            StatsGenForm sgf = new StatsGenForm(eventList, buildingList, eventCounter, buildingCounter, startDate, endDate);
+            StatsGenForm sgf = new StatsGenForm(eventList, buildingList, eventCounter, buildingCounter, combinedData, startDate, endDate);
 
             //REMOVE THIS LINE!
             sgf.ShowDialog();
