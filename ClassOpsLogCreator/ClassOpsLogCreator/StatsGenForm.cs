@@ -31,14 +31,16 @@ namespace ClassOpsLogCreator
         {
             InitializeComponent();
 
+            //Set the start and end date format.
             string startDate = StartDate.ToString("ddd, MMM dd, yyyy");
             string endDate = EndDate.ToString("ddd, MMM dd, yyyy");
 
-            //Create the event datagridview
-            this.createDataGrids(this.dataGridofEvents, eventList, eventCounter);
-
-            //Create the Building datagridview
-            this.createDataGrids(this.dataGridofBuildinds, buildingList, buildingCounter);
+            //Get a totalCount
+            int totalCount = 0;
+            foreach(string s in eventList)
+            {
+                totalCount += eventCounter[s.ToString()];
+            }
 
             //Create the chart
             this.createEventChart(eventList, eventCounter);
@@ -110,80 +112,28 @@ namespace ClassOpsLogCreator
                 addEmptyLine(p, 1);
                 pdfDoc.Add(p);
 
-                //Add a title for the second table
-                Paragraph title3 = new Paragraph("Task Count Data", smallertitleFont);
-                title3.Alignment = Element.ALIGN_CENTER;
-                addEmptyLine(title3, 1);
-                pdfDoc.Add(title3);
-
+                //Write tabular data to a master table to have them side by side
+                PdfPTable tableToAdd1 = this.writeDataGridViewstoPDF(eventList, eventCounter, 45, "Task Data");
+                PdfPTable tableToAdd2 = this.writeDataGridViewstoPDF(buildingList, buildingCounter, 45, "Building Data");
+                PdfPTable masterTable = new PdfPTable(2);
+                masterTable.AddCell(tableToAdd1);
+                masterTable.AddCell(tableToAdd2);
+                masterTable.AddCell(new Phrase("Total: " + totalCount.ToString()));
+                masterTable.AddCell(new Phrase(""));
+                masterTable.WidthPercentage = 80;
+                
                 //Add the fist table
-                pdfDoc.Add(this.writeDataGridViewstoPDF(dataGridofEvents, 80));
+                pdfDoc.Add(masterTable);
 
-                //Add some space
-                Paragraph space = new Paragraph("");
-                pdfDoc.Add(space);
-
-                //Add a title for the second table
-                Paragraph title4 = new Paragraph("Building Count Data", smallertitleFont);
-                title4.Alignment = Element.ALIGN_CENTER;
-                addEmptyLine(title4, 1);
-                pdfDoc.Add(title4);
-
-                //Add the second table
-                pdfDoc.Add(this.writeDataGridViewstoPDF(dataGridofBuildinds, 100));
+                //Add combinedData
+                pdfDoc.Add(wirteCombinedDatatoPDF(eventList, buildingList, combineDic));
 
                 //Close the streams
                 pdfDoc.Close();
                 stream.Close();
             }
-
         }
         
-        /// <summary>
-        /// Create datagridviews for easy access to the dpf table
-        /// </summary>
-        /// <param name="dataGridView"></param>
-        /// <param name="ColumnList"></param>
-        /// <param name="dataCoutner"></param>
-        private void createDataGrids(DataGridView dataGridView, List<string> ColumnList, Dictionary<string, int> dataCoutner)
-        {
-            //Use a data table to store all the data and then apply it to the datagrid view
-            DataTable dt = new DataTable();
-
-            //Write the columsn
-            foreach (string s in ColumnList)
-            {
-                dt.Columns.Add(s);
-            }
-
-            //Create a new row
-            DataRow dr = dt.NewRow();
-
-            for (int Cnum = 0; Cnum < dataCoutner.Count; Cnum++)
-            {
-                dr[Cnum] = dataCoutner[dt.Columns[Cnum].ToString()];
-            }
-            //Add the row to the table
-            dt.Rows.Add(dr);
-
-            //Accept the changes
-            dt.AcceptChanges();
-
-            //Set the datagrid data source to the dataTable
-            dataGridView.DataSource = dt;
-
-            for (int Cnum = 0; Cnum < dataGridView.ColumnCount; Cnum++)
-            {
-                dataGridView.Columns[Cnum].Width = 25;
-            }
-
-            //Clear the default selected
-            dataGridView.ClearSelection();
-
-            //Do not accept the system style
-            dataGridView.RowHeadersVisible = false;
-        }
-
         /// <summary>
         /// Create the event chart
         /// </summary>
@@ -258,7 +208,7 @@ namespace ClassOpsLogCreator
                 this.distrabutionChart.Series[e.ToString()].ChartType = SeriesChartType.StackedColumn;
                 foreach (string s in buildingList)
                 {
-                    //Add out X value to the building, and our Y value as the number of occurances.
+                    //Add out X value to the building, and our Y value as the number of occurrences.
                     this.distrabutionChart.Series[e.ToString()].Points.AddXY(s, (combinedDic[s])[e]);
                 }
             }
@@ -272,54 +222,89 @@ namespace ClassOpsLogCreator
         /// <param name="dataGridView1"></param>
         /// <param name="percentSize"></param>
         /// <returns></returns>
-        private PdfPTable writeDataGridViewstoPDF(DataGridView dataGridView1, int percentSize)
+        private PdfPTable writeDataGridViewstoPDF(List<string> dataKeys, Dictionary<string,int> data, int percentSize, string tabelTitel)
         {
 
             //Creating iTextSharp Table from the DataTable data
-            PdfPTable pdfTable = new PdfPTable(dataGridView1.ColumnCount);
+            PdfPTable pdfTable = new PdfPTable(2);
             pdfTable.DefaultCell.Padding = 1;
             pdfTable.WidthPercentage = percentSize;
-            pdfTable.HorizontalAlignment = Element.ALIGN_CENTER;
             pdfTable.DefaultCell.BorderWidth = 0;
 
-            //Adding Header row
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            PdfPCell taskHeader = new PdfPCell(new Phrase(tabelTitel));
+            PdfPCell counterHeader = new PdfPCell(new Phrase("Count"));
+            taskHeader.HorizontalAlignment = Element.ALIGN_CENTER;
+            taskHeader.BackgroundColor = new BaseColor(255, 0, 0);
+            counterHeader.HorizontalAlignment = Element.ALIGN_CENTER;
+            counterHeader.BackgroundColor = new BaseColor(255, 0, 0);
+            pdfTable.AddCell(taskHeader);
+            pdfTable.AddCell(counterHeader);
+
+            foreach(string e in dataKeys)
             {
-                //Add a chunk with the header text
-                Chunk addtoHeader = new Chunk(column.HeaderText, FontFactory.GetFont(FontFactory.COURIER, 9, iTextSharp.text.Font.BOLD));
-                //Set the skew to the header go on an angle
-                addtoHeader.SetSkew(-30f,0f);
-                //Add the chunk to the cell
-                PdfPCell cell = new PdfPCell(new Phrase(addtoHeader));
-                //Rotate the text 90 degrees
-                cell.Rotation = 90;
-                //Use ascending text
-                cell.UseAscender = true;
-                //Add some padding
-                cell.PaddingBottom = 5;
-                cell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                pdfTable.AddCell(cell);
+                PdfPCell taskLabel = new PdfPCell(new Phrase(e.ToString()));
+                taskLabel.BackgroundColor = new BaseColor(156, 156, 156);
+                taskLabel.HorizontalAlignment = Element.ALIGN_CENTER;
+                int datatoAdd = data[e];
+                PdfPCell dataLabel = new PdfPCell(new Phrase(datatoAdd.ToString()));
+                dataLabel.HorizontalAlignment = Element.ALIGN_CENTER;
+                pdfTable.AddCell(taskLabel);
+                pdfTable.AddCell(dataLabel);
             }
 
-            //Adding DataRow
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                foreach (DataGridViewCell cell in row.Cells)
-                {
-                    PdfPCell cellToAdd = new PdfPCell(new Phrase(cell.Value.ToString(), FontFactory.GetFont(FontFactory.COURIER, 9)));
-                    cellToAdd.HorizontalAlignment = Element.ALIGN_CENTER;
-                    cellToAdd.UseAscender = true;
-                    cellToAdd.PaddingTop = 5;
-                    cellToAdd.PaddingLeft = 5;
-                    cellToAdd.PaddingRight = 5;
-                    cellToAdd.PaddingBottom = 5;
-                    pdfTable.AddCell(cellToAdd);
-                }
-            }
+            //Add a total
             return pdfTable;
-
         }
 
+        /// <summary>
+        /// This method will generate a matrix table of all the information.
+        /// </summary>
+        /// <param name="eventList"></param>
+        /// <param name="buildingList"></param>
+        /// <param name="combinedData"></param>
+        /// <returns></returns>
+        private PdfPTable wirteCombinedDatatoPDF(List<string> eventList, List<string> buildingList, Dictionary<string,Dictionary<string,int>> combinedData)
+        {
+            PdfPTable pdfTable = new PdfPTable(eventList.Count + 1);
+            //Add a space here
+            PdfPCell spaceToAdd = new PdfPCell(new Phrase(""));
+            spaceToAdd.Border = 0;
+            pdfTable.AddCell(spaceToAdd);
+
+            foreach (string e in eventList)
+            {
+                Chunk chuckToAdd = new Chunk(e.ToString());
+                chuckToAdd.SetSkew(-30f, 0f);
+                PdfPCell cellToAdd = new PdfPCell(new Phrase(chuckToAdd));
+                cellToAdd.Rotation = 90;
+                cellToAdd.UseAscender = true;
+                cellToAdd.Border = 0;
+                pdfTable.AddCell(cellToAdd);
+            }
+
+            foreach(string s in buildingList)
+            {
+                PdfPCell cellToAdd = new PdfPCell(new Phrase(s.ToString()));
+                cellToAdd.Border = 0;
+                pdfTable.AddCell(cellToAdd);
+                foreach (string e in eventList)
+                {
+                    int value = (combinedData[s.ToString()])[e.ToString()];
+                    PdfPCell valuecellToAdd = new PdfPCell(new Phrase(value.ToString()));
+                    valuecellToAdd.HorizontalAlignment = Element.ALIGN_CENTER;
+                    pdfTable.AddCell(valuecellToAdd);
+                }
+            }
+   
+            
+            return pdfTable;
+        }
+
+        /// <summary>
+        /// Addes an empty line to the pdf
+        /// </summary>
+        /// <param name="paragraph"></param>
+        /// <param name="number"></param>
         private static void addEmptyLine(Paragraph paragraph, int number)
         {
             for (int i = 0; i < number; i++)
