@@ -76,7 +76,7 @@ namespace ClassOpsLogCreator
                 addEmptyLine(subTitle, 1);
                 pdfDoc.Add(subTitle);
 
-                //Add the charts
+                //Add the charts to a table
                 iTextSharp.text.Image eventChart_Image = iTextSharp.text.Image.GetInstance(eventChartImage.GetBuffer());
                 iTextSharp.text.Image buildingChart_Image = iTextSharp.text.Image.GetInstance(buildingChartImage.GetBuffer());
 
@@ -86,13 +86,26 @@ namespace ClassOpsLogCreator
                 PdfPTable imageTable = new PdfPTable(1);
                 imageTable.AddCell(eventChart_Image);
                 imageTable.AddCell(buildingChart_Image);
+                imageTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
                 pdfDoc.Add(imageTable);
 
-                /* pdfDoc.Add(eventChart_Image);
-                 pdfDoc.Add(buildingChart_Image);*/
+                //Add a new title
+                Paragraph title2 = new Paragraph("Raw Data", titleFont);
+                title1.Alignment = Element.ALIGN_LEFT;
+                pdfDoc.Add(title2);
+
+                //add a line and add it in to the pdf
+                addEmptyLine(p, 1);
+                pdfDoc.Add(p);
+
+                //Add a title for the second table
+                Paragraph title3 = new Paragraph("Task Count Data", titleFont);
+                title2.Alignment = Element.ALIGN_CENTER;
+                addEmptyLine(title2, 1);
+                pdfDoc.Add(title2);
 
                 //Add the fist table
-                pdfDoc.Add(this.writeDataGridViewstoPDF(dataGridofEvents, 100));
+                pdfDoc.Add(this.writeDataGridViewstoPDF(dataGridofEvents, 80));
 
                 //Add some space
                 Paragraph space = new Paragraph("");
@@ -100,8 +113,7 @@ namespace ClassOpsLogCreator
                 pdfDoc.Add(space);
 
                 //Add a title for the second table
-                //Create a title
-                Paragraph title2 = new Paragraph("Building Count Data", titleFont);
+                Paragraph title4 = new Paragraph("Building Count Data", titleFont);
                 title2.Alignment = Element.ALIGN_CENTER;
                 addEmptyLine(title2, 2);
                 pdfDoc.Add(title2);
@@ -168,19 +180,24 @@ namespace ClassOpsLogCreator
         /// <param name="eventCounter"></param>
         private void createEventChart(List<string> eventList, Dictionary<string,int> eventCounter)
         {
+            //Look though each of the events and add it as an x and y value 
             foreach(string s in eventList)
             {
                 this.eventChart.Series["Tasks"].Points.AddXY(s, eventCounter[s]);
             }
 
+            //Set the label to outside
             this.eventChart.Series["Tasks"]["PieLabelStyle"] = "Outside";
+            //Make the chart 3D
             this.eventChart.ChartAreas[0].Area3DStyle.Enable3D = true;
+            //Explode each of the values /slices
             for (int i = 0; i < this.eventChart.Series["Tasks"].Points.Count; i++)
             {
                 this.eventChart.Series["Tasks"].Points[i]["Exploded"] = "True";
             }
-
+            //Make the legend show percent and value
             this.eventChart.Series[0].LegendText = "#PERCENT #VALX";
+            //Set the legend at the bottom
             this.eventChart.Legends[0].Docking = Docking.Bottom;
         }
 
@@ -191,19 +208,24 @@ namespace ClassOpsLogCreator
         /// <param name="buildingCounter"></param>
         private void createBuildingChart(List<string> buildingList, Dictionary<string, int> buildingCounter)
         {
+            //look at each building and create a x and y axis value
             foreach (string s in buildingList)
             {
                 this.buildingChart.Series["Buildings"].Points.AddXY(s, buildingCounter[s]);
             }
 
+            //Set the label to outside
             this.buildingChart.Series["Buildings"]["PieLabelStyle"] = "Outside";
+            //Make the chart 3D
             this.buildingChart.ChartAreas[0].Area3DStyle.Enable3D = true;
+            //Exlose each value in the chart
             for (int i = 0; i < this.buildingChart.Series["Buildings"].Points.Count; i++)
             {
                 this.buildingChart.Series["Buildings"].Points[i]["Exploded"] = "True";
             }
-
+            //The legend should have percent and value
             this.buildingChart.Series[0].LegendText = "#PERCENT #VALX";
+            //Dock the legend at the bottom.
             this.buildingChart.Legends[0].Docking = Docking.Bottom;
         }
 
@@ -227,13 +249,19 @@ namespace ClassOpsLogCreator
             //Adding Header row
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
-                PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText, FontFactory.GetFont(FontFactory.COURIER, 9, iTextSharp.text.Font.BOLD)));
+                //Add a chunk with the header text
+                Chunk addtoHeader = new Chunk(column.HeaderText, FontFactory.GetFont(FontFactory.COURIER, 9, iTextSharp.text.Font.BOLD));
+                //Set the skew to the header go on an angle
+                addtoHeader.SetSkew(-30f,0f);
+                //Add the chunk to the cell
+                PdfPCell cell = new PdfPCell(new Phrase(addtoHeader));
+                //Rotate the text 90 degrees
                 cell.Rotation = 90;
+                //Use ascending text
                 cell.UseAscender = true;
+                //Add some padding
                 cell.PaddingBottom = 5;
-                cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                cell.HorizontalAlignment = Element.ALIGN_MIDDLE;
-                cell.BackgroundColor = new BaseColor(240, 240, 240);
+                cell.Border = iTextSharp.text.Rectangle.NO_BORDER;
                 pdfTable.AddCell(cell);
             }
 
@@ -249,7 +277,6 @@ namespace ClassOpsLogCreator
                     cellToAdd.PaddingLeft = 5;
                     cellToAdd.PaddingRight = 5;
                     cellToAdd.PaddingBottom = 5;
-                    //cellToAdd.FixedHeight = 30;
                     pdfTable.AddCell(cellToAdd);
                 }
             }

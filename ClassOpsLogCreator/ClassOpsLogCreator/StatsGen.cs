@@ -101,9 +101,9 @@ namespace ClassOpsLogCreator
 
             //Send all the dictionaries with data to be processed and writen to a pdf
             StatsGenForm sgf = new StatsGenForm(eventList, buildingList, eventCounter, buildingCounter, startDate, endDate);
-            sgf.ShowDialog();
 
-            masterExcel.Visible = true;
+            //REMOVE THIS LINE!
+            sgf.ShowDialog();
 
             //Close all excel instances
             Quit();
