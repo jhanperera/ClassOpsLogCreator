@@ -23,12 +23,9 @@ namespace ClassOpsLogCreator
         private static BackgroundWorker bw = null;
 
         //Start and end time that are picked
-        DateTime startDate;
-        DateTime endDate;
+        private DateTime startDate;
+        private DateTime endDate;
 
-        //Store the starting and ending index of the range
-        int startingRowIndex = -1;
-        int endingRowIndex = -1;
 
         /// <summary>
         /// Constructor
@@ -166,7 +163,7 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void MetroTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(emailLoginTab.SelectedIndex == 3)
+            if(emailLoginTab.SelectedIndex == 4)
             {
                 PasswordInput passInput = new PasswordInput();
                 passInput.ShowDialog(this);
@@ -199,7 +196,17 @@ namespace ClassOpsLogCreator
                 Properties.Settings.Default.UserName = this.usernameTextBox.Text;
                 Properties.Settings.Default.Password = this.passwordTextBox.Text;
                 Properties.Settings.Default.Save();
-                this.Close();
+                EmailSender eS = new EmailSender(true);
+                if(eS.isConnectionMade())
+                {
+                    MetroMessageBox.Show(this, "Success: A connection was made", "Success",
+                                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "FAIL: A connection was unable to be established", "Problem....",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

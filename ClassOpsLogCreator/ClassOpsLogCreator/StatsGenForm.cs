@@ -16,8 +16,8 @@ namespace ClassOpsLogCreator
 {
     public partial class StatsGenForm : MetroFramework.Forms.MetroForm
     {
-        iTextSharp.text.Font titleFont = FontFactory.GetFont("Arial", 19);
-        iTextSharp.text.Font smallertitleFont = FontFactory.GetFont("Arial", 12);
+        private iTextSharp.text.Font titleFont = FontFactory.GetFont("Arial", 19);
+        private iTextSharp.text.Font smallertitleFont = FontFactory.GetFont("Arial", 12);
 
         /// <summary>
         /// Create a statics visualization and writes the data to a pdf
@@ -263,14 +263,16 @@ namespace ClassOpsLogCreator
         /// <param name="buildingList"></param>
         /// <param name="combinedData"></param>
         /// <returns></returns>
-        private PdfPTable wirteCombinedDatatoPDF(List<string> eventList, List<string> buildingList, Dictionary<string,Dictionary<string,int>> combinedData)
+        private PdfPTable wirteCombinedDatatoPDF(List<string> eventList, List<string> buildingList, Dictionary<string, Dictionary<string, int>> combinedData)
         {
+            //Create a table to write the data too
             PdfPTable pdfTable = new PdfPTable(eventList.Count + 1);
             //Add a space here
             PdfPCell spaceToAdd = new PdfPCell(new Phrase(""));
             spaceToAdd.Border = 0;
             pdfTable.AddCell(spaceToAdd);
 
+            //Adding the header
             foreach (string e in eventList)
             {
                 Chunk chuckToAdd = new Chunk(e.ToString());
@@ -282,10 +284,13 @@ namespace ClassOpsLogCreator
                 pdfTable.AddCell(cellToAdd);
             }
 
-            foreach(string s in buildingList)
+            //For each building we display all the data.
+            foreach (string s in buildingList)
             {
                 PdfPCell cellToAdd = new PdfPCell(new Phrase(s.ToString()));
                 cellToAdd.Border = 0;
+                cellToAdd.HorizontalAlignment = Element.ALIGN_RIGHT;
+                cellToAdd.NoWrap = true;
                 pdfTable.AddCell(cellToAdd);
                 foreach (string e in eventList)
                 {
@@ -295,8 +300,17 @@ namespace ClassOpsLogCreator
                     pdfTable.AddCell(valuecellToAdd);
                 }
             }
-   
-            
+
+            //Set the widths of the first column to be twice as large
+            int[] tableWidths = new int[(eventList.Count + 1)];
+            tableWidths[0] = 2;
+            for (int i = 1; i <= tableWidths.GetUpperBound(0); i++)
+            {
+                tableWidths[i] = 1;
+            }
+            pdfTable.SetWidths(tableWidths);
+
+            //Return the pdfTable
             return pdfTable;
         }
 

@@ -14,15 +14,15 @@ namespace ClassOpsLogCreator
         private LogCreator mainForm;
 
         //Excel references
-        Excel.Application masterExcel = null;
-        Excel.Workbook masterExcelWorkBook = null;
-        Excel.Worksheet masterExcelWorkSheet = null;
-        Excel.Worksheet masterExcelDataBaseSheet = null;
+        private Excel.Application masterExcel = null;
+        private Excel.Workbook masterExcelWorkBook = null;
+        private Excel.Worksheet masterExcelWorkSheet = null;
+        private Excel.Worksheet masterExcelDataBaseSheet = null;
 
 
         //Start and end time that are picked
-        DateTime startDate;
-        DateTime endDate;
+        private DateTime startDate;
+        private DateTime endDate;
 
         public StatsGen(LogCreator MainForm, DateTime StartDate, DateTime EndDate)
         {
@@ -92,18 +92,22 @@ namespace ClassOpsLogCreator
             //Tally up the data
             foreach(Tuple<string,string> obj in data)
             {
-                //Item1 = taskts! and item2 = building
-                eventCounter[obj.Item1] += 1;
-                buildingCounter[obj.Item2] += 1;
-                var internalDic = combinedData[obj.Item2];
-                internalDic[obj.Item1] += 1;
+                //Fail safe to avoid a dictionary crash
+                if(eventCounter.ContainsKey(obj.Item1) && buildingCounter.ContainsKey(obj.Item2))
+                {
+                    //Item1 = taskts! and item2 = building
+                    eventCounter[obj.Item1] += 1;
+                    buildingCounter[obj.Item2] += 1;
+                    var internalDic = combinedData[obj.Item2];
+                    internalDic[obj.Item1] += 1;
+                }
             }
 
-            //Send all the dictionaries with data to be processed and writen to a pdf
-            StatsGenForm sgf = new StatsGenForm(eventList, buildingList, eventCounter, buildingCounter, combinedData, startDate, endDate);
-
-            //REMOVE THIS LINE!
-            sgf.ShowDialog();
+            //Send all the dictionaries with data to be processed and written to a pdf
+            using (StatsGenForm sgf = new StatsGenForm(eventList, buildingList, eventCounter, buildingCounter, combinedData, startDate, endDate))
+            {
+                //Nothing in here because we dispose the form when its done.
+            }
 
             //Close all excel instances
             Quit();
@@ -163,6 +167,13 @@ namespace ClassOpsLogCreator
             return eventList;
         }
 
+        /// <summary>
+        /// Read the data from the excel file and return a tuble of tasts and row numbers
+        /// </summary>
+        /// <param name="ExSheet"></param>
+        /// <param name="startingIndex"></param>
+        /// <param name="endingIndex"></param>
+        /// <returns></returns>
         private Tuple<string,string>[] dataFromFile(Excel.Worksheet ExSheet, int startingIndex, int endingIndex)
         {        
             Excel.Range eventRange = ExSheet.get_Range("B" + startingIndex, "B" + endingIndex);
@@ -213,7 +224,7 @@ namespace ClassOpsLogCreator
                 int firstIndex = this.first(stringArray, 0, stringArray.Length - 1, startDate);
                 if (firstIndex == -1)
                 {
-                    firstIndex = 0;
+                    firstIndex = 2375;
                 }
                 int lastIndex = this.last(stringArray, firstIndex, stringArray.Length - 1, endDate);
                 if (lastIndex == -1)

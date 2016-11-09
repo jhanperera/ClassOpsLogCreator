@@ -46,19 +46,22 @@
             this.am_pmCombo1_1 = new MetroFramework.Controls.MetroComboBox();
             this.startHour1 = new MetroFramework.Controls.MetroComboBox();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
-            this.buildingUpdateTab = new MetroFramework.Controls.MetroTabPage();
             this.statisticsTab = new MetroFramework.Controls.MetroTabPage();
-            this.selectorLabel = new MetroFramework.Controls.MetroLabel();
-            this.weeklyRadio = new MetroFramework.Controls.MetroRadioButton();
-            this.monthlyRadio = new MetroFramework.Controls.MetroRadioButton();
-            this.yearlyRadio = new MetroFramework.Controls.MetroRadioButton();
-            this.generateBTN = new MetroFramework.Controls.MetroButton();
             this.dateTimePicker = new MetroFramework.Controls.MetroDateTime();
+            this.generateBTN = new MetroFramework.Controls.MetroButton();
+            this.yearlyRadio = new MetroFramework.Controls.MetroRadioButton();
+            this.monthlyRadio = new MetroFramework.Controls.MetroRadioButton();
+            this.weeklyRadio = new MetroFramework.Controls.MetroRadioButton();
+            this.selectorLabel = new MetroFramework.Controls.MetroLabel();
+            this.buildingUpdateTab = new MetroFramework.Controls.MetroTabPage();
+            this.buildingDataGridView = new System.Windows.Forms.DataGridView();
             this.emailLoginTab.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.statisticsTab.SuspendLayout();
+            this.buildingUpdateTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buildingDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // usernameLabel
@@ -180,11 +183,11 @@
             this.emailLoginTab.Controls.Add(this.metroTabPage3);
             this.emailLoginTab.Controls.Add(this.metroTabPage2);
             this.emailLoginTab.Controls.Add(this.metroTabPage1);
-            this.emailLoginTab.Controls.Add(this.buildingUpdateTab);
             this.emailLoginTab.Controls.Add(this.statisticsTab);
+            this.emailLoginTab.Controls.Add(this.buildingUpdateTab);
             this.emailLoginTab.Location = new System.Drawing.Point(25, 63);
             this.emailLoginTab.Name = "emailLoginTab";
-            this.emailLoginTab.SelectedIndex = 4;
+            this.emailLoginTab.SelectedIndex = 2;
             this.emailLoginTab.Size = new System.Drawing.Size(510, 238);
             this.emailLoginTab.Style = MetroFramework.MetroColorStyle.Red;
             this.emailLoginTab.TabIndex = 7;
@@ -309,20 +312,6 @@
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
             // 
-            // buildingUpdateTab
-            // 
-            this.buildingUpdateTab.HorizontalScrollbarBarColor = true;
-            this.buildingUpdateTab.HorizontalScrollbarHighlightOnWheel = false;
-            this.buildingUpdateTab.HorizontalScrollbarSize = 10;
-            this.buildingUpdateTab.Location = new System.Drawing.Point(4, 41);
-            this.buildingUpdateTab.Name = "buildingUpdateTab";
-            this.buildingUpdateTab.Size = new System.Drawing.Size(502, 193);
-            this.buildingUpdateTab.TabIndex = 3;
-            this.buildingUpdateTab.Text = "Edit Buildings";
-            this.buildingUpdateTab.VerticalScrollbarBarColor = true;
-            this.buildingUpdateTab.VerticalScrollbarHighlightOnWheel = false;
-            this.buildingUpdateTab.VerticalScrollbarSize = 10;
-            // 
             // statisticsTab
             // 
             this.statisticsTab.Controls.Add(this.dateTimePicker);
@@ -343,15 +332,47 @@
             this.statisticsTab.VerticalScrollbarHighlightOnWheel = false;
             this.statisticsTab.VerticalScrollbarSize = 10;
             // 
-            // selectorLabel
+            // dateTimePicker
             // 
-            this.selectorLabel.AutoSize = true;
-            this.selectorLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.selectorLabel.Location = new System.Drawing.Point(87, 73);
-            this.selectorLabel.Name = "selectorLabel";
-            this.selectorLabel.Size = new System.Drawing.Size(106, 25);
-            this.selectorLabel.TabIndex = 3;
-            this.selectorLabel.Text = "Select a day:";
+            this.dateTimePicker.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dateTimePicker.Location = new System.Drawing.Point(216, 73);
+            this.dateTimePicker.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(200, 29);
+            this.dateTimePicker.Style = MetroFramework.MetroColorStyle.Red;
+            this.dateTimePicker.TabIndex = 8;
+            // 
+            // generateBTN
+            // 
+            this.generateBTN.Location = new System.Drawing.Point(197, 126);
+            this.generateBTN.Name = "generateBTN";
+            this.generateBTN.Size = new System.Drawing.Size(117, 35);
+            this.generateBTN.TabIndex = 7;
+            this.generateBTN.Text = "Generate Statistics";
+            this.generateBTN.UseSelectable = true;
+            this.generateBTN.Click += new System.EventHandler(this.generateBTN_Click);
+            // 
+            // yearlyRadio
+            // 
+            this.yearlyRadio.AutoSize = true;
+            this.yearlyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.yearlyRadio.Location = new System.Drawing.Point(295, 26);
+            this.yearlyRadio.Name = "yearlyRadio";
+            this.yearlyRadio.Size = new System.Drawing.Size(61, 19);
+            this.yearlyRadio.TabIndex = 6;
+            this.yearlyRadio.Text = "Yearly";
+            this.yearlyRadio.UseSelectable = true;
+            // 
+            // monthlyRadio
+            // 
+            this.monthlyRadio.AutoSize = true;
+            this.monthlyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.monthlyRadio.Location = new System.Drawing.Point(212, 26);
+            this.monthlyRadio.Name = "monthlyRadio";
+            this.monthlyRadio.Size = new System.Drawing.Size(77, 19);
+            this.monthlyRadio.TabIndex = 5;
+            this.monthlyRadio.Text = "Monthly";
+            this.monthlyRadio.UseSelectable = true;
             // 
             // weeklyRadio
             // 
@@ -366,47 +387,41 @@
             this.weeklyRadio.Text = "Weekly";
             this.weeklyRadio.UseSelectable = true;
             // 
-            // monthlyRadio
+            // selectorLabel
             // 
-            this.monthlyRadio.AutoSize = true;
-            this.monthlyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.monthlyRadio.Location = new System.Drawing.Point(212, 26);
-            this.monthlyRadio.Name = "monthlyRadio";
-            this.monthlyRadio.Size = new System.Drawing.Size(77, 19);
-            this.monthlyRadio.TabIndex = 5;
-            this.monthlyRadio.Text = "Monthly";
-            this.monthlyRadio.UseSelectable = true;
+            this.selectorLabel.AutoSize = true;
+            this.selectorLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.selectorLabel.Location = new System.Drawing.Point(87, 73);
+            this.selectorLabel.Name = "selectorLabel";
+            this.selectorLabel.Size = new System.Drawing.Size(106, 25);
+            this.selectorLabel.TabIndex = 3;
+            this.selectorLabel.Text = "Select a day:";
             // 
-            // yearlyRadio
+            // buildingUpdateTab
             // 
-            this.yearlyRadio.AutoSize = true;
-            this.yearlyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.yearlyRadio.Location = new System.Drawing.Point(295, 26);
-            this.yearlyRadio.Name = "yearlyRadio";
-            this.yearlyRadio.Size = new System.Drawing.Size(61, 19);
-            this.yearlyRadio.TabIndex = 6;
-            this.yearlyRadio.Text = "Yearly";
-            this.yearlyRadio.UseSelectable = true;
+            this.buildingUpdateTab.Controls.Add(this.buildingDataGridView);
+            this.buildingUpdateTab.HorizontalScrollbarBarColor = true;
+            this.buildingUpdateTab.HorizontalScrollbarHighlightOnWheel = false;
+            this.buildingUpdateTab.HorizontalScrollbarSize = 10;
+            this.buildingUpdateTab.Location = new System.Drawing.Point(4, 41);
+            this.buildingUpdateTab.Name = "buildingUpdateTab";
+            this.buildingUpdateTab.Size = new System.Drawing.Size(502, 193);
+            this.buildingUpdateTab.TabIndex = 3;
+            this.buildingUpdateTab.Text = "Edit Buildings";
+            this.buildingUpdateTab.VerticalScrollbarBarColor = true;
+            this.buildingUpdateTab.VerticalScrollbarHighlightOnWheel = false;
+            this.buildingUpdateTab.VerticalScrollbarSize = 10;
             // 
-            // generateBTN
+            // buildingDataGridView
             // 
-            this.generateBTN.Location = new System.Drawing.Point(197, 126);
-            this.generateBTN.Name = "generateBTN";
-            this.generateBTN.Size = new System.Drawing.Size(117, 35);
-            this.generateBTN.TabIndex = 7;
-            this.generateBTN.Text = "Generate Statistics";
-            this.generateBTN.UseSelectable = true;
-            this.generateBTN.Click += new System.EventHandler(this.generateBTN_Click);
-            // 
-            // dateTimePicker
-            // 
-            this.dateTimePicker.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dateTimePicker.Location = new System.Drawing.Point(216, 73);
-            this.dateTimePicker.MinimumSize = new System.Drawing.Size(0, 29);
-            this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(200, 29);
-            this.dateTimePicker.Style = MetroFramework.MetroColorStyle.Red;
-            this.dateTimePicker.TabIndex = 8;
+            this.buildingDataGridView.AllowUserToDeleteRows = false;
+            this.buildingDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.buildingDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buildingDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.buildingDataGridView.Name = "buildingDataGridView";
+            this.buildingDataGridView.Size = new System.Drawing.Size(502, 193);
+            this.buildingDataGridView.TabIndex = 2;
+            this.buildingDataGridView.Visible = false;
             // 
             // SettingForm
             // 
@@ -434,6 +449,8 @@
             this.metroTabPage1.PerformLayout();
             this.statisticsTab.ResumeLayout(false);
             this.statisticsTab.PerformLayout();
+            this.buildingUpdateTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.buildingDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -465,5 +482,6 @@
         private MetroFramework.Controls.MetroLabel selectorLabel;
         private MetroFramework.Controls.MetroButton generateBTN;
         private MetroFramework.Controls.MetroDateTime dateTimePicker;
+        private System.Windows.Forms.DataGridView buildingDataGridView;
     }
 }

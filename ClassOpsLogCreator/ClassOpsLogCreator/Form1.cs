@@ -1543,7 +1543,7 @@ namespace ClassOpsLogCreator
                     }
 
                     existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&20" + nameText + ", " + timeArray[i,0] + " to " + timeArray[i,1];
-                    existingMasterWorkSheet.PageSetup.RightHeader = "&\"Calibri,Bold\"&20&KFF0000" + DateTime.Now.ToString("dddd");
+                    existingMasterWorkSheet.PageSetup.RightHeader = "&\"Calibri,Bold\"&20&KFF0000" + DateTime.Now.ToString("ddd");
                     existingMasterWorkSheet.PageSetup.RightHeader = existingMasterWorkSheet.PageSetup.RightHeader + "&\"Calibri,Bold\"&20&K000000" + DateTime.Now.ToString(", MMM dd, yyyy");
                     logRange.PrintPreview(true);    
                 }
@@ -1559,7 +1559,7 @@ namespace ClassOpsLogCreator
                 string nameText = name.Cells.Value2.ToString();
             
                 existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&20" + nameText + ", " + timeArray[0, 0] + " to " + timeArray[0, 1];
-                existingMasterWorkSheet.PageSetup.RightHeader = "&\"Calibri,Bold\"&20&KFF0000" + DateTime.Now.ToString("dddd");
+                existingMasterWorkSheet.PageSetup.RightHeader = "&\"Calibri,Bold\"&20&KFF0000" + DateTime.Now.ToString("ddd");
                 existingMasterWorkSheet.PageSetup.RightHeader = existingMasterWorkSheet.PageSetup.RightHeader + "&\"Calibri,Bold\"&20&K000000" + DateTime.Now.ToString(", MMM dd, yyyy");
 
                 SetDefaultPrinter(printDlg.PrinterSettings.PrinterName); 
