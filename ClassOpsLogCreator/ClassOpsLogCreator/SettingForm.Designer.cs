@@ -187,7 +187,7 @@
             this.emailLoginTab.Controls.Add(this.buildingUpdateTab);
             this.emailLoginTab.Location = new System.Drawing.Point(25, 63);
             this.emailLoginTab.Name = "emailLoginTab";
-            this.emailLoginTab.SelectedIndex = 2;
+            this.emailLoginTab.SelectedIndex = 0;
             this.emailLoginTab.Size = new System.Drawing.Size(510, 238);
             this.emailLoginTab.Style = MetroFramework.MetroColorStyle.Red;
             this.emailLoginTab.TabIndex = 7;
@@ -336,7 +336,7 @@
             // 
             this.dateTimePicker.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dateTimePicker.Location = new System.Drawing.Point(216, 73);
-            this.dateTimePicker.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dateTimePicker.MinimumSize = new System.Drawing.Size(4, 29);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(200, 29);
             this.dateTimePicker.Style = MetroFramework.MetroColorStyle.Red;

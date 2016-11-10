@@ -23,7 +23,8 @@ namespace ClassOpsLogCreator
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
-        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";*/
+        public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        public readonly string STATS_LOCATION =  @"H:\CS\SHARE-PT\CLASSOPS\Statistics\"; */
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY!
@@ -35,6 +36,7 @@ namespace ClassOpsLogCreator
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
         public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
+        public readonly string STATS_LOCATION = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Statistics\";
 
         //A stack for some thread safer operations
         private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();        
@@ -1025,18 +1027,20 @@ namespace ClassOpsLogCreator
                 //Bring this form to the front
                 this.Activate();
 
-                //Enable the button again
-                createBTN.Enabled = true;
-                plusBTN1.Enabled = true;
-                plusBTN2.Enabled = true;
-                plusBTN3.Enabled = true;
-
                 detailForm.updateDetail("Saving and cleaning up background processes.");
 
                 //Quit
                 Quit();
 
+                ScheduleStatsGen SSG = new ScheduleStatsGen(this, detailForm);
+
                 detailForm.updateDetail("Done!");
+
+                //Enable the button again
+                createBTN.Enabled = true;
+                plusBTN1.Enabled = true;
+                plusBTN2.Enabled = true;
+                plusBTN3.Enabled = true;
             }
         }
         #endregion

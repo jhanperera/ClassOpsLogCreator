@@ -446,7 +446,17 @@ namespace ClassOpsLogCreator
         {
             var worker = sender as BackgroundWorker;
 
-            StatsGen statGenerator = new StatsGen(this.mainForm, this.startDate, this.endDate);
+            try
+            {
+                StatsGen statGenerator = new StatsGen(this.mainForm, this.startDate, this.endDate, "Manual");
+                statGenerator = null;
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
+            catch (Exception)
+            {
+                return;
+            }
             return;
         }
 

@@ -24,11 +24,16 @@ namespace ClassOpsLogCreator
         private DateTime startDate;
         private DateTime endDate;
 
-        public StatsGen(LogCreator MainForm, DateTime StartDate, DateTime EndDate)
+        private string PDFName;
+        private string fileName;
+
+        public StatsGen(LogCreator MainForm, DateTime StartDate, DateTime EndDate, string pdfName)
         {
             this.mainForm = MainForm;
             this.startDate = StartDate;
             this.endDate = EndDate;
+
+            this.PDFName = pdfName;
 
             this.generateStats();
         }
@@ -103,14 +108,26 @@ namespace ClassOpsLogCreator
                 }
             }
 
+            fileName = @"Auto_" + PDFName + "_Stats_" + startDate.ToString("dd-MM-yyyy") +"_to_" + endDate.ToString("dd-MM-yyyy") + ".pdf";
             //Send all the dictionaries with data to be processed and written to a pdf
-            using (StatsGenForm sgf = new StatsGenForm(eventList, buildingList, eventCounter, buildingCounter, combinedData, startDate, endDate))
+            using (StatsGenForm sgf = new StatsGenForm(eventList, buildingList, eventCounter, buildingCounter, combinedData, startDate, endDate, mainForm.STATS_LOCATION, fileName))
             {
                 //Nothing in here because we dispose the form when its done.
             }
 
+            last = null;
+
             //Close all excel instances
             Quit();
+        }
+
+        /// <summary>
+        /// Return the pdf file name
+        /// </summary>
+        /// <returns></returns>
+        public string getfileName()
+        {
+            return this.fileName;
         }
 
         /// <summary>
@@ -137,6 +154,8 @@ namespace ClassOpsLogCreator
                 }
             }
 
+            last = null;
+            eventRange = null;
             return eventList;
         }
 
@@ -164,6 +183,8 @@ namespace ClassOpsLogCreator
                 }
             }
 
+            last = null;
+            eventRange = null;
             return eventList;
         }
 
@@ -194,6 +215,9 @@ namespace ClassOpsLogCreator
                     dataCount++;
                 }
             }
+
+            eventRange = null;
+            buildingRange = null;
             return data = data.Where(x => x != null).ToArray();
         }
         

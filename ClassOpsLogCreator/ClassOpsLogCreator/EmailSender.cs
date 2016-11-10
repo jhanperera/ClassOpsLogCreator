@@ -22,7 +22,7 @@ namespace ClassOpsLogCreator
         /// <summary>
         /// This is the main constructor to make the connection and send the statistics email
         /// </summary>
-        public EmailSender(string attachmentPath)
+        public EmailSender(string attachmentPath, string emailSubject)
         {
             //Connect to the smtp server
             using (SmtpClient smtpClient = new SmtpClient())
@@ -56,11 +56,11 @@ namespace ClassOpsLogCreator
                 message.From = fromAddress;
 
                 //Set the subject
-                message.Subject = "This is a test subject.";
+                message.Subject = emailSubject;
 
                 //Set IsBodyHtml to true means you can send HTML email.
                 message.IsBodyHtml = true;
-                message.Body = "<h1>This is a test Body</h1>";
+                message.Body = "<h1></h1>";
                 message.Body += "This message was auto generated at " + now.ToString();
 
                 //Set the attachment

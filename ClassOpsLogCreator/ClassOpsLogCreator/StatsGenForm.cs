@@ -27,7 +27,7 @@ namespace ClassOpsLogCreator
         /// <param name="eventCounter"></param>
         /// <param name="buildingCounter"></param>
         public StatsGenForm(List<string> eventList, List<string> buildingList, Dictionary<string, int> eventCounter, Dictionary<string, int> buildingCounter, 
-                            Dictionary<string,Dictionary<string,int>> combineDic , DateTime StartDate, DateTime EndDate)
+                            Dictionary<string,Dictionary<string,int>> combineDic , DateTime StartDate, DateTime EndDate, string fileLocation, string fileName)
         {
             InitializeComponent();
 
@@ -60,12 +60,12 @@ namespace ClassOpsLogCreator
             this.distrabutionChart.SaveImage(combinedChartImage, ChartImageFormat.Png);
 
             //Exporting to PDF
-            /*string folderPath = @"‪C:\Users\jhan\Desktop\PDF";
+            string folderPath = fileLocation;
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
-            }*/
-            using (FileStream stream = new FileStream("DataGridViewExport.pdf", FileMode.Create))
+            }
+            using (FileStream stream = new FileStream(folderPath + fileName, FileMode.Create))
             {
                 Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
                 PdfWriter.GetInstance(pdfDoc, stream);
@@ -126,7 +126,10 @@ namespace ClassOpsLogCreator
                 pdfDoc.Add(masterTable);
 
                 //Add combinedData
-                pdfDoc.Add(wirteCombinedDatatoPDF(eventList, buildingList, combineDic));
+                PdfPTable combineTable = writeCombinedDatatoPDF(eventList, buildingList, combineDic);
+                combineTable.HorizontalAlignment = Element.ALIGN_LEFT;
+                combineTable.WidthPercentage = 90;
+                pdfDoc.Add(combineTable);
 
                 //Close the streams
                 pdfDoc.Close();
@@ -159,7 +162,7 @@ namespace ClassOpsLogCreator
             //Make the legend show percent and value
             this.eventChart.Series[0].LegendText = "#PERCENT #VALX";
             //Set the legend at the bottom
-            this.eventChart.Legends[0].Docking = Docking.Bottom;
+            this.eventChart.Legends[0].Docking = Docking.Left;
         }
 
         /// <summary>
@@ -187,7 +190,7 @@ namespace ClassOpsLogCreator
             //The legend should have percent and value
             this.buildingChart.Series[0].LegendText = "#PERCENT #VALX";
             //Dock the legend at the bottom.
-            this.buildingChart.Legends[0].Docking = Docking.Bottom;
+            this.buildingChart.Legends[0].Docking = Docking.Right;
         }
 
         /// <summary>
@@ -263,7 +266,7 @@ namespace ClassOpsLogCreator
         /// <param name="buildingList"></param>
         /// <param name="combinedData"></param>
         /// <returns></returns>
-        private PdfPTable wirteCombinedDatatoPDF(List<string> eventList, List<string> buildingList, Dictionary<string, Dictionary<string, int>> combinedData)
+        private PdfPTable writeCombinedDatatoPDF(List<string> eventList, List<string> buildingList, Dictionary<string, Dictionary<string, int>> combinedData)
         {
             //Create a table to write the data too
             PdfPTable pdfTable = new PdfPTable(eventList.Count + 1);
@@ -301,6 +304,20 @@ namespace ClassOpsLogCreator
                 }
             }
 
+            //Set alternative colored rows
+            bool b = false;
+            foreach(PdfPRow r in pdfTable.Rows)
+            {
+                foreach(PdfPCell c in r.GetCells())
+                {
+                    if (b)
+                    {
+                        c.BackgroundColor = new BaseColor(156, 156, 156);
+                    }
+                }
+                b = !b;
+            }
+
             //Set the widths of the first column to be twice as large
             int[] tableWidths = new int[(eventList.Count + 1)];
             tableWidths[0] = 2;
@@ -308,6 +325,7 @@ namespace ClassOpsLogCreator
             {
                 tableWidths[i] = 1;
             }
+            tableWidths[3] = 2;
             pdfTable.SetWidths(tableWidths);
 
             //Return the pdfTable
