@@ -60,7 +60,7 @@ namespace ClassOpsLogCreator
 
                 //Set IsBodyHtml to true means you can send HTML email.
                 message.IsBodyHtml = true;
-                message.Body = "<h1></h1>";
+                message.Body = "<h3>Please see attached a pdf of the auto generated statistics.</h3>";
                 message.Body += "This message was auto generated at " + now.ToString();
 
                 //Set the attachment

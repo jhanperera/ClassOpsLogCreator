@@ -40,10 +40,10 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.eventChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.buildingChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.eventChartNOCLO = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.distrabutionChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.eventChart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buildingChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventChartNOCLO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.distrabutionChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,6 +57,7 @@
             this.eventChart.Name = "eventChart";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             series1.Legend = "Legend1";
             series1.Name = "Tasks";
             series1.YValuesPerPoint = 4;
@@ -64,29 +65,32 @@
             this.eventChart.Size = new System.Drawing.Size(1366, 575);
             this.eventChart.TabIndex = 1;
             this.eventChart.Text = "chart1";
+            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             title1.Name = "Title1";
             title1.Text = "Task Breakdown";
             this.eventChart.Titles.Add(title1);
             // 
-            // buildingChart
+            // eventChartNOCLO
             // 
             chartArea2.Name = "ChartArea1";
-            this.buildingChart.ChartAreas.Add(chartArea2);
+            this.eventChartNOCLO.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
-            this.buildingChart.Legends.Add(legend2);
-            this.buildingChart.Location = new System.Drawing.Point(23, 126);
-            this.buildingChart.Name = "buildingChart";
+            this.eventChartNOCLO.Legends.Add(legend2);
+            this.eventChartNOCLO.Location = new System.Drawing.Point(23, 126);
+            this.eventChartNOCLO.Name = "eventChartNOCLO";
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             series2.Legend = "Legend1";
-            series2.Name = "Buildings";
-            this.buildingChart.Series.Add(series2);
-            this.buildingChart.Size = new System.Drawing.Size(1366, 575);
-            this.buildingChart.TabIndex = 2;
-            this.buildingChart.Text = "chart2";
+            series2.Name = "Tasks";
+            this.eventChartNOCLO.Series.Add(series2);
+            this.eventChartNOCLO.Size = new System.Drawing.Size(1366, 575);
+            this.eventChartNOCLO.TabIndex = 2;
+            this.eventChartNOCLO.Text = "chart2";
+            title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             title2.Name = "Title1";
-            title2.Text = "Building Breakdown";
-            this.buildingChart.Titles.Add(title2);
+            title2.Text = "Task Breakdown (No Crestron Logouts)";
+            this.eventChartNOCLO.Titles.Add(title2);
             // 
             // distrabutionChart
             // 
@@ -99,6 +103,7 @@
             this.distrabutionChart.Size = new System.Drawing.Size(1366, 575);
             this.distrabutionChart.TabIndex = 7;
             this.distrabutionChart.Text = "chart1";
+            title3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             title3.Name = "Title1";
             title3.Text = "Combined Data";
             this.distrabutionChart.Titles.Add(title3);
@@ -109,12 +114,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(241, 95);
             this.Controls.Add(this.distrabutionChart);
-            this.Controls.Add(this.buildingChart);
+            this.Controls.Add(this.eventChartNOCLO);
             this.Controls.Add(this.eventChart);
             this.Name = "StatsGenForm";
             this.Text = "StatsGenForm";
             ((System.ComponentModel.ISupportInitialize)(this.eventChart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buildingChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventChartNOCLO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.distrabutionChart)).EndInit();
             this.ResumeLayout(false);
 
@@ -123,7 +128,7 @@
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart eventChart;
-        private System.Windows.Forms.DataVisualization.Charting.Chart buildingChart;
+        private System.Windows.Forms.DataVisualization.Charting.Chart eventChartNOCLO;
         private System.Windows.Forms.DataVisualization.Charting.Chart distrabutionChart;
     }
 }

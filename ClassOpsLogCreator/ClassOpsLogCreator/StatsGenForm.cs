@@ -44,7 +44,7 @@ namespace ClassOpsLogCreator
 
             //Create the chart
             this.createEventChart(eventList, eventCounter);
-            this.createBuildingChart(buildingList, buildingCounter);
+            this.createEventChartNOCLO(eventList, eventCounter);
             this.createBuildingtoEventChart(eventList, buildingList, combineDic);
 
             //eventChart memory block to add to pdf
@@ -53,7 +53,7 @@ namespace ClassOpsLogCreator
 
             //buildingChart memory block to add to pdf
             var buildingChartImage = new MemoryStream();
-            this.buildingChart.SaveImage(buildingChartImage, ChartImageFormat.Png);
+            this.eventChartNOCLO.SaveImage(buildingChartImage, ChartImageFormat.Png);
 
             //eventChart memory block to add to pdf
             var combinedChartImage = new MemoryStream();
@@ -128,7 +128,7 @@ namespace ClassOpsLogCreator
                 //Add combinedData
                 PdfPTable combineTable = writeCombinedDatatoPDF(eventList, buildingList, combineDic);
                 combineTable.HorizontalAlignment = Element.ALIGN_LEFT;
-                combineTable.WidthPercentage = 90;
+                combineTable.WidthPercentage = 95;
                 pdfDoc.Add(combineTable);
 
                 //Close the streams
@@ -163,6 +163,7 @@ namespace ClassOpsLogCreator
             this.eventChart.Series[0].LegendText = "#PERCENT #VALX";
             //Set the legend at the bottom
             this.eventChart.Legends[0].Docking = Docking.Left;
+            this.eventChart.Legends[0].Font = new System.Drawing.Font("Verdona", 11);
         }
 
         /// <summary>
@@ -170,27 +171,31 @@ namespace ClassOpsLogCreator
         /// </summary>
         /// <param name="buildingList"></param>
         /// <param name="buildingCounter"></param>
-        private void createBuildingChart(List<string> buildingList, Dictionary<string, int> buildingCounter)
+        private void createEventChartNOCLO(List<string> eventList, Dictionary<string, int> eventCounter)
         {
             //look at each building and create a x and y axis value
-            foreach (string s in buildingList)
+            foreach (string s in eventList)
             {
-                this.buildingChart.Series["Buildings"].Points.AddXY(s, buildingCounter[s]);
+                if (s != "Crestron Logout")
+                {
+                    this.eventChartNOCLO.Series["Tasks"].Points.AddXY(s, eventCounter[s]);
+                }
             }
 
             //Set the label to outside
-            this.buildingChart.Series["Buildings"]["PieLabelStyle"] = "Outside";
+            this.eventChartNOCLO.Series["Tasks"]["PieLabelStyle"] = "Outside";
             //Make the chart 3D
-            this.buildingChart.ChartAreas[0].Area3DStyle.Enable3D = true;
-            //Exlose each value in the chart
-            for (int i = 0; i < this.buildingChart.Series["Buildings"].Points.Count; i++)
+            this.eventChartNOCLO.ChartAreas[0].Area3DStyle.Enable3D = true;
+            //Expose each value in the chart
+            for (int i = 0; i < this.eventChartNOCLO.Series["Tasks"].Points.Count; i++)
             {
-                this.buildingChart.Series["Buildings"].Points[i]["Exploded"] = "True";
+                this.eventChartNOCLO.Series["Tasks"].Points[i]["Exploded"] = "True";
             }
             //The legend should have percent and value
-            this.buildingChart.Series[0].LegendText = "#PERCENT #VALX";
+            this.eventChartNOCLO.Series[0].LegendText = "#PERCENT #VALX";
             //Dock the legend at the bottom.
-            this.buildingChart.Legends[0].Docking = Docking.Right;
+            this.eventChartNOCLO.Legends[0].Docking = Docking.Right;
+            this.eventChartNOCLO.Legends[0].Font = new System.Drawing.Font("Verdona", 11);
         }
 
         /// <summary>
@@ -204,19 +209,23 @@ namespace ClassOpsLogCreator
             //Add the eventList to the series
             foreach (string e in eventList)
             {
-                //add the event as a series
-                Series seriesToAdd = new Series(e.ToString());
-                this.distrabutionChart.Series.Add(seriesToAdd);
-                //Set it as a Stacking Column
-                this.distrabutionChart.Series[e.ToString()].ChartType = SeriesChartType.StackedColumn;
-                foreach (string s in buildingList)
+                if (e != "Crestron Logout")
                 {
-                    //Add out X value to the building, and our Y value as the number of occurrences.
-                    this.distrabutionChart.Series[e.ToString()].Points.AddXY(s, (combinedDic[s])[e]);
-                }
+                    //add the event as a series
+                    Series seriesToAdd = new Series(e.ToString());
+                    this.distrabutionChart.Series.Add(seriesToAdd);
+                    //Set it as a Stacking Column
+                    this.distrabutionChart.Series[e.ToString()].ChartType = SeriesChartType.StackedColumn;
+                    foreach (string s in buildingList)
+                    {
+                        //Add out X value to the building, and our Y value as the number of occurrences.
+                        this.distrabutionChart.Series[e.ToString()].Points.AddXY(s, (combinedDic[s])[e]);
+                    }
+                }             
             }
             this.distrabutionChart.ChartAreas["ChartArea1"].AxisX.LabelStyle.Interval = 1;
             this.distrabutionChart.Legends[0].Docking = Docking.Bottom;
+            this.distrabutionChart.Legends[0].Font = new System.Drawing.Font("Verdona", 11);
         }
 
         /// <summary>
@@ -319,13 +328,13 @@ namespace ClassOpsLogCreator
             }
 
             //Set the widths of the first column to be twice as large
-            int[] tableWidths = new int[(eventList.Count + 1)];
-            tableWidths[0] = 2;
+            float[] tableWidths = new float[(eventList.Count + 1)];
+            tableWidths[0] = 2f;
             for (int i = 1; i <= tableWidths.GetUpperBound(0); i++)
             {
-                tableWidths[i] = 1;
+                tableWidths[i] = 1.5f;
             }
-            tableWidths[3] = 2;
+            tableWidths[3] = 2f;
             pdfTable.SetWidths(tableWidths);
 
             //Return the pdfTable

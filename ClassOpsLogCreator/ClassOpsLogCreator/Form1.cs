@@ -1033,6 +1033,9 @@ namespace ClassOpsLogCreator
                 Quit();
 
                 ScheduleStatsGen SSG = new ScheduleStatsGen(this, detailForm);
+                SSG = null;
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
 
                 detailForm.updateDetail("Done!");
 
@@ -1549,7 +1552,10 @@ namespace ClassOpsLogCreator
                     existingMasterWorkSheet.PageSetup.CenterHeader = "&\"Calibri,Bold\"&20" + nameText + ", " + timeArray[i,0] + " to " + timeArray[i,1];
                     existingMasterWorkSheet.PageSetup.RightHeader = "&\"Calibri,Bold\"&20&KFF0000" + DateTime.Now.ToString("ddd");
                     existingMasterWorkSheet.PageSetup.RightHeader = existingMasterWorkSheet.PageSetup.RightHeader + "&\"Calibri,Bold\"&20&K000000" + DateTime.Now.ToString(", MMM dd, yyyy");
-                    logRange.PrintPreview(true);    
+                    logRange.PrintPreview(true);
+
+                    logRange = null;
+                    name = null;
                 }
             }
             else
@@ -1570,7 +1576,8 @@ namespace ClassOpsLogCreator
                 existingMaster.Visible = true;
                 logRange.PrintPreview(true);
 
-                
+                last = null;
+                logRange = null;        
             }
             existingMaster.get_Range("C:C").EntireColumn.Hidden = false;
         }
