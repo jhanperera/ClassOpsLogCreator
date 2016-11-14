@@ -19,6 +19,7 @@ namespace ClassOpsLogCreator
         private iTextSharp.text.Font titleFont = FontFactory.GetFont("Arial", 19);
         private iTextSharp.text.Font smallertitleFont = FontFactory.GetFont("Arial", 12);
 
+
         /// <summary>
         /// Create a statics visualization and writes the data to a pdf
         /// </summary>
@@ -26,6 +27,11 @@ namespace ClassOpsLogCreator
         /// <param name="buildingList"></param>
         /// <param name="eventCounter"></param>
         /// <param name="buildingCounter"></param>
+        /// <param name="combineDic"></param>
+        /// <param name="StartDate"></param>
+        /// <param name="EndDate"></param>
+        /// <param name="fileLocation"></param>
+        /// <param name="fileName"></param>
         public StatsGenForm(List<string> eventList, List<string> buildingList, Dictionary<string, int> eventCounter, Dictionary<string, int> buildingCounter, 
                             Dictionary<string,Dictionary<string,int>> combineDic , DateTime StartDate, DateTime EndDate, string fileLocation, string fileName)
         {
@@ -67,6 +73,7 @@ namespace ClassOpsLogCreator
             }
             using (FileStream stream = new FileStream(folderPath + fileName, FileMode.Create))
             {
+
                 Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
                 PdfWriter.GetInstance(pdfDoc, stream);
                 pdfDoc.Open();
@@ -160,7 +167,7 @@ namespace ClassOpsLogCreator
                 this.eventChart.Series["Tasks"].Points[i]["Exploded"] = "True";
             }
             //Make the legend show percent and value
-            this.eventChart.Series[0].LegendText = "#PERCENT #VALX";
+            this.eventChart.Series[0].LegendText = "#PERCENT{P0} #VALX";
             //Set the legend at the bottom
             this.eventChart.Legends[0].Docking = Docking.Left;
             this.eventChart.Legends[0].Font = new System.Drawing.Font("Verdona", 11);
@@ -192,7 +199,7 @@ namespace ClassOpsLogCreator
                 this.eventChartNOCLO.Series["Tasks"].Points[i]["Exploded"] = "True";
             }
             //The legend should have percent and value
-            this.eventChartNOCLO.Series[0].LegendText = "#PERCENT #VALX";
+            this.eventChartNOCLO.Series[0].LegendText = "#PERCENT{P0} #VALX";
             //Dock the legend at the bottom.
             this.eventChartNOCLO.Legends[0].Docking = Docking.Right;
             this.eventChartNOCLO.Legends[0].Font = new System.Drawing.Font("Verdona", 11);

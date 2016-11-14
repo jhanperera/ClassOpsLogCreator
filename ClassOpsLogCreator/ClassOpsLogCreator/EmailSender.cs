@@ -66,8 +66,8 @@ namespace ClassOpsLogCreator
                 //Set the attachment
                 message.Attachments.Add(new Attachment(attachmentPath));
 
-                //CHANG THIS TO SOMETHING!
-                message.To.Add("jhanperera@live.com");
+                //Send the email to csmangers@yorku.ca
+                message.To.Add("csmanagers@yorku.ca");
 
                 //Try to send the email
                 try

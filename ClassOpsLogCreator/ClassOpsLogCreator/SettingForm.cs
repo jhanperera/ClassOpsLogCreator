@@ -19,6 +19,8 @@ namespace ClassOpsLogCreator
         private bool canceledClicked = false;
         private LogCreator mainForm;
 
+        private string statsFileToOpen = null;
+
         //Use a background worker to allow the GUI to still be functional and not hang.
         private static BackgroundWorker bw = null;
 
@@ -163,13 +165,69 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void MetroTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //If the 4th tab is selected we present them with a password dialog
             if(emailLoginTab.SelectedIndex == 4)
             {
+                //Present the password dialog
                 PasswordInput passInput = new PasswordInput();
                 passInput.ShowDialog(this);
+                //If the password checks out we are good to go.
                 if(passInput.DialogResult == DialogResult.OK)
                 {
-                    //Make all controls visible.
+                    Excel.Application masterlog = new Excel.Application();
+                    Excel.Workbook masterWorkBook = null;
+                    Excel.Worksheet dataBaseSheet = null;
+                    masterlog.Visible = false;
+
+                    try
+                    {
+                        //This should look for the file
+                        masterWorkBook = masterlog.Workbooks.Open(mainForm.EXISTING_MASTER_LOG);
+                        //Work in worksheet number 1
+                        dataBaseSheet = (Excel.Worksheet)masterWorkBook.Sheets[2];
+
+                    }
+                    catch (Exception)
+                    {
+                        //File not found...
+                        masterlog.Quit();
+                        System.Runtime.InteropServices.Marshal.FinalReleaseComObject(masterlog);
+                        masterlog = null;
+                        masterWorkBook = null;
+                        dataBaseSheet = null;
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
+                        throw new System.FieldAccessException("File not found!");
+                    }
+
+                    //Extract the name range
+                    Excel.Range last = dataBaseSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+                    int lastRow = dataBaseSheet.UsedRange.Rows.Count;
+                    Excel.Range buildingRange = dataBaseSheet.get_Range("C2", "C" + (lastRow));
+                    //Convert to an array
+                    System.Array array = (System.Array)buildingRange.Cells.Value2;
+
+
+                    //Make the buildingDatagridview visible.
+                    buildingDataGridView.Visible = true;
+
+                    //close and garbage collect 
+                    if (masterWorkBook != null)
+                    {
+                        masterWorkBook.Close(false, Type.Missing, Type.Missing);
+                        masterlog.Quit();
+                        System.Runtime.InteropServices.Marshal.FinalReleaseComObject(masterlog);
+                        masterlog = null;
+                        masterWorkBook = null;
+                        dataBaseSheet = null;
+                    }
+
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
                 }
             }
         }
@@ -423,6 +481,9 @@ namespace ClassOpsLogCreator
             }
             else
             {
+                //Open the pdf file and move the setting window to the back
+                System.Diagnostics.Process.Start(mainForm.STATS_LOCATION + statsFileToOpen);
+                this.SendToBack();                          
                 generateBTN.Enabled = true;
             }
         }
@@ -449,6 +510,7 @@ namespace ClassOpsLogCreator
             try
             {
                 StatsGen statGenerator = new StatsGen(this.mainForm, this.startDate, this.endDate, "Manual");
+                statsFileToOpen = statGenerator.getfileName();
                 statGenerator = null;
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
