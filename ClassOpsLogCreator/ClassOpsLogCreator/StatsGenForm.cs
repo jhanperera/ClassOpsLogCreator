@@ -49,9 +49,9 @@ namespace ClassOpsLogCreator
             }
 
             //Create the chart
-            this.createEventChart(eventList, eventCounter);
-            this.createEventChartNOCLO(eventList, eventCounter);
-            this.createBuildingtoEventChart(eventList, buildingList, combineDic);
+            this.createEventChart(eventCounter);
+            this.createEventChartNOCLO(eventCounter);
+            this.createBuildingtoEventChart(eventCounter, buildingCounter, combineDic);
 
             //eventChart memory block to add to pdf
             var eventChartImage = new MemoryStream();
@@ -147,12 +147,11 @@ namespace ClassOpsLogCreator
         /// <summary>
         /// Create the event chart
         /// </summary>
-        /// <param name="eventList"></param>
         /// <param name="eventCounter"></param>
-        private void createEventChart(List<string> eventList, Dictionary<string,int> eventCounter)
+        private void createEventChart(Dictionary<string,int> eventCounter)
         {
             //Look though each of the events and add it as an x and y value 
-            foreach(string s in eventList)
+            foreach(string s in eventCounter.Keys)
             {
                 this.eventChart.Series["Tasks"].Points.AddXY(s, eventCounter[s]);
             }
@@ -178,10 +177,10 @@ namespace ClassOpsLogCreator
         /// </summary>
         /// <param name="buildingList"></param>
         /// <param name="buildingCounter"></param>
-        private void createEventChartNOCLO(List<string> eventList, Dictionary<string, int> eventCounter)
+        private void createEventChartNOCLO(Dictionary<string, int> eventCounter)
         {
             //look at each building and create a x and y axis value
-            foreach (string s in eventList)
+            foreach (string s in eventCounter.Keys)
             {
                 if (s != "Crestron Logout")
                 {
@@ -211,28 +210,33 @@ namespace ClassOpsLogCreator
         /// <param name="eventList"></param>
         /// <param name="buildingList"></param>
         /// <param name="combinedDic"></param>
-        private void createBuildingtoEventChart(List<string> eventList, List<string> buildingList, Dictionary<string, Dictionary<string, int>> combinedDic)
+        private void createBuildingtoEventChart(Dictionary<string, int> eventList, Dictionary<string, int> buildingList, Dictionary<string, Dictionary<string, int>> combinedDic)
         {
             //Add the eventList to the series
-            foreach (string e in eventList)
+            foreach (string e in eventList.Keys)
             {
-                if (e != "Crestron Logout")
+                if (e != "Crestron Logout" && eventList[e] > 0)
                 {
                     //add the event as a series
                     Series seriesToAdd = new Series(e.ToString());
                     this.distrabutionChart.Series.Add(seriesToAdd);
                     //Set it as a Stacking Column
                     this.distrabutionChart.Series[e.ToString()].ChartType = SeriesChartType.StackedColumn;
-                    foreach (string s in buildingList)
+                    foreach (string s in buildingList.Keys)
                     {
-                        //Add out X value to the building, and our Y value as the number of occurrences.
-                        this.distrabutionChart.Series[e.ToString()].Points.AddXY(s, (combinedDic[s])[e]);
+                        if(buildingList[s] > 0)
+                        {
+                            //Add out X value to the building, and our Y value as the number of occurrences.
+                            this.distrabutionChart.Series[e.ToString()].Points.AddXY(s, (combinedDic[s])[e]);
+                        }
                     }
                 }             
             }
             this.distrabutionChart.ChartAreas["ChartArea1"].AxisX.LabelStyle.Interval = 1;
             this.distrabutionChart.Legends[0].Docking = Docking.Bottom;
             this.distrabutionChart.Legends[0].Font = new System.Drawing.Font("Verdona", 11);
+            this.distrabutionChart.ChartAreas[0].Area3DStyle.Enable3D = true;
+            this.distrabutionChart.Palette = ChartColorPalette.BrightPastel;
         }
 
         /// <summary>
@@ -251,7 +255,7 @@ namespace ClassOpsLogCreator
             pdfTable.DefaultCell.BorderWidth = 0;
 
             PdfPCell taskHeader = new PdfPCell(new Phrase(tabelTitel));
-            PdfPCell counterHeader = new PdfPCell(new Phrase("Count"));
+            PdfPCell counterHeader = new PdfPCell(new Phrase("Number of Tasks"));
             taskHeader.HorizontalAlignment = Element.ALIGN_CENTER;
             taskHeader.BackgroundColor = new BaseColor(255, 0, 0);
             counterHeader.HorizontalAlignment = Element.ALIGN_CENTER;

@@ -49,7 +49,7 @@ namespace ClassOpsLogCreator
                 //Use SSL to send the email security.
                 smtpClient.EnableSsl = true;
 
-                //Set the credentials to the username and password provided.
+                //Set the credentials to the user name and password provided.
                 smtpClient.Credentials = basicCredential;
 
                 //Set the from sender of the message
@@ -67,7 +67,7 @@ namespace ClassOpsLogCreator
                 message.Attachments.Add(new Attachment(attachmentPath));
 
                 //Send the email to csmangers@yorku.ca
-                message.To.Add("csmanagers@yorku.ca");
+                message.To.Add(Properties.Settings.Default.UserName + "@yorku.ca");
 
                 //Try to send the email
                 try

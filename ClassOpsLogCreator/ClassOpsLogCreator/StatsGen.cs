@@ -108,9 +108,13 @@ namespace ClassOpsLogCreator
                 }
             }
 
-            fileName = @"Auto_" + PDFName + "_Stats_" + startDate.ToString("dd-MM-yyyy") +"_to_" + endDate.ToString("dd-MM-yyyy") + ".pdf";
+            var sortedEventCounter = eventCounter.OrderByDescending(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+            var sortedbuildingCounter = buildingCounter.OrderByDescending(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+
+
+            fileName = @""+ PDFName + "_Stats_" + startDate.ToString("MMM-dd-yyyy") +"-" + endDate.ToString("MMM-dd-yyyy") + ".pdf";
             //Send all the dictionaries with data to be processed and written to a pdf
-            using (StatsGenForm sgf = new StatsGenForm(eventList, buildingList, eventCounter, buildingCounter, combinedData, startDate, endDate, mainForm.STATS_LOCATION, fileName))
+            using (StatsGenForm sgf = new StatsGenForm(eventList, buildingList, sortedEventCounter, sortedbuildingCounter, combinedData, startDate, endDate, mainForm.STATS_LOCATION, fileName))
             {
                 //Nothing in here because we dispose the form when its done.
             }

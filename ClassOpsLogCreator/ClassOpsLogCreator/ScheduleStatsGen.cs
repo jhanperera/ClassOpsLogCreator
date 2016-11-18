@@ -37,7 +37,7 @@ namespace ClassOpsLogCreator
                 string filePath = MainForm.STATS_LOCATION + statGenerator.getfileName();
                 //Send the email
                 detailFrom.updateDetail("Sending Email.");
-                EmailSender ES = new EmailSender(filePath, "Weekly Classroom Operations Statistics");
+                EmailSender ES = new EmailSender(filePath, "Weekly CSCO PT Stats");
             }
             
             //If we are at the end of the month we auto generate statistics
@@ -52,7 +52,7 @@ namespace ClassOpsLogCreator
                 string filePath = MainForm.STATS_LOCATION + statGenerator.getfileName();
                 //Send the email
                 detailFrom.updateDetail("Sending Email.");
-                EmailSender ES = new EmailSender(filePath, "Monthly Classroom Operations Statistics");
+                EmailSender ES = new EmailSender(filePath, "Monthly CSCO PT Stats for " + today.Month);
             }
 
             //If we are at the end of the year we end 
@@ -67,7 +67,7 @@ namespace ClassOpsLogCreator
                 string filePath = MainForm.STATS_LOCATION + statGenerator.getfileName();
                 //Send the email
                 detailFrom.updateDetail("Sending Email.");
-                EmailSender ES = new EmailSender(filePath, "Yearly Classroom Operations Statistics");
+                EmailSender ES = new EmailSender(filePath, "Yearly CSCO PT stats for " + (today.Year - 1));
             }
         }
 

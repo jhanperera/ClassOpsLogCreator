@@ -15,6 +15,14 @@ namespace ClassOpsLogCreator
 {
     public partial class SettingForm : MetroFramework.Forms.MetroForm
     {
+        //Excel variables 
+        Excel.Application masterlog = null;
+        Excel.Workbook masterWorkBook = null;
+        Excel.Worksheet dataBaseSheet = null;
+        Excel.Range last = null;
+        Excel.Range buildingRange = null;
+        Excel.Range employeeRange = null;
+
         private bool loginClicked = false;
         private bool canceledClicked = false;
         private LogCreator mainForm;
@@ -88,7 +96,7 @@ namespace ClassOpsLogCreator
             this.versionLabel.Text += Application.ProductVersion;
 
             //Fill the password and user name field if we already have a user name and password saved.
-            if (!Properties.Settings.Default.UserName.Equals("")||!Properties.Settings.Default.Password.Equals(""))
+            if (!Properties.Settings.Default.UserName.Equals("") || !Properties.Settings.Default.Password.Equals(""))
             {
                 this.usernameTextBox.Text = Properties.Settings.Default.UserName;
                 this.passwordTextBox.Text = Properties.Settings.Default.Password;
@@ -107,7 +115,7 @@ namespace ClassOpsLogCreator
             dateTimePicker.Format = DateTimePickerFormat.Custom;
             dateTimePicker.CustomFormat = "yyyy";
             selectorLabel.Text = "Select a year:";
-            
+
         }
 
         /// <summary>
@@ -166,69 +174,67 @@ namespace ClassOpsLogCreator
         private void MetroTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             //If the 4th tab is selected we present them with a password dialog
-            if(emailLoginTab.SelectedIndex == 4)
+            if (emailLoginTab.SelectedIndex == 4)
             {
-                //Present the password dialog
-                PasswordInput passInput = new PasswordInput();
-                passInput.ShowDialog(this);
-                //If the password checks out we are good to go.
-                if(passInput.DialogResult == DialogResult.OK)
+                masterlog = new Excel.Application();
+                masterWorkBook = null;
+                dataBaseSheet = null;
+                masterlog.Visible = false;
+
+                try
                 {
-                    Excel.Application masterlog = new Excel.Application();
-                    Excel.Workbook masterWorkBook = null;
-                    Excel.Worksheet dataBaseSheet = null;
-                    masterlog.Visible = false;
+                    //This should look for the file
+                    masterWorkBook = masterlog.Workbooks.Open(mainForm.EXISTING_MASTER_LOG);
+                    //Work in worksheet number 1
+                    dataBaseSheet = (Excel.Worksheet)masterWorkBook.Sheets[2];
 
-                    try
-                    {
-                        //This should look for the file
-                        masterWorkBook = masterlog.Workbooks.Open(mainForm.EXISTING_MASTER_LOG);
-                        //Work in worksheet number 1
-                        dataBaseSheet = (Excel.Worksheet)masterWorkBook.Sheets[2];
-
-                    }
-                    catch (Exception)
-                    {
-                        //File not found...
-                        masterlog.Quit();
-                        System.Runtime.InteropServices.Marshal.FinalReleaseComObject(masterlog);
-                        masterlog = null;
-                        masterWorkBook = null;
-                        dataBaseSheet = null;
-                        GC.Collect();
-                        GC.WaitForPendingFinalizers();
-                        GC.Collect();
-                        GC.WaitForPendingFinalizers();
-                        throw new System.FieldAccessException("File not found!");
-                    }
-
-                    //Extract the name range
-                    Excel.Range last = dataBaseSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-                    int lastRow = dataBaseSheet.UsedRange.Rows.Count;
-                    Excel.Range buildingRange = dataBaseSheet.get_Range("C2", "C" + (lastRow));
-                    //Convert to an array
-                    System.Array array = (System.Array)buildingRange.Cells.Value2;
-
-
-                    //Make the buildingDatagridview visible.
-                    buildingDataGridView.Visible = true;
-
-                    //close and garbage collect 
-                    if (masterWorkBook != null)
-                    {
-                        masterWorkBook.Close(false, Type.Missing, Type.Missing);
-                        masterlog.Quit();
-                        System.Runtime.InteropServices.Marshal.FinalReleaseComObject(masterlog);
-                        masterlog = null;
-                        masterWorkBook = null;
-                        dataBaseSheet = null;
-                    }
-
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
                 }
+                catch (Exception)
+                {
+                    this.Quit();
+                    GC.WaitForPendingFinalizers();
+                    throw new System.FieldAccessException("File not found!");
+                }
+
+                //Extract the name range
+                last = dataBaseSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+                int lastRow = dataBaseSheet.UsedRange.Rows.Count;
+
+                System.Array buildingArray = null;
+                System.Array employeeArray = null;
+
+                if (buildingRange == null || employeeRange == null)
+                {
+                    buildingRange = dataBaseSheet.get_Range("C1", "C" + (lastRow));
+                    employeeRange = dataBaseSheet.get_Range("A1", "A" + (lastRow + 5));
+                    //Convert to an array
+                    buildingArray = (System.Array)buildingRange.Cells.Value2;
+                    employeeArray = (System.Array)employeeRange.Cells.Value2;
+                }
+                
+                //Add the buildings and names to the drop down mean
+                foreach (object s in buildingArray)
+                {
+                    if(s != null && s.ToString() != "TEL")
+                    {
+                        this.buildingComboBox.Items.Add(s.ToString());
+                    }               
+                }
+
+                foreach(object s in employeeArray)
+                {
+                    if(s != null)
+                    {
+                        this.employeeComboBox.Items.Add(s.ToString());
+                    }
+                }
+
+                //Select the default value to display 
+                this.buildingComboBox.SelectedIndex = 0;
+                this.employeeComboBox.SelectedIndex = 0;
+
+                //Make the save button visible.
+                this.saveBTN.Visible = true;
             }
         }
         #endregion
@@ -241,7 +247,7 @@ namespace ClassOpsLogCreator
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void loginBTN_Click(object sender, EventArgs e)
-        {    
+        {
 
             if (this.usernameTextBox.Text == "" || this.passwordTextBox.Text == "")
             {
@@ -255,7 +261,7 @@ namespace ClassOpsLogCreator
                 Properties.Settings.Default.Password = this.passwordTextBox.Text;
                 Properties.Settings.Default.Save();
                 EmailSender eS = new EmailSender(true);
-                if(eS.isConnectionMade())
+                if (eS.isConnectionMade())
                 {
                     MetroMessageBox.Show(this, "Success: A connection was made", "Success",
                                             MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -354,7 +360,7 @@ namespace ClassOpsLogCreator
 
             }
             //Generate the stats for the month.
-            else if(monthlyRadio.Checked)
+            else if (monthlyRadio.Checked)
             {
                 var holidays = new List<DateTime> {/* list of observed holidays */};
                 var i = DateTime.DaysInMonth(dateTimePicker.Value.Date.Year, dateTimePicker.Value.Date.Month);
@@ -450,6 +456,33 @@ namespace ClassOpsLogCreator
                 bw.RunWorkerAsync();
             }
         }
+
+        /// <summary>
+        /// This is when we check all the inputs and ensure we can save the data to the file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void saveBTN_Click(object sender, EventArgs e)
+        {
+            //First check if the building text box has text in it. 
+            if(!string.IsNullOrWhiteSpace(newBuildingInit.Text.ToString()))
+            {
+              //We know that the text box is not empty  
+            }
+
+            if(!string.IsNullOrWhiteSpace(newEmployeeName.Text.ToString()))
+            {
+
+            }
+
+            if( !string.IsNullOrWhiteSpace(newEmployeeNameTextBox.Text.ToString()))
+            {
+
+            }
+
+            //Quit and close everything
+            this.Quit();
+        }
         #endregion
 
         #region Thread work
@@ -477,17 +510,17 @@ namespace ClassOpsLogCreator
                 // flag may not have been set, even though
                 // CancelAsync was called.
                 generateBTN.Enabled = true;
-               
+
             }
             else
             {
                 //Open the pdf file and move the setting window to the back
                 System.Diagnostics.Process.Start(mainForm.STATS_LOCATION + statsFileToOpen);
-                this.SendToBack();                          
+                this.SendToBack();
                 generateBTN.Enabled = true;
             }
         }
-        
+
         /// <summary>
         /// Progress change method to update the detail window
         /// </summary>
@@ -524,5 +557,26 @@ namespace ClassOpsLogCreator
 
         #endregion
 
+        private void Quit()
+        {
+            //close and garbage collect 
+            if (masterWorkBook != null)
+            {
+                masterWorkBook.Close(false, Type.Missing, Type.Missing);
+                masterlog.Quit();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(masterlog);
+                masterlog = null;
+                masterWorkBook = null;
+                dataBaseSheet = null;
+                last = null;
+                buildingRange = null;
+                employeeRange = null;
+            }
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
     }
 }
