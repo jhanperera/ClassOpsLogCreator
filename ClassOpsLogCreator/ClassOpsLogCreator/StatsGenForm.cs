@@ -97,9 +97,6 @@ namespace ClassOpsLogCreator
                 iTextSharp.text.Image buildingChart_Image = iTextSharp.text.Image.GetInstance(buildingChartImage.GetBuffer());
                 iTextSharp.text.Image distrabutionChart_Image = iTextSharp.text.Image.GetInstance(combinedChartImage.GetBuffer());
 
-                //eventChart_Image.ScaleAbsolute(200f, 300f);
-                //buildingChart_Image.ScaleAbsolute(200f, 300f);
-
                 PdfPTable imageTable = new PdfPTable(1);
                 imageTable.DefaultCell.Border = 0;
                 imageTable.AddCell(eventChart_Image);
@@ -131,6 +128,19 @@ namespace ClassOpsLogCreator
                 
                 //Add the fist table
                 pdfDoc.Add(masterTable);
+
+                Paragraph emptySpsace = new Paragraph("");
+                addEmptyLine(emptySpsace, 5);
+                pdfDoc.Add(emptySpsace);
+
+                //Add a new title
+                Paragraph title3 = new Paragraph("Combined Raw Data", titleFont);
+                title2.Alignment = Element.ALIGN_LEFT;
+                pdfDoc.Add(title3);
+
+                //add a line and add it in to the pdf
+                addEmptyLine(p, 3);
+                pdfDoc.Add(p);
 
                 //Add combinedData
                 PdfPTable combineTable = writeCombinedDatatoPDF(eventList, buildingList, combineDic);
@@ -224,7 +234,7 @@ namespace ClassOpsLogCreator
                     this.distrabutionChart.Series[e.ToString()].ChartType = SeriesChartType.StackedColumn;
                     foreach (string s in buildingList.Keys)
                     {
-                        if(buildingList[s] > 0)
+                        if (buildingList[s] > 0)
                         {
                             //Add out X value to the building, and our Y value as the number of occurrences.
                             this.distrabutionChart.Series[e.ToString()].Points.AddXY(s, (combinedDic[s])[e]);
@@ -235,7 +245,6 @@ namespace ClassOpsLogCreator
             this.distrabutionChart.ChartAreas["ChartArea1"].AxisX.LabelStyle.Interval = 1;
             this.distrabutionChart.Legends[0].Docking = Docking.Bottom;
             this.distrabutionChart.Legends[0].Font = new System.Drawing.Font("Verdona", 11);
-            this.distrabutionChart.ChartAreas[0].Area3DStyle.Enable3D = true;
             this.distrabutionChart.Palette = ChartColorPalette.BrightPastel;
         }
 
@@ -307,9 +316,30 @@ namespace ClassOpsLogCreator
                 pdfTable.AddCell(cellToAdd);
             }
 
+            int count = 0;
             //For each building we display all the data.
             foreach (string s in buildingList)
             {
+                //Add a new header
+                if(count > 0 && count % 10 == 0)
+                {
+                    //Add a space here
+                    PdfPCell callToAdd = new PdfPCell(new Phrase(""));
+                    spaceToAdd.Border = 0;
+                    pdfTable.AddCell(spaceToAdd);
+
+                    //Adding the header
+                    foreach (string e in eventList)
+                    {
+                        Chunk chuckToAdd = new Chunk(e.ToString());
+                        chuckToAdd.SetSkew(-30f, 0f);
+                        PdfPCell callToAdd1 = new PdfPCell(new Phrase(chuckToAdd));
+                        callToAdd1.Rotation = 90;
+                        callToAdd1.UseAscender = true;
+                        callToAdd1.Border = 0;
+                        pdfTable.AddCell(callToAdd1);
+                    }
+                }
                 PdfPCell cellToAdd = new PdfPCell(new Phrase(s.ToString()));
                 cellToAdd.Border = 0;
                 cellToAdd.HorizontalAlignment = Element.ALIGN_RIGHT;
@@ -322,20 +352,27 @@ namespace ClassOpsLogCreator
                     valuecellToAdd.HorizontalAlignment = Element.ALIGN_CENTER;
                     pdfTable.AddCell(valuecellToAdd);
                 }
+                count++;
             }
 
             //Set alternative colored rows
             bool b = false;
+            count = 0;
             foreach(PdfPRow r in pdfTable.Rows)
             {
                 foreach(PdfPCell c in r.GetCells())
                 {
+                    if (count > 0 && count % 11 == 0 && b == true)
+                    {
+                        b = false;
+                    }
                     if (b)
                     {
                         c.BackgroundColor = new BaseColor(156, 156, 156);
                     }
                 }
                 b = !b;
+                count++;
             }
 
             //Set the widths of the first column to be twice as large

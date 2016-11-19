@@ -23,6 +23,9 @@ namespace ClassOpsLogCreator
         Excel.Range buildingRange = null;
         Excel.Range employeeRange = null;
 
+        System.Array buildingArray = null;
+        System.Array employeeArray = null;
+
         private bool loginClicked = false;
         private bool canceledClicked = false;
         private LogCreator mainForm;
@@ -200,13 +203,11 @@ namespace ClassOpsLogCreator
                 last = dataBaseSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
                 int lastRow = dataBaseSheet.UsedRange.Rows.Count;
 
-                System.Array buildingArray = null;
-                System.Array employeeArray = null;
 
                 if (buildingRange == null || employeeRange == null)
                 {
                     buildingRange = dataBaseSheet.get_Range("C1", "C" + (lastRow));
-                    employeeRange = dataBaseSheet.get_Range("A1", "A" + (lastRow + 5));
+                    employeeRange = dataBaseSheet.get_Range("A1", "A" + (lastRow));
                     //Convert to an array
                     buildingArray = (System.Array)buildingRange.Cells.Value2;
                     employeeArray = (System.Array)employeeRange.Cells.Value2;
@@ -234,7 +235,9 @@ namespace ClassOpsLogCreator
                 this.employeeComboBox.SelectedIndex = 0;
 
                 //Make the save button visible.
-                this.saveBTN.Visible = true;
+                this.updateBTN.Visible = true;
+                this.addBTN.Visible = true;
+                this.removeBTN.Visible = true;
             }
         }
         #endregion
@@ -458,7 +461,7 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// This is when we check all the inputs and ensure we can save the data to the file
+        /// This will save the settings if we want to change a building name
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -467,21 +470,142 @@ namespace ClassOpsLogCreator
             //First check if the building text box has text in it. 
             if(!string.IsNullOrWhiteSpace(newBuildingInit.Text.ToString()))
             {
-              //We know that the text box is not empty  
+                //Get the index of the selected building
+                int selected = this.buildingComboBox.SelectedIndex;
+                //Building was not selected correctly
+                if(selected == 0)
+                {
+                    MetroMessageBox.Show(this, "Please select a building!", "Invalid Building",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    //We get the index of the building we need to change
+                    Excel.Range changeBuilding = (Excel.Range)dataBaseSheet.get_Range("C" + (selected + 1), "C" + (selected + 1));
+                    //Save the building name for further references
+                    string previousBuildingName = changeBuilding.Value2.ToString();
+                    //Update the building name with the new one
+                    changeBuilding.Value2 = this.newBuildingInit.Text.ToString().ToUpper();
+                    //Save and inform the user that the save was successful
+                    masterWorkBook.Save();
+                    MetroMessageBox.Show(this, previousBuildingName + " was successfully changed to " + this.newBuildingInit.Text.ToString().ToUpper(),
+                                    "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    changeBuilding = null;
+
+                    //Update the comobox again
+                    int lastRow = dataBaseSheet.UsedRange.Rows.Count;
+                    buildingRange = dataBaseSheet.get_Range("C1", "C" + (lastRow));
+                    //Convert to an array
+                    buildingArray = (System.Array)buildingRange.Cells.Value2;
+
+                    //Clear the combo box
+                    this.buildingComboBox.Items.Clear();
+                    this.newBuildingInit.Clear();
+
+                    //Add the buildings and names to the drop down mean
+                    foreach (object s in buildingArray)
+                    {
+                        if (s != null)
+                        {
+                            this.buildingComboBox.Items.Add(s.ToString());
+                        }
+                    }
+
+                    //Select the default value to display 
+                    this.buildingComboBox.SelectedIndex = 0;
+                }
             }
 
-            if(!string.IsNullOrWhiteSpace(newEmployeeName.Text.ToString()))
+        }
+
+        /// <summary>
+        /// Add the new staff name into the excel file database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addBTN_Click(object sender, EventArgs e)
+        {
+            //Check if the current
+            if (!string.IsNullOrWhiteSpace(newEmployeeNameTextBox.Text.ToString()))
             {
+                //Get the last row number
+                int lastRow = dataBaseSheet.UsedRange.Rows.Count;
+                //Get the name range to add the new employee
+                Excel.Range addNameRange = (Excel.Range)dataBaseSheet.get_Range("A" + (lastRow + 1), "A" + (lastRow + 1));
+                //Parse the input and ensure it ends up in a name format. First letter is capital. 
+                string newName = this.newEmployeeNameTextBox.Text.First().ToString().ToUpper() +
+                                        this.newEmployeeNameTextBox.Text.Substring(1).ToLower();
+
+                //Check if the employee is already in the database. (NO DUPLICATES) 
+                foreach(object s in employeeArray)
+                {
+                    if (s != null && s.ToString() == newName)
+                    {
+                        MetroMessageBox.Show(this, newName + " ready exists ", "Problem...",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                //If no duplicates then we add the name to the database
+                addNameRange.Value2 = newName;
+                //Save
+                masterWorkBook.Save();
+                //Inform the user the save was successful. 
+                MetroMessageBox.Show(this, newName + " was successfully added. ", "Success!",
+                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                addNameRange = null;
+
 
             }
+        }
 
-            if( !string.IsNullOrWhiteSpace(newEmployeeNameTextBox.Text.ToString()))
+        /// <summary>
+        /// Remove staff from the excel file database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void removeBTN_Click(object sender, EventArgs e)
+        {
+            //Get the selected index
+            int selected = this.employeeComboBox.SelectedIndex;
+
+            //If we are in the first one we throw a error message
+            if(selected == 0)
             {
-
+                MetroMessageBox.Show(this, "Please select a employee!", "Invalid Employee",
+                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            else
+            {
+                Excel.Range nameToDelete = (Excel.Range)dataBaseSheet.get_Range("A" + (selected + 1), "A" + (selected + 1));
+                string oldName = nameToDelete.Value2.ToString();
+                nameToDelete.Delete(Excel.XlDeleteShiftDirection.xlShiftUp);
+                masterWorkBook.Save();
+                MetroMessageBox.Show(this, oldName + " was successfully added. ", "Success!",
+                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                nameToDelete = null;
 
-            //Quit and close everything
-            this.Quit();
+                //Get the last row number
+                int lastRow = dataBaseSheet.UsedRange.Rows.Count;
+
+                //Refresh the employee combo box. 
+                employeeRange = dataBaseSheet.get_Range("A1", "A" + (lastRow));
+                //Convert to an array
+                employeeArray = (System.Array)employeeRange.Cells.Value2;
+
+                employeeComboBox.Items.Clear();
+                foreach (object s in employeeArray)
+                {
+                    if (s != null)
+                    {
+                        this.employeeComboBox.Items.Add(s.ToString());
+                    }
+                }
+
+                //Select the default value to display 
+                this.employeeComboBox.SelectedIndex = 0;
+            }
         }
         #endregion
 
@@ -557,6 +681,15 @@ namespace ClassOpsLogCreator
 
         #endregion
 
+        #region closing and clean up operations
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            //We are going to use the base onFormClose operations and add more
+            base.OnFormClosing(e);
+
+            this.Quit();
+        }
+
         private void Quit()
         {
             //close and garbage collect 
@@ -578,5 +711,7 @@ namespace ClassOpsLogCreator
             GC.Collect();
             GC.WaitForPendingFinalizers();
         }
+        #endregion
+
     }
 }

@@ -54,27 +54,26 @@
             this.weeklyRadio = new MetroFramework.Controls.MetroRadioButton();
             this.selectorLabel = new MetroFramework.Controls.MetroLabel();
             this.buildingUpdateTab = new MetroFramework.Controls.MetroTabPage();
-            this.changeGroupBox = new System.Windows.Forms.GroupBox();
-            this.buildingNameLabel = new MetroFramework.Controls.MetroLabel();
-            this.newBuildingInit = new MetroFramework.Controls.MetroTextBox();
-            this.buildingComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.employeeNameLabel = new MetroFramework.Controls.MetroLabel();
-            this.newEmployeeName = new MetroFramework.Controls.MetroTextBox();
-            this.employeeComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.saveBTN = new MetroFramework.Controls.MetroButton();
             this.addEmployeGroup = new System.Windows.Forms.GroupBox();
             this.newEmployeeNameTextBox = new MetroFramework.Controls.MetroTextBox();
             this.addEmployeeLabel = new MetroFramework.Controls.MetroLabel();
+            this.changeGroupBox = new System.Windows.Forms.GroupBox();
             this.toLabel01 = new MetroFramework.Controls.MetroLabel();
-            this.toLabel02 = new MetroFramework.Controls.MetroLabel();
+            this.newBuildingInit = new MetroFramework.Controls.MetroTextBox();
+            this.buildingComboBox = new MetroFramework.Controls.MetroComboBox();
+            this.updateBTN = new MetroFramework.Controls.MetroButton();
+            this.employeeNameLabel = new MetroFramework.Controls.MetroLabel();
+            this.employeeComboBox = new MetroFramework.Controls.MetroComboBox();
+            this.addBTN = new MetroFramework.Controls.MetroButton();
+            this.removeBTN = new MetroFramework.Controls.MetroButton();
             this.emailLoginTab.SuspendLayout();
             this.versuibTab.SuspendLayout();
             this.logoutGenTab.SuspendLayout();
             this.emailTab.SuspendLayout();
             this.statisticsTab.SuspendLayout();
             this.buildingUpdateTab.SuspendLayout();
-            this.changeGroupBox.SuspendLayout();
             this.addEmployeGroup.SuspendLayout();
+            this.changeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // usernameLabel
@@ -414,7 +413,6 @@
             // 
             this.buildingUpdateTab.Controls.Add(this.addEmployeGroup);
             this.buildingUpdateTab.Controls.Add(this.changeGroupBox);
-            this.buildingUpdateTab.Controls.Add(this.saveBTN);
             this.buildingUpdateTab.HorizontalScrollbarBarColor = true;
             this.buildingUpdateTab.HorizontalScrollbarHighlightOnWheel = false;
             this.buildingUpdateTab.HorizontalScrollbarSize = 10;
@@ -427,32 +425,87 @@
             this.buildingUpdateTab.VerticalScrollbarHighlightOnWheel = false;
             this.buildingUpdateTab.VerticalScrollbarSize = 10;
             // 
+            // addEmployeGroup
+            // 
+            this.addEmployeGroup.BackColor = System.Drawing.Color.Transparent;
+            this.addEmployeGroup.Controls.Add(this.removeBTN);
+            this.addEmployeGroup.Controls.Add(this.addBTN);
+            this.addEmployeGroup.Controls.Add(this.employeeNameLabel);
+            this.addEmployeGroup.Controls.Add(this.employeeComboBox);
+            this.addEmployeGroup.Controls.Add(this.newEmployeeNameTextBox);
+            this.addEmployeGroup.Controls.Add(this.addEmployeeLabel);
+            this.addEmployeGroup.Location = new System.Drawing.Point(3, 75);
+            this.addEmployeGroup.Name = "addEmployeGroup";
+            this.addEmployeGroup.Size = new System.Drawing.Size(499, 118);
+            this.addEmployeGroup.TabIndex = 12;
+            this.addEmployeGroup.TabStop = false;
+            this.addEmployeGroup.Text = "Add/Remove Employee";
+            // 
+            // newEmployeeNameTextBox
+            // 
+            // 
+            // 
+            // 
+            this.newEmployeeNameTextBox.CustomButton.Image = null;
+            this.newEmployeeNameTextBox.CustomButton.Location = new System.Drawing.Point(93, 1);
+            this.newEmployeeNameTextBox.CustomButton.Name = "";
+            this.newEmployeeNameTextBox.CustomButton.Size = new System.Drawing.Size(27, 27);
+            this.newEmployeeNameTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.newEmployeeNameTextBox.CustomButton.TabIndex = 1;
+            this.newEmployeeNameTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.newEmployeeNameTextBox.CustomButton.UseSelectable = true;
+            this.newEmployeeNameTextBox.CustomButton.Visible = false;
+            this.newEmployeeNameTextBox.Lines = new string[0];
+            this.newEmployeeNameTextBox.Location = new System.Drawing.Point(216, 25);
+            this.newEmployeeNameTextBox.MaxLength = 32767;
+            this.newEmployeeNameTextBox.Name = "newEmployeeNameTextBox";
+            this.newEmployeeNameTextBox.PasswordChar = '\0';
+            this.newEmployeeNameTextBox.PromptText = "New Employee Name";
+            this.newEmployeeNameTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.newEmployeeNameTextBox.SelectedText = "";
+            this.newEmployeeNameTextBox.SelectionLength = 0;
+            this.newEmployeeNameTextBox.SelectionStart = 0;
+            this.newEmployeeNameTextBox.ShortcutsEnabled = true;
+            this.newEmployeeNameTextBox.Size = new System.Drawing.Size(121, 29);
+            this.newEmployeeNameTextBox.TabIndex = 12;
+            this.newEmployeeNameTextBox.UseSelectable = true;
+            this.newEmployeeNameTextBox.WaterMark = "New Employee Name";
+            this.newEmployeeNameTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.newEmployeeNameTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // addEmployeeLabel
+            // 
+            this.addEmployeeLabel.AutoSize = true;
+            this.addEmployeeLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.addEmployeeLabel.Location = new System.Drawing.Point(33, 29);
+            this.addEmployeeLabel.Name = "addEmployeeLabel";
+            this.addEmployeeLabel.Size = new System.Drawing.Size(177, 25);
+            this.addEmployeeLabel.TabIndex = 11;
+            this.addEmployeeLabel.Text = "Add Employee Name:";
+            // 
             // changeGroupBox
             // 
             this.changeGroupBox.BackColor = System.Drawing.Color.Transparent;
-            this.changeGroupBox.Controls.Add(this.toLabel02);
             this.changeGroupBox.Controls.Add(this.toLabel01);
-            this.changeGroupBox.Controls.Add(this.buildingNameLabel);
+            this.changeGroupBox.Controls.Add(this.updateBTN);
             this.changeGroupBox.Controls.Add(this.newBuildingInit);
             this.changeGroupBox.Controls.Add(this.buildingComboBox);
-            this.changeGroupBox.Controls.Add(this.employeeNameLabel);
-            this.changeGroupBox.Controls.Add(this.newEmployeeName);
-            this.changeGroupBox.Controls.Add(this.employeeComboBox);
             this.changeGroupBox.Location = new System.Drawing.Point(3, 3);
             this.changeGroupBox.Name = "changeGroupBox";
-            this.changeGroupBox.Size = new System.Drawing.Size(496, 115);
+            this.changeGroupBox.Size = new System.Drawing.Size(499, 66);
             this.changeGroupBox.TabIndex = 11;
             this.changeGroupBox.TabStop = false;
-            this.changeGroupBox.Text = "Change Building or Employee names";
+            this.changeGroupBox.Text = "Change Building Name";
             // 
-            // buildingNameLabel
+            // toLabel01
             // 
-            this.buildingNameLabel.AutoSize = true;
-            this.buildingNameLabel.Location = new System.Drawing.Point(6, 24);
-            this.buildingNameLabel.Name = "buildingNameLabel";
-            this.buildingNameLabel.Size = new System.Drawing.Size(126, 19);
-            this.buildingNameLabel.TabIndex = 2;
-            this.buildingNameLabel.Text = "Edit building name: ";
+            this.toLabel01.AutoSize = true;
+            this.toLabel01.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.toLabel01.Location = new System.Drawing.Point(183, 19);
+            this.toLabel01.Name = "toLabel01";
+            this.toLabel01.Size = new System.Drawing.Size(27, 25);
+            this.toLabel01.TabIndex = 8;
+            this.toLabel01.Text = "to";
             // 
             // newBuildingInit
             // 
@@ -469,7 +522,7 @@
             this.newBuildingInit.CustomButton.UseSelectable = true;
             this.newBuildingInit.CustomButton.Visible = false;
             this.newBuildingInit.Lines = new string[0];
-            this.newBuildingInit.Location = new System.Drawing.Point(344, 24);
+            this.newBuildingInit.Location = new System.Drawing.Point(216, 19);
             this.newBuildingInit.MaxLength = 32767;
             this.newBuildingInit.Name = "newBuildingInit";
             this.newBuildingInit.PasswordChar = '\0';
@@ -490,144 +543,64 @@
             // 
             this.buildingComboBox.FormattingEnabled = true;
             this.buildingComboBox.ItemHeight = 23;
-            this.buildingComboBox.Location = new System.Drawing.Point(160, 24);
+            this.buildingComboBox.Location = new System.Drawing.Point(56, 20);
             this.buildingComboBox.Name = "buildingComboBox";
             this.buildingComboBox.Size = new System.Drawing.Size(121, 29);
             this.buildingComboBox.TabIndex = 4;
             this.buildingComboBox.UseSelectable = true;
             // 
+            // updateBTN
+            // 
+            this.updateBTN.Location = new System.Drawing.Point(372, 19);
+            this.updateBTN.Name = "updateBTN";
+            this.updateBTN.Size = new System.Drawing.Size(118, 30);
+            this.updateBTN.TabIndex = 8;
+            this.updateBTN.Text = "Update Building";
+            this.updateBTN.UseSelectable = true;
+            this.updateBTN.Visible = false;
+            this.updateBTN.Click += new System.EventHandler(this.saveBTN_Click);
+            // 
             // employeeNameLabel
             // 
             this.employeeNameLabel.AutoSize = true;
-            this.employeeNameLabel.Location = new System.Drawing.Point(6, 73);
+            this.employeeNameLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.employeeNameLabel.Location = new System.Drawing.Point(6, 68);
             this.employeeNameLabel.Name = "employeeNameLabel";
-            this.employeeNameLabel.Size = new System.Drawing.Size(133, 19);
-            this.employeeNameLabel.TabIndex = 5;
-            this.employeeNameLabel.Text = "Edit employee name:";
-            // 
-            // newEmployeeName
-            // 
-            // 
-            // 
-            // 
-            this.newEmployeeName.CustomButton.Image = null;
-            this.newEmployeeName.CustomButton.Location = new System.Drawing.Point(93, 1);
-            this.newEmployeeName.CustomButton.Name = "";
-            this.newEmployeeName.CustomButton.Size = new System.Drawing.Size(27, 27);
-            this.newEmployeeName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.newEmployeeName.CustomButton.TabIndex = 1;
-            this.newEmployeeName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.newEmployeeName.CustomButton.UseSelectable = true;
-            this.newEmployeeName.CustomButton.Visible = false;
-            this.newEmployeeName.Lines = new string[0];
-            this.newEmployeeName.Location = new System.Drawing.Point(344, 73);
-            this.newEmployeeName.MaxLength = 32767;
-            this.newEmployeeName.Name = "newEmployeeName";
-            this.newEmployeeName.PasswordChar = '\0';
-            this.newEmployeeName.PromptText = "New Employee Name";
-            this.newEmployeeName.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.newEmployeeName.SelectedText = "";
-            this.newEmployeeName.SelectionLength = 0;
-            this.newEmployeeName.SelectionStart = 0;
-            this.newEmployeeName.ShortcutsEnabled = true;
-            this.newEmployeeName.Size = new System.Drawing.Size(121, 29);
-            this.newEmployeeName.TabIndex = 6;
-            this.newEmployeeName.UseSelectable = true;
-            this.newEmployeeName.WaterMark = "New Employee Name";
-            this.newEmployeeName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.newEmployeeName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.employeeNameLabel.Size = new System.Drawing.Size(204, 25);
+            this.employeeNameLabel.TabIndex = 13;
+            this.employeeNameLabel.Text = "Remove employee name:";
             // 
             // employeeComboBox
             // 
             this.employeeComboBox.FormattingEnabled = true;
             this.employeeComboBox.ItemHeight = 23;
-            this.employeeComboBox.Location = new System.Drawing.Point(160, 73);
+            this.employeeComboBox.Location = new System.Drawing.Point(216, 68);
             this.employeeComboBox.Name = "employeeComboBox";
             this.employeeComboBox.Size = new System.Drawing.Size(121, 29);
-            this.employeeComboBox.TabIndex = 7;
+            this.employeeComboBox.TabIndex = 14;
             this.employeeComboBox.UseSelectable = true;
             // 
-            // saveBTN
+            // addBTN
             // 
-            this.saveBTN.Location = new System.Drawing.Point(356, 143);
-            this.saveBTN.Name = "saveBTN";
-            this.saveBTN.Size = new System.Drawing.Size(103, 30);
-            this.saveBTN.TabIndex = 8;
-            this.saveBTN.Text = "Save Changes";
-            this.saveBTN.UseSelectable = true;
-            this.saveBTN.Visible = false;
-            this.saveBTN.Click += new System.EventHandler(this.saveBTN_Click);
+            this.addBTN.Location = new System.Drawing.Point(372, 19);
+            this.addBTN.Name = "addBTN";
+            this.addBTN.Size = new System.Drawing.Size(118, 30);
+            this.addBTN.TabIndex = 15;
+            this.addBTN.Text = "Add Employee";
+            this.addBTN.UseSelectable = true;
+            this.addBTN.Visible = false;
+            this.addBTN.Click += new System.EventHandler(this.addBTN_Click);
             // 
-            // addEmployeGroup
+            // removeBTN
             // 
-            this.addEmployeGroup.BackColor = System.Drawing.Color.Transparent;
-            this.addEmployeGroup.Controls.Add(this.newEmployeeNameTextBox);
-            this.addEmployeGroup.Controls.Add(this.addEmployeeLabel);
-            this.addEmployeGroup.Location = new System.Drawing.Point(3, 124);
-            this.addEmployeGroup.Name = "addEmployeGroup";
-            this.addEmployeGroup.Size = new System.Drawing.Size(281, 69);
-            this.addEmployeGroup.TabIndex = 12;
-            this.addEmployeGroup.TabStop = false;
-            this.addEmployeGroup.Text = "Add an Employee";
-            // 
-            // newEmployeeNameTextBox
-            // 
-            // 
-            // 
-            // 
-            this.newEmployeeNameTextBox.CustomButton.Image = null;
-            this.newEmployeeNameTextBox.CustomButton.Location = new System.Drawing.Point(93, 1);
-            this.newEmployeeNameTextBox.CustomButton.Name = "";
-            this.newEmployeeNameTextBox.CustomButton.Size = new System.Drawing.Size(27, 27);
-            this.newEmployeeNameTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.newEmployeeNameTextBox.CustomButton.TabIndex = 1;
-            this.newEmployeeNameTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.newEmployeeNameTextBox.CustomButton.UseSelectable = true;
-            this.newEmployeeNameTextBox.CustomButton.Visible = false;
-            this.newEmployeeNameTextBox.Lines = new string[0];
-            this.newEmployeeNameTextBox.Location = new System.Drawing.Point(122, 19);
-            this.newEmployeeNameTextBox.MaxLength = 32767;
-            this.newEmployeeNameTextBox.Name = "newEmployeeNameTextBox";
-            this.newEmployeeNameTextBox.PasswordChar = '\0';
-            this.newEmployeeNameTextBox.PromptText = "New Employee Name";
-            this.newEmployeeNameTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.newEmployeeNameTextBox.SelectedText = "";
-            this.newEmployeeNameTextBox.SelectionLength = 0;
-            this.newEmployeeNameTextBox.SelectionStart = 0;
-            this.newEmployeeNameTextBox.ShortcutsEnabled = true;
-            this.newEmployeeNameTextBox.Size = new System.Drawing.Size(121, 29);
-            this.newEmployeeNameTextBox.TabIndex = 12;
-            this.newEmployeeNameTextBox.UseSelectable = true;
-            this.newEmployeeNameTextBox.WaterMark = "New Employee Name";
-            this.newEmployeeNameTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.newEmployeeNameTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // addEmployeeLabel
-            // 
-            this.addEmployeeLabel.AutoSize = true;
-            this.addEmployeeLabel.Location = new System.Drawing.Point(6, 25);
-            this.addEmployeeLabel.Name = "addEmployeeLabel";
-            this.addEmployeeLabel.Size = new System.Drawing.Size(110, 19);
-            this.addEmployeeLabel.TabIndex = 11;
-            this.addEmployeeLabel.Text = "Employee Name:";
-            // 
-            // toLabel01
-            // 
-            this.toLabel01.AutoSize = true;
-            this.toLabel01.Location = new System.Drawing.Point(300, 29);
-            this.toLabel01.Name = "toLabel01";
-            this.toLabel01.Size = new System.Drawing.Size(21, 19);
-            this.toLabel01.TabIndex = 8;
-            this.toLabel01.Text = "to";
-            // 
-            // toLabel02
-            // 
-            this.toLabel02.AutoSize = true;
-            this.toLabel02.Location = new System.Drawing.Point(300, 83);
-            this.toLabel02.Name = "toLabel02";
-            this.toLabel02.Size = new System.Drawing.Size(21, 19);
-            this.toLabel02.TabIndex = 9;
-            this.toLabel02.Text = "to";
+            this.removeBTN.Location = new System.Drawing.Point(372, 68);
+            this.removeBTN.Name = "removeBTN";
+            this.removeBTN.Size = new System.Drawing.Size(118, 30);
+            this.removeBTN.TabIndex = 16;
+            this.removeBTN.Text = "Remove Employee";
+            this.removeBTN.UseSelectable = true;
+            this.removeBTN.Visible = false;
+            this.removeBTN.Click += new System.EventHandler(this.removeBTN_Click);
             // 
             // SettingForm
             // 
@@ -656,10 +629,10 @@
             this.statisticsTab.ResumeLayout(false);
             this.statisticsTab.PerformLayout();
             this.buildingUpdateTab.ResumeLayout(false);
-            this.changeGroupBox.ResumeLayout(false);
-            this.changeGroupBox.PerformLayout();
             this.addEmployeGroup.ResumeLayout(false);
             this.addEmployeGroup.PerformLayout();
+            this.changeGroupBox.ResumeLayout(false);
+            this.changeGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -692,17 +665,16 @@
         private MetroFramework.Controls.MetroButton generateBTN;
         private MetroFramework.Controls.MetroDateTime dateTimePicker;
         private MetroFramework.Controls.MetroTextBox newBuildingInit;
-        private MetroFramework.Controls.MetroLabel buildingNameLabel;
         private MetroFramework.Controls.MetroComboBox buildingComboBox;
         private System.Windows.Forms.GroupBox changeGroupBox;
-        private MetroFramework.Controls.MetroLabel employeeNameLabel;
-        private MetroFramework.Controls.MetroTextBox newEmployeeName;
-        private MetroFramework.Controls.MetroComboBox employeeComboBox;
-        private MetroFramework.Controls.MetroButton saveBTN;
+        private MetroFramework.Controls.MetroButton updateBTN;
         private MetroFramework.Controls.MetroTextBox newEmployeeNameTextBox;
         private MetroFramework.Controls.MetroLabel addEmployeeLabel;
         private System.Windows.Forms.GroupBox addEmployeGroup;
-        private MetroFramework.Controls.MetroLabel toLabel02;
         private MetroFramework.Controls.MetroLabel toLabel01;
+        private MetroFramework.Controls.MetroLabel employeeNameLabel;
+        private MetroFramework.Controls.MetroComboBox employeeComboBox;
+        private MetroFramework.Controls.MetroButton removeBTN;
+        private MetroFramework.Controls.MetroButton addBTN;
     }
 }
