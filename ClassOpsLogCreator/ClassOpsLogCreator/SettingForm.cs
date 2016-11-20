@@ -212,7 +212,9 @@ namespace ClassOpsLogCreator
                     buildingArray = (System.Array)buildingRange.Cells.Value2;
                     employeeArray = (System.Array)employeeRange.Cells.Value2;
                 }
-                
+                //Clear the combo boxes
+                buildingComboBox.Items.Clear();
+                employeeComboBox.Items.Clear();
                 //Add the buildings and names to the drop down mean
                 foreach (object s in buildingArray)
                 {
@@ -605,9 +607,32 @@ namespace ClassOpsLogCreator
                 //Inform the user the save was successful. 
                 MetroMessageBox.Show(this, newName + " was successfully added. ", "Success!",
                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
+
+                //Update the comobox again
+                lastRow = dataBaseSheet.UsedRange.Rows.Count;
+                addNameRange = dataBaseSheet.get_Range("A1", "A" + (lastRow));
+
+                //Convert to an array
+                System.Array nameArray = (System.Array)addNameRange.Cells.Value2;
+
+                //Clear the combo box
+                this.employeeComboBox.Items.Clear();
+
+                //Add the buildings and names to the drop down mean
+                foreach (object s in nameArray)
+                {
+                    if (s != null)
+                    {
+                        this.employeeComboBox.Items.Add(s.ToString());
+                    }
+                }
+
+                //Select the default value to display 
+                this.employeeComboBox.SelectedIndex = 0;
+
                 addNameRange = null;
             }
-
             Cursor.Current = Cursors.Default;
         }
 
@@ -630,10 +655,18 @@ namespace ClassOpsLogCreator
             }
             else
             {
+                //get the name from the selected position
                 Excel.Range nameToDelete = (Excel.Range)dataBaseSheet.get_Range("A" + (selected + 1), "A" + (selected + 1));
+                //save it for now
                 string oldName = nameToDelete.Value2.ToString();
+                //Delete and move it up
                 nameToDelete.Delete(Excel.XlDeleteShiftDirection.xlShiftUp);
+
+                //Save the data
+                masterlog.DisplayAlerts = false;
                 masterWorkBook.Save();
+
+                //Display the sucessful message
                 MetroMessageBox.Show(this, oldName + " was successfully added. ", "Success!",
                      MessageBoxButtons.OK, MessageBoxIcon.Information);
                 nameToDelete = null;
@@ -646,6 +679,7 @@ namespace ClassOpsLogCreator
                 //Convert to an array
                 employeeArray = (System.Array)employeeRange.Cells.Value2;
 
+                //Update the combo box
                 employeeComboBox.Items.Clear();
                 foreach (object s in employeeArray)
                 {
@@ -657,8 +691,9 @@ namespace ClassOpsLogCreator
 
                 //Select the default value to display 
                 this.employeeComboBox.SelectedIndex = 0;
-            }
 
+                employeeRange = null;
+            }
             Cursor.Current = Cursors.Default;
         }
         #endregion
@@ -743,10 +778,10 @@ namespace ClassOpsLogCreator
         {
             Cursor.Current = Cursors.Default;
 
+            this.Quit();
+
             //We are going to use the base onFormClose operations and add more
             base.OnFormClosing(e);
-
-            this.Quit();
         }
 
         private void Quit()

@@ -75,9 +75,9 @@ namespace ClassOpsLogCreator
                     smtpClient.Send(message);
                     connectionMade = true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    //Error, could not send the message
+                    throw new Exception("Unable to send statistics email. Please check login credentials");
                 }
             }                
         }
@@ -136,9 +136,9 @@ namespace ClassOpsLogCreator
                     //If all is okay we are connected and good to go.
                     connectionMade = true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    //Error, could not send the message
+                    throw new Exception("Unable to send test email. Please check login credentials");
                 }
             }
         }
