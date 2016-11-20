@@ -20,94 +20,99 @@ namespace ClassOpsLogCreator
         private string[] ClassArray = null;
         private string[] ClassArrayWithNoCrestron = null;
         private string[] CLassArrayWithLapelMic = null;
+        private List<string> BuildingNames = null;
+        private string ACE,ACW,ATK,BC,BCS,BRG,BSB,CB,CC,CFA,CFT,CLH,
+            CSQ,DB,ELC,FC,FRQ,HNE,K,KT,LAS,LSB,LUM,MC,OSG,PSE,R,SC,SCL,
+            SHR,SLH,SSB,STC,TM,VC,VH,WC,WSC,YL;
 
         /// <summary>
         /// Constructor for this class
         /// This will import the master class list and give access to other helper methods.
         /// </summary>
-        public ClassInfo()
+        public ClassInfo(List<string> buildingNames)
         {
-            //Initialize the Absent crestron list
+            this.setBuildingList(buildingNames);
+            //Initialize the Classes with crestron
             ClassArray = new string[]
             {
-                "ACE001","ACE002","ACE003","ACE004","ACE005","ACE006","ACE007","ACE008","ACE009",
-                "ACE010","ACE011","ACE012","ACE013","ACE020","ACE021","ACE025","ACE102","ACE122",
-                "ACE147","ACE148","ACE201","ACE203","ACE207","ACE209","ACE231","ACE235","ACE237",
-                "ACE241","ACE244","ACE245","ACE249","ACE251","ACE253","ACE311","ACE373","ACW002",
-                "ACW003","ACW004","ACW005","ACW006","ACW008","ACW009","ACW102","ACW103","ACW104",
-                "ACW106","ACW109","ACW203","ACW204","ACW205","ACW206","ACW209","ACW302","ACW303",
-                "ACW304","ACW305","ACW306","ACW307","BSB163","BSB164","BSB203","BSB204","BSB207",
-                "BSB102A","BSB328A","BC202","BC214","BC215","BC225","BC228","BC230","BC320","BC322",
-                "BC323","BC325","BC203A","CC106","CC108","CC109","CC208","CC211","CC318","CC335","CFA130",
-                "CFA312","CB115","CB120","CB121","CB122","CB129","CLH110","CLHA","CLHB",
-                "CLHC","CLHD","CLHE","CLHF","CLHG","CLHH","CLHI","CLHJ","CLHK","CLHL","CLHM","FC022",
-                "FC042","FC044","FC046","FC048","FC049","FC103","FC104","FC105","FC106","FC108","FC109",
-                "FC110","FC112","FC113","FC114","FC117","FC118","FC119","FC152","FC201","FC202","FC203",
-                "FC303","FC019B","FC019C","FC030C","FC030D","FC047A","FC047B","HNE001","HNE030","HNE031",
-                "HNE032","HNE033","HNE034","HNE035","HNE036","HNE037","HNE038","HNE102","HNE103","HNE104",
-                "HNE138","HNE140","HNE141","HNE142","HNE143","HNE206","HNE207","HNE230","HNE248","HNE249",
-                "HNE253","HNE258","HNE281","HNE303","HNE304","HNE401","HNE402","HNEB015","HNEB017","HNEB02",
-                "HNEB10","HNEB11","KT204","KT510","KT519","KT524","KT626","KT749","KT764","KT830","KT857",
-                "KT901","KT902","KT921","KT956","KT1001","KT1048","KK145","KK214","KK224","LASA","LASB",
-                "LASC","LSB101","LSB103","LSB105","LSB106","LSB107","MC101","MC103","MC109","MC110","MC111",
-                "MC112","MC113","MC114","MC211","MC212","MC213","MC214","MC215","MC216","MC050A","MC050B",
-                "MC050C","MC157A","MC157B","MC157C","IKB1001","IKB1002","IKB1003","IKB1004","IKB1005",
+                ACE + "001",ACE + "002",ACE + "003",ACE + "004",ACE + "005",ACE + "006",ACE + "007",ACE + "008",ACE + "009",
+                ACE + "010",ACE + "011",ACE + "012",ACE + "013",ACE + "020",ACE + "021",ACE + "025",ACE + "102",ACE + "122",
+                ACE + "147",ACE + "148",ACE + "201",ACE + "203",ACE + "207",ACE + "209",ACE + "231",ACE + "235",ACE + "237",
+                ACE + "241",ACE + "244",ACE + "245",ACE + "249",ACE + "251",ACE + "253",ACE + "311",ACE + "373","ACW002",
+                ACW+"003",ACW+"004",ACW+"005",ACW+"006",ACW+"008",ACW+"009",ACW+"102",ACW+"103",ACW+"104",
+                ACW+"106",ACW+"109",ACW+"203",ACW+"204",ACW+"205",ACW+"206",ACW+"209",ACW+"302",ACW+"303",
+                ACW+"304",ACW+"305",ACW+"306",ACW+"307",BSB+"163",BSB+"164",BSB+"203",BSB+"204",BSB+"207",
+                BSB+"102A",BSB+"328A",BC+"202",BC+"214",BC+"215",BC+"225",BC+"228",BC+"230",BC+"320",BC+"322",
+                BC+"323",BC+"325",BC+"203A",CC+"106",CC+"108",CC+"109",CC+"208",CC+"211",CC+"318",CC+"335",CFA+"130",
+                CFA+"312",CB+"115",CB+"120",CB+"121",CB+"122",CB+"129",CLH+"110",CLH+"A",CLH+"B",
+                CLH+"C",CLH+"D",CLH+"E",CLH+"F",CLH+"G",CLH+"H",CLH+"I",CLH+"J",CLH+"K",CLH+"L",CLH+"M",FC+"022",
+                FC+"042",FC+"044",FC+"046",FC+"048",FC+"049",FC+"103",FC+"104",FC+"105",FC+"106",FC+"108",FC+"109",
+                FC+"110",FC+"112",FC+"113",FC+"114",FC+"117",FC+"118",FC+"119",FC+"152",FC+"201",FC+"202",FC+"203",
+                FC+"303",FC+"019B",FC+"019C",FC+"030C",FC+"030D",FC+"047A",FC+"047B",HNE+"001",HNE+"030",HNE+"031",
+                HNE+"032",HNE+"033",HNE+"034",HNE+"035",HNE+"036",HNE+"037",HNE+"038",HNE+"102",HNE+"103",HNE+"104",
+                HNE+"138",HNE+"140",HNE+"141",HNE+"142",HNE+"143",HNE+"206",HNE+"207",HNE+"230",HNE+"248",HNE+"249",
+                HNE+"253",HNE+"258",HNE+"281",HNE+"303",HNE+"304",HNE+"401",HNE+"402",HNE+"B015",HNE+"B017",HNE+"B02",
+                HNE+"B10",HNE+"B11",KT+"204",KT+"510",KT+"519",KT+"524",KT+"626",KT+"749",KT+"764",KT+"830",KT+"857",
+                KT+"901",KT+"902",KT+"921",KT+"956",KT+"1001",KT+"1048",LAS+"A",LAS+"B",
+                LAS+"C",LSB+"101",LSB+"103",LSB+"105",LSB+"106",LSB+"107",MC+"101",MC+"103",MC+"109",MC+"110",MC+"111",
+                MC+"112",MC+"113",MC+"114",MC+"211",MC+"212",MC+"213",MC+"214",MC+"215",MC+"216",MC+"050A",MC+"050B",
+                MC+"050C",MC+"157A",MC+"157B",MC+"157C","IKB1001","IKB1002","IKB1003","IKB1004","IKB1005",
                 "IKB1006","IKB1008","IKB1014","IKB2001","IKB2002","IKB2003","IKB2004","IKB2008","IKB2009","IKB2010","IKB2011","IKB2027","IKB2028","IKB4034",
-                "IKB2026C","PSE317","PSE321","RN102","RN119","RN120","RN143","RN145","RN146","RN201","RN203",
-                "RN306","RN812","RN814","RN836","RN836A","RS101","RS101A","RS102","RS103","RS104","RS105",
-                "RS122","RS123","RS125","RS127","RS128","RS129","RS130","RS133","RS136","RS137","RS156",
-                "RS174","RS201","RS202","RS203","RS205","RS421","RS501","RS536","RS537","RS801","RS802",
-                "RS803","RS822","RS840","RS841","SSBE111","SSBE112","SSBE115","SSBE118","SSBN105","SSBN106",
-                "SSBN107","SSBN108","SSBN109","SSBN201","SSBN300A","SSBS123","SSBS124","SSBS125","SSBS126",
-                "SSBS127","SSBS128","SSBS129","SSBS235","SSBS236","SSBS335","SSBW132","SSBW133","SSBW136",
-                "SSBW141","SSBW253","SSBW254","SSBW255","SSBW256","SSBW257","SSBW356","SSBW357","SLH107",
-                "SLHA","SLHB","SLHC","SLHD","SLHE","SLHF","SC114","SC116","SC203","SC205","SC211","SC212",
-                "SC214","SC216","SC218","SC219","SC220","SC221","SC222","SC223","SC224","SC302","SC303",
-                "SC304","DB0001","DB0004","DB0005","DB0006","DB0007","DB0009","DB0010","DB0011",
-                "DB0013","DB0014","DB0015","DB0016","DB1004","DB1005","DB1015","DB1016","DB2003",
-                "DB2027","DB2032","DB2114","DB2116","DB2118","DB3001","DB3069","DB3072","DB4023",
-                "DB4028","DB4031","DB4034","VC102","VC103","VC104","VC105","VC106","VC107","VC108","VC114",
-                "VC115","VC116","VC117","VC118","VC119","VC135","VC107A","VH1005","VH1016","VH1018","VH1020",
-                "VH1022","VH1152","VH1152A","VH1154","VH1156","VH1158","VH2000","VH2005","VH2009","VH2016",
-                "VH3000","VH3003","VH3004","VH3005","VH3006","VH3009","VH3017","VHA","VHB","VHC","VHD","WC012",
-                "WC117","WC118","WC283A","YL232","YL234","YL305","YL390","YL246B","YL280A","YL280N"
+                "IKB2026C",PSE+"317",PSE+"321",R+"N102",R+"N119",R+"N120",R+"N143",R+"N145",R+"N146",R+"N201",R+"N203",
+                R+"N306",R+"N812",R+"N814",R+"N836",R+"N836A",R+"S101",R+"S101A",R+"S102",R+"S103",R+"S104",R+"S105",
+                R+"S122",R+"S123",R+"S125",R+"S127",R+"S128",R+"S129",R+"S130",R+"S133",R+"S136",R+"S137",R+"S156",
+                R+"S174",R+"S201",R+"S202",R+"S203",R+"S205",R+"S421",R+"S501",R+"S536",R+"S537",R+"S801",R+"S802",
+                R+"S803",R+"S822",R+"S840",R+"S841",SSB+"E111",SSB+"E112",SSB+"E115",SSB+"E118",SSB+"N105",SSB+"N106",
+                SSB+"N107",SSB+"N108",SSB+"N109",SSB+"N201",SSB+"N300A",SSB+"S123",SSB+"S124",SSB+"S125",SSB+"S126",
+                SSB+"S127",SSB+"S128",SSB+"S129",SSB+"S235",SSB+"S236",SSB+"S335",SSB+"W132",SSB+"W133",SSB+"W136",
+                SSB+"W141",SSB+"W253",SSB+"W254",SSB+"W255",SSB+"W256",SSB+"W257",SSB+"W356",SSB+"W357",SLH+"107",
+                SLH+"A",SLH+"B",SLH+"C",SLH+"D",SLH+"E",SLH+"F",SC+"114",SC+"116",SC+"203",SC+"205",SC+"211",SC+"212",
+                SC+"214",SC+"216",SC+"218",SC+"219",SC+"220",SC+"221",SC+"222",SC+"223",SC+"224",SC+"302",SC+"303",
+                SC+"304",DB+"0001",DB+"0004",DB+"0005",DB+"0006",DB+"0007",DB+"0009",DB+"0010",DB+"0011",
+                DB+"0013",DB+"0014",DB+"0015",DB+"0016",DB+"1004",DB+"1005",DB+"1015",DB+"1016",DB+"2003",
+                DB+"2027",DB+"2032",DB+"2114",DB+"2116",DB+"2118",DB+"3001",DB+"3069",DB+"3072",DB+"4023",
+                DB+"4028",DB+"4031",DB+"4034",VC+"102",VC+"103",VC+"104",VC+"105",VC+"106",VC+"107",VC+"108",VC+"114",
+                VC+"115",VC+"116",VC+"117",VC+"118",VC+"119",VC+"135",VC+"107A",VH+"1005",VH+"1016",VH+"1018",VH+"1020",
+                VH+"1022",VH+"1152",VH+"1152A",VH+"1154",VH+"1156",VH+"1158",VH+"2000",VH+"2005",VH+"2009",VH+"2016",
+                VH+"3000",VH+"3003",VH+"3004",VH+"3005",VH+"3006",VH+"3009",VH+"3017",VH+"A",VH+"B",VH+"C",VH+"D",WC+"012",
+                WC+"117",WC+"118",WC+"283A",YL+"232",YL+"234",YL+"305",YL+"390",YL+"246B",YL+"280A",YL+"280N"
             };
-
+            //Init classes without a crestron
             ClassArrayWithNoCrestron = new string[]
             {
-                "ACE147", "ACE148", "ACE201", "ACE203", "ACE207", "ACE209",
-                "ACE249", "ACE251", "ACE253", "ACE311", "ACE373", "BSB163",
-                "BSB102A", "BC320", "FC022", "FC042", "FC042","FC044","FC046",
-                "FC048","FC049","FC103","FC104","FC105","FC106","FC108","FC109",
-                "FC110","FC112","FC113","FC114","FC117","FC118","FC119","FC152",
-                "FC303","FC019B","FC019C","FC030C","FC030D","FC047A","FC047B", "HNE001",
-                "HNE102","HNE103","HNE104","HNE138","HNE143","HNE206","HNE207","HNE230",
-                "HNEB015","HNEB017","HNEB10","HNEB11","KT204","KT510","KT626","KT749",
-                "KT764","KT830","KT857","KT901","KT902","KT921","KT956","KT1001","KT1048",
-                "IKB2028","IKB4034","IKB2026C","RN145","RN146","RN203","RN306","RS101","RS101A",
-                "RS102","RS103","RS104","RS105","RS122","RS123","RS125","RS127","RS128","RS129",
-                "RS130","RS133","RS136","RS156","RS174","RS202","RS203","RS421","RS501","RS536",
-                "RS537","RS822","RS840","RS841","VC102","VC103","VC104","VC105","VC106","VC108",
-                "VC114","VC115","VC116","VC117","VC118","VC119"
+                ACE + "147", ACE + "148", ACE + "201", ACE + "203", ACE + "207", ACE + "209",
+                ACE + "249", ACE + "251", ACE + "253", ACE + "311", ACE + "373", BSB+"163",
+                BSB+"102A", BC+"320", FC+"022", FC+"042", FC+"042",FC+"044",FC+"046",
+                FC+"048",FC+"049",FC+"103",FC+"104",FC+"105",FC+"106",FC+"108",FC+"109",
+                FC+"110",FC+"112",FC+"113",FC+"114",FC+"117",FC+"118",FC+"119",FC+"152",
+                FC+"303",FC+"019B",FC+"019C",FC+"030C",FC+"030D",FC+"047A",FC+"047B", HNE+"001",
+                HNE+"102",HNE+"103",HNE+"104",HNE+"138",HNE+"143",HNE+"206",HNE+"207",HNE+"230",
+                HNE+"B015",HNE+"B017",HNE+"B10",HNE+"B11",KT+"204",KT+"510",KT+"626",KT+"749",
+                KT+"764",KT+"830",KT+"857",KT+"901",KT+"902",KT+"921",KT+"956",KT+"1001",KT+"1048",K+"K145",
+                K+"K214",K+"K224","IKB2028","IKB4034","IKB2026C",R+"N145",R+"N146",R+"N203",R+"N306",R+"S101",R+"S101A",
+                R+"S102",R+"S103",R+"S104",R+"S105",R+"S122",R+"S123",R+"S125",R+"S127",R+"S128",R+"S129",
+                R+"S130",R+"S133",R+"S136",R+"S156",R+"S174",R+"S202",R+"S203",R+"S421",R+"S501",R+"S536",
+                R+"S537",R+"S822",R+"S840",R+"S841",VC+"102",VC+"103",VC+"104",VC+"105",VC+"106",VC+"108",
+                VC+"114",VC+"115",VC+"116",VC+"117",VC+"118",VC+"119"
             };
-
+            //Classes with mic
             CLassArrayWithLapelMic = new string[]
             {
-                "ACE001","ACE002", "ACE003", "ACE004", "ACE005", "ACE007", "ACE009", "ACE011",
-                "ACE013", "ACE102", "ACE235", "ACE244", "ACW102", "ACW103", "ACW004", "ACW005",
-                "ACW006", "ACW106", "ACW109", "ACW205", "ACW206", "CFA312", "CB115", "C121",
-                "CLH110", "CLHA", "CLHB", "CLHC", "CLHD", "CLHE", "CLHF", "CLHG", "CLHH", "CLHI",
-                "CLHJ", "CLHK", "CLHL", "CLHM", "FC203", "HNE030", "HNE031", "HNE032", "HNE033",
-                "HNE034", "HNE035", "HNE037", "HNE038", "HNE140", "HNE304", "HNE401", "HNEB02",
-                "KT519", "KT524", "LASA", "LASB", "LASC", "LSB101", "LSB103", "LSB105", "LSB106",
-                "LSB107","MC157A", "MC157B", "MC157C", "IKB1001", "IKB1002",
+                ACE + "001",ACE + "002", ACE + "003", ACE + "004", ACE + "005", ACE + "007", ACE + "009", ACE + "011",
+                ACE + "013", ACE + "102", ACE + "235", ACE + "244", ACW+"102", ACW+"103", ACW+"004", ACW+"005",
+                ACW+"006", ACW+"106", ACW+"109", ACW+"205", ACW+"206", CFA+"312", CB+"115", "C121",
+                CLH+"110", CLH+"A", CLH+"B", CLH+"C", CLH+"D", CLH+"E", CLH+"F", CLH+"G", CLH+"H", CLH+"I",
+                CLH+"J", CLH+"K", CLH+"L", CLH+"M", FC+"203", HNE+"030", HNE+"031", HNE+"032", HNE+"033",
+                HNE+"034", HNE+"035", HNE+"037", HNE+"038", HNE+"140", HNE+"304", HNE+"401", HNE+"B02",
+                KT+"519", KT+"524", LAS+"A", LAS+"B", LAS+"C", LSB+"101", LSB+"103", LSB+"105", LSB+"106",
+                LSB+"107",MC+"157A", MC+"157B", MC+"157C", "IKB1001", "IKB1002",
                 "IKB1003", "IKB1005", "IKB1006", "IKB2001", "IKB2002", "IKB2003", "IKB2010",
-                "IKB2027", "RS137", "RS201", "RS205", "RS802", "SSBE111", "SSBE112", "SSBE115",
-                "SSBE118", "SSBN105", "SSBN106", "SSBN107", "SSBN108", "SSBN109", "SSBS124",
-                "SSBS235", "SSBS335", "SSBW132", "SSBW133", "SSBW136", "SSBW141", "SLHA",
-                "SLHB", "SLHC", "SLHD", "SLHE", "SLHF", "SC302", "SC303", "DB0001", "DB0005",
-                "DB0006", "DB0007", "DB0010", "DB0014", "DB0016", "DB1004", "DB1005",
-                "VC135", "VH3006", "VH3009", "VH1152A", "VHA", "VHB", "VHC", "VHD"
+                "IKB2027", R+"S137", R+"S201", R+"S205", R+"S802", SSB+"E111", SSB+"E112", SSB+"E115",
+                SSB+"E118", SSB+"N105", SSB+"N106", SSB+"N107", SSB+"N108", SSB+"N109", SSB+"S124",
+                SSB+"S235", SSB+"S335", SSB+"W132", SSB+"W133", SSB+"W136", SSB+"W141", SLH+"A",
+                SLH+"B", SLH+"C", SLH+"D", SLH+"E", SLH+"F", SC+"302", SC+"303", DB+"0001", DB+"0005",
+                DB+"0006", DB+"0007", DB+"0010", DB+"0014", DB+"0016", DB+"1004", DB+"1005",
+                VC+"135", VH+"3006", VH+"3009", VH+"1152A", VH+"A", VH+"B", VH+"C", VH+"D"
             };
         }
 
@@ -153,6 +158,28 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
+        /// This method must be called first before any zoning is done
+        /// </summary>
+        /// <param name="buildingList"></param>
+        public void setBuildingList(List<string> buildingList)
+        {
+            this.BuildingNames = buildingList;
+            ACE = BuildingNames[0]; ACW = BuildingNames[1]; ATK = BuildingNames[2];
+            BC = BuildingNames[3]; BCS = BuildingNames[4]; BRG = BuildingNames[5];
+            BSB = BuildingNames[6]; CB = BuildingNames[7]; CC = BuildingNames[8];
+            CFA = BuildingNames[9]; CFT = BuildingNames[10]; CLH = BuildingNames[11];
+            CSQ = BuildingNames[12]; DB = BuildingNames[13]; ELC = BuildingNames[14];
+            FC = BuildingNames[15]; FRQ = BuildingNames[16]; HNE = BuildingNames[17];
+            K = BuildingNames[18]; KT = BuildingNames[19]; LAS = BuildingNames[20];
+            LSB = BuildingNames[21]; LUM = BuildingNames[22]; MC = BuildingNames[23];
+            OSG = BuildingNames[24]; PSE = BuildingNames[25]; R = BuildingNames[26];
+            SC = BuildingNames[27]; SCL = BuildingNames[28]; SHR = BuildingNames[29];
+            SLH = BuildingNames[30]; SSB = BuildingNames[31]; STC = BuildingNames[32];
+            TM = BuildingNames[33]; VC = BuildingNames[34]; VH = BuildingNames[35];
+            WC = BuildingNames[36]; WSC = BuildingNames[37]; YL = BuildingNames[38];
+        }
+
+        /// <summary>
         /// This will return a List of buildings that are in one of two zones
         /// </summary>
         /// <param name="i"></param>
@@ -161,14 +188,14 @@ namespace ClassOpsLogCreator
         {
             string[] zone1 = new string[] //North West
             {
-                "CLH", "FRQ", "LAS", "LUM", "CC", "LSB", "BC", "PSE", "SC", "BSB", "SLH", "VH",
-                "FC", "MC", "VC", "WC", "CB","BRG"
+                CLH, FRQ, LAS, LUM, CC, LSB, BC, PSE, SC, BSB, SLH, VH,
+                FC, MC, VC, WC, CB,BRG, K
             };
 
             string[] zone2 = new string[] //South East
             {
-                "CSQ", "R", "ACW", "CFT", "CFA", "DB", "STC", "ATK", "BCS", "SSB", "ACE", "YL",
-                "KT", "HNE", "OSG", "ELC"
+                CSQ, R, ACW, CFT, CFA, DB, STC, ATK, BCS, SSB, ACE, YL,
+                KT, HNE, OSG, ELC, SCL
             };
 
             List<string> buildingList = new List<string>();
@@ -195,17 +222,17 @@ namespace ClassOpsLogCreator
         {
             string[] zone1 = new string[] // North Central
             {
-                "LSB", "CB", "BC", "CC", "SC", "FRQ", "R", "CSQ", "SCL", "BRG","VH", "OSG", "HNE", "CLH"
+                LSB, CB, BC, CC, SC, FRQ, R, CSQ, SCL, BRG,VH, OSG, HNE, CLH
             };
 
             string[] zone2 = new string[] //North East
             {
-               "MC", "FC", "VC", "WC", "SLH", "YL", "LUM", "KT", "BSB", "LAS", "PSE"
+               MC, FC, VC, WC, SLH, YL, LUM, KT, BSB, LAS, PSE, K
             };
 
             string[] zone3 = new string[] //South
             {
-                "SSB", "ELC", "BCS", "DB", "ACE", "CFT", "ACW", "CFA", "STC", "ATK"
+                SSB, ELC, BCS, DB, ACE, CFT, ACW, CFA, STC, ATK
             };
 
             List<string> buildingList = new List<string>();
@@ -235,22 +262,22 @@ namespace ClassOpsLogCreator
 
             string[] zone1 = new string[] //North West
             {
-               "CLH", "LAS", "PSE", "CB", "LSB", "BC", "CC", "SC", "FRQ"
+               CLH, LAS, PSE, CB, LSB, BC, CC, SC, FRQ
             };
 
             string[] zone2 = new string[] // Central
             {
-                "BSB", "R", "CSQ", "SCL", "BRG", "HNE", "OSG", "VH", "ATK", "ACW"
+                BSB, R, CSQ, SCL, BRG, HNE, OSG, VH, ATK, ACW
             };
 
             string[] zone3 = new string[] //South
             {
-               "SSB", "ELC", "BCS", "DB", "ACE", "CFT","KT", "CFA"
+               SSB, ELC, BCS, DB, ACE, CFT,KT, CFA
             };
 
             string[] zone4 = new string[] //Noth East
             {
-               "MC", "FC", "VC", "WC", "SLH", "YL", "LUM", "STC"
+               MC, FC, VC, WC, SLH, YL, LUM, STC, K
             };
 
             List<string> buildingList = new List<string>();
@@ -282,27 +309,27 @@ namespace ClassOpsLogCreator
         {
             string[] zone1 = new string[] //North East (Central)
             {
-               "FRQ", "LAS", "SLH", "BSB", "FC", "MC", "VC", "WC"
+               FRQ, LAS, SLH, BSB, FC, MC, VC, WC, K
             };
 
             string[] zone2 = new string[] //North West
             {
-                "CC", "CB", "LSB", "BC", "PSE", "SC", "CLH", "LUM"
+                CC, CB, LSB, BC, PSE, SC, CLH, LUM
             };
 
             string[] zone3 = new string[] //South West
             {
-                "CSQ", "R", "SCL", "ACW", "HNE", "OSG", "VH", "BRG"
+                CSQ, R, SCL, ACW, HNE, OSG, VH, BRG
             };
 
             string[] zone4 = new string[] //South central
             {
-               "CFT", "CFA", "DB", "STC", "ATK"
+               CFT, CFA, DB, STC, ATK
             };
 
             string[] zone5 = new string[] //South East
             {
-                "BCS", "SSB", "ACE", "YL", "KT", "ELC"
+                BCS, SSB, ACE, YL, KT, ELC
             };
 
             List<string> buildingList = new List<string>();
@@ -339,32 +366,32 @@ namespace ClassOpsLogCreator
         {
             string[] zone1 = new string[]
             {
-               "CLH", "FRQ", "LAS", "LUM", "SLH", "BSB"
+               CLH, FRQ, LAS, LUM, SLH, BSB
             };
 
             string[] zone2 = new string[]
             {
-                "CC", "CB", "LSB", "BC", "PSE", "SC"
+                CC, CB, LSB, BC, PSE, SC
             };
 
             string[] zone3 = new string[]
             {
-                "CSQ", "R", "SCL", "ACW", "HNE", "OSG", "VH","BRG"
+                CSQ, R, SCL, ACW, HNE, OSG, VH,BRG
             };
 
             string[] zone4 = new string[]
             {
-               "FC", "MC", "VC", "WC"
+               FC, MC, VC, WC, K
             };
 
             string[] zone5 = new string[]
             {
-                "CFT", "CFA", "DB", "STC", "ATK"
+                CFT, CFA, DB, STC, ATK
             };
 
             string[] zone6 = new string[]
             {
-                "BCS", "SSB", "ACE", "YL", "KT", "ELC"
+                BCS, SSB, ACE, YL, KT, ELC
             };
 
 
@@ -405,37 +432,37 @@ namespace ClassOpsLogCreator
         {
             string[] zone1 = new string[]
             {
-               "CLH", "FRQ", "LAS", "LUM"
+               CLH, FRQ, LAS, LUM
             };
 
             string[] zone2 = new string[]
             {
-                "CC", "CB", "LSB", "BC", "PSE", "SC"
+                CC, CB, LSB, BC, PSE, SC
             };
 
             string[] zone3 = new string[]
             {
-                "BSB", "SLH", "VH", 
+                BSB, SLH, VH, 
             };
 
             string[] zone4 = new string[]
             {
-               "CSQ", "R", "SCL", "ACW", "HNE", "OSG", "BRG"
+               CSQ, R, SCL, ACW, HNE, OSG, BRG
             };
 
             string[] zone5 = new string[]
             {
-                "FC", "MC", "VC", "WC"
+                FC, MC, VC, WC, K
             };
 
             string[] zone6 = new string[]
             {
-                "CFT", "CFA", "DB", "STC", "ATK"
+                CFT, CFA, DB, STC, ATK
             };
 
             string[] zone7 = new string[]
             {
-                "BCS", "SSB", "ACE", "YL", "KT", "ELC"
+                BCS, SSB, ACE, YL, KT, ELC
             };
 
             List<string> buildingList = new List<string>();
@@ -479,41 +506,41 @@ namespace ClassOpsLogCreator
         {
             string[] zone1 = new string[]
              {
-                "CLH", "FRQ", "LAS", "LUM", "WSC"
+                CLH, FRQ, LAS, LUM, WSC
              };
 
             string[] zone2 = new string[]
             {
-                "CC", "CB", "LSB", "BC", "PSE", "SHR", "TM", "SC"
+                CC, CB, LSB, BC, PSE, SHR, TM, SC
             };
 
             string[] zone3 = new string[]
             {
-                "BSB", "SLH", "VH"
+                BSB, SLH, VH
             };
 
             string[] zone4 = new string[]
             {
-               "CSQ", "R", "SCL", "ACW", "BRG"
+               CSQ, R, SCL, ACW, BRG
             };
 
             string[] zone5 = new string[]
             {
-                "FC", "MC", "VC", "WC"
+                FC, MC, VC, WC, K
             };
 
             string[] zone6 = new string[]
             {
-                "CFT", "CFA", "DB", "STC", "ATK"
+                CFT, CFA, DB, STC, ATK
             };
 
             string[] zone7 = new string[]
             {
-                "BCS", "SSB", "ACE", "YL", "KT", "ELC"
+                BCS, SSB, ACE, YL, KT, ELC
             };
             string[] zone8 = new string[]
             {
-                "HNE", "OSG"
+                HNE, OSG
             };
 
             List<string> buildingList = new List<string>();
@@ -560,7 +587,7 @@ namespace ClassOpsLogCreator
         {
             string[] zone1Boarder = new string[]
             {
-                "CSQ", "R", "STC", "YL", "KT", "SLH", "BSB", "CLH", "SCL"
+                CSQ, R, STC, YL, KT, SLH, BSB, CLH, SCL
             };
             List<string> zone1BoarderList = new List<string>();
             zone1BoarderList.AddRange(zone1Boarder);
@@ -580,7 +607,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone1Boarder = new string[] // North Central and North East
                 {
-                    "LUM", "LAS", "VH", "BSB", "VC", "SLH", "FRQ", "R", "LSB"
+                    LUM, LAS, VH, BSB, VC, SLH, FRQ, R, LSB
                 };
                 zone1BoarderList.AddRange(zone1Boarder);
             }
@@ -588,7 +615,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone2Boarder = new string[] //North East and South
                 {
-                    "YL", "TK", "ACE", "STC"
+                    YL, KT , ACE, STC
                 };
                 zone1BoarderList.AddRange(zone2Boarder);
             }
@@ -596,7 +623,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone3Boarder = new string[] //North Central and south
                  {
-                     "ACW", "R", "VH", "HNE", "OSG", "ATK", "CFT", "CFA",
+                     ACW, R, VH, HNE, OSG, ATK, CFT, CFA,
                  };
                 zone1BoarderList.AddRange(zone3Boarder);
             }
@@ -617,7 +644,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone1Boarder = new string[]//North West and central
                 {
-                    "CLH", "R", "CSQ", "LAS", "FRQ", "BSB", "HNE", "BRG"
+                    CLH, R, CSQ, LAS, FRQ, BSB, HNE, BRG
                 };
                 zone1BoarderList.AddRange(zone1Boarder);
             }
@@ -625,7 +652,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone2Boarder = new string[] //Central and South
                 {
-                    "ACW", "CFA", "ATK", "DB", "VH"
+                    ACW, CFA, ATK, DB, VH
                 };
                 zone1BoarderList.AddRange(zone2Boarder);
             }
@@ -633,7 +660,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone3Boarder = new string[] //South North East
                 {
-                    "YL", "KT", "STC"
+                    YL, KT, STC
                 };
                 zone1BoarderList.AddRange(zone3Boarder);
             }
@@ -641,7 +668,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone4Boarder = new string[] //North East and North West
                  {
-                     "FC", "LUM", "SLH", "FRQ"
+                     FC, LUM, SLH, FRQ
                  };
                 zone1BoarderList.AddRange(zone4Boarder);
             }
@@ -662,7 +689,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone1Boarder = new string[]//North east and North West
                 {
-                    "LSB", "PSE", "LAS", "LUM", "CLH"
+                    LSB, PSE, LAS, LUM, CLH
                 };
                 zone1BoarderList.AddRange(zone1Boarder);
             }
@@ -670,7 +697,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone2Boarder = new string[] //North West and South West
                 {
-                    "SC", "BRG"
+                    SC, BRG
                 };
                 zone1BoarderList.AddRange(zone2Boarder);
             }
@@ -678,7 +705,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone3Boarder = new string[] //South West and South central
                 {
-                    "ACW", "VH", "ATK", "CFA", "CFT", "DB"
+                    ACW, VH, ATK, CFA, CFT, DB
                 };
                 zone1BoarderList.AddRange(zone3Boarder);
             }
@@ -686,7 +713,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone4Boarder = new string[] //South Central and South East
                  {
-                     "YL", "KT", "SSB", "ELC", "CFT", "ACE", "DB"
+                     YL, KT, SSB, ELC, CFT, ACE, DB
                  };
                 zone1BoarderList.AddRange(zone4Boarder);
             }
@@ -694,7 +721,7 @@ namespace ClassOpsLogCreator
             {
                 string[] zone5Boarder = new string[] //North East (Central) and South West
                  {
-                     "SLH", "CSQ", "BSB", "R", "VH", "CLH"
+                     SLH, CSQ, BSB, R, VH, CLH
                  };
                 zone1BoarderList.AddRange(zone5Boarder);
             }

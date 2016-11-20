@@ -73,6 +73,7 @@ namespace ClassOpsLogCreator
 
         //A list of employee Names
         List<string> employeeNames = null;
+        List<string> buildingNames = null;
 
         //Use a background worker to allow the GUI to still be functional and not hang.
         private static BackgroundWorker bw = null;
@@ -158,6 +159,57 @@ namespace ClassOpsLogCreator
                 this.BeginInvoke(new MethodInvoker(this.Close));
                 this.Quit();
                 return;
+            }
+
+            //Open the existing excel file
+            existingMaster = new Excel.Application();
+            existingMaster.Visible = false;
+            try
+            {
+                existingMasterWorkBook = existingMaster.Workbooks.Open(EXISTING_MASTER_LOG);
+                existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
+                databaseSheet = (Excel.Worksheet)existingMasterWorkBook.Sheets[2];
+            }
+            catch (Exception)
+            {
+                Quit();
+                return;
+            }
+
+            //Get the employee names and building name
+            if (employeeNames == null || buildingNames == null)
+            {
+                // Get the employee names and save it to the employee list
+                this.employeeNames = new List<string>();
+                this.buildingNames = new List<string>();
+                //Extract the name range
+                Excel.Range last = databaseSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+                int lastRow = databaseSheet.UsedRange.Rows.Count;
+                Excel.Range nameRange = databaseSheet.get_Range("A2", "A" + (lastRow));
+                Excel.Range buildingRange = databaseSheet.get_Range("C2", "C" + (lastRow));
+                //Convert to an array
+                System.Array array = (System.Array)nameRange.Cells.Value2;
+                System.Array buildingArray = (System.Array)buildingRange.Cells.Value2;
+
+                foreach (string name in array)
+                {
+                    if (name != null)
+                    {
+                        employeeNames.Add(name.ToLower());
+                    }
+                }
+
+                foreach (string building in buildingArray)
+                {
+                    if (building != null)
+                    {
+                        buildingNames.Add(building.ToString());
+                    }
+                }
+
+                last = null;
+                nameRange = null;
+                buildingRange = null;
             }
 
             //fill the combo boxes
@@ -285,8 +337,17 @@ namespace ClassOpsLogCreator
                 this.numberOfShiftsCombo4.SelectedIndex = 0;
                 this.am_pmCombo4_1.SelectedIndex = 1;
                 this.am_pmCombo4_2.SelectedIndex = 1;
+
+                
             }
 
+        }
+        #endregion
+
+        #region Public Methods
+        public List<string> getBuildingNames()
+        {
+            return this.buildingNames;
         }
         #endregion
 
@@ -887,21 +948,24 @@ namespace ClassOpsLogCreator
                 PrinterSettings defaultSettings = new PrinterSettings();
                 string defaultPrinterName = defaultSettings.PrinterName;
 
-                //Open the existing excel file
-                existingMaster = new Excel.Application();
-                existingMaster.Visible = false;
-                try
+                if (existingMaster == null)
                 {
-                    existingMasterWorkBook = existingMaster.Workbooks.Open(EXISTING_MASTER_LOG);
-                    existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
+                    //Open the existing excel file
+                    existingMaster = new Excel.Application();
+                    existingMaster.Visible = false;
+                    try
+                    {
+                        existingMasterWorkBook = existingMaster.Workbooks.Open(EXISTING_MASTER_LOG);
+                        existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
+                    }
+                    catch (Exception)
+                    {
+                        //file not found
+                        Quit();
+                        throw new System.FieldAccessException("File not found!");
+                    }
                 }
-                catch (Exception)
-                {
-                    //file not found
-                    Quit();
-                    throw new System.FieldAccessException("File not found!");
-                }
-
+              
                 detailForm.updateDetail("Displaying Logs...");
                 
                 //Display all the logs
@@ -1002,17 +1066,6 @@ namespace ClassOpsLogCreator
                 existingMaster.DisplayAlerts = false;
                 existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);
                 existingMasterWorkBook.Close();
-                existingMaster.Quit();
-                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
-                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMasterWorkBook);
-                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMasterWorkSheet);
-                existingMaster = null;
-                existingMasterWorkBook = null;
-                existingMasterWorkSheet = null;
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
 
                 //Reset the default printer and close the print dialog
                 SetDefaultPrinter(defaultPrinterName);
@@ -1032,10 +1085,14 @@ namespace ClassOpsLogCreator
                 //Quit
                 Quit();
 
-                ScheduleStatsGen SSG = new ScheduleStatsGen(this, detailForm);
-                SSG = null;
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
+                //Check if we have a username or password
+                if(Properties.Settings.Default.UserName != "" && Properties.Settings.Default.Password != "")
+                {
+                    ScheduleStatsGen SSG = new ScheduleStatsGen(this, detailForm);
+                    SSG = null;
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                }
 
                 detailForm.updateDetail("Done!");
 
@@ -1068,7 +1125,7 @@ namespace ClassOpsLogCreator
             worker.ReportProgress(11); //Importing Room Schedule
 
             //Get the logout from the clo
-            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo, endTimeFromCombo);
+            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this, startTimeFromCombo, endTimeFromCombo, new ClassInfo(this.buildingNames));
            
             string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
 
@@ -1195,19 +1252,22 @@ namespace ClassOpsLogCreator
         /// <param name="rowNumbers"></param>
         public void mergeMasterWithExisting(Excel.Worksheet worksheet, int numberOfShifts, bool redSeperator, string startTime, string endTime, ref long[,] rowNumbers)
         {
-            //Open the existing excel file
-            existingMaster = new Excel.Application();
-            existingMaster.Visible = false;
-            try
+            if (existingMaster == null)
             {
-                existingMasterWorkBook = existingMaster.Workbooks.Open(EXISTING_MASTER_LOG);
-                existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
-                databaseSheet = (Excel.Worksheet)existingMasterWorkBook.Sheets[2];
-            }
-            catch (Exception)
-            {
-                Quit();
-                return;
+                //Open the existing excel file
+                existingMaster = new Excel.Application();
+                existingMaster.Visible = false;
+                try
+                {
+                    existingMasterWorkBook = existingMaster.Workbooks.Open(EXISTING_MASTER_LOG);
+                    existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
+                }
+                catch (Exception)
+                {
+                    //file not found
+                    Quit();
+                    throw new System.FieldAccessException("File not found!");
+                }
             }
 
             //Get the number of rows from the worksheet and the existing worksheet
@@ -1243,7 +1303,7 @@ namespace ClassOpsLogCreator
             //Zoning is done here
             if (numberOfShifts > 1)
             {
-                SchoolZoning sz = new SchoolZoning();
+                SchoolZoning sz = new SchoolZoning(buildingNames);
                 //Pass the zoning with the number of shifts
                 destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts);
                 //Get the number of rows
@@ -1299,30 +1359,6 @@ namespace ClassOpsLogCreator
                     task_color_change.Font.Color = redFont;
                 }
             }
-
-            //Get the employee names
-            if (employeeNames == null)
-            {
-                // Get the employee names and save it to the employee list
-                this.employeeNames = new List<string>();
-                //Extract the name range
-                Excel.Range last = databaseSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-                int lastRow = databaseSheet.UsedRange.Rows.Count;
-                Excel.Range nameRange = databaseSheet.get_Range("A2", "A" + (lastRow));
-                //Convert to an array
-                System.Array array = (System.Array)nameRange.Cells.Value2;
-
-                foreach (string name in array)
-                {
-                    if (name != null)
-                    {
-                        employeeNames.Add(name.ToLower());
-                    }
-                }
-
-                last = null;
-                nameRange = null;
-            }
             
             //Clean the range items
             range = null;
@@ -1335,15 +1371,6 @@ namespace ClassOpsLogCreator
             //Save
             existingMaster.DisplayAlerts = false;
             existingMasterWorkBook.SaveAs(EXISTING_MASTER_LOG);
-            
-            //Close the workbook and the excel file
-            existingMasterWorkBook.Close();
-            existingMaster.Quit();
-            System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
-            existingMaster = null;
-            existingMasterWorkBook = null;
-            existingMasterWorkSheet = null;
-            databaseSheet = null;
         }
 
 
@@ -1591,6 +1618,7 @@ namespace ClassOpsLogCreator
         /// <param name="e">Form Closing Event </param>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
+            this.Quit();
             //We are going to use the base onFormClose operations and add more
             base.OnFormClosing(e);
 
@@ -1658,7 +1686,6 @@ namespace ClassOpsLogCreator
 
             if (existingMasterWorkBook != null)
             {
-                existingMasterWorkBook.Close(0);
                 existingMaster.Quit();
                 System.Runtime.InteropServices.Marshal.FinalReleaseComObject(existingMaster);
                 existingMaster = null;

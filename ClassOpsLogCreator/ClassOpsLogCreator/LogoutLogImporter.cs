@@ -34,17 +34,20 @@ namespace ClassOpsLogCreator
         private string startTime = null;
         private string endTime = null;
 
+        private ClassInfo classList;
+
         /// <summary>
         /// Constructor that will create the arrays for the main UI to use
         /// </summary>
         /// <param name="Form1"></param>
         /// <param name="StartTime"></param>
         /// <param name="EndTime"></param>
-        public LogoutLogImporter(LogCreator Form1, string StartTime, string EndTime)
+        public LogoutLogImporter(LogCreator Form1, string StartTime, string EndTime, ClassInfo classInfo)
         {
             this.form1 = Form1;
             this.startTime = StartTime;
             this.endTime = EndTime;
+            this.classList = classInfo;
 
             //Open the room excel file
             roomSched = new Excel.Application();
@@ -254,7 +257,6 @@ namespace ClassOpsLogCreator
             }
 
             masterArray = new string[classArray.GetUpperBound(0), 4];
-            ClassInfo classList = new ClassInfo();
             DateTime startingTime = Convert.ToDateTime(this.startTime.ToString());
             DateTime endingTime = Convert.ToDateTime(this.endTime.ToString());
 

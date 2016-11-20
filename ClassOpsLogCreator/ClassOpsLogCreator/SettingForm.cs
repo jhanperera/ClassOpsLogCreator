@@ -298,7 +298,7 @@ namespace ClassOpsLogCreator
             //createBTN.Enabled = false;
             /******************************INPUT VALIDATION********************************************/
             //Get the times set by the first set of combo boxes
-            /*string startTimeFromCombo1 = this.startHour1.GetItemText(this.startHour1.SelectedItem)
+            string startTimeFromCombo1 = this.startHour1.GetItemText(this.startHour1.SelectedItem)
                                  + "" + this.am_pmCombo1_1.GetItemText(this.am_pmCombo1_1.SelectedItem);
             string endTimeFromCombo1 = this.endHour1.GetItemText(this.endHour1.SelectedItem)
                                  + "" + this.am_pmCombo1_2.GetItemText(this.am_pmCombo1_2.SelectedItem);
@@ -328,16 +328,64 @@ namespace ClassOpsLogCreator
                 return;
             }
             /****************************END INPUT VALIDATION********************************************/
+            
+            //Set the cursor to waiting
+            Cursor.Current = Cursors.WaitCursor;
 
-            /*Cursor.Current = Cursors.WaitCursor;
+            ClassInfo classInfo = new ClassInfo(this.mainForm.getBuildingNames());
 
-            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this.mainForm, startTimeFromCombo1, endTimeFromCombo1);
+            //Get all the times from the logout importer
+            LogoutLogImporter classRoomTimeLogs = new LogoutLogImporter(this.mainForm, startTimeFromCombo1, endTimeFromCombo1, classInfo);
 
+            //Save all the data to the an array
             string[,] arrayClassRooms = classRoomTimeLogs.getLogOutArray();
 
-            createBTN.Enabled = true;
-            Cursor.Current = Cursors.Default;*/
+            //Create the new excel file 
+            Excel.Application excelApp = new Excel.Application();
+            Excel.Workbook wb = null;
+            Excel.Worksheet ws = null;
 
+            try
+            {
+                //Try and open the workbook and access the fist worksheet
+                wb = excelApp.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
+                ws = (Excel.Worksheet)wb.Worksheets[1];
+            }
+            catch (Exception)
+            {
+                throw new Exception("Unable to start Excel");
+            }
+
+            //Don't show it.
+            excelApp.Visible = false;
+            //Get the range we want to write the information to
+            Excel.Range saveRange = (Excel.Range)ws.get_Range("A1", "D" + (arrayClassRooms.GetLength(0)));
+            //Save the values into the range
+            saveRange.Value2 = arrayClassRooms;
+
+            //Sorting it by time column
+            dynamic allDataRange = ws.UsedRange;
+            allDataRange.Sort(allDataRange.Columns[1], Excel.XlSortOrder.xlAscending);
+
+            //Close up, save, and cleanup.
+            excelApp.DisplayAlerts = false;
+            wb.SaveAs(mainForm.CLO_GENERATED_LOG);
+            wb.Close();
+            excelApp.Quit();
+            System.Runtime.InteropServices.Marshal.FinalReleaseComObject(excelApp);
+            excelApp = null;
+            wb = null;
+            ws = null;
+            saveRange = null;
+            classRoomTimeLogs = null;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            //Set the buttons back to normal
+            createBTN.Enabled = true;
+            Cursor.Current = Cursors.Default;
         }
 
         /// <summary>
@@ -347,6 +395,7 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void generateBTN_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             //Generate the stats for the week.
             if (weeklyRadio.Checked)
             {
@@ -467,6 +516,7 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void saveBTN_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             //First check if the building text box has text in it. 
             if(!string.IsNullOrWhiteSpace(newBuildingInit.Text.ToString()))
             {
@@ -516,7 +566,7 @@ namespace ClassOpsLogCreator
                     this.buildingComboBox.SelectedIndex = 0;
                 }
             }
-
+            Cursor.Current = Cursors.Default;
         }
 
         /// <summary>
@@ -526,6 +576,7 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void addBTN_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             //Check if the current
             if (!string.IsNullOrWhiteSpace(newEmployeeNameTextBox.Text.ToString()))
             {
@@ -555,9 +606,9 @@ namespace ClassOpsLogCreator
                 MetroMessageBox.Show(this, newName + " was successfully added. ", "Success!",
                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
                 addNameRange = null;
-
-
             }
+
+            Cursor.Current = Cursors.Default;
         }
 
         /// <summary>
@@ -567,6 +618,7 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void removeBTN_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             //Get the selected index
             int selected = this.employeeComboBox.SelectedIndex;
 
@@ -606,6 +658,8 @@ namespace ClassOpsLogCreator
                 //Select the default value to display 
                 this.employeeComboBox.SelectedIndex = 0;
             }
+
+            Cursor.Current = Cursors.Default;
         }
         #endregion
 
@@ -621,6 +675,7 @@ namespace ClassOpsLogCreator
             // First, handle the case where an exception was thrown.
             if (e.Error != null)
             {
+                Cursor.Current = Cursors.Default;
                 MetroMessageBox.Show(this, e.Error.Message, "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 generateBTN.Enabled = true;
@@ -634,10 +689,12 @@ namespace ClassOpsLogCreator
                 // flag may not have been set, even though
                 // CancelAsync was called.
                 generateBTN.Enabled = true;
+                Cursor.Current = Cursors.Default;
 
             }
             else
             {
+                Cursor.Current = Cursors.Default;
                 //Open the pdf file and move the setting window to the back
                 System.Diagnostics.Process.Start(mainForm.STATS_LOCATION + statsFileToOpen);
                 this.SendToBack();
@@ -684,6 +741,8 @@ namespace ClassOpsLogCreator
         #region closing and clean up operations
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
+            Cursor.Current = Cursors.Default;
+
             //We are going to use the base onFormClose operations and add more
             base.OnFormClosing(e);
 
@@ -692,6 +751,7 @@ namespace ClassOpsLogCreator
 
         private void Quit()
         {
+            Cursor.Current = Cursors.Default;
             //close and garbage collect 
             if (masterWorkBook != null)
             {

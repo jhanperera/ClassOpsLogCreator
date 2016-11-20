@@ -14,10 +14,7 @@ namespace ClassOpsLogCreator
     /// </summary>
     public class SchoolZoning
     {
-        private Graph schoolGraph;
         private ClassInfo classinfo;
-        private int numberOfBuildings;
-        private int numberOfConnections;
         private int[] numberOfElementsPerZone;
         private List<string> taskList;
 
@@ -25,38 +22,16 @@ namespace ClassOpsLogCreator
         /// This will create a the map for the school and 
         /// provide features for school map as well
         /// </summary>
-        public SchoolZoning()
+        public SchoolZoning(List<string> buildingNames)
         {
-            //Create the graph
-            schoolGraph = new Graph();
-            classinfo = new ClassInfo();
 
-            this.numberOfBuildings = schoolGraph.numberOfVerticies();
-            this.numberOfConnections = schoolGraph.numberOfEdges();
+            classinfo = new ClassInfo(buildingNames);
 
             taskList = new List<string>();
             string[] taskArray = { "AV Shutdown", "Crestron Logout", "Lockup", "Proactive Classroom Check",
                        "SCLD Student Event", "SCLD Student Logout", "Operator", "Pickup Large PA", "Pickup Mic",
                 "Pickup PC", "Pickup Projector", "Pickup Skype Kit","Pickup Small PA" };
             taskList.AddRange(taskArray);
-        }
-
-        /// <summary>
-        /// This return how many buildings we are working with
-        /// </summary>
-        /// <returns></returns>
-        public int getNumberOfBuilding()
-        {
-            return this.numberOfBuildings;
-        }
-
-        /// <summary>
-        /// This returns how many connections we have in the graph
-        /// </summary>
-        /// <returns></returns>
-        public int getNumberOfConnections()
-        {
-            return this.numberOfConnections;
         }
 
         /// <summary>
@@ -703,45 +678,6 @@ namespace ClassOpsLogCreator
                     result[i + start, j] = array[i, j];
                 }
             }
-        }
-
-        /// <summary>
-        /// This method will find the shortest path from the root
-        /// to all other nodes within a given distance
-        /// </summary>
-        /// <param name="root"></param>
-        /// <param name="distance"></param>
-        /// <returns></returns>
-        public string[] BFS(string root, int distance)
-        {
-            //Create the queue and the mark array
-            Queue<string> reachable = new Queue<string>();
-            string[] mark = new string[numberOfBuildings];
-            int index = 0;
-            int distanceCount = 0;
-
-            //Add the root to the visited list
-            mark[index] = root;
-            reachable.Enqueue(root);
-
-            //While our queue is not empty and while we are within the distance
-            while (reachable.Count > 0 && distanceCount < distance)
-            {
-                //Pop the top of the queue
-                string current = reachable.Dequeue();
-                //Look at all the adjacent 
-                foreach (string v in schoolGraph.adjacentTo(current))
-                {
-                    if (!(mark.Contains(v)))
-                    {
-                        index++;
-                        mark[index] = v;
-                        reachable.Enqueue(v);
-                    }
-                }
-                distanceCount++;
-            }
-            return mark = mark.Where(n => n != null).ToArray();
         }
 
         /// <summary>
