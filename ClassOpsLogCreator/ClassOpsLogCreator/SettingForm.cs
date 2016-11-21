@@ -13,6 +13,11 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ClassOpsLogCreator
 {
+    /// <summary>
+    /// This class displays the settings in the admin version. 
+    /// 
+    /// Settings for changing building names, adding/removing employees. etc.
+    /// </summary>
     public partial class SettingForm : MetroFramework.Forms.MetroForm
     {
         //Excel variables 

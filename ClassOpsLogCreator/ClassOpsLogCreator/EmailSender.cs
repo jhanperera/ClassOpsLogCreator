@@ -61,13 +61,13 @@ namespace ClassOpsLogCreator
                 //Set IsBodyHtml to true means you can send HTML email.
                 message.IsBodyHtml = true;
                 message.Body = "<h3>Please see attached a pdf of the auto generated statistics.</h3>";
-                message.Body += "This message was auto generated at " + now.ToString();
+                message.Body += "This message was auto generated at " + now.ToString() + " by the CLog application";
 
                 //Set the attachment
                 message.Attachments.Add(new Attachment(attachmentPath));
 
                 //Send the email to csmangers@yorku.ca
-                message.To.Add(Properties.Settings.Default.UserName + "@yorku.ca");
+                message.To.Add("masyb@yorku.ca");
 
                 //Try to send the email
                 try

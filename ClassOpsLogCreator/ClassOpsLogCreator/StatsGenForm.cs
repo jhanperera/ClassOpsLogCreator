@@ -14,6 +14,9 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace ClassOpsLogCreator
 {
+    /// <summary>
+    /// A StatsGen helper that builds the graphs and writes the raw data to a pdf file
+    /// </summary>
     public partial class StatsGenForm : MetroFramework.Forms.MetroForm
     {
         private iTextSharp.text.Font titleFont = FontFactory.GetFont("Arial", 19);

@@ -8,6 +8,9 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ClassOpsLogCreator
 {
+    /// <summary>
+    /// This class is in charge of generating statistics from the masterlog
+    /// </summary>
     public class StatsGen
     {
         //Holds the main form pointer

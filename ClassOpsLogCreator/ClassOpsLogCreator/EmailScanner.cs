@@ -8,6 +8,9 @@ using System.Net.Mail;
 
 namespace ClassOpsLogCreator
 {
+    /// <summary>
+    /// This class wills can in an email and process it into an Excel file
+    /// </summary>
     public class EmailScanner
     {
         private static string hostname = "mypost.yorku.ca";

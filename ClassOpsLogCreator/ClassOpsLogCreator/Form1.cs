@@ -11,8 +11,14 @@ using System.Drawing.Printing;
 using MetroFramework;
 using MetroFramework.Forms;
 
+/// <summary>
+/// This Application is a classroom operations PT log creator. All classes are dependent on this name space.
+/// </summary>
 namespace ClassOpsLogCreator
 {
+    /// <summary>
+    /// The main class of the while system. This is where all methods and classes get dispatched from.
+    /// </summary>
     public partial class LogCreator : MetroForm
     {
         #region Private Attributes/Variables

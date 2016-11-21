@@ -10,6 +10,9 @@ using System.Globalization;
 
 namespace ClassOpsLogCreator
 {
+    /// <summary>
+    /// A class to display the logs once they are being generated
+    /// </summary>
     public partial class LogViewer : MetroForm
     {
  

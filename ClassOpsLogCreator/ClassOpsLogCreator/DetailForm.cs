@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace ClassOpsLogCreator
 {
+    /// <summary>
+    /// This class in charge of displaying status information about the system when it is running.
+    /// </summary>
     public partial class DetailForm : MetroFramework.Forms.MetroForm
     {
         /// <summary>
