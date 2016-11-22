@@ -60,6 +60,12 @@ namespace ClassOpsLogCreator
     /// </summary>
     public static class RichTextBoxExtensions
     {
+        /// <summary>
+        /// This method appends text to the richtextbox with the set color
+        /// </summary>
+        /// <param name="box"></param>
+        /// <param name="text"></param>
+        /// <param name="color"></param>
         public static void AppendText(this RichTextBox box, string text, Color color)
         {
             box.SelectionStart = box.TextLength;

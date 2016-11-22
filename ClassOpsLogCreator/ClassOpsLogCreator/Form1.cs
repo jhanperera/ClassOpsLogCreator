@@ -11,9 +11,6 @@ using System.Drawing.Printing;
 using MetroFramework;
 using MetroFramework.Forms;
 
-/// <summary>
-/// This Application is a classroom operations PT log creator. All classes are dependent on this name space.
-/// </summary>
 namespace ClassOpsLogCreator
 {
     /// <summary>
@@ -23,26 +20,50 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
 
-        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
         public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
-        public readonly string STATS_LOCATION =  @"H:\CS\SHARE-PT\CLASSOPS\Statistics\"; 
+        public readonly string STATS_LOCATION =  @"H:\CS\SHARE-PT\CLASSOPS\Statistics\"; */
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY!
-        /*private static string username = Environment.UserName; 
+        private static string username = Environment.UserName; 
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly string ROOM_SCHED = @"C:\Users\" + username+ @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly string JEANNINE_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly string RAUL_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Raul\Raul's Log.xlsx";
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly string DEREK_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Derek\Derek's Log.xlsx";
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
-        public readonly string STATS_LOCATION = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Statistics\";*/
+        /// <summary>
+        /// 
+        /// </summary>
+        public readonly string STATS_LOCATION = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Statistics\";
 
         //A stack for some thread safer operations
         private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();        
@@ -178,6 +199,10 @@ namespace ClassOpsLogCreator
             }
             catch (Exception)
             {
+                MetroMessageBox.Show(this, "Unable to locate Excel files. Please ensure you have full access to the share drive.",
+                                    "Problem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                existingMaster.Quit();
+                existingMaster = null;
                 Quit();
                 return;
             }
@@ -351,6 +376,10 @@ namespace ClassOpsLogCreator
         #endregion
 
         #region Public Methods
+        /// <summary>
+        /// Return all the building names
+        /// </summary>
+        /// <returns></returns>
         public List<string> getBuildingNames()
         {
             return this.buildingNames;
@@ -1123,6 +1152,7 @@ namespace ClassOpsLogCreator
         /// <param name="numberOfShifts"></param>
         /// <param name="redSeperator"></param>
         /// <param name="rowNumbers"></param>
+        /// <param name="worker"></param>
         private void logCreationAndExcelWriter(int worksheetNumber, string startTimeFromCombo, string endTimeFromCombo, int numberOfShifts, bool redSeperator, ref long[,] rowNumbers, BackgroundWorker worker)
         {
             //Open up a new worksheet
@@ -1440,6 +1470,7 @@ namespace ClassOpsLogCreator
         /// <param name="rowNumbers"></param>
         /// <param name="numberOfShifts"></param>
         /// <param name="shiftTitle"></param>
+        /// <param name="timeArray"></param>
         private void displayLogs(string startTime, string endTime, long[,] rowNumbers, int numberOfShifts, string shiftTitle, ref string[,] timeArray)
         {
             int i = 0;
@@ -1554,10 +1585,9 @@ namespace ClassOpsLogCreator
         /// <summary>
         /// This method will print out all the logs that have been named.
         /// </summary>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
-        /// <param name="numberOfShifts"></param>
+        /// <param name="timeArray"></param>
         /// <param name="rowNumbers"></param>
+        /// <param name="numberOfShifts"></param>
         private void printOutLog(string[,] timeArray, long[,] rowNumbers, int numberOfShifts)
         {
             existingMaster.get_Range("C:C").EntireColumn.Hidden = true;

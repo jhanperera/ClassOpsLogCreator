@@ -688,6 +688,7 @@ namespace ClassOpsLogCreator
         /// <param name="zone1"></param>
         /// <param name="zone2"></param>
         /// <param name="borderBuildings"></param>
+        /// <param name="discrepancy"></param>
         private void applyRankAndOrganize(ref string[,] zone1, ref string[,] zone2, List<string> borderBuildings, int discrepancy)
         {
             //Convert each zone to a list
@@ -771,11 +772,9 @@ namespace ClassOpsLogCreator
             }
             return jagged.ToList();
         }
-
+    
         /// <summary>
-        /// This method converts a List<string[]> into a 2d array
-        /// 
-        /// Returns an empty array if arrays.count = 0 
+        /// This method coverts a List of strings into a 2d string array
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="arrays"></param>

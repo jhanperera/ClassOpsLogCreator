@@ -120,8 +120,8 @@ namespace ClassOpsLogCreator
                 pdfDoc.Add(p);
 
                 //Write tabular data to a master table to have them side by side
-                PdfPTable tableToAdd1 = this.writeDataGridViewstoPDF(eventList, eventCounter, 45, "Task Data");
-                PdfPTable tableToAdd2 = this.writeDataGridViewstoPDF(buildingList, buildingCounter, 45, "Building Data");
+                PdfPTable tableToAdd1 = this.writeTableOfRawData(eventCounter, 45, "Task Data");
+                PdfPTable tableToAdd2 = this.writeTableOfRawData(buildingCounter, 45, "Building Data");
                 PdfPTable masterTable = new PdfPTable(2);
                 masterTable.AddCell(tableToAdd1);
                 masterTable.AddCell(tableToAdd2);
@@ -166,7 +166,10 @@ namespace ClassOpsLogCreator
             //Look though each of the events and add it as an x and y value 
             foreach(string s in eventCounter.Keys)
             {
-                this.eventChart.Series["Tasks"].Points.AddXY(s, eventCounter[s]);
+                if(eventCounter[s] > 0)
+                {
+                    this.eventChart.Series["Tasks"].Points.AddXY(s, eventCounter[s]);
+                }
             }
 
             //Set the label to outside
@@ -179,7 +182,7 @@ namespace ClassOpsLogCreator
                 this.eventChart.Series["Tasks"].Points[i]["Exploded"] = "True";
             }
             //Make the legend show percent and value
-            this.eventChart.Series[0].LegendText = "#PERCENT{P0} #VALX";
+            this.eventChart.Series[0].LegendText = "#PERCENT #VALX";
             //Set the legend at the bottom
             this.eventChart.Legends[0].Docking = Docking.Left;
             this.eventChart.Legends[0].Font = new System.Drawing.Font("Verdona", 11);
@@ -188,8 +191,7 @@ namespace ClassOpsLogCreator
         /// <summary>
         /// Create the building chart
         /// </summary>
-        /// <param name="buildingList"></param>
-        /// <param name="buildingCounter"></param>
+        /// <param name="eventCounter"></param>
         private void createEventChartNOCLO(Dictionary<string, int> eventCounter)
         {
             //look at each building and create a x and y axis value
@@ -197,7 +199,10 @@ namespace ClassOpsLogCreator
             {
                 if (s != "Crestron Logout")
                 {
-                    this.eventChartNOCLO.Series["Tasks"].Points.AddXY(s, eventCounter[s]);
+                    if (eventCounter[s] > 0)
+                    {
+                        this.eventChartNOCLO.Series["Tasks"].Points.AddXY(s, eventCounter[s]);
+                    }
                 }
             }
 
@@ -211,7 +216,7 @@ namespace ClassOpsLogCreator
                 this.eventChartNOCLO.Series["Tasks"].Points[i]["Exploded"] = "True";
             }
             //The legend should have percent and value
-            this.eventChartNOCLO.Series[0].LegendText = "#PERCENT{P0} #VALX";
+            this.eventChartNOCLO.Series[0].LegendText = "#PERCENT #VALX";
             //Dock the legend at the bottom.
             this.eventChartNOCLO.Legends[0].Docking = Docking.Right;
             this.eventChartNOCLO.Legends[0].Font = new System.Drawing.Font("Verdona", 11);
@@ -252,12 +257,13 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        /// Write the datagrid to a pdf table. return a table to be added to the pdf
+        /// Write the the raw data to a table. Key  then Value
         /// </summary>
-        /// <param name="dataGridView1"></param>
+        /// <param name="data"></param>
         /// <param name="percentSize"></param>
+        /// <param name="tabelTitel"></param>
         /// <returns></returns>
-        private PdfPTable writeDataGridViewstoPDF(List<string> dataKeys, Dictionary<string,int> data, int percentSize, string tabelTitel)
+        private PdfPTable writeTableOfRawData(Dictionary<string,int> data, int percentSize, string tabelTitel)
         {
 
             //Creating iTextSharp Table from the DataTable data
@@ -275,7 +281,7 @@ namespace ClassOpsLogCreator
             pdfTable.AddCell(taskHeader);
             pdfTable.AddCell(counterHeader);
 
-            foreach(string e in dataKeys)
+            foreach(string e in data.Keys)
             {
                 PdfPCell taskLabel = new PdfPCell(new Phrase(e.ToString()));
                 taskLabel.BackgroundColor = new BaseColor(156, 156, 156);

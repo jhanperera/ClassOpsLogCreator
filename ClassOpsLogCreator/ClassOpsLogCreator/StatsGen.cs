@@ -30,6 +30,13 @@ namespace ClassOpsLogCreator
         private string PDFName;
         private string fileName;
 
+        /// <summary>
+        /// Create the statistics given the start and end date. 
+        /// </summary>
+        /// <param name="MainForm"></param>
+        /// <param name="StartDate"></param>
+        /// <param name="EndDate"></param>
+        /// <param name="pdfName"></param>
         public StatsGen(LogCreator MainForm, DateTime StartDate, DateTime EndDate, string pdfName)
         {
             this.mainForm = MainForm;
@@ -319,7 +326,7 @@ namespace ClassOpsLogCreator
         /// <param name="array"></param>
         /// <param name="low"></param>
         /// <param name="high"></param>
-        /// <param name="startDate"></param>
+        /// <param name="startDateL"></param>
         /// <returns></returns>
         private int first(Tuple<DateTime, int>[] array, int low, int high, DateTime startDateL)
         {

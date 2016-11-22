@@ -95,35 +95,40 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
-        ///  All Public Accessors methods
+        ///  Return the Last Date AKA todays date
         /// </summary>
         /// <returns></returns>
-        
-        //Return the Last Date AKA todays date
         public string getLastDate()
         {
             return this.lastDate;
         }
-
-        //Get the number of rows that are associated with today
+        /// <summary>
+        ///Get the number of rows that are associated with today
+        /// </summary>
+        /// <returns></returns>
         public int getNumberofRows()
         {
             return this.numberOfRows(JeannineSheet1, this.lastDate);
         }
-
-        //Get Jeannine 2dArray
+        /// <summary>
+        ///Get Jeannine 2dArray
+        /// </summary>
         public string[,] getJeannineLog()
         {
             return this.JeannineLogArray;
         }
-
-        //Get Raul 2dArray
+        /// <summary>
+        ///Get Raul 2dArray
+        /// </summary>
+        /// <returns></returns>
         public string[,] getRaulLog()
         {
             return this.RaulLogArray;
         }
-
-        //Get Derek 2dArray
+        /// <summary>
+        /// Get Derek 2dArray
+        /// </summary>
+        /// <returns></returns>
         public string[,] getDerekLog()
         {
             return this.DerekLogArray;

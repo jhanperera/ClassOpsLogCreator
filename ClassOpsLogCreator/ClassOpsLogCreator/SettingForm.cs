@@ -778,6 +778,10 @@ namespace ClassOpsLogCreator
 
         #endregion
 
+        /// <summary>
+        /// Some more added cleanup when the application is closed via the x button
+        /// </summary>
+        /// <param name="e"></param>
         #region closing and clean up operations
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
@@ -789,6 +793,9 @@ namespace ClassOpsLogCreator
             base.OnFormClosing(e);
         }
 
+        /// <summary>
+        /// Quit and clean up. Garbage collect as well.
+        /// </summary>
         private void Quit()
         {
             Cursor.Current = Cursors.Default;

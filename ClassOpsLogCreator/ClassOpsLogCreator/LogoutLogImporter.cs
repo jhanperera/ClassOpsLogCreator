@@ -36,12 +36,14 @@ namespace ClassOpsLogCreator
 
         private ClassInfo classList;
 
+
         /// <summary>
         /// Constructor that will create the arrays for the main UI to use
         /// </summary>
         /// <param name="Form1"></param>
         /// <param name="StartTime"></param>
         /// <param name="EndTime"></param>
+        /// <param name="classInfo"></param>
         public LogoutLogImporter(LogCreator Form1, string StartTime, string EndTime, ClassInfo classInfo)
         {
             this.form1 = Form1;

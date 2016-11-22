@@ -16,6 +16,14 @@ namespace ClassOpsLogCreator
         private StatsGen statGenerator;
         private DateTime today;
 
+        /// <summary>
+        /// This is the constructor for the Schedule Stats generator. 
+        /// 
+        /// This class determines if today is the last working day of the week, month, 
+        /// or first working day of the year and send out a report via email automatically.
+        /// </summary>
+        /// <param name="MainForm"></param>
+        /// <param name="detailFrom"></param>
         public ScheduleStatsGen(LogCreator MainForm, DetailForm detailFrom)
         {
             //Check if today is either the end of the week, end of the month, or end of the year.
