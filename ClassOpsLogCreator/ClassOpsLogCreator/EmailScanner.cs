@@ -13,6 +13,7 @@ namespace ClassOpsLogCreator
     /// </summary>
     public class EmailScanner
     {
+        //Host connection string
         private static string hostname = "mypost.yorku.ca";
         private static string username = Properties.Settings.Default.UserName;
         private static string password = Properties.Settings.Default.Password;
