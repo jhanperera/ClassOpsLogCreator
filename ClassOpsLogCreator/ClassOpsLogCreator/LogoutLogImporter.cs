@@ -2,6 +2,7 @@
 using System.Linq;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace ClassOpsLogCreator
 {
@@ -80,8 +81,28 @@ namespace ClassOpsLogCreator
             string todaysDate = DateTime.Now.ToString("dddd,dd,yyyy");
             if (!cloDateString.Equals(todaysDate))
             {
-                Quit();
-                throw new Exception(form1.ROOM_SCHED + " is out of date!");
+                //Try to update the clo via the EmailScanner. 1st (Check if we have login credentials
+                if (Properties.Settings.Default.UserName == "" || Properties.Settings.Default.Password == "")
+                {
+                    //Prompt to login
+
+                }
+                else if (Properties.Settings.Default.UserName != "" || Properties.Settings.Default.Password != "")
+                {
+                    //Have login credentials. Lets make the clo via the email scanner.
+                    bool answer = this.getCLOFromEmail(DateTime.Today);
+                    if (!answer)
+                    {
+                        Quit();
+                        throw new Exception("Unable to update " + form1.ROOM_SCHED + " automatically! Please update manually.");
+                    }
+                }
+                else
+                {
+                    //In case both those attempt failed we come in here
+                    Quit();
+                    throw new Exception("Unable to update " + form1.ROOM_SCHED + " automatically! Please update manually.");
+                }                
             }
 
             //Get the range we are working within. (A1, A.LastRow)
@@ -153,6 +174,51 @@ namespace ClassOpsLogCreator
         public int getLogOutArrayCount()
         {
             return this.masterArrayCounter;
+        }
+
+        /// <summary>
+        /// This will attempt to read the clo data from an email steams
+        /// </summary>
+        /// <returns>True - if connection was made and the clo was imported successfully. False - otherwise. </returns>
+        private bool getCLOFromEmail(DateTime today)
+        {
+            //A result flag
+            bool result = false;
+
+            //Using email scanner
+            EmailScanner ES = new EmailScanner(today);
+
+            //Get the message body if possible.
+            string body = ES.messageBody();
+            if(body != null)
+            {
+                //Clear all the content in the worksheet
+                Excel.Range clearCells = roomSheet1.UsedRange;
+                clearCells.Clear();
+
+                //Use the UI thread to do a copy of the data (STA Thread rules) 
+                form1.BeginInvoke(new Action(() => Clipboard.SetText(body)));
+
+                //Re-assign the clearCell variable to point to the fist cell
+                clearCells = (Excel.Range)roomSheet1.Cells[1, 1];
+                //Select it
+                clearCells.Select();
+                //Past all the data there.
+                roomSheet1.Paste(clearCells, false);
+
+                //Select the first columns
+                clearCells = (Excel.Range)roomSheet1.UsedRange.Columns[1];
+                //Select it
+                clearCells.Select();
+                //Run macro
+                roomSched.Run("Parsing");
+                
+                //Save and set the result flag to true
+                roomWorkBook.Save();
+                result = true;
+            }
+
+            return result;
         }
 
         /// <summary>

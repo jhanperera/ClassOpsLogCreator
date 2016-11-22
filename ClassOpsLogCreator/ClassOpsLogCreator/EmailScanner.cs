@@ -24,7 +24,7 @@ namespace ClassOpsLogCreator
         /// <summary>
         /// The constructor to connect and interface with e-mail.
         /// </summary>
-        public EmailScanner()
+        public EmailScanner(DateTime today)
         {
             using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
             {
@@ -32,7 +32,7 @@ namespace ClassOpsLogCreator
 
                 string dayOfTheWeek = DateTime.Now.ToString("dddd"); 
 
-                IEnumerable<uint> uids = client.Search(SearchCondition.From("pereraj@yorku.ca").And(SearchCondition.Subject("Room Report " + dayOfTheWeek)));
+                IEnumerable<uint> uids = client.Search(SearchCondition.Subject("Room Report for " + dayOfTheWeek).And(SearchCondition.SentOn(today)));
                 IEnumerable <MailMessage> messages = client.GetMessages(uids, FetchOptions.Normal);
 
                 foreach(MailMessage msg in messages)
@@ -68,6 +68,7 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         public string messageBody()
         {
+            msgBody = msgBody.Replace("?", " ");
             return msgBody;
         }
     }
