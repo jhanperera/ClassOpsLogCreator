@@ -143,6 +143,12 @@
     </Compile>
     <Compile Include="EmailScanner.cs" />
     <Compile Include="EmailSender.cs" />
+    <Compile Include="InitialEmailLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InitialEmailLoginForm.Designer.cs">
+      <DependentUpon>InitialEmailLoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ScheduleStatsGen.cs" />
     <Compile Include="SettingForm.cs">
       <SubType>Form</SubType>
