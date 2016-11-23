@@ -55,17 +55,19 @@
             this.selectorLabel = new MetroFramework.Controls.MetroLabel();
             this.buildingUpdateTab = new MetroFramework.Controls.MetroTabPage();
             this.addEmployeGroup = new System.Windows.Forms.GroupBox();
+            this.removeBTN = new MetroFramework.Controls.MetroButton();
+            this.addBTN = new MetroFramework.Controls.MetroButton();
+            this.employeeNameLabel = new MetroFramework.Controls.MetroLabel();
+            this.employeeComboBox = new MetroFramework.Controls.MetroComboBox();
             this.newEmployeeNameTextBox = new MetroFramework.Controls.MetroTextBox();
             this.addEmployeeLabel = new MetroFramework.Controls.MetroLabel();
             this.changeGroupBox = new System.Windows.Forms.GroupBox();
             this.toLabel01 = new MetroFramework.Controls.MetroLabel();
+            this.updateBTN = new MetroFramework.Controls.MetroButton();
             this.newBuildingInit = new MetroFramework.Controls.MetroTextBox();
             this.buildingComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.updateBTN = new MetroFramework.Controls.MetroButton();
-            this.employeeNameLabel = new MetroFramework.Controls.MetroLabel();
-            this.employeeComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.addBTN = new MetroFramework.Controls.MetroButton();
-            this.removeBTN = new MetroFramework.Controls.MetroButton();
+            this.lotusNotesPassword = new MetroFramework.Controls.MetroLabel();
+            this.lotusNotesPassTextBox = new MetroFramework.Controls.MetroTextBox();
             this.emailLoginTab.SuspendLayout();
             this.versuibTab.SuspendLayout();
             this.logoutGenTab.SuspendLayout();
@@ -79,7 +81,7 @@
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Location = new System.Drawing.Point(87, 38);
+            this.usernameLabel.Location = new System.Drawing.Point(97, 38);
             this.usernameLabel.Name = "usernameLabel";
             this.usernameLabel.Size = new System.Drawing.Size(68, 19);
             this.usernameLabel.TabIndex = 0;
@@ -88,11 +90,11 @@
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(87, 83);
+            this.passwordLabel.Location = new System.Drawing.Point(5, 71);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(63, 19);
+            this.passwordLabel.Size = new System.Drawing.Size(160, 19);
             this.passwordLabel.TabIndex = 1;
-            this.passwordLabel.Text = "Password";
+            this.passwordLabel.Text = "Electronic Email Password";
             // 
             // usernameTextBox
             // 
@@ -139,7 +141,7 @@
             this.passwordTextBox.CustomButton.UseSelectable = true;
             this.passwordTextBox.CustomButton.Visible = false;
             this.passwordTextBox.Lines = new string[0];
-            this.passwordTextBox.Location = new System.Drawing.Point(182, 83);
+            this.passwordTextBox.Location = new System.Drawing.Point(182, 68);
             this.passwordTextBox.MaxLength = 32767;
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '●';
@@ -159,7 +161,7 @@
             // 
             this.loginBTN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loginBTN.Highlight = true;
-            this.loginBTN.Location = new System.Drawing.Point(95, 133);
+            this.loginBTN.Location = new System.Drawing.Point(118, 148);
             this.loginBTN.Name = "loginBTN";
             this.loginBTN.Size = new System.Drawing.Size(80, 22);
             this.loginBTN.TabIndex = 2;
@@ -170,7 +172,7 @@
             // cancelBTN
             // 
             this.cancelBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cancelBTN.Location = new System.Drawing.Point(335, 133);
+            this.cancelBTN.Location = new System.Drawing.Point(295, 148);
             this.cancelBTN.Name = "cancelBTN";
             this.cancelBTN.Size = new System.Drawing.Size(80, 22);
             this.cancelBTN.TabIndex = 5;
@@ -185,7 +187,7 @@
             this.versionLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.versionLabel.Location = new System.Drawing.Point(187, 87);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(79, 25);
+            this.versionLabel.Size = new System.Drawing.Size(80, 25);
             this.versionLabel.TabIndex = 6;
             this.versionLabel.Text = "Version: ";
             // 
@@ -199,7 +201,7 @@
             this.emailLoginTab.Controls.Add(this.buildingUpdateTab);
             this.emailLoginTab.Location = new System.Drawing.Point(25, 63);
             this.emailLoginTab.Name = "emailLoginTab";
-            this.emailLoginTab.SelectedIndex = 0;
+            this.emailLoginTab.SelectedIndex = 2;
             this.emailLoginTab.Size = new System.Drawing.Size(510, 238);
             this.emailLoginTab.Style = MetroFramework.MetroColorStyle.Red;
             this.emailLoginTab.TabIndex = 7;
@@ -306,6 +308,8 @@
             // 
             // emailTab
             // 
+            this.emailTab.Controls.Add(this.lotusNotesPassword);
+            this.emailTab.Controls.Add(this.lotusNotesPassTextBox);
             this.emailTab.Controls.Add(this.cancelBTN);
             this.emailTab.Controls.Add(this.usernameLabel);
             this.emailTab.Controls.Add(this.loginBTN);
@@ -370,7 +374,7 @@
             this.yearlyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.yearlyRadio.Location = new System.Drawing.Point(295, 26);
             this.yearlyRadio.Name = "yearlyRadio";
-            this.yearlyRadio.Size = new System.Drawing.Size(61, 19);
+            this.yearlyRadio.Size = new System.Drawing.Size(62, 19);
             this.yearlyRadio.TabIndex = 6;
             this.yearlyRadio.Text = "Yearly";
             this.yearlyRadio.UseSelectable = true;
@@ -393,7 +397,7 @@
             this.weeklyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.weeklyRadio.Location = new System.Drawing.Point(138, 26);
             this.weeklyRadio.Name = "weeklyRadio";
-            this.weeklyRadio.Size = new System.Drawing.Size(68, 19);
+            this.weeklyRadio.Size = new System.Drawing.Size(69, 19);
             this.weeklyRadio.TabIndex = 4;
             this.weeklyRadio.TabStop = true;
             this.weeklyRadio.Text = "Weekly";
@@ -440,6 +444,48 @@
             this.addEmployeGroup.TabIndex = 12;
             this.addEmployeGroup.TabStop = false;
             this.addEmployeGroup.Text = "Add/Remove Employee";
+            // 
+            // removeBTN
+            // 
+            this.removeBTN.Location = new System.Drawing.Point(372, 68);
+            this.removeBTN.Name = "removeBTN";
+            this.removeBTN.Size = new System.Drawing.Size(118, 30);
+            this.removeBTN.TabIndex = 16;
+            this.removeBTN.Text = "Remove Employee";
+            this.removeBTN.UseSelectable = true;
+            this.removeBTN.Visible = false;
+            this.removeBTN.Click += new System.EventHandler(this.removeBTN_Click);
+            // 
+            // addBTN
+            // 
+            this.addBTN.Location = new System.Drawing.Point(372, 19);
+            this.addBTN.Name = "addBTN";
+            this.addBTN.Size = new System.Drawing.Size(118, 30);
+            this.addBTN.TabIndex = 15;
+            this.addBTN.Text = "Add Employee";
+            this.addBTN.UseSelectable = true;
+            this.addBTN.Visible = false;
+            this.addBTN.Click += new System.EventHandler(this.addBTN_Click);
+            // 
+            // employeeNameLabel
+            // 
+            this.employeeNameLabel.AutoSize = true;
+            this.employeeNameLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.employeeNameLabel.Location = new System.Drawing.Point(6, 68);
+            this.employeeNameLabel.Name = "employeeNameLabel";
+            this.employeeNameLabel.Size = new System.Drawing.Size(204, 25);
+            this.employeeNameLabel.TabIndex = 13;
+            this.employeeNameLabel.Text = "Remove employee name:";
+            // 
+            // employeeComboBox
+            // 
+            this.employeeComboBox.FormattingEnabled = true;
+            this.employeeComboBox.ItemHeight = 23;
+            this.employeeComboBox.Location = new System.Drawing.Point(216, 68);
+            this.employeeComboBox.Name = "employeeComboBox";
+            this.employeeComboBox.Size = new System.Drawing.Size(121, 29);
+            this.employeeComboBox.TabIndex = 14;
+            this.employeeComboBox.UseSelectable = true;
             // 
             // newEmployeeNameTextBox
             // 
@@ -507,6 +553,17 @@
             this.toLabel01.TabIndex = 8;
             this.toLabel01.Text = "to";
             // 
+            // updateBTN
+            // 
+            this.updateBTN.Location = new System.Drawing.Point(372, 19);
+            this.updateBTN.Name = "updateBTN";
+            this.updateBTN.Size = new System.Drawing.Size(118, 30);
+            this.updateBTN.TabIndex = 8;
+            this.updateBTN.Text = "Update Building";
+            this.updateBTN.UseSelectable = true;
+            this.updateBTN.Visible = false;
+            this.updateBTN.Click += new System.EventHandler(this.saveBTN_Click);
+            // 
             // newBuildingInit
             // 
             // 
@@ -549,58 +606,45 @@
             this.buildingComboBox.TabIndex = 4;
             this.buildingComboBox.UseSelectable = true;
             // 
-            // updateBTN
+            // lotusNotesPassword
             // 
-            this.updateBTN.Location = new System.Drawing.Point(372, 19);
-            this.updateBTN.Name = "updateBTN";
-            this.updateBTN.Size = new System.Drawing.Size(118, 30);
-            this.updateBTN.TabIndex = 8;
-            this.updateBTN.Text = "Update Building";
-            this.updateBTN.UseSelectable = true;
-            this.updateBTN.Visible = false;
-            this.updateBTN.Click += new System.EventHandler(this.saveBTN_Click);
+            this.lotusNotesPassword.AutoSize = true;
+            this.lotusNotesPassword.Location = new System.Drawing.Point(29, 100);
+            this.lotusNotesPassword.Name = "lotusNotesPassword";
+            this.lotusNotesPassword.Size = new System.Drawing.Size(136, 19);
+            this.lotusNotesPassword.TabIndex = 6;
+            this.lotusNotesPassword.Text = "Lotus Notes Password";
             // 
-            // employeeNameLabel
+            // lotusNotesPassTextBox
             // 
-            this.employeeNameLabel.AutoSize = true;
-            this.employeeNameLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.employeeNameLabel.Location = new System.Drawing.Point(6, 68);
-            this.employeeNameLabel.Name = "employeeNameLabel";
-            this.employeeNameLabel.Size = new System.Drawing.Size(204, 25);
-            this.employeeNameLabel.TabIndex = 13;
-            this.employeeNameLabel.Text = "Remove employee name:";
             // 
-            // employeeComboBox
             // 
-            this.employeeComboBox.FormattingEnabled = true;
-            this.employeeComboBox.ItemHeight = 23;
-            this.employeeComboBox.Location = new System.Drawing.Point(216, 68);
-            this.employeeComboBox.Name = "employeeComboBox";
-            this.employeeComboBox.Size = new System.Drawing.Size(121, 29);
-            this.employeeComboBox.TabIndex = 14;
-            this.employeeComboBox.UseSelectable = true;
             // 
-            // addBTN
-            // 
-            this.addBTN.Location = new System.Drawing.Point(372, 19);
-            this.addBTN.Name = "addBTN";
-            this.addBTN.Size = new System.Drawing.Size(118, 30);
-            this.addBTN.TabIndex = 15;
-            this.addBTN.Text = "Add Employee";
-            this.addBTN.UseSelectable = true;
-            this.addBTN.Visible = false;
-            this.addBTN.Click += new System.EventHandler(this.addBTN_Click);
-            // 
-            // removeBTN
-            // 
-            this.removeBTN.Location = new System.Drawing.Point(372, 68);
-            this.removeBTN.Name = "removeBTN";
-            this.removeBTN.Size = new System.Drawing.Size(118, 30);
-            this.removeBTN.TabIndex = 16;
-            this.removeBTN.Text = "Remove Employee";
-            this.removeBTN.UseSelectable = true;
-            this.removeBTN.Visible = false;
-            this.removeBTN.Click += new System.EventHandler(this.removeBTN_Click);
+            this.lotusNotesPassTextBox.CustomButton.Image = null;
+            this.lotusNotesPassTextBox.CustomButton.Location = new System.Drawing.Point(214, 2);
+            this.lotusNotesPassTextBox.CustomButton.Name = "";
+            this.lotusNotesPassTextBox.CustomButton.Size = new System.Drawing.Size(17, 17);
+            this.lotusNotesPassTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.lotusNotesPassTextBox.CustomButton.TabIndex = 1;
+            this.lotusNotesPassTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.lotusNotesPassTextBox.CustomButton.UseSelectable = true;
+            this.lotusNotesPassTextBox.CustomButton.Visible = false;
+            this.lotusNotesPassTextBox.Lines = new string[0];
+            this.lotusNotesPassTextBox.Location = new System.Drawing.Point(182, 97);
+            this.lotusNotesPassTextBox.MaxLength = 32767;
+            this.lotusNotesPassTextBox.Name = "lotusNotesPassTextBox";
+            this.lotusNotesPassTextBox.PasswordChar = '●';
+            this.lotusNotesPassTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.lotusNotesPassTextBox.SelectedText = "";
+            this.lotusNotesPassTextBox.SelectionLength = 0;
+            this.lotusNotesPassTextBox.SelectionStart = 0;
+            this.lotusNotesPassTextBox.ShortcutsEnabled = true;
+            this.lotusNotesPassTextBox.Size = new System.Drawing.Size(234, 22);
+            this.lotusNotesPassTextBox.TabIndex = 7;
+            this.lotusNotesPassTextBox.UseSelectable = true;
+            this.lotusNotesPassTextBox.UseSystemPasswordChar = true;
+            this.lotusNotesPassTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.lotusNotesPassTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // SettingForm
             // 
@@ -676,5 +720,7 @@
         private MetroFramework.Controls.MetroComboBox employeeComboBox;
         private MetroFramework.Controls.MetroButton removeBTN;
         private MetroFramework.Controls.MetroButton addBTN;
+        private MetroFramework.Controls.MetroLabel lotusNotesPassword;
+        private MetroFramework.Controls.MetroTextBox lotusNotesPassTextBox;
     }
 }

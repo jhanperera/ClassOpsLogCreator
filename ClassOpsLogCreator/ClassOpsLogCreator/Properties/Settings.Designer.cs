@@ -334,5 +334,17 @@ namespace ClassOpsLogCreator.Properties {
                 this["isLotusAccount"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool firstTimeStart {
+            get {
+                return ((bool)(this["firstTimeStart"]));
+            }
+            set {
+                this["firstTimeStart"] = value;
+            }
+        }
     }
 }

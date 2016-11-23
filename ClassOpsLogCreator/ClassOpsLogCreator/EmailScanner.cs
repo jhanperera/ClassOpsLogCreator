@@ -16,10 +16,10 @@ namespace ClassOpsLogCreator
         //Host connection string
         private static string hostname = "mypost.yorku.ca";
         private static string lotusHostName = "postoffice.notes.yorku.ca";
-        private static string username = Properties.Settings.Default.UserName;
-        private static string password = Properties.Settings.Default.Password;
-        private static string lotusPass = Properties.Settings.Default.lotusPassword;
-        private static bool isLotus = Properties.Settings.Default.isLotusAccount;
+        private string username = Properties.Settings.Default.UserName;
+        private string password = Properties.Settings.Default.Password;
+        private string lotusPass = Properties.Settings.Default.lotusPassword;
+        private bool isLotus = Properties.Settings.Default.isLotusAccount;
         private bool isConnectedFlag = false;
 
         private string msgFrom;
@@ -32,6 +32,7 @@ namespace ClassOpsLogCreator
         {
             if (isLotus)
             {
+                username = username + "@yorku.ca";
                 using (ImapClient client = new ImapClient(lotusHostName, 993, username, lotusPass, AuthMethod.Login, true))
                 {
                     this.isConnectedFlag = true;
@@ -74,20 +75,27 @@ namespace ClassOpsLogCreator
         /// <param name="test"></param>
         public EmailScanner(bool test)
         {
-            if (isLotus)
+            try
             {
-                using (ImapClient client = new ImapClient(lotusHostName, 993, username, lotusPass, AuthMethod.Login, true))
+                if (isLotus)
                 {
-                    this.isConnectedFlag = true;
+                    using (ImapClient client = new ImapClient(lotusHostName, 993, username, lotusPass, AuthMethod.Login, true))
+                    {
+                        this.isConnectedFlag = true;
+                    }
+                }
+                else
+                {
+                    using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
+                    {
+                        this.isConnectedFlag = true;
+                    }
                 }
             }
-            else
+            catch (Exception)
             {
-                using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
-                {
-                    this.isConnectedFlag = true;
-                }
-            }
+                this.isConnectedFlag = false;
+            }         
         }
 
         /// <summary>
@@ -115,7 +123,14 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         public string messageBody()
         {
-            msgBody = msgBody.Replace("?", " ");
+            try
+            {
+                msgBody = msgBody.Replace("?", " ");
+            }
+            catch(Exception)
+            {
+                msgBody = null;
+            }          
             return msgBody;
         }
     }

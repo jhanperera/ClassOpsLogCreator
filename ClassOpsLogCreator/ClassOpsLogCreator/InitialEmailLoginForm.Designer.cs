@@ -54,7 +54,7 @@
             this.emailQuestoinLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.emailQuestoinLabel.Location = new System.Drawing.Point(138, 15);
             this.emailQuestoinLabel.Name = "emailQuestoinLabel";
-            this.emailQuestoinLabel.Size = new System.Drawing.Size(276, 25);
+            this.emailQuestoinLabel.Size = new System.Drawing.Size(264, 25);
             this.emailQuestoinLabel.TabIndex = 2;
             this.emailQuestoinLabel.Text = "Which Email system do you use? ";
             this.emailQuestoinLabel.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -128,6 +128,7 @@
             // 
             // emailLoginPanel
             // 
+            this.emailLoginPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.emailLoginPanel.Controls.Add(this.cancelBTN);
             this.emailLoginPanel.Controls.Add(this.connectBTN);
             this.emailLoginPanel.Controls.Add(this.lotusEmailPasswordTextBox);
@@ -152,7 +153,7 @@
             // 
             // cancelBTN
             // 
-            this.cancelBTN.Location = new System.Drawing.Point(282, 220);
+            this.cancelBTN.Location = new System.Drawing.Point(279, 194);
             this.cancelBTN.Name = "cancelBTN";
             this.cancelBTN.Size = new System.Drawing.Size(75, 23);
             this.cancelBTN.TabIndex = 9;
@@ -163,7 +164,7 @@
             // 
             // connectBTN
             // 
-            this.connectBTN.Location = new System.Drawing.Point(177, 220);
+            this.connectBTN.Location = new System.Drawing.Point(174, 194);
             this.connectBTN.Name = "connectBTN";
             this.connectBTN.Size = new System.Drawing.Size(75, 23);
             this.connectBTN.TabIndex = 8;
@@ -178,7 +179,7 @@
             // 
             // 
             this.lotusEmailPasswordTextBox.CustomButton.Image = null;
-            this.lotusEmailPasswordTextBox.CustomButton.Location = new System.Drawing.Point(92, 1);
+            this.lotusEmailPasswordTextBox.CustomButton.Location = new System.Drawing.Point(124, 1);
             this.lotusEmailPasswordTextBox.CustomButton.Name = "";
             this.lotusEmailPasswordTextBox.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.lotusEmailPasswordTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -187,7 +188,7 @@
             this.lotusEmailPasswordTextBox.CustomButton.UseSelectable = true;
             this.lotusEmailPasswordTextBox.CustomButton.Visible = false;
             this.lotusEmailPasswordTextBox.Lines = new string[0];
-            this.lotusEmailPasswordTextBox.Location = new System.Drawing.Point(300, 168);
+            this.lotusEmailPasswordTextBox.Location = new System.Drawing.Point(280, 142);
             this.lotusEmailPasswordTextBox.MaxLength = 32767;
             this.lotusEmailPasswordTextBox.Name = "lotusEmailPasswordTextBox";
             this.lotusEmailPasswordTextBox.PasswordChar = '●';
@@ -197,7 +198,7 @@
             this.lotusEmailPasswordTextBox.SelectionLength = 0;
             this.lotusEmailPasswordTextBox.SelectionStart = 0;
             this.lotusEmailPasswordTextBox.ShortcutsEnabled = true;
-            this.lotusEmailPasswordTextBox.Size = new System.Drawing.Size(114, 23);
+            this.lotusEmailPasswordTextBox.Size = new System.Drawing.Size(146, 23);
             this.lotusEmailPasswordTextBox.TabIndex = 7;
             this.lotusEmailPasswordTextBox.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.lotusEmailPasswordTextBox.UseSelectable = true;
@@ -209,9 +210,9 @@
             // lotusEmailPassLabel
             // 
             this.lotusEmailPassLabel.AutoSize = true;
-            this.lotusEmailPassLabel.Location = new System.Drawing.Point(122, 168);
+            this.lotusEmailPassLabel.Location = new System.Drawing.Point(119, 142);
             this.lotusEmailPassLabel.Name = "lotusEmailPassLabel";
-            this.lotusEmailPassLabel.Size = new System.Drawing.Size(147, 20);
+            this.lotusEmailPassLabel.Size = new System.Drawing.Size(139, 19);
             this.lotusEmailPassLabel.TabIndex = 6;
             this.lotusEmailPassLabel.Text = "Lotus Notes Password:";
             this.lotusEmailPassLabel.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -222,7 +223,7 @@
             // 
             // 
             this.electronicEmailPasswordTextBox.CustomButton.Image = null;
-            this.electronicEmailPasswordTextBox.CustomButton.Location = new System.Drawing.Point(92, 1);
+            this.electronicEmailPasswordTextBox.CustomButton.Location = new System.Drawing.Point(124, 1);
             this.electronicEmailPasswordTextBox.CustomButton.Name = "";
             this.electronicEmailPasswordTextBox.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.electronicEmailPasswordTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -231,7 +232,7 @@
             this.electronicEmailPasswordTextBox.CustomButton.UseSelectable = true;
             this.electronicEmailPasswordTextBox.CustomButton.Visible = false;
             this.electronicEmailPasswordTextBox.Lines = new string[0];
-            this.electronicEmailPasswordTextBox.Location = new System.Drawing.Point(300, 125);
+            this.electronicEmailPasswordTextBox.Location = new System.Drawing.Point(280, 99);
             this.electronicEmailPasswordTextBox.MaxLength = 32767;
             this.electronicEmailPasswordTextBox.Name = "electronicEmailPasswordTextBox";
             this.electronicEmailPasswordTextBox.PasswordChar = '●';
@@ -241,7 +242,7 @@
             this.electronicEmailPasswordTextBox.SelectionLength = 0;
             this.electronicEmailPasswordTextBox.SelectionStart = 0;
             this.electronicEmailPasswordTextBox.ShortcutsEnabled = true;
-            this.electronicEmailPasswordTextBox.Size = new System.Drawing.Size(114, 23);
+            this.electronicEmailPasswordTextBox.Size = new System.Drawing.Size(146, 23);
             this.electronicEmailPasswordTextBox.TabIndex = 5;
             this.electronicEmailPasswordTextBox.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.electronicEmailPasswordTextBox.UseSelectable = true;
@@ -253,9 +254,9 @@
             // elecMailPassLabel
             // 
             this.elecMailPassLabel.AutoSize = true;
-            this.elecMailPassLabel.Location = new System.Drawing.Point(111, 125);
+            this.elecMailPassLabel.Location = new System.Drawing.Point(108, 99);
             this.elecMailPassLabel.Name = "elecMailPassLabel";
-            this.elecMailPassLabel.Size = new System.Drawing.Size(163, 20);
+            this.elecMailPassLabel.Size = new System.Drawing.Size(156, 19);
             this.elecMailPassLabel.TabIndex = 4;
             this.elecMailPassLabel.Text = "Electronic Mail Password:";
             this.elecMailPassLabel.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -266,7 +267,7 @@
             // 
             // 
             this.emailUserNameTextBox.CustomButton.Image = null;
-            this.emailUserNameTextBox.CustomButton.Location = new System.Drawing.Point(92, 1);
+            this.emailUserNameTextBox.CustomButton.Location = new System.Drawing.Point(124, 1);
             this.emailUserNameTextBox.CustomButton.Name = "";
             this.emailUserNameTextBox.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.emailUserNameTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -275,37 +276,37 @@
             this.emailUserNameTextBox.CustomButton.UseSelectable = true;
             this.emailUserNameTextBox.CustomButton.Visible = false;
             this.emailUserNameTextBox.Lines = new string[0];
-            this.emailUserNameTextBox.Location = new System.Drawing.Point(300, 80);
+            this.emailUserNameTextBox.Location = new System.Drawing.Point(280, 54);
             this.emailUserNameTextBox.MaxLength = 32767;
             this.emailUserNameTextBox.Name = "emailUserNameTextBox";
             this.emailUserNameTextBox.PasswordChar = '\0';
-            this.emailUserNameTextBox.PromptText = "username@yorku.ca";
+            this.emailUserNameTextBox.PromptText = "username";
             this.emailUserNameTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.emailUserNameTextBox.SelectedText = "";
             this.emailUserNameTextBox.SelectionLength = 0;
             this.emailUserNameTextBox.SelectionStart = 0;
             this.emailUserNameTextBox.ShortcutsEnabled = true;
-            this.emailUserNameTextBox.Size = new System.Drawing.Size(114, 23);
+            this.emailUserNameTextBox.Size = new System.Drawing.Size(146, 23);
             this.emailUserNameTextBox.TabIndex = 3;
             this.emailUserNameTextBox.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.emailUserNameTextBox.UseSelectable = true;
-            this.emailUserNameTextBox.WaterMark = "username@yorku.ca";
+            this.emailUserNameTextBox.WaterMark = "username";
             this.emailUserNameTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.emailUserNameTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Location = new System.Drawing.Point(159, 80);
+            this.usernameLabel.Location = new System.Drawing.Point(156, 54);
             this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(80, 20);
+            this.usernameLabel.Size = new System.Drawing.Size(75, 19);
             this.usernameLabel.TabIndex = 2;
             this.usernameLabel.Text = "Username: ";
             this.usernameLabel.Theme = MetroFramework.MetroThemeStyle.Dark;
             // 
             // InitialEmailLoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(578, 376);
             this.ControlBox = false;

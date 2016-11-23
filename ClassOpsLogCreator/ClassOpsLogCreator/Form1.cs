@@ -188,6 +188,8 @@ namespace ClassOpsLogCreator
                 return;
             }
 
+            Cursor.Current = Cursors.WaitCursor;
+
             //Open the existing excel file
             existingMaster = new Excel.Application();
             existingMaster.Visible = false;
@@ -372,6 +374,7 @@ namespace ClassOpsLogCreator
                 
             }
 
+            Cursor.Current = Cursors.WaitCursor;
         }
         #endregion
 
