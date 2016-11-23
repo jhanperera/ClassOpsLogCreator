@@ -63,6 +63,16 @@ namespace ClassOpsLogCreator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1479883104_5303___Gmail {
+            get {
+                object obj = ResourceManager.GetObject("1479883104_5303_-_Gmail", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AboutInfoPICTURE {
             get {
                 object obj = ResourceManager.GetObject("AboutInfoPICTURE", resourceCulture);
@@ -73,9 +83,39 @@ namespace ClassOpsLogCreator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap email_icon_vector_icon_eps_59012 {
+            get {
+                object obj = ResourceManager.GetObject("email-icon-vector-icon-eps-59012", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lotus_notes_icon {
+            get {
+                object obj = ResourceManager.GetObject("lotus-notes-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Main_thread_image {
             get {
                 object obj = ResourceManager.GetObject("Main_thread_image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap oie_transparent {
+            get {
+                object obj = ResourceManager.GetObject("oie_transparent", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

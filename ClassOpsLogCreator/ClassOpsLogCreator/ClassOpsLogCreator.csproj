@@ -198,6 +198,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InitialEmailLoginForm.resx">
+      <DependentUpon>InitialEmailLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -290,6 +293,10 @@
   <ItemGroup>
     <Content Include="green_c_md_VTs_icon.ico" />
     <Content Include="MetroFramework.txt" />
+    <None Include="Resources\oie_transparent.png" />
+    <None Include="Resources\1479883104_5303_-_Gmail.png" />
+    <None Include="Resources\lotus-notes-icon.png" />
+    <None Include="Resources\email-icon-vector-icon-eps-59012.jpg" />
     <None Include="Resources\rsz_green-plus-icon-13.bmp" />
     <None Include="Resources\green-plus-icon-13.png" />
   </ItemGroup>

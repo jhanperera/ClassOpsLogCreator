@@ -15,9 +15,18 @@ namespace ClassOpsLogCreator
         [STAThread]
         static void Main()
         {
+            //Run our settings loader here from previous versions
+            if (Properties.Settings.Default.UpdateSetting)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpdateSetting = false;
+                Properties.Settings.Default.Save();
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LogCreator());
+            Application.Run(new InitialEmailLoginForm());
+            //Application.Run(new LogCreator());
         }
     }
 }

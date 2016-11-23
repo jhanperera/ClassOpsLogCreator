@@ -298,5 +298,41 @@ namespace ClassOpsLogCreator.Properties {
                 this["saveCheckedBoxState"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UpdateSetting {
+            get {
+                return ((bool)(this["UpdateSetting"]));
+            }
+            set {
+                this["UpdateSetting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string lotusPassword {
+            get {
+                return ((string)(this["lotusPassword"]));
+            }
+            set {
+                this["lotusPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isLotusAccount {
+            get {
+                return ((bool)(this["isLotusAccount"]));
+            }
+            set {
+                this["isLotusAccount"] = value;
+            }
+        }
     }
 }

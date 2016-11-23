@@ -15,8 +15,11 @@ namespace ClassOpsLogCreator
     {
         //Host connection string
         private static string hostname = "mypost.yorku.ca";
+        private static string lotusHostName = "postoffice.notes.yorku.ca";
         private static string username = Properties.Settings.Default.UserName;
         private static string password = Properties.Settings.Default.Password;
+        private static string lotusPass = Properties.Settings.Default.lotusPassword;
+        private static bool isLotus = Properties.Settings.Default.isLotusAccount;
         private bool isConnectedFlag = false;
 
         private string msgFrom;
@@ -27,19 +30,62 @@ namespace ClassOpsLogCreator
         /// </summary>
         public EmailScanner(DateTime today)
         {
-            using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
+            if (isLotus)
             {
-                this.isConnectedFlag = true;
-
-                string dayOfTheWeek = DateTime.Now.ToString("dddd"); 
-
-                IEnumerable<uint> uids = client.Search(SearchCondition.Subject("Room Report for " + dayOfTheWeek).And(SearchCondition.SentOn(today)));
-                IEnumerable <MailMessage> messages = client.GetMessages(uids, FetchOptions.Normal);
-
-                foreach(MailMessage msg in messages)
+                using (ImapClient client = new ImapClient(lotusHostName, 993, username, lotusPass, AuthMethod.Login, true))
                 {
-                    msgFrom = msg.From.ToString();
-                    msgBody = msg.Body.ToString();
+                    this.isConnectedFlag = true;
+
+                    string dayOfTheWeek = DateTime.Now.ToString("dddd");
+
+                    IEnumerable<uint> uids = client.Search(SearchCondition.Subject("Room Report for " + dayOfTheWeek).And(SearchCondition.SentOn(today)));
+                    IEnumerable<MailMessage> messages = client.GetMessages(uids, FetchOptions.Normal);
+
+                    foreach (MailMessage msg in messages)
+                    {
+                        msgFrom = msg.From.ToString();
+                        msgBody = msg.Body.ToString();
+                    }
+                }
+            }
+            else
+            {
+                using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
+                {
+                    this.isConnectedFlag = true;
+
+                    string dayOfTheWeek = DateTime.Now.ToString("dddd");
+
+                    IEnumerable<uint> uids = client.Search(SearchCondition.Subject("Room Report for " + dayOfTheWeek).And(SearchCondition.SentOn(today)));
+                    IEnumerable<MailMessage> messages = client.GetMessages(uids, FetchOptions.Normal);
+
+                    foreach (MailMessage msg in messages)
+                    {
+                        msgFrom = msg.From.ToString();
+                        msgBody = msg.Body.ToString();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// This method tests if we can make a connection to the imap server
+        /// </summary>
+        /// <param name="test"></param>
+        public EmailScanner(bool test)
+        {
+            if (isLotus)
+            {
+                using (ImapClient client = new ImapClient(lotusHostName, 993, username, lotusPass, AuthMethod.Login, true))
+                {
+                    this.isConnectedFlag = true;
+                }
+            }
+            else
+            {
+                using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
+                {
+                    this.isConnectedFlag = true;
                 }
             }
         }
