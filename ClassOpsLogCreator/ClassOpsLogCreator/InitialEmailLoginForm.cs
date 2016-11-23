@@ -78,7 +78,23 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void connectBTN_Click(object sender, EventArgs e)
         {
+            //We are in the lotus notes segments Try to connect
+            if(lotusEmailPasswordTextBox.Visible == true)
+            {
+                Properties.Settings.Default.UserName = this.emailUserNameTextBox.Text;
+                Properties.Settings.Default.Password = this.electronicEmailPasswordTextBox.Text;
+                Properties.Settings.Default.lotusPassword = this.lotusEmailPasswordTextBox.Text;
+                Properties.Settings.Default.isLotusAccount = true;
+                //Test incoming connection to notes
+                EmailScanner ES = new EmailScanner(true);
+            }
+            else
+            {
+                Properties.Settings.Default.UserName = this.emailUserNameTextBox.Text;
+                Properties.Settings.Default.Password = this.electronicEmailPasswordTextBox.Text;
+                Properties.Settings.Default.isLotusAccount = false;
 
+            }
         }
     }
 }

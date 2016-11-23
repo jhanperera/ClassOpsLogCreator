@@ -190,7 +190,7 @@
             this.lotusEmailPasswordTextBox.Location = new System.Drawing.Point(300, 168);
             this.lotusEmailPasswordTextBox.MaxLength = 32767;
             this.lotusEmailPasswordTextBox.Name = "lotusEmailPasswordTextBox";
-            this.lotusEmailPasswordTextBox.PasswordChar = '\0';
+            this.lotusEmailPasswordTextBox.PasswordChar = '●';
             this.lotusEmailPasswordTextBox.PromptText = "Lotus Notes Password";
             this.lotusEmailPasswordTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.lotusEmailPasswordTextBox.SelectedText = "";
@@ -201,6 +201,7 @@
             this.lotusEmailPasswordTextBox.TabIndex = 7;
             this.lotusEmailPasswordTextBox.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.lotusEmailPasswordTextBox.UseSelectable = true;
+            this.lotusEmailPasswordTextBox.UseSystemPasswordChar = true;
             this.lotusEmailPasswordTextBox.WaterMark = "Lotus Notes Password";
             this.lotusEmailPasswordTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.lotusEmailPasswordTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -233,7 +234,7 @@
             this.electronicEmailPasswordTextBox.Location = new System.Drawing.Point(300, 125);
             this.electronicEmailPasswordTextBox.MaxLength = 32767;
             this.electronicEmailPasswordTextBox.Name = "electronicEmailPasswordTextBox";
-            this.electronicEmailPasswordTextBox.PasswordChar = '\0';
+            this.electronicEmailPasswordTextBox.PasswordChar = '●';
             this.electronicEmailPasswordTextBox.PromptText = "Electronic Email Password";
             this.electronicEmailPasswordTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.electronicEmailPasswordTextBox.SelectedText = "";
@@ -244,6 +245,7 @@
             this.electronicEmailPasswordTextBox.TabIndex = 5;
             this.electronicEmailPasswordTextBox.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.electronicEmailPasswordTextBox.UseSelectable = true;
+            this.electronicEmailPasswordTextBox.UseSystemPasswordChar = true;
             this.electronicEmailPasswordTextBox.WaterMark = "Electronic Email Password";
             this.electronicEmailPasswordTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.electronicEmailPasswordTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
