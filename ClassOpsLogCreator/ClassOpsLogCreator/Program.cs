@@ -25,14 +25,6 @@ namespace ClassOpsLogCreator
                 Properties.Settings.Default.UpdateSetting = false;
                 Properties.Settings.Default.Save();
             }
-            //First time run
-            if (Properties.Settings.Default.firstTimeStart == true)
-            {
-                Application.Run(new InitialEmailLoginForm());
-                Properties.Settings.Default.firstTimeStart = false;
-                Properties.Settings.Default.Save();
-            }
-
             //Run application
             Application.Run(new LogCreator());
         }

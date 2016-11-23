@@ -88,8 +88,84 @@
     </ManifestKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ActiveUp.Net.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6cceae6a4844c51b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ActiveUp.Net.Dns, Version=5.0.3454.364, Culture=neutral, PublicKeyToken=6fc67824e0089991, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Dns.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ActiveUp.Net.Groupware, Version=5.0.3454.364, Culture=neutral, PublicKeyToken=db51b95d57ebfe25, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Groupware.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ActiveUp.Net.Imap4, Version=5.0.3454.364, Culture=neutral, PublicKeyToken=9d424b1770e92b68, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Imap4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ActiveUp.Net.Mail, Version=5.0.3454.364, Culture=neutral, PublicKeyToken=851b9e39ef2572fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Mail.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ActiveUp.Net.Nntp, Version=5.0.3454.364, Culture=neutral, PublicKeyToken=01416978360a49a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Nntp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ActiveUp.Net.OpenPGP, Version=5.0.3454.364, Culture=neutral, PublicKeyToken=0e094b86584219e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.OpenPGP.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ActiveUp.Net.Pop3, Version=5.0.3454.364, Culture=neutral, PublicKeyToken=962567372c07b9fe, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Pop3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ActiveUp.Net.Smtp, Version=5.0.3454.364, Culture=neutral, PublicKeyToken=366752d00f09ae34, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.Smtp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ActiveUp.Net.WhoIs, Version=5.0.3454.364, Culture=neutral, PublicKeyToken=6b9afb81c1de5ed4, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailSystem.NET.2.0.1\lib\ActiveUp.Net.WhoIs.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AE.Net.Mail, Version=1.7.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AE.Net.Mail.1.7.10.0\lib\net45\AE.Net.Mail.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.7.4137.9688, Culture=neutral, PublicKeyToken=a4292a325f69b123, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis, Version=1.19.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.19.0\lib\net45\Google.Apis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.19.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.19.0\lib\net45\Google.Apis.Auth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.19.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.19.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.19.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.19.0\lib\net45\Google.Apis.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.19.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.19.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Plus.v1, Version=1.19.0.690, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Plus.v1.1.19.0.690\lib\net45\Google.Apis.Plus.v1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="itextsharp, Version=5.5.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.10\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
@@ -109,6 +185,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="S22.Imap, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\S22.Imap.3.6.0.0\lib\net40\S22.Imap.dll</HintPath>
       <Private>True</Private>
@@ -126,6 +206,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Zlib.Portable, Version=1.11.0.0, Culture=neutral, PublicKeyToken=431cba815f6a8b5b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zlib.Portable.Signed.1.11.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutBox.cs">
@@ -143,12 +227,7 @@
     </Compile>
     <Compile Include="EmailScanner.cs" />
     <Compile Include="EmailSender.cs" />
-    <Compile Include="InitialEmailLoginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InitialEmailLoginForm.Designer.cs">
-      <DependentUpon>InitialEmailLoginForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="MailRepository.cs" />
     <Compile Include="ScheduleStatsGen.cs" />
     <Compile Include="SettingForm.cs">
       <SubType>Form</SubType>
@@ -197,9 +276,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InitialEmailLoginForm.resx">
-      <DependentUpon>InitialEmailLoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>

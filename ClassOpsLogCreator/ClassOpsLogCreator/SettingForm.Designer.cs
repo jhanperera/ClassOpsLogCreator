@@ -66,8 +66,6 @@
             this.updateBTN = new MetroFramework.Controls.MetroButton();
             this.newBuildingInit = new MetroFramework.Controls.MetroTextBox();
             this.buildingComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.lotusNotesPassword = new MetroFramework.Controls.MetroLabel();
-            this.lotusNotesPassTextBox = new MetroFramework.Controls.MetroTextBox();
             this.emailLoginTab.SuspendLayout();
             this.versuibTab.SuspendLayout();
             this.logoutGenTab.SuspendLayout();
@@ -308,8 +306,6 @@
             // 
             // emailTab
             // 
-            this.emailTab.Controls.Add(this.lotusNotesPassword);
-            this.emailTab.Controls.Add(this.lotusNotesPassTextBox);
             this.emailTab.Controls.Add(this.cancelBTN);
             this.emailTab.Controls.Add(this.usernameLabel);
             this.emailTab.Controls.Add(this.loginBTN);
@@ -606,46 +602,6 @@
             this.buildingComboBox.TabIndex = 4;
             this.buildingComboBox.UseSelectable = true;
             // 
-            // lotusNotesPassword
-            // 
-            this.lotusNotesPassword.AutoSize = true;
-            this.lotusNotesPassword.Location = new System.Drawing.Point(29, 100);
-            this.lotusNotesPassword.Name = "lotusNotesPassword";
-            this.lotusNotesPassword.Size = new System.Drawing.Size(136, 19);
-            this.lotusNotesPassword.TabIndex = 6;
-            this.lotusNotesPassword.Text = "Lotus Notes Password";
-            // 
-            // lotusNotesPassTextBox
-            // 
-            // 
-            // 
-            // 
-            this.lotusNotesPassTextBox.CustomButton.Image = null;
-            this.lotusNotesPassTextBox.CustomButton.Location = new System.Drawing.Point(214, 2);
-            this.lotusNotesPassTextBox.CustomButton.Name = "";
-            this.lotusNotesPassTextBox.CustomButton.Size = new System.Drawing.Size(17, 17);
-            this.lotusNotesPassTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.lotusNotesPassTextBox.CustomButton.TabIndex = 1;
-            this.lotusNotesPassTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.lotusNotesPassTextBox.CustomButton.UseSelectable = true;
-            this.lotusNotesPassTextBox.CustomButton.Visible = false;
-            this.lotusNotesPassTextBox.Lines = new string[0];
-            this.lotusNotesPassTextBox.Location = new System.Drawing.Point(182, 97);
-            this.lotusNotesPassTextBox.MaxLength = 32767;
-            this.lotusNotesPassTextBox.Name = "lotusNotesPassTextBox";
-            this.lotusNotesPassTextBox.PasswordChar = '●';
-            this.lotusNotesPassTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.lotusNotesPassTextBox.SelectedText = "";
-            this.lotusNotesPassTextBox.SelectionLength = 0;
-            this.lotusNotesPassTextBox.SelectionStart = 0;
-            this.lotusNotesPassTextBox.ShortcutsEnabled = true;
-            this.lotusNotesPassTextBox.Size = new System.Drawing.Size(234, 22);
-            this.lotusNotesPassTextBox.TabIndex = 7;
-            this.lotusNotesPassTextBox.UseSelectable = true;
-            this.lotusNotesPassTextBox.UseSystemPasswordChar = true;
-            this.lotusNotesPassTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.lotusNotesPassTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
             // SettingForm
             // 
             this.AcceptButton = this.loginBTN;
@@ -720,7 +676,5 @@
         private MetroFramework.Controls.MetroComboBox employeeComboBox;
         private MetroFramework.Controls.MetroButton removeBTN;
         private MetroFramework.Controls.MetroButton addBTN;
-        private MetroFramework.Controls.MetroLabel lotusNotesPassword;
-        private MetroFramework.Controls.MetroTextBox lotusNotesPassTextBox;
     }
 }

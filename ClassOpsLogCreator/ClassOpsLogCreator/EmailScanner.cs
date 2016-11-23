@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using S22.Imap;
 using System.Net.Mail;
+using ActiveUp.Net.Mail;
 
 namespace ClassOpsLogCreator
 {
@@ -14,12 +15,9 @@ namespace ClassOpsLogCreator
     public class EmailScanner
     {
         //Host connection string
-        private static string hostname = "mypost.yorku.ca";
-        private static string lotusHostName = "postoffice.notes.yorku.ca";
-        private string username = Properties.Settings.Default.UserName;
-        private string password = Properties.Settings.Default.Password;
-        private string lotusPass = Properties.Settings.Default.lotusPassword;
-        private bool isLotus = Properties.Settings.Default.isLotusAccount;
+        private static string hostname = "imap.gmail.com";
+        private string username = "uitclientservices";
+        private string password = "ca1mn3ss";
         private bool isConnectedFlag = false;
 
         private string msgFrom;
@@ -30,10 +28,43 @@ namespace ClassOpsLogCreator
         /// </summary>
         public EmailScanner(DateTime today)
         {
-            if (isLotus)
+
+            string dayOfTheWeek = DateTime.Now.ToString("dddd");
+
+            try
             {
-                username = username + "@yorku.ca";
-                using (ImapClient client = new ImapClient(lotusHostName, 993, username, lotusPass, AuthMethod.Login, true))
+                var mailRepository = new MailRepository(
+                            "imap.gmail.com",
+                            993,
+                            true,
+                            username + "@gmail.com",
+                            password
+                        );
+
+                this.isConnectedFlag = true;
+
+                //get all the messages from the inboc
+                var emailList = mailRepository.GetAllMails("inbox");
+
+                foreach (Message email in emailList)
+                {
+                    if (email.Subject == "Fwd: Room Report for Wednesday" && email.ReceivedDate == DateTime.Today)
+                    {
+                        msgBody = email.BodyText.ToString();
+                        msgFrom = email.From.ToString();
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+            /*
+            using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
                 {
                     this.isConnectedFlag = true;
 
@@ -47,26 +78,7 @@ namespace ClassOpsLogCreator
                         msgFrom = msg.From.ToString();
                         msgBody = msg.Body.ToString();
                     }
-                }
-            }
-            else
-            {
-                using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
-                {
-                    this.isConnectedFlag = true;
-
-                    string dayOfTheWeek = DateTime.Now.ToString("dddd");
-
-                    IEnumerable<uint> uids = client.Search(SearchCondition.Subject("Room Report for " + dayOfTheWeek).And(SearchCondition.SentOn(today)));
-                    IEnumerable<MailMessage> messages = client.GetMessages(uids, FetchOptions.Normal);
-
-                    foreach (MailMessage msg in messages)
-                    {
-                        msgFrom = msg.From.ToString();
-                        msgBody = msg.Body.ToString();
-                    }
-                }
-            }
+                }*/
         }
 
         /// <summary>
@@ -77,19 +89,9 @@ namespace ClassOpsLogCreator
         {
             try
             {
-                if (isLotus)
+                using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
                 {
-                    using (ImapClient client = new ImapClient(lotusHostName, 993, username, lotusPass, AuthMethod.Login, true))
-                    {
-                        this.isConnectedFlag = true;
-                    }
-                }
-                else
-                {
-                    using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
-                    {
-                        this.isConnectedFlag = true;
-                    }
+                    this.isConnectedFlag = true;
                 }
             }
             catch (Exception)

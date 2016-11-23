@@ -104,26 +104,11 @@ namespace ClassOpsLogCreator
             this.versionLabel.Text += Application.ProductVersion;
 
             //Fill the password and user name field if we already have a user name and password saved.
-            if(Properties.Settings.Default.isLotusAccount)
+            if (!Properties.Settings.Default.UserName.Equals("") || !Properties.Settings.Default.Password.Equals(""))
             {
-                if (!Properties.Settings.Default.UserName.Equals("") || !Properties.Settings.Default.Password.Equals("") || !Properties.Settings.Default.lotusPassword.Equals(""))
-                {
-                    this.usernameTextBox.Text = Properties.Settings.Default.UserName;
-                    this.passwordTextBox.Text = Properties.Settings.Default.Password;
-                    this.lotusNotesPassTextBox.Text = Properties.Settings.Default.lotusPassword;
-                }
-            }
-            else
-            {
-                this.lotusNotesPassTextBox.Visible = false;
-                this.lotusNotesPassword.Visible = false;
-
-                if (!Properties.Settings.Default.UserName.Equals("") || !Properties.Settings.Default.Password.Equals(""))
-                {
-                    this.usernameTextBox.Text = Properties.Settings.Default.UserName;
-                    this.passwordTextBox.Text = Properties.Settings.Default.Password;
-                }
-            }       
+                this.usernameTextBox.Text = Properties.Settings.Default.UserName;
+                this.passwordTextBox.Text = Properties.Settings.Default.Password;
+            }    
         }
 
         #region Radio button event handlers
@@ -273,59 +258,30 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void loginBTN_Click(object sender, EventArgs e)
         {
-            if(Properties.Settings.Default.isLotusAccount)
+            if (this.usernameTextBox.Text == "" || this.passwordTextBox.Text == "")
             {
-                if (this.usernameTextBox.Text == "" || this.passwordTextBox.Text == "" || this.lotusNotesPassTextBox.Text == "")
-                {
-                    MetroMessageBox.Show(this, "Please provide a User name, Password and Lotus Notes password.");
-                    return;
-                }
-                else
-                {
-                    this.loginClicked = true;
-                    Properties.Settings.Default.UserName = this.usernameTextBox.Text;
-                    Properties.Settings.Default.Password = this.passwordTextBox.Text;
-                    Properties.Settings.Default.lotusPassword = this.lotusNotesPassTextBox.Text;
-                    Properties.Settings.Default.Save();
-                    EmailSender eS = new EmailSender(true);
-                    if (eS.isConnectionMade())
-                    {
-                        MetroMessageBox.Show(this, "Success: A connection was made", "Success",
-                                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MetroMessageBox.Show(this, "FAIL: A connection was unable to be established", "Problem....",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
+                MetroMessageBox.Show(this, "Please provide a User name and Password.");
+                return;
             }
             else
             {
-                if (this.usernameTextBox.Text == "" || this.passwordTextBox.Text == "")
+                this.loginClicked = true;
+                Properties.Settings.Default.UserName = this.usernameTextBox.Text;
+                Properties.Settings.Default.Password = this.passwordTextBox.Text;
+                Properties.Settings.Default.Save();
+                EmailSender eS = new EmailSender(true);
+                if (eS.isConnectionMade())
                 {
-                    MetroMessageBox.Show(this, "Please provide a User name and Password.");
-                    return;
+                    MetroMessageBox.Show(this, "Success: A connection was made", "Success",
+                                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    this.loginClicked = true;
-                    Properties.Settings.Default.UserName = this.usernameTextBox.Text;
-                    Properties.Settings.Default.Password = this.passwordTextBox.Text;
-                    Properties.Settings.Default.Save();
-                    EmailSender eS = new EmailSender(true);
-                    if (eS.isConnectionMade())
-                    {
-                        MetroMessageBox.Show(this, "Success: A connection was made", "Success",
-                                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MetroMessageBox.Show(this, "FAIL: A connection was unable to be established", "Problem....",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    MetroMessageBox.Show(this, "FAIL: A connection was unable to be established", "Problem....",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+ 
         }
 
         /// <summary>
