@@ -12,6 +12,7 @@ using System.Threading;
 using Google.Apis.Util.Store;
 using Google.Apis.Services;
 using Google.Apis.Gmail.v1.Data;
+using ActiveUp.Net.Mail;
 
 namespace ClassOpsLogCreator
 {
@@ -34,63 +35,24 @@ namespace ClassOpsLogCreator
         /// </summary>
         public EmailScanner(DateTime today)
         {
-
+            string dayOfTheWeek = today.ToString("dddd");
             try
             {
+                MailRepository mailRepo = new MailRepository(hostname, 993, true, username, password);
+
+                var emailList = mailRepo.GetAllMails("inbox");
+
+                foreach(ActiveUp.Net.Mail.Message ms in emailList)
                 {
-                    // If modifying these scopes, delete your previously saved credentials
-                    // at ~/.credentials/gmail-dotnet-quickstart.json
-                     string[] Scopes = { GmailService.Scope.GmailReadonly };
-                     string ApplicationName = "CLog";
-
-                        UserCredential credential;
-
-                        using (var stream =
-                            new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
-                        {
-                            string credPath = System.Environment.GetFolderPath(
-                                System.Environment.SpecialFolder.Personal);
-                            credPath = Path.Combine(credPath, ".credentials/gmail-dotnet-quickstart.json");
-
-                            credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                                GoogleClientSecrets.Load(stream).Secrets,
-                                Scopes,
-                                "user",
-                                CancellationToken.None,
-                                new FileDataStore(credPath, true)).Result;
-                            Console.WriteLine("Credential file saved to: " + credPath);
-                        }
-
-                        // Create Gmail API service.
-                        var service = new GmailService(new BaseClientService.Initializer()
-                        {
-                            HttpClientInitializer = credential,
-                            ApplicationName = ApplicationName,
-                        });
-
-                        // Define parameters of request.
-                        UsersResource.LabelsResource.ListRequest request = service.Users.Labels.List("me");
-
-                        // List labels.
-                        IList<Label> labels = request.Execute().Labels;
-                        Console.WriteLine("Labels:");
-                        if (labels != null && labels.Count > 0)
-                        {
-                            foreach (var labelItem in labels)
-                            {
-                                Console.WriteLine("{0}", labelItem.Name);
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("No labels found.");
-                        }
-                        Console.Read();
-
+                    if(ms.Subject == "Room Report for " + dayOfTheWeek && 
+                        (ms.Date.ToString("dd-MM-yyyy") == today.ToString("dd-MM-yyyy")))
+                    {
+                        msgFrom = ms.From.Email;
+                        msgBody = ms.BodyText.Text;
                     }
-               
-
-                /*using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
+                }
+                /*
+                using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
                 {
                     this.isConnectedFlag = true;
 
@@ -108,7 +70,7 @@ namespace ClassOpsLogCreator
             }
             catch (Exception)
             {
-
+                
                 throw;
             }
         }
@@ -147,7 +109,7 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         public string messageFrom()
         {
-            string resault = msgFrom.Split('<', '>')[1];
+            string resault = msgFrom;
             return resault;
         }
 
