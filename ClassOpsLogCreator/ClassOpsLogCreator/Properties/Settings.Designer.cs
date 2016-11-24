@@ -310,41 +310,5 @@ namespace ClassOpsLogCreator.Properties {
                 this["UpdateSetting"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string lotusPassword {
-            get {
-                return ((string)(this["lotusPassword"]));
-            }
-            set {
-                this["lotusPassword"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool isLotusAccount {
-            get {
-                return ((bool)(this["isLotusAccount"]));
-            }
-            set {
-                this["isLotusAccount"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool firstTimeStart {
-            get {
-                return ((bool)(this["firstTimeStart"]));
-            }
-            set {
-                this["firstTimeStart"] = value;
-            }
-        }
     }
 }

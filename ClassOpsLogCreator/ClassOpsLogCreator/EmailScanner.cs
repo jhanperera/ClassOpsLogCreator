@@ -5,7 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using S22.Imap;
 using System.Net.Mail;
-using ActiveUp.Net.Mail;
+using Google.Apis.Gmail.v1;
+using Google.Apis.Auth.OAuth2;
+using System.IO;
+using System.Threading;
+using Google.Apis.Util.Store;
+using Google.Apis.Services;
+using Google.Apis.Gmail.v1.Data;
 
 namespace ClassOpsLogCreator
 {
@@ -29,42 +35,62 @@ namespace ClassOpsLogCreator
         public EmailScanner(DateTime today)
         {
 
-            string dayOfTheWeek = DateTime.Now.ToString("dddd");
-
             try
             {
-                var mailRepository = new MailRepository(
-                            "imap.gmail.com",
-                            993,
-                            true,
-                            username + "@gmail.com",
-                            password
-                        );
-
-                this.isConnectedFlag = true;
-
-                //get all the messages from the inboc
-                var emailList = mailRepository.GetAllMails("inbox");
-
-                foreach (Message email in emailList)
                 {
-                    if (email.Subject == "Fwd: Room Report for Wednesday" && email.ReceivedDate == DateTime.Today)
-                    {
-                        msgBody = email.BodyText.ToString();
-                        msgFrom = email.From.ToString();
+                    // If modifying these scopes, delete your previously saved credentials
+                    // at ~/.credentials/gmail-dotnet-quickstart.json
+                     string[] Scopes = { GmailService.Scope.GmailReadonly };
+                     string ApplicationName = "CLog";
+
+                        UserCredential credential;
+
+                        using (var stream =
+                            new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
+                        {
+                            string credPath = System.Environment.GetFolderPath(
+                                System.Environment.SpecialFolder.Personal);
+                            credPath = Path.Combine(credPath, ".credentials/gmail-dotnet-quickstart.json");
+
+                            credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                                GoogleClientSecrets.Load(stream).Secrets,
+                                Scopes,
+                                "user",
+                                CancellationToken.None,
+                                new FileDataStore(credPath, true)).Result;
+                            Console.WriteLine("Credential file saved to: " + credPath);
+                        }
+
+                        // Create Gmail API service.
+                        var service = new GmailService(new BaseClientService.Initializer()
+                        {
+                            HttpClientInitializer = credential,
+                            ApplicationName = ApplicationName,
+                        });
+
+                        // Define parameters of request.
+                        UsersResource.LabelsResource.ListRequest request = service.Users.Labels.List("me");
+
+                        // List labels.
+                        IList<Label> labels = request.Execute().Labels;
+                        Console.WriteLine("Labels:");
+                        if (labels != null && labels.Count > 0)
+                        {
+                            foreach (var labelItem in labels)
+                            {
+                                Console.WriteLine("{0}", labelItem.Name);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("No labels found.");
+                        }
+                        Console.Read();
+
                     }
+               
 
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-
-            /*
-            using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
+                /*using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
                 {
                     this.isConnectedFlag = true;
 
@@ -79,6 +105,12 @@ namespace ClassOpsLogCreator
                         msgBody = msg.Body.ToString();
                     }
                 }*/
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
