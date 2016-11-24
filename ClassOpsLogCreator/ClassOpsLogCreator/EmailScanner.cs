@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using S22.Imap;
+//using S22.Imap;
 using System.Net.Mail;
 using Google.Apis.Gmail.v1;
 using Google.Apis.Auth.OAuth2;
@@ -13,6 +13,7 @@ using Google.Apis.Util.Store;
 using Google.Apis.Services;
 using Google.Apis.Gmail.v1.Data;
 using ActiveUp.Net.Mail;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ClassOpsLogCreator
 {
@@ -37,7 +38,8 @@ namespace ClassOpsLogCreator
         {
             string dayOfTheWeek = today.ToString("dddd");
             try
-            {
+            {    
+
                 MailRepository mailRepo = new MailRepository(hostname, 993, true, username, password);
 
                 var emailList = mailRepo.GetAllMails("inbox");
@@ -47,10 +49,11 @@ namespace ClassOpsLogCreator
                     if(ms.Subject == "Room Report for " + dayOfTheWeek && 
                         (ms.Date.ToString("dd-MM-yyyy") == today.ToString("dd-MM-yyyy")))
                     {
-                        msgFrom = ms.From.Email;
-                        msgBody = ms.BodyText.Text;
+                        this.msgFrom = ms.From.Email;
+                        this.msgBody = ms.BodyText.Text;
                     }
                 }
+
                 /*
                 using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
                 {
@@ -73,25 +76,6 @@ namespace ClassOpsLogCreator
                 
                 throw;
             }
-        }
-
-        /// <summary>
-        /// This method tests if we can make a connection to the imap server
-        /// </summary>
-        /// <param name="test"></param>
-        public EmailScanner(bool test)
-        {
-            try
-            {
-                using (ImapClient client = new ImapClient(hostname, 993, username, password, AuthMethod.Login, true))
-                {
-                    this.isConnectedFlag = true;
-                }
-            }
-            catch (Exception)
-            {
-                this.isConnectedFlag = false;
-            }         
         }
 
         /// <summary>
