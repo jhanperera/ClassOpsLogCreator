@@ -29,8 +29,7 @@ namespace ClassOpsLogCreator
 
             taskList = new List<string>();
             string[] taskArray = { "AV Shutdown", "Crestron Logout", "Lockup", "Proactive Classroom Check",
-                       "SCLD Student Event", "SCLD Student Logout", "Operator", "Pickup Large PA", "Pickup Mic",
-                "Pickup PC", "Pickup Projector", "Pickup Skype Kit","Pickup Small PA" };
+                       "SCLD Student Event", "SCLD Student Logout", "Operator" };
             taskList.AddRange(taskArray);
         }
 

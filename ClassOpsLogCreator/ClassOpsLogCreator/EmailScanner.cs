@@ -41,6 +41,38 @@ namespace ClassOpsLogCreator
             string dayOfTheWeek = today.ToString("dddd");
             try
             {
+                //use the POP3 method to retrieve our Room report email
+                using (var clientPOP = new Pop3Client())
+                {
+                    clientPOP.Connect("pop.gmail.com", 995, true);
+                    clientPOP.Authenticate(username + "@gmail.com", password, AuthenticationMethod.Auto);
+                    var count = clientPOP.GetMessageCount();
+
+                    // We want to download all messages
+                    List<Message> allMessages = new List<Message>(count);
+
+                    // Messages are numbered in the interval: [1, messageCount]
+                    // Ergo: message numbers are 1-based.
+                    // Most servers give the latest message the highest number
+                    for (int i = count; i > (count - 5); i--)
+                    {
+                        allMessages.Add(clientPOP.GetMessage(i));
+                    }
+
+                    foreach (Message msg in allMessages)
+                    {
+                        if (msg.Headers.Subject == "Room Report for " + dayOfTheWeek &&
+                            msg.Headers.DateSent.ToString("dd-MM-yy") == today.ToString("dd-MM-yy"))
+                        {
+                            OpenPop.Mime.MessagePart plainTextPart = msg.FindFirstPlainTextVersion();
+                            msgBody = plainTextPart.GetBodyAsText();
+                            msgFrom = msg.Headers.From.ToString();
+                            break;
+                        }
+                    }
+                }
+               
+                //**********************************TEST CODE*******************************************************/
                 /* MailRepository mailRepo = new MailRepository(hostname, 993, true, username, password);
 
                  var emailList = mailRepo.GetAllMails("inbox");
@@ -54,35 +86,7 @@ namespace ClassOpsLogCreator
                          this.msgBody = ms.BodyText.Text;
                      }
                  }*/
-
                 /*
-                var clientPOP = new Pop3Client();
-                clientPOP.Connect("pop.gmail.com", 995, true);
-                clientPOP.Authenticate(username + "@gmail.com", password, AuthenticationMethod.Auto);
-                var count = clientPOP.GetMessageCount();
-
-                // We want to download all messages
-                List<Message> allMessages = new List<Message>(count);
-
-                // Messages are numbered in the interval: [1, messageCount]
-                // Ergo: message numbers are 1-based.
-                // Most servers give the latest message the highest number
-                for (int i = count; i > (count - 5); i--)
-                {
-                    allMessages.Add(clientPOP.GetMessage(i));
-                }
-
-                foreach(Message msg in allMessages)
-                {
-                    if(msg.Headers.Subject == "Fwd: Room Report for Wednesday")
-                    {
-                        OpenPop.Mime.MessagePart plainTextPart = msg.FindFirstPlainTextVersion();
-                        var bodyString = plainTextPart.GetBodyAsText();
-                    }
-                    var mailbody = ASCIIEncoding.ASCII.GetString(msg.RawMessage);
-                }*/
-
-
                 using (ImapClient client = new ImapClient("mypost.yorku.ca", 993, "pereraj", "pooman12", AuthMethod.Login, true))
                 {
                     this.isConnectedFlag = true;
@@ -96,7 +100,8 @@ namespace ClassOpsLogCreator
                         msgFrom = msg.From.ToString();
                         msgBody = msg.Body.ToString();
                     }
-                }
+                }*/
+                //**********************************TEST CODE*******************************************************/
             }
             catch (Exception)
             {
@@ -127,9 +132,10 @@ namespace ClassOpsLogCreator
         /// <summary>
         /// This returns the message body of the message
         /// </summary>
-        /// <returns></returns>
+        /// <returns>null if the message was not valid</returns>
         public string messageBody()
         {
+            //Try and replace any artifacts that might occur
             try
             {
                 msgBody = msgBody.Replace("?", " ");
