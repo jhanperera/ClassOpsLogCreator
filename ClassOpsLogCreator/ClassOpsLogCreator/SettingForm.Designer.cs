@@ -46,6 +46,14 @@
             this.am_pmCombo1_1 = new MetroFramework.Controls.MetroComboBox();
             this.startHour1 = new MetroFramework.Controls.MetroComboBox();
             this.emailTab = new MetroFramework.Controls.MetroTabPage();
+            this.electronicEmail = new System.Windows.Forms.GroupBox();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.gmail = new System.Windows.Forms.GroupBox();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBox2 = new MetroFramework.Controls.MetroTextBox();
             this.statisticsTab = new MetroFramework.Controls.MetroTabPage();
             this.dateTimePicker = new MetroFramework.Controls.MetroDateTime();
             this.generateBTN = new MetroFramework.Controls.MetroButton();
@@ -66,24 +74,16 @@
             this.updateBTN = new MetroFramework.Controls.MetroButton();
             this.newBuildingInit = new MetroFramework.Controls.MetroTextBox();
             this.buildingComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.gmail = new System.Windows.Forms.GroupBox();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
-            this.metroTextBox2 = new MetroFramework.Controls.MetroTextBox();
-            this.electronicEmail = new System.Windows.Forms.GroupBox();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.emailLoginTab.SuspendLayout();
             this.versuibTab.SuspendLayout();
             this.logoutGenTab.SuspendLayout();
             this.emailTab.SuspendLayout();
+            this.electronicEmail.SuspendLayout();
+            this.gmail.SuspendLayout();
             this.statisticsTab.SuspendLayout();
             this.buildingUpdateTab.SuspendLayout();
             this.addEmployeGroup.SuspendLayout();
             this.changeGroupBox.SuspendLayout();
-            this.gmail.SuspendLayout();
-            this.electronicEmail.SuspendLayout();
             this.SuspendLayout();
             // 
             // usernameLabel
@@ -100,7 +100,7 @@
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Location = new System.Drawing.Point(7, 49);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(159, 19);
+            this.passwordLabel.Size = new System.Drawing.Size(160, 19);
             this.passwordLabel.TabIndex = 1;
             this.passwordLabel.Text = "Electronic Email Password";
             // 
@@ -197,7 +197,7 @@
             this.versionLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.versionLabel.Location = new System.Drawing.Point(187, 87);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(79, 25);
+            this.versionLabel.Size = new System.Drawing.Size(80, 25);
             this.versionLabel.TabIndex = 6;
             this.versionLabel.Text = "Version: ";
             // 
@@ -334,6 +334,136 @@
             this.emailTab.VerticalScrollbarHighlightOnWheel = false;
             this.emailTab.VerticalScrollbarSize = 10;
             // 
+            // electronicEmail
+            // 
+            this.electronicEmail.BackColor = System.Drawing.Color.Transparent;
+            this.electronicEmail.Controls.Add(this.metroLabel5);
+            this.electronicEmail.Controls.Add(this.usernameLabel);
+            this.electronicEmail.Controls.Add(this.usernameTextBox);
+            this.electronicEmail.Controls.Add(this.passwordTextBox);
+            this.electronicEmail.Controls.Add(this.passwordLabel);
+            this.electronicEmail.Location = new System.Drawing.Point(3, 86);
+            this.electronicEmail.Name = "electronicEmail";
+            this.electronicEmail.Size = new System.Drawing.Size(499, 78);
+            this.electronicEmail.TabIndex = 7;
+            this.electronicEmail.TabStop = false;
+            this.electronicEmail.Text = "Electronic Email Login";
+            // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.Location = new System.Drawing.Point(341, 16);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(70, 19);
+            this.metroLabel5.TabIndex = 8;
+            this.metroLabel5.Text = "@yorku.ca";
+            // 
+            // gmail
+            // 
+            this.gmail.BackColor = System.Drawing.Color.Transparent;
+            this.gmail.Controls.Add(this.metroLabel3);
+            this.gmail.Controls.Add(this.metroLabel1);
+            this.gmail.Controls.Add(this.metroLabel2);
+            this.gmail.Controls.Add(this.metroTextBox1);
+            this.gmail.Controls.Add(this.metroTextBox2);
+            this.gmail.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.gmail.Location = new System.Drawing.Point(3, 4);
+            this.gmail.Name = "gmail";
+            this.gmail.Size = new System.Drawing.Size(499, 76);
+            this.gmail.TabIndex = 6;
+            this.gmail.TabStop = false;
+            this.gmail.Text = "Gmail Login";
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(341, 19);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(84, 19);
+            this.metroLabel3.TabIndex = 6;
+            this.metroLabel3.Text = "@gmail.com";
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(74, 16);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(106, 19);
+            this.metroLabel1.TabIndex = 2;
+            this.metroLabel1.Text = "Gmail Username";
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(79, 46);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(102, 19);
+            this.metroLabel2.TabIndex = 4;
+            this.metroLabel2.Text = "Gmail Password";
+            // 
+            // metroTextBox1
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBox1.CustomButton.Image = null;
+            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(129, 2);
+            this.metroTextBox1.CustomButton.Name = "";
+            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(17, 17);
+            this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBox1.CustomButton.TabIndex = 1;
+            this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBox1.CustomButton.UseSelectable = true;
+            this.metroTextBox1.CustomButton.Visible = false;
+            this.metroTextBox1.Lines = new string[0];
+            this.metroTextBox1.Location = new System.Drawing.Point(186, 46);
+            this.metroTextBox1.MaxLength = 32767;
+            this.metroTextBox1.Name = "metroTextBox1";
+            this.metroTextBox1.PasswordChar = '●';
+            this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBox1.SelectedText = "";
+            this.metroTextBox1.SelectionLength = 0;
+            this.metroTextBox1.SelectionStart = 0;
+            this.metroTextBox1.ShortcutsEnabled = true;
+            this.metroTextBox1.Size = new System.Drawing.Size(149, 22);
+            this.metroTextBox1.TabIndex = 5;
+            this.metroTextBox1.UseSelectable = true;
+            this.metroTextBox1.UseSystemPasswordChar = true;
+            this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroTextBox2
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBox2.CustomButton.Image = null;
+            this.metroTextBox2.CustomButton.Location = new System.Drawing.Point(129, 2);
+            this.metroTextBox2.CustomButton.Name = "";
+            this.metroTextBox2.CustomButton.Size = new System.Drawing.Size(17, 17);
+            this.metroTextBox2.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBox2.CustomButton.TabIndex = 1;
+            this.metroTextBox2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBox2.CustomButton.UseSelectable = true;
+            this.metroTextBox2.CustomButton.Visible = false;
+            this.metroTextBox2.Lines = new string[0];
+            this.metroTextBox2.Location = new System.Drawing.Point(186, 16);
+            this.metroTextBox2.MaxLength = 32767;
+            this.metroTextBox2.Name = "metroTextBox2";
+            this.metroTextBox2.PasswordChar = '\0';
+            this.metroTextBox2.PromptText = "Username";
+            this.metroTextBox2.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBox2.SelectedText = "";
+            this.metroTextBox2.SelectionLength = 0;
+            this.metroTextBox2.SelectionStart = 0;
+            this.metroTextBox2.ShortcutsEnabled = true;
+            this.metroTextBox2.Size = new System.Drawing.Size(149, 22);
+            this.metroTextBox2.TabIndex = 3;
+            this.metroTextBox2.UseSelectable = true;
+            this.metroTextBox2.WaterMark = "Username";
+            this.metroTextBox2.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBox2.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
             // statisticsTab
             // 
             this.statisticsTab.Controls.Add(this.dateTimePicker);
@@ -380,7 +510,7 @@
             this.yearlyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.yearlyRadio.Location = new System.Drawing.Point(295, 26);
             this.yearlyRadio.Name = "yearlyRadio";
-            this.yearlyRadio.Size = new System.Drawing.Size(61, 19);
+            this.yearlyRadio.Size = new System.Drawing.Size(62, 19);
             this.yearlyRadio.TabIndex = 6;
             this.yearlyRadio.Text = "Yearly";
             this.yearlyRadio.UseSelectable = true;
@@ -403,7 +533,7 @@
             this.weeklyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.weeklyRadio.Location = new System.Drawing.Point(138, 26);
             this.weeklyRadio.Name = "weeklyRadio";
-            this.weeklyRadio.Size = new System.Drawing.Size(68, 19);
+            this.weeklyRadio.Size = new System.Drawing.Size(69, 19);
             this.weeklyRadio.TabIndex = 4;
             this.weeklyRadio.TabStop = true;
             this.weeklyRadio.Text = "Weekly";
@@ -612,136 +742,6 @@
             this.buildingComboBox.TabIndex = 4;
             this.buildingComboBox.UseSelectable = true;
             // 
-            // gmail
-            // 
-            this.gmail.BackColor = System.Drawing.Color.Transparent;
-            this.gmail.Controls.Add(this.metroLabel3);
-            this.gmail.Controls.Add(this.metroLabel1);
-            this.gmail.Controls.Add(this.metroLabel2);
-            this.gmail.Controls.Add(this.metroTextBox1);
-            this.gmail.Controls.Add(this.metroTextBox2);
-            this.gmail.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.gmail.Location = new System.Drawing.Point(3, 4);
-            this.gmail.Name = "gmail";
-            this.gmail.Size = new System.Drawing.Size(499, 76);
-            this.gmail.TabIndex = 6;
-            this.gmail.TabStop = false;
-            this.gmail.Text = "Gmail Login";
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(74, 16);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(106, 19);
-            this.metroLabel1.TabIndex = 2;
-            this.metroLabel1.Text = "Gmail Username";
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(79, 46);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(101, 19);
-            this.metroLabel2.TabIndex = 4;
-            this.metroLabel2.Text = "Gmail Password";
-            // 
-            // metroTextBox1
-            // 
-            // 
-            // 
-            // 
-            this.metroTextBox1.CustomButton.Image = null;
-            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(129, 2);
-            this.metroTextBox1.CustomButton.Name = "";
-            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(17, 17);
-            this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTextBox1.CustomButton.TabIndex = 1;
-            this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTextBox1.CustomButton.UseSelectable = true;
-            this.metroTextBox1.CustomButton.Visible = false;
-            this.metroTextBox1.Lines = new string[0];
-            this.metroTextBox1.Location = new System.Drawing.Point(186, 46);
-            this.metroTextBox1.MaxLength = 32767;
-            this.metroTextBox1.Name = "metroTextBox1";
-            this.metroTextBox1.PasswordChar = '●';
-            this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.metroTextBox1.SelectedText = "";
-            this.metroTextBox1.SelectionLength = 0;
-            this.metroTextBox1.SelectionStart = 0;
-            this.metroTextBox1.ShortcutsEnabled = true;
-            this.metroTextBox1.Size = new System.Drawing.Size(149, 22);
-            this.metroTextBox1.TabIndex = 5;
-            this.metroTextBox1.UseSelectable = true;
-            this.metroTextBox1.UseSystemPasswordChar = true;
-            this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // metroTextBox2
-            // 
-            // 
-            // 
-            // 
-            this.metroTextBox2.CustomButton.Image = null;
-            this.metroTextBox2.CustomButton.Location = new System.Drawing.Point(129, 2);
-            this.metroTextBox2.CustomButton.Name = "";
-            this.metroTextBox2.CustomButton.Size = new System.Drawing.Size(17, 17);
-            this.metroTextBox2.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTextBox2.CustomButton.TabIndex = 1;
-            this.metroTextBox2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTextBox2.CustomButton.UseSelectable = true;
-            this.metroTextBox2.CustomButton.Visible = false;
-            this.metroTextBox2.Lines = new string[0];
-            this.metroTextBox2.Location = new System.Drawing.Point(186, 16);
-            this.metroTextBox2.MaxLength = 32767;
-            this.metroTextBox2.Name = "metroTextBox2";
-            this.metroTextBox2.PasswordChar = '\0';
-            this.metroTextBox2.PromptText = "Username";
-            this.metroTextBox2.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.metroTextBox2.SelectedText = "";
-            this.metroTextBox2.SelectionLength = 0;
-            this.metroTextBox2.SelectionStart = 0;
-            this.metroTextBox2.ShortcutsEnabled = true;
-            this.metroTextBox2.Size = new System.Drawing.Size(149, 22);
-            this.metroTextBox2.TabIndex = 3;
-            this.metroTextBox2.UseSelectable = true;
-            this.metroTextBox2.WaterMark = "Username";
-            this.metroTextBox2.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroTextBox2.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // electronicEmail
-            // 
-            this.electronicEmail.BackColor = System.Drawing.Color.Transparent;
-            this.electronicEmail.Controls.Add(this.metroLabel5);
-            this.electronicEmail.Controls.Add(this.usernameLabel);
-            this.electronicEmail.Controls.Add(this.usernameTextBox);
-            this.electronicEmail.Controls.Add(this.passwordTextBox);
-            this.electronicEmail.Controls.Add(this.passwordLabel);
-            this.electronicEmail.Location = new System.Drawing.Point(3, 86);
-            this.electronicEmail.Name = "electronicEmail";
-            this.electronicEmail.Size = new System.Drawing.Size(499, 78);
-            this.electronicEmail.TabIndex = 7;
-            this.electronicEmail.TabStop = false;
-            this.electronicEmail.Text = "Electronic Email Login";
-            // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(341, 19);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(84, 19);
-            this.metroLabel3.TabIndex = 6;
-            this.metroLabel3.Text = "@gmail.com";
-            // 
-            // metroLabel5
-            // 
-            this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(341, 16);
-            this.metroLabel5.Name = "metroLabel5";
-            this.metroLabel5.Size = new System.Drawing.Size(70, 19);
-            this.metroLabel5.TabIndex = 8;
-            this.metroLabel5.Text = "@yorku.ca";
-            // 
             // SettingForm
             // 
             this.AcceptButton = this.loginBTN;
@@ -765,6 +765,10 @@
             this.logoutGenTab.ResumeLayout(false);
             this.logoutGenTab.PerformLayout();
             this.emailTab.ResumeLayout(false);
+            this.electronicEmail.ResumeLayout(false);
+            this.electronicEmail.PerformLayout();
+            this.gmail.ResumeLayout(false);
+            this.gmail.PerformLayout();
             this.statisticsTab.ResumeLayout(false);
             this.statisticsTab.PerformLayout();
             this.buildingUpdateTab.ResumeLayout(false);
@@ -772,10 +776,6 @@
             this.addEmployeGroup.PerformLayout();
             this.changeGroupBox.ResumeLayout(false);
             this.changeGroupBox.PerformLayout();
-            this.gmail.ResumeLayout(false);
-            this.gmail.PerformLayout();
-            this.electronicEmail.ResumeLayout(false);
-            this.electronicEmail.PerformLayout();
             this.ResumeLayout(false);
 
         }

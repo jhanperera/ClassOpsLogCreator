@@ -160,8 +160,8 @@
       <HintPath>..\packages\Google.Apis.1.19.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Google.Apis.Plus.v1, Version=1.19.0.690, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Plus.v1.1.19.0.690\lib\net45\Google.Apis.Plus.v1.dll</HintPath>
+    <Reference Include="Google.Apis.Plus.v1, Version=1.19.0.691, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Plus.v1.1.19.0.691\lib\net45\Google.Apis.Plus.v1.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="itextsharp, Version=5.5.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
@@ -235,6 +235,7 @@
     </Compile>
     <Compile Include="EmailScanner.cs" />
     <Compile Include="EmailSender.cs" />
+    <Compile Include="JsonParser.cs" />
     <Compile Include="MailRepository.cs" />
     <Compile Include="ScheduleStatsGen.cs" />
     <Compile Include="SettingForm.cs">
@@ -300,7 +301,6 @@
       <DependentUpon>StatsGenForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
-    <None Include="client_secret.json" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

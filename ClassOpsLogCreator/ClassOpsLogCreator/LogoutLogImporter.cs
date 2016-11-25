@@ -79,7 +79,7 @@ namespace ClassOpsLogCreator
 
             //Get todays date and do a check to see if the clo is updated.
             string todaysDate = DateTime.Now.ToString("dddd,dd,yyyy");
-            if (!cloDateString.Equals(todaysDate))
+            if (true)//!cloDateString.Equals(todaysDate))
             {
                 //Try to update the clo via the EmailScanner. 1st (Check if we have login credentials
                 if (Properties.Settings.Default.UserName == "" || Properties.Settings.Default.Password == "")

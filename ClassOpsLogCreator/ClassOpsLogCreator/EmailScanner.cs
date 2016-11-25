@@ -13,7 +13,6 @@ using System.Threading;
 using Google.Apis.Services;
 using Google.Apis.Gmail.v1.Data;
 using ActiveUp.Net.Mail;*/
-using System.Security.Cryptography.X509Certificates;
 using OpenPop.Pop3;
 using OpenPop.Mime;
 
@@ -39,6 +38,11 @@ namespace ClassOpsLogCreator
         public EmailScanner(DateTime today)
         {
             string dayOfTheWeek = today.ToString("dddd");
+
+            JsonParser JP = new JsonParser();
+            string s = JP.getPassword();
+
+            JP.updateJson("NEW PASSWORD");
             try
             {
                 //use the POP3 method to retrieve our Room report email
