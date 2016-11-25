@@ -106,6 +106,8 @@ namespace ClassOpsLogCreator
             //Fill the password and user name field if we already have a user name and password saved.
             if (!Properties.Settings.Default.UserName.Equals("") || !Properties.Settings.Default.Password.Equals(""))
             {
+                this.gmailUsernameTextBox.Text = Properties.Settings.Default.gmailUserName;
+                this.gmailPasswordTextBox.Text = Properties.Settings.Default.gmailPassword;
                 this.usernameTextBox.Text = Properties.Settings.Default.UserName;
                 this.passwordTextBox.Text = Properties.Settings.Default.Password;
             }    
@@ -258,7 +260,8 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void loginBTN_Click(object sender, EventArgs e)
         {
-            if (this.usernameTextBox.Text == "" || this.passwordTextBox.Text == "")
+            if (this.usernameTextBox.Text == "" || this.passwordTextBox.Text == ""
+                || this.gmailUsernameTextBox.Text == "" || this.gmailPasswordTextBox.Text == "")
             {
                 MetroMessageBox.Show(this, "Please provide a User name and Password.");
                 return;

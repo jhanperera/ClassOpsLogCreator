@@ -25,8 +25,8 @@ namespace ClassOpsLogCreator
     {
         //Host connection string
         private static string hostname = "pop.gmail.com";
-        private string username = "uitclientservices";
-        private string password = "ca1mn3ss";
+        private string username = Properties.Settings.Default.gmailUserName;
+        private string password;
         private bool isConnectedFlag = false;
 
         private string msgFrom;
@@ -39,13 +39,14 @@ namespace ClassOpsLogCreator
         {
             string dayOfTheWeek = today.ToString("dddd");
 
+            //We get the password from the JSON file
             JsonParser JP = new JsonParser();
-            string s = JP.getPassword();
+            password = JP.getPassword();
 
-            JP.updateJson("NEW PASSWORD");
             try
             {
                 //use the POP3 method to retrieve our Room report email
+                /*
                 using (var clientPOP = new Pop3Client())
                 {
                     clientPOP.Connect("pop.gmail.com", 995, true);
@@ -74,14 +75,14 @@ namespace ClassOpsLogCreator
                             break;
                         }
                     }
-                }
+                }*/
                
                 //**********************************TEST CODE*******************************************************/
-                /* MailRepository mailRepo = new MailRepository(hostname, 993, true, username, password);
+                MailRepository mailRepo = new MailRepository(hostname, 993, true, username, password);
 
                  var emailList = mailRepo.GetAllMails("inbox");
 
-                 foreach(ActiveUp.Net.Mail.Message ms in emailList
+                 foreach(ActiveUp.Net.Mail.Message ms in emailList)
                  {
                      if(ms.Subject == "Room Report for " + dayOfTheWeek && 
                          (ms.Date.ToString("dd-MM-yyyy") == today.ToString("dd-MM-yyyy")))
@@ -89,7 +90,7 @@ namespace ClassOpsLogCreator
                          this.msgFrom = ms.From.Email;
                          this.msgBody = ms.BodyText.Text;
                      }
-                 }*/
+                 }
                 /*
                 using (ImapClient client = new ImapClient("mypost.yorku.ca", 993, "pereraj", "pooman12", AuthMethod.Login, true))
                 {

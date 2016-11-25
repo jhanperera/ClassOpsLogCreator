@@ -74,5 +74,11 @@
     <Setting Name="UpdateSetting" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="gmailUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">uitclientservices</Value>
+    </Setting>
+    <Setting Name="gmailPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ca1mn3ss</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

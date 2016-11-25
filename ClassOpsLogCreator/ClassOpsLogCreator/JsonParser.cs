@@ -64,33 +64,59 @@ namespace ClassOpsLogCreator
             return password;
         }  
 
+        /// <summary>
+        /// This method will update the Json file with a new password 
+        /// 
+        /// and write it to the ftp server for future updates. 
+        /// </summary>
+        /// <param name="newPass"></param>
         public void updateJson(string newPass)
         {
-            //Open an ftp request from the URL
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
-            //Request the download method
-            request.Method = WebRequestMethods.Ftp.DownloadFile;
-            //Pass it the credentials
-            request.Credentials = new NetworkCredential("csstaff", "dr4g0n12");
+            try
+            {
+                //Open an ftp request from the URL
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
+                //Request the download method
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+                //Pass it the credentials
+                request.Credentials = new NetworkCredential("csstaff", "dr4g0n12");
 
-            Json.cred = newPass;
+                //Upadate the password
+                Json.cred = newPass;
 
-            //write to a file called cred.json
-            string save = JsonConvert.SerializeObject(Json);
+                //write to a file called cred.json
+                string save = JsonConvert.SerializeObject(Json);
+                File.WriteAllText("cred.json", save);
 
-            StreamReader sourceStream = new StreamReader(Json);
-            byte[] fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
-            sourceStream.Close();
-            request.ContentLength = fileContents.Length;
+                using (StreamWriter file = File.CreateText("cred.json"))
+                {
+                    //Serialize the data to JSON
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(file, Json);
+                }
 
-            Stream requestStream = request.GetRequestStream();
-            requestStream.Write(fileContents, 0, fileContents.Length);
-            requestStream.Close();
+                //Upload the file the ftp server
+                StreamReader sourceStream = new StreamReader("cred.json");
+                byte[] fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
+                sourceStream.Close();
+                request.ContentLength = fileContents.Length;
 
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                Stream requestStream = request.GetRequestStream();
+                requestStream.Write(fileContents, 0, fileContents.Length);
+                requestStream.Close();
 
-            response.Close();
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
 
+                response.Close();
+
+                //Delete the file so we don't have a trace of it. 
+                File.Delete("cred.json");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

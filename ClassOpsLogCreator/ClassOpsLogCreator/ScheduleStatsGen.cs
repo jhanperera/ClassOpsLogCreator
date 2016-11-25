@@ -27,7 +27,7 @@ namespace ClassOpsLogCreator
         public ScheduleStatsGen(LogCreator MainForm, DetailForm detailFrom)
         {
             //Check if today is either the end of the week, end of the month, or end of the year.
-            //End of the week == Friday
+            //End of the week == Monday(of next week) 
             //End of the month == Last business day of the month
             //End of the year == One week into the new year. (Send out on the second Monday of the year)
 
@@ -38,9 +38,15 @@ namespace ClassOpsLogCreator
             {
                 //Get the start date
                 DateTime startDate = this.getFirstDayOfWeek();
+                DateTime endDate = today;
+
+                while (endDate.DayOfWeek != DayOfWeek.Friday)
+                {
+                    endDate = endDate.AddDays(-1);
+                }
                 //generate the stats
                 detailFrom.updateDetail("Generating weekly statistics.");
-                statGenerator = new StatsGen(MainForm, startDate, today, "Weekly");
+                statGenerator = new StatsGen(MainForm, startDate, endDate, "Weekly");
                 //Get the file path
                 string filePath = MainForm.STATS_LOCATION + statGenerator.getfileName();
                 //Send the email
@@ -86,7 +92,7 @@ namespace ClassOpsLogCreator
         private bool isEndOfWeek()
         {
             //If today is Friday then we return true;
-            if(today.DayOfWeek == DayOfWeek.Friday)
+            if(today.DayOfWeek == DayOfWeek.Monday)
             {
                 return true;
             }
@@ -182,7 +188,7 @@ namespace ClassOpsLogCreator
         private DateTime getFirstDayOfWeek()
         {
             //get the date and subtract a day until we reach Monday.
-            DateTime date = today;
+            DateTime date = today.AddDays(-1);
             while (date.DayOfWeek != DayOfWeek.Monday)
             {
                 date = date.AddDays(-1);

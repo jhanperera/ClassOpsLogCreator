@@ -310,5 +310,29 @@ namespace ClassOpsLogCreator.Properties {
                 this["UpdateSetting"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("uitclientservices")]
+        public string gmailUserName {
+            get {
+                return ((string)(this["gmailUserName"]));
+            }
+            set {
+                this["gmailUserName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ca1mn3ss")]
+        public string gmailPassword {
+            get {
+                return ((string)(this["gmailPassword"]));
+            }
+            set {
+                this["gmailPassword"] = value;
+            }
+        }
     }
 }
