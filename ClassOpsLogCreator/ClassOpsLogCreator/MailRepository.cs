@@ -4,6 +4,9 @@ using ActiveUp.Net.Mail;
 
 namespace ClassOpsLogCreator
 {
+    /// <summary>
+    /// A mail repository found on 
+    /// </summary>
     public class MailRepository
     {
         private Imap4Client client;

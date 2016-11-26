@@ -106,11 +106,13 @@ namespace ClassOpsLogCreator
             //Fill the password and user name field if we already have a user name and password saved.
             if (!Properties.Settings.Default.UserName.Equals("") || !Properties.Settings.Default.Password.Equals(""))
             {
-                this.gmailUsernameTextBox.Text = Properties.Settings.Default.gmailUserName;
-                this.gmailPasswordTextBox.Text = Properties.Settings.Default.gmailPassword;
                 this.usernameTextBox.Text = Properties.Settings.Default.UserName;
                 this.passwordTextBox.Text = Properties.Settings.Default.Password;
-            }    
+            }
+
+            //Fill in the gmail and box
+            this.gmailUsernameTextBox.Text = Properties.Settings.Default.gmailUserName;
+            this.gmailPasswordTextBox.Text = Properties.Settings.Default.gmailPassword;
         }
 
         #region Radio button event handlers
@@ -269,18 +271,27 @@ namespace ClassOpsLogCreator
             else
             {
                 this.loginClicked = true;
+
+                Properties.Settings.Default.gmailUserName = this.gmailUsernameTextBox.Text;
+                Properties.Settings.Default.gmailPassword = this.gmailPasswordTextBox.Text;
+
                 Properties.Settings.Default.UserName = this.usernameTextBox.Text;
                 Properties.Settings.Default.Password = this.passwordTextBox.Text;
+
                 Properties.Settings.Default.Save();
+
+                //start up test cases
                 EmailSender eS = new EmailSender(true);
-                if (eS.isConnectionMade())
+                EmailScanner eScanner = new EmailScanner(true);
+
+                if (eS.isConnectionMade() && eScanner.isConnected())
                 {
-                    MetroMessageBox.Show(this, "Success: A connection was made", "Success",
+                    MetroMessageBox.Show(this, "Success: A connection was sucessfully made.", "Success",
                                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "FAIL: A connection was unable to be established", "Problem....",
+                    MetroMessageBox.Show(this, "FAIL: A connection was unable to be established. Please check your login credentials and try again.", "Problem....",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -781,11 +792,12 @@ namespace ClassOpsLogCreator
 
         #endregion
 
+        #region closing and clean up operations
+
         /// <summary>
         /// Some more added cleanup when the application is closed via the x button
         /// </summary>
         /// <param name="e"></param>
-        #region closing and clean up operations
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             Cursor.Current = Cursors.Default;

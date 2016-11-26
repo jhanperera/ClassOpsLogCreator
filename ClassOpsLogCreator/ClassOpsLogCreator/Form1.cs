@@ -387,6 +387,15 @@ namespace ClassOpsLogCreator
         {
             return this.buildingNames;
         }
+
+        /// <summary>
+        /// This method will allow us to send messages to the detail window
+        /// </summary>
+        /// <param name="message"></param>
+        public void updateDetails(string message)
+        {
+            this.detailForm.updateDetail(message);
+        }
         #endregion
 
         #region Button Operations

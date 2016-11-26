@@ -116,6 +116,39 @@ namespace ClassOpsLogCreator
         }
 
         /// <summary>
+        /// This contructor will be called to test wheather we can make a connection to the google servers
+        /// 
+        /// If we have a succesful connection we update the password on central web
+        /// </summary>
+        /// <param name="test"></param>
+        public EmailScanner(bool test)
+        {
+            //Try and make a connection to email server
+            try
+            {
+                //Lets try it with this password
+                password = Properties.Settings.Default.gmailPassword;
+
+                MailRepository mailRepo = new MailRepository(hostname, 993, true, username, password);
+
+                //If we get here we have a connection
+                this.isConnectedFlag = true;
+                JsonParser JP = new JsonParser();
+
+                //Update the password if we are good. 
+                JP.updateJson(password);
+
+            }
+            catch (Exception)
+            {
+                //We hit a problem try again
+                this.isConnectedFlag = false;
+                throw;
+            }
+
+        }
+
+        /// <summary>
         /// Return true if we are able to 
         /// </summary>
         /// <returns></returns>

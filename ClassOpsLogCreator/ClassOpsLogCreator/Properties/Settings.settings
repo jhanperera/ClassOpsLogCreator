@@ -15,10 +15,10 @@
       <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="am_pmCombo1_1" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="am_pmCombo1_2" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="numberOfShiftsCombo1" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
@@ -30,10 +30,10 @@
       <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="am_pmCombo2_1" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="am_pmCombo2_2" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="numberOfShiftsCombo2" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
@@ -45,10 +45,10 @@
       <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="am_pmCombo3_1" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="am_pmCombo3_2" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="numberOfShiftsCombo3" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
@@ -60,10 +60,10 @@
       <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="am_pmCombo4_1" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="am_pmCombo4_2" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="numberOfShiftsCombo4" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>

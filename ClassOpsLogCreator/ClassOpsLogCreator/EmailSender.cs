@@ -45,7 +45,7 @@ namespace ClassOpsLogCreator
 
                 //Do not use the default credential
                 smtpClient.UseDefaultCredentials = false;
-                
+
                 //Use SSL to send the email security.
                 smtpClient.EnableSsl = true;
 
@@ -61,12 +61,13 @@ namespace ClassOpsLogCreator
                 //Set IsBodyHtml to true means you can send HTML email.
                 message.IsBodyHtml = true;
                 message.Body = "<h3>Please see attached a pdf of the auto generated statistics.</h3>";
-                message.Body += "This message was auto generated at " + now.ToString() + " by the CLog application";
+                message.Body += "This message was auto generated at " + now.ToString() + 
+                                " by the CLog.exe application from: "+ this.getIPofMachine();
 
                 //Set the attachment
                 message.Attachments.Add(new Attachment(attachmentPath));
 
-                //Send the email to asyb@yorku.ca
+                //Send the email to masyb@yorku.ca
                 message.To.Add("pereraj@yorku.ca");
 
                 //Send the email to asyb@yorku.ca
@@ -82,7 +83,7 @@ namespace ClassOpsLogCreator
                 {
                     throw new Exception("Unable to send statistics email. Please check login credentials");
                 }
-            }                
+            }
         }
 
         /// <summary>
@@ -126,7 +127,9 @@ namespace ClassOpsLogCreator
 
                 //Set IsBodyHtml to true means you can send HTML email.
                 message.IsBodyHtml = true;
-                message.Body = "<h1>This message was sent to test the connection to the smtp server.</h1>";
+                message.Body = "<h3>This message was sent to test the connection to the smtp server from the CLog.exe application.</h3>";
+                message.Body += "<p>This request was made from " + this.getIPofMachine() + 
+                                ", if you did not make this request please consider chaning your passwords.</p>";
                 message.Body += "This message was auto generated at " + now.ToString();
 
                 //Add a To address to send the email to.
@@ -153,6 +156,23 @@ namespace ClassOpsLogCreator
         public bool isConnectionMade()
         {
             return connectionMade;
+        }
+
+        /// <summary>
+        /// Returns the current IPaddress of this machine
+        /// </summary>
+        /// <returns></returns>
+        private string getIPofMachine()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("Local IP Address Not Found!");
         }
     }
 }

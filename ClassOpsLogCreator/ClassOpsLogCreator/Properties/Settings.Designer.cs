@@ -73,7 +73,7 @@ namespace ClassOpsLogCreator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int am_pmCombo1_1 {
             get {
                 return ((int)(this["am_pmCombo1_1"]));
@@ -85,7 +85,7 @@ namespace ClassOpsLogCreator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int am_pmCombo1_2 {
             get {
                 return ((int)(this["am_pmCombo1_2"]));
@@ -133,7 +133,7 @@ namespace ClassOpsLogCreator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int am_pmCombo2_1 {
             get {
                 return ((int)(this["am_pmCombo2_1"]));
@@ -145,7 +145,7 @@ namespace ClassOpsLogCreator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int am_pmCombo2_2 {
             get {
                 return ((int)(this["am_pmCombo2_2"]));
@@ -193,7 +193,7 @@ namespace ClassOpsLogCreator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int am_pmCombo3_1 {
             get {
                 return ((int)(this["am_pmCombo3_1"]));
@@ -205,7 +205,7 @@ namespace ClassOpsLogCreator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int am_pmCombo3_2 {
             get {
                 return ((int)(this["am_pmCombo3_2"]));
@@ -253,7 +253,7 @@ namespace ClassOpsLogCreator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int am_pmCombo4_1 {
             get {
                 return ((int)(this["am_pmCombo4_1"]));
@@ -265,7 +265,7 @@ namespace ClassOpsLogCreator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int am_pmCombo4_2 {
             get {
                 return ((int)(this["am_pmCombo4_2"]));

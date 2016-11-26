@@ -90,12 +90,20 @@ namespace ClassOpsLogCreator
                 else if (Properties.Settings.Default.UserName != "" || Properties.Settings.Default.Password != "")
                 {
                     //Have login credentials. Lets make the clo via the email scanner.
+                    form1.BeginInvoke(new MethodInvoker(delegate ()
+                    {
+                        form1.updateDetails(form1.ROOM_SCHED + " is out of date! - Fetching most recent R25 data.");
+                    }));
                     bool answer = this.getCLOFromEmail(DateTime.Today);
                     if (!answer)
                     {
                         Quit();
                         throw new Exception("Unable to update " + form1.ROOM_SCHED + " automatically! Please update manually.");
                     }
+                    form1.BeginInvoke(new MethodInvoker(delegate ()
+                    {
+                        form1.updateDetails("Classroom schedule sucessfully update!");
+                    }));
                 }
                 else
                 {
