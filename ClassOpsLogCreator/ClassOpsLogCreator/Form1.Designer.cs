@@ -141,7 +141,7 @@
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 20;
             this.metroPanel1.Location = new System.Drawing.Point(40, 120);
-            this.metroPanel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.metroPanel1.Margin = new System.Windows.Forms.Padding(6);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(1278, 316);
             this.metroPanel1.Style = MetroFramework.MetroColorStyle.Green;
@@ -154,7 +154,7 @@
             // metroProgressSpinner1
             // 
             this.metroProgressSpinner1.Location = new System.Drawing.Point(69, 280);
-            this.metroProgressSpinner1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.metroProgressSpinner1.Margin = new System.Windows.Forms.Padding(2);
             this.metroProgressSpinner1.Maximum = 100;
             this.metroProgressSpinner1.Name = "metroProgressSpinner1";
             this.metroProgressSpinner1.Size = new System.Drawing.Size(25, 20);
@@ -167,7 +167,7 @@
             this.saveSettingCheckBox.AutoSize = true;
             this.saveSettingCheckBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.saveSettingCheckBox.Location = new System.Drawing.Point(1042, 279);
-            this.saveSettingCheckBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.saveSettingCheckBox.Margin = new System.Windows.Forms.Padding(6);
             this.saveSettingCheckBox.Name = "saveSettingCheckBox";
             this.saveSettingCheckBox.Size = new System.Drawing.Size(94, 15);
             this.saveSettingCheckBox.Style = MetroFramework.MetroColorStyle.Red;
@@ -183,7 +183,7 @@
             this.createBTN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.createBTN.Highlight = true;
             this.createBTN.Location = new System.Drawing.Point(480, 234);
-            this.createBTN.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.createBTN.Margin = new System.Windows.Forms.Padding(6);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(316, 62);
             this.createBTN.Style = MetroFramework.MetroColorStyle.Red;
@@ -210,7 +210,7 @@
             this.numberOfShiftsCombo4.FormattingEnabled = true;
             this.numberOfShiftsCombo4.ItemHeight = 24;
             this.numberOfShiftsCombo4.Location = new System.Drawing.Point(814, 726);
-            this.numberOfShiftsCombo4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.numberOfShiftsCombo4.Margin = new System.Windows.Forms.Padding(6);
             this.numberOfShiftsCombo4.Name = "numberOfShiftsCombo4";
             this.numberOfShiftsCombo4.Size = new System.Drawing.Size(284, 30);
             this.numberOfShiftsCombo4.Style = MetroFramework.MetroColorStyle.Red;
@@ -227,7 +227,7 @@
             this.am_pmCombo4_2.FormattingEnabled = true;
             this.am_pmCombo4_2.ItemHeight = 24;
             this.am_pmCombo4_2.Location = new System.Drawing.Point(650, 728);
-            this.am_pmCombo4_2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.am_pmCombo4_2.Margin = new System.Windows.Forms.Padding(6);
             this.am_pmCombo4_2.Name = "am_pmCombo4_2";
             this.am_pmCombo4_2.Size = new System.Drawing.Size(102, 30);
             this.am_pmCombo4_2.Style = MetroFramework.MetroColorStyle.Red;
@@ -244,7 +244,7 @@
             this.endHour4.FormattingEnabled = true;
             this.endHour4.ItemHeight = 24;
             this.endHour4.Location = new System.Drawing.Point(462, 728);
-            this.endHour4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.endHour4.Margin = new System.Windows.Forms.Padding(6);
             this.endHour4.Name = "endHour4";
             this.endHour4.Size = new System.Drawing.Size(172, 30);
             this.endHour4.Style = MetroFramework.MetroColorStyle.Red;
@@ -272,7 +272,7 @@
             this.am_pmCombo4_1.FormattingEnabled = true;
             this.am_pmCombo4_1.ItemHeight = 24;
             this.am_pmCombo4_1.Location = new System.Drawing.Point(290, 728);
-            this.am_pmCombo4_1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.am_pmCombo4_1.Margin = new System.Windows.Forms.Padding(6);
             this.am_pmCombo4_1.Name = "am_pmCombo4_1";
             this.am_pmCombo4_1.Size = new System.Drawing.Size(102, 30);
             this.am_pmCombo4_1.Style = MetroFramework.MetroColorStyle.Red;
@@ -289,7 +289,7 @@
             this.startHour4.FormattingEnabled = true;
             this.startHour4.ItemHeight = 24;
             this.startHour4.Location = new System.Drawing.Point(102, 728);
-            this.startHour4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.startHour4.Margin = new System.Windows.Forms.Padding(6);
             this.startHour4.Name = "startHour4";
             this.startHour4.Size = new System.Drawing.Size(172, 30);
             this.startHour4.Style = MetroFramework.MetroColorStyle.Red;
@@ -349,7 +349,7 @@
             // 
             this.plusBTN3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.plusBTN3.Location = new System.Drawing.Point(1144, 524);
-            this.plusBTN3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.plusBTN3.Margin = new System.Windows.Forms.Padding(6);
             this.plusBTN3.Name = "plusBTN3";
             this.plusBTN3.Size = new System.Drawing.Size(112, 58);
             this.plusBTN3.Style = MetroFramework.MetroColorStyle.Red;
@@ -367,7 +367,7 @@
             this.numberOfShiftsCombo3.FormattingEnabled = true;
             this.numberOfShiftsCombo3.ItemHeight = 24;
             this.numberOfShiftsCombo3.Location = new System.Drawing.Point(814, 524);
-            this.numberOfShiftsCombo3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.numberOfShiftsCombo3.Margin = new System.Windows.Forms.Padding(6);
             this.numberOfShiftsCombo3.Name = "numberOfShiftsCombo3";
             this.numberOfShiftsCombo3.Size = new System.Drawing.Size(284, 30);
             this.numberOfShiftsCombo3.Style = MetroFramework.MetroColorStyle.Red;
@@ -384,7 +384,7 @@
             this.am_pmCombo3_2.FormattingEnabled = true;
             this.am_pmCombo3_2.ItemHeight = 24;
             this.am_pmCombo3_2.Location = new System.Drawing.Point(650, 526);
-            this.am_pmCombo3_2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.am_pmCombo3_2.Margin = new System.Windows.Forms.Padding(6);
             this.am_pmCombo3_2.Name = "am_pmCombo3_2";
             this.am_pmCombo3_2.Size = new System.Drawing.Size(102, 30);
             this.am_pmCombo3_2.Style = MetroFramework.MetroColorStyle.Red;
@@ -401,7 +401,7 @@
             this.endHour3.FormattingEnabled = true;
             this.endHour3.ItemHeight = 24;
             this.endHour3.Location = new System.Drawing.Point(462, 526);
-            this.endHour3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.endHour3.Margin = new System.Windows.Forms.Padding(6);
             this.endHour3.Name = "endHour3";
             this.endHour3.Size = new System.Drawing.Size(172, 30);
             this.endHour3.Style = MetroFramework.MetroColorStyle.Red;
@@ -429,7 +429,7 @@
             this.am_pmCombo3_1.FormattingEnabled = true;
             this.am_pmCombo3_1.ItemHeight = 24;
             this.am_pmCombo3_1.Location = new System.Drawing.Point(290, 526);
-            this.am_pmCombo3_1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.am_pmCombo3_1.Margin = new System.Windows.Forms.Padding(6);
             this.am_pmCombo3_1.Name = "am_pmCombo3_1";
             this.am_pmCombo3_1.Size = new System.Drawing.Size(102, 30);
             this.am_pmCombo3_1.Style = MetroFramework.MetroColorStyle.Red;
@@ -446,7 +446,7 @@
             this.startHour3.FormattingEnabled = true;
             this.startHour3.ItemHeight = 24;
             this.startHour3.Location = new System.Drawing.Point(102, 526);
-            this.startHour3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.startHour3.Margin = new System.Windows.Forms.Padding(6);
             this.startHour3.Name = "startHour3";
             this.startHour3.Size = new System.Drawing.Size(172, 30);
             this.startHour3.Style = MetroFramework.MetroColorStyle.Red;
@@ -506,7 +506,7 @@
             // 
             this.plusBTN2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.plusBTN2.Location = new System.Drawing.Point(1144, 322);
-            this.plusBTN2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.plusBTN2.Margin = new System.Windows.Forms.Padding(6);
             this.plusBTN2.Name = "plusBTN2";
             this.plusBTN2.Size = new System.Drawing.Size(112, 58);
             this.plusBTN2.Style = MetroFramework.MetroColorStyle.Red;
@@ -524,7 +524,7 @@
             this.numberOfShiftsCombo2.FormattingEnabled = true;
             this.numberOfShiftsCombo2.ItemHeight = 24;
             this.numberOfShiftsCombo2.Location = new System.Drawing.Point(814, 322);
-            this.numberOfShiftsCombo2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.numberOfShiftsCombo2.Margin = new System.Windows.Forms.Padding(6);
             this.numberOfShiftsCombo2.Name = "numberOfShiftsCombo2";
             this.numberOfShiftsCombo2.Size = new System.Drawing.Size(284, 30);
             this.numberOfShiftsCombo2.Style = MetroFramework.MetroColorStyle.Red;
@@ -541,7 +541,7 @@
             this.am_pmCombo2_2.FormattingEnabled = true;
             this.am_pmCombo2_2.ItemHeight = 24;
             this.am_pmCombo2_2.Location = new System.Drawing.Point(650, 324);
-            this.am_pmCombo2_2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.am_pmCombo2_2.Margin = new System.Windows.Forms.Padding(6);
             this.am_pmCombo2_2.Name = "am_pmCombo2_2";
             this.am_pmCombo2_2.Size = new System.Drawing.Size(102, 30);
             this.am_pmCombo2_2.Style = MetroFramework.MetroColorStyle.Red;
@@ -558,7 +558,7 @@
             this.endHour2.FormattingEnabled = true;
             this.endHour2.ItemHeight = 24;
             this.endHour2.Location = new System.Drawing.Point(462, 324);
-            this.endHour2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.endHour2.Margin = new System.Windows.Forms.Padding(6);
             this.endHour2.Name = "endHour2";
             this.endHour2.Size = new System.Drawing.Size(172, 30);
             this.endHour2.Style = MetroFramework.MetroColorStyle.Red;
@@ -586,7 +586,7 @@
             this.am_pmCombo2_1.FormattingEnabled = true;
             this.am_pmCombo2_1.ItemHeight = 24;
             this.am_pmCombo2_1.Location = new System.Drawing.Point(290, 324);
-            this.am_pmCombo2_1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.am_pmCombo2_1.Margin = new System.Windows.Forms.Padding(6);
             this.am_pmCombo2_1.Name = "am_pmCombo2_1";
             this.am_pmCombo2_1.Size = new System.Drawing.Size(102, 30);
             this.am_pmCombo2_1.Style = MetroFramework.MetroColorStyle.Red;
@@ -603,7 +603,7 @@
             this.startHour2.FormattingEnabled = true;
             this.startHour2.ItemHeight = 24;
             this.startHour2.Location = new System.Drawing.Point(102, 324);
-            this.startHour2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.startHour2.Margin = new System.Windows.Forms.Padding(6);
             this.startHour2.Name = "startHour2";
             this.startHour2.Size = new System.Drawing.Size(172, 30);
             this.startHour2.Style = MetroFramework.MetroColorStyle.Red;
@@ -663,7 +663,7 @@
             // 
             this.plusBTN1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.plusBTN1.Location = new System.Drawing.Point(1144, 124);
-            this.plusBTN1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.plusBTN1.Margin = new System.Windows.Forms.Padding(6);
             this.plusBTN1.Name = "plusBTN1";
             this.plusBTN1.Size = new System.Drawing.Size(112, 58);
             this.plusBTN1.Style = MetroFramework.MetroColorStyle.Red;
@@ -679,7 +679,7 @@
             this.numberOfShiftsCombo1.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.numberOfShiftsCombo1.ItemHeight = 23;
             this.numberOfShiftsCombo1.Location = new System.Drawing.Point(814, 124);
-            this.numberOfShiftsCombo1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.numberOfShiftsCombo1.Margin = new System.Windows.Forms.Padding(6);
             this.numberOfShiftsCombo1.Name = "numberOfShiftsCombo1";
             this.numberOfShiftsCombo1.Size = new System.Drawing.Size(284, 29);
             this.numberOfShiftsCombo1.Style = MetroFramework.MetroColorStyle.Red;
@@ -695,7 +695,7 @@
             this.am_pmCombo1_2.FormattingEnabled = true;
             this.am_pmCombo1_2.ItemHeight = 23;
             this.am_pmCombo1_2.Location = new System.Drawing.Point(650, 126);
-            this.am_pmCombo1_2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.am_pmCombo1_2.Margin = new System.Windows.Forms.Padding(6);
             this.am_pmCombo1_2.Name = "am_pmCombo1_2";
             this.am_pmCombo1_2.Size = new System.Drawing.Size(102, 29);
             this.am_pmCombo1_2.Style = MetroFramework.MetroColorStyle.Red;
@@ -711,7 +711,7 @@
             this.endHour1.FormattingEnabled = true;
             this.endHour1.ItemHeight = 23;
             this.endHour1.Location = new System.Drawing.Point(462, 126);
-            this.endHour1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.endHour1.Margin = new System.Windows.Forms.Padding(6);
             this.endHour1.Name = "endHour1";
             this.endHour1.Size = new System.Drawing.Size(172, 29);
             this.endHour1.Style = MetroFramework.MetroColorStyle.Red;
@@ -737,7 +737,7 @@
             this.am_pmCombo1_1.FormattingEnabled = true;
             this.am_pmCombo1_1.ItemHeight = 23;
             this.am_pmCombo1_1.Location = new System.Drawing.Point(290, 126);
-            this.am_pmCombo1_1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.am_pmCombo1_1.Margin = new System.Windows.Forms.Padding(6);
             this.am_pmCombo1_1.Name = "am_pmCombo1_1";
             this.am_pmCombo1_1.Size = new System.Drawing.Size(102, 29);
             this.am_pmCombo1_1.Style = MetroFramework.MetroColorStyle.Red;
@@ -752,7 +752,7 @@
             this.startHour1.FontWeight = MetroFramework.MetroComboBoxWeight.Bold;
             this.startHour1.ItemHeight = 23;
             this.startHour1.Location = new System.Drawing.Point(102, 126);
-            this.startHour1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.startHour1.Margin = new System.Windows.Forms.Padding(6);
             this.startHour1.Name = "startHour1";
             this.startHour1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.startHour1.Size = new System.Drawing.Size(172, 29);
@@ -801,7 +801,7 @@
             this.lineDivide1.Location = new System.Drawing.Point(102, 36);
             this.lineDivide1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lineDivide1.Name = "lineDivide1";
-            this.lineDivide1.Size = new System.Drawing.Size(1154, 4);
+            this.lineDivide1.Size = new System.Drawing.Size(1158, 10);
             this.lineDivide1.TabIndex = 6;
             // 
             // metroToolTip1
@@ -816,7 +816,7 @@
             this.settingsBTN.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.settingsBTN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.settingsBTN.Location = new System.Drawing.Point(1184, 12);
-            this.settingsBTN.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.settingsBTN.Margin = new System.Windows.Forms.Padding(6);
             this.settingsBTN.Name = "settingsBTN";
             this.settingsBTN.Size = new System.Drawing.Size(68, 54);
             this.settingsBTN.Style = MetroFramework.MetroColorStyle.White;
@@ -841,7 +841,7 @@
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.Margin = new System.Windows.Forms.Padding(8);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1358, 1088);
             this.MinimumSize = new System.Drawing.Size(1358, 476);
