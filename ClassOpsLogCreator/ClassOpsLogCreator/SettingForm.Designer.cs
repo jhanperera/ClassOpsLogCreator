@@ -110,9 +110,9 @@
             // 
             // 
             this.usernameTextBox.CustomButton.Image = null;
-            this.usernameTextBox.CustomButton.Location = new System.Drawing.Point(52, 1);
+            this.usernameTextBox.CustomButton.Location = new System.Drawing.Point(131, 2);
             this.usernameTextBox.CustomButton.Name = "";
-            this.usernameTextBox.CustomButton.Size = new System.Drawing.Size(7, 7);
+            this.usernameTextBox.CustomButton.Size = new System.Drawing.Size(17, 17);
             this.usernameTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.usernameTextBox.CustomButton.TabIndex = 1;
             this.usernameTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -142,9 +142,9 @@
             // 
             // 
             this.passwordTextBox.CustomButton.Image = null;
-            this.passwordTextBox.CustomButton.Location = new System.Drawing.Point(52, 1);
+            this.passwordTextBox.CustomButton.Location = new System.Drawing.Point(131, 2);
             this.passwordTextBox.CustomButton.Name = "";
-            this.passwordTextBox.CustomButton.Size = new System.Drawing.Size(7, 7);
+            this.passwordTextBox.CustomButton.Size = new System.Drawing.Size(17, 17);
             this.passwordTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.passwordTextBox.CustomButton.TabIndex = 1;
             this.passwordTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -211,7 +211,7 @@
             this.emailLoginTab.Controls.Add(this.buildingUpdateTab);
             this.emailLoginTab.Location = new System.Drawing.Point(25, 63);
             this.emailLoginTab.Name = "emailLoginTab";
-            this.emailLoginTab.SelectedIndex = 4;
+            this.emailLoginTab.SelectedIndex = 0;
             this.emailLoginTab.Size = new System.Drawing.Size(570, 240);
             this.emailLoginTab.Style = MetroFramework.MetroColorStyle.Red;
             this.emailLoginTab.TabIndex = 7;
@@ -411,9 +411,9 @@
             // 
             // 
             this.gmailPasswordTextBox.CustomButton.Image = null;
-            this.gmailPasswordTextBox.CustomButton.Location = new System.Drawing.Point(52, 1);
+            this.gmailPasswordTextBox.CustomButton.Location = new System.Drawing.Point(129, 2);
             this.gmailPasswordTextBox.CustomButton.Name = "";
-            this.gmailPasswordTextBox.CustomButton.Size = new System.Drawing.Size(7, 7);
+            this.gmailPasswordTextBox.CustomButton.Size = new System.Drawing.Size(17, 17);
             this.gmailPasswordTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.gmailPasswordTextBox.CustomButton.TabIndex = 1;
             this.gmailPasswordTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -442,9 +442,9 @@
             // 
             // 
             this.gmailUsernameTextBox.CustomButton.Image = null;
-            this.gmailUsernameTextBox.CustomButton.Location = new System.Drawing.Point(52, 1);
+            this.gmailUsernameTextBox.CustomButton.Location = new System.Drawing.Point(129, 2);
             this.gmailUsernameTextBox.CustomButton.Name = "";
-            this.gmailUsernameTextBox.CustomButton.Size = new System.Drawing.Size(7, 7);
+            this.gmailUsernameTextBox.CustomButton.Size = new System.Drawing.Size(17, 17);
             this.gmailUsernameTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.gmailUsernameTextBox.CustomButton.TabIndex = 1;
             this.gmailUsernameTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -492,7 +492,7 @@
             // 
             this.dateTimePicker.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dateTimePicker.Location = new System.Drawing.Point(246, 77);
-            this.dateTimePicker.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dateTimePicker.MinimumSize = new System.Drawing.Size(4, 29);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(200, 29);
             this.dateTimePicker.Style = MetroFramework.MetroColorStyle.Red;
@@ -640,9 +640,9 @@
             // 
             // 
             this.newEmployeeNameTextBox.CustomButton.Image = null;
-            this.newEmployeeNameTextBox.CustomButton.Location = new System.Drawing.Point(37, 0);
+            this.newEmployeeNameTextBox.CustomButton.Location = new System.Drawing.Point(93, 1);
             this.newEmployeeNameTextBox.CustomButton.Name = "";
-            this.newEmployeeNameTextBox.CustomButton.Size = new System.Drawing.Size(11, 11);
+            this.newEmployeeNameTextBox.CustomButton.Size = new System.Drawing.Size(27, 27);
             this.newEmployeeNameTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.newEmployeeNameTextBox.CustomButton.TabIndex = 1;
             this.newEmployeeNameTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -718,9 +718,9 @@
             // 
             // 
             this.newBuildingInit.CustomButton.Image = null;
-            this.newBuildingInit.CustomButton.Location = new System.Drawing.Point(37, 0);
+            this.newBuildingInit.CustomButton.Location = new System.Drawing.Point(93, 1);
             this.newBuildingInit.CustomButton.Name = "";
-            this.newBuildingInit.CustomButton.Size = new System.Drawing.Size(11, 11);
+            this.newBuildingInit.CustomButton.Size = new System.Drawing.Size(27, 27);
             this.newBuildingInit.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.newBuildingInit.CustomButton.TabIndex = 1;
             this.newBuildingInit.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
