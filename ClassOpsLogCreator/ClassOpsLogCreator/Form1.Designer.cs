@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogCreator));
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.saveSettingCheckBox = new MetroFramework.Controls.MetroCheckBox();
             this.createBTN = new MetroFramework.Controls.MetroButton();
             this.statusText = new MetroFramework.Controls.MetroLabel();
@@ -89,7 +88,6 @@
             // 
             // metroPanel1
             // 
-            this.metroPanel1.Controls.Add(this.metroProgressSpinner1);
             this.metroPanel1.Controls.Add(this.saveSettingCheckBox);
             this.metroPanel1.Controls.Add(this.createBTN);
             this.metroPanel1.Controls.Add(this.statusText);
@@ -149,16 +147,6 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
-            // 
-            // metroProgressSpinner1
-            // 
-            this.metroProgressSpinner1.Location = new System.Drawing.Point(34, 140);
-            this.metroProgressSpinner1.Margin = new System.Windows.Forms.Padding(1);
-            this.metroProgressSpinner1.Maximum = 100;
-            this.metroProgressSpinner1.Name = "metroProgressSpinner1";
-            this.metroProgressSpinner1.Size = new System.Drawing.Size(12, 10);
-            this.metroProgressSpinner1.TabIndex = 54;
-            this.metroProgressSpinner1.UseSelectable = true;
             // 
             // saveSettingCheckBox
             // 
@@ -861,7 +849,6 @@
         private MetroFramework.Components.MetroToolTip metroToolTip1;
         private MetroFramework.Controls.MetroTile settingsBTN;
         private MetroFramework.Controls.MetroCheckBox saveSettingCheckBox;
-        private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
     }
 }
 
