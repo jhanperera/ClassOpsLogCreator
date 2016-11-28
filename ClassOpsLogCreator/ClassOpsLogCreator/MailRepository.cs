@@ -5,7 +5,7 @@ using ActiveUp.Net.Mail;
 namespace ClassOpsLogCreator
 {
     /// <summary>
-    /// A mail repository found on 
+    /// A mail repository found on github to help read in gmail via POP3 settings
     /// </summary>
     public class MailRepository
     {

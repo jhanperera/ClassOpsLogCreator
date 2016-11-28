@@ -67,11 +67,11 @@ namespace ClassOpsLogCreator
                 //Set the attachment
                 message.Attachments.Add(new Attachment(attachmentPath));
 
-                //Send the email to masyb@yorku.ca
-                message.To.Add("pereraj@yorku.ca");
+                //DEBUG CODE
+                //message.To.Add("pereraj@yorku.ca");
 
-                //Send the email to asyb@yorku.ca
-                //message.To.Add("masyb@yorku.ca");
+                //Send the email to masyb@yorku.ca
+                message.To.Add("masyb@yorku.ca");
 
                 //Try to send the email
                 try
@@ -95,7 +95,7 @@ namespace ClassOpsLogCreator
             //Using the smtp client we try to make a connection
             using (SmtpClient smtpClient = new SmtpClient())
             {
-                //Set the credentials as the ppy username and the email password
+                //Set the credentials as the ppy user name and the email password
                 NetworkCredential basicCredential =
                                     new NetworkCredential(Properties.Settings.Default.UserName, Properties.Settings.Default.Password);
                 //Create a new message

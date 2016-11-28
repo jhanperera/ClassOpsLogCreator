@@ -766,6 +766,7 @@
             this.settingsBTN.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.settingsBTN.UseSelectable = true;
             this.settingsBTN.UseTileImage = true;
+            this.settingsBTN.Visible = false;
             this.settingsBTN.Click += new System.EventHandler(this.settingsBTN_Click);
             // 
             // LogCreator

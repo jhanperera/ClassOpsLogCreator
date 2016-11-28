@@ -31,6 +31,7 @@ namespace ClassOpsLogCreator
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY!
+        
         private static string username = Environment.UserName; 
         /// <summary>
         /// 
@@ -618,6 +619,7 @@ namespace ClassOpsLogCreator
                 plusBTN1.Enabled = false;
                 plusBTN2.Enabled = false;
                 plusBTN3.Enabled = false;
+                settingsBTN.Enabled = false;
 
                 //Run the work
                 bw.RunWorkerAsync();
@@ -967,6 +969,7 @@ namespace ClassOpsLogCreator
                 plusBTN1.Enabled = true;
                 plusBTN2.Enabled = true;
                 plusBTN3.Enabled = true;
+                settingsBTN.Enabled = true;
 
                 Quit();
             }
@@ -984,6 +987,7 @@ namespace ClassOpsLogCreator
                 plusBTN1.Enabled = true;
                 plusBTN2.Enabled = true;
                 plusBTN3.Enabled = true;
+                settingsBTN.Enabled = true;
 
                 Quit();
             }
@@ -1148,6 +1152,7 @@ namespace ClassOpsLogCreator
                 plusBTN1.Enabled = true;
                 plusBTN2.Enabled = true;
                 plusBTN3.Enabled = true;
+                settingsBTN.Enabled = true;
             }
         }
         #endregion

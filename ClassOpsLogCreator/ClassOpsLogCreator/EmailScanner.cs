@@ -5,14 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using S22.Imap;
 using System.Net.Mail;
-using Google.Apis.Gmail.v1;
-using Google.Apis.Auth.OAuth2;
 using System.IO;
 using System.Threading;
-/*using Google.Apis.Util.Store;
-using Google.Apis.Services;
-using Google.Apis.Gmail.v1.Data;
-using ActiveUp.Net.Mail;*/
 using OpenPop.Pop3;
 using OpenPop.Mime;
 
@@ -42,6 +36,13 @@ namespace ClassOpsLogCreator
             //We get the password from the JSON file
             JsonParser JP = new JsonParser();
             password = JP.getPassword();
+
+            //If the password is different from the current saved password we update the current saved password
+            if(password != Properties.Settings.Default.gmailPassword)
+            {
+                Properties.Settings.Default.gmailPassword = password;
+                Properties.Settings.Default.Save();
+            }
 
             try
             {
@@ -137,6 +138,8 @@ namespace ClassOpsLogCreator
 
                 //Update the password if we are good. 
                 JP.updateJson(password);
+
+
 
             }
             catch (Exception)

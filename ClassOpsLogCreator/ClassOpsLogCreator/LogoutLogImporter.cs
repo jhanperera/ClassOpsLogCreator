@@ -79,13 +79,15 @@ namespace ClassOpsLogCreator
 
             //Get todays date and do a check to see if the clo is updated.
             string todaysDate = DateTime.Now.ToString("dddd,dd,yyyy");
+
+            //If the clo excel file is outdated we need to update it automatically
             if (!cloDateString.Equals(todaysDate))
             {
                 //Try to update the clo via the EmailScanner. 1st (Check if we have login credentials
                 if (Properties.Settings.Default.UserName == "" || Properties.Settings.Default.Password == "")
                 {
-                    //Prompt to login
-
+                    Quit();
+                    throw new Exception("No login credentials are provided. Unable to login to automatically fetch CLO. Please update manually.");
                 }
                 else if (Properties.Settings.Default.UserName != "" || Properties.Settings.Default.Password != "")
                 {
@@ -102,7 +104,7 @@ namespace ClassOpsLogCreator
                     }
                     form1.BeginInvoke(new MethodInvoker(delegate ()
                     {
-                        form1.updateDetails("Classroom schedule sucessfully update!");
+                        form1.updateDetails("Classroom schedule successfully update!");
                     }));
                 }
                 else
@@ -224,6 +226,7 @@ namespace ClassOpsLogCreator
                 //Save and set the result flag to true
                 roomWorkBook.Save();
                 result = true;
+                clearCells = null;
             }
 
             return result;
