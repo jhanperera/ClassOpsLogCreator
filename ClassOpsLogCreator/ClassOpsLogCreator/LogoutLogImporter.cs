@@ -84,7 +84,7 @@ namespace ClassOpsLogCreator
             if (!cloDateString.Equals(todaysDate))
             {
                 //Try to update the clo via the EmailScanner. 1st (Check if we have login credentials
-                if (Properties.Settings.Default.UserName == "" || Properties.Settings.Default.Password == "")
+                if (Properties.Settings.Default.gmailUserName == "" || Properties.Settings.Default.gmailPassword == "")
                 {
                     Quit();
                     throw new Exception("No login credentials are provided. Unable to login to automatically fetch CLO. Please update manually.");

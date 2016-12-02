@@ -88,7 +88,7 @@ namespace ClassOpsLogCreator
             //Special case were we account for R N102 being in the building list already and doesn't have the description.
             if (buildingAndRooms.Contains("R N102") && arrayClassRooms[buildingAndRooms.IndexOf("R N102"), 3].ToString() == "")
             {
-                this.ArrayClassRooms[buildingAndRooms.IndexOf("R N102"), 3] = @"Lock upper cinema doors (2) with allen key by releasing the crash bar.Pull side stage door shut from the inside.Make sure the stage lights at the front are off.Make sure the projector room is not open.Make sure the cinema lights are off, switched across from the projector room.";
+                this.ArrayClassRooms[buildingAndRooms.IndexOf("R N102"), 3] = @" Lock upper cinema doors (2) with allen key by releasing the crash bar.Pull side stage door shut from the inside.Make sure the stage lights at the front are off.Make sure the projector room is not open.Make sure the cinema lights are off, switched across from the projector room.";
             }
 
             this.Quit();
