@@ -87,9 +87,9 @@ namespace ClassOpsLogCreator
                 if (Properties.Settings.Default.gmailUserName == "" || Properties.Settings.Default.gmailPassword == "")
                 {
                     Quit();
-                    throw new Exception("No login credentials are provided. Unable to login to automatically fetch CLO. Please update manually.");
+                    throw new Exception("No login credentials were found. Unable to login to automatically fetch CLO. Please update manually.");
                 }
-                else if (Properties.Settings.Default.UserName != "" || Properties.Settings.Default.Password != "")
+                else if (Properties.Settings.Default.gmailUserName != "" || Properties.Settings.Default.gmailPassword != "")
                 {
                     //Have login credentials. Lets make the clo via the email scanner.
                     form1.BeginInvoke(new MethodInvoker(delegate ()
