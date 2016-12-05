@@ -38,21 +38,19 @@ Listed bellow are the minimum requirements for this application to run. **PLEASE
 ***
 1. Click on the download button bellow and save the install zip anywhere on your computer.
 <p align="center">
+  <a href="https://s3.amazonaws.com/jhansapps/CLog-v1.1.2_Setup.zip" target="_blank">
   <img src="http://diylogodesigns.com/blog/wp-content/uploads/2016/04/download-button.png">
 </p>
-
 2. Unzip the _CLog-Beta_vX.X.X_Setup.zip_ file anywhere on your computer. This can be done by right-clicking the zip file and selecting **Extract All...**. Follow the prompts and save the output folder anywhere on your computer. 
 <p align="center">
    <img src="https://s3.amazonaws.com/jhansapps/docImages/Capture.PNG">
    <img height="150" width="150" src="http://www.clipartbest.com/cliparts/nTE/xEk/nTExEk5TA.jpeg">
    <img src="https://s3.amazonaws.com/jhansapps/docImages/Capture2.PNG">
 </p>
-
 3. Enter into the newly extracted _CLog-Beta_vX.X.X_Setup_ folder and double click on **CLogSetup.msi** installer file. NOTE: Sometimes the installer might need admin privileges to execute. If this is the case, you can right-click on **CLogSetup.msi** and then select **Run as administrator**.
 <p align="center">
    <img src="https://s3.amazonaws.com/jhansapps/docImages/Capture3.PNG">
 </p>
-
 4. If a _Open File - Security Warning_ appears you can click **Run**. 
 
 5. Follow the installation instruction that follow. Ensure the installation locations is set to: **C:\Program Files (x86)\YorkUIT\CLog-Beta\**. Otherwise there will be problems with saving and loading user settings.
@@ -77,10 +75,68 @@ The second option is to remove the application through **Control Panel\Programs\
 
 ## <a name="instructions"></a>Instructions (Step-by-Step)
 ***
+**NOTE: Before running this application make sure you are able to access the H: drive from your machine. If unable to access this drive please contact your manager to provide instructions on how to get access to this drive.**
+
+1. Launch the application by double clicking the **CLog** icon from your desktop or from your start mean.
+
+2. A blue message will appear informing you the last time the zone supervisor logs were modified. Ensure that they are up-to date and ready to be processed. Click **Ok** to continue. 
+
+3. The main window will now appear. At this point you are prompted to provide a start time, end time and the number of employees working that shift. 
+
+4. (Optional) You can click the **+** button to add another shift with the same perimeters. 
+
+5. When ready click **Create Logs** for the application to begin processing your request. 
+
+6. After a few moments, a **Log Viewer** will display the logs that have been generated. Assign a employee name to each log. 
+
+7. When ready click **Next** to continue to the next log. 
+
+8. After all logs have a employee name click **Print**, at this point a print dialog will appear. Select the printer you wish to send the print job to. 
+
+9. A Print Preview will appear. At this point click **Print** to print the log for distribution. 
+
 <br></br>
 ## <a name="version"></a>Version Number & Patch Notes (Bold version is the current version)
 ***
-**Version 0.2.9 - 10/26/16**
+
+**Version 1.1.2 - 12/05/16**
+* Fixed a bug that would cause the email scanner to not operate correctly.
+* Users on the standard edition would sometimes get an error message saying that no credentials were found even though credentials are saved in the app.config file correctly. 
+
+
+Version 1.1.0 - 11/28/16
+* R25 Scanner implementation complete. 
+* This module allows the application to parse the R25 email and construct the Crestron logout information with no human intervention. 
+* Implemented a way to retrieve user settings from previous version. Now the user does not need to input all their settings again when a new version is released. The application will automatically update from a previous version. If no previous version was installed then the application will use default settings. 
+
+
+Version 1.0.0 - 11/21/16
+* Full release of the CLog application for York UIT
+* 2 Versions are now available. A standard version that will be distributed via the csstaff webpage and the link above. A Admin version that will be given to a select number of people. 
+* Standard version has no new features. Will work the same as of version 0.2.11
+* Admin version allows editing of the back end database. This includes: 
+    * Changing building names
+    * Adding new employee name
+    * Deleting employee names
+* Optimizations across the whole application.
+
+
+Version 0.2.11 - 11/14/16
+* Classroom operations statistics have now been implemented. 
+* Once a week, once a month and once a year statistics will be auto generated and sent to masyb@yorku.ca
+* A copy is saved in a hidden folder at : H:\CS\SHARE-PT\CLASSOPS\Statistics
+* Users can manually generate statistics as well via the settings panel. Generated statistics end up in the folder mentioned above. 
+* Improved the look of the date of the output log, shortened the day to only show 3 characters instead of the whole day. 
+* Optimizations were applied to speed up the searching and sorting of the data. 
+* Minor bug fixes. 
+
+Version 0.2.10 – 10/31/16
+* Moves the day of the week to the right side of the header. 
+* Improved the task ranking for the case with 3 employees on a given shift. 
+* Bug fixes
+<br></br>
+
+Version 0.2.9 - 10/26/16
 * Added the day of the week and painted it in red, as well as a easier to read date to the head.
 * Implemented a better data merging feature that will find already existing crestron logouts and add notes that show up as "AV Shutdown" by the zone supervisors. Reducing redundant duplicates.
 * Tweak the case when there are 3 employees are working a shift for better work distribution.
