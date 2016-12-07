@@ -263,7 +263,7 @@ namespace ClassOpsLogCreator
                     if ((arrayA.GetValue(i + 1, 1) != null) && (arrayC.GetValue(i + 1, 1) != null) && !(arrayA.GetValue(i + 1, 1).Equals("Crestron Logout")))
                     {
                         //Check if the event is between the selected times
-                        DateTime check = DateTime.ParseExact(arrayC.GetValue(i + 1, 1).ToString(), "HHmm", null);
+                        DateTime check = DateTime.ParseExact(arrayC.GetValue(i + 1, 1).ToString().Trim(), "HHmm", null);
                         if ((check.TimeOfDay >= startingTime.TimeOfDay) && (check.TimeOfDay < endingTime.TimeOfDay))
                         {
                             //If we get an AV shutdown. See if we have it in our logout master first
@@ -272,7 +272,7 @@ namespace ClassOpsLogCreator
                                 //A string we will use to compare too
                                 string buildingandRoomCompareString = arrayD.GetValue(i + 1, 1).ToString() + " " + arrayE.GetValue(i + 1, 1).ToString();
 
-                                //The vase of R N102 has special instructions
+                                //The case of R N102 has special instructions
                                 if (arrayD.GetValue(i + 1, 1).Equals("R") && arrayE.GetValue(i + 1, 1).Equals("N102"))
                                 {
                                     //If fount in the logout master
