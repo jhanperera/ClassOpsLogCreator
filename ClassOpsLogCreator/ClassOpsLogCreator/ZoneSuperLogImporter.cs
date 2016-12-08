@@ -184,7 +184,7 @@ namespace ClassOpsLogCreator
                 {
                     //This finds all number of columns that happen today. 
                     if ((array.GetValue(i, 1) != null) && (array.GetValue(i, 1) is double)
-                        && (DateTime.FromOADate(double.Parse((string)array.GetValue(i, 1).ToString())).ToString("M/dd/yy").Equals(date)))
+                        && (DateTime.FromOADate(double.Parse((string)array.GetValue(i, 1).ToString().Trim())).ToString("M/dd/yy").Equals(date)))
                     {
                         numberOfRows++;
                     }
@@ -194,7 +194,7 @@ namespace ClassOpsLogCreator
             {
                 //We just have one element in the array so we check if its in the time period.
                 if ((range.Value2 != null) && (range.Value2 is double)
-                        && (DateTime.FromOADate(double.Parse((string)range.Value2.ToString())).ToString("M/dd/yy").Equals(date)))
+                        && (DateTime.FromOADate(double.Parse((string)range.Value2.ToString().Trim())).ToString("M/dd/yy").Equals(date)))
                 {
                     numberOfRows++;
                 }
@@ -280,7 +280,7 @@ namespace ClassOpsLogCreator
                                     {
 
                                         int indexOf = buildingAndRooms.IndexOf(buildingandRoomCompareString);
-                                        this.ArrayClassRooms[indexOf, 3] = arrayF.GetValue(i + 1, 1).ToString() + @" Lock upper cinema doors (2) with allen key by releasing the crash bar.Pull side stage door shut from the inside.Make sure the stage lights at the front are off.Make sure the projector room is not open.Make sure the cinema lights are off, switched across from the projector room.";
+                                        this.ArrayClassRooms[indexOf, 3] = arrayF.GetValue(i + 1, 1).ToString() + @" Lock upper cinema doors (2) with allen key by releasing the crash bar.Pull side stage door shut from the inside.Make sure the stage lights at the front are off.Make sure the projector room is not open.Make sure the cinema lights are off, switched across from the projector room. Make sure the keyboard is on top of all the equipment in the drawer.";
                                     }
                                     //If not add it in normally
                                     else
