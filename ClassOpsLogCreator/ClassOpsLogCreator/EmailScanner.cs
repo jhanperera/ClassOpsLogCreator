@@ -85,12 +85,20 @@ namespace ClassOpsLogCreator
 
                  foreach(ActiveUp.Net.Mail.Message ms in emailList)
                  {
+                    //We Check if today has the newest schedule
                      if(ms.Subject == "Room Report for " + dayOfTheWeek && 
                          (ms.Date.ToString("dd-MM-yyyy") == today.ToString("dd-MM-yyyy")))
                      {
                          this.msgFrom = ms.From.Email;
                          this.msgBody = ms.BodyText.Text;
                      }
+                     //Or if yesterday has a schedule we can work with.
+                     else if(ms.Subject == "Room Report for " + dayOfTheWeek &&
+                         (ms.Date.ToString("dd-MM-yyyy") == today.AddDays(-1).ToString("dd-MM-yyyy")))
+                    {
+                        this.msgFrom = ms.From.Email;
+                        this.msgBody = ms.BodyText.Text;
+                    }
                  }
                 /*
                 using (ImapClient client = new ImapClient("mypost.yorku.ca", 993, "pereraj", "pooman12", AuthMethod.Login, true))

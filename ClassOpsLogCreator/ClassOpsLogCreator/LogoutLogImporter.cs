@@ -206,6 +206,9 @@ namespace ClassOpsLogCreator
                 Excel.Range clearCells = roomSheet1.UsedRange;
                 clearCells.Clear();
 
+                //Clear the clipboard just incase   
+                form1.BeginInvoke(new Action(() => Clipboard.Clear()));
+
                 //Use the UI thread to do a copy of the data (STA Thread rules) 
                 form1.BeginInvoke(new Action(() => Clipboard.SetText(body)));
 
