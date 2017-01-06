@@ -213,35 +213,28 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         private string[,] ConvertToStringArray2D(Excel.Worksheet ExSheet)
         {
+            int offset = 0;
             DateTime startingTime = Convert.ToDateTime(this.startTime.ToString());
             DateTime endingTime = Convert.ToDateTime(this.endTime.ToString());
 
             //initialization of all the ranges that we are going to collect.
             Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
 
-            //Delete any empty rows (This 
-            foreach(Excel.Range cell in last.Cells)
+            //Delete any empty rows at the end of the range if any (THIS IS DUE TO O
+            while((ExSheet.Cells[last.Row - offset, 1] as Excel.Range).Value2 == null)
             {
-                if(cell == null)
-                {
-                    last.EntireRow.Delete(Excel.XlDeleteShiftDirection.xlShiftUp);
-                    last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-                }
-                else
-                {
-                    break;
-                }  
+                offset++;
             }
 
-            int start = last.Row - this.numberOfRows(ExSheet, this.getLastDate());
-            Excel.Range rangeA = ExSheet.get_Range("A" + start, "A" + last.Row);
-            Excel.Range rangeB = ExSheet.get_Range("B" + start, "B" + last.Row);
-            Excel.Range rangeC = ExSheet.get_Range("C" + start, "C" + last.Row);
-            Excel.Range rangeD = ExSheet.get_Range("D" + start, "D" + last.Row);
-            Excel.Range rangeE = ExSheet.get_Range("E" + start, "E" + last.Row);
-            Excel.Range rangeF = ExSheet.get_Range("F" + start, "F" + last.Row);
+            int start = last.Row - offset - this.numberOfRows(ExSheet, this.getLastDate());
+            Excel.Range rangeA = ExSheet.get_Range("A" + start, "A" + (last.Row - offset));
+            Excel.Range rangeB = ExSheet.get_Range("B" + start, "B" + (last.Row - offset));
+            Excel.Range rangeC = ExSheet.get_Range("C" + start, "C" + (last.Row - offset));
+            Excel.Range rangeD = ExSheet.get_Range("D" + start, "D" + (last.Row - offset));
+            Excel.Range rangeE = ExSheet.get_Range("E" + start, "E" + (last.Row - offset));
+            Excel.Range rangeF = ExSheet.get_Range("F" + start, "F" + (last.Row - offset));
 
-            string[,] values = new string[(last.Row - start) + 1, 6];
+            string[,] values = new string[((last.Row - offset) - start) + 1, 6];
 
             //If the range is not just one element we make arrays out of them
             //And get upper bound is greater than 0 (Avoid the array out of bounds)

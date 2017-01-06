@@ -45,39 +45,7 @@ namespace ClassOpsLogCreator
             }
 
             try
-            {
-                //use the POP3 method to retrieve our Room report email
-                /*
-                using (var clientPOP = new Pop3Client())
-                {
-                    clientPOP.Connect("pop.gmail.com", 995, true);
-                    clientPOP.Authenticate(username + "@gmail.com", password, AuthenticationMethod.Auto);
-                    var count = clientPOP.GetMessageCount();
-
-                    // We want to download all messages
-                    List<Message> allMessages = new List<Message>(count);
-
-                    // Messages are numbered in the interval: [1, messageCount]
-                    // Ergo: message numbers are 1-based.
-                    // Most servers give the latest message the highest number
-                    for (int i = count; i > (count - 5); i--)
-                    {
-                        allMessages.Add(clientPOP.GetMessage(i));
-                    }
-
-                    foreach (Message msg in allMessages)
-                    {
-                        if (msg.Headers.Subject == "Room Report for " + dayOfTheWeek &&
-                            msg.Headers.DateSent.ToString("dd-MM-yy") == today.ToString("dd-MM-yy"))
-                        {
-                            OpenPop.Mime.MessagePart plainTextPart = msg.FindFirstPlainTextVersion();
-                            msgBody = plainTextPart.GetBodyAsText();
-                            msgFrom = msg.Headers.From.ToString();
-                            break;
-                        }
-                    }
-                }*/
-               
+            {   
                 //**********************************TEST CODE*******************************************************/
                 MailRepository mailRepo = new MailRepository(hostname, 993, true, username, password);
 
@@ -91,6 +59,7 @@ namespace ClassOpsLogCreator
                      {
                          this.msgFrom = ms.From.Email;
                          this.msgBody = ms.BodyText.Text;
+                        return;
                      }
                      //Or if yesterday has a schedule we can work with.
                      else if(ms.Subject == "Room Report for " + dayOfTheWeek &&
@@ -98,28 +67,12 @@ namespace ClassOpsLogCreator
                     {
                         this.msgFrom = ms.From.Email;
                         this.msgBody = ms.BodyText.Text;
+                        return;
                     }
                  }
-                /*
-                using (ImapClient client = new ImapClient("mypost.yorku.ca", 993, "pereraj", "pooman12", AuthMethod.Login, true))
-                {
-                    this.isConnectedFlag = true;
-
-
-                    IEnumerable<uint> uids = client.Search(SearchCondition.Subject("Room Report for " + dayOfTheWeek).And(SearchCondition.SentOn(today)));
-                    IEnumerable<MailMessage> messages = client.GetMessages(uids, FetchOptions.Normal);
-
-                    foreach (MailMessage msg in messages)
-                    {
-                        msgFrom = msg.From.ToString();
-                        msgBody = msg.Body.ToString();
-                    }
-                }*/
-                //**********************************TEST CODE*******************************************************/
             }
             catch (Exception)
-            {
-                
+            {               
                 throw;
             }
         }
@@ -146,8 +99,6 @@ namespace ClassOpsLogCreator
 
                 //Update the password if we are good. 
                 JP.updateJson(password);
-
-
 
             }
             catch (Exception)

@@ -228,6 +228,10 @@ namespace ClassOpsLogCreator
                 
                 //Save and set the result flag to true
                 roomWorkBook.Save();
+
+                //Clear the clipboard   
+                form1.BeginInvoke(new Action(() => Clipboard.Clear()));
+
                 result = true;
                 clearCells = null;
             }

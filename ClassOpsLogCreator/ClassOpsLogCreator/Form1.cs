@@ -162,6 +162,29 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void LogCreator_Load(object sender, EventArgs e)
         {
+            //Send a message that closes all excel instances
+            DialogResult closeMessage = closeMessage = MetroMessageBox.Show(this, "This application is about to terminate all instances of Excel."
+                                + Environment.NewLine + Environment.NewLine + 
+                                "Please save all work in excel before continuing to the next step.",
+                                "IMPORTANT!!!",
+                                MessageBoxButtons.OKCancel,
+                                MessageBoxIcon.Error,
+                                MessageBoxDefaultButton.Button1, 250);
+
+            //If they cancel we close the program
+            if(closeMessage == DialogResult.Cancel)
+            {
+                //Use an anonymous event handler to take care of this
+                this.BeginInvoke(new MethodInvoker(this.Close));
+                this.Quit();
+                return;
+            }
+            else
+            {
+                //We close all open instances of Excel
+                this.closeExcel();
+            }
+
             //Get the last access times to display during the first message
             string JLastAccess = File.GetLastWriteTime(JEANNINE_LOG).ToString("dd MMMM yyyy - hh:mm tt");
             string RLastAccess = File.GetLastWriteTime(RAUL_LOG).ToString("dd MMMM yyyy - hh:mm tt");
@@ -1720,6 +1743,26 @@ namespace ClassOpsLogCreator
             //Save settings to the xml file
             Properties.Settings.Default.Save();
         }
+
+        /// <summary>
+        /// This method will find and close all instances of Excel 
+        /// </summary>
+        private void closeExcel()
+        {
+            System.Diagnostics.Process[] process = System.Diagnostics.Process.GetProcessesByName("Excel");
+            foreach (System.Diagnostics.Process p in process)
+            {
+                if (!string.IsNullOrEmpty(p.ProcessName))
+                {
+                    try
+                    {
+                        p.Kill();
+                    }
+                    catch { }
+                }
+            }
+        }
+
 
         /// <summary>
         /// Close all open instances of Excel and Garbage collects.
