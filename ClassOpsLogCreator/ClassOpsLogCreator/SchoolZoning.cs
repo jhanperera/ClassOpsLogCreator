@@ -28,7 +28,7 @@ namespace ClassOpsLogCreator
             classinfo = new ClassInfo(buildingNames);
 
             taskList = new List<string>();
-            string[] taskArray = { "AV Shutdown", "Crestron Logout", "Lockup", "Proactive Classroom Check",
+            string[] taskArray = { "AV Shutdown", "Demo", "Crestron Logout", "Lockup", "Proactive Classroom Check",
                        "SCLD Student Event", "SCLD Student Logout", "Operator" };
             taskList.AddRange(taskArray);
         }
