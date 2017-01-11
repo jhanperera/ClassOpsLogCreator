@@ -213,11 +213,21 @@ namespace ClassOpsLogCreator
                 form1.BeginInvoke(new Action(() => Clipboard.SetText(body)));
 
                 //Re-assign the clearCell variable to point to the fist cell
-                clearCells = (Excel.Range)roomSheet1.Cells[1, 1];
+                //clearCells = (Excel.Range)roomSheet1.Cells[1, 1];
+                clearCells = (Excel.Range)roomSheet1.get_Range("A1", "A1");
+
                 //Select it
                 clearCells.Select();
-                //Past all the data there.
-                roomSheet1.Paste(clearCells, false);
+                try
+                {
+                    //Past all the data there.
+                    roomSheet1.Paste(clearCells, false);
+                }
+                catch(Exception e)
+                {
+                    //throw the exepction
+                    throw new Exception(e.ToString());                    
+                }
 
                 //Select the first columns
                 clearCells = (Excel.Range)roomSheet1.UsedRange.Columns[1];
