@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
-using System.IO;
+
 
 namespace ClassOpsLogCreator
 {
@@ -68,10 +64,10 @@ namespace ClassOpsLogCreator
                 message.Attachments.Add(new Attachment(attachmentPath));
 
                 //DEBUG CODE
-                //message.To.Add("pereraj@yorku.ca");
+                message.To.Add("pereraj@yorku.ca");
 
                 //Send the email to masyb@yorku.ca
-                message.To.Add("masyb@yorku.ca");
+                //message.To.Add("masyb@yorku.ca");
 
                 //Try to send the email
                 try
