@@ -231,6 +231,9 @@ namespace ClassOpsLogCreator
                         //Check the excel file is busy
                     }
                     roomSheet1.PasteSpecial("Text");
+                    //if(roomSched.Ready)
+                    //Past all the data there.
+                    //roomSheet1.PasteSpecial("Text");
                 }
                 catch(Exception e)
                 {
