@@ -87,14 +87,14 @@ namespace ClassOpsLogCreator
                 if (Properties.Settings.Default.gmailUserName == "" || Properties.Settings.Default.gmailPassword == "")
                 {
                     Quit();
-                    throw new Exception("No login credentials were found. Unable to login to automatically fetch CLO. Please update manually.");
+                    throw new Exception("No login credentials were found. Unable to login to automatically fetch CLO. Please update CLO manually.");
                 }
                 else if (Properties.Settings.Default.gmailUserName != "" || Properties.Settings.Default.gmailPassword != "")
                 {
                     //Have login credentials. Lets make the clo via the email scanner.
                     form1.BeginInvoke(new MethodInvoker(delegate ()
                     {
-                        form1.updateDetails(form1.ROOM_SCHED + " is out of date! - Fetching most recent R25 data.");
+                        form1.updateDetails(form1.ROOM_SCHED + " is out of date! - Fetching most recent R25 data. (This step can take up to 5 Minutes)");
                     }));
                     bool answer = this.getCLOFromEmail(DateTime.Today);
                     if (!answer)
@@ -210,40 +210,53 @@ namespace ClassOpsLogCreator
                 form1.BeginInvoke(new Action(() => Clipboard.Clear()));
 
                 //Use the UI thread to do a copy of the data (STA Thread rules) 
-                form1.BeginInvoke(new Action(() => Clipboard.SetText(body)));
+                //form1.BeginInvoke(new Action(() => Clipboard.SetText(body)));
+                form1.BeginInvoke(new Action(() => Clipboard.SetData("Text", body)));
 
-                //Re-assign the clearCell variable to point to the fist cell
-                //clearCells = (Excel.Range)roomSheet1.Cells[1, 1];
-                clearCells = (Excel.Range)roomSheet1.get_Range("A1", "A1");
+                //deference this variable
+                clearCells = null;
+                
+                //The cell we want to paste too
+                Excel.Range pasteCell = roomSheet1.get_Range("A1", "A1");
 
                 //Select it
-                clearCells.Select();
+                pasteCell.Select();
+                //sleep for about 10ms so the select is okay
+                Thread.Sleep(10);
+
                 try
                 {
-                    //Past all the data there.
-                    roomSheet1.Paste(clearCells, false);
+                    while(!roomSched.Ready)
+                    {
+                        //Check the excel file is busy
+                    }
+                    roomSheet1.PasteSpecial("Text");
                 }
                 catch(Exception e)
                 {
-                    //throw the exepction
-                    throw new Exception(e.ToString());                    
+                    //throw the exception
+                    throw new Exception("Excel was busy while pasting the R25 data. Please restart the application and try again.");                    
                 }
 
                 //Select the first columns
-                clearCells = (Excel.Range)roomSheet1.UsedRange.Columns[1];
+                pasteCell = (Excel.Range)roomSheet1.UsedRange.Columns[1];
+
                 //Select it
-                clearCells.Select();
+                pasteCell.Select();
+
                 //Run macro
                 roomSched.Run("Parsing");
-                
+
                 //Save and set the result flag to true
+                roomSched.DisplayAlerts = false;
                 roomWorkBook.Save();
+                result = true;
 
                 //Clear the clipboard   
                 form1.BeginInvoke(new Action(() => Clipboard.Clear()));
 
-                result = true;
                 clearCells = null;
+                pasteCell = null;
             }
 
             return result;

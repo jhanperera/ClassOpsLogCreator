@@ -64,10 +64,10 @@ namespace ClassOpsLogCreator
                 message.Attachments.Add(new Attachment(attachmentPath));
 
                 //DEBUG CODE
-                message.To.Add("pereraj@yorku.ca");
+                //message.To.Add("pereraj@yorku.ca");
 
                 //Send the email to masyb@yorku.ca
-                //message.To.Add("masyb@yorku.ca");
+                message.To.Add("masyb@yorku.ca");
 
                 //Try to send the email
                 try
