@@ -211,7 +211,7 @@ namespace ClassOpsLogCreator
 
                 //Use the UI thread to do a copy of the data (STA Thread rules) 
                 //form1.BeginInvoke(new Action(() => Clipboard.SetText(body)));
-                form1.BeginInvoke(new Action(() => Clipboard.SetData("Text", body)));
+                form1.BeginInvoke(new Action(() => Clipboard.SetData(DataFormats.Text, body)));
 
                 //deference this variable
                 clearCells = null;
@@ -221,8 +221,6 @@ namespace ClassOpsLogCreator
 
                 //Select it
                 pasteCell.Select();
-                //sleep for about 10ms so the select is okay
-                Thread.Sleep(10);
 
                 try
                 {
@@ -230,7 +228,7 @@ namespace ClassOpsLogCreator
                     {
                         //Check the excel file is busy
                     }
-                    roomSheet1.PasteSpecial("Text");
+                    roomSheet1.PasteSpecial(DataFormats.Text);
                     //if(roomSched.Ready)
                     //Past all the data there.
                     //roomSheet1.PasteSpecial("Text");
