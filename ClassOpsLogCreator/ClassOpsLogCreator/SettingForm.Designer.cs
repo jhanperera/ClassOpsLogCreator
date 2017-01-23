@@ -211,7 +211,7 @@
             this.emailLoginTab.Controls.Add(this.buildingUpdateTab);
             this.emailLoginTab.Location = new System.Drawing.Point(25, 63);
             this.emailLoginTab.Name = "emailLoginTab";
-            this.emailLoginTab.SelectedIndex = 0;
+            this.emailLoginTab.SelectedIndex = 1;
             this.emailLoginTab.Size = new System.Drawing.Size(570, 240);
             this.emailLoginTab.Style = MetroFramework.MetroColorStyle.Red;
             this.emailLoginTab.TabIndex = 7;
@@ -255,7 +255,7 @@
             // createBTN
             // 
             this.createBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.createBTN.Location = new System.Drawing.Point(240, 111);
+            this.createBTN.Location = new System.Drawing.Point(241, 162);
             this.createBTN.Name = "createBTN";
             this.createBTN.Size = new System.Drawing.Size(87, 27);
             this.createBTN.TabIndex = 18;
@@ -268,7 +268,7 @@
             this.am_pmCombo1_2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.am_pmCombo1_2.FormattingEnabled = true;
             this.am_pmCombo1_2.ItemHeight = 23;
-            this.am_pmCombo1_2.Location = new System.Drawing.Point(392, 50);
+            this.am_pmCombo1_2.Location = new System.Drawing.Point(393, 101);
             this.am_pmCombo1_2.Name = "am_pmCombo1_2";
             this.am_pmCombo1_2.Size = new System.Drawing.Size(53, 29);
             this.am_pmCombo1_2.TabIndex = 15;
@@ -280,7 +280,7 @@
             this.endHour1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.endHour1.FormattingEnabled = true;
             this.endHour1.ItemHeight = 23;
-            this.endHour1.Location = new System.Drawing.Point(298, 50);
+            this.endHour1.Location = new System.Drawing.Point(299, 101);
             this.endHour1.Name = "endHour1";
             this.endHour1.Size = new System.Drawing.Size(88, 29);
             this.endHour1.TabIndex = 14;
@@ -290,7 +290,7 @@
             // toLabel1
             // 
             this.toLabel1.AutoSize = true;
-            this.toLabel1.Location = new System.Drawing.Point(271, 52);
+            this.toLabel1.Location = new System.Drawing.Point(272, 103);
             this.toLabel1.Name = "toLabel1";
             this.toLabel1.Size = new System.Drawing.Size(21, 19);
             this.toLabel1.TabIndex = 17;
@@ -301,7 +301,7 @@
             this.am_pmCombo1_1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.am_pmCombo1_1.FormattingEnabled = true;
             this.am_pmCombo1_1.ItemHeight = 23;
-            this.am_pmCombo1_1.Location = new System.Drawing.Point(212, 50);
+            this.am_pmCombo1_1.Location = new System.Drawing.Point(213, 101);
             this.am_pmCombo1_1.Name = "am_pmCombo1_1";
             this.am_pmCombo1_1.Size = new System.Drawing.Size(53, 29);
             this.am_pmCombo1_1.TabIndex = 13;
@@ -312,7 +312,7 @@
             // 
             this.startHour1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.startHour1.ItemHeight = 23;
-            this.startHour1.Location = new System.Drawing.Point(118, 50);
+            this.startHour1.Location = new System.Drawing.Point(119, 101);
             this.startHour1.Name = "startHour1";
             this.startHour1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.startHour1.Size = new System.Drawing.Size(88, 29);

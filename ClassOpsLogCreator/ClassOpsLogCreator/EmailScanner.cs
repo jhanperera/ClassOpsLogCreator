@@ -36,7 +36,6 @@ namespace ClassOpsLogCreator
 
             try
             {   
-                //**********************************TEST CODE*******************************************************/
                 MailRepository mailRepo = new MailRepository(hostname, 993, true, username, password);
 
                  var emailList = mailRepo.GetAllMails("inbox");
@@ -49,7 +48,7 @@ namespace ClassOpsLogCreator
                      {
                          this.msgFrom = ms.From.Email;
                          this.msgBody = ms.BodyText.Text;
-                        return;
+                         return;
                      }
                      //Or if yesterday has a schedule we can work with.
                      else if(ms.Subject == "Room Report for " + dayOfTheWeek &&
@@ -60,6 +59,8 @@ namespace ClassOpsLogCreator
                         return;
                     }
                  }
+
+                mailRepo = null;
             }
             catch (Exception)
             {               

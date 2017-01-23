@@ -20,18 +20,18 @@ namespace ClassOpsLogCreator
     {
         #region Private Attributes/Variables
         
-        /*public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
+        public readonly string ROOM_SCHED = @"H:\CS\SHARE-PT\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Jeannine\Jeannine's log.xlsx";
         public readonly string RAUL_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Raul\Raul's Log.xlsx";
         public readonly string DEREK_LOG = @"H:\CS\SHARE-PT\CLASSOPS\Derek\Derek's Log.xlsx";
         public readonly string EXISTING_MASTER_LOG_COPY = @"H:\CS\SHARE-PT\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"H:\CS\SHARE-PT\CLASSOPS\masterlog.xlsx";
         public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
-        public readonly string STATS_LOCATION =  @"H:\CS\SHARE-PT\CLASSOPS\Statistics\"; */
+        public readonly string STATS_LOCATION =  @"H:\CS\SHARE-PT\CLASSOPS\Statistics\"; 
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY!
-        
+        /*
         private static string username = Environment.UserName; 
         public readonly string ROOM_SCHED = @"C:\Users\" + username+ @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
@@ -40,7 +40,7 @@ namespace ClassOpsLogCreator
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
         public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
-        public readonly string STATS_LOCATION = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Statistics\";
+        public readonly string STATS_LOCATION = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Statistics\";*/
 
         //A stack for some thread safer operations
         private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();        
@@ -75,6 +75,10 @@ namespace ClassOpsLogCreator
         private static Excel.Worksheet existingMasterWorkSheet = null;
         private static Excel.Worksheet databaseSheet = null;
 
+        private static Excel.Application roomSched = null;
+        private static Excel.Workbook roomWorkBook = null;
+        private static Excel.Worksheet roomSheet1 = null;
+
         //A list of employee Names
         List<string> employeeNames = null;
         List<string> buildingNames = null;
@@ -103,6 +107,7 @@ namespace ClassOpsLogCreator
         private Boolean plusClicked1 = false;
         private Boolean plusClicked2 = false;
         private Boolean plusClicked3 = false;
+
         #endregion
 
         #region Constructor/Load Handlers
@@ -138,46 +143,29 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void LogCreator_Load(object sender, EventArgs e)
         {
-            //Send a message that closes all excel instances
-            DialogResult closeMessage = closeMessage = MetroMessageBox.Show(this, "This application is about to terminate all instances of Excel."
-                                + Environment.NewLine + Environment.NewLine + 
-                                "Please save all work in excel before continuing to the next step.",
-                                "IMPORTANT!!!",
-                                MessageBoxButtons.OKCancel,
-                                MessageBoxIcon.Error,
-                                MessageBoxDefaultButton.Button1, 250);
-
-            //If they cancel we close the program
-            if(closeMessage == DialogResult.Cancel)
-            {
-                //Use an anonymous event handler to take care of this
-                this.BeginInvoke(new MethodInvoker(this.Close));
-                this.Quit();
-                return;
-            }
-            else
-            {
-                //We close all open instances of Excel
-                this.closeExcel();
-            }
-
             //Get the last access times to display during the first message
             string JLastAccess = File.GetLastWriteTime(JEANNINE_LOG).ToString("dd MMMM yyyy - hh:mm tt");
             string RLastAccess = File.GetLastWriteTime(RAUL_LOG).ToString("dd MMMM yyyy - hh:mm tt");
             string DLastAccess = File.GetLastWriteTime(DEREK_LOG).ToString("dd MMMM yyyy - hh:mm tt");
 
             //A pop up message to ensure that the user is aware that the zone super logs need to be in before running this application
-            DialogResult checkMessage = checkMessage = MetroMessageBox.Show(this, "Ensure all Zone logs have been submitted before preceding."
-                               + Environment.NewLine + Environment.NewLine +
-                               "Jeannine's log was last written to on:  " + JLastAccess + Environment.NewLine +
-                               "Raul's log was last written to on:  " + RLastAccess + Environment.NewLine +
-                               "Derek's log was last written to on:  " + DLastAccess + Environment.NewLine +
-                               Environment.NewLine +
-                               "Failure to do so will result in incorrect output being generated",
-                               "Important Notice",
+            DialogResult checkMessage = checkMessage = MetroMessageBox.Show(this, "This application is about to terminate all instances of Excel." 
+                               + Environment.NewLine + Environment.NewLine 
+                               + "Ensure all Zone logs have been submitted before preceding."
+                               + Environment.NewLine + Environment.NewLine 
+                               + "Jeannine's log was last written to on:  " + JLastAccess 
+                               + Environment.NewLine 
+                               + "Raul's log was last written to on:  " + RLastAccess 
+                               + Environment.NewLine 
+                               + "Derek's log was last written to on:  " + DLastAccess 
+                               + Environment.NewLine + Environment.NewLine 
+                               + "Failure to do so will result in incorrect output being generated"
+                               + Environment.NewLine + Environment.NewLine
+                               + "Please save all work in excel before continuing to the next step.",
+                               "IMPORTANT!!!",
                                 MessageBoxButtons.OKCancel,
-                                MessageBoxIcon.Information,
-                                MessageBoxDefaultButton.Button1, 250);
+                                MessageBoxIcon.Error,
+                                MessageBoxDefaultButton.Button1, 325);
 
             //If the user click cancel we close the application
             if (checkMessage == DialogResult.Cancel)
@@ -188,26 +176,48 @@ namespace ClassOpsLogCreator
                 return;
             }
 
-            Cursor.Current = Cursors.WaitCursor;
+            //Open the splash screen 
+            LoadingScreen.ShowLoadingScreen();
 
             //Open the existing excel file
             existingMaster = new Excel.Application();
             existingMaster.Visible = false;
+
+            //Open the room excel file
+            roomSched = new Excel.Application();
+            roomSched.Visible = false;
             try
             {
+                //The master excel
                 existingMasterWorkBook = existingMaster.Workbooks.Open(EXISTING_MASTER_LOG);
                 existingMasterWorkSheet = (Excel.Worksheet)existingMasterWorkBook.Worksheets[1];
                 databaseSheet = (Excel.Worksheet)existingMasterWorkBook.Sheets[2];
+
+                //the CLO
+                //This should look for the file
+                roomWorkBook = roomSched.Workbooks.Open(this.ROOM_SCHED);
+                //Work in worksheet number 1
+                roomSheet1 = (Excel.Worksheet)roomWorkBook.Sheets[1];
+
             }
             catch (Exception)
             {
+                LoadingScreen.CloseForm();
+
                 MetroMessageBox.Show(this, "Unable to locate Excel files. Please ensure you have full access to the share drive.",
                                     "Problem", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 existingMaster.Quit();
                 existingMaster = null;
+
+                roomSched.Quit();
+                roomSched = null;
+
                 Quit();
                 return;
             }
+
+            //try importing the logout from email
+            this.importLogoutFromEmail();
 
             //Get the employee names and building name
             if (employeeNames == null || buildingNames == null)
@@ -374,7 +384,21 @@ namespace ClassOpsLogCreator
                 
             }
 
-            Cursor.Current = Cursors.WaitCursor;
+            //Close everything up and let the main UI thread take over.
+            roomWorkBook.Close(false, Type.Missing, Type.Missing);
+            roomSched.Quit();
+            System.Runtime.InteropServices.Marshal.FinalReleaseComObject(roomSched);
+            roomSched = null;
+            roomWorkBook = null;
+            roomSheet1 = null;
+
+            LoadingScreen.CloseForm();
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
         }
         #endregion
 
@@ -1660,6 +1684,119 @@ namespace ClassOpsLogCreator
             }
             existingMaster.get_Range("C:C").EntireColumn.Hidden = false;
         }
+
+        /// <summary>
+        /// This method will attempt to read in the R25 data from the emil and fill in the CLO.
+        /// </summary>
+        private void importLogoutFromEmail()
+        {
+            //Get the date from the clo file (For reference checking)
+            Excel.Range cloDate = roomSheet1.get_Range("A1", "B1");
+            System.Array cloDateArray = (System.Array)cloDate.Cells.Value2;
+            string cloDateString = ((string)cloDateArray.GetValue(1, 1).ToString().Trim() + "," + (string)cloDateArray.GetValue(1, 2).ToString().Trim()).Replace(" ", "");
+
+            //Get todays date and do a check to see if the clo is updated.
+            string todaysDate = DateTime.Now.ToString("dddd,dd,yyyy");
+
+            //If the clo excel file is outdated we need to update it automatically
+            if (!cloDateString.Equals(todaysDate))
+            {
+                //Try to update the clo via the EmailScanner. 1st (Check if we have login credentials
+                if (Properties.Settings.Default.gmailUserName == "" || Properties.Settings.Default.gmailPassword == "")
+                {
+                    Quit();
+                    throw new Exception("No login credentials were found. Unable to login to automatically fetch CLO. Please update CLO manually.");
+                }
+                else if (Properties.Settings.Default.gmailUserName != "" || Properties.Settings.Default.gmailPassword != "")
+                {
+                    bool answer = this.getCLOFromEmail(DateTime.Today);
+                    if (!answer)
+                    {
+                        Quit();
+                        throw new Exception("Unable to update " + this.ROOM_SCHED + " automatically! Please update manually.");
+                    }
+                }
+                else
+                {
+                    //In case both those attempt failed we come in here
+                    Quit();
+                    throw new Exception("Unable to update " + this.ROOM_SCHED + " automatically! Please update manually.");
+                }
+            }
+        }
+
+        /// <summary>
+        /// This will attempt to read the clo data from an email steams
+        /// </summary>
+        /// <returns>True - if connection was made and the clo was imported successfully. False - otherwise. </returns>
+        private bool getCLOFromEmail(DateTime today)
+        {
+            //A result flag
+            bool result = false;
+
+            //Using email scanner
+            EmailScanner ES = new EmailScanner(today);
+
+            //Get the message body if possible.
+            string body = ES.messageBody();
+            if (body != null)
+            {
+                //Clear all the content in the worksheet
+                Excel.Range clearCells = roomSheet1.UsedRange;
+                clearCells.Clear();
+
+                //Clear the clipboard just incase   
+                Clipboard.Clear();
+
+                //Use the UI thread to do a copy of the data (STA Thread rules) 
+                //form1.BeginInvoke(new Action(() => Clipboard.SetText(body)));
+                Clipboard.SetData(DataFormats.Text, body);
+
+                //deference this variable
+                clearCells = null;
+
+                //The cell we want to paste too
+                Excel.Range pasteCell = roomSheet1.get_Range("A1", "A1");
+
+                //Select it
+                pasteCell.Select();
+
+                try
+                {
+                    roomSheet1.PasteSpecial(DataFormats.Text);
+                    //if(roomSched.Ready)
+                    //Past all the data there.
+                    //roomSheet1.PasteSpecial("Text");
+                }
+                catch (Exception e)
+                {
+                    //throw the exception
+                    throw new Exception("Excel was busy while pasting the R25 data. Please restart the application and try again.");
+                }
+
+                //Select the first columns
+                pasteCell = (Excel.Range)roomSheet1.UsedRange.Columns[1];
+
+                //Select it
+                pasteCell.Select();
+
+                //Run macro
+                roomSched.Run("Parsing");
+
+                //Save and set the result flag to true
+                roomSched.DisplayAlerts = false;
+                roomWorkBook.Save();
+                result = true;
+
+                //Clear the clipboard   
+                Clipboard.Clear();
+
+                clearCells = null;
+                pasteCell = null;
+            }
+
+            return result;
+        }
         #endregion
 
         #region Cleanup/Closing Methods
@@ -1764,26 +1901,20 @@ namespace ClassOpsLogCreator
                 existingMasterWorkBook = null;
                 existingMasterWorkSheet = null;
             }
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
 
-            //TEST CODE!
-            //If we still have open instance of excel lets force close
-            /*System.Diagnostics.Process[] process = System.Diagnostics.Process.GetProcessesByName("Excel");
-            foreach (System.Diagnostics.Process p in process)
+            if (roomWorkBook != null)
             {
-                if (!string.IsNullOrEmpty(p.ProcessName))
-                {
-                    try
-                    {
-                        p.Kill();
-                    }
-                    catch { }
-                }
-            }*/
-            //TEST CODE!
+                roomSched.Quit();
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(roomSched);
+                roomSched = null;
+                roomWorkBook = null;
+                roomSheet1 = null;
+            }
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
         #endregion
     }

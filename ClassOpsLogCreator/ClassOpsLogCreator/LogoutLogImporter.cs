@@ -72,48 +72,6 @@ namespace ClassOpsLogCreator
                 throw new System.FieldAccessException("File not found!");
             }
 
-            //Get the date from the clo file (For reference checking)
-            Excel.Range cloDate = roomSheet1.get_Range("A1", "B1");
-            System.Array cloDateArray = (System.Array)cloDate.Cells.Value2;
-            string cloDateString = ((string)cloDateArray.GetValue(1, 1).ToString().Trim() + "," + (string)cloDateArray.GetValue(1, 2).ToString().Trim()).Replace(" ", "");
-
-            //Get todays date and do a check to see if the clo is updated.
-            string todaysDate = DateTime.Now.ToString("dddd,dd,yyyy");
-
-            //If the clo excel file is outdated we need to update it automatically
-            if (!cloDateString.Equals(todaysDate))
-            {
-                //Try to update the clo via the EmailScanner. 1st (Check if we have login credentials
-                if (Properties.Settings.Default.gmailUserName == "" || Properties.Settings.Default.gmailPassword == "")
-                {
-                    Quit();
-                    throw new Exception("No login credentials were found. Unable to login to automatically fetch CLO. Please update CLO manually.");
-                }
-                else if (Properties.Settings.Default.gmailUserName != "" || Properties.Settings.Default.gmailPassword != "")
-                {
-                    //Have login credentials. Lets make the clo via the email scanner.
-                    form1.BeginInvoke(new MethodInvoker(delegate ()
-                    {
-                        form1.updateDetails(form1.ROOM_SCHED + " is out of date! - Fetching most recent R25 data. (This step can take up to 5 Minutes)");
-                    }));
-                    bool answer = this.getCLOFromEmail(DateTime.Today);
-                    if (!answer)
-                    {
-                        Quit();
-                        throw new Exception("Unable to update " + form1.ROOM_SCHED + " automatically! Please update manually.");
-                    }
-                    form1.BeginInvoke(new MethodInvoker(delegate ()
-                    {
-                        form1.updateDetails("Classroom schedule successfully update!");
-                    }));
-                }
-                else
-                {
-                    //In case both those attempt failed we come in here
-                    Quit();
-                    throw new Exception("Unable to update " + form1.ROOM_SCHED + " automatically! Please update manually.");
-                }                
-            }
 
             //Get the range we are working within. (A1, A.LastRow)
             Excel.Range last = roomSheet1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
@@ -184,83 +142,6 @@ namespace ClassOpsLogCreator
         public int getLogOutArrayCount()
         {
             return this.masterArrayCounter;
-        }
-
-        /// <summary>
-        /// This will attempt to read the clo data from an email steams
-        /// </summary>
-        /// <returns>True - if connection was made and the clo was imported successfully. False - otherwise. </returns>
-        private bool getCLOFromEmail(DateTime today)
-        {
-            //A result flag
-            bool result = false;
-
-            //Using email scanner
-            EmailScanner ES = new EmailScanner(today);
-
-            //Get the message body if possible.
-            string body = ES.messageBody();
-            if(body != null)
-            {
-                //Clear all the content in the worksheet
-                Excel.Range clearCells = roomSheet1.UsedRange;
-                clearCells.Clear();
-
-                //Clear the clipboard just incase   
-                form1.BeginInvoke(new Action(() => Clipboard.Clear()));
-
-                //Use the UI thread to do a copy of the data (STA Thread rules) 
-                //form1.BeginInvoke(new Action(() => Clipboard.SetText(body)));
-                form1.BeginInvoke(new Action(() => Clipboard.SetData(DataFormats.Text, body)));
-
-                //deference this variable
-                clearCells = null;
-                
-                //The cell we want to paste too
-                Excel.Range pasteCell = roomSheet1.get_Range("A1", "A1");
-
-                //Select it
-                pasteCell.Select();
-
-                try
-                {
-                    while(!roomSched.Ready)
-                    {
-                        //Check the excel file is busy
-                    }
-                    roomSheet1.PasteSpecial(DataFormats.Text);
-                    //if(roomSched.Ready)
-                    //Past all the data there.
-                    //roomSheet1.PasteSpecial("Text");
-                }
-                catch(Exception e)
-                {
-                    //throw the exception
-                    throw new Exception("Excel was busy while pasting the R25 data. Please restart the application and try again.");                    
-                }
-
-                //Select the first columns
-                pasteCell = (Excel.Range)roomSheet1.UsedRange.Columns[1];
-
-                //Select it
-                pasteCell.Select();
-
-                //Run macro
-                roomSched.Run("Parsing");
-
-                //Save and set the result flag to true
-                roomSched.DisplayAlerts = false;
-                roomWorkBook.Save();
-                result = true;
-
-                //Clear the clipboard   
-                form1.BeginInvoke(new Action(() => Clipboard.Clear()));
-
-                clearCells = null;
-                pasteCell = null;
-            }
-
-            return result;
         }
 
         /// <summary>
