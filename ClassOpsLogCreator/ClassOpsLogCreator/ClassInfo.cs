@@ -272,12 +272,12 @@ namespace ClassOpsLogCreator
 
             string[] zone3 = new string[] //South
             {
-               SSB, ELC, BCS, DB, ACE, CFT,KT, CFA
+               SSB, ELC, BCS, DB, ACE, CFT,KT, YL, CFA
             };
 
-            string[] zone4 = new string[] //Noth East
+            string[] zone4 = new string[] //North East
             {
-               MC, FC, VC, WC, SLH, YL, LUM, STC, K
+               MC, FC, VC, WC, SLH, LUM, STC, K
             };
 
             List<string> buildingList = new List<string>();

@@ -59,6 +59,7 @@ namespace ClassOpsLogCreator
             this.weeklyRadio.CheckedChanged += new EventHandler(weeklyRadio_CheckedChanged);
             this.monthlyRadio.CheckedChanged += new EventHandler(monthlyRadio_CheckedChanged);
             this.yearlyRadio.CheckedChanged += new EventHandler(yearlyRadio_CheckedChanged);
+            
 
             //Get last weeks start and end date.
             DateTime date = DateTime.Now.AddDays(-7);
@@ -422,14 +423,14 @@ namespace ClassOpsLogCreator
             {
                 //get Monday and Friday of a selected week.
                 DateTime date = this.dateTimePicker.Value.Date;
-                while (date.DayOfWeek != DayOfWeek.Monday)
+                while (date.DayOfWeek != DayOfWeek.Sunday)
                 {
                     date = date.AddDays(-1);
                 }
 
                 //Start of selected week and end of the given week.
                 startDate = date;
-                endDate = date.AddDays(4);
+                endDate = date.AddDays(6);
 
             }
             //Generate the stats for the month.

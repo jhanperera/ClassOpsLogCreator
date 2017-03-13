@@ -1277,9 +1277,9 @@ namespace ClassOpsLogCreator
             date_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             date_range.ColumnWidth = 10;
             DateTime today = DateTime.Today;
-            date_range.Value2 = today.ToString("M/d/yy");
+            date_range.Value2 = today.ToString("M/dd/yy");
             //Set the date format for the whole column. 
-            date_range.EntireColumn.NumberFormat = "M/d/yy";
+            date_range.EntireColumn.NumberFormat = "M/dd/yy";
 
             //Format for easy reading of Time, Building, and Room.
             value_range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -1402,6 +1402,10 @@ namespace ClassOpsLogCreator
                 rowNumbers = new long[,] { { lastRowDestination + 2, last.Row } };
                 this.logNextQueue.Enqueue(destinationArray);
             }
+
+            //Convert all date time
+            Excel.Range rg = existingMasterWorkSheet.get_Range("C1", "C1");
+            rg.EntireColumn.NumberFormat = "M/dd/yy";
 
             //Get the new last row
             Excel.Range last_row = existingMasterWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
