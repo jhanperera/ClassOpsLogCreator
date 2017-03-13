@@ -187,7 +187,7 @@ namespace ClassOpsLogCreator
         /// <returns></returns>
         private DateTime getFirstDayOfWeek()
         {
-            //get the date and subtract a day until we reach Monday.
+            //get the date and subtract a day until we reach Sunday.
             DateTime date = today.AddDays(-1);
             while (date.DayOfWeek != DayOfWeek.Monday)
             {
