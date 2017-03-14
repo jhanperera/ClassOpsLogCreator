@@ -212,7 +212,7 @@
             this.emailLoginTab.Controls.Add(this.buildingUpdateTab);
             this.emailLoginTab.Location = new System.Drawing.Point(25, 63);
             this.emailLoginTab.Name = "emailLoginTab";
-            this.emailLoginTab.SelectedIndex = 3;
+            this.emailLoginTab.SelectedIndex = 0;
             this.emailLoginTab.Size = new System.Drawing.Size(570, 240);
             this.emailLoginTab.Style = MetroFramework.MetroColorStyle.Red;
             this.emailLoginTab.TabIndex = 7;
