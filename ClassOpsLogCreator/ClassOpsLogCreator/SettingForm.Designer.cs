@@ -74,6 +74,7 @@
             this.updateBTN = new MetroFramework.Controls.MetroButton();
             this.newBuildingInit = new MetroFramework.Controls.MetroTextBox();
             this.buildingComboBox = new MetroFramework.Controls.MetroComboBox();
+            this.weekendCheckBox = new System.Windows.Forms.CheckBox();
             this.emailLoginTab.SuspendLayout();
             this.versuibTab.SuspendLayout();
             this.logoutGenTab.SuspendLayout();
@@ -100,7 +101,7 @@
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Location = new System.Drawing.Point(7, 49);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(159, 19);
+            this.passwordLabel.Size = new System.Drawing.Size(160, 19);
             this.passwordLabel.TabIndex = 1;
             this.passwordLabel.Text = "Electronic Email Password";
             // 
@@ -197,7 +198,7 @@
             this.versionLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.versionLabel.Location = new System.Drawing.Point(207, 87);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(79, 25);
+            this.versionLabel.Size = new System.Drawing.Size(80, 25);
             this.versionLabel.TabIndex = 6;
             this.versionLabel.Text = "Version: ";
             // 
@@ -211,7 +212,7 @@
             this.emailLoginTab.Controls.Add(this.buildingUpdateTab);
             this.emailLoginTab.Location = new System.Drawing.Point(25, 63);
             this.emailLoginTab.Name = "emailLoginTab";
-            this.emailLoginTab.SelectedIndex = 1;
+            this.emailLoginTab.SelectedIndex = 3;
             this.emailLoginTab.Size = new System.Drawing.Size(570, 240);
             this.emailLoginTab.Style = MetroFramework.MetroColorStyle.Red;
             this.emailLoginTab.TabIndex = 7;
@@ -401,7 +402,7 @@
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.Location = new System.Drawing.Point(79, 46);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(101, 19);
+            this.metroLabel2.Size = new System.Drawing.Size(102, 19);
             this.metroLabel2.TabIndex = 4;
             this.metroLabel2.Text = "Gmail Password";
             // 
@@ -470,6 +471,7 @@
             // 
             // statisticsTab
             // 
+            this.statisticsTab.Controls.Add(this.weekendCheckBox);
             this.statisticsTab.Controls.Add(this.dateTimePicker);
             this.statisticsTab.Controls.Add(this.generateBTN);
             this.statisticsTab.Controls.Add(this.yearlyRadio);
@@ -492,7 +494,7 @@
             // 
             this.dateTimePicker.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dateTimePicker.Location = new System.Drawing.Point(246, 77);
-            this.dateTimePicker.MinimumSize = new System.Drawing.Size(4, 29);
+            this.dateTimePicker.MinimumSize = new System.Drawing.Size(0, 29);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(200, 29);
             this.dateTimePicker.Style = MetroFramework.MetroColorStyle.Red;
@@ -516,7 +518,7 @@
             this.yearlyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.yearlyRadio.Location = new System.Drawing.Point(329, 30);
             this.yearlyRadio.Name = "yearlyRadio";
-            this.yearlyRadio.Size = new System.Drawing.Size(61, 19);
+            this.yearlyRadio.Size = new System.Drawing.Size(62, 19);
             this.yearlyRadio.TabIndex = 6;
             this.yearlyRadio.Text = "Yearly";
             this.yearlyRadio.UseSelectable = true;
@@ -541,7 +543,7 @@
             this.weeklyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.weeklyRadio.Location = new System.Drawing.Point(172, 30);
             this.weeklyRadio.Name = "weeklyRadio";
-            this.weeklyRadio.Size = new System.Drawing.Size(68, 19);
+            this.weeklyRadio.Size = new System.Drawing.Size(69, 19);
             this.weeklyRadio.TabIndex = 4;
             this.weeklyRadio.TabStop = true;
             this.weeklyRadio.Text = "Weekly";
@@ -755,6 +757,16 @@
             this.buildingComboBox.TabIndex = 4;
             this.buildingComboBox.UseSelectable = true;
             // 
+            // weekendCheckBox
+            // 
+            this.weekendCheckBox.AutoSize = true;
+            this.weekendCheckBox.Location = new System.Drawing.Point(453, 84);
+            this.weekendCheckBox.Name = "weekendCheckBox";
+            this.weekendCheckBox.Size = new System.Drawing.Size(122, 17);
+            this.weekendCheckBox.TabIndex = 9;
+            this.weekendCheckBox.Text = "Include Weekends?";
+            this.weekendCheckBox.UseVisualStyleBackColor = true;
+            // 
             // SettingForm
             // 
             this.AcceptButton = this.loginBTN;
@@ -840,5 +852,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroTextBox gmailPasswordTextBox;
         private MetroFramework.Controls.MetroTextBox gmailUsernameTextBox;
+        private System.Windows.Forms.CheckBox weekendCheckBox;
     }
 }

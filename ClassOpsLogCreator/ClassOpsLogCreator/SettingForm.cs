@@ -125,6 +125,9 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void yearlyRadio_CheckedChanged(object sender, EventArgs e)
         {
+            //hide the weekend checkbox
+            this.weekendCheckBox.Visible = false;
+
             dateTimePicker.Format = DateTimePickerFormat.Custom;
             dateTimePicker.CustomFormat = "yyyy";
             selectorLabel.Text = "Select a year:";
@@ -138,6 +141,9 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void monthlyRadio_CheckedChanged(object sender, EventArgs e)
         {
+            //hide the weekend checkbox
+            this.weekendCheckBox.Visible = false;
+
             dateTimePicker.Format = DateTimePickerFormat.Custom;
             dateTimePicker.CustomFormat = "MM/yyyy";
             selectorLabel.Text = "Select a month:";
@@ -150,6 +156,9 @@ namespace ClassOpsLogCreator
         /// <param name="e"></param>
         private void weeklyRadio_CheckedChanged(object sender, EventArgs e)
         {
+            //show the weekend checkbox
+            this.weekendCheckBox.Visible = true;
+
             dateTimePicker.Format = DateTimePickerFormat.Long;
             selectorLabel.Text = "Select a day:";
         }
@@ -423,14 +432,21 @@ namespace ClassOpsLogCreator
             {
                 //get Monday and Friday of a selected week.
                 DateTime date = this.dateTimePicker.Value.Date;
-                while (date.DayOfWeek != DayOfWeek.Sunday)
+                while (date.DayOfWeek != DayOfWeek.Monday)
                 {
                     date = date.AddDays(-1);
                 }
 
                 //Start of selected week and end of the given week.
                 startDate = date;
-                endDate = date.AddDays(6);
+                endDate = date.AddDays(4);
+
+                if (this.weekendCheckBox.Checked)
+                {
+                    MetroMessageBox.Show(this, "Please note that if the selected week has no weekend work or the data is not in chronological order in the masterlog.xlsx the output will be incorrect!", "Alert!");
+                    startDate = startDate.AddDays(-1);
+                    endDate = endDate.AddDays(1);
+                }
 
             }
             //Generate the stats for the month.
