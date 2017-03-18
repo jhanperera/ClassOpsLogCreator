@@ -126,7 +126,7 @@ namespace ClassOpsLogCreator
         private void yearlyRadio_CheckedChanged(object sender, EventArgs e)
         {
             //hide the weekend checkbox
-            this.weekendCheckBox.Visible = false;
+            this.weekendIncludeBox.Visible = false;
 
             dateTimePicker.Format = DateTimePickerFormat.Custom;
             dateTimePicker.CustomFormat = "yyyy";
@@ -142,7 +142,7 @@ namespace ClassOpsLogCreator
         private void monthlyRadio_CheckedChanged(object sender, EventArgs e)
         {
             //hide the weekend checkbox
-            this.weekendCheckBox.Visible = false;
+            this.weekendIncludeBox.Visible = false;
 
             dateTimePicker.Format = DateTimePickerFormat.Custom;
             dateTimePicker.CustomFormat = "MM/yyyy";
@@ -157,7 +157,7 @@ namespace ClassOpsLogCreator
         private void weeklyRadio_CheckedChanged(object sender, EventArgs e)
         {
             //show the weekend checkbox
-            this.weekendCheckBox.Visible = true;
+            this.weekendIncludeBox.Visible = true;
 
             dateTimePicker.Format = DateTimePickerFormat.Long;
             selectorLabel.Text = "Select a day:";
@@ -441,11 +441,16 @@ namespace ClassOpsLogCreator
                 startDate = date;
                 endDate = date.AddDays(4);
 
-                if (this.weekendCheckBox.Checked)
+                if (this.satIncludeCheck.Checked)
                 {
-                    MetroMessageBox.Show(this, "Please note that if the selected week has no weekend work or the data is not in chronological order in the masterlog.xlsx the output will be incorrect!", "Alert!");
-                    startDate = startDate.AddDays(-1);
+                    //Go to Saturday
                     endDate = endDate.AddDays(1);
+                }
+
+                if (this.sunIncludeCheck.Checked)
+                {
+                    //Go to Sunday
+                    startDate = startDate.AddDays(-1);
                 }
 
             }

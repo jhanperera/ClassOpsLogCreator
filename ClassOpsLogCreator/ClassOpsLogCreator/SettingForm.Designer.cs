@@ -74,7 +74,9 @@
             this.updateBTN = new MetroFramework.Controls.MetroButton();
             this.newBuildingInit = new MetroFramework.Controls.MetroTextBox();
             this.buildingComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.weekendCheckBox = new System.Windows.Forms.CheckBox();
+            this.weekendIncludeBox = new System.Windows.Forms.GroupBox();
+            this.satIncludeCheck = new MetroFramework.Controls.MetroCheckBox();
+            this.sunIncludeCheck = new MetroFramework.Controls.MetroCheckBox();
             this.emailLoginTab.SuspendLayout();
             this.versuibTab.SuspendLayout();
             this.logoutGenTab.SuspendLayout();
@@ -85,23 +87,26 @@
             this.buildingUpdateTab.SuspendLayout();
             this.addEmployeGroup.SuspendLayout();
             this.changeGroupBox.SuspendLayout();
+            this.weekendIncludeBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Location = new System.Drawing.Point(99, 16);
+            this.usernameLabel.Location = new System.Drawing.Point(248, 40);
+            this.usernameLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(68, 19);
+            this.usernameLabel.Size = new System.Drawing.Size(73, 20);
             this.usernameLabel.TabIndex = 0;
             this.usernameLabel.Text = "Username";
             // 
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(7, 49);
+            this.passwordLabel.Location = new System.Drawing.Point(18, 122);
+            this.passwordLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(160, 19);
+            this.passwordLabel.Size = new System.Drawing.Size(168, 20);
             this.passwordLabel.TabIndex = 1;
             this.passwordLabel.Text = "Electronic Email Password";
             // 
@@ -111,16 +116,18 @@
             // 
             // 
             this.usernameTextBox.CustomButton.Image = null;
-            this.usernameTextBox.CustomButton.Location = new System.Drawing.Point(131, 2);
+            this.usernameTextBox.CustomButton.Location = new System.Drawing.Point(810, 2);
+            this.usernameTextBox.CustomButton.Margin = new System.Windows.Forms.Padding(20, 20, 20, 20);
             this.usernameTextBox.CustomButton.Name = "";
-            this.usernameTextBox.CustomButton.Size = new System.Drawing.Size(17, 17);
+            this.usernameTextBox.CustomButton.Size = new System.Drawing.Size(132, 132);
             this.usernameTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.usernameTextBox.CustomButton.TabIndex = 1;
             this.usernameTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.usernameTextBox.CustomButton.UseSelectable = true;
             this.usernameTextBox.CustomButton.Visible = false;
             this.usernameTextBox.Lines = new string[0];
-            this.usernameTextBox.Location = new System.Drawing.Point(184, 16);
+            this.usernameTextBox.Location = new System.Drawing.Point(460, 40);
+            this.usernameTextBox.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.usernameTextBox.MaxLength = 32767;
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.PasswordChar = '\0';
@@ -130,7 +137,7 @@
             this.usernameTextBox.SelectionLength = 0;
             this.usernameTextBox.SelectionStart = 0;
             this.usernameTextBox.ShortcutsEnabled = true;
-            this.usernameTextBox.Size = new System.Drawing.Size(151, 22);
+            this.usernameTextBox.Size = new System.Drawing.Size(378, 55);
             this.usernameTextBox.TabIndex = 0;
             this.usernameTextBox.UseSelectable = true;
             this.usernameTextBox.WaterMark = "Username";
@@ -143,16 +150,18 @@
             // 
             // 
             this.passwordTextBox.CustomButton.Image = null;
-            this.passwordTextBox.CustomButton.Location = new System.Drawing.Point(131, 2);
+            this.passwordTextBox.CustomButton.Location = new System.Drawing.Point(810, 2);
+            this.passwordTextBox.CustomButton.Margin = new System.Windows.Forms.Padding(20, 20, 20, 20);
             this.passwordTextBox.CustomButton.Name = "";
-            this.passwordTextBox.CustomButton.Size = new System.Drawing.Size(17, 17);
+            this.passwordTextBox.CustomButton.Size = new System.Drawing.Size(132, 132);
             this.passwordTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.passwordTextBox.CustomButton.TabIndex = 1;
             this.passwordTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.passwordTextBox.CustomButton.UseSelectable = true;
             this.passwordTextBox.CustomButton.Visible = false;
             this.passwordTextBox.Lines = new string[0];
-            this.passwordTextBox.Location = new System.Drawing.Point(184, 46);
+            this.passwordTextBox.Location = new System.Drawing.Point(460, 115);
+            this.passwordTextBox.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.passwordTextBox.MaxLength = 32767;
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '●';
@@ -161,7 +170,7 @@
             this.passwordTextBox.SelectionLength = 0;
             this.passwordTextBox.SelectionStart = 0;
             this.passwordTextBox.ShortcutsEnabled = true;
-            this.passwordTextBox.Size = new System.Drawing.Size(151, 22);
+            this.passwordTextBox.Size = new System.Drawing.Size(378, 55);
             this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.UseSelectable = true;
             this.passwordTextBox.UseSystemPasswordChar = true;
@@ -172,9 +181,10 @@
             // 
             this.loginBTN.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loginBTN.Highlight = true;
-            this.loginBTN.Location = new System.Drawing.Point(153, 168);
+            this.loginBTN.Location = new System.Drawing.Point(382, 420);
+            this.loginBTN.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.loginBTN.Name = "loginBTN";
-            this.loginBTN.Size = new System.Drawing.Size(80, 22);
+            this.loginBTN.Size = new System.Drawing.Size(200, 55);
             this.loginBTN.TabIndex = 2;
             this.loginBTN.Text = "Login";
             this.loginBTN.UseSelectable = true;
@@ -183,9 +193,10 @@
             // cancelBTN
             // 
             this.cancelBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cancelBTN.Location = new System.Drawing.Point(330, 168);
+            this.cancelBTN.Location = new System.Drawing.Point(825, 420);
+            this.cancelBTN.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.cancelBTN.Name = "cancelBTN";
-            this.cancelBTN.Size = new System.Drawing.Size(80, 22);
+            this.cancelBTN.Size = new System.Drawing.Size(200, 55);
             this.cancelBTN.TabIndex = 5;
             this.cancelBTN.Text = "Cancel";
             this.cancelBTN.UseSelectable = true;
@@ -196,9 +207,10 @@
             this.versionLabel.AutoSize = true;
             this.versionLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.versionLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.versionLabel.Location = new System.Drawing.Point(207, 87);
+            this.versionLabel.Location = new System.Drawing.Point(518, 218);
+            this.versionLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(80, 25);
+            this.versionLabel.Size = new System.Drawing.Size(84, 25);
             this.versionLabel.TabIndex = 6;
             this.versionLabel.Text = "Version: ";
             // 
@@ -210,10 +222,11 @@
             this.emailLoginTab.Controls.Add(this.emailTab);
             this.emailLoginTab.Controls.Add(this.statisticsTab);
             this.emailLoginTab.Controls.Add(this.buildingUpdateTab);
-            this.emailLoginTab.Location = new System.Drawing.Point(25, 63);
+            this.emailLoginTab.Location = new System.Drawing.Point(62, 158);
+            this.emailLoginTab.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.emailLoginTab.Name = "emailLoginTab";
-            this.emailLoginTab.SelectedIndex = 0;
-            this.emailLoginTab.Size = new System.Drawing.Size(570, 240);
+            this.emailLoginTab.SelectedIndex = 3;
+            this.emailLoginTab.Size = new System.Drawing.Size(1425, 600);
             this.emailLoginTab.Style = MetroFramework.MetroColorStyle.Red;
             this.emailLoginTab.TabIndex = 7;
             this.emailLoginTab.UseSelectable = true;
@@ -223,15 +236,16 @@
             this.versuibTab.Controls.Add(this.versionLabel);
             this.versuibTab.HorizontalScrollbarBarColor = true;
             this.versuibTab.HorizontalScrollbarHighlightOnWheel = false;
-            this.versuibTab.HorizontalScrollbarSize = 10;
+            this.versuibTab.HorizontalScrollbarSize = 25;
             this.versuibTab.Location = new System.Drawing.Point(4, 41);
+            this.versuibTab.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.versuibTab.Name = "versuibTab";
-            this.versuibTab.Size = new System.Drawing.Size(562, 195);
+            this.versuibTab.Size = new System.Drawing.Size(1417, 555);
             this.versuibTab.TabIndex = 2;
             this.versuibTab.Text = "Version";
             this.versuibTab.VerticalScrollbarBarColor = true;
             this.versuibTab.VerticalScrollbarHighlightOnWheel = false;
-            this.versuibTab.VerticalScrollbarSize = 10;
+            this.versuibTab.VerticalScrollbarSize = 25;
             // 
             // logoutGenTab
             // 
@@ -243,22 +257,24 @@
             this.logoutGenTab.Controls.Add(this.startHour1);
             this.logoutGenTab.HorizontalScrollbarBarColor = true;
             this.logoutGenTab.HorizontalScrollbarHighlightOnWheel = false;
-            this.logoutGenTab.HorizontalScrollbarSize = 10;
+            this.logoutGenTab.HorizontalScrollbarSize = 25;
             this.logoutGenTab.Location = new System.Drawing.Point(4, 41);
+            this.logoutGenTab.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.logoutGenTab.Name = "logoutGenTab";
-            this.logoutGenTab.Size = new System.Drawing.Size(562, 195);
+            this.logoutGenTab.Size = new System.Drawing.Size(1417, 555);
             this.logoutGenTab.TabIndex = 1;
             this.logoutGenTab.Text = "Logout Generator";
             this.logoutGenTab.VerticalScrollbarBarColor = true;
             this.logoutGenTab.VerticalScrollbarHighlightOnWheel = false;
-            this.logoutGenTab.VerticalScrollbarSize = 10;
+            this.logoutGenTab.VerticalScrollbarSize = 25;
             // 
             // createBTN
             // 
             this.createBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.createBTN.Location = new System.Drawing.Point(241, 162);
+            this.createBTN.Location = new System.Drawing.Point(602, 405);
+            this.createBTN.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.createBTN.Name = "createBTN";
-            this.createBTN.Size = new System.Drawing.Size(87, 27);
+            this.createBTN.Size = new System.Drawing.Size(218, 68);
             this.createBTN.TabIndex = 18;
             this.createBTN.Text = "Create";
             this.createBTN.UseSelectable = true;
@@ -269,9 +285,10 @@
             this.am_pmCombo1_2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.am_pmCombo1_2.FormattingEnabled = true;
             this.am_pmCombo1_2.ItemHeight = 23;
-            this.am_pmCombo1_2.Location = new System.Drawing.Point(393, 101);
+            this.am_pmCombo1_2.Location = new System.Drawing.Point(982, 252);
+            this.am_pmCombo1_2.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.am_pmCombo1_2.Name = "am_pmCombo1_2";
-            this.am_pmCombo1_2.Size = new System.Drawing.Size(53, 29);
+            this.am_pmCombo1_2.Size = new System.Drawing.Size(126, 29);
             this.am_pmCombo1_2.TabIndex = 15;
             this.am_pmCombo1_2.TabStop = false;
             this.am_pmCombo1_2.UseSelectable = true;
@@ -281,9 +298,10 @@
             this.endHour1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.endHour1.FormattingEnabled = true;
             this.endHour1.ItemHeight = 23;
-            this.endHour1.Location = new System.Drawing.Point(299, 101);
+            this.endHour1.Location = new System.Drawing.Point(748, 252);
+            this.endHour1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.endHour1.Name = "endHour1";
-            this.endHour1.Size = new System.Drawing.Size(88, 29);
+            this.endHour1.Size = new System.Drawing.Size(214, 29);
             this.endHour1.TabIndex = 14;
             this.endHour1.TabStop = false;
             this.endHour1.UseSelectable = true;
@@ -291,9 +309,10 @@
             // toLabel1
             // 
             this.toLabel1.AutoSize = true;
-            this.toLabel1.Location = new System.Drawing.Point(272, 103);
+            this.toLabel1.Location = new System.Drawing.Point(680, 258);
+            this.toLabel1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.toLabel1.Name = "toLabel1";
-            this.toLabel1.Size = new System.Drawing.Size(21, 19);
+            this.toLabel1.Size = new System.Drawing.Size(21, 20);
             this.toLabel1.TabIndex = 17;
             this.toLabel1.Text = "to";
             // 
@@ -302,9 +321,10 @@
             this.am_pmCombo1_1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.am_pmCombo1_1.FormattingEnabled = true;
             this.am_pmCombo1_1.ItemHeight = 23;
-            this.am_pmCombo1_1.Location = new System.Drawing.Point(213, 101);
+            this.am_pmCombo1_1.Location = new System.Drawing.Point(532, 252);
+            this.am_pmCombo1_1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.am_pmCombo1_1.Name = "am_pmCombo1_1";
-            this.am_pmCombo1_1.Size = new System.Drawing.Size(53, 29);
+            this.am_pmCombo1_1.Size = new System.Drawing.Size(126, 29);
             this.am_pmCombo1_1.TabIndex = 13;
             this.am_pmCombo1_1.TabStop = false;
             this.am_pmCombo1_1.UseSelectable = true;
@@ -313,10 +333,11 @@
             // 
             this.startHour1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.startHour1.ItemHeight = 23;
-            this.startHour1.Location = new System.Drawing.Point(119, 101);
+            this.startHour1.Location = new System.Drawing.Point(298, 252);
+            this.startHour1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.startHour1.Name = "startHour1";
             this.startHour1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.startHour1.Size = new System.Drawing.Size(88, 29);
+            this.startHour1.Size = new System.Drawing.Size(214, 29);
             this.startHour1.TabIndex = 12;
             this.startHour1.TabStop = false;
             this.startHour1.UseSelectable = true;
@@ -329,15 +350,16 @@
             this.emailTab.Controls.Add(this.loginBTN);
             this.emailTab.HorizontalScrollbarBarColor = true;
             this.emailTab.HorizontalScrollbarHighlightOnWheel = false;
-            this.emailTab.HorizontalScrollbarSize = 10;
+            this.emailTab.HorizontalScrollbarSize = 25;
             this.emailTab.Location = new System.Drawing.Point(4, 41);
+            this.emailTab.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.emailTab.Name = "emailTab";
-            this.emailTab.Size = new System.Drawing.Size(562, 195);
+            this.emailTab.Size = new System.Drawing.Size(1417, 555);
             this.emailTab.TabIndex = 0;
             this.emailTab.Text = "Email Login";
             this.emailTab.VerticalScrollbarBarColor = true;
             this.emailTab.VerticalScrollbarHighlightOnWheel = false;
-            this.emailTab.VerticalScrollbarSize = 10;
+            this.emailTab.VerticalScrollbarSize = 25;
             // 
             // electronicEmail
             // 
@@ -347,9 +369,11 @@
             this.electronicEmail.Controls.Add(this.usernameTextBox);
             this.electronicEmail.Controls.Add(this.passwordTextBox);
             this.electronicEmail.Controls.Add(this.passwordLabel);
-            this.electronicEmail.Location = new System.Drawing.Point(0, 86);
+            this.electronicEmail.Location = new System.Drawing.Point(0, 215);
+            this.electronicEmail.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.electronicEmail.Name = "electronicEmail";
-            this.electronicEmail.Size = new System.Drawing.Size(559, 78);
+            this.electronicEmail.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.electronicEmail.Size = new System.Drawing.Size(1398, 195);
             this.electronicEmail.TabIndex = 7;
             this.electronicEmail.TabStop = false;
             this.electronicEmail.Text = "Electronic Email Login";
@@ -357,9 +381,10 @@
             // metroLabel5
             // 
             this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(341, 16);
+            this.metroLabel5.Location = new System.Drawing.Point(852, 40);
+            this.metroLabel5.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.metroLabel5.Name = "metroLabel5";
-            this.metroLabel5.Size = new System.Drawing.Size(70, 19);
+            this.metroLabel5.Size = new System.Drawing.Size(75, 20);
             this.metroLabel5.TabIndex = 8;
             this.metroLabel5.Text = "@yorku.ca";
             // 
@@ -372,9 +397,11 @@
             this.gmail.Controls.Add(this.gmailPasswordTextBox);
             this.gmail.Controls.Add(this.gmailUsernameTextBox);
             this.gmail.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.gmail.Location = new System.Drawing.Point(0, 4);
+            this.gmail.Location = new System.Drawing.Point(0, 10);
+            this.gmail.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.gmail.Name = "gmail";
-            this.gmail.Size = new System.Drawing.Size(559, 76);
+            this.gmail.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.gmail.Size = new System.Drawing.Size(1398, 190);
             this.gmail.TabIndex = 6;
             this.gmail.TabStop = false;
             this.gmail.Text = "Gmail Login";
@@ -382,27 +409,30 @@
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(341, 19);
+            this.metroLabel3.Location = new System.Drawing.Point(852, 48);
+            this.metroLabel3.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(84, 19);
+            this.metroLabel3.Size = new System.Drawing.Size(86, 20);
             this.metroLabel3.TabIndex = 6;
             this.metroLabel3.Text = "@gmail.com";
             // 
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(74, 16);
+            this.metroLabel1.Location = new System.Drawing.Point(185, 40);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(106, 19);
+            this.metroLabel1.Size = new System.Drawing.Size(112, 20);
             this.metroLabel1.TabIndex = 2;
             this.metroLabel1.Text = "Gmail Username";
             // 
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(79, 46);
+            this.metroLabel2.Location = new System.Drawing.Point(198, 115);
+            this.metroLabel2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(102, 19);
+            this.metroLabel2.Size = new System.Drawing.Size(105, 20);
             this.metroLabel2.TabIndex = 4;
             this.metroLabel2.Text = "Gmail Password";
             // 
@@ -412,16 +442,18 @@
             // 
             // 
             this.gmailPasswordTextBox.CustomButton.Image = null;
-            this.gmailPasswordTextBox.CustomButton.Location = new System.Drawing.Point(129, 2);
+            this.gmailPasswordTextBox.CustomButton.Location = new System.Drawing.Point(795, 2);
+            this.gmailPasswordTextBox.CustomButton.Margin = new System.Windows.Forms.Padding(20, 20, 20, 20);
             this.gmailPasswordTextBox.CustomButton.Name = "";
-            this.gmailPasswordTextBox.CustomButton.Size = new System.Drawing.Size(17, 17);
+            this.gmailPasswordTextBox.CustomButton.Size = new System.Drawing.Size(132, 132);
             this.gmailPasswordTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.gmailPasswordTextBox.CustomButton.TabIndex = 1;
             this.gmailPasswordTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.gmailPasswordTextBox.CustomButton.UseSelectable = true;
             this.gmailPasswordTextBox.CustomButton.Visible = false;
             this.gmailPasswordTextBox.Lines = new string[0];
-            this.gmailPasswordTextBox.Location = new System.Drawing.Point(186, 46);
+            this.gmailPasswordTextBox.Location = new System.Drawing.Point(465, 115);
+            this.gmailPasswordTextBox.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.gmailPasswordTextBox.MaxLength = 32767;
             this.gmailPasswordTextBox.Name = "gmailPasswordTextBox";
             this.gmailPasswordTextBox.PasswordChar = '●';
@@ -430,7 +462,7 @@
             this.gmailPasswordTextBox.SelectionLength = 0;
             this.gmailPasswordTextBox.SelectionStart = 0;
             this.gmailPasswordTextBox.ShortcutsEnabled = true;
-            this.gmailPasswordTextBox.Size = new System.Drawing.Size(149, 22);
+            this.gmailPasswordTextBox.Size = new System.Drawing.Size(372, 55);
             this.gmailPasswordTextBox.TabIndex = 5;
             this.gmailPasswordTextBox.UseSelectable = true;
             this.gmailPasswordTextBox.UseSystemPasswordChar = true;
@@ -443,16 +475,18 @@
             // 
             // 
             this.gmailUsernameTextBox.CustomButton.Image = null;
-            this.gmailUsernameTextBox.CustomButton.Location = new System.Drawing.Point(129, 2);
+            this.gmailUsernameTextBox.CustomButton.Location = new System.Drawing.Point(795, 2);
+            this.gmailUsernameTextBox.CustomButton.Margin = new System.Windows.Forms.Padding(20, 20, 20, 20);
             this.gmailUsernameTextBox.CustomButton.Name = "";
-            this.gmailUsernameTextBox.CustomButton.Size = new System.Drawing.Size(17, 17);
+            this.gmailUsernameTextBox.CustomButton.Size = new System.Drawing.Size(132, 132);
             this.gmailUsernameTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.gmailUsernameTextBox.CustomButton.TabIndex = 1;
             this.gmailUsernameTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.gmailUsernameTextBox.CustomButton.UseSelectable = true;
             this.gmailUsernameTextBox.CustomButton.Visible = false;
             this.gmailUsernameTextBox.Lines = new string[0];
-            this.gmailUsernameTextBox.Location = new System.Drawing.Point(186, 16);
+            this.gmailUsernameTextBox.Location = new System.Drawing.Point(465, 40);
+            this.gmailUsernameTextBox.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.gmailUsernameTextBox.MaxLength = 32767;
             this.gmailUsernameTextBox.Name = "gmailUsernameTextBox";
             this.gmailUsernameTextBox.PasswordChar = '\0';
@@ -462,7 +496,7 @@
             this.gmailUsernameTextBox.SelectionLength = 0;
             this.gmailUsernameTextBox.SelectionStart = 0;
             this.gmailUsernameTextBox.ShortcutsEnabled = true;
-            this.gmailUsernameTextBox.Size = new System.Drawing.Size(149, 22);
+            this.gmailUsernameTextBox.Size = new System.Drawing.Size(372, 55);
             this.gmailUsernameTextBox.TabIndex = 3;
             this.gmailUsernameTextBox.UseSelectable = true;
             this.gmailUsernameTextBox.WaterMark = "Username";
@@ -471,7 +505,7 @@
             // 
             // statisticsTab
             // 
-            this.statisticsTab.Controls.Add(this.weekendCheckBox);
+            this.statisticsTab.Controls.Add(this.weekendIncludeBox);
             this.statisticsTab.Controls.Add(this.dateTimePicker);
             this.statisticsTab.Controls.Add(this.generateBTN);
             this.statisticsTab.Controls.Add(this.yearlyRadio);
@@ -480,32 +514,35 @@
             this.statisticsTab.Controls.Add(this.selectorLabel);
             this.statisticsTab.HorizontalScrollbarBarColor = true;
             this.statisticsTab.HorizontalScrollbarHighlightOnWheel = false;
-            this.statisticsTab.HorizontalScrollbarSize = 10;
+            this.statisticsTab.HorizontalScrollbarSize = 25;
             this.statisticsTab.Location = new System.Drawing.Point(4, 41);
+            this.statisticsTab.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.statisticsTab.Name = "statisticsTab";
-            this.statisticsTab.Size = new System.Drawing.Size(562, 195);
+            this.statisticsTab.Size = new System.Drawing.Size(1417, 555);
             this.statisticsTab.TabIndex = 4;
             this.statisticsTab.Text = "Statistics";
             this.statisticsTab.VerticalScrollbarBarColor = true;
             this.statisticsTab.VerticalScrollbarHighlightOnWheel = false;
-            this.statisticsTab.VerticalScrollbarSize = 10;
+            this.statisticsTab.VerticalScrollbarSize = 25;
             // 
             // dateTimePicker
             // 
             this.dateTimePicker.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dateTimePicker.Location = new System.Drawing.Point(246, 77);
-            this.dateTimePicker.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dateTimePicker.Location = new System.Drawing.Point(615, 192);
+            this.dateTimePicker.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.dateTimePicker.MinimumSize = new System.Drawing.Size(0, 30);
             this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(200, 29);
+            this.dateTimePicker.Size = new System.Drawing.Size(494, 38);
             this.dateTimePicker.Style = MetroFramework.MetroColorStyle.Red;
             this.dateTimePicker.TabIndex = 8;
             // 
             // generateBTN
             // 
             this.generateBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.generateBTN.Location = new System.Drawing.Point(226, 130);
+            this.generateBTN.Location = new System.Drawing.Point(565, 325);
+            this.generateBTN.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.generateBTN.Name = "generateBTN";
-            this.generateBTN.Size = new System.Drawing.Size(117, 35);
+            this.generateBTN.Size = new System.Drawing.Size(292, 88);
             this.generateBTN.TabIndex = 7;
             this.generateBTN.Text = "Generate Statistics";
             this.generateBTN.UseSelectable = true;
@@ -516,9 +553,10 @@
             this.yearlyRadio.AutoSize = true;
             this.yearlyRadio.Cursor = System.Windows.Forms.Cursors.Hand;
             this.yearlyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.yearlyRadio.Location = new System.Drawing.Point(329, 30);
+            this.yearlyRadio.Location = new System.Drawing.Point(822, 75);
+            this.yearlyRadio.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.yearlyRadio.Name = "yearlyRadio";
-            this.yearlyRadio.Size = new System.Drawing.Size(62, 19);
+            this.yearlyRadio.Size = new System.Drawing.Size(64, 20);
             this.yearlyRadio.TabIndex = 6;
             this.yearlyRadio.Text = "Yearly";
             this.yearlyRadio.UseSelectable = true;
@@ -528,9 +566,10 @@
             this.monthlyRadio.AutoSize = true;
             this.monthlyRadio.Cursor = System.Windows.Forms.Cursors.Hand;
             this.monthlyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.monthlyRadio.Location = new System.Drawing.Point(246, 30);
+            this.monthlyRadio.Location = new System.Drawing.Point(615, 75);
+            this.monthlyRadio.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.monthlyRadio.Name = "monthlyRadio";
-            this.monthlyRadio.Size = new System.Drawing.Size(77, 19);
+            this.monthlyRadio.Size = new System.Drawing.Size(79, 20);
             this.monthlyRadio.TabIndex = 5;
             this.monthlyRadio.Text = "Monthly";
             this.monthlyRadio.UseSelectable = true;
@@ -541,9 +580,10 @@
             this.weeklyRadio.Checked = true;
             this.weeklyRadio.Cursor = System.Windows.Forms.Cursors.Hand;
             this.weeklyRadio.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.weeklyRadio.Location = new System.Drawing.Point(172, 30);
+            this.weeklyRadio.Location = new System.Drawing.Point(430, 75);
+            this.weeklyRadio.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.weeklyRadio.Name = "weeklyRadio";
-            this.weeklyRadio.Size = new System.Drawing.Size(69, 19);
+            this.weeklyRadio.Size = new System.Drawing.Size(72, 20);
             this.weeklyRadio.TabIndex = 4;
             this.weeklyRadio.TabStop = true;
             this.weeklyRadio.Text = "Weekly";
@@ -553,9 +593,10 @@
             // 
             this.selectorLabel.AutoSize = true;
             this.selectorLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.selectorLabel.Location = new System.Drawing.Point(117, 77);
+            this.selectorLabel.Location = new System.Drawing.Point(292, 192);
+            this.selectorLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.selectorLabel.Name = "selectorLabel";
-            this.selectorLabel.Size = new System.Drawing.Size(106, 25);
+            this.selectorLabel.Size = new System.Drawing.Size(111, 25);
             this.selectorLabel.TabIndex = 3;
             this.selectorLabel.Text = "Select a day:";
             // 
@@ -565,15 +606,16 @@
             this.buildingUpdateTab.Controls.Add(this.changeGroupBox);
             this.buildingUpdateTab.HorizontalScrollbarBarColor = true;
             this.buildingUpdateTab.HorizontalScrollbarHighlightOnWheel = false;
-            this.buildingUpdateTab.HorizontalScrollbarSize = 10;
+            this.buildingUpdateTab.HorizontalScrollbarSize = 25;
             this.buildingUpdateTab.Location = new System.Drawing.Point(4, 41);
+            this.buildingUpdateTab.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.buildingUpdateTab.Name = "buildingUpdateTab";
-            this.buildingUpdateTab.Size = new System.Drawing.Size(562, 195);
+            this.buildingUpdateTab.Size = new System.Drawing.Size(1417, 555);
             this.buildingUpdateTab.TabIndex = 3;
             this.buildingUpdateTab.Text = "Edit Database";
             this.buildingUpdateTab.VerticalScrollbarBarColor = true;
             this.buildingUpdateTab.VerticalScrollbarHighlightOnWheel = false;
-            this.buildingUpdateTab.VerticalScrollbarSize = 10;
+            this.buildingUpdateTab.VerticalScrollbarSize = 25;
             // 
             // addEmployeGroup
             // 
@@ -584,9 +626,11 @@
             this.addEmployeGroup.Controls.Add(this.employeeComboBox);
             this.addEmployeGroup.Controls.Add(this.newEmployeeNameTextBox);
             this.addEmployeGroup.Controls.Add(this.addEmployeeLabel);
-            this.addEmployeGroup.Location = new System.Drawing.Point(3, 75);
+            this.addEmployeGroup.Location = new System.Drawing.Point(8, 188);
+            this.addEmployeGroup.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.addEmployeGroup.Name = "addEmployeGroup";
-            this.addEmployeGroup.Size = new System.Drawing.Size(556, 118);
+            this.addEmployeGroup.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.addEmployeGroup.Size = new System.Drawing.Size(1390, 295);
             this.addEmployeGroup.TabIndex = 12;
             this.addEmployeGroup.TabStop = false;
             this.addEmployeGroup.Text = "Add/Remove Employee";
@@ -594,9 +638,10 @@
             // removeBTN
             // 
             this.removeBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.removeBTN.Location = new System.Drawing.Point(416, 68);
+            this.removeBTN.Location = new System.Drawing.Point(1040, 170);
+            this.removeBTN.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.removeBTN.Name = "removeBTN";
-            this.removeBTN.Size = new System.Drawing.Size(118, 30);
+            this.removeBTN.Size = new System.Drawing.Size(295, 75);
             this.removeBTN.TabIndex = 16;
             this.removeBTN.Text = "Remove Employee";
             this.removeBTN.UseSelectable = true;
@@ -606,9 +651,10 @@
             // addBTN
             // 
             this.addBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addBTN.Location = new System.Drawing.Point(416, 19);
+            this.addBTN.Location = new System.Drawing.Point(1040, 48);
+            this.addBTN.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.addBTN.Name = "addBTN";
-            this.addBTN.Size = new System.Drawing.Size(118, 30);
+            this.addBTN.Size = new System.Drawing.Size(295, 75);
             this.addBTN.TabIndex = 15;
             this.addBTN.Text = "Add Employee";
             this.addBTN.UseSelectable = true;
@@ -619,9 +665,10 @@
             // 
             this.employeeNameLabel.AutoSize = true;
             this.employeeNameLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.employeeNameLabel.Location = new System.Drawing.Point(6, 68);
+            this.employeeNameLabel.Location = new System.Drawing.Point(15, 170);
+            this.employeeNameLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.employeeNameLabel.Name = "employeeNameLabel";
-            this.employeeNameLabel.Size = new System.Drawing.Size(204, 25);
+            this.employeeNameLabel.Size = new System.Drawing.Size(219, 25);
             this.employeeNameLabel.TabIndex = 13;
             this.employeeNameLabel.Text = "Remove employee name:";
             // 
@@ -630,9 +677,10 @@
             this.employeeComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.employeeComboBox.FormattingEnabled = true;
             this.employeeComboBox.ItemHeight = 23;
-            this.employeeComboBox.Location = new System.Drawing.Point(216, 68);
+            this.employeeComboBox.Location = new System.Drawing.Point(540, 170);
+            this.employeeComboBox.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.employeeComboBox.Name = "employeeComboBox";
-            this.employeeComboBox.Size = new System.Drawing.Size(121, 29);
+            this.employeeComboBox.Size = new System.Drawing.Size(296, 29);
             this.employeeComboBox.TabIndex = 14;
             this.employeeComboBox.UseSelectable = true;
             // 
@@ -642,16 +690,18 @@
             // 
             // 
             this.newEmployeeNameTextBox.CustomButton.Image = null;
-            this.newEmployeeNameTextBox.CustomButton.Location = new System.Drawing.Point(93, 1);
+            this.newEmployeeNameTextBox.CustomButton.Location = new System.Drawing.Point(580, 5);
+            this.newEmployeeNameTextBox.CustomButton.Margin = new System.Windows.Forms.Padding(20, 20, 20, 20);
             this.newEmployeeNameTextBox.CustomButton.Name = "";
-            this.newEmployeeNameTextBox.CustomButton.Size = new System.Drawing.Size(27, 27);
+            this.newEmployeeNameTextBox.CustomButton.Size = new System.Drawing.Size(168, 168);
             this.newEmployeeNameTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.newEmployeeNameTextBox.CustomButton.TabIndex = 1;
             this.newEmployeeNameTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.newEmployeeNameTextBox.CustomButton.UseSelectable = true;
             this.newEmployeeNameTextBox.CustomButton.Visible = false;
             this.newEmployeeNameTextBox.Lines = new string[0];
-            this.newEmployeeNameTextBox.Location = new System.Drawing.Point(216, 25);
+            this.newEmployeeNameTextBox.Location = new System.Drawing.Point(540, 62);
+            this.newEmployeeNameTextBox.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.newEmployeeNameTextBox.MaxLength = 32767;
             this.newEmployeeNameTextBox.Name = "newEmployeeNameTextBox";
             this.newEmployeeNameTextBox.PasswordChar = '\0';
@@ -661,7 +711,7 @@
             this.newEmployeeNameTextBox.SelectionLength = 0;
             this.newEmployeeNameTextBox.SelectionStart = 0;
             this.newEmployeeNameTextBox.ShortcutsEnabled = true;
-            this.newEmployeeNameTextBox.Size = new System.Drawing.Size(121, 29);
+            this.newEmployeeNameTextBox.Size = new System.Drawing.Size(302, 72);
             this.newEmployeeNameTextBox.TabIndex = 12;
             this.newEmployeeNameTextBox.UseSelectable = true;
             this.newEmployeeNameTextBox.WaterMark = "New Employee Name";
@@ -672,9 +722,10 @@
             // 
             this.addEmployeeLabel.AutoSize = true;
             this.addEmployeeLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.addEmployeeLabel.Location = new System.Drawing.Point(33, 29);
+            this.addEmployeeLabel.Location = new System.Drawing.Point(82, 72);
+            this.addEmployeeLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.addEmployeeLabel.Name = "addEmployeeLabel";
-            this.addEmployeeLabel.Size = new System.Drawing.Size(177, 25);
+            this.addEmployeeLabel.Size = new System.Drawing.Size(189, 25);
             this.addEmployeeLabel.TabIndex = 11;
             this.addEmployeeLabel.Text = "Add Employee Name:";
             // 
@@ -685,9 +736,11 @@
             this.changeGroupBox.Controls.Add(this.updateBTN);
             this.changeGroupBox.Controls.Add(this.newBuildingInit);
             this.changeGroupBox.Controls.Add(this.buildingComboBox);
-            this.changeGroupBox.Location = new System.Drawing.Point(3, 3);
+            this.changeGroupBox.Location = new System.Drawing.Point(8, 8);
+            this.changeGroupBox.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.changeGroupBox.Name = "changeGroupBox";
-            this.changeGroupBox.Size = new System.Drawing.Size(556, 66);
+            this.changeGroupBox.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.changeGroupBox.Size = new System.Drawing.Size(1390, 165);
             this.changeGroupBox.TabIndex = 11;
             this.changeGroupBox.TabStop = false;
             this.changeGroupBox.Text = "Change Building Name";
@@ -696,18 +749,20 @@
             // 
             this.toLabel01.AutoSize = true;
             this.toLabel01.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.toLabel01.Location = new System.Drawing.Point(183, 19);
+            this.toLabel01.Location = new System.Drawing.Point(458, 48);
+            this.toLabel01.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.toLabel01.Name = "toLabel01";
-            this.toLabel01.Size = new System.Drawing.Size(27, 25);
+            this.toLabel01.Size = new System.Drawing.Size(29, 25);
             this.toLabel01.TabIndex = 8;
             this.toLabel01.Text = "to";
             // 
             // updateBTN
             // 
             this.updateBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.updateBTN.Location = new System.Drawing.Point(416, 20);
+            this.updateBTN.Location = new System.Drawing.Point(1040, 50);
+            this.updateBTN.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.updateBTN.Name = "updateBTN";
-            this.updateBTN.Size = new System.Drawing.Size(118, 30);
+            this.updateBTN.Size = new System.Drawing.Size(295, 75);
             this.updateBTN.TabIndex = 8;
             this.updateBTN.Text = "Update Building";
             this.updateBTN.UseSelectable = true;
@@ -720,16 +775,18 @@
             // 
             // 
             this.newBuildingInit.CustomButton.Image = null;
-            this.newBuildingInit.CustomButton.Location = new System.Drawing.Point(93, 1);
+            this.newBuildingInit.CustomButton.Location = new System.Drawing.Point(580, 5);
+            this.newBuildingInit.CustomButton.Margin = new System.Windows.Forms.Padding(20, 20, 20, 20);
             this.newBuildingInit.CustomButton.Name = "";
-            this.newBuildingInit.CustomButton.Size = new System.Drawing.Size(27, 27);
+            this.newBuildingInit.CustomButton.Size = new System.Drawing.Size(168, 168);
             this.newBuildingInit.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.newBuildingInit.CustomButton.TabIndex = 1;
             this.newBuildingInit.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.newBuildingInit.CustomButton.UseSelectable = true;
             this.newBuildingInit.CustomButton.Visible = false;
             this.newBuildingInit.Lines = new string[0];
-            this.newBuildingInit.Location = new System.Drawing.Point(216, 19);
+            this.newBuildingInit.Location = new System.Drawing.Point(540, 48);
+            this.newBuildingInit.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.newBuildingInit.MaxLength = 32767;
             this.newBuildingInit.Name = "newBuildingInit";
             this.newBuildingInit.PasswordChar = '\0';
@@ -739,7 +796,7 @@
             this.newBuildingInit.SelectionLength = 0;
             this.newBuildingInit.SelectionStart = 0;
             this.newBuildingInit.ShortcutsEnabled = true;
-            this.newBuildingInit.Size = new System.Drawing.Size(121, 29);
+            this.newBuildingInit.Size = new System.Drawing.Size(302, 72);
             this.newBuildingInit.TabIndex = 3;
             this.newBuildingInit.UseSelectable = true;
             this.newBuildingInit.WaterMark = "New Building Initials";
@@ -751,34 +808,58 @@
             this.buildingComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buildingComboBox.FormattingEnabled = true;
             this.buildingComboBox.ItemHeight = 23;
-            this.buildingComboBox.Location = new System.Drawing.Point(56, 20);
+            this.buildingComboBox.Location = new System.Drawing.Point(140, 50);
+            this.buildingComboBox.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.buildingComboBox.Name = "buildingComboBox";
-            this.buildingComboBox.Size = new System.Drawing.Size(121, 29);
+            this.buildingComboBox.Size = new System.Drawing.Size(296, 29);
             this.buildingComboBox.TabIndex = 4;
             this.buildingComboBox.UseSelectable = true;
             // 
-            // weekendCheckBox
+            // weekendIncludeBox
             // 
-            this.weekendCheckBox.AutoSize = true;
-            this.weekendCheckBox.Location = new System.Drawing.Point(453, 84);
-            this.weekendCheckBox.Name = "weekendCheckBox";
-            this.weekendCheckBox.Size = new System.Drawing.Size(122, 17);
-            this.weekendCheckBox.TabIndex = 9;
-            this.weekendCheckBox.Text = "Include Weekends?";
-            this.weekendCheckBox.UseVisualStyleBackColor = true;
+            this.weekendIncludeBox.BackColor = System.Drawing.Color.Transparent;
+            this.weekendIncludeBox.Controls.Add(this.sunIncludeCheck);
+            this.weekendIncludeBox.Controls.Add(this.satIncludeCheck);
+            this.weekendIncludeBox.Location = new System.Drawing.Point(1120, 128);
+            this.weekendIncludeBox.Name = "weekendIncludeBox";
+            this.weekendIncludeBox.Size = new System.Drawing.Size(261, 167);
+            this.weekendIncludeBox.TabIndex = 9;
+            this.weekendIncludeBox.TabStop = false;
+            this.weekendIncludeBox.Text = "Inclusion: ";
+            // 
+            // satIncludeCheck
+            // 
+            this.satIncludeCheck.AutoSize = true;
+            this.satIncludeCheck.Location = new System.Drawing.Point(6, 60);
+            this.satIncludeCheck.Name = "satIncludeCheck";
+            this.satIncludeCheck.Size = new System.Drawing.Size(75, 17);
+            this.satIncludeCheck.TabIndex = 0;
+            this.satIncludeCheck.Text = "Saturday";
+            this.satIncludeCheck.UseSelectable = true;
+            // 
+            // sunIncludeCheck
+            // 
+            this.sunIncludeCheck.AutoSize = true;
+            this.sunIncludeCheck.Location = new System.Drawing.Point(6, 37);
+            this.sunIncludeCheck.Name = "sunIncludeCheck";
+            this.sunIncludeCheck.Size = new System.Drawing.Size(66, 17);
+            this.sunIncludeCheck.TabIndex = 1;
+            this.sunIncludeCheck.Text = "Sunday";
+            this.sunIncludeCheck.UseSelectable = true;
             // 
             // SettingForm
             // 
             this.AcceptButton = this.loginBTN;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(240F, 240F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(620, 326);
+            this.ClientSize = new System.Drawing.Size(1550, 815);
             this.Controls.Add(this.emailLoginTab);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingForm";
-            this.Padding = new System.Windows.Forms.Padding(22, 60, 22, 20);
+            this.Padding = new System.Windows.Forms.Padding(55, 150, 55, 50);
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Red;
@@ -801,6 +882,8 @@
             this.addEmployeGroup.PerformLayout();
             this.changeGroupBox.ResumeLayout(false);
             this.changeGroupBox.PerformLayout();
+            this.weekendIncludeBox.ResumeLayout(false);
+            this.weekendIncludeBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -852,6 +935,8 @@
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroTextBox gmailPasswordTextBox;
         private MetroFramework.Controls.MetroTextBox gmailUsernameTextBox;
-        private System.Windows.Forms.CheckBox weekendCheckBox;
+        private System.Windows.Forms.GroupBox weekendIncludeBox;
+        private MetroFramework.Controls.MetroCheckBox sunIncludeCheck;
+        private MetroFramework.Controls.MetroCheckBox satIncludeCheck;
     }
 }
