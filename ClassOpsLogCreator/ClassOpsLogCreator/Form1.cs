@@ -31,7 +31,7 @@ namespace ClassOpsLogCreator
 
         //DEBUG CODE! 
         //ONLY UNCOMMENT FOR LOCAL USE ONLY!
-        /*
+        /* 
         private static string username = Environment.UserName; 
         public readonly string ROOM_SCHED = @"C:\Users\" + username+ @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\clo.xlsm";
         public readonly string JEANNINE_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Jeannine\Jeannine's log.xlsx";
@@ -40,9 +40,9 @@ namespace ClassOpsLogCreator
         public readonly string EXISTING_MASTER_LOG_COPY = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\PW\masterlog.xlsx";
         public readonly string EXISTING_MASTER_LOG = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\masterlog.xlsx";
         public readonly string CLO_GENERATED_LOG = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\CLO_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
-        public readonly string STATS_LOCATION = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Statistics\"; */
+        public readonly string STATS_LOCATION = @"C:\Users\" + username + @"\Documents\Visual Studio 2015\Projects\ClassOpsLogCreator\CLASSOPS\Statistics\"; 
+        */
         
-
         //A stack for some thread safer operations
         private readonly ConcurrentQueue<System.Array> logNextQueue = new ConcurrentQueue<System.Array>();        
         private readonly ConcurrentStack<System.Array> logNextStack = new ConcurrentStack<System.Array>();
@@ -1382,7 +1382,11 @@ namespace ClassOpsLogCreator
             {
                 SchoolZoning sz = new SchoolZoning(buildingNames);
                 //Pass the zoning with the number of shifts
-                destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts);
+                lock (destinationRange.Value2 = sz.generateZonedLog(range, numberOfShifts))
+                {
+                    
+                }
+                
                 //Get the number of rows
                 int[] numberOfRowsPerZone = sz.numberOfRows();
                 //divide the zones
